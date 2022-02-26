@@ -20,15 +20,21 @@ struct RootView: View {
     /// The View
     var body: some View {
         VStack {
-            HStack(spacing: 0) {
-                ForEach(appState.titles, id: \.title) { (title, icon) in
-                    Button(action: {
-                        selected = title
-                    }, label: {
-                        Label(title, systemImage: icon)
-                            .background(title == selected ? .green : .blue)
-                    })
+            if appState.filter.media == .none {
+                HStack(spacing: 0) {
+                    ForEach(appState.titles, id: \.title) { (title, icon) in
+                        Button(action: {
+                            selected = title
+                        }, label: {
+                            Label(title, systemImage: icon)
+                                .background(title == selected ? .green : .blue)
+                        })
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.thinMaterial)
+            } else {
+                PartsView.TitleHeader()
             }
             ContentView()
             Spacer()

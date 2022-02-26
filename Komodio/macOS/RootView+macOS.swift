@@ -26,9 +26,9 @@ struct RootView: View {
                 }
             }
             ContentView()
-                .toolbar {
-                    toolbarContents()
-                }
+//                .toolbar {
+//                    toolbarContents()
+//                }
         }
         .environmentObject(appState)
         .onChange(of: selected) { newSelected in

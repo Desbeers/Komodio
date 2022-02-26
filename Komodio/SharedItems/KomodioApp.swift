@@ -22,6 +22,11 @@ import SwiftlyKodiAPI
                 RootView()
             }
             .environmentObject(kodi)
+            .ignoresSafeArea()
         }
+#if os(macOS)
+        //.windowToolbarStyle(.unifiedCompact(showsTitle: true))
+        .windowStyle(.hiddenTitleBar)
+#endif
     }
 }

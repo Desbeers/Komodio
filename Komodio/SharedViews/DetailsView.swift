@@ -6,15 +6,28 @@
 //
 
 import SwiftUI
+import SwiftUIRouter
+import SwiftlyKodiAPI
 
 struct DetailsView: View {
+    
+    let item: KodiItem
+    
+    /// The route navigation
+    @EnvironmentObject var routeInformation: RouteInformation
+    
     var body: some View {
+        VStack {
         Text("Item details!")
-    }
-}
-
-struct DetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsView()
+                .font(.title)
+            Text(item.title)
+                .font(.headline)
+            NavLink(to: "/Player") {
+                Text("Play!!")
+            }
+        }
+        .task {
+            print("DetailsView task!")
+        }
     }
 }

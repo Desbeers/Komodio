@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D735DEA927C9DCD800C63E1D /* StackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackLink.swift */; };
+		D735DEAA27C9DCD800C63E1D /* StackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackLink.swift */; };
+		D735DEAB27C9DCD800C63E1D /* StackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackLink.swift */; };
 		D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15C27C9763A00321E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView.swift */; };
@@ -55,9 +58,17 @@
 		D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
 		D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
 		D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
+		D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
+		D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
+		D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
+		D7EC594827C9C5B8004FFC57 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594727C9C5B8004FFC57 /* PartsView.swift */; };
+		D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594727C9C5B8004FFC57 /* PartsView.swift */; };
+		D7EC594A27C9C5B8004FFC57 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594727C9C5B8004FFC57 /* PartsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D735DEA727C9D7FD00C63E1D /* SwiftUIRouter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIRouter; path = ../Projects/SwiftUIRouter; sourceTree = "<group>"; };
+		D735DEA827C9DCD800C63E1D /* StackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLink.swift; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7ADD14B27C9763900321E23 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +94,8 @@
 		D7B2F24427C996F9002DFC41 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RootView+tvOS.swift"; path = "Komodio/tvOS/RootView+tvOS.swift"; sourceTree = SOURCE_ROOT; };
 		D7EC593F27C9B46F004FFC57 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		D7EC594327C9BB53004FFC57 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		D7EC594727C9C5B8004FFC57 /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +132,7 @@
 		D7ADD14427C9763900321E23 = {
 			isa = PBXGroup;
 			children = (
+				D735DEA727C9D7FD00C63E1D /* SwiftUIRouter */,
 				D7B2F21327C97C2E002DFC41 /* SwiftlyKodiAPI */,
 				D7ADD16C27C9774E00321E23 /* Komodio */,
 				D7ADD16B27C9772400321E23 /* .gitignore */,
@@ -137,6 +151,7 @@
 				D7B2F21A27C97CD9002DFC41 /* AppState.swift */,
 				D7ADD14C27C9763A00321E23 /* Assets.xcassets */,
 				D7B2F24427C996F9002DFC41 /* Toolbar.swift */,
+				D735DEA827C9DCD800C63E1D /* StackLink.swift */,
 			);
 			path = SharedItems;
 			sourceTree = "<group>";
@@ -191,6 +206,8 @@
 				D7B2F22F27C9846B002DFC41 /* LoadingView.swift */,
 				D7B2F24027C99465002DFC41 /* DetailsView.swift */,
 				D7EC593F27C9B46F004FFC57 /* RootView.swift */,
+				D7EC594327C9BB53004FFC57 /* PlayerView.swift */,
+				D7EC594727C9C5B8004FFC57 /* PartsView.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -362,9 +379,12 @@
 				D7B2F24B27C9A026002DFC41 /* RootView+iOS.swift in Sources */,
 				D7B2F24127C99465002DFC41 /* DetailsView.swift in Sources */,
 				D7ADD15C27C9763A00321E23 /* ContentView.swift in Sources */,
+				D7EC594827C9C5B8004FFC57 /* PartsView.swift in Sources */,
+				D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
+				D735DEA927C9DCD800C63E1D /* StackLink.swift in Sources */,
 				D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,9 +402,12 @@
 				D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7B2F24227C99465002DFC41 /* DetailsView.swift in Sources */,
 				D7ADD15D27C9763A00321E23 /* ContentView.swift in Sources */,
+				D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */,
+				D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
+				D735DEAA27C9DCD800C63E1D /* StackLink.swift in Sources */,
 				D7B2F22927C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,9 +425,12 @@
 				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
 				D7B2F20827C9792A002DFC41 /* ContentView.swift in Sources */,
+				D7EC594A27C9C5B8004FFC57 /* PartsView.swift in Sources */,
+				D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */,
+				D735DEAB27C9DCD800C63E1D /* StackLink.swift in Sources */,
 				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

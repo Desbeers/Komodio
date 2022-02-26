@@ -7,31 +7,52 @@
 
 import SwiftUI
 import SwiftUIRouter
+import SwiftlyKodiAPI
 
 struct MoviesView: View {
-    
+    /// The AppState model
+    @EnvironmentObject var appState: AppState
+    /// The route navigation
     @EnvironmentObject var routeInformation: RouteInformation
-    
+    /// The Navigator model
+    @EnvironmentObject var navigator: Navigator
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
+    /// The library filter
+    @State var filter: KodiFilter
+    /// The movies we want to show
+    @State var movies: [KodiItem] = []
+    /// The View
     var body: some View {
-        VStack {
-            Text("Movies View!")
-
-            
-            NavLink(to: "/Movies/Set/20") {
-                Text("Take me to **Movie Set 10**")
-            }
-            NavLink(to: "/Movies/Details/6") {
-                Text("Take me to **Details Movie 6**")
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                ForEach(movies) { movie in
+                    
+                    StackLink(path: "/Movies/Details/\(movie.id.uuidString)", filter: $filter, destination: DetailsView(item: movie)) {
+                        Text(movie.title)
+                    }
+                    
+//                    NavLink(to: "/Movies/Details/\(movie.id.uuidString)") {
+//                        Text(movie.title)
+//                    }
+                    //MovieItem(filter: filter, movie: movie.binding())
+                }
             }
         }
+        //.buttonStyle(.plain)
         .task {
-            dump(routeInformation)
+            print("MoviesView task!")
+            navigator.clear()
+            appState.filter.media = .movie
+            appState.filter.title = "Movies"
+            movies = kodi.library.filter(filter)
+            dump(navigator)
         }
     }
 }
 
 extension MoviesView {
-
+    
     struct Set: View {
         let setID: Int
         var body: some View {

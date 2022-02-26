@@ -9,6 +9,10 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct HomeView: View {
+    
+    /// The AppState model
+    @EnvironmentObject var appState: AppState
+    
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// Library loading state
@@ -20,9 +24,15 @@ struct HomeView: View {
             } else {
                 LoadingView()
             }
+            Button(action: {
+                ///
+            }, label: {
+                Text("Reload Library")
+            })
         }
         .task {
             print("HomeViewTask!")
+            appState.filter.media = .none
             libraryLoaded = kodi.library.isEmpty ? false : true
         }
         .onChange(of: kodi.library) { newLibrary in
