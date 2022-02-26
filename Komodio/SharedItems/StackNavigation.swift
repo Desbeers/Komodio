@@ -69,8 +69,7 @@ public struct StackNavItem<Destination, V: Hashable> : View where Destination : 
         
 #if os(iOS)
         if let tag = tag, let selection = selection {
-            NavigationLink(destination: destination
-                            .navigationTitle(title),
+            NavigationLink(destination: destination,
                            tag: tag,
                            selection: selection,
                            label: { Label(title, systemImage: icon) })
@@ -110,7 +109,7 @@ public struct StackNavLink<Label: View, Destination: View>: View {
             label
         }
 #elseif os(iOS)
-        NavigationLink(destination: destination.navigationTitle(filter.title ?? "No title")) {
+        NavigationLink(destination: destination) {
             label
         }
 #elseif os(tvOS)

@@ -30,7 +30,7 @@ extension PartsView {
                 .buttonStyle(.plain)
                 VStack(alignment: .leading) {
                     Text(appState.filter.title ?? "Komodio")
-                        .font(.title)
+                        .font(appState.filter.subtitle == nil ? .title : .title2)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     if let subtitle = appState.filter.subtitle {
                         Text(subtitle)

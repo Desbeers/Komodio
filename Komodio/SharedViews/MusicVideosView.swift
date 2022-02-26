@@ -10,6 +10,8 @@ import SwiftUIRouter
 import SwiftlyKodiAPI
 
 struct MusicVideosView: View {
+    /// The AppState model
+    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Kodi filter for this View
@@ -18,7 +20,7 @@ struct MusicVideosView: View {
     @State var musicvideos: [KodiItem] = []
     /// The View
     var body: some View {
-        ItemsView.List(filter) {
+        ItemsView.List() {
             ForEach(musicvideos) { musicvideo in
                 let artist = kodi.getArtistInfo(artist: musicvideo.artist)
                 
@@ -38,9 +40,11 @@ struct MusicVideosView: View {
         }
         .task {
             let filter = KodiFilter(media: .musicvideo)
-            let musicKodiItems = kodi.library.filter(filter)
-            musicvideos = musicKodiItems
+            musicvideos = kodi.library.filter(filter)
+            appState.filter.title = "Music Videos"
+            appState.filter.subtitle = nil
         }
+        .navigationTitle("Music Videos")
     }
 }
 
@@ -77,17 +81,20 @@ extension MusicVideosView {
         @State var musicvideos: [KodiItem] = []
         /// The View
         var body: some View {
-            ItemsView.List(appState.filter) {
+            ItemsView.List() {
                 ForEach(musicvideos) { musicvideo in
                     Item(artist: artist, item: musicvideo.binding())
                 }
             }
             .task {
-                print("Music Videos task!")
+                print("Music Videos Items task!")
                 let filter = KodiFilter(media: .musicvideo, artist: artist.artist)
-                let musicvideoItems = kodi.library.filter(filter)
-                musicvideos = musicvideoItems
+                musicvideos = kodi.library.filter(filter)
+                appState.filter.title = artist.artist.joined(separator: " & ")
+                appState.filter.subtitle = "Music Videos"
+                
             }
+            .navigationTitle(artist.artist.joined(separator: " & "))
         }
     }
     
@@ -95,9 +102,12 @@ extension MusicVideosView {
         let artist: KodiItem
         @Binding var item: KodiItem
         var body: some View {
-            //StackLink(title: artist.title, destination: ItemsView.Details(item: $item)) {
+            StackNavLink(path: "/Movies/Details/\(item.id)",
+                         filter: KodiFilter(media: .musicvideo),
+                         destination: DetailsView(item: $item)
+            ) {
                 ItemsView.Item(item: $item)
-            //}
+            }
             .buttonStyle(ButtonStyles.KodiItem(item: item))
             .contextMenu {
                 Button(action: {

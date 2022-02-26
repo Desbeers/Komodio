@@ -10,7 +10,7 @@ import SwiftUIRouter
 import SwiftlyKodiAPI
 
 extension PartsView {
-    
+
     struct TitleHeader: View {
         /// The Kodi item
         let item: KodiItem

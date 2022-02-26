@@ -78,6 +78,9 @@ struct DetailsView: View {
         }
         .task {
             print("DetailsView task!")
+            appState.filter.subtitle = item.subtitle.isEmpty ? appState.filter.title : item.subtitle
+            appState.filter.title = item.title
         }
+        .navigationTitle(item.title)
     }
 }

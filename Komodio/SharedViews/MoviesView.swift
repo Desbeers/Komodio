@@ -24,7 +24,7 @@ struct MoviesView: View {
     @State var movies: [KodiItem] = []
     /// The View
     var body: some View {
-        ItemsView.List(filter) {
+        ItemsView.List() {
             ForEach(movies) { movie in
                 
                 /// Build a new filter for the DetailsView
@@ -47,7 +47,11 @@ struct MoviesView: View {
         .task {
             print("MoviesView task!")
             movies = kodi.library.filter(filter)
+            appState.filter.title = "Movies"
+            appState.filter.subtitle = nil
+            
         }
+        .navigationTitle("Movies")
     }
 }
 

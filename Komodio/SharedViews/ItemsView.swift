@@ -17,14 +17,10 @@ extension ItemsView {
 
     /// Wrap the Kodi items in a List or a LazyVStack
     struct List<Content: View>: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        private var filter: KodiFilter
         private var content: Content
         /// StackNavView
-        init(_ filter: KodiFilter, @ViewBuilder content: () -> Content) {
+        init(@ViewBuilder content: () -> Content) {
             self.content = content()
-            self.filter = filter
         }
         ///The View
         var body: some View {
@@ -34,9 +30,6 @@ extension ItemsView {
                 }
                 /// On macOS, give it some padding because the TitleHeader is on top
                 .macOS { $0.padding(.top, 40)}
-            }
-            .task {
-                appState.filter = filter
             }
         }
     }

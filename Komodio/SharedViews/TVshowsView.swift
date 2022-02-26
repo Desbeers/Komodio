@@ -18,11 +18,18 @@ struct TVshowsView: View {
     @State var filter: KodiFilter
     /// The View
     var body: some View {
-        ItemsView.List(filter) {
+        ItemsView.List() {
             ForEach(kodi.library.filter(filter)) { tvshow in
                 Item(item: tvshow.binding(), filter: filter)
             }
         }
+        .task {
+            print("TVsshowView task!")
+            appState.filter.title = "TV shows"
+            appState.filter.subtitle = nil
+            
+        }
+        .navigationTitle("TV shows")
     }
 }
 
