@@ -13,6 +13,48 @@
 		D7ADD15D27C9763A00321E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView.swift */; };
 		D7ADD15E27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
 		D7ADD15F27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
+		D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
+		D7B2F20827C9792A002DFC41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView.swift */; };
+		D7B2F20927C9792E002DFC41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
+		D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */; };
+		D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */; };
+		D7B2F21227C97C18002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21127C97C18002DFC41 /* SwiftUIRouter */; };
+		D7B2F21527C97C36002DFC41 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21427C97C36002DFC41 /* SwiftlyKodiAPI */; };
+		D7B2F21727C97C3C002DFC41 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21627C97C3C002DFC41 /* SwiftlyKodiAPI */; };
+		D7B2F21927C97C41002DFC41 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21827C97C41002DFC41 /* SwiftlyKodiAPI */; };
+		D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
+		D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
+		D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
+		D7B2F22127C97D4A002DFC41 /* RootView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */; };
+		D7B2F22427C97EF0002DFC41 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22327C97EF0002DFC41 /* MoviesView.swift */; };
+		D7B2F22527C97EF0002DFC41 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22327C97EF0002DFC41 /* MoviesView.swift */; };
+		D7B2F22627C97EF0002DFC41 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22327C97EF0002DFC41 /* MoviesView.swift */; };
+		D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */; };
+		D7B2F22927C97F1E002DFC41 /* TVshowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */; };
+		D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */; };
+		D7B2F22C27C97F2D002DFC41 /* MusicVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */; };
+		D7B2F22D27C97F2D002DFC41 /* MusicVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */; };
+		D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */; };
+		D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22F27C9846B002DFC41 /* LoadingView.swift */; };
+		D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22F27C9846B002DFC41 /* LoadingView.swift */; };
+		D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22F27C9846B002DFC41 /* LoadingView.swift */; };
+		D7B2F23427C98578002DFC41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23327C98578002DFC41 /* HomeView.swift */; };
+		D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23327C98578002DFC41 /* HomeView.swift */; };
+		D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23327C98578002DFC41 /* HomeView.swift */; };
+		D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
+		D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
+		D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
+		D7B2F24127C99465002DFC41 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
+		D7B2F24227C99465002DFC41 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
+		D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
+		D7B2F24527C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
+		D7B2F24627C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
+		D7B2F24727C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
+		D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
+		D7B2F24B27C9A026002DFC41 /* RootView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */; };
+		D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
+		D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
+		D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +64,25 @@
 		D7ADD15127C9763A00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7ADD15727C9763A00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7ADD15927C9763A00321E23 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		D7ADD16827C9772400321E23 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D7ADD16927C9772400321E23 /* .periphery.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .periphery.yml; sourceTree = "<group>"; };
+		D7ADD16A27C9772400321E23 /* .jazzy.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .jazzy.yaml; sourceTree = "<group>"; };
+		D7ADD16B27C9772400321E23 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D7ADD17127C9789D00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7B2F21327C97C2E002DFC41 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../SwiftlyKodiAPI; sourceTree = "<group>"; };
+		D7B2F21A27C97CD9002DFC41 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView+macOS.swift"; sourceTree = "<group>"; };
+		D7B2F22327C97EF0002DFC41 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
+		D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVshowsView.swift; sourceTree = "<group>"; };
+		D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideosView.swift; sourceTree = "<group>"; };
+		D7B2F22F27C9846B002DFC41 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D7B2F23327C98578002DFC41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView+iOS.swift"; sourceTree = "<group>"; };
+		D7B2F23C27C98FDB002DFC41 /* GenresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresView.swift; sourceTree = "<group>"; };
+		D7B2F24027C99465002DFC41 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		D7B2F24427C996F9002DFC41 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RootView+tvOS.swift"; path = "Komodio/tvOS/RootView+tvOS.swift"; sourceTree = SOURCE_ROOT; };
+		D7EC593F27C9B46F004FFC57 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */,
+				D7B2F21527C97C36002DFC41 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +99,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */,
+				D7B2F21727C97C3C002DFC41 /* SwiftlyKodiAPI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7ADD16E27C9789D00321E23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7B2F21227C97C18002DFC41 /* SwiftUIRouter in Frameworks */,
+				D7B2F21927C97C41002DFC41 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,20 +119,26 @@
 		D7ADD14427C9763900321E23 = {
 			isa = PBXGroup;
 			children = (
-				D7ADD14927C9763900321E23 /* Shared */,
-				D7ADD15827C9763A00321E23 /* macOS */,
+				D7B2F21327C97C2E002DFC41 /* SwiftlyKodiAPI */,
+				D7ADD16C27C9774E00321E23 /* Komodio */,
+				D7ADD16B27C9772400321E23 /* .gitignore */,
+				D7ADD16A27C9772400321E23 /* .jazzy.yaml */,
+				D7ADD16927C9772400321E23 /* .periphery.yml */,
+				D7ADD16827C9772400321E23 /* .swiftlint.yml */,
 				D7ADD15227C9763A00321E23 /* Products */,
+				D7B2F20E27C97C10002DFC41 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		D7ADD14927C9763900321E23 /* Shared */ = {
+		D7ADD14927C9763900321E23 /* SharedItems */ = {
 			isa = PBXGroup;
 			children = (
 				D7ADD14A27C9763900321E23 /* KomodioApp.swift */,
-				D7ADD14B27C9763900321E23 /* ContentView.swift */,
+				D7B2F21A27C97CD9002DFC41 /* AppState.swift */,
 				D7ADD14C27C9763A00321E23 /* Assets.xcassets */,
+				D7B2F24427C996F9002DFC41 /* Toolbar.swift */,
 			);
-			path = Shared;
+			path = SharedItems;
 			sourceTree = "<group>";
 		};
 		D7ADD15227C9763A00321E23 /* Products */ = {
@@ -66,6 +146,7 @@
 			children = (
 				D7ADD15127C9763A00321E23 /* Komodio.app */,
 				D7ADD15727C9763A00321E23 /* Komodio.app */,
+				D7ADD17127C9789D00321E23 /* Komodio.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,9 +154,61 @@
 		D7ADD15827C9763A00321E23 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
 				D7ADD15927C9763A00321E23 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		D7ADD16C27C9774E00321E23 /* Komodio */ = {
+			isa = PBXGroup;
+			children = (
+				D7ADD14927C9763900321E23 /* SharedItems */,
+				D7B2F21E27C97D29002DFC41 /* SharedViews */,
+				D7ADD15827C9763A00321E23 /* macOS */,
+				D7B2F24827C99F8C002DFC41 /* tvOS */,
+				D7B2F23827C98CBA002DFC41 /* iOS */,
+			);
+			path = Komodio;
+			sourceTree = "<group>";
+		};
+		D7B2F20E27C97C10002DFC41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7B2F21E27C97D29002DFC41 /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				D7ADD14B27C9763900321E23 /* ContentView.swift */,
+				D7B2F23327C98578002DFC41 /* HomeView.swift */,
+				D7B2F22327C97EF0002DFC41 /* MoviesView.swift */,
+				D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */,
+				D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */,
+				D7B2F23C27C98FDB002DFC41 /* GenresView.swift */,
+				D7B2F22F27C9846B002DFC41 /* LoadingView.swift */,
+				D7B2F24027C99465002DFC41 /* DetailsView.swift */,
+				D7EC593F27C9B46F004FFC57 /* RootView.swift */,
+			);
+			path = SharedViews;
+			sourceTree = "<group>";
+		};
+		D7B2F23827C98CBA002DFC41 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		D7B2F24827C99F8C002DFC41 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */,
+			);
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +227,10 @@
 			dependencies = (
 			);
 			name = "Komodio (iOS)";
+			packageProductDependencies = (
+				D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */,
+				D7B2F21427C97C36002DFC41 /* SwiftlyKodiAPI */,
+			);
 			productName = "Komodio (iOS)";
 			productReference = D7ADD15127C9763A00321E23 /* Komodio.app */;
 			productType = "com.apple.product-type.application";
@@ -111,8 +248,33 @@
 			dependencies = (
 			);
 			name = "Komodio (macOS)";
+			packageProductDependencies = (
+				D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */,
+				D7B2F21627C97C3C002DFC41 /* SwiftlyKodiAPI */,
+			);
 			productName = "Komodio (macOS)";
 			productReference = D7ADD15727C9763A00321E23 /* Komodio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D7ADD17027C9789D00321E23 /* Komodio (tvOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7ADD17C27C9789E00321E23 /* Build configuration list for PBXNativeTarget "Komodio (tvOS)" */;
+			buildPhases = (
+				D7ADD16D27C9789D00321E23 /* Sources */,
+				D7ADD16E27C9789D00321E23 /* Frameworks */,
+				D7ADD16F27C9789D00321E23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Komodio (tvOS)";
+			packageProductDependencies = (
+				D7B2F21127C97C18002DFC41 /* SwiftUIRouter */,
+				D7B2F21827C97C41002DFC41 /* SwiftlyKodiAPI */,
+			);
+			productName = Komodio;
+			productReference = D7ADD17127C9789D00321E23 /* Komodio.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -131,6 +293,9 @@
 					D7ADD15627C9763A00321E23 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					D7ADD17027C9789D00321E23 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 				};
 			};
 			buildConfigurationList = D7ADD14827C9763900321E23 /* Build configuration list for PBXProject "Komodio" */;
@@ -142,12 +307,16 @@
 				Base,
 			);
 			mainGroup = D7ADD14427C9763900321E23;
+			packageReferences = (
+				D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */,
+			);
 			productRefGroup = D7ADD15227C9763A00321E23 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				D7ADD15027C9763A00321E23 /* Komodio (iOS) */,
 				D7ADD15627C9763A00321E23 /* Komodio (macOS) */,
+				D7ADD17027C9789D00321E23 /* Komodio (tvOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -169,6 +338,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7ADD16F27C9789D00321E23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7B2F20927C9792E002DFC41 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -176,8 +353,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B2F23427C98578002DFC41 /* HomeView.swift in Sources */,
+				D7B2F22C27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
+				D7B2F22427C97EF0002DFC41 /* MoviesView.swift in Sources */,
+				D7B2F24527C996F9002DFC41 /* Toolbar.swift in Sources */,
+				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
+				D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */,
+				D7B2F24B27C9A026002DFC41 /* RootView+iOS.swift in Sources */,
+				D7B2F24127C99465002DFC41 /* DetailsView.swift in Sources */,
 				D7ADD15C27C9763A00321E23 /* ContentView.swift in Sources */,
+				D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */,
+				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
+				D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +373,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */,
+				D7B2F22D27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
+				D7B2F22527C97EF0002DFC41 /* MoviesView.swift in Sources */,
+				D7B2F24627C996F9002DFC41 /* Toolbar.swift in Sources */,
+				D7B2F22127C97D4A002DFC41 /* RootView+macOS.swift in Sources */,
+				D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */,
+				D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */,
+				D7B2F24227C99465002DFC41 /* DetailsView.swift in Sources */,
 				D7ADD15D27C9763A00321E23 /* ContentView.swift in Sources */,
+				D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */,
+				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
+				D7B2F22927C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7ADD16D27C9789D00321E23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */,
+				D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */,
+				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
+				D7B2F22627C97EF0002DFC41 /* MoviesView.swift in Sources */,
+				D7B2F24727C996F9002DFC41 /* Toolbar.swift in Sources */,
+				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
+				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
+				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
+				D7B2F20827C9792A002DFC41 /* ContentView.swift in Sources */,
+				D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */,
+				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,
+				D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */,
+				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +549,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -360,7 +579,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -370,7 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Komodio/macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -398,7 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Komodio/macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -418,6 +637,63 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D7ADD17D27C9789E00321E23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Komodio/Preview Content\"";
+				DEVELOPMENT_TEAM = FHPCJ7396C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.Komodio;
+				PRODUCT_NAME = Komodio;
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.2;
+			};
+			name = Debug;
+		};
+		D7ADD17E27C9789E00321E23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Komodio/Preview Content\"";
+				DEVELOPMENT_TEAM = FHPCJ7396C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.Komodio;
+				PRODUCT_NAME = Komodio;
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.2;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -451,7 +727,57 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D7ADD17C27C9789E00321E23 /* Build configuration list for PBXNativeTarget "Komodio (tvOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7ADD17D27C9789E00321E23 /* Debug */,
+				D7ADD17E27C9789E00321E23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/frzi/SwiftUIRouter";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
+			productName = SwiftUIRouter;
+		};
+		D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
+			productName = SwiftUIRouter;
+		};
+		D7B2F21127C97C18002DFC41 /* SwiftUIRouter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
+			productName = SwiftUIRouter;
+		};
+		D7B2F21427C97C36002DFC41 /* SwiftlyKodiAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftlyKodiAPI;
+		};
+		D7B2F21627C97C3C002DFC41 /* SwiftlyKodiAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftlyKodiAPI;
+		};
+		D7B2F21827C97C41002DFC41 /* SwiftlyKodiAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftlyKodiAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D7ADD14527C9763900321E23 /* Project object */;
 }

@@ -1,0 +1,12 @@
+# module: Komodio
+title: Komodio
+author: Nick Berendsen
+author_url: https://desbeers.nl
+github_url: https://github.com/desbeers/komodio/
+min_acl: private
+clean: true
+theme: apple
+
+# Command line for doc generation:
+
+# jazzy --xcodebuild-arguments -workspace,Komodio.xcworkspace,-scheme,Komodio-macOS
