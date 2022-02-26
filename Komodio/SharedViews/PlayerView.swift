@@ -13,10 +13,6 @@ struct PlayerView: View {
     var body: some View {
         Text("PLAYING!!!")
             .font(.title)
-#if os(tvOS)
-        /// Else we can't keep control of the Siri Munu button
-        .focusable(true)
-#endif
     }
 }
 

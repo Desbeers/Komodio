@@ -16,31 +16,42 @@ struct RootView: View {
     /// The Navigator model
     @EnvironmentObject var navigator: Navigator
     /// The selection in the list
-    @State private var selected: String?
+    @State private var selection: String?
     /// The View
     var body: some View {
-        NavigationView {
-            List(selection: $selected) {
-                ForEach(appState.titles, id: \.title) { (title, icon) in
-                    Label(title, systemImage: icon)
+        StackNavView {
+            List(selection: $selection) {
+                Section(header: Text("Library")) {
+                    NavBarView.Items(selection: $selection)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button(action: { navigator.goBack() }) {
+                        Image(systemName: "chevron.backward.square.fill")
+                            .foregroundColor(navigator.canGoBack ? .accentColor : .secondary)
+                    }
+                    .disabled(!navigator.canGoBack)
+                    .help("Go back")
                 }
             }
             ContentView()
+                .background(Color(nsColor: .textBackgroundColor))
 //                .toolbar {
 //                    toolbarContents()
 //                }
         }
         .environmentObject(appState)
-        .onChange(of: selected) { newSelected in
+        .onChange(of: selection) { newSelection in
             let pathComponents = navigator.path.components(separatedBy: "/").dropFirst()
-            if newSelected != pathComponents.first {
-                navigator.navigate("/" + (newSelected ?? ""))
+            if newSelection != pathComponents.first {
+                navigator.navigate("/" + (newSelection ?? ""))
             }
         }
         .onChange(of: navigator.path) { newPath in
             let components = newPath.components(separatedBy: "/").dropFirst()
-            if selected != components.first {
-                selected = components.first
+            if selection != components.first {
+                selection = components.first
             }
         }
     }

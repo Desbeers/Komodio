@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import SwiftUIRouter
 import SwiftlyKodiAPI
 
 struct HomeView: View {
     
     /// The AppState model
     @EnvironmentObject var appState: AppState
+    /// The Navigator model
+    @EnvironmentObject var navigator: Navigator
     
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// Library loading state
     @State var libraryLoaded: Bool = false
     var body: some View {
-        Group {
+        VStack {
             if libraryLoaded {
                 Text("Homepage!")
             } else {
@@ -32,6 +35,9 @@ struct HomeView: View {
         }
         .task {
             print("HomeViewTask!")
+            //navigator.clear()
+            appState.filter.title = "Home"
+            appState.filter.subtitle = nil
             appState.filter.media = .none
             libraryLoaded = kodi.library.isEmpty ? false : true
         }

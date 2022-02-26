@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUIRouter
+import SwiftlyKodiAPI
 
 struct MusicVideosView: View {
+    /// The library filter
+    @State var filter: KodiFilter
     var body: some View {
         Text("Music Videos View!")
     }

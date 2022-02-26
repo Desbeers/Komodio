@@ -7,17 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D735DEA927C9DCD800C63E1D /* StackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackLink.swift */; };
-		D735DEAA27C9DCD800C63E1D /* StackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackLink.swift */; };
-		D735DEAB27C9DCD800C63E1D /* StackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackLink.swift */; };
+		D735DEA927C9DCD800C63E1D /* StackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackNavigation.swift */; };
+		D735DEAA27C9DCD800C63E1D /* StackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackNavigation.swift */; };
+		D735DEAB27C9DCD800C63E1D /* StackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackNavigation.swift */; };
+		D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
+		D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
+		D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
+		D735DEB127C9EB9E00C63E1D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB027C9EB9E00C63E1D /* Extensions.swift */; };
+		D735DEB227C9EB9E00C63E1D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB027C9EB9E00C63E1D /* Extensions.swift */; };
+		D735DEB327C9EB9E00C63E1D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB027C9EB9E00C63E1D /* Extensions.swift */; };
+		D735DEB527C9F1C400C63E1D /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB427C9F1C400C63E1D /* ItemsView.swift */; };
+		D735DEB627C9F1C400C63E1D /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB427C9F1C400C63E1D /* ItemsView.swift */; };
+		D735DEB727C9F1C400C63E1D /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB427C9F1C400C63E1D /* ItemsView.swift */; };
+		D735DEB927C9F23600C63E1D /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB827C9F23600C63E1D /* ButtonStyles.swift */; };
+		D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB827C9F23600C63E1D /* ButtonStyles.swift */; };
+		D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */; };
+		D735DEC127CA732700C63E1D /* RootView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */; };
+		D735DEC327CA81B100C63E1D /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavBarView.swift */; };
+		D735DEC427CA81B100C63E1D /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavBarView.swift */; };
+		D735DEC527CA81B100C63E1D /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavBarView.swift */; };
+		D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */; };
+		D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */; };
+		D735DECD27CABCCF00C63E1D /* PartsView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */; };
 		D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
-		D7ADD15C27C9763A00321E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView.swift */; };
-		D7ADD15D27C9763A00321E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView.swift */; };
 		D7ADD15E27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
 		D7ADD15F27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
 		D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
-		D7B2F20827C9792A002DFC41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView.swift */; };
 		D7B2F20927C9792E002DFC41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
 		D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */; };
 		D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */; };
@@ -54,7 +70,6 @@
 		D7B2F24627C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
 		D7B2F24727C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
 		D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
-		D7B2F24B27C9A026002DFC41 /* RootView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */; };
 		D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
 		D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
 		D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
@@ -68,7 +83,16 @@
 
 /* Begin PBXFileReference section */
 		D735DEA727C9D7FD00C63E1D /* SwiftUIRouter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIRouter; path = ../Projects/SwiftUIRouter; sourceTree = "<group>"; };
-		D735DEA827C9DCD800C63E1D /* StackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackLink.swift; sourceTree = "<group>"; };
+		D735DEA827C9DCD800C63E1D /* StackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackNavigation.swift; sourceTree = "<group>"; };
+		D735DEAC27C9EB6D00C63E1D /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
+		D735DEB027C9EB9E00C63E1D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D735DEB427C9F1C400C63E1D /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
+		D735DEB827C9F23600C63E1D /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyles+tvOS.swift"; sourceTree = "<group>"; };
+		D735DEC227CA81B100C63E1D /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartsView+macOS.swift"; sourceTree = "<group>"; };
+		D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartsView+tvOS.swift"; sourceTree = "<group>"; };
+		D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartsView+iOS.swift"; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7ADD14B27C9763900321E23 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,7 +175,9 @@
 				D7B2F21A27C97CD9002DFC41 /* AppState.swift */,
 				D7ADD14C27C9763A00321E23 /* Assets.xcassets */,
 				D7B2F24427C996F9002DFC41 /* Toolbar.swift */,
-				D735DEA827C9DCD800C63E1D /* StackLink.swift */,
+				D735DEA827C9DCD800C63E1D /* StackNavigation.swift */,
+				D735DEB027C9EB9E00C63E1D /* Extensions.swift */,
+				D735DEB827C9F23600C63E1D /* ButtonStyles.swift */,
 			);
 			path = SharedItems;
 			sourceTree = "<group>";
@@ -170,7 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
+				D7ADD14B27C9763900321E23 /* ContentView.swift */,
 				D7ADD15927C9763A00321E23 /* macOS.entitlements */,
+				D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -197,7 +225,6 @@
 		D7B2F21E27C97D29002DFC41 /* SharedViews */ = {
 			isa = PBXGroup;
 			children = (
-				D7ADD14B27C9763900321E23 /* ContentView.swift */,
 				D7B2F23327C98578002DFC41 /* HomeView.swift */,
 				D7B2F22327C97EF0002DFC41 /* MoviesView.swift */,
 				D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */,
@@ -208,6 +235,9 @@
 				D7EC593F27C9B46F004FFC57 /* RootView.swift */,
 				D7EC594327C9BB53004FFC57 /* PlayerView.swift */,
 				D7EC594727C9C5B8004FFC57 /* PartsView.swift */,
+				D735DEAC27C9EB6D00C63E1D /* ArtView.swift */,
+				D735DEB427C9F1C400C63E1D /* ItemsView.swift */,
+				D735DEC227CA81B100C63E1D /* NavBarView.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -216,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */,
+				D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -224,6 +255,8 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */,
+				D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */,
+				D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -374,18 +407,23 @@
 				D7B2F22C27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D7B2F22427C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D7B2F24527C996F9002DFC41 /* Toolbar.swift in Sources */,
+				D735DEC327CA81B100C63E1D /* NavBarView.swift in Sources */,
 				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
+				D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */,
+				D735DEC127CA732700C63E1D /* RootView+iOS.swift in Sources */,
+				D735DEB527C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */,
-				D7B2F24B27C9A026002DFC41 /* RootView+iOS.swift in Sources */,
 				D7B2F24127C99465002DFC41 /* DetailsView.swift in Sources */,
-				D7ADD15C27C9763A00321E23 /* ContentView.swift in Sources */,
 				D7EC594827C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */,
+				D735DEB927C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
-				D735DEA927C9DCD800C63E1D /* StackLink.swift in Sources */,
+				D735DEA927C9DCD800C63E1D /* StackNavigation.swift in Sources */,
+				D735DEB127C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+				D735DECD27CABCCF00C63E1D /* PartsView+iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,20 +432,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */,
+				D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */,
 				D7B2F22D27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D7B2F22527C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D7B2F24627C996F9002DFC41 /* Toolbar.swift in Sources */,
+				D735DEC427CA81B100C63E1D /* NavBarView.swift in Sources */,
 				D7B2F22127C97D4A002DFC41 /* RootView+macOS.swift in Sources */,
+				D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */,
+				D735DEB627C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7B2F24227C99465002DFC41 /* DetailsView.swift in Sources */,
-				D7ADD15D27C9763A00321E23 /* ContentView.swift in Sources */,
 				D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */,
+				D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
-				D735DEAA27C9DCD800C63E1D /* StackLink.swift in Sources */,
+				D735DEAA27C9DCD800C63E1D /* StackNavigation.swift in Sources */,
+				D735DEB227C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7B2F22927C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,20 +460,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */,
+				D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */,
 				D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */,
+				D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */,
 				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
+				D735DEC527CA81B100C63E1D /* NavBarView.swift in Sources */,
 				D7B2F22627C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D7B2F24727C996F9002DFC41 /* Toolbar.swift in Sources */,
+				D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */,
+				D735DEB727C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
-				D7B2F20827C9792A002DFC41 /* ContentView.swift in Sources */,
 				D7EC594A27C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */,
-				D735DEAB27C9DCD800C63E1D /* StackLink.swift in Sources */,
+				D735DEAB27C9DCD800C63E1D /* StackNavigation.swift in Sources */,
+				D735DEB327C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

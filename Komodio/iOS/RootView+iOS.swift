@@ -12,35 +12,20 @@ struct RootView: View {
     /// The Navigator model
     @EnvironmentObject var navigator: Navigator
     /// The selection in the list
-    @State var selected = -1
+    @State var selection: String? = "Home"
     /// The View
     var body: some View {
-        TabView(selection: $selected) {
-            ForEach(0..<appState.titles.count) { index in
-                VStack {
-                    HStack(spacing: 20) {
-                        toolbarContents()
-                    }
-                    Spacer()
-                    ContentView()
-                    Spacer()
-                }
-                .tag(index)
-                .tabItem {
-                    Image(systemName: appState.titles[index].image)
-                    Text(appState.titles[index].title)
-                }
+        StackNavView {
+            List(selection: $selection) {
+                //Section(header: Text("Library")) {
+                    NavBarView.Items(selection: $selection)
+                //}
             }
+            .navigationTitle("Library")
+            HomeView()
         }
         .environmentObject(appState)
-        .onChange(of: selected) { newIndex in
-            navigator.navigate("/" + appState.titles[newIndex].title)
-        }
-        .onChange(of: navigator.path) { newPath in
-            let components = newPath.components(separatedBy: "/").dropFirst()
-            if let index = appState.titles.firstIndex(where: { $0.title == components.first }) {
-                selected = index
-            }
-        }
+        .edgesIgnoringSafeArea(.bottom)
+        //.statusBar(hidden: true)
     }
 }

@@ -15,23 +15,41 @@ struct PartsView {
 
 extension PartsView {
     
-    struct TitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
+    /// A Button to toggle the watched status of a Kodi item
+    struct WatchedToggle: View {
+        /// The KodiConnector model
+        @EnvironmentObject var kodi: KodiConnector
+        /// The item we want to toggle
+        @Binding var item: KodiItem
         /// The View
         var body: some View {
-            HStack {
-                Text(appState.filter.title ?? "Komodio")
-                    .font(.title)
-                    //.padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                toolbarContents(navigator: navigator)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.thinMaterial).blendMode(.multiply)
+            Button(action: {
+                item.toggleWatchedState()
+            }, label: {
+                Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
+                    .macOS { $0.frame(width: 110) }
+                    .tvOS { $0.frame(width: 300) }
+            })
+                .buttonStyle(.bordered)
+                .animation(.default, value: item)
         }
-        
+    }
+}
+
+extension PartsView {
+    
+    /// A View to show the watched status of a Kodi item
+    struct WatchStatusViewModifier: ViewModifier {
+        /// The Kodi media item
+        @Binding var item: KodiItem
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+                .overlay(alignment: .topTrailing) {
+                    Image(systemName: item.playcount == 0 ? "star.fill" : "checkmark.circle.fill")
+                        .font(.subheadline)
+                        .foregroundColor(item.playcount == 0 ? .yellow : .green)
+                }
+        }
     }
 }

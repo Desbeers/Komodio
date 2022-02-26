@@ -24,29 +24,27 @@ struct MoviesView: View {
     @State var movies: [KodiItem] = []
     /// The View
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                ForEach(movies) { movie in
-                    
-                    StackLink(path: "/Movies/Details/\(movie.id.uuidString)", filter: $filter, destination: DetailsView(item: movie)) {
-                        Text(movie.title)
-                    }
-                    
-//                    NavLink(to: "/Movies/Details/\(movie.id.uuidString)") {
-//                        Text(movie.title)
-//                    }
-                    //MovieItem(filter: filter, movie: movie.binding())
+        ItemsView.List(filter) {
+            ForEach(movies) { movie in
+                
+                /// Build a new filter for the DetailsView
+                let newFilter = KodiFilter(
+                    media: .movie,
+                    item: movie,
+                    title: movie.title,
+                    subtitle: movie.subtitle
+                )
+                
+                StackNavLink(path: "/Movies/Details/\(movie.id)", filter: newFilter, destination: DetailsView(item: movie.binding())) {
+                    ItemsView.Item(item: movie.binding())
                 }
+                .listRowInsets(.none)
+                .buttonStyle(ButtonStyles.KodiItem(item: movie))
             }
         }
-        //.buttonStyle(.plain)
         .task {
             print("MoviesView task!")
-            navigator.clear()
-            appState.filter.media = .movie
-            appState.filter.title = "Movies"
             movies = kodi.library.filter(filter)
-            dump(navigator)
         }
     }
 }
