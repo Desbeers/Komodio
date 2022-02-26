@@ -21,7 +21,7 @@ struct RootView: View {
                 NavBarView.Items(selection: $selection)
             }
         }
-        .background(Color(uiColor: .systemOrange).blendMode(.difference))
+        .background(Color(uiColor: .systemOrange))
         .environmentObject(appState)
     }
 }

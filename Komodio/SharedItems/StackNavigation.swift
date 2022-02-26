@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUIRouter
 import SwiftlyKodiAPI
 
-/// A replaceent for ``NavigationView``
+/// A replacement for ``NavigationView``
 struct StackNavView<Content: View>: View {
     private var content: Content
     /// StackNavView
@@ -121,6 +121,8 @@ public struct StackNavLink<Label: View, Destination: View>: View {
 #endif
     }
 }
+
+// - MARK: Transitions
 
 struct NavigationTransition: ViewModifier {
     @EnvironmentObject private var navigator: Navigator

@@ -42,7 +42,11 @@ struct ContentView: View {
                                        title: "TV shows",
                                        subtitle: nil)
                 ))
-                Route("Music Videos/*", content: MusicVideosView(filter: KodiFilter(media: .musicvideo)))
+                Route("Music Videos/*", content: MusicVideosView(
+                    filter: KodiFilter(media: .musicvideo,
+                                       title: "Music Videos",
+                                       subtitle: nil)
+                ))
                 Route("Genres/*", content: GenresView())
                 Route {
                     Navigate(to: "/Home")
@@ -54,6 +58,7 @@ struct ContentView: View {
                 Spacer()
             }
         }
+        
     }
     
     func validateItemID(routeInfo: RouteInformation) -> KodiItem {

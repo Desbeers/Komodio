@@ -10,12 +10,8 @@ import SwiftUIRouter
 import SwiftlyKodiAPI
 
 extension PartsView {
-    
-    /// The header above a list of Kodi items or at a detail view
-    /// - Note: detail view has `scrollView` as `false`
+
     struct TitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
         /// The Kodi item
         let item: KodiItem
         /// The View

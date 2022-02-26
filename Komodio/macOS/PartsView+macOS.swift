@@ -11,6 +11,7 @@ import SwiftlyKodiAPI
 
 extension PartsView {
     
+    /// View the Ttitle and optional subtitle of the page
     struct TitleHeader: View {
         /// The AppState model
         @EnvironmentObject var appState: AppState
@@ -28,20 +29,18 @@ extension PartsView {
                 .font(.title)
                 .buttonStyle(.plain)
                 VStack(alignment: .leading) {
-                Text(appState.filter.title ?? "Komodio")
-                    .font(.title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                if let subtitle = appState.filter.subtitle {
-                    Text(subtitle)
-                        .font(.subheadline)
+                    Text(appState.filter.title ?? "Komodio")
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    if let subtitle = appState.filter.subtitle {
+                        Text(subtitle)
+                            .font(.subheadline)
+                    }
                 }
-                }
-                //toolbarContents(navigator: navigator)
             }
             .padding()
             .frame(height: 60)
             .frame(maxWidth: .infinity, alignment: .leading)
-            //.background(Color.white.opacity(0.8))
             .background(.thinMaterial)
             .ignoresSafeArea()
         }

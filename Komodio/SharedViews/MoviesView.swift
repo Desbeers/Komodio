@@ -38,7 +38,6 @@ struct MoviesView: View {
                 StackNavLink(path: "/Movies/Details/\(movie.id)", filter: newFilter, destination: DetailsView(item: movie.binding())) {
                     ItemsView.Item(item: movie.binding())
                 }
-                .listRowInsets(.none)
                 .buttonStyle(ButtonStyles.KodiItem(item: movie))
             }
         }
