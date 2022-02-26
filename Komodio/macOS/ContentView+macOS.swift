@@ -42,11 +42,14 @@ struct ContentView: View {
                                        title: "TV shows",
                                        subtitle: nil)
                 ))
-                Route("Music Videos/*", content: MusicVideosView(
+                Route("Music Videos/", content: MusicVideosView(
                     filter: KodiFilter(media: .musicvideo,
                                        title: "Music Videos",
                                        subtitle: nil)
                 ))
+                Route("Music Videos/Artist/:itemID", validator: validateItemID) { kodiItem in
+                    MusicVideosView.Items(artist: kodiItem)
+                }
                 Route("Genres/*", content: GenresView())
                 Route {
                     Navigate(to: "/Home")
@@ -65,10 +68,11 @@ struct ContentView: View {
         
         let id = routeInfo.parameters["itemID"] ?? ""
         let item = kodi.library.first(where: { $0.id == id })!
-        Task { @MainActor in
-            appState.filter.title = item.title
-            appState.filter.subtitle = item.subtitle.isEmpty ? nil : item.subtitle
-        }
+        debugPrint("Validating \(item.title)")
+//        Task { @MainActor in
+//            appState.filter.title = item.title
+//            appState.filter.subtitle = item.subtitle.isEmpty ? nil : item.subtitle
+//        }
         return item
     }
     

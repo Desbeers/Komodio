@@ -26,13 +26,6 @@ struct DetailsView: View {
             #if !os(macOS)
             PartsView.TitleHeader(item: item)
             #endif
-//            if !item.subtitle.isEmpty {
-//                Text(item.subtitle)
-//                    .padding(.bottom, 8)
-//                    .padding(.leading, 20)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .background(.thinMaterial)
-//            }
             Spacer()
             HStack(alignment: .top, spacing: 0) {
                 ArtView.PosterDetail(item: item)

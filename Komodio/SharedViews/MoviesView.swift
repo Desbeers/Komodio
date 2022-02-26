@@ -35,7 +35,10 @@ struct MoviesView: View {
                     subtitle: movie.subtitle
                 )
                 
-                StackNavLink(path: "/Movies/Details/\(movie.id)", filter: newFilter, destination: DetailsView(item: movie.binding())) {
+                StackNavLink(path: "/Movies/Details/\(movie.id)",
+                             filter: newFilter,
+                             destination: DetailsView(item: movie.binding())
+                ) {
                     ItemsView.Item(item: movie.binding())
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: movie))

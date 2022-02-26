@@ -30,6 +30,8 @@
 		D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */; };
 		D735DECD27CABCCF00C63E1D /* PartsView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */; };
 		D735DECE27CAC08300C63E1D /* ContentView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */; };
+		D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
+		D735DED027CACAA400C63E1D /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
 		D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15E27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
@@ -410,6 +412,7 @@
 				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEC127CA732700C63E1D /* RootView+iOS.swift in Sources */,
+				D735DED027CACAA400C63E1D /* DetailsView.swift in Sources */,
 				D735DEB527C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7EC594827C9C5B8004FFC57 /* PartsView.swift in Sources */,
@@ -446,6 +449,7 @@
 				D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
+				D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
 				D735DEAA27C9DCD800C63E1D /* StackNavigation.swift in Sources */,
 				D735DEB227C9EB9E00C63E1D /* Extensions.swift in Sources */,
