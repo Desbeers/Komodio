@@ -25,16 +25,6 @@ struct RootView: View {
                     NavBarView.Items(selection: $selection)
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Button(action: { navigator.goBack() }) {
-                        Image(systemName: "chevron.backward.square.fill")
-                            .foregroundColor(navigator.canGoBack ? .accentColor : .secondary)
-                    }
-                    .disabled(!navigator.canGoBack)
-                    .help("Go back")
-                }
-            }
             ContentView()
                 .background(Color(nsColor: .textBackgroundColor))
 //                .toolbar {

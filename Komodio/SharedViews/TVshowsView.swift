@@ -20,7 +20,7 @@ struct TVshowsView: View {
     var body: some View {
         ItemsView.List() {
             ForEach(kodi.library.filter(filter)) { tvshow in
-                Item(item: tvshow.binding(), filter: filter)
+                Item(tvshow: tvshow.binding(), filter: filter)
             }
         }
         .task {
@@ -38,14 +38,14 @@ extension TVshowsView {
     /// View a TV show item
     struct Item: View {
         /// The TV show item
-        @Binding var item: KodiItem
+        @Binding var tvshow: KodiItem
         /// The current filter
         let filter: KodiFilter
         var body: some View {
-            StackNavLink(path: "/Movies/Details/\(item.id)", filter: filter, destination: DetailsView(item: item.binding())) {
-                ItemsView.Item(item: item.binding())
+            StackNavLink(path: "/TV shows/Episodes/\(tvshow.id)", filter: filter, destination: EpisodesView(tvshow: tvshow)) {
+                ItemsView.Item(item: tvshow.binding())
             }
-            .buttonStyle(ButtonStyles.KodiItem(item: item))
+            .buttonStyle(ButtonStyles.KodiItem(item: tvshow))
         }
     }
 }

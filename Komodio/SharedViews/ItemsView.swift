@@ -73,4 +73,12 @@ extension ItemsView {
             }
         }
     }
+    
+    /// The description of a Kodi item
+    struct Description: View {
+        let description: String
+        var body: some View {
+            Text(description)
+        }
+    }
 }
