@@ -31,6 +31,7 @@ extension ItemsView {
                 /// On macOS, give it some padding because the TitleHeader is on top
                 .macOS { $0.padding(.top, 40)}
             }
+            .tvOS {$0.fanartBackground() }
         }
     }
 }
@@ -79,6 +80,29 @@ extension ItemsView {
         let description: String
         var body: some View {
             Text(description)
+        }
+    }
+    
+        
+    /// A View to show the watched status of a Kodi item
+    struct FanartModifier: ViewModifier {
+        /// The AppState model
+        @EnvironmentObject var appState: AppState
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+                .background {
+                    if let fanart = appState.filter.fanart {
+                        ArtView.Fanart(fanart: fanart)
+                            .opacity(0.3)
+                            .blur(radius: 10)
+                            .macOS {$0.edgesIgnoringSafeArea(.all) }
+                            .tvOS { $0.edgesIgnoringSafeArea(.all) }
+                            .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+                    } else {
+                        EmptyView()
+                    }
+                }
         }
     }
 }

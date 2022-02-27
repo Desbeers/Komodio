@@ -27,6 +27,7 @@ struct TVshowsView: View {
             print("TVsshowView task!")
             appState.filter.title = "TV shows"
             appState.filter.subtitle = nil
+            appState.filter.fanart = nil
             
         }
         .iOS { $0.navigationTitle("TV shows") }

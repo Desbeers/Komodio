@@ -9,6 +9,21 @@ import SwiftUI
 import AVKit
 import SwiftlyKodiAPI
 
+extension KodiMedia {
+    var color: Color {
+        switch self {
+        case .movie:
+            return Color.blue
+        case .tvshow:
+            return Color.orange
+        case .musicvideo:
+            return Color.green
+        default:
+            return Color("tvOSbackground")
+        }
+    }
+}
+
 extension AVPlayer {
     
     /// Is the AV player playing or not?
@@ -46,23 +61,14 @@ extension View {
         #endif
     }
     
-//    /// Shortcut for the ``WrapperViewModifier``
-//    func wrapItems(
-//        title: String = "",
-//        subtitle: String = "",
-//        fanart: String = "",
-//        scrollView: Bool = true
-//    ) -> some View {
-//        modifier(PartsView.WrapViewModifier(title: title,
-//                                            subtitle: subtitle,
-//                                            fanart: fanart,
-//                                            scrollView: scrollView)
-//        )
-//    }
-    
     /// Shortcut to the ``WatchStatusViewModifier``
     func watchStatus(of item: Binding<KodiItem>) -> some View {
         modifier(PartsView.WatchStatusViewModifier(item: item))
+    }
+    
+    /// Shortcut to the ``FanartModifier``
+    func fanartBackground() -> some View {
+        modifier(ItemsView.FanartModifier())
     }
     
     /// Cheap `if` extension that should not be used because of performance

@@ -32,7 +32,7 @@ struct EpisodesView: View {
                         .font(.title3)
                         .padding(.top)
                     HStack(alignment: .top) {
-                        ArtView.PosterList(poster: episodes.filter { $0.season == season }.first?.poster ?? "")
+                        ArtView.PosterEpisode(poster: episodes.filter { $0.season == season }.first?.poster ?? "")
                             .cornerRadius(6)
                             .padding()
                         VStack {
@@ -48,6 +48,7 @@ struct EpisodesView: View {
             print("EpisodesView task!")
             appState.filter.title = tvshow.title
             appState.filter.subtitle = "TV shows"
+            appState.filter.fanart = tvshow.fanart
             /// Filter the episodes
             getEpisodes()
         }

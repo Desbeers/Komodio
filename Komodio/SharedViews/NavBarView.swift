@@ -54,22 +54,22 @@ extension NavBarView {
         }
     }
     
-//    /// A View for the Sidebar with all the genres from the Kodi host
-//    struct Genres: View {
-//        /// The KodiConnector model
-//        @EnvironmentObject var kodi: KodiConnector
-//        /// The binding for the list
-//        @Binding var selection: Int?
-//        /// The view
-//        var body: some View {
-//            ForEach(kodi.genres) { genre in
-//                StackNavItem(title: genre.label,
-//                            icon: genre.symbol,
-//                            destination: GenresView.Items(genre: genre, filter: KodiFilter(media: .all, genre: genre.label)),
-//                            tag: 100 + genre.genreID,
-//                            selection: $selection
-//                )
-//            }
-//        }
-//    }
+    /// A View for the Sidebar with all the genres from the Kodi host
+    struct Genres: View {
+        /// The KodiConnector model
+        @EnvironmentObject var kodi: KodiConnector
+        /// The binding for the list
+        @Binding var selection: String?
+        /// The view
+        var body: some View {
+            ForEach(kodi.genres) { genre in
+                StackNavItem(title: genre.label,
+                            icon: genre.symbol,
+                            destination: GenresView.Items(genre: genre),
+                            tag: "100-\(genre.genreID)",
+                            selection: $selection
+                )
+            }
+        }
+    }
 }

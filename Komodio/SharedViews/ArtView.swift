@@ -79,6 +79,42 @@ extension ArtView {
             .iOS { $0.frame(width: 100) }
         }
     }
+
+    /// A View to show the poster of a Kodi item in a list
+    struct PosterEpisode: View {
+        /// The poster
+        let poster: String
+        /// The View
+        var body: some View {
+            Group {
+                if poster.isEmpty {
+                    Image("No Poster")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    AsyncImage(url: URL(string: poster)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        case .failure:
+                            Image("No Poster")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                }
+            }
+            .macOS { $0.frame(width: 150) }
+            .tvOS { $0.frame(height: 300) }
+            .iOS { $0.frame(width: 100) }
+        }
+    }
     
     /// A View to show the poster of a Kodi item in a detail View
     struct PosterDetail: View {

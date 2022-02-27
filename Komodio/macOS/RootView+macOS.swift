@@ -24,6 +24,9 @@ struct RootView: View {
                 Section(header: Text("Library")) {
                     NavBarView.Items(selection: $selection)
                 }
+                Section(header: Text("Genres")) {
+                    NavBarView.Genres(selection: $selection)
+                }
             }
             ContentView()
                 .background(Color(nsColor: .textBackgroundColor))

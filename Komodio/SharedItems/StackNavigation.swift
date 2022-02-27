@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 /// A replacement for ``NavigationView``
 struct StackNavView<Content: View>: View {
     private var content: Content
-    /// StackNavView
+    /// Init the View
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }

@@ -115,10 +115,15 @@ extension MoviesView {
         let setID: Int
         /// The movies we want to show
         @State var movies: [KodiItem] = []
+        /// The set info
+        @State var setDescription = ""
         /// The View
         var body: some View {
             
             ItemsView.List() {
+                if !setDescription.isEmpty {
+                    ItemsView.Description(description: setDescription)
+                }
                 ForEach(movies) { movie in
                     StackNavLink(path: "/Movies/Details/\(movie.id)",
                                  filter: appState.filter,
@@ -131,8 +136,10 @@ extension MoviesView {
             }
             .task {
                 /// Get set info
-                if let setInfo = kodi.library.first(where: { $0.setID == setID}) {
-                    appState.filter.title = setInfo.setInfo.title
+                if let item = kodi.library.first(where: { $0.setID == setID}) {
+                    appState.filter.title = item.setInfo.title
+                    setDescription = item.setInfo.description
+                    appState.filter.fanart = item.setInfo.fanart
                     appState.filter.subtitle = "Movies"
                     appState.filter.setID = setID
                     movies = kodi.library.filter(appState.filter)

@@ -71,7 +71,12 @@ struct ContentView: View {
                     }
                 }
                 /// Genres
-                Route("Genres/*", content: GenresView())
+                Group {
+                    Route("/Genres/", content: GenresView())
+                    Route("/Genres/:itemID", validator: validateGenreID) { genreItem in
+                        GenresView.Items(genre: genreItem)
+                    }
+                }
                 /// Fallback
                 Route {
                     Navigate(to: "/Home")
@@ -83,6 +88,7 @@ struct ContentView: View {
                 Spacer()
             }
         }
+        .fanartBackground()
     }
 
     /// Get a Kodi item from an ID string
@@ -91,6 +97,15 @@ struct ContentView: View {
     func validateItemID(routeInfo: RouteInformation) -> KodiItem {
         let id = routeInfo.parameters["itemID"] ?? ""
         let item = kodi.library.first(where: { $0.id == id })!
+        return item
+    }
+    
+    /// Get a Kodi genre from an ID string
+    /// - Parameter routeInfo: The route info with the details
+    /// - Returns: A ``KodItem``
+    func validateGenreID(routeInfo: RouteInformation) -> GenreItem {
+        let id = Int(routeInfo.parameters["itemID"] ?? "0")
+        let item = kodi.genres.first(where: { $0.genreID == id })!
         return item
     }
     

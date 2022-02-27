@@ -39,9 +39,9 @@ extension ButtonStyles {
             configuration.label
             /// Slow in the simulator; check on a real aTV
             /// .background(focused ? .thickMaterial : .ultraThinMaterial)
-                .background(Color("ListButtonColor").opacity(focused ? 0.8 : 0.5))
+                .background(Color("ListButtonColor").opacity(focused ? 1 : 0.5))
                 .cornerRadius(12)
-                .shadow(radius: 20)
+                .shadow(radius: focused ? 20 : 0, y: focused ? 20 : 0)
                 .padding(.horizontal, 80)
                 .padding(.vertical, 30)
                 .onChange(of: focused) { focus in
