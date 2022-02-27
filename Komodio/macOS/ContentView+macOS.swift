@@ -92,7 +92,6 @@ struct ContentView: View {
                 }
                 /// Fallback
                 Route {
-                    let _ = print("Genre Detail??")
                     Navigate(to: "Home")
                 }
             }

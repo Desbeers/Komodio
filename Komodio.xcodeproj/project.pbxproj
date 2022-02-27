@@ -50,9 +50,6 @@
 		D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */; };
 		D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */; };
 		D7B2F21227C97C18002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21127C97C18002DFC41 /* SwiftUIRouter */; };
-		D7B2F21527C97C36002DFC41 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21427C97C36002DFC41 /* SwiftlyKodiAPI */; };
-		D7B2F21727C97C3C002DFC41 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21627C97C3C002DFC41 /* SwiftlyKodiAPI */; };
-		D7B2F21927C97C41002DFC41 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21827C97C41002DFC41 /* SwiftlyKodiAPI */; };
 		D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
 		D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
 		D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
@@ -76,13 +73,10 @@
 		D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
 		D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
 		D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
-		D7B2F24527C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
-		D7B2F24627C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
-		D7B2F24727C996F9002DFC41 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24427C996F9002DFC41 /* Toolbar.swift */; };
 		D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
-		D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
-		D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
-		D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC593F27C9B46F004FFC57 /* RootView.swift */; };
+		D7CCA97127CC3B19001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */; };
+		D7CCA97327CC3B21001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */; };
+		D7CCA97527CC3B28001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */; };
 		D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
 		D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
 		D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
@@ -92,7 +86,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D735DEA727C9D7FD00C63E1D /* SwiftUIRouter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIRouter; path = ../Projects/SwiftUIRouter; sourceTree = "<group>"; };
 		D735DEA827C9DCD800C63E1D /* StackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackNavigation.swift; sourceTree = "<group>"; };
 		D735DEAC27C9EB6D00C63E1D /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		D735DEB027C9EB9E00C63E1D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -108,6 +101,7 @@
 		D735DED927CB088900C63E1D /* PlayerMetaData+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerMetaData+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
+		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+macOS.swift"; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,7 +113,6 @@
 		D7ADD16A27C9772400321E23 /* .jazzy.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .jazzy.yaml; sourceTree = "<group>"; };
 		D7ADD16B27C9772400321E23 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D7ADD17127C9789D00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7B2F21327C97C2E002DFC41 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D7B2F21A27C97CD9002DFC41 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView+macOS.swift"; sourceTree = "<group>"; };
 		D7B2F22327C97EF0002DFC41 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
@@ -130,9 +123,8 @@
 		D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView+iOS.swift"; sourceTree = "<group>"; };
 		D7B2F23C27C98FDB002DFC41 /* GenresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresView.swift; sourceTree = "<group>"; };
 		D7B2F24027C99465002DFC41 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
-		D7B2F24427C996F9002DFC41 /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RootView+tvOS.swift"; path = "Komodio/tvOS/RootView+tvOS.swift"; sourceTree = SOURCE_ROOT; };
-		D7EC593F27C9B46F004FFC57 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		D7CCA96F27CC3B08001B4828 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D7EC594327C9BB53004FFC57 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		D7EC594727C9C5B8004FFC57 /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,7 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */,
-				D7B2F21527C97C36002DFC41 /* SwiftlyKodiAPI in Frameworks */,
+				D7CCA97327CC3B21001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */,
-				D7B2F21727C97C3C002DFC41 /* SwiftlyKodiAPI in Frameworks */,
+				D7CCA97127CC3B19001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B2F21227C97C18002DFC41 /* SwiftUIRouter in Frameworks */,
-				D7B2F21927C97C41002DFC41 /* SwiftlyKodiAPI in Frameworks */,
+				D7CCA97527CC3B28001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,9 +163,9 @@
 		D7ADD14427C9763900321E23 = {
 			isa = PBXGroup;
 			children = (
-				D735DEA727C9D7FD00C63E1D /* SwiftUIRouter */,
-				D7B2F21327C97C2E002DFC41 /* SwiftlyKodiAPI */,
+				D7CCA96E27CC3B08001B4828 /* Packages */,
 				D7ADD16C27C9774E00321E23 /* Komodio */,
+				D76FE5A427CC25C1006A1DF0 /* README.md */,
 				D7ADD16B27C9772400321E23 /* .gitignore */,
 				D7ADD16A27C9772400321E23 /* .jazzy.yaml */,
 				D7ADD16927C9772400321E23 /* .periphery.yml */,
@@ -189,7 +181,6 @@
 				D7ADD14A27C9763900321E23 /* KomodioApp.swift */,
 				D7B2F21A27C97CD9002DFC41 /* AppState.swift */,
 				D7ADD14C27C9763A00321E23 /* Assets.xcassets */,
-				D7B2F24427C996F9002DFC41 /* Toolbar.swift */,
 				D735DEA827C9DCD800C63E1D /* StackNavigation.swift */,
 				D735DEB027C9EB9E00C63E1D /* Extensions.swift */,
 				D735DEB827C9F23600C63E1D /* ButtonStyles.swift */,
@@ -251,7 +242,6 @@
 				D735DEB427C9F1C400C63E1D /* ItemsView.swift */,
 				D7B2F22F27C9846B002DFC41 /* LoadingView.swift */,
 				D7B2F24027C99465002DFC41 /* DetailsView.swift */,
-				D7EC593F27C9B46F004FFC57 /* RootView.swift */,
 				D7EC594327C9BB53004FFC57 /* PlayerView.swift */,
 				D7EC594727C9C5B8004FFC57 /* PartsView.swift */,
 				D735DEAC27C9EB6D00C63E1D /* ArtView.swift */,
@@ -281,6 +271,14 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
+		D7CCA96E27CC3B08001B4828 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D7CCA96F27CC3B08001B4828 /* SwiftlyKodiAPI */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,7 +297,7 @@
 			name = "Komodio (iOS)";
 			packageProductDependencies = (
 				D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */,
-				D7B2F21427C97C36002DFC41 /* SwiftlyKodiAPI */,
+				D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */,
 			);
 			productName = "Komodio (iOS)";
 			productReference = D7ADD15127C9763A00321E23 /* Komodio.app */;
@@ -320,7 +318,7 @@
 			name = "Komodio (macOS)";
 			packageProductDependencies = (
 				D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */,
-				D7B2F21627C97C3C002DFC41 /* SwiftlyKodiAPI */,
+				D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */,
 			);
 			productName = "Komodio (macOS)";
 			productReference = D7ADD15727C9763A00321E23 /* Komodio.app */;
@@ -341,7 +339,7 @@
 			name = "Komodio (tvOS)";
 			packageProductDependencies = (
 				D7B2F21127C97C18002DFC41 /* SwiftUIRouter */,
-				D7B2F21827C97C41002DFC41 /* SwiftlyKodiAPI */,
+				D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */,
 			);
 			productName = Komodio;
 			productReference = D7ADD17127C9789D00321E23 /* Komodio.app */;
@@ -426,7 +424,6 @@
 				D7B2F23427C98578002DFC41 /* HomeView.swift in Sources */,
 				D7B2F22C27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D7B2F22427C97EF0002DFC41 /* MoviesView.swift in Sources */,
-				D7B2F24527C996F9002DFC41 /* Toolbar.swift in Sources */,
 				D735DED227CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D735DEC327CA81B100C63E1D /* NavBarView.swift in Sources */,
 				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
@@ -439,7 +436,6 @@
 				D7EC594827C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D735DEB927C9F23600C63E1D /* ButtonStyles.swift in Sources */,
-				D7EC594027C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
 				D735DEA927C9DCD800C63E1D /* StackNavigation.swift in Sources */,
@@ -458,7 +454,6 @@
 				D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */,
 				D7B2F22D27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D7B2F22527C97EF0002DFC41 /* MoviesView.swift in Sources */,
-				D7B2F24627C996F9002DFC41 /* Toolbar.swift in Sources */,
 				D735DEC427CA81B100C63E1D /* NavBarView.swift in Sources */,
 				D7B2F22127C97D4A002DFC41 /* RootView+macOS.swift in Sources */,
 				D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */,
@@ -469,7 +464,6 @@
 				D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */,
-				D7EC594127C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
@@ -493,7 +487,6 @@
 				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D735DEC527CA81B100C63E1D /* NavBarView.swift in Sources */,
 				D7B2F22627C97EF0002DFC41 /* MoviesView.swift in Sources */,
-				D7B2F24727C996F9002DFC41 /* Toolbar.swift in Sources */,
 				D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEB727C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
@@ -503,7 +496,6 @@
 				D735DEDC27CB1CB100C63E1D /* Extensions+tvOS.swift in Sources */,
 				D7EC594A27C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */,
-				D7EC594227C9B46F004FFC57 /* RootView.swift in Sources */,
 				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */,
 				D735DEAB27C9DCD800C63E1D /* StackNavigation.swift in Sources */,
@@ -869,15 +861,15 @@
 			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
 			productName = SwiftUIRouter;
 		};
-		D7B2F21427C97C36002DFC41 /* SwiftlyKodiAPI */ = {
+		D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftlyKodiAPI;
 		};
-		D7B2F21627C97C3C002DFC41 /* SwiftlyKodiAPI */ = {
+		D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftlyKodiAPI;
 		};
-		D7B2F21827C97C41002DFC41 /* SwiftlyKodiAPI */ = {
+		D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftlyKodiAPI;
 		};

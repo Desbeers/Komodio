@@ -70,18 +70,16 @@ extension GenresView {
         var body: some View {
             ItemsView.List() {
                 ForEach(items) { item in
-//                    StackNavLink(path: "\(navigator.path)/Details/\(item.id)",
-//                                 filter: appState.filter,
-//                                 destination: DetailsView(item: item.binding())
-//                    ) {
-                        ItemsView.Item(item: item.binding())
-//                    }
-//                    .buttonStyle(ButtonStyles.KodiItem(item: item))
-                    
+                    ItemsView.Item(item: item.binding())
                 }
             }
             .task {
-                let filter = KodiFilter(media: .all, genre: genre.label)
+                print("GenresView.Items task!")
+                let filter = KodiFilter(media: .all,
+                                        /// Make sure there is no more movie set selected
+                                        //setID: nil,
+                                        genre: genre.label
+                )
                 items = kodi.library.filter(filter)
                 appState.filter.title = genre.label
                 appState.filter.subtitle = "Genres"

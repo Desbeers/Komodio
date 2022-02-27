@@ -21,14 +21,11 @@ struct MoviesView: View {
     @State var filter: KodiFilter
     /// The movies we want to show
     @State var movies: [KodiItem] = []
-    /// Optional Set ID
-    var setID: Int?
     /// The View
     var body: some View {
         ItemsView.List() {
             ForEach(movies) { movie in
                 ItemsView.Item(item: movie.binding())
-                //MovieItem(filter: filter, movie: movie.binding())
             }
         }
         .task {
@@ -128,16 +125,11 @@ extension MoviesView {
                     ItemsView.Description(description: setDescription)
                 }
                 ForEach(movies) { movie in
-                    StackNavLink(path: "/Movies/Details/\(movie.id)",
-                                 filter: appState.filter,
-                                 destination: DetailsView(item: movie.binding())
-                    ) {
-                        ItemsView.Item(item: movie.binding())
-                    }
-                    .buttonStyle(ButtonStyles.KodiItem(item: movie))
+                    Item(movie: movie.binding(), filter: appState.filter)
                 }
             }
             .task {
+                print("MoviesView.MovieSetView task!")
                 /// Get set info
                 if let item = kodi.library.first(where: { $0.setID == setID}) {
                     appState.filter.title = item.setInfo.title

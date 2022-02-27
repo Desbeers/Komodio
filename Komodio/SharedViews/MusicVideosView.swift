@@ -27,7 +27,6 @@ struct MusicVideosView: View {
                 /// Build a new filter for the MusicVideos.Artist View
                 let newFilter = KodiFilter(
                     media: .musicvideo,
-                    item: musicvideo,
                     title: artist.title,
                     subtitle: "Music Videos"
                 )
