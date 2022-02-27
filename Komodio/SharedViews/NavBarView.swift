@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+import SwiftUIRouter
 
 /// The View for the Sidebar
 struct NavBarView { }
@@ -63,12 +64,17 @@ extension NavBarView {
         /// The view
         var body: some View {
             ForEach(kodi.genres) { genre in
-                StackNavItem(title: genre.label,
-                            icon: genre.symbol,
-                            destination: GenresView.Items(genre: genre),
-                            tag: "100-\(genre.genreID)",
-                            selection: $selection
-                )
+                
+                Label(genre.label, systemImage: genre.symbol)
+                    .tag("\(genre.label)")
+
+                
+//                StackNavItem(title: genre.label,
+//                            icon: genre.symbol,
+//                            destination: GenresView.Items(genre: genre),
+//                            tag: "100-\(genre.genreID)",
+//                            selection: $selection
+//                )
             }
         }
     }

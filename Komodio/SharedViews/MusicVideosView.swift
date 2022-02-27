@@ -82,8 +82,11 @@ extension MusicVideosView {
         /// The View
         var body: some View {
             ItemsView.List() {
+#if os(tvOS)
+                PartsView.TitleHeader()
+#endif
                 ForEach(musicvideos) { musicvideo in
-                    Item(artist: artist, item: musicvideo.binding())
+                    ItemsView.Item(item: musicvideo.binding())
                 }
             }
             .task {
@@ -99,21 +102,21 @@ extension MusicVideosView {
     }
     
     struct Item: View {
-        let artist: KodiItem
-        @Binding var item: KodiItem
+        //let artist: KodiItem
+        @Binding var musicvideo: KodiItem
         var body: some View {
-            StackNavLink(path: "/Music Videos/Artist/Details/\(item.id)",
+            StackNavLink(path: "/Music Videos/Artist/Details/\(musicvideo.id)",
                          filter: KodiFilter(media: .musicvideo),
-                         destination: DetailsView(item: $item)
+                         destination: DetailsView(item: $musicvideo)
             ) {
-                ItemsView.Item(item: $item)
+                ItemsView.Basic(item: $musicvideo)
             }
-            .buttonStyle(ButtonStyles.KodiItem(item: item))
+            .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
             .contextMenu {
                 Button(action: {
-                    item.toggleWatchedState()
+                    musicvideo.toggleWatchedState()
                 }, label: {
-                    Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
+                    Text(musicvideo.playcount == 0 ? "Mark as watched" : "Mark as new")
                 })
             }
         }

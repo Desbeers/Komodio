@@ -39,6 +39,7 @@ extension PartsView {
                             .transition(AnyTransition.opacity.combined(with: .slide))
                     }
                 }
+                Text(navigator.path)
             }
             .animation(.default, value: appState.filter)
             .padding()

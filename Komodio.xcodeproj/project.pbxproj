@@ -248,13 +248,13 @@
 				D735DED127CAF76300C63E1D /* EpisodesView.swift */,
 				D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */,
 				D7B2F23C27C98FDB002DFC41 /* GenresView.swift */,
+				D735DEB427C9F1C400C63E1D /* ItemsView.swift */,
 				D7B2F22F27C9846B002DFC41 /* LoadingView.swift */,
 				D7B2F24027C99465002DFC41 /* DetailsView.swift */,
 				D7EC593F27C9B46F004FFC57 /* RootView.swift */,
 				D7EC594327C9BB53004FFC57 /* PlayerView.swift */,
 				D7EC594727C9C5B8004FFC57 /* PartsView.swift */,
 				D735DEAC27C9EB6D00C63E1D /* ArtView.swift */,
-				D735DEB427C9F1C400C63E1D /* ItemsView.swift */,
 				D735DEC227CA81B100C63E1D /* NavBarView.swift */,
 			);
 			path = SharedViews;

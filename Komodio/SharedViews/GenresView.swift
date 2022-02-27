@@ -28,7 +28,7 @@ struct GenresView: View {
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.genres) { genre in
                     
-                    StackNavLink(path: "/Genres/\(genre.genreID)",
+                    StackNavLink(path: "/Genres/\(genre.label)",
                                  filter: KodiFilter(media: .none),
                                  destination: GenresView.Items(genre: genre)
                     ) {
@@ -60,6 +60,8 @@ extension GenresView {
         @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
+        /// The Navigator model
+        @EnvironmentObject var navigator: Navigator
         /// The selected Genre to filter
         let genre: GenreItem
         /// The list of Kodi items to show
@@ -68,11 +70,16 @@ extension GenresView {
         var body: some View {
             ItemsView.List() {
                 ForEach(items) { item in
-                    /// Use ``MoviesView/Movie`` so we keep movie sets
-                    MoviesView.MovieItem(filter: appState.filter, movie: item.binding())
+//                    StackNavLink(path: "\(navigator.path)/Details/\(item.id)",
+//                                 filter: appState.filter,
+//                                 destination: DetailsView(item: item.binding())
+//                    ) {
+                        ItemsView.Item(item: item.binding())
+//                    }
+//                    .buttonStyle(ButtonStyles.KodiItem(item: item))
+                    
                 }
             }
-            .padding(.vertical)
             .task {
                 let filter = KodiFilter(media: .all, genre: genre.label)
                 items = kodi.library.filter(filter)

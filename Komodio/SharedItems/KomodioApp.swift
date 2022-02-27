@@ -18,17 +18,11 @@ import SwiftlyKodiAPI
     /// The Scene
     var body: some Scene {
         WindowGroup {
-            //#if !os(tvOS)
             Router {
                 RootView()
             }
             .environmentObject(kodi)
             .ignoresSafeArea()
-//            #else
-//            RootView()
-//                .environmentObject(kodi)
-//                .ignoresSafeArea()
-//            #endif
         }
 #if os(macOS)
         //.windowToolbarStyle(.unifiedCompact(showsTitle: true))

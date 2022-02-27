@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIRouter
 import SwiftlyKodiAPI
 
 /// An 'Item' can be any kind of ``KodiItem``; e.g., movie, tvshow, episode etc...
@@ -36,10 +37,45 @@ extension ItemsView {
     }
 }
 
+
+extension ItemsView {
+    struct Item: View {
+        /// The AppState model
+        @EnvironmentObject var appState: AppState
+        /// The Navigator model
+        @EnvironmentObject var navigator: Navigator
+        /// The ``KodiItem`` to show in this View
+        @Binding var item: KodiItem
+        var body: some View {
+            
+            switch item.media {
+            case .movie:
+                Text("Movie")
+                MoviesView.Item(movie: $item, filter: appState.filter)
+            case .tvshow:
+                Text("TV show")
+                TVshowsView.Item(tvshow: $item, filter: appState.filter)
+            case .musicvideo:
+                Text("Music Video")
+                MusicVideosView.Item(musicvideo: $item)
+            default:
+                Text("Basic")
+                StackNavLink(path: "\(navigator.path)/Details/\(item.id)",
+                             filter: appState.filter,
+                             destination: DetailsView(item: item.binding())
+                ) {
+                    Basic(item: $item)
+                }
+                .buttonStyle(ButtonStyles.KodiItem(item: item))
+            }
+        }
+    }
+}
+
 extension ItemsView {
     
-    /// A View for a Kodi item
-    struct Item: View {
+    /// A basic View for a Kodi item
+    struct Basic: View {
         /// The ``KodiItem`` to show in this View
         @Binding var item: KodiItem
         /// The View

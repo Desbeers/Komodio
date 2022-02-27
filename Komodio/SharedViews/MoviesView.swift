@@ -27,7 +27,8 @@ struct MoviesView: View {
     var body: some View {
         ItemsView.List() {
             ForEach(movies) { movie in
-                MovieItem(filter: filter, movie: movie.binding())
+                ItemsView.Item(item: movie.binding())
+                //MovieItem(filter: filter, movie: movie.binding())
             }
         }
         .task {
@@ -45,11 +46,11 @@ struct MoviesView: View {
 extension MoviesView {
     
     /// A View for a movie item
-    struct MovieItem: View {
-        /// The current library  filter
-        let filter: KodiFilter
+    struct Item: View {
         /// The Movie item from the library
         @Binding var movie: KodiItem
+        /// The current library  filter
+        let filter: KodiFilter
         /// The View
         var body: some View {
             if movie.setID == 0 || filter.setID != nil || filter.search != nil {
@@ -57,7 +58,7 @@ extension MoviesView {
                              filter: filter,
                              destination: DetailsView(item: movie.binding())
                 ) {
-                    ItemsView.Item(item: movie.binding())
+                    ItemsView.Basic(item: movie.binding())
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: movie))
             } else {
@@ -67,15 +68,15 @@ extension MoviesView {
                              destination: MovieSetView(setID: movie.setID)
                              //destination: MoviesView(filter: filter, setID: movie.setID)
                 ) {
-                    MovieSetItem(movie: movie)
+                    Set(movie: movie)
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: movie))
             }
         }
     }
     
-    /// A View for a movie set item
-    struct MovieSetItem: View {
+    /// A View for a movie set
+    struct Set: View {
         /// The Movie item from the library
         let movie: KodiItem
         /// The View
@@ -119,8 +120,10 @@ extension MoviesView {
         @State var setDescription = ""
         /// The View
         var body: some View {
-            
             ItemsView.List() {
+#if os(tvOS)
+                PartsView.TitleHeader()
+#endif
                 if !setDescription.isEmpty {
                     ItemsView.Description(description: setDescription)
                 }

@@ -30,9 +30,6 @@ struct RootView: View {
             }
             ContentView()
                 .background(Color(nsColor: .textBackgroundColor))
-//                .toolbar {
-//                    toolbarContents()
-//                }
         }
         .environmentObject(appState)
         .onChange(of: selection) { newSelection in

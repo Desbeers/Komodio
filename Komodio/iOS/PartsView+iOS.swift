@@ -12,13 +12,13 @@ import SwiftlyKodiAPI
 extension PartsView {
 
     struct TitleHeader: View {
-        /// The Kodi item
-        let item: KodiItem
+        /// The AppState model
+        @EnvironmentObject var appState: AppState
         /// The View
         var body: some View {
-            if !item.subtitle.isEmpty {
+            if let subtitle = appState.filter.subtitle {
                 VStack(alignment: .leading, spacing: 0) {
-                        Text(item.subtitle)
+                        Text(subtitle)
                             .font(.body)
                             .padding(.bottom, 8)
                             .padding(.leading, 20)

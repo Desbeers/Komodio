@@ -44,7 +44,7 @@ extension TVshowsView {
         let filter: KodiFilter
         var body: some View {
             StackNavLink(path: "/TV shows/Episodes/\(tvshow.id)", filter: filter, destination: EpisodesView(tvshow: tvshow)) {
-                ItemsView.Item(item: tvshow.binding())
+                ItemsView.Basic(item: tvshow.binding())
             }
             .buttonStyle(ButtonStyles.KodiItem(item: tvshow))
         }

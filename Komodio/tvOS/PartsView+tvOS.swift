@@ -12,17 +12,16 @@ import SwiftlyKodiAPI
 extension PartsView {
 
     struct TitleHeader: View {
-        /// The Kodi item
-        let item: KodiItem
+        /// The AppState model
+        @EnvironmentObject var appState: AppState
         /// The View
         var body: some View {
-            if !item.title.isEmpty {
-                VStack(spacing: 0) {
-                    Text(item.title)
-                        .font(.title2)
-                    if !item.subtitle.isEmpty {
-                        Text(item.subtitle)
-                            .font(.body)
+            if let title = appState.filter.title {
+                VStack {
+                    Text(title)
+                        .font(.title)
+                    if let subtitle = appState.filter.subtitle {
+                        Text(subtitle)
                     }
                 }
                 .padding()

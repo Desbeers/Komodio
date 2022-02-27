@@ -24,7 +24,7 @@ struct DetailsView: View {
         VStack(spacing: 0) {
             /// macOS has it's own PartsHeader as a ZStack
             #if !os(macOS)
-            PartsView.TitleHeader(item: item)
+            PartsView.TitleHeader()
             #endif
             Spacer()
             HStack(alignment: .top, spacing: 0) {
