@@ -113,7 +113,6 @@ public struct StackNavLink<Label: View, Destination: View>: View {
             label
         }
 #elseif os(tvOS)
-        /// .navigationTitle is a mess on tvOS; so up to the View to add something...
         NavigationLink(destination: destination) {
             label
         }

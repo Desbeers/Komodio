@@ -51,7 +51,7 @@ struct EpisodesView: View {
             /// Filter the episodes
             getEpisodes()
         }
-        .navigationTitle("Movies")
+        .iOS { $0.navigationTitle("Movies") }
         
     }
     /// Get the episodes from the Kodi database
@@ -76,7 +76,7 @@ extension EpisodesView {
         @Binding var item: KodiItem
         var body: some View {
             
-            StackNavLink(path: "/Movies/Details/\(item.id)",
+            StackNavLink(path: "/TV shows/Episodes/Details/\(item.id)",
                          filter: appState.filter,
                          destination: DetailsView(item: item.binding())
             ) {

@@ -27,11 +27,6 @@ struct HomeView: View {
             } else {
                 LoadingView()
             }
-            Button(action: {
-                ///
-            }, label: {
-                Text("Reload Library")
-            })
         }
         .task {
             print("HomeViewTask!")
@@ -62,7 +57,7 @@ extension HomeView {
                     .tvOS { $0.padding(.top, 160) }
                 Row(title: "Random Music Videos", items: $items.musicvideos)
                 Row(title: "Latest TV show Episodes", items: $items.episodes)
-                //libraryReloadButton
+                libraryReloadButton
                 
             }
             .buttonStyle(ButtonStyles.HomeItem())
@@ -72,6 +67,25 @@ extension HomeView {
                 items = getHomeItems(library: kodi.library)
             }
         }
+        /// A library 'reload' button
+        var libraryReloadButton: some View {
+            /// In a HStack to make it focusable in tvOS
+            HStack {
+                /// On macOS, the reload button is in the toolbar, so no need here
+                Button(action: {
+                    kodi.reloadHost()
+                }, label: {
+                    Text("Reload Library")
+                })
+                    .buttonStyle(.bordered)
+                    .padding(.all, 40)
+            }
+            .frame(maxWidth: .infinity)
+    #if os(tvOS)
+            .focusSection()
+    #endif
+        }
+        
         /// Get the home items
         private func getHomeItems(library: [KodiItem]) -> HomeItems {
             return HomeItems(movies: Array(library
@@ -130,7 +144,7 @@ extension HomeView {
         var body: some View {
             VStack(spacing: 0) {
                 
-                StackNavLink(path: "/Movies/Details/\(item.id)",
+                StackNavLink(path: "/Home/Details/\(item.id)",
                              filter: KodiFilter(media: .none),
                              destination: DetailsView(item: item.binding())
                 ) {
@@ -146,27 +160,9 @@ extension HomeView {
                         }
                     }
                 }
-                PartsView.WatchedToggle(item: $item)
+                // PartsView.WatchedToggle(item: $item)
             }
         }
-    }
-    
-    var libraryReloadButton: some View {
-        /// In a HStack to make it focusable in tvOS
-        HStack {
-            /// On macOS, the reload button is in the toolbar, so no need here
-            Button(action: {
-                kodi.reloadHost()
-            }, label: {
-                Text("Reload Library")
-            })
-                .buttonStyle(.bordered)
-                .padding(.all, 40)
-        }
-        .frame(maxWidth: .infinity)
-#if os(tvOS)
-        .focusSection()
-#endif
     }
     
     /// A struct to collect items for the HomeView

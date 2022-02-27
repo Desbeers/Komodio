@@ -10,59 +10,72 @@ import SwiftUIRouter
 import SwiftlyKodiAPI
 
 // MARK: - Routes
+
+/// The one and only content page for macOS
 struct ContentView: View {
-    
     /// The AppState model
     @EnvironmentObject var appState: AppState
-    
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    
+    /// The View
     var body: some View {
         ZStack(alignment: .top) {
             SwitchRoutes {
-                Route("Home/", content: HomeView())
-                
-                Route("Movies/", content: MoviesView(
-                    filter: KodiFilter(media: .movie,
-                                       title: "Movies",
-                                       subtitle: nil)
-                ))
-                
-                Route("Movies/Set/:setID") { info in
-                    MoviesView.MovieSetView(setID: Int(info.parameters["setID"]!)!)
+                /// Home
+                Group {
+                    Route("/Home/", content: HomeView())
+                    Route("/Home/Details/:itemID", validator: validateItemID) { itemID in
+                        DetailsView(item: itemID.binding())
+                    }
                 }
-                
-                Route("Movies/Details/:itemID", validator: validateItemID) { itemID in
-                    DetailsView(item: itemID.binding())
+                /// Movies
+                Group {
+                    Route("/Movies/", content: MoviesView(
+                        filter: KodiFilter(media: .movie,
+                                           title: "Movies",
+                                           subtitle: nil)
+                    ))
+                    Route("/Movies/Set/:setID") { info in
+                        MoviesView.MovieSetView(setID: Int(info.parameters["setID"]!)!)
+                    }
+                    Route("/Movies/Details/:itemID", validator: validateItemID) { itemID in
+                        DetailsView(item: itemID.binding())
+                    }
                 }
-                
-                Route("/player", content: PlayerView())
-
-                Route("TV shows/", content: TVshowsView(
-                    filter: KodiFilter(media: .tvshow,
-                                       title: "TV shows",
-                                       subtitle: nil)
-                ))
-                
-                Route("TV shows/Episodes/:itemID", validator: validateItemID) { showID in
-                    EpisodesView(tvshow: showID)
+                /// TV shows
+                Group {
+                    Route("/TV shows/", content: TVshowsView(
+                        filter: KodiFilter(media: .tvshow,
+                                           title: "TV shows",
+                                           subtitle: nil)
+                    ))
+                    Route("/TV shows/Episodes/:itemID", validator: validateItemID) { showID in
+                        EpisodesView(tvshow: showID)
+                    }
+                    Route("/TV shows/Episodes/Details/:itemID", validator: validateItemID) { itemID in
+                        DetailsView(item: itemID.binding())
+                    }
                 }
-                
-                Route("Music Videos/", content: MusicVideosView(
-                    filter: KodiFilter(media: .musicvideo,
-                                       title: "Music Videos",
-                                       subtitle: nil)
-                ))
-                
-                Route("Music Videos/Artist/:itemID", validator: validateItemID) { kodiItem in
-                    MusicVideosView.Items(artist: kodiItem)
+                /// Music Videos
+                Group {
+                    Route("/Music Videos/", content: MusicVideosView(
+                        filter: KodiFilter(media: .musicvideo,
+                                           title: "Music Videos",
+                                           subtitle: nil)
+                    ))
+                    Route("/Music Videos/Artist/:itemID", validator: validateItemID) { kodiItem in
+                        MusicVideosView.Items(artist: kodiItem)
+                    }
+                    Route("/Music Videos/Artist/Details/:itemID", validator: validateItemID) { itemID in
+                        DetailsView(item: itemID.binding())
+                    }
                 }
+                /// Genres
                 Route("Genres/*", content: GenresView())
-                
-//                Route {
-//                    Navigate(to: "/Home")
-//                }
+                /// Fallback
+                Route {
+                    Navigate(to: "/Home")
+                }
             }
             .navigationTransition()
             VStack {
@@ -70,18 +83,14 @@ struct ContentView: View {
                 Spacer()
             }
         }
-        
     }
-    
-    func validateItemID(routeInfo: RouteInformation) -> KodiItem {
 
+    /// Get a Kodi item from an ID string
+    /// - Parameter routeInfo: The route info with the details
+    /// - Returns: A ``KodItem``
+    func validateItemID(routeInfo: RouteInformation) -> KodiItem {
         let id = routeInfo.parameters["itemID"] ?? ""
         let item = kodi.library.first(where: { $0.id == id })!
-        debugPrint("Validating \(item.title)")
-//        Task { @MainActor in
-//            appState.filter.title = item.title
-//            appState.filter.subtitle = item.subtitle.isEmpty ? nil : item.subtitle
-//        }
         return item
     }
     

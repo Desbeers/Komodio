@@ -38,7 +38,7 @@ struct MoviesView: View {
             /// Filter the movies
             movies = kodi.library.filter(filter)
         }
-        .navigationTitle("Movies")
+        .iOS { $0.navigationTitle("Movies") }
     }
 }
 
@@ -138,7 +138,7 @@ extension MoviesView {
                     movies = kodi.library.filter(appState.filter)
                 }
             }
-            .navigationTitle(appState.filter.title ?? "")
+            .iOS { $0.navigationTitle(appState.filter.title ?? "") }
         }
     }
     

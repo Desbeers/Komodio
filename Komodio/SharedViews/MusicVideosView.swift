@@ -44,7 +44,7 @@ struct MusicVideosView: View {
             appState.filter.title = "Music Videos"
             appState.filter.subtitle = nil
         }
-        .navigationTitle("Music Videos")
+        .iOS { $0.navigationTitle("Music Videos") }
     }
 }
 
@@ -94,7 +94,7 @@ extension MusicVideosView {
                 appState.filter.subtitle = "Music Videos"
                 
             }
-            .navigationTitle(artist.artist.joined(separator: " & "))
+            .iOS { $0.navigationTitle(artist.artist.joined(separator: " & ")) }
         }
     }
     
@@ -102,7 +102,7 @@ extension MusicVideosView {
         let artist: KodiItem
         @Binding var item: KodiItem
         var body: some View {
-            StackNavLink(path: "/Movies/Details/\(item.id)",
+            StackNavLink(path: "/Music Videos/Artist/Details/\(item.id)",
                          filter: KodiFilter(media: .musicvideo),
                          destination: DetailsView(item: $item)
             ) {

@@ -21,7 +21,7 @@ struct RootView: View {
                     NavBarView.Items(selection: $selection)
                 //}
             }
-            .navigationTitle("Library")
+            .iOS { $0.navigationTitle("Library") }
             HomeView()
         }
         .environmentObject(appState)

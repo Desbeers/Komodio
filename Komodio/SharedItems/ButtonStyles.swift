@@ -24,15 +24,16 @@ extension ButtonStyles {
         func makeBody(configuration: Configuration) -> some View {
             Button(action: configuration.trigger, label: {
                 configuration
-                    .label
+                    .label.cornerRadius(6)
             })
                 .zIndex(isOverButton ? 2 : 1)
                 .padding(.all, 2)
                 .background(.ultraThinMaterial)
+                .cornerRadius(6)
                 .shadow(radius: isOverButton ? 2 : 0)
                 .padding(.vertical, 20)
                 .buttonStyle(.plain)
-                .scaleEffect(isOverButton ? 1.1 : 1)
+                .scaleEffect(isOverButton ? 1.05 : 1)
                 .animation(.easeInOut, value: isOverButton)
                 .onHover { over in
                     isOverButton = over

@@ -38,9 +38,9 @@ struct DetailsView: View {
                     Spacer()
                     /// Buttons
                     HStack {
-//                        PlayerView.Link(item: item, destination: PlayerView(video: item)) {
-//                            Text("Play")
-//                        }
+                        PlayerView.Link(item: item, destination: PlayerView(video: item)) {
+                            Text("Play")
+                        }
                         PartsView.WatchedToggle(item: $item)
                         Spacer()
                     }
@@ -81,6 +81,6 @@ struct DetailsView: View {
             appState.filter.subtitle = item.subtitle.isEmpty ? appState.filter.title : item.subtitle
             appState.filter.title = item.title
         }
-        .navigationTitle(item.title)
+        .iOS { $0.navigationTitle(item.title) }
     }
 }

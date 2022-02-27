@@ -29,7 +29,7 @@ struct TVshowsView: View {
             appState.filter.subtitle = nil
             
         }
-        .navigationTitle("TV shows")
+        .iOS { $0.navigationTitle("TV shows") }
     }
 }
 

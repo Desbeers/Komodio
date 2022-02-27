@@ -35,9 +35,12 @@ extension PartsView {
                     if let subtitle = appState.filter.subtitle {
                         Text(subtitle)
                             .font(.subheadline)
+                            .transition(AnyTransition.opacity.combined(with: .slide))
+                            //.transition(.move(edge: .bottom))
                     }
                 }
             }
+            .animation(.default, value: appState.filter)
             .padding()
             .frame(height: 60)
             .frame(maxWidth: .infinity, alignment: .leading)
