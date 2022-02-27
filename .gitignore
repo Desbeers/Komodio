@@ -1,12 +1,13 @@
 ## User settings
 xcuserdata/
+*.xcworkspace
 
 ## Icons
 icons/
 
 ## Jazzy stuff
 build/
-doc/
+docs/
 
 ## Mac stuff
 .DS_Store
