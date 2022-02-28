@@ -11,6 +11,11 @@ import SwiftlyKodiAPI
 
 extension PartsView {
     
+    /// Show the optional title and subtitle on a View
+    ///
+    /// - Note: We can't control the page animations on tvOS, so we just hide
+    /// this view as soon as a new header is set. Ugly, but else the header for the next
+    /// View is shown before the previous View is gone.
     struct TitleHeader: View {
         /// The AppState model
         @EnvironmentObject var appState: AppState
