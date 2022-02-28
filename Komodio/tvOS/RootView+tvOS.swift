@@ -21,7 +21,7 @@ struct RootView: View {
                 NavBarView.Items(selection: $selection)
             }
         }
-        .background(Color("tvOSbackground"))
+        //.background(Color("tvOSbackground"))
         .environmentObject(appState)
     }
 }

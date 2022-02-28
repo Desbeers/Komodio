@@ -20,8 +20,13 @@
         }
       ],
       "color" : {
-        "platform" : "tvos",
-        "reference" : "tintColor"
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0.168",
+          "green" : "0.166",
+          "red" : "0.164"
+        }
       },
       "idiom" : "tv"
     }
