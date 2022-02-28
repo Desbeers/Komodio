@@ -21,8 +21,10 @@ struct RootView: View {
                 NavBarView.Items(selection: $selection)
             }
         }
-        .background(Image("Background").resizable())
+        //.animation(nil, value: selection)
         //.background(Color("tvOSbackground"))
         .environmentObject(appState)
+        .background(Image("Background").resizable().ignoresSafeArea())
+        .preferredColorScheme(.dark)
     }
 }

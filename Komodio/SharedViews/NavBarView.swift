@@ -64,17 +64,8 @@ extension NavBarView {
         /// The view
         var body: some View {
             ForEach(kodi.genres) { genre in
-                
                 Label(genre.label, systemImage: genre.symbol)
                     .tag("\(genre.label)")
-
-                
-//                StackNavItem(title: genre.label,
-//                            icon: genre.symbol,
-//                            destination: GenresView.Items(genre: genre),
-//                            tag: "100-\(genre.genreID)",
-//                            selection: $selection
-//                )
             }
         }
     }

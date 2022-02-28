@@ -270,8 +270,8 @@
 				D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */,
 				D735DED927CB088900C63E1D /* PlayerMetaData+tvOS.swift */,
 				D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */,
-				D722643727CC56500037FC76 /* tvOS.plist */,
 				D788807327CC76D400F0C51A /* LaunchScreen.storyboard */,
+				D722643727CC56500037FC76 /* tvOS.plist */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";

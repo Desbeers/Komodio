@@ -32,7 +32,7 @@ extension ItemsView {
                 /// On macOS, give it some padding because the TitleHeader is on top
                 .macOS { $0.padding(.top, 40)}
             }
-            .tvOS {$0.fanartBackground() }
+            .tvOS { $0.fanartBackground() }
         }
     }
 }
@@ -129,14 +129,21 @@ extension ItemsView {
             content
                 .background {
                     if let fanart = appState.filter.fanart {
-                        ArtView.Fanart(fanart: fanart)
-                            .opacity(0.3)
-                            .blur(radius: 10)
-                            .macOS {$0.edgesIgnoringSafeArea(.all) }
-                            .tvOS { $0.edgesIgnoringSafeArea(.all) }
-                            .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+                        ZStack {
+                            Color("Background")
+                            ArtView.Fanart(fanart: fanart)
+                                .opacity(0.3)
+                                .blur(radius: 10)
+                        }
+                        .macOS {$0.edgesIgnoringSafeArea(.all) }
+                        .tvOS { $0.edgesIgnoringSafeArea(.all) }
+                        .iOS { $0.edgesIgnoringSafeArea(.bottom) }
                     } else {
+                        //#if os(tvOS)
+                        //Image("Background").resizable().ignoresSafeArea()
+                        //#else
                         EmptyView()
+                        //#endif
                     }
                 }
         }
