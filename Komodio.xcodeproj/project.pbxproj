@@ -41,6 +41,7 @@
 		D735DEDE27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
+		D788807427CC76D400F0C51A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D788807327CC76D400F0C51A /* LaunchScreen.storyboard */; };
 		D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15E27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		D788807327CC76D400F0C51A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+macOS.swift"; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				D735DED927CB088900C63E1D /* PlayerMetaData+tvOS.swift */,
 				D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */,
 				D722643727CC56500037FC76 /* tvOS.plist */,
+				D788807327CC76D400F0C51A /* LaunchScreen.storyboard */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B2F20927C9792E002DFC41 /* Assets.xcassets in Resources */,
+				D788807427CC76D400F0C51A /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,6 +755,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Komodio/tvOS/tvOS.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -780,6 +785,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Komodio/tvOS/tvOS.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
