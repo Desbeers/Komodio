@@ -21,6 +21,7 @@ struct RootView: View {
                 NavBarView.Items(selection: $selection)
             }
         }
+        .background(Image("Background").resizable())
         //.background(Color("tvOSbackground"))
         .environmentObject(appState)
     }
