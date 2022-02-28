@@ -46,6 +46,7 @@ struct GenresView: View {
             print("GenresView task!")
             appState.filter.title = "Genres"
             appState.filter.subtitle = nil
+            appState.filter.fanart = nil
         }
         .iOS { $0.navigationTitle("Genres") }
         .tvOS { $0.padding(.horizontal, 100) }
@@ -77,12 +78,13 @@ extension GenresView {
                 print("GenresView.Items task!")
                 let filter = KodiFilter(media: .all,
                                         /// Make sure there is no more movie set selected
-                                        //setID: nil,
+                                        setID: nil,
                                         genre: genre.label
                 )
                 items = kodi.library.filter(filter)
                 appState.filter.title = genre.label
                 appState.filter.subtitle = "Genres"
+                appState.filter.fanart = nil
             }
             .iOS { $0.navigationTitle("Genres") }
             

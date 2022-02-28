@@ -42,6 +42,7 @@ struct MusicVideosView: View {
             musicvideos = kodi.library.filter(filter)
             appState.filter.title = "Music Videos"
             appState.filter.subtitle = nil
+            appState.filter.fanart = nil
         }
         .iOS { $0.navigationTitle("Music Videos") }
     }

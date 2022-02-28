@@ -36,7 +36,7 @@ struct ContentView: View {
                                            subtitle: nil)
                     ))
                     Route("Movies/Set/:setID") { info in
-                        MoviesView.MovieSetView(setID: Int(info.parameters["setID"]!)!)
+                        MoviesView.Set(setID: Int(info.parameters["setID"]!)!)
                     }
                     Route("Movies/Details/:itemID", validator: validateItemID) { itemID in
                         DetailsView(item: itemID.binding())

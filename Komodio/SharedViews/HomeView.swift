@@ -33,6 +33,7 @@ struct HomeView: View {
             //navigator.clear()
             appState.filter.title = "Home"
             appState.filter.subtitle = nil
+            appState.filter.fanart = nil
             appState.filter.media = .none
             libraryLoaded = kodi.library.isEmpty ? false : true
         }
