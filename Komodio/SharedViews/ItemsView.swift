@@ -50,16 +50,12 @@ extension ItemsView {
             
             switch item.media {
             case .movie:
-                Text("Movie")
                 MoviesView.Item(movie: $item, filter: appState.filter)
             case .tvshow:
-                Text("TV show")
                 TVshowsView.Item(tvshow: $item, filter: appState.filter)
             case .musicvideo:
-                Text("Music Video")
                 MusicVideosView.Item(musicvideo: $item)
             default:
-                Text("Basic")
                 StackNavLink(path: "\(navigator.path)/Details/\(item.id)",
                              filter: appState.filter,
                              destination: DetailsView(item: item.binding())
@@ -128,22 +124,18 @@ extension ItemsView {
         func body(content: Content) -> some View {
             content
                 .background {
-                    if let fanart = appState.filter.fanart {
+                    if let fanart = appState.filter.fanart, !fanart.isEmpty {
                         ZStack {
                             Color("Background")
                             ArtView.Fanart(fanart: fanart)
                                 .opacity(0.3)
-                                .blur(radius: 10)
+                                .blur(radius: 4)
                         }
                         .macOS {$0.edgesIgnoringSafeArea(.all) }
                         .tvOS { $0.edgesIgnoringSafeArea(.all) }
                         .iOS { $0.edgesIgnoringSafeArea(.bottom) }
                     } else {
-                        //#if os(tvOS)
-                        //Image("Background").resizable().ignoresSafeArea()
-                        //#else
                         EmptyView()
-                        //#endif
                     }
                 }
         }

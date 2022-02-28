@@ -98,13 +98,14 @@ extension MoviesView {
                 }
             }
             .task {
-                print("MoviesView.MovieSetView task!")
+                print("MoviesView.Set task!")
                 /// Get set info
                 if let item = kodi.library.first(where: { $0.setID == setID}) {
                     appState.filter.title = item.setInfo.title
                     setDescription = item.setInfo.description
                     appState.filter.fanart = item.setInfo.fanart
                     appState.filter.subtitle = "Movies"
+                    appState.filter.media = .movie
                     appState.filter.setID = setID
                     movies = kodi.library.filter(appState.filter)
                 }

@@ -44,9 +44,12 @@ struct GenresView: View {
         }
         .task {
             print("GenresView task!")
-            appState.filter.title = "Genres"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
+            /// Set the filter
+            appState.filter = KodiFilter(media: .none,
+                                         title: "Genres",
+                                         subtitle: nil,
+                                         fanart: nil
+            )
         }
         .iOS { $0.navigationTitle("Genres") }
         .tvOS { $0.padding(.horizontal, 100) }
@@ -69,6 +72,9 @@ extension GenresView {
         @State var items: [KodiItem] = []
         /// The View
         var body: some View {
+#if os(tvOS)
+            PartsView.TitleHeader()
+#endif
             ItemsView.List() {
                 ForEach(items) { item in
                     ItemsView.Item(item: item.binding())
@@ -76,18 +82,17 @@ extension GenresView {
             }
             .task {
                 print("GenresView.Items task!")
-                let filter = KodiFilter(media: .all,
-                                        /// Make sure there is no more movie set selected
-                                        setID: nil,
-                                        genre: genre.label
-                )
-                items = kodi.library.filter(filter)
-                appState.filter.title = genre.label
-                appState.filter.subtitle = "Genres"
-                appState.filter.fanart = nil
+                /// Set the filter
+                appState.filter = KodiFilter(media: .all,
+                                             title: genre.label,
+                                             subtitle: "Genres",
+                                             fanart: nil,
+                                             setID: nil,
+                                             genre: genre.label)
+                /// Get the items
+                items = kodi.library.filter(appState.filter)
             }
-            .iOS { $0.navigationTitle("Genres") }
-            
+            .iOS { $0.navigationTitle(genre.label) }
         }
     }
 }
