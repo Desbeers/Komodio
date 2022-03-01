@@ -29,15 +29,15 @@ extension PartsView {
                 .font(.title)
                 .buttonStyle(.plain)
                 VStack(alignment: .leading) {
-                    Text(appState.filter.title ?? "Komodio")
-                        .font(appState.filter.subtitle == nil ? .title : .title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     if let subtitle = appState.filter.subtitle {
                         Text(subtitle)
                             .padding(.leading, 2)
                             .font(.subheadline)
                             .transition(AnyTransition.opacity.combined(with: .slide))
                     }
+                    Text(appState.filter.title ?? "Komodio")
+                        .font(appState.filter.subtitle == nil ? .title : .title2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 Text(navigator.path)
             }

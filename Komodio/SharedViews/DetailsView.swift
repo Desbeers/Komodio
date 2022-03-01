@@ -22,8 +22,7 @@ struct DetailsView: View {
     /// The View
     var body: some View {
         VStack(spacing: 0) {
-            /// macOS has it's own PartsHeader as a ZStack
-            #if !os(macOS)
+            #if os(tvOS)
             PartsView.TitleHeader()
             #endif
             Spacer()
@@ -66,7 +65,7 @@ struct DetailsView: View {
             .cornerRadius(12)
             .shadow(radius: 20)
             .macOS { $0.padding().frame(maxHeight: 200) }
-            .tvOS { $0.frame(maxHeight: 300) }
+            .tvOS { $0.frame(maxHeight: 300).padding(60) }
             .iOS { $0.frame(maxHeight: 200).padding(.horizontal) }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -81,6 +80,7 @@ struct DetailsView: View {
             appState.filter.subtitle = item.subtitle.isEmpty ? appState.filter.title : item.subtitle
             appState.filter.title = item.title
         }
+        .ignoresSafeArea()
         .iOS { $0.navigationTitle(item.title) }
     }
 }

@@ -24,9 +24,13 @@ struct MoviesView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(movies) { movie in
-                ItemsView.Item(item: movie.binding())
+            VStack {
+                ForEach(movies) { movie in
+                    ItemsView.Item(item: movie.binding())
+                }
             }
+            /// Move the first row below the tabs on tvOS
+            .tvOS { $0.padding(.top, 160) }
         }
         .task {
             print("MoviesView task!")
@@ -37,6 +41,7 @@ struct MoviesView: View {
             /// Filter the movies
             movies = kodi.library.filter(filter)
         }
+        /// Set the navigation title for iOS
         .iOS { $0.navigationTitle("Movies") }
     }
 }

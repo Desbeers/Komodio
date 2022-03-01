@@ -19,9 +19,13 @@ struct TVshowsView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(kodi.library.filter(filter)) { tvshow in
-                Item(tvshow: tvshow.binding(), filter: filter)
+            VStack {
+                ForEach(kodi.library.filter(filter)) { tvshow in
+                    Item(tvshow: tvshow.binding(), filter: filter)
+                }
             }
+            /// Move the first row below the tabs on tvOS
+            .tvOS { $0.padding(.top, 160) }
         }
         .task {
             print("TVsshowView task!")
@@ -30,6 +34,7 @@ struct TVshowsView: View {
             appState.filter.fanart = nil
             
         }
+        /// Set the navigation title for iOS
         .iOS { $0.navigationTitle("TV shows") }
     }
 }

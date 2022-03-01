@@ -21,21 +21,25 @@ struct MusicVideosView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(musicvideos) { musicvideo in
-                let artist = kodi.getArtistInfo(artist: musicvideo.artist)
-                
-                /// Build a new filter for the MusicVideos.Artist View
-                let newFilter = KodiFilter(
-                    media: .musicvideo,
-                    title: artist.title,
-                    subtitle: "Music Videos"
-                )
-                
-                StackNavLink(path: "/Music Videos/Artist/\(musicvideo.id)", filter: newFilter, destination: Items(artist: artist)) {
-                    Artist(artist: artist)
+            VStack {
+                ForEach(musicvideos) { musicvideo in
+                    let artist = kodi.getArtistInfo(artist: musicvideo.artist)
+                    
+                    /// Build a new filter for the MusicVideos.Artist View
+                    let newFilter = KodiFilter(
+                        media: .musicvideo,
+                        title: artist.title,
+                        subtitle: "Music Videos"
+                    )
+                    
+                    StackNavLink(path: "/Music Videos/Artist/\(musicvideo.id)", filter: newFilter, destination: Items(artist: artist)) {
+                        Artist(artist: artist)
+                    }
+                    .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
                 }
-                .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
             }
+            /// Move the first row below the tabs on tvOS
+            .tvOS { $0.padding(.top, 160) }
         }
         .task {
             let filter = KodiFilter(media: .musicvideo)

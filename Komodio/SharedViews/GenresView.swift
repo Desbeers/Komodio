@@ -72,10 +72,10 @@ extension GenresView {
         @State var items: [KodiItem] = []
         /// The View
         var body: some View {
+            ItemsView.List() {
 #if os(tvOS)
             PartsView.TitleHeader()
 #endif
-            ItemsView.List() {
                 ForEach(items) { item in
                     ItemsView.Item(item: item.binding())
                 }
