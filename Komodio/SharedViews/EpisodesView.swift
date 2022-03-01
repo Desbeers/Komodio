@@ -31,7 +31,7 @@ struct EpisodesView: View {
             ItemsView.Description(description: tvshow.description)
                 .padding()
             /// More padding for tvOS
-                .tvOS { $0.padding(.horizontal, 80)}
+                .tvOS { $0.padding(.horizontal, 60)}
             ForEach(seasons, id: \.self) { season in
                 VStack {
                     Text(season == 0 ? "Specials" : "Season \(season)")
