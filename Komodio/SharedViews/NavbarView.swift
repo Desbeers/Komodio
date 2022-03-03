@@ -41,10 +41,16 @@ struct NavbarView: View {
 }
 #endif
 
+#if os(tvOS)
+struct NavbarView {}
+#endif
+
 extension NavbarView {
     
     /// A View with 'standard' items for a Sidebar or Tabbar
     struct Items: View {
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The selection
         @Binding var selection: Route?
         /// The view
@@ -65,6 +71,7 @@ extension NavbarView {
 
 #if os(iOS)
                     NavigationLink(destination: item.destination
+                                    //.onAppear { router.routes = [item] }
                                     .navigationTitle(item.title),
                                    tag: item,
                                    selection: $selection,

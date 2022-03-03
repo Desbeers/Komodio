@@ -18,6 +18,6 @@ struct LoadingView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .fanartBackground()
+        //.fanartBackground(fanart: router.fanart)
     }
 }

@@ -10,7 +10,13 @@ import SwiftlyKodiAPI
 
 class Router: ObservableObject {
     
+#if os(macOS)
+    /// Publish the routes for macOS
     @Published var routes: [Route] = [.home]
+#else
+    /// Don't publish it for iOS or else the NavigationLink will pop back
+    var routes: [Route] = [.home]
+#endif
     
     var title: String {
         currentRoute.title
@@ -20,7 +26,7 @@ class Router: ObservableObject {
         routes.dropLast().last?.title
     }
     
-    @Published var fanart: String = ""
+    var fanart: String = ""
     
     @Published var navbar: Route? = .home {
         didSet {
@@ -34,7 +40,7 @@ class Router: ObservableObject {
     var currentRoute: Route {
         routes.last ?? .home
     }
-    
+
     func push(_ route: Route) {
         debugPrint("Push \(route.title)")
         //objectWillChange.send()
@@ -68,7 +74,17 @@ struct RouterLink<Label: View>: View {
         })
 #else
         NavigationLink(destination: item.destination
-                        .iOS { $0.navigationTitle(item.title) }) {
+                        .iOS { $0.navigationTitle(item.title) }
+//                        .task {
+//            print("Appear: \(item.title), push it")
+//            router.routes.append(item)
+//        }
+//                        .onDisappear {
+//            print("Dissapear: \(item.title), pop it")
+//            let _ = router.routes.popLast()
+//        }
+        
+        ) {
             label
         }
 #endif

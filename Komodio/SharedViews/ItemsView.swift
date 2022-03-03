@@ -30,14 +30,17 @@ extension ItemsView {
         var body: some View {
             ScrollView {
                 LazyVStack(spacing: 0) {
+                    
+                    Text(router.routes.map { $0.title } .joined(separator: "/"))
+                    
                     content
                 }
                 /// On macOS, give it some padding because the TitleHeader is on top
                 .macOS { $0.padding(.top, 60)}
             }
-            .tvOS { $0.fanartBackground().ignoresSafeArea() }
+            .tvOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea() }
             .macOS { $0.ignoresSafeArea() }
-            .iOS { $0.fanartBackground().ignoresSafeArea(.all, edges: .bottom) }
+            .iOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea(.all, edges: .bottom) }
         }
     }
 }
@@ -144,13 +147,14 @@ extension ItemsView {
     
     struct FanartModifier: ViewModifier {
         /// The Router model
-        @EnvironmentObject var router: Router
+        //@EnvironmentObject var router: Router
+        let fanart: String
         /// The modifier
         func body(content: Content) -> some View {
             content
                 .background {
-                    if !router.fanart.isEmpty {
-                        ArtView.Fanart(fanart: router.currentRoute.fanart)
+                    if !fanart.isEmpty {
+                        ArtView.Fanart(fanart: fanart)
                             .opacity(0.3)
                             .blur(radius: 4)
                             .macOS {$0.edgesIgnoringSafeArea(.all) }
@@ -160,10 +164,10 @@ extension ItemsView {
                         EmptyView()
                     }
                 }
-                .task {
-                    print("Fanart Modifier task!")
-                    print(router.fanart)
-                }
+//                .task {
+//                    print("Fanart Modifier task!")
+//                    print(fanart)
+//                }
         }
     }
 }

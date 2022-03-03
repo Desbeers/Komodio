@@ -10,8 +10,8 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct TVshowsView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
+    /// The Router model
+    @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The library filter
@@ -29,13 +29,9 @@ struct TVshowsView: View {
         }
         .task {
             print("TVsshowView task!")
-            appState.filter.title = "TV shows"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
-            
+            /// Set fanart
+            router.fanart = ""
         }
-        /// Set the navigation title for iOS
-        .iOS { $0.navigationTitle("TV shows") }
     }
 }
 

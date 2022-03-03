@@ -17,7 +17,7 @@ struct MainView: View {
                 Spacer()
             }
         }
-        .fanartBackground()
+        .fanartBackground(fanart: router.fanart)
         .animation(.default, value: router.currentRoute)
     }
 }
