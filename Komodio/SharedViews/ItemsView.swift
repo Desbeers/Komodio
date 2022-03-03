@@ -32,8 +32,9 @@ extension ItemsView {
                 /// On macOS, give it some padding because the TitleHeader is on top
                 .macOS { $0.padding(.top, 60)}
             }
-            .ignoresSafeArea()
-            .tvOS { $0.fanartBackground() }
+            .tvOS { $0.fanartBackground().ignoresSafeArea() }
+            .macOS { $0.ignoresSafeArea() }
+            .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }
         }
     }
 }

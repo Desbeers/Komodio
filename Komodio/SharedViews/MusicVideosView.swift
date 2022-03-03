@@ -21,22 +21,20 @@ struct MusicVideosView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            VStack {
-                ForEach(musicvideos) { musicvideo in
-                    let artist = kodi.getArtistInfo(artist: musicvideo.artist)
-                    
-                    /// Build a new filter for the MusicVideos.Artist View
-                    let newFilter = KodiFilter(
-                        media: .musicvideo,
-                        title: artist.title,
-                        subtitle: "Music Videos"
-                    )
-                    
-                    StackNavLink(path: "/Music Videos/Artist/\(musicvideo.id)", filter: newFilter, destination: Items(artist: artist)) {
-                        Artist(artist: artist)
-                    }
-                    .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
+            ForEach(musicvideos) { musicvideo in
+                let artist = kodi.getArtistInfo(artist: musicvideo.artist)
+                
+                /// Build a new filter for the MusicVideos.Artist View
+                let newFilter = KodiFilter(
+                    media: .musicvideo,
+                    title: artist.title,
+                    subtitle: "Music Videos"
+                )
+                
+                StackNavLink(path: "/Music Videos/Artist/\(musicvideo.id)", filter: newFilter, destination: Items(artist: artist)) {
+                    Artist(artist: artist)
                 }
+                .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
             }
             /// Move the first row below the tabs on tvOS
             .tvOS { $0.padding(.top, 160) }
@@ -99,6 +97,7 @@ extension MusicVideosView {
                 musicvideos = kodi.library.filter(filter)
                 appState.filter.title = artist.artist.joined(separator: " & ")
                 appState.filter.subtitle = "Music Videos"
+                appState.filter.fanart = artist.fanart
                 
             }
             .iOS { $0.navigationTitle(artist.artist.joined(separator: " & ")) }

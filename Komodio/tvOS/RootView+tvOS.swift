@@ -14,6 +14,9 @@ struct RootView: View {
     @EnvironmentObject var navigator: Navigator
     /// The selection in the list
     @State var selection: String?
+//    init(){
+//        UINavigationBar.setAnimationsEnabled(false)
+//    }
     /// The View
     var body: some View {
         StackNavView {
@@ -21,10 +24,8 @@ struct RootView: View {
                 NavBarView.Items(selection: $selection)
             }
         }
-        //.animation(nil, value: selection)
-        //.background(Color("tvOSbackground"))
         .environmentObject(appState)
-        .background(Image("Background").resizable().ignoresSafeArea())
-        .preferredColorScheme(.dark)
+        //.background(Image("Background").resizable().ignoresSafeArea())
+        //.preferredColorScheme(.dark)
     }
 }

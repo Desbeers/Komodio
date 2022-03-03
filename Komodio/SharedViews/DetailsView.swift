@@ -80,7 +80,9 @@ struct DetailsView: View {
             appState.filter.subtitle = item.subtitle.isEmpty ? appState.filter.title : item.subtitle
             appState.filter.title = item.title
         }
-        .ignoresSafeArea()
+        .tvOS { $0.fanartBackground().ignoresSafeArea() }
+        .macOS { $0.ignoresSafeArea() }
+        .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }
         .iOS { $0.navigationTitle(item.title) }
     }
 }

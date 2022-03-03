@@ -11,7 +11,11 @@ import SwiftlyKodiAPI
 
 extension PartsView {
     
-    /// View the Ttitle and optional subtitle of the page
+    /// Show the optional title and subtitle on a View
+    ///
+    /// - Note: We can't control the page animations on tvOS, so we just hide
+    /// this view as soon as a new header is set. Ugly, but else the header for the next
+    /// View is shown before the previous View is gone.
     struct TitleHeader: View {
         /// The AppState model
         @EnvironmentObject var appState: AppState
@@ -19,62 +23,24 @@ extension PartsView {
         @State var visible: Bool = false
         /// The View
         var body: some View {
-            Group {
-                //if visible {
-                    VStack(alignment: .leading) {
-//                        Text(visible ? appState.filter.title ?? "Komodio" : " ")
-//                            .font(.title)
-                        if let subtitle = appState.filter.subtitle {
-                            Text(visible ? subtitle : "")
-                                .padding(.leading, 2)
-                                .font(.subheadline)
-                        } else {
-                            Text(" ")
-                        }
-                        Text(visible ? appState.filter.title ?? "Komodio" : " ")
-                            .font(.title)
-                    }
-                    .padding(.top, 20)
-                    .padding(.bottom, 10)
-                    .padding(.leading, 60)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(.thinMaterial)
-                //}
-            }
-            .onChange(of: appState.filter) { _ in
-                print("Header filter changed!")
-                visible.toggle()
-            }
-            
-        }
-    }
-    
-    /// Show the optional title and subtitle on a View
-    ///
-    /// - Note: We can't control the page animations on tvOS, so we just hide
-    /// this view as soon as a new header is set. Ugly, but else the header for the next
-    /// View is shown before the previous View is gone.
-    struct AATitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        /// Visible or not
-        @State var visible: Bool = false
-        /// The View
-        var body: some View {
-            Group {
-                if visible, let title = appState.filter.title {
-                    VStack {
-                        Text(title)
-                            .font(.title)
-                        if let subtitle = appState.filter.subtitle {
-                            Text(subtitle)
-                        }
-                    }
-                    .padding()
-                    .background(.thinMaterial)
-                    .cornerRadius(12)
+            VStack(alignment: .leading) {
+                if let subtitle = appState.filter.subtitle {
+                    Text(visible ? subtitle : "")
+                        .padding(.leading, 2)
+                        .font(.subheadline)
+                } else {
+                    Text(" ")
+                }
+                if let title = appState.filter.title {
+                    Text(visible ? title : "")
+                        .font(.title)
                 }
             }
+            //.animation(.default, value: appState.filter)
+            .padding(.leading, 60)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 160)
+            .background(.ultraThinMaterial)
             .onChange(of: appState.filter) { _ in
                 print("Header filter changed!")
                 visible.toggle()

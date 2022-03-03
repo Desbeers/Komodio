@@ -24,10 +24,8 @@ struct MoviesView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            VStack {
-                ForEach(movies) { movie in
-                    ItemsView.Item(item: movie.binding())
-                }
+            ForEach(movies) { movie in
+                ItemsView.Item(item: movie.binding())
             }
             /// Move the first row below the tabs on tvOS
             .tvOS { $0.padding(.top, 160) }
@@ -56,7 +54,6 @@ extension MoviesView {
         let filter: KodiFilter
         /// The View
         var body: some View {
-            
             if movie.setID == 0 {
                 StackNavLink(path: "/Movies/Details/\(movie.id)",
                              filter: filter,
