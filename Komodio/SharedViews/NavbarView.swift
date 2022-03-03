@@ -37,7 +37,17 @@ extension NavbarView {
                 ForEach(Route.menuItems, id: \.self) { item in
 #if os(macOS)
                     Label(item.title, systemImage: item.symbol)
-#else
+#endif
+
+#if os(tvOS)
+                    item.destination
+                        .tabItem {
+                            Label(item.title, systemImage: item.symbol)
+                        }
+                        .tag(item.title)
+#endif
+
+#if os(iOS)
                     NavigationLink(destination: item.destination,
                                    tag: item,
                                    selection: $selection,

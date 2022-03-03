@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 enum Route: Equatable, Hashable {
     case home
     case movies
-    case moviesSet(setID: Int)
+    case moviesSet(set: KodiItem.MovieSetItem)
     case tvshows
     case episodes(tvshow: KodiItem)
     case musicVideos
@@ -33,8 +33,8 @@ extension Route {
             return "Home"
         case .movies:
             return "Movies"
-        case .moviesSet(let setID):
-            return "Movie Set \(setID)"
+        case .moviesSet(let set):
+            return set.title
         case .tvshows:
             return "TV shows"
         case .episodes:
@@ -89,8 +89,8 @@ extension Route {
             HomeView()
         case .movies:
             MoviesView(filter: KodiFilter(media: .movie))
-        case .moviesSet(let setID):
-            MoviesView.Set(setID: setID)
+        case .moviesSet(let set):
+            MoviesView.Set(set: set)
         
         case .tvshows:
             TVshowsView(filter: KodiFilter(media: .tvshow))

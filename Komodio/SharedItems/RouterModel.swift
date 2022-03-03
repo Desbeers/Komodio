@@ -66,7 +66,8 @@ struct RouterLink<Label: View>: View {
             label
         })
 #else
-        NavigationLink(destination: item.destination.navigationTitle(item.rawValue)) {
+        NavigationLink(destination: item.destination
+                        .iOS { $0.navigationTitle(item.title) }) {
             label
         }
 #endif

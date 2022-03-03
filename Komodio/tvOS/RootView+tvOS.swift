@@ -10,21 +10,20 @@ import SwiftlyKodiAPI
 struct RootView: View {
     /// The AppState model
     @StateObject var appState: AppState = AppState()
-    /// The Navigator model
-    @EnvironmentObject var navigator: Navigator
-    /// The selection in the list
-    @State var selection: String?
+    /// The Router model
+    @StateObject var router: Router = Router()
 //    init(){
 //        UINavigationBar.setAnimationsEnabled(false)
 //    }
     /// The View
     var body: some View {
-        StackNavView {
+        NavigationView {
             TabView() {
-                NavBarView.Items(selection: $selection)
+                NavbarView.Items(selection: $router.navbar)
             }
         }
         .environmentObject(appState)
+        .environmentObject(router)
         //.background(Image("Background").resizable().ignoresSafeArea())
         //.preferredColorScheme(.dark)
     }

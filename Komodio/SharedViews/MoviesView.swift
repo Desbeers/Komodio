@@ -72,7 +72,7 @@ extension MoviesView {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
         /// The Set ID for this View
-        let setID: Int
+        let set: KodiItem.MovieSetItem
         /// The movies we want to show
         @State var movies: [KodiItem] = []
         /// The set info
@@ -96,13 +96,13 @@ extension MoviesView {
             .task {
                 print("MoviesView.Set task!")
                 /// Get set info
-                if let item = kodi.library.first(where: { $0.setID == setID}) {
+                if let item = kodi.library.first(where: { $0.setID == set.setID}) {
                     appState.filter.title = item.setInfo.title
                     setDescription = item.setInfo.description
                     appState.filter.fanart = item.setInfo.fanart
                     appState.filter.subtitle = "Movies"
                     appState.filter.media = .movie
-                    appState.filter.setID = setID
+                    appState.filter.setID = set.setID
                     movies = kodi.library.filter(appState.filter)
                 }
             }
@@ -119,7 +119,7 @@ extension MoviesView {
         /// The View
         var body: some View {
             
-            RouterLink(item: .details(item: movie)) {
+            RouterLink(item: .moviesSet(set: movie.setInfo)) {
                 HStack(spacing: 0) {
                     ArtView.PosterList(poster: movie.setInfo.art.isEmpty ? movie.poster : movie.setInfo.poster)
                     VStack(alignment: .leading) {
