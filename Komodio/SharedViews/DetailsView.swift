@@ -29,6 +29,11 @@ struct DetailsView: View {
                     .shadow(radius: 6)
                     .padding(6)
                 VStack {
+                    if !item.subtitle.isEmpty {
+                        Text(item.subtitle)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                     /// Description
                     Text(item.description)
                     Spacer()

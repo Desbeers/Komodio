@@ -37,16 +37,16 @@ extension Route {
             return set.title
         case .tvshows:
             return "TV shows"
-        case .episodes:
-            return "Episodes"
+        case .episodes(let tvshow):
+            return tvshow.title
         case .musicVideos:
             return "Music Videos"
-        case .musicVideosItems:
-            return "Music Videos Items"
+        case .musicVideosItems(let artist):
+            return artist.title
         case .genres:
             return "Genres"
-        case .genresItems:
-            return "Genres Items"
+        case .genresItems(let genre):
+            return genre.label
         case .details(let kodiID):
             return kodiID.title
         case .player:

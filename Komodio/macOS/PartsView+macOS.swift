@@ -15,28 +15,35 @@ extension PartsView {
     struct TitleHeader: View {
         /// The AppState model
         @EnvironmentObject var appState: AppState
+        
+        @EnvironmentObject var router: Router
+        
         /// The View
         var body: some View {
             HStack(alignment: .center) {
-//                Button(action: { navigator.goBack() }) {
-//                    Image(systemName: "chevron.backward.square.fill")
-//                        .foregroundColor(navigator.canGoBack ? .accentColor : .secondary)
-//                }
-//                .disabled(!navigator.canGoBack)
-//                .help("Go back")
-//                .font(.title)
-//                .buttonStyle(.plain)
+                
+                Button(action: {
+                    router.pop()
+                },
+                       label: {
+                    Image(systemName: "chevron.backward.square.fill")
+                })
+                    .disabled(router.routes.count == 1)
+                    .help("Go back")
+                    .font(.title)
+                    .buttonStyle(.plain)
                 VStack(alignment: .leading) {
-                    if let subtitle = appState.filter.subtitle {
+                    
+                    if let subtitle = router.subtitle {
                         Text(subtitle)
                             .padding(.leading, 2)
                             .font(.subheadline)
                             .transition(AnyTransition.opacity.combined(with: .slide))
                     }
-                    Text(appState.filter.title ?? "Komodio")
-                        .font(appState.filter.subtitle == nil ? .title : .title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(router.title)
+                        .font(router.subtitle == nil ? .title : .title2)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .animation(.default, value: appState.filter)
             .padding()

@@ -84,7 +84,7 @@ extension EpisodesView {
         var body: some View {
             
             RouterLink(item: .details(item: item)) {
-                ItemsView.Basic(item: $item)
+                Item(item: $item)
             }
             .buttonStyle(ButtonStyles.KodiItem(item: item))
 

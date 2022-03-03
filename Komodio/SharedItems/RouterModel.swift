@@ -22,6 +22,14 @@ class Router: ObservableObject {
     
     var selection: Route = .home
     
+    var title: String {
+        currentRoute.title
+    }
+    
+    var subtitle: String? {
+        routes.dropLast().last?.title
+    }
+    
     @Published var navbar: Route? = .home {
         didSet {
             /// Don't bother with nil's or repeated selection
@@ -37,6 +45,7 @@ class Router: ObservableObject {
     
     @MainActor func push(_ route: Route) {
         debugPrint("Push \(route.title)")
+        objectWillChange.send()
         routes.append(route)
     }
     
