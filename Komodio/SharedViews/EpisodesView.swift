@@ -16,6 +16,10 @@ struct EpisodesView: View {
     @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    
+    /// The Router model
+    @EnvironmentObject var router: Router
+    
     /// The TV show item in the library
     let tvshow: KodiItem
     /// The seasons of this TV show
@@ -57,8 +61,10 @@ struct EpisodesView: View {
             appState.filter.fanart = tvshow.fanart
             /// Filter the episodes
             getEpisodes()
+            /// Set fanart
+            router.fanart = tvshow.fanart
         }
-        .iOS { $0.navigationTitle("Movies") }
+        //.iOS { $0.navigationTitle("Movies") }
         
     }
     /// Get the episodes from the Kodi database

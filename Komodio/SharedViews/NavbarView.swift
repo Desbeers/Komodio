@@ -9,21 +9,37 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 
+
+#if os(macOS)
 /// The View for the Sidebar
 struct NavbarView: View {
-    
     /// The Router model
     @EnvironmentObject var router: Router
-    
+    /// The View
     var body: some View {
         List(selection: $router.navbar) {
             Section(header: Text("Library")) {
                 NavbarView.Items(selection: $router.navbar)
             }
         }
+    }
+}
+#endif
+
+#if os(iOS)
+/// The View for the Sidebar
+struct NavbarView: View {
+    /// The selection
+    @State var selection: Route?
+    /// The View
+    var body: some View {
+        List {
+            NavbarView.Items(selection: $selection)
+        }
         .navigationTitle("Library")
     }
 }
+#endif
 
 extension NavbarView {
     
@@ -48,7 +64,8 @@ extension NavbarView {
 #endif
 
 #if os(iOS)
-                    NavigationLink(destination: item.destination,
+                    NavigationLink(destination: item.destination
+                                    .navigationTitle(item.title),
                                    tag: item,
                                    selection: $selection,
                                    label: { Label(item.title, systemImage: item.symbol) })

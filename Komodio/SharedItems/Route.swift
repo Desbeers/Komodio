@@ -47,8 +47,8 @@ extension Route {
             return "Genres"
         case .genresItems(let genre):
             return genre.label
-        case .details(let kodiID):
-            return kodiID.title
+        case .details(let item):
+            return item.title
         case .player:
             return "Player"
         }
@@ -72,11 +72,35 @@ extension Route {
             return "list.star"
         case .genresItems:
             return "Genres Items"
-        case .details(let kodiID):
-            return kodiID.title
+        case .details(let item):
+            return item.title
         default:
             return "questionmark"
         }
+    }
+}
+
+extension Route {
+    
+    // MARK: Fanart
+    
+    /// The fanart for the route item
+    var fanart: String {
+        var fanart = ""
+        switch self {
+            
+        case .moviesSet(let set):
+            fanart = set.fanart
+        case .episodes(let tvshow):
+            fanart = tvshow.fanart
+        case .musicVideosItems(let artist):
+            fanart = artist.fanart
+        case .details(let item):
+            fanart = item.fanart
+        default:
+            break
+        }
+        return fanart
     }
 }
 
@@ -88,7 +112,7 @@ extension Route {
         case .home:
             HomeView()
         case .movies:
-            MoviesView(filter: KodiFilter(media: .movie))
+            MoviesView()
         case .moviesSet(let set):
             MoviesView.Set(set: set)
         

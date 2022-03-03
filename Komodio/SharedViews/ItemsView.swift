@@ -15,9 +15,12 @@ struct ItemsView {
 }
 
 extension ItemsView {
-
+    
     /// Wrap the Kodi items in a List or a LazyVStack
     struct List<Content: View>: View {
+        
+        @EnvironmentObject var router: Router
+        
         private var content: Content
         /// StackNavView
         init(@ViewBuilder content: () -> Content) {
@@ -34,7 +37,7 @@ extension ItemsView {
             }
             .tvOS { $0.fanartBackground().ignoresSafeArea() }
             .macOS { $0.ignoresSafeArea() }
-            .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }
+            .iOS { $0.fanartBackground().ignoresSafeArea(.all, edges: .bottom) }
         }
     }
 }
@@ -112,28 +115,54 @@ extension ItemsView {
         }
     }
     
-        
+    
     /// A View to show the watched status of a Kodi item
+//    struct FanartModifier: ViewModifier {
+//        /// The AppState model
+//        @EnvironmentObject var appState: AppState
+//        /// The modifier
+//        func body(content: Content) -> some View {
+//            content
+//                .background {
+//                    if let fanart = appState.filter.fanart, !fanart.isEmpty {
+//                        ArtView.Fanart(fanart: fanart)
+//                            .opacity(0.3)
+//                            .blur(radius: 4)
+//                            .macOS {$0.edgesIgnoringSafeArea(.all) }
+//                            .tvOS { $0.edgesIgnoringSafeArea(.all) }
+//                            .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+//                    } else {
+//                        EmptyView()
+//                    }
+//                }
+//                .task {
+//                    print("Fanart Modifier task!")
+//                    //print(router.fanart)
+//                }
+//        }
+//    }
+    
     struct FanartModifier: ViewModifier {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The modifier
         func body(content: Content) -> some View {
             content
                 .background {
-                    if let fanart = appState.filter.fanart, !fanart.isEmpty {
-                        ZStack {
-                            Color("Background")
-                            ArtView.Fanart(fanart: fanart)
-                                .opacity(0.3)
-                                .blur(radius: 4)
-                        }
-                        .macOS {$0.edgesIgnoringSafeArea(.all) }
-                        .tvOS { $0.edgesIgnoringSafeArea(.all) }
-                        .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+                    if !router.fanart.isEmpty {
+                        ArtView.Fanart(fanart: router.currentRoute.fanart)
+                            .opacity(0.3)
+                            .blur(radius: 4)
+                            .macOS {$0.edgesIgnoringSafeArea(.all) }
+                            .tvOS { $0.edgesIgnoringSafeArea(.all) }
+                            .iOS { $0.edgesIgnoringSafeArea(.bottom) }
                     } else {
                         EmptyView()
                     }
+                }
+                .task {
+                    print("Fanart Modifier task!")
+                    print(router.fanart)
                 }
         }
     }

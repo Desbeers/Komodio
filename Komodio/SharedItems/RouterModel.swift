@@ -8,19 +8,9 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-
-
-struct RouteItem {
-    let id = UUID()
-    let name: String
-    let symbol: String
-}
-
 class Router: ObservableObject {
     
     @Published var routes: [Route] = [.home]
-    
-    var selection: Route = .home
     
     var title: String {
         currentRoute.title
@@ -29,6 +19,8 @@ class Router: ObservableObject {
     var subtitle: String? {
         routes.dropLast().last?.title
     }
+    
+    @Published var fanart: String = ""
     
     @Published var navbar: Route? = .home {
         didSet {
@@ -43,13 +35,13 @@ class Router: ObservableObject {
         routes.last ?? .home
     }
     
-    @MainActor func push(_ route: Route) {
+    func push(_ route: Route) {
         debugPrint("Push \(route.title)")
-        objectWillChange.send()
+        //objectWillChange.send()
         routes.append(route)
     }
     
-    @discardableResult
+    //@discardableResult
     @MainActor func pop() -> Route? {
         routes.popLast()
     }

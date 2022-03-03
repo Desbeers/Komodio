@@ -16,9 +16,10 @@ struct MoviesView: View {
     @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The library filter
-    /// - Note: A `State` because this View can calitself again when viewing a set and that has a different filter
-    @State var filter: KodiFilter
+    
+    /// The Router model
+    @EnvironmentObject var router: Router
+    
     /// The movies we want to show
     @State var movies: [KodiItem] = []
     /// The View
@@ -32,15 +33,11 @@ struct MoviesView: View {
         }
         .task {
             print("MoviesView task!")
-            appState.filter = filter
-            appState.filter.title = "Movies"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
             /// Filter the movies
-            movies = kodi.library.filter(filter)
+            movies = kodi.library.filter(KodiFilter(media: .movie))
+            /// Set fanart
+            router.fanart = ""
         }
-        /// Set the navigation title for iOS
-        .iOS { $0.navigationTitle("Movies") }
     }
 }
 
@@ -71,20 +68,22 @@ extension MoviesView {
         @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
-        /// The Set ID for this View
+        
+        /// The Router model
+        @EnvironmentObject var router: Router
+        
+        /// The Set item for this View
         let set: KodiItem.MovieSetItem
         /// The movies we want to show
         @State var movies: [KodiItem] = []
-        /// The set info
-        @State var setDescription = ""
         /// The View
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
                 PartsView.TitleHeader()
 #endif
-                if !setDescription.isEmpty {
-                    ItemsView.Description(description: setDescription)
+                if !set.description.isEmpty {
+                    ItemsView.Description(description: set.description)
                 }
                 ForEach(movies) { movie in
                     RouterLink(item: .details(item: movie)) {
@@ -95,18 +94,21 @@ extension MoviesView {
             }
             .task {
                 print("MoviesView.Set task!")
-                /// Get set info
-                if let item = kodi.library.first(where: { $0.setID == set.setID}) {
-                    appState.filter.title = item.setInfo.title
-                    setDescription = item.setInfo.description
-                    appState.filter.fanart = item.setInfo.fanart
-                    appState.filter.subtitle = "Movies"
-                    appState.filter.media = .movie
-                    appState.filter.setID = set.setID
-                    movies = kodi.library.filter(appState.filter)
-                }
+                /// Get set movies
+                movies = kodi.library.filter(KodiFilter(media: .movie, setID: set.setID))
+                /// Set fanart
+                router.fanart = set.fanart
+//                if let item = kodi.library.first(where: { $0.setID == set.setID}) {
+//                    //appState.filter.title = item.setInfo.title
+//                    //setDescription = item.setInfo.description
+//                    //appState.filter.fanart = item.setInfo.fanart
+//                    //appState.filter.subtitle = "Movies"
+//                    //appState.filter.media = .movie
+//                    //appState.filter.setID = set.setID
+//                    movies = kodi.library.filter(appState.filter)
+//                }
             }
-            .iOS { $0.navigationTitle(appState.filter.title ?? "") }
+            //.iOS { $0.navigationTitle(appState.filter.title ?? "") }
         }
     }
     
