@@ -89,7 +89,7 @@ struct RouteItem {
     let symbol: String
 }
 
-@MainActor class Router: ObservableObject {
+class Router: ObservableObject {
     
     @Published var routes: [Route] = [.home]
     
@@ -108,12 +108,13 @@ struct RouteItem {
         routes.last ?? .home
     }
     
-    func push(_ route: Route) {
+    @MainActor func push(_ route: Route) {
+        debugPrint("Push \(route.title)")
         routes.append(route)
     }
     
     @discardableResult
-    func pop() -> Route? {
+    @MainActor func pop() -> Route? {
         routes.popLast()
     }
 }

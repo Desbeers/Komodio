@@ -18,7 +18,7 @@ struct NavbarView: View {
     var body: some View {
         List(selection: $router.navbar) {
             Section(header: Text("Library")) {
-                NavbarView.Items()
+                NavbarView.Items(selection: $router.navbar)
             }
         }
         .navigationTitle("Library")
@@ -29,8 +29,8 @@ extension NavbarView {
     
     /// A View with 'standard' items for a Sidebar or Tabbar
     struct Items: View {
-        /// The KodiConnector model
-        @EnvironmentObject var router: Router
+        /// The selection
+        @Binding var selection: Route?
         /// The view
         var body: some View {
 
@@ -40,7 +40,7 @@ extension NavbarView {
 #else
                     NavigationLink(destination: item.destination,
                                    tag: item,
-                                   selection: $router.navbar,
+                                   selection: $selection,
                                    label: { Label(item.title, systemImage: "film") })
 #endif
                 }
