@@ -36,12 +36,12 @@ extension NavbarView {
 
                 ForEach(Route.menuItems, id: \.self) { item in
 #if os(macOS)
-                    Text(item.title)
+                    Label(item.title, systemImage: item.symbol)
 #else
                     NavigationLink(destination: item.destination,
                                    tag: item,
                                    selection: $selection,
-                                   label: { Label(item.title, systemImage: "film") })
+                                   label: { Label(item.title, systemImage: item.symbol) })
 #endif
                 }
             
