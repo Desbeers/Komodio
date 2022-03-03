@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 
@@ -83,12 +83,11 @@ extension EpisodesView {
         @Binding var item: KodiItem
         var body: some View {
             
-            StackNavLink(path: "/TV shows/Episodes/Details/\(item.id)",
-                         filter: appState.filter,
-                         destination: DetailsView(item: item.binding())
-            ) {
-                Item(item: $item)
+            RouterLink(item: .details(item: item)) {
+                ItemsView.Basic(item: $item)
             }
+            .buttonStyle(ButtonStyles.KodiItem(item: item))
+
             
             .buttonStyle(ButtonStyles.KodiItem(item: item))
             .tvOS { $0.frame(width: 1000) }

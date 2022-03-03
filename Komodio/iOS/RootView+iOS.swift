@@ -4,7 +4,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 
 struct RootView: View {    
     /// The AppState model

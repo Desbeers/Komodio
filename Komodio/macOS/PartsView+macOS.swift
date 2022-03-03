@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 extension PartsView {
@@ -15,19 +15,17 @@ extension PartsView {
     struct TitleHeader: View {
         /// The AppState model
         @EnvironmentObject var appState: AppState
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
         /// The View
         var body: some View {
             HStack(alignment: .center) {
-                Button(action: { navigator.goBack() }) {
-                    Image(systemName: "chevron.backward.square.fill")
-                        .foregroundColor(navigator.canGoBack ? .accentColor : .secondary)
-                }
-                .disabled(!navigator.canGoBack)
-                .help("Go back")
-                .font(.title)
-                .buttonStyle(.plain)
+//                Button(action: { navigator.goBack() }) {
+//                    Image(systemName: "chevron.backward.square.fill")
+//                        .foregroundColor(navigator.canGoBack ? .accentColor : .secondary)
+//                }
+//                .disabled(!navigator.canGoBack)
+//                .help("Go back")
+//                .font(.title)
+//                .buttonStyle(.plain)
                 VStack(alignment: .leading) {
                     if let subtitle = appState.filter.subtitle {
                         Text(subtitle)
@@ -39,7 +37,6 @@ extension PartsView {
                         .font(appState.filter.subtitle == nil ? .title : .title2)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                Text(navigator.path)
             }
             .animation(.default, value: appState.filter)
             .padding()

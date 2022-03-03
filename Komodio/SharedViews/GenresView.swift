@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 /// A View for Genre items
@@ -28,15 +28,13 @@ struct GenresView: View {
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.genres) { genre in
                     
-                    StackNavLink(path: "/Genres/\(genre.label)",
-                                 filter: KodiFilter(media: .none),
-                                 destination: GenresView.Items(genre: genre)
-                    ) {
+                    RouterLink(item: .genresItems(genre: genre)) {
                         Label(genre.label, systemImage: genre.symbol)
                             .labelStyle(LabelStyles.GridItem())
                             .tvOS { $0.frame(width: 260, height: 120) }
                             .macOS { $0.frame(width: 130, height: 60) }
                     }
+
                 }
                 .buttonStyle(ButtonStyles.GridItem())
             }
@@ -64,8 +62,6 @@ extension GenresView {
         @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
         /// The selected Genre to filter
         let genre: GenreItem
         /// The list of Kodi items to show

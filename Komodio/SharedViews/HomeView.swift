@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct HomeView: View {
     
     /// The AppState model
     @EnvironmentObject var appState: AppState
-    /// The Navigator model
-    @EnvironmentObject var navigator: Navigator
+
     
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -145,10 +144,7 @@ extension HomeView {
         var body: some View {
             VStack(spacing: 0) {
                 
-                StackNavLink(path: "/Home/Details/\(item.id)",
-                             filter: KodiFilter(media: .none),
-                             destination: DetailsView(item: item.binding())
-                ) {
+                RouterLink(item: .details(item: item)) {
                     VStack(spacing: 0) {
                         ArtView.PosterDetail(item: item)
                             .macOS { $0.frame(height: 300) }
@@ -161,7 +157,6 @@ extension HomeView {
                         }
                     }
                 }
-                // PartsView.WatchedToggle(item: $item)
             }
         }
     }

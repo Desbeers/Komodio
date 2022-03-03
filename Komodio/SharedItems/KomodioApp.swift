@@ -8,7 +8,7 @@
 import SwiftUI
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 /// The startpoint of Komodio
@@ -18,9 +18,7 @@ import SwiftlyKodiAPI
     /// The Scene
     var body: some Scene {
         WindowGroup {
-            Router {
-                RootView()
-            }
+            RootView()
             .environmentObject(kodi)
             .ignoresSafeArea()
         }

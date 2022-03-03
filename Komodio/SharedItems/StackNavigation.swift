@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 /// A replacement for ``NavigationView``

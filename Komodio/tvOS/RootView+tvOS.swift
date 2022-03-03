@@ -4,7 +4,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct RootView: View {

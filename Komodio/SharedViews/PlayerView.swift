@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 import Combine
 import AVKit

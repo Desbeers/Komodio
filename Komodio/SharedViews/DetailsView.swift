@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
-struct DetailsView: View {
-    /// The route navigation
-    @EnvironmentObject var routeInformation: RouteInformation
-    
+struct DetailsView: View {    
     /// The AppState model
     @EnvironmentObject var appState: AppState
     /// The KodiConnector model

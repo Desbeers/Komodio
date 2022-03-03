@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct MusicVideosView: View {
@@ -31,7 +31,7 @@ struct MusicVideosView: View {
                     subtitle: "Music Videos"
                 )
                 
-                StackNavLink(path: "/Music Videos/Artist/\(musicvideo.id)", filter: newFilter, destination: Items(artist: artist)) {
+                RouterLink(item: .musicVideosItems(artist: artist)) {
                     Artist(artist: artist)
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
@@ -108,12 +108,12 @@ extension MusicVideosView {
         //let artist: KodiItem
         @Binding var musicvideo: KodiItem
         var body: some View {
-            StackNavLink(path: "/Music Videos/Artist/Details/\(musicvideo.id)",
-                         filter: KodiFilter(media: .musicvideo),
-                         destination: DetailsView(item: $musicvideo)
-            ) {
+            
+            RouterLink(item: .details(item: musicvideo)) {
                 ItemsView.Basic(item: $musicvideo)
             }
+            .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
+
             .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
             .contextMenu {
                 Button(action: {

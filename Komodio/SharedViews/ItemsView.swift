@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 /// An 'Item' can be any kind of ``KodiItem``; e.g., movie, tvshow, episode etc...
@@ -44,8 +44,6 @@ extension ItemsView {
     struct Item: View {
         /// The AppState model
         @EnvironmentObject var appState: AppState
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
         /// The ``KodiItem`` to show in this View
         @Binding var item: KodiItem
         var body: some View {
@@ -58,10 +56,7 @@ extension ItemsView {
             case .musicvideo:
                 MusicVideosView.Item(musicvideo: $item)
             default:
-                StackNavLink(path: "\(navigator.path)/Details/\(item.id)",
-                             filter: appState.filter,
-                             destination: DetailsView(item: item.binding())
-                ) {
+                RouterLink(item: .details(item: item)) {
                     Basic(item: $item)
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: item))

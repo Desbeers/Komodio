@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 
@@ -55,10 +55,7 @@ extension MoviesView {
         /// The View
         var body: some View {
             if movie.setID == 0 {
-                StackNavLink(path: "/Movies/Details/\(movie.id)",
-                             filter: filter,
-                             destination: DetailsView(item: movie.binding())
-                ) {
+                RouterLink(item: .details(item: movie)) {
                     ItemsView.Basic(item: movie.binding())
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: movie))
@@ -90,10 +87,7 @@ extension MoviesView {
                     ItemsView.Description(description: setDescription)
                 }
                 ForEach(movies) { movie in
-                    StackNavLink(path: "/Movies/Details/\(movie.id)",
-                                 filter: appState.filter,
-                                 destination: DetailsView(item: movie.binding())
-                    ) {
+                    RouterLink(item: .details(item: movie)) {
                         ItemsView.Basic(item: movie.binding())
                     }
                     .buttonStyle(ButtonStyles.KodiItem(item: movie))
@@ -124,10 +118,8 @@ extension MoviesView {
         let movie: KodiItem
         /// The View
         var body: some View {
-            StackNavLink(path: "/Movies/Set/\(movie.setID)",
-                         filter: appState.filter,
-                         destination: Set(setID: movie.setID)
-            ) {
+            
+            RouterLink(item: .details(item: movie)) {
                 HStack(spacing: 0) {
                     ArtView.PosterList(poster: movie.setInfo.art.isEmpty ? movie.poster : movie.setInfo.poster)
                     VStack(alignment: .leading) {

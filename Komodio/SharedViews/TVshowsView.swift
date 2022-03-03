@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct TVshowsView: View {
@@ -48,7 +48,7 @@ extension TVshowsView {
         /// The current filter
         let filter: KodiFilter
         var body: some View {
-            StackNavLink(path: "/TV shows/Episodes/\(tvshow.id)", filter: filter, destination: EpisodesView(tvshow: tvshow)) {
+            RouterLink(item: .episodes(tvshow: tvshow)) {
                 ItemsView.Basic(item: tvshow.binding())
             }
             .buttonStyle(ButtonStyles.KodiItem(item: tvshow))
