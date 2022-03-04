@@ -29,7 +29,6 @@ struct GenresView: View {
     /// The View
     var body: some View {
         ScrollView {
-            Text(router.routes.map { $0.title } .joined(separator: "/"))
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.genres) { genre in
                     
