@@ -14,13 +14,17 @@ struct DetailsView: View {
     @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    
+    /// The Router model
+    @EnvironmentObject var router: Router
+    
     /// The Kodi item for the details
     @Binding var item: KodiItem
     /// The View
     var body: some View {
         VStack(spacing: 0) {
             #if os(tvOS)
-            PartsView.TitleHeader()
+            PartsView.TitleHeader(router: $router.routes)
             #endif
             Spacer()
             HStack(alignment: .top, spacing: 0) {

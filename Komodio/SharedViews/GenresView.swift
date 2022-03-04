@@ -15,6 +15,10 @@ struct GenresView: View {
     @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    
+    /// The Router model
+    @EnvironmentObject var router: Router
+    
 #if os(tvOS)
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 320))]
@@ -25,6 +29,7 @@ struct GenresView: View {
     /// The View
     var body: some View {
         ScrollView {
+            Text(router.routes.map { $0.title } .joined(separator: "/"))
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.genres) { genre in
                     
@@ -62,6 +67,10 @@ extension GenresView {
         @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
+        
+        /// The Router model
+        @EnvironmentObject var router: Router
+        
         /// The selected Genre to filter
         let genre: GenreItem
         /// The list of Kodi items to show
@@ -70,7 +79,7 @@ extension GenresView {
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
-            PartsView.TitleHeader()
+            PartsView.TitleHeader(router: $router.routes)
 #endif
                 ForEach(items) { item in
                     ItemsView.Item(item: item.binding())

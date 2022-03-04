@@ -19,13 +19,9 @@ struct TVshowsView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            VStack {
-                ForEach(kodi.library.filter(filter)) { tvshow in
-                    Item(tvshow: tvshow.binding(), filter: filter)
-                }
+            ForEach(kodi.library.filter(filter)) { tvshow in
+                Item(tvshow: tvshow.binding(), filter: filter)
             }
-            /// Move the first row below the tabs on tvOS
-            .tvOS { $0.padding(.top, 160) }
         }
         .task {
             print("TVsshowView task!")

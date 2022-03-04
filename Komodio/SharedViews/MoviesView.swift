@@ -29,7 +29,7 @@ struct MoviesView: View {
                 ItemsView.Item(item: movie.binding())
             }
             /// Move the first row below the tabs on tvOS
-            .tvOS { $0.padding(.top, 160) }
+            //.tvOS { $0.padding(.top, 160) }
         }
         .task {
             print("MoviesView task!")
@@ -80,7 +80,7 @@ extension MoviesView {
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
-                PartsView.TitleHeader()
+                PartsView.TitleHeader(router: $router.routes)
 #endif
                 if !set.description.isEmpty {
                     ItemsView.Description(description: set.description)

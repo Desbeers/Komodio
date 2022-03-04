@@ -13,9 +13,85 @@ class Router: ObservableObject {
 #if os(macOS)
     /// Publish the routes for macOS
     @Published var routes: [Route] = [.home]
-#else
-    /// Don't publish it for iOS or else the NavigationLink will pop back
+
+    @MainActor func push(_ route: Route) {
+        debugPrint("Push \(route.title)")
+        /// Need below because `routes` is an `Enum`??
+        objectWillChange.send()
+        routes.append(route)
+    }
+    
+    @discardableResult
+    @MainActor func pop() -> Route? {
+        debugPrint("Pop \(currentRoute.title)")
+        return routes.popLast()
+    }
+    #endif
+    
+#if os(tvOS)
+    @Published var routes: [Route] = [.home]
+
+    func push(_ route: Route) {
+        
+        if routes.contains(route) {
+            debugPrint("\(route) already in the stack")
+            
+            //let index = routes.firstIndex(of: route)
+            
+            _ = routes.popLast()
+        } else {
+            debugPrint("\(route) new in the stack")
+            routes.append(route)
+        }
+        
+        //debugPrint("Push \(route.title)")
+        //debugPrint("Push enum \(route)")
+        //routes.append(route)
+        dump(routes, maxDepth: 1)
+    }
+    
+    @discardableResult
+    func pop(_ route: Route) -> Route? {
+        objectWillChange.send()
+        debugPrint("Pop argument \(currentRoute.title)")
+        debugPrint("Pop current \(currentRoute.title)")
+        
+        if routes.count > 1 {
+            
+            return routes.popLast()
+            
+        } else {
+            return nil
+        }
+    }
+    #endif
+    
+#if os(iOS)
+    /// Don't publish it for iOS or else the NavigationLink got nuts
     var routes: [Route] = [.home]
+
+    func push(_ route: Route) {
+        debugPrint("Push \(route.title)")
+        debugPrint("Push enum \(route)")
+        routes.append(route)
+        dump(routes, maxDepth: 1)
+    }
+    
+    @discardableResult
+    func pop(_ route: Route) -> Route? {
+        objectWillChange.send()
+        debugPrint("Pop argument \(currentRoute.title)")
+        debugPrint("Pop current \(currentRoute.title)")
+        
+        if routes.count > 1 {
+            
+            return routes.popLast()
+            
+        } else {
+            return nil
+        }
+    }
+
 #endif
     
     var title: String {
@@ -39,17 +115,6 @@ class Router: ObservableObject {
     
     var currentRoute: Route {
         routes.last ?? .home
-    }
-
-    func push(_ route: Route) {
-        debugPrint("Push \(route.title)")
-        //objectWillChange.send()
-        routes.append(route)
-    }
-    
-    //@discardableResult
-    @MainActor func pop() -> Route? {
-        routes.popLast()
     }
 }
 
@@ -75,14 +140,8 @@ struct RouterLink<Label: View>: View {
 #else
         NavigationLink(destination: item.destination
                         .iOS { $0.navigationTitle(item.title) }
-//                        .task {
-//            print("Appear: \(item.title), push it")
-//            router.routes.append(item)
-//        }
-//                        .onDisappear {
-//            print("Dissapear: \(item.title), pop it")
-//            let _ = router.routes.popLast()
-//        }
+                        .onAppear { router.push(item) }
+                        //.onDisappear { router.pop(item) }
         
         ) {
             label

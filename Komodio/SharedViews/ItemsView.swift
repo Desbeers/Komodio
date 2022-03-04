@@ -30,13 +30,12 @@ extension ItemsView {
         var body: some View {
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    
-                    Text(router.routes.map { $0.title } .joined(separator: "/"))
-                    
                     content
                 }
                 /// On macOS, give it some padding because the TitleHeader is on top
                 .macOS { $0.padding(.top, 60)}
+                /// Move the first row below the tabs on tvOS
+                .tvOS { $0.padding(.top, router.routes.count == 1 ? 160 : 0) }
             }
             .tvOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea() }
             .macOS { $0.ignoresSafeArea() }

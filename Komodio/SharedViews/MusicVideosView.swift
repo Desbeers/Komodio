@@ -23,23 +23,14 @@ struct MusicVideosView: View {
         ItemsView.List() {
             ForEach(musicvideos) { musicvideo in
                 let artist = kodi.getArtistInfo(artist: musicvideo.artist)
-                
-                /// Build a new filter for the MusicVideos.Artist View
-                let newFilter = KodiFilter(
-                    media: .musicvideo,
-                    title: artist.title,
-                    subtitle: "Music Videos"
-                )
-                
                 RouterLink(item: .musicVideosItems(artist: artist)) {
                     Artist(artist: artist)
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
             }
-            /// Move the first row below the tabs on tvOS
-            .tvOS { $0.padding(.top, 160) }
         }
         .task {
+            print("MusicVideos task!")
             let filter = KodiFilter(media: .musicvideo)
             musicvideos = kodi.library.filter(filter)
             appState.filter.title = "Music Videos"
@@ -77,6 +68,10 @@ extension MusicVideosView {
         @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
+        
+        /// The Router model
+        @EnvironmentObject var router: Router
+        
         /// The Artist item
         let artist: KodiItem
         /// The Music Video items to show in this view
@@ -85,14 +80,14 @@ extension MusicVideosView {
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
-                PartsView.TitleHeader()
+                PartsView.TitleHeader(router: $router.routes)
 #endif
                 ForEach(musicvideos) { musicvideo in
                     ItemsView.Item(item: musicvideo.binding())
                 }
             }
             .task {
-                print("Music Videos Items task!")
+                print("MusicVideos.Items task!")
                 let filter = KodiFilter(media: .musicvideo, artist: artist.artist)
                 musicvideos = kodi.library.filter(filter)
                 appState.filter.title = artist.artist.joined(separator: " & ")

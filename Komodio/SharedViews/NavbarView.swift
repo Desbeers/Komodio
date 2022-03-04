@@ -62,7 +62,11 @@ extension NavbarView {
 #endif
 
 #if os(tvOS)
-                    item.destination
+                    item.destination.onAppear {
+                        print("Sidebar onAppear: \(item.title)")
+                        router.objectWillChange.send()
+                        router.routes = [item]
+                    }
                         .tabItem {
                             Label(item.title, systemImage: item.symbol)
                         }
@@ -71,7 +75,11 @@ extension NavbarView {
 
 #if os(iOS)
                     NavigationLink(destination: item.destination
-                                    //.onAppear { router.routes = [item] }
+                                    .onAppear {
+                        print("Sidebar onAppear: \(item.title)")
+                        router.objectWillChange.send()
+                        router.routes = [item]
+                    }
                                     .navigationTitle(item.title),
                                    tag: item,
                                    selection: $selection,

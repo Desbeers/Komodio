@@ -30,7 +30,7 @@ struct EpisodesView: View {
     var body: some View {
         ItemsView.List() {
 #if os(tvOS)
-            PartsView.TitleHeader()
+            PartsView.TitleHeader(router: $router.routes)
 #endif
             ItemsView.Description(description: tvshow.description)
                 .padding()

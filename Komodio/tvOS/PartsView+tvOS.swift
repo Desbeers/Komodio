@@ -17,22 +17,26 @@ extension PartsView {
     /// this view as soon as a new header is set. Ugly, but else the header for the next
     /// View is shown before the previous View is gone.
     struct TitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
+//        /// The AppState model
+//        @EnvironmentObject var appState: AppState
+        
+        @Binding var router: [Route]
+        
         /// Visible or not
-        @State var visible: Bool = false
+        @State var visible: Bool = true
         /// The View
         var body: some View {
             VStack(alignment: .leading) {
-                if let subtitle = appState.filter.subtitle {
+                if let subtitle = router.dropLast().last?.title {
                     Text(visible ? subtitle : "")
                         .padding(.leading, 2)
                         .font(.subheadline)
                 } else {
                     Text(" ")
                 }
-                if let title = appState.filter.title {
-                    Text(visible ? title : "")
+                if let title = router.last?.title {
+                //if let title = appState.filter.title {
+                Text(visible ? title : "")
                         .font(.title)
                 }
             }
@@ -41,10 +45,10 @@ extension PartsView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 160)
             .background(.ultraThinMaterial)
-            .onChange(of: appState.filter) { _ in
-                print("Header filter changed!")
-                visible.toggle()
-            }
+//            .onChange(of: router.title) { _ in
+//                print("Header filter changed!")
+//                visible.toggle()
+//            }
         }
     }
 }

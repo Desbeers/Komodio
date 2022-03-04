@@ -13,9 +13,7 @@ extension PartsView {
     
     /// View the Ttitle and optional subtitle of the page
     struct TitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        
+
         @EnvironmentObject var router: Router
         
         /// The View
@@ -45,7 +43,7 @@ extension PartsView {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .animation(.default, value: appState.filter)
+            .animation(.default, value: router.routes)
             .padding()
             .frame(height: 60)
             .frame(maxWidth: .infinity, alignment: .leading)
