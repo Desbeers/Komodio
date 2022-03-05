@@ -6,24 +6,16 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct DetailsView: View {
-    /// The route navigation
-    @EnvironmentObject var routeInformation: RouteInformation
-    
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
     /// The Kodi item for the details
     @Binding var item: KodiItem
     /// The View
     var body: some View {
         VStack(spacing: 0) {
-            /// macOS has it's own PartsHeader as a ZStack
-            #if !os(macOS)
+            #if os(tvOS)
             PartsView.TitleHeader()
             #endif
             Spacer()
@@ -33,6 +25,11 @@ struct DetailsView: View {
                     .shadow(radius: 6)
                     .padding(6)
                 VStack {
+                    if !item.subtitle.isEmpty {
+                        Text(item.subtitle)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                     /// Description
                     Text(item.description)
                     Spacer()
@@ -66,7 +63,7 @@ struct DetailsView: View {
             .cornerRadius(12)
             .shadow(radius: 20)
             .macOS { $0.padding().frame(maxHeight: 200) }
-            .tvOS { $0.frame(maxHeight: 300) }
+            .tvOS { $0.frame(maxHeight: 300).padding(60) }
             .iOS { $0.frame(maxHeight: 200).padding(.horizontal) }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -78,9 +75,10 @@ struct DetailsView: View {
         }
         .task {
             print("DetailsView task!")
-            appState.filter.subtitle = item.subtitle.isEmpty ? appState.filter.title : item.subtitle
-            appState.filter.title = item.title
         }
+        .tvOS { $0.ignoresSafeArea() }
+        .macOS { $0.ignoresSafeArea() }
+        .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }
         .iOS { $0.navigationTitle(item.title) }
     }
 }

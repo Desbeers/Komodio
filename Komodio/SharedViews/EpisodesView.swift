@@ -6,14 +6,11 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
-import SwiftlyKodiAPI
 
+import SwiftlyKodiAPI
 
 /// A View for Episode items
 struct EpisodesView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The TV show item in the library
@@ -26,9 +23,12 @@ struct EpisodesView: View {
     var body: some View {
         ItemsView.List() {
 #if os(tvOS)
-                PartsView.TitleHeader()
+            PartsView.TitleHeader()
 #endif
             ItemsView.Description(description: tvshow.description)
+                .padding()
+            /// More padding for tvOS
+                .tvOS { $0.padding(.horizontal, 60)}
             ForEach(seasons, id: \.self) { season in
                 VStack {
                     Text(season == 0 ? "Specials" : "Season \(season)")
@@ -49,14 +49,9 @@ struct EpisodesView: View {
         }
         .task {
             print("EpisodesView task!")
-            appState.filter.title = tvshow.title
-            appState.filter.subtitle = "TV shows"
-            appState.filter.fanart = tvshow.fanart
             /// Filter the episodes
             getEpisodes()
         }
-        .iOS { $0.navigationTitle("Movies") }
-        
     }
     /// Get the episodes from the Kodi database
     private func getEpisodes() {
@@ -71,22 +66,15 @@ struct EpisodesView: View {
 
 extension EpisodesView {
     
-    /// A View to link an episode to the Details View
+    /// A View to link an episode item to the Details View
     struct Link: View {
-        
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        
+        /// The Kodi item we want to link
         @Binding var item: KodiItem
+        /// The link
         var body: some View {
-            
-            StackNavLink(path: "/TV shows/Episodes/Details/\(item.id)",
-                         filter: appState.filter,
-                         destination: DetailsView(item: item.binding())
-            ) {
+            RouterLink(item: .details(item: item)) {
                 Item(item: $item)
             }
-            
             .buttonStyle(ButtonStyles.KodiItem(item: item))
             .tvOS { $0.frame(width: 1000) }
             .contextMenu {

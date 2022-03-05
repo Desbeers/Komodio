@@ -19,12 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="f66-S4-Qd4">
-                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Huge Icon" translatesAutoresizingMaskIntoConstraints="NO" id="NCN-Yp-kNW">
-                                <rect key="frame" x="693" y="116" width="534" height="509"/>
+                                <rect key="frame" x="693" y="286" width="534" height="509"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -37,7 +33,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="1920" height="1080"/>
         <image name="Huge Icon" width="1200" height="1200"/>
     </resources>
 </document>

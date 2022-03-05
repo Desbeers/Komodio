@@ -42,7 +42,7 @@ extension ButtonStyles {
                 .background(Color("ListButtonColor").opacity(focused ? 1 : 0.5))
                 .cornerRadius(12)
                 .shadow(radius: focused ? 20 : 0, y: focused ? 20 : 0)
-                .padding(.horizontal, 80)
+                .padding(.horizontal, 160)
                 .padding(.vertical, 30)
                 .onChange(of: focused) { focus in
                     if focus {

@@ -6,36 +6,33 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 extension PartsView {
     
+    /// Show the title and optional subtitle on a View
     struct TitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        /// Visible or not
-        @State var visible: Bool = false
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The View
         var body: some View {
-            Group {
-                if visible, let title = appState.filter.title {
-                    VStack {
-                        Text(title)
-                            .font(.title)
-                        if let subtitle = appState.filter.subtitle {
-                            Text(subtitle)
-                        }
-                    }
-                    .padding()
-                    .background(.thinMaterial)
-                    .cornerRadius(12)
+            VStack(alignment: .leading) {
+                if let subtitle = router.subtitle {
+                    Text(subtitle)
+                        .padding(.leading, 2)
+                        .font(.subheadline)
+                } else {
+                    Text(" ")
                 }
+                Text(router.title)
+                    .font(.title)
             }
-            .onChange(of: appState.filter) { _ in
-                print("Header filter changed!")
-                visible.toggle()
-            }
+            .animation(.default, value: router.title)
+            .padding(.leading, 60)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 160)
+            .background(.ultraThinMaterial)
         }
     }
 }

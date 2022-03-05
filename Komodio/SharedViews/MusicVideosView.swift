@@ -6,16 +6,12 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct MusicVideosView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The Kodi filter for this View
-    let filter: KodiFilter
     /// The Music Video items to show in this view
     @State var musicvideos: [KodiItem] = []
     /// The View
@@ -23,28 +19,17 @@ struct MusicVideosView: View {
         ItemsView.List() {
             ForEach(musicvideos) { musicvideo in
                 let artist = kodi.getArtistInfo(artist: musicvideo.artist)
-                
-                /// Build a new filter for the MusicVideos.Artist View
-                let newFilter = KodiFilter(
-                    media: .musicvideo,
-                    title: artist.title,
-                    subtitle: "Music Videos"
-                )
-                
-                StackNavLink(path: "/Music Videos/Artist/\(musicvideo.id)", filter: newFilter, destination: Items(artist: artist)) {
+                RouterLink(item: .musicVideosItems(artist: artist)) {
                     Artist(artist: artist)
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
             }
         }
         .task {
+            print("MusicVideos task!")
             let filter = KodiFilter(media: .musicvideo)
             musicvideos = kodi.library.filter(filter)
-            appState.filter.title = "Music Videos"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
         }
-        .iOS { $0.navigationTitle("Music Videos") }
     }
 }
 
@@ -71,8 +56,6 @@ extension MusicVideosView {
     
     /// A View with all Music Video items for a selected artist
     struct Items: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
         /// The Artist item
@@ -90,36 +73,21 @@ extension MusicVideosView {
                 }
             }
             .task {
-                print("Music Videos Items task!")
+                print("MusicVideos.Items task!")
                 let filter = KodiFilter(media: .musicvideo, artist: artist.artist)
                 musicvideos = kodi.library.filter(filter)
-                appState.filter.title = artist.artist.joined(separator: " & ")
-                appState.filter.subtitle = "Music Videos"
                 
             }
-            .iOS { $0.navigationTitle(artist.artist.joined(separator: " & ")) }
         }
     }
     
     struct Item: View {
-        //let artist: KodiItem
         @Binding var musicvideo: KodiItem
         var body: some View {
-            StackNavLink(path: "/Music Videos/Artist/Details/\(musicvideo.id)",
-                         filter: KodiFilter(media: .musicvideo),
-                         destination: DetailsView(item: $musicvideo)
-            ) {
+            RouterLink(item: .details(item: musicvideo)) {
                 ItemsView.Basic(item: $musicvideo)
             }
             .buttonStyle(ButtonStyles.KodiItem(item: musicvideo))
-            .contextMenu {
-                Button(action: {
-                    musicvideo.toggleWatchedState()
-                }, label: {
-                    Text(musicvideo.playcount == 0 ? "Mark as watched" : "Mark as new")
-                })
-            }
         }
     }
-    
 }

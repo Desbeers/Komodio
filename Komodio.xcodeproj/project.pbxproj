@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D735DEA927C9DCD800C63E1D /* StackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackNavigation.swift */; };
-		D735DEAA27C9DCD800C63E1D /* StackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackNavigation.swift */; };
-		D735DEAB27C9DCD800C63E1D /* StackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEA827C9DCD800C63E1D /* StackNavigation.swift */; };
 		D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
 		D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
 		D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
@@ -23,13 +20,12 @@
 		D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEB827C9F23600C63E1D /* ButtonStyles.swift */; };
 		D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */; };
 		D735DEC127CA732700C63E1D /* RootView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */; };
-		D735DEC327CA81B100C63E1D /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavBarView.swift */; };
-		D735DEC427CA81B100C63E1D /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavBarView.swift */; };
-		D735DEC527CA81B100C63E1D /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavBarView.swift */; };
+		D735DEC327CA81B100C63E1D /* NavbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavbarView.swift */; };
+		D735DEC427CA81B100C63E1D /* NavbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavbarView.swift */; };
+		D735DEC527CA81B100C63E1D /* NavbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC227CA81B100C63E1D /* NavbarView.swift */; };
 		D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */; };
 		D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */; };
 		D735DECD27CABCCF00C63E1D /* PartsView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */; };
-		D735DECE27CAC08300C63E1D /* ContentView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */; };
 		D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
 		D735DED027CACAA400C63E1D /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
 		D735DED227CAF76300C63E1D /* EpisodesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DED127CAF76300C63E1D /* EpisodesView.swift */; };
@@ -48,9 +44,6 @@
 		D7ADD15F27C9763A00321E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
 		D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7B2F20927C9792E002DFC41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7ADD14C27C9763A00321E23 /* Assets.xcassets */; };
-		D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */; };
-		D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */; };
-		D7B2F21227C97C18002DFC41 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = D7B2F21127C97C18002DFC41 /* SwiftUIRouter */; };
 		D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
 		D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
 		D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F21A27C97CD9002DFC41 /* AppState.swift */; };
@@ -78,6 +71,16 @@
 		D7CCA97127CC3B19001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */; };
 		D7CCA97327CC3B21001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */; };
 		D7CCA97527CC3B28001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */; };
+		D7D0B86227D052B900C1C873 /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86127D052B900C1C873 /* RouterModel.swift */; };
+		D7D0B86327D052B900C1C873 /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86127D052B900C1C873 /* RouterModel.swift */; };
+		D7D0B86427D052B900C1C873 /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86127D052B900C1C873 /* RouterModel.swift */; };
+		D7D0B86627D052EB00C1C873 /* MainView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */; };
+		D7D0B86827D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
+		D7D0B86927D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
+		D7D0B86A27D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
+		D7D0B86C27D2DE0B00C1C873 /* RouterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */; };
+		D7D0B86D27D2DE0B00C1C873 /* RouterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */; };
+		D7D0B86E27D2DE0B00C1C873 /* RouterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */; };
 		D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
 		D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
 		D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
@@ -94,7 +97,7 @@
 		D735DEB427C9F1C400C63E1D /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		D735DEB827C9F23600C63E1D /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyles+tvOS.swift"; sourceTree = "<group>"; };
-		D735DEC227CA81B100C63E1D /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		D735DEC227CA81B100C63E1D /* NavbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavbarView.swift; sourceTree = "<group>"; };
 		D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartsView+macOS.swift"; sourceTree = "<group>"; };
 		D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartsView+tvOS.swift"; sourceTree = "<group>"; };
 		D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartsView+iOS.swift"; sourceTree = "<group>"; };
@@ -106,7 +109,6 @@
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D788807327CC76D400F0C51A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
-		D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+macOS.swift"; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7ADD15127C9763A00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7ADD15727C9763A00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +130,10 @@
 		D7B2F24027C99465002DFC41 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RootView+tvOS.swift"; path = "Komodio/tvOS/RootView+tvOS.swift"; sourceTree = SOURCE_ROOT; };
 		D7CCA96F27CC3B08001B4828 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../SwiftlyKodiAPI; sourceTree = "<group>"; };
+		D7D0B86127D052B900C1C873 /* RouterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterModel.swift; sourceTree = "<group>"; };
+		D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainView+macOS.swift"; sourceTree = "<group>"; };
+		D7D0B86727D0673B00C1C873 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterLink.swift; sourceTree = "<group>"; };
 		D7EC594327C9BB53004FFC57 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		D7EC594727C9C5B8004FFC57 /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7B2F21027C97C10002DFC41 /* SwiftUIRouter in Frameworks */,
 				D7CCA97327CC3B21001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,7 +151,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7B2F20D27C97BF9002DFC41 /* SwiftUIRouter in Frameworks */,
 				D7CCA97127CC3B19001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,7 +159,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7B2F21227C97C18002DFC41 /* SwiftUIRouter in Frameworks */,
 				D7CCA97527CC3B28001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +190,9 @@
 				D735DEA827C9DCD800C63E1D /* StackNavigation.swift */,
 				D735DEB027C9EB9E00C63E1D /* Extensions.swift */,
 				D735DEB827C9F23600C63E1D /* ButtonStyles.swift */,
+				D7D0B86727D0673B00C1C873 /* Route.swift */,
+				D7D0B86127D052B900C1C873 /* RouterModel.swift */,
+				D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */,
 				D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */,
 			);
 			path = SharedItems;
@@ -206,7 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
-				D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */,
+				D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */,
 				D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */,
 				D735DED527CB07D800C63E1D /* Extensions+macOS.swift */,
 				D7ADD15927C9763A00321E23 /* macOS.entitlements */,
@@ -248,7 +254,7 @@
 				D7EC594327C9BB53004FFC57 /* PlayerView.swift */,
 				D7EC594727C9C5B8004FFC57 /* PartsView.swift */,
 				D735DEAC27C9EB6D00C63E1D /* ArtView.swift */,
-				D735DEC227CA81B100C63E1D /* NavBarView.swift */,
+				D735DEC227CA81B100C63E1D /* NavbarView.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -301,7 +307,6 @@
 			);
 			name = "Komodio (iOS)";
 			packageProductDependencies = (
-				D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */,
 				D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */,
 			);
 			productName = "Komodio (iOS)";
@@ -322,7 +327,6 @@
 			);
 			name = "Komodio (macOS)";
 			packageProductDependencies = (
-				D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */,
 				D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */,
 			);
 			productName = "Komodio (macOS)";
@@ -343,7 +347,6 @@
 			);
 			name = "Komodio (tvOS)";
 			packageProductDependencies = (
-				D7B2F21127C97C18002DFC41 /* SwiftUIRouter */,
 				D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */,
 			);
 			productName = Komodio;
@@ -431,11 +434,13 @@
 				D7B2F22C27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D7B2F22427C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D735DED227CAF76300C63E1D /* EpisodesView.swift in Sources */,
-				D735DEC327CA81B100C63E1D /* NavBarView.swift in Sources */,
+				D735DEC327CA81B100C63E1D /* NavbarView.swift in Sources */,
 				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */,
+				D7D0B86C27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D735DEC127CA732700C63E1D /* RootView+iOS.swift in Sources */,
 				D735DEDE27CB1FC700C63E1D /* LabelStyles.swift in Sources */,
+				D7D0B86827D0673B00C1C873 /* Route.swift in Sources */,
 				D735DED027CACAA400C63E1D /* DetailsView.swift in Sources */,
 				D735DEB527C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */,
@@ -444,9 +449,9 @@
 				D735DEB927C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
-				D735DEA927C9DCD800C63E1D /* StackNavigation.swift in Sources */,
 				D735DEB127C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+				D7D0B86227D052B900C1C873 /* RouterModel.swift in Sources */,
 				D735DECD27CABCCF00C63E1D /* PartsView+iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,27 +461,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				D735DED327CAF76300C63E1D /* EpisodesView.swift in Sources */,
+				D7D0B86627D052EB00C1C873 /* MainView+macOS.swift in Sources */,
 				D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */,
 				D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */,
 				D7B2F22D27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D7B2F22527C97EF0002DFC41 /* MoviesView.swift in Sources */,
-				D735DEC427CA81B100C63E1D /* NavBarView.swift in Sources */,
+				D735DEC427CA81B100C63E1D /* NavbarView.swift in Sources */,
+				D7D0B86327D052B900C1C873 /* RouterModel.swift in Sources */,
 				D7B2F22127C97D4A002DFC41 /* RootView+macOS.swift in Sources */,
 				D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEB627C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */,
-				D735DECE27CAC08300C63E1D /* ContentView+macOS.swift in Sources */,
+				D7D0B86927D0673B00C1C873 /* Route.swift in Sources */,
 				D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
-				D735DEAA27C9DCD800C63E1D /* StackNavigation.swift in Sources */,
 				D735DEB227C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D7B2F22927C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+				D7D0B86D27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D735DED727CB07D800C63E1D /* Extensions+macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,12 +498,14 @@
 				D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */,
 				D735DED427CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
-				D735DEC527CA81B100C63E1D /* NavBarView.swift in Sources */,
+				D7D0B86427D052B900C1C873 /* RouterModel.swift in Sources */,
+				D735DEC527CA81B100C63E1D /* NavbarView.swift in Sources */,
 				D7B2F22627C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEB727C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
+				D7D0B86A27D0673B00C1C873 /* Route.swift in Sources */,
 				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
 				D735DEDA27CB088900C63E1D /* PlayerMetaData+tvOS.swift in Sources */,
 				D735DEDC27CB1CB100C63E1D /* Extensions+tvOS.swift in Sources */,
@@ -504,9 +513,9 @@
 				D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */,
-				D735DEAB27C9DCD800C63E1D /* StackNavigation.swift in Sources */,
 				D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D735DEB327C9EB9E00C63E1D /* Extensions.swift in Sources */,
+				D7D0B86E27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,21 +865,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D7B2F20C27C97BF9002DFC41 /* SwiftUIRouter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
-			productName = SwiftUIRouter;
-		};
-		D7B2F20F27C97C10002DFC41 /* SwiftUIRouter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
-			productName = SwiftUIRouter;
-		};
-		D7B2F21127C97C18002DFC41 /* SwiftUIRouter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D7B2F20B27C97BF9002DFC41 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
-			productName = SwiftUIRouter;
-		};
 		D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftlyKodiAPI;

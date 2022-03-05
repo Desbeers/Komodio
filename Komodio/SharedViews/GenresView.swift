@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 /// A View for Genre items
 struct GenresView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
 #if os(tvOS)
@@ -27,16 +25,13 @@ struct GenresView: View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.genres) { genre in
-                    
-                    StackNavLink(path: "/Genres/\(genre.label)",
-                                 filter: KodiFilter(media: .none),
-                                 destination: GenresView.Items(genre: genre)
-                    ) {
+                    RouterLink(item: .genresItems(genre: genre)) {
                         Label(genre.label, systemImage: genre.symbol)
                             .labelStyle(LabelStyles.GridItem())
                             .tvOS { $0.frame(width: 260, height: 120) }
                             .macOS { $0.frame(width: 130, height: 60) }
                     }
+
                 }
                 .buttonStyle(ButtonStyles.GridItem())
             }
@@ -44,14 +39,7 @@ struct GenresView: View {
         }
         .task {
             print("GenresView task!")
-            /// Set the filter
-            appState.filter = KodiFilter(media: .none,
-                                         title: "Genres",
-                                         subtitle: nil,
-                                         fanart: nil
-            )
         }
-        .iOS { $0.navigationTitle("Genres") }
         .tvOS { $0.padding(.horizontal, 100) }
     }
 }
@@ -60,22 +48,18 @@ extension GenresView {
     
     /// A view with all items of a certain genre
     struct Items: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
         /// The selected Genre to filter
         let genre: GenreItem
         /// The list of Kodi items to show
         @State var items: [KodiItem] = []
         /// The View
         var body: some View {
+            ItemsView.List() {
 #if os(tvOS)
             PartsView.TitleHeader()
 #endif
-            ItemsView.List() {
                 ForEach(items) { item in
                     ItemsView.Item(item: item.binding())
                 }
@@ -83,14 +67,12 @@ extension GenresView {
             .task {
                 print("GenresView.Items task!")
                 /// Set the filter
-                appState.filter = KodiFilter(media: .all,
-                                             title: genre.label,
-                                             subtitle: "Genres",
+                let filter = KodiFilter(media: .all,
                                              fanart: nil,
                                              setID: nil,
                                              genre: genre.label)
                 /// Get the items
-                items = kodi.library.filter(appState.filter)
+                items = kodi.library.filter(filter)
             }
             .iOS { $0.navigationTitle(genre.label) }
         }

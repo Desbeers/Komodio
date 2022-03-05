@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 /// An 'Item' can be any kind of ``KodiItem``; e.g., movie, tvshow, episode etc...
@@ -15,9 +15,12 @@ struct ItemsView {
 }
 
 extension ItemsView {
-
+    
     /// Wrap the Kodi items in a List or a LazyVStack
     struct List<Content: View>: View {
+        
+        @EnvironmentObject var router: Router
+        
         private var content: Content
         /// StackNavView
         init(@ViewBuilder content: () -> Content) {
@@ -30,36 +33,34 @@ extension ItemsView {
                     content
                 }
                 /// On macOS, give it some padding because the TitleHeader is on top
-                .macOS { $0.padding(.top, 40)}
+                .macOS { $0.padding(.top, 60)}
+                /// Move the first row below the tabs on tvOS
+                .tvOS { $0.padding(.top, router.routes.count == 1 ? 160 : 0) }
             }
-            .tvOS { $0.fanartBackground() }
+            .tvOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea() }
+            .macOS { $0.ignoresSafeArea() }
+            .iOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea(.all, edges: .bottom) }
         }
     }
 }
 
 
 extension ItemsView {
+    
     struct Item: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
         /// The ``KodiItem`` to show in this View
         @Binding var item: KodiItem
         var body: some View {
             
             switch item.media {
             case .movie:
-                MoviesView.Item(movie: $item, filter: appState.filter)
+                MoviesView.Item(movie: $item)
             case .tvshow:
-                TVshowsView.Item(tvshow: $item, filter: appState.filter)
+                TVshowsView.Item(tvshow: $item)
             case .musicvideo:
                 MusicVideosView.Item(musicvideo: $item)
             default:
-                StackNavLink(path: "\(navigator.path)/Details/\(item.id)",
-                             filter: appState.filter,
-                             destination: DetailsView(item: item.binding())
-                ) {
+                RouterLink(item: .details(item: item)) {
                     Basic(item: $item)
                 }
                 .buttonStyle(ButtonStyles.KodiItem(item: item))
@@ -115,25 +116,22 @@ extension ItemsView {
         }
     }
     
-        
-    /// A View to show the watched status of a Kodi item
+    
+
+    
     struct FanartModifier: ViewModifier {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
+        let fanart: String
         /// The modifier
         func body(content: Content) -> some View {
             content
                 .background {
-                    if let fanart = appState.filter.fanart, !fanart.isEmpty {
-                        ZStack {
-                            Color("Background")
-                            ArtView.Fanart(fanart: fanart)
-                                .opacity(0.3)
-                                .blur(radius: 4)
-                        }
-                        .macOS {$0.edgesIgnoringSafeArea(.all) }
-                        .tvOS { $0.edgesIgnoringSafeArea(.all) }
-                        .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+                    if !fanart.isEmpty {
+                        ArtView.Fanart(fanart: fanart)
+                            .opacity(0.3)
+                            .blur(radius: 4)
+                            .macOS {$0.edgesIgnoringSafeArea(.all) }
+                            .tvOS { $0.edgesIgnoringSafeArea(.all) }
+                            .iOS { $0.edgesIgnoringSafeArea(.bottom) }
                     } else {
                         EmptyView()
                     }

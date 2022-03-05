@@ -67,8 +67,8 @@ extension View {
     }
     
     /// Shortcut to the ``FanartModifier``
-    func fanartBackground() -> some View {
-        modifier(ItemsView.FanartModifier())
+    func fanartBackground(fanart: String) -> some View {
+        modifier(ItemsView.FanartModifier(fanart: fanart))
     }
     
     /// Cheap `if` extension that should not be used because of performance

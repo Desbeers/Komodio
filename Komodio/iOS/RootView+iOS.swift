@@ -4,28 +4,16 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
 
-struct RootView: View {    
-    /// The AppState model
-    @StateObject var appState: AppState = AppState()
-    /// The Navigator model
-    @EnvironmentObject var navigator: Navigator
-    /// The selection in the list
-    @State var selection: String? = "Home"
+struct RootView: View {
+    /// The Router model
+    @StateObject var router: Router = Router()
     /// The View
     var body: some View {
-        StackNavView {
-            List(selection: $selection) {
-                //Section(header: Text("Library")) {
-                    NavBarView.Items(selection: $selection)
-                //}
-            }
-            .iOS { $0.navigationTitle("Library") }
+        NavigationView {
+            NavbarView()
             HomeView()
         }
-        .environmentObject(appState)
-        .edgesIgnoringSafeArea(.bottom)
-        //.statusBar(hidden: true)
+        .environmentObject(router)
     }
 }

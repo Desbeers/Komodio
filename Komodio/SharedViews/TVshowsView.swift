@@ -6,31 +6,28 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct TVshowsView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    /// The tv shows we want to show
+    @State var tvshows: [KodiItem] = []
     /// The library filter
     @State var filter: KodiFilter
     /// The View
     var body: some View {
         ItemsView.List() {
             ForEach(kodi.library.filter(filter)) { tvshow in
-                Item(tvshow: tvshow.binding(), filter: filter)
+                Item(tvshow: tvshow.binding())
             }
         }
         .task {
-            print("TVsshowView task!")
-            appState.filter.title = "TV shows"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
-            
+            print("TVshowView task!")
+            /// Filter the movies
+            tvshows = kodi.library.filter(KodiFilter(media: .tvshow))
         }
-        .iOS { $0.navigationTitle("TV shows") }
     }
 }
 
@@ -40,10 +37,9 @@ extension TVshowsView {
     struct Item: View {
         /// The TV show item
         @Binding var tvshow: KodiItem
-        /// The current filter
-        let filter: KodiFilter
+        /// The View
         var body: some View {
-            StackNavLink(path: "/TV shows/Episodes/\(tvshow.id)", filter: filter, destination: EpisodesView(tvshow: tvshow)) {
+            RouterLink(item: .episodes(tvshow: tvshow)) {
                 ItemsView.Basic(item: tvshow.binding())
             }
             .buttonStyle(ButtonStyles.KodiItem(item: tvshow))

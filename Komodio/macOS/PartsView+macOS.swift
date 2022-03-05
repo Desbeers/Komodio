@@ -6,47 +6,52 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 extension PartsView {
     
     /// View the Ttitle and optional subtitle of the page
     struct TitleHeader: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        /// The Navigator model
-        @EnvironmentObject var navigator: Navigator
+
+        @EnvironmentObject var router: Router
+        
         /// The View
         var body: some View {
             HStack(alignment: .center) {
-                Button(action: { navigator.goBack() }) {
+                
+                Button(action: {
+                    router.pop()
+                },
+                       label: {
                     Image(systemName: "chevron.backward.square.fill")
-                        .foregroundColor(navigator.canGoBack ? .accentColor : .secondary)
-                }
-                .disabled(!navigator.canGoBack)
-                .help("Go back")
-                .font(.title)
-                .buttonStyle(.plain)
+                })
+                    .disabled(router.routes.count == 1)
+                    .help("Go back")
+                    .font(.title)
+                    .buttonStyle(.plain)
                 VStack(alignment: .leading) {
-                    Text(appState.filter.title ?? "Komodio")
-                        .font(appState.filter.subtitle == nil ? .title : .title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    if let subtitle = appState.filter.subtitle {
+                    
+                    if let subtitle = router.subtitle {
                         Text(subtitle)
                             .padding(.leading, 2)
                             .font(.subheadline)
                             .transition(AnyTransition.opacity.combined(with: .slide))
                     }
+                    Text(router.title)
+                        .font(router.subtitle == nil ? .title : .title2)
                 }
-                Text(navigator.path)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .animation(.default, value: appState.filter)
+            .animation(.default, value: router.routes)
             .padding()
             .frame(height: 60)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.thinMaterial)
             .ignoresSafeArea()
+            .onChange(of: router.routes) { newRoutes in
+                print("TitleHeader: ROUTER CHANGED")
+            }
         }
         
     }

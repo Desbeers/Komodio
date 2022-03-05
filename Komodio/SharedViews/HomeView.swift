@@ -6,16 +6,10 @@
 //
 
 import SwiftUI
-import SwiftUIRouter
+
 import SwiftlyKodiAPI
 
 struct HomeView: View {
-    
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
-    /// The Navigator model
-    @EnvironmentObject var navigator: Navigator
-    
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// Library loading state
@@ -29,12 +23,7 @@ struct HomeView: View {
             }
         }
         .task {
-            print("HomeViewTask!")
-            //navigator.clear()
-            appState.filter.title = "Home"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
-            appState.filter.media = .none
+            print("HomeView Task!")
             libraryLoaded = kodi.library.isEmpty ? false : true
         }
         .onChange(of: kodi.library) { newLibrary in
@@ -55,7 +44,7 @@ extension HomeView {
             ItemsView.List() {
                 Row(title: "Latest unwatched Movies", items: $items.movies)
                 /// Move the first row below the tabs on tvOS
-                    .tvOS { $0.padding(.top, 160) }
+                    //.tvOS { $0.padding(.top, 160) }
                 Row(title: "Random Music Videos", items: $items.musicvideos)
                 Row(title: "Latest TV show Episodes", items: $items.episodes)
                 libraryReloadButton
@@ -64,7 +53,7 @@ extension HomeView {
             .buttonStyle(ButtonStyles.HomeItem())
             .tvOS { $0.ignoresSafeArea(.all) }
             .task {
-                print("HomeView task!")
+                print("HomeView.Items task!")
                 items = getHomeItems(library: kodi.library)
             }
         }
@@ -145,10 +134,7 @@ extension HomeView {
         var body: some View {
             VStack(spacing: 0) {
                 
-                StackNavLink(path: "/Home/Details/\(item.id)",
-                             filter: KodiFilter(media: .none),
-                             destination: DetailsView(item: item.binding())
-                ) {
+                RouterLink(item: .details(item: item)) {
                     VStack(spacing: 0) {
                         ArtView.PosterDetail(item: item)
                             .macOS { $0.frame(height: 300) }
@@ -161,7 +147,6 @@ extension HomeView {
                         }
                     }
                 }
-                // PartsView.WatchedToggle(item: $item)
             }
         }
     }
