@@ -11,7 +11,7 @@ struct RootView: View {
     /// The View
     var body: some View {
         NavigationView {
-            NavbarView()
+            SidebarView()
             HomeView()
         }
         .environmentObject(router)

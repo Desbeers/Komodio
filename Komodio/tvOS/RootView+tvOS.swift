@@ -17,7 +17,7 @@ struct RootView: View {
     var body: some View {
         NavigationView {
             TabView() {
-                NavbarView.Items(selection: $router.navbar)
+                TabsView()
             }
         }
         .environmentObject(router)
