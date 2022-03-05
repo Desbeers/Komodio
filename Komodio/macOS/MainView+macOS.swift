@@ -11,7 +11,10 @@ struct MainView: View {
     @EnvironmentObject var router: Router
     var body: some View {
         ZStack(alignment: .top) {
-            router.currentRoute.destination
+            
+            if let route = router.routes.last {
+                route.destination
+            }
             VStack {
                 PartsView.TitleHeader()
                 Spacer()
@@ -19,5 +22,8 @@ struct MainView: View {
         }
         .fanartBackground(fanart: router.fanart)
         .animation(.default, value: router.currentRoute)
+        .onChange(of: router.routes) { newRoutes in
+            print("ROUTER CHANGED")
+        }
     }
 }

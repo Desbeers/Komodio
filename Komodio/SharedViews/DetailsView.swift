@@ -24,7 +24,7 @@ struct DetailsView: View {
     var body: some View {
         VStack(spacing: 0) {
             #if os(tvOS)
-            PartsView.TitleHeader(router: $router.routes)
+            PartsView.TitleHeader()
             #endif
             Spacer()
             HStack(alignment: .top, spacing: 0) {

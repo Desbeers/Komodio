@@ -10,8 +10,8 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct MusicVideosView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
+    /// The Router model
+    @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Kodi filter for this View
@@ -33,9 +33,7 @@ struct MusicVideosView: View {
             print("MusicVideos task!")
             let filter = KodiFilter(media: .musicvideo)
             musicvideos = kodi.library.filter(filter)
-            appState.filter.title = "Music Videos"
-            appState.filter.subtitle = nil
-            appState.filter.fanart = nil
+            //router.fanart = ""
         }
         .iOS { $0.navigationTitle("Music Videos") }
     }
@@ -80,7 +78,7 @@ extension MusicVideosView {
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
-                PartsView.TitleHeader(router: $router.routes)
+                PartsView.TitleHeader()
 #endif
                 ForEach(musicvideos) { musicvideo in
                     ItemsView.Item(item: musicvideo.binding())
@@ -90,9 +88,7 @@ extension MusicVideosView {
                 print("MusicVideos.Items task!")
                 let filter = KodiFilter(media: .musicvideo, artist: artist.artist)
                 musicvideos = kodi.library.filter(filter)
-                appState.filter.title = artist.artist.joined(separator: " & ")
-                appState.filter.subtitle = "Music Videos"
-                appState.filter.fanart = artist.fanart
+                //router.fanart = artist.fanart
                 
             }
             .iOS { $0.navigationTitle(artist.artist.joined(separator: " & ")) }

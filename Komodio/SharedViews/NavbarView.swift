@@ -8,8 +8,6 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-
-
 #if os(macOS)
 /// The View for the Sidebar
 struct NavbarView: View {
@@ -30,7 +28,7 @@ struct NavbarView: View {
 /// The View for the Sidebar
 struct NavbarView: View {
     /// The selection
-    @State var selection: Route?
+    @State var selection: Route? = .home
     /// The View
     var body: some View {
         List {
@@ -62,11 +60,10 @@ extension NavbarView {
 #endif
 
 #if os(tvOS)
-                    item.destination.onAppear {
-                        print("Sidebar onAppear: \(item.title)")
-                        router.objectWillChange.send()
-                        router.routes = [item]
-                    }
+                    item.destination
+                        .onAppear {
+                            router.routes = [item]
+                        }
                         .tabItem {
                             Label(item.title, systemImage: item.symbol)
                         }
@@ -74,16 +71,16 @@ extension NavbarView {
 #endif
 
 #if os(iOS)
-                    NavigationLink(destination: item.destination
-                                    .onAppear {
-                        print("Sidebar onAppear: \(item.title)")
-                        router.objectWillChange.send()
-                        router.routes = [item]
-                    }
-                                    .navigationTitle(item.title),
-                                   tag: item,
-                                   selection: $selection,
-                                   label: { Label(item.title, systemImage: item.symbol) })
+                    NavigationLink(
+                        destination: item.destination
+                            .onAppear {
+                                router.routes = [item]
+                            }
+                            .navigationTitle(item.title),
+                        tag: item,
+                        selection: $selection,
+                        label: { Label(item.title, systemImage: item.symbol) }
+                    )
 #endif
                 }
             

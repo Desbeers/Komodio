@@ -8,91 +8,59 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+@MainActor
 class Router: ObservableObject {
+    
+    // MARK: macOS
     
 #if os(macOS)
     /// Publish the routes for macOS
     @Published var routes: [Route] = [.home]
-
-    @MainActor func push(_ route: Route) {
+    
+    func push(_ route: Route) {
         debugPrint("Push \(route.title)")
-        /// Need below because `routes` is an `Enum`??
+        /// Need below because `routes` is an `[Enum]`??
         objectWillChange.send()
         routes.append(route)
     }
     
     @discardableResult
-    @MainActor func pop() -> Route? {
+    func pop() -> Route? {
         debugPrint("Pop \(currentRoute.title)")
         return routes.popLast()
     }
-    #endif
+#endif
+    
+    // MARK: tvOS
     
 #if os(tvOS)
     @Published var routes: [Route] = [.home]
-
+    
     func push(_ route: Route) {
-        
         if routes.contains(route) {
-            debugPrint("\(route) already in the stack")
-            
-            //let index = routes.firstIndex(of: route)
-            
             _ = routes.popLast()
         } else {
-            debugPrint("\(route) new in the stack")
             routes.append(route)
         }
-        
-        //debugPrint("Push \(route.title)")
-        //debugPrint("Push enum \(route)")
-        //routes.append(route)
-        dump(routes, maxDepth: 1)
     }
+#endif
     
-    @discardableResult
-    func pop(_ route: Route) -> Route? {
-        objectWillChange.send()
-        debugPrint("Pop argument \(currentRoute.title)")
-        debugPrint("Pop current \(currentRoute.title)")
-        
-        if routes.count > 1 {
-            
-            return routes.popLast()
-            
-        } else {
-            return nil
-        }
-    }
-    #endif
+    // MARK: iOS
     
 #if os(iOS)
     /// Don't publish it for iOS or else the NavigationLink got nuts
     var routes: [Route] = [.home]
-
-    func push(_ route: Route) {
-        debugPrint("Push \(route.title)")
-        debugPrint("Push enum \(route)")
-        routes.append(route)
-        dump(routes, maxDepth: 1)
-    }
     
-    @discardableResult
-    func pop(_ route: Route) -> Route? {
-        objectWillChange.send()
-        debugPrint("Pop argument \(currentRoute.title)")
-        debugPrint("Pop current \(currentRoute.title)")
-        
-        if routes.count > 1 {
-            
-            return routes.popLast()
-            
+    func push(_ route: Route) {
+        if routes.contains(route) {
+            _ = routes.popLast()
         } else {
-            return nil
+            routes.append(route)
         }
     }
-
 #endif
+    
+    // MARK: shared
     
     var title: String {
         currentRoute.title
@@ -102,7 +70,9 @@ class Router: ObservableObject {
         routes.dropLast().last?.title
     }
     
-    var fanart: String = ""
+    var fanart: String {
+        currentRoute.fanart
+    }
     
     @Published var navbar: Route? = .home {
         didSet {
@@ -115,37 +85,5 @@ class Router: ObservableObject {
     
     var currentRoute: Route {
         routes.last ?? .home
-    }
-}
-
-struct RouterLink<Label: View>: View {
-    
-    @EnvironmentObject var router: Router
-    
-    private var item: Route
-    private var label: Label
-    /// Init the RouterLink
-    init(item: Route, @ViewBuilder label: () -> Label) {
-        self.item = item
-        self.label = label()
-    }
-    /// The View
-    var body: some View {
-#if os(macOS)
-        Button(action: {
-            router.push(item)
-        }, label: {
-            label
-        })
-#else
-        NavigationLink(destination: item.destination
-                        .iOS { $0.navigationTitle(item.title) }
-                        .onAppear { router.push(item) }
-                        //.onDisappear { router.pop(item) }
-        
-        ) {
-            label
-        }
-#endif
     }
 }

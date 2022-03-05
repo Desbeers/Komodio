@@ -26,7 +26,7 @@ struct TVshowsView: View {
         .task {
             print("TVsshowView task!")
             /// Set fanart
-            router.fanart = ""
+            //router.fanart = ""
         }
     }
 }

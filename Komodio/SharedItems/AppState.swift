@@ -26,8 +26,8 @@ final class AppState: ObservableObject {
         kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
     }
     
-    
-    @Published var filter = KodiFilter(media: .none)
+    var filter = KodiFilter(media: .none)
+    //@Published var filter = KodiFilter(media: .none)
     
     
     /// Set the hovered Kodi item from the UI to the published Var

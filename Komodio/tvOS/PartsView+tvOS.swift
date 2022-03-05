@@ -20,35 +20,30 @@ extension PartsView {
 //        /// The AppState model
 //        @EnvironmentObject var appState: AppState
         
-        @Binding var router: [Route]
+        //@Binding var router: [Route]
+        
+        @EnvironmentObject var router: Router
         
         /// Visible or not
         @State var visible: Bool = true
         /// The View
         var body: some View {
             VStack(alignment: .leading) {
-                if let subtitle = router.dropLast().last?.title {
+                if let subtitle = router.subtitle {
                     Text(visible ? subtitle : "")
                         .padding(.leading, 2)
                         .font(.subheadline)
                 } else {
                     Text(" ")
                 }
-                if let title = router.last?.title {
-                //if let title = appState.filter.title {
-                Text(visible ? title : "")
-                        .font(.title)
-                }
+                Text(visible ? router.title : "")
+                    .font(.title)
             }
-            //.animation(.default, value: appState.filter)
+            .animation(.default, value: router.title)
             .padding(.leading, 60)
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 160)
             .background(.ultraThinMaterial)
-//            .onChange(of: router.title) { _ in
-//                print("Header filter changed!")
-//                visible.toggle()
-//            }
         }
     }
 }

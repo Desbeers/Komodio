@@ -12,14 +12,10 @@ import SwiftlyKodiAPI
 
 /// A View for Movie items
 struct MoviesView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
-    
     /// The Router model
     @EnvironmentObject var router: Router
-    
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
     /// The movies we want to show
     @State var movies: [KodiItem] = []
     /// The View
@@ -28,15 +24,13 @@ struct MoviesView: View {
             ForEach(movies) { movie in
                 ItemsView.Item(item: movie.binding())
             }
-            /// Move the first row below the tabs on tvOS
-            //.tvOS { $0.padding(.top, 160) }
         }
         .task {
             print("MoviesView task!")
             /// Filter the movies
             movies = kodi.library.filter(KodiFilter(media: .movie))
             /// Set fanart
-            router.fanart = ""
+            //router.fanart = ""
         }
     }
 }
@@ -80,7 +74,7 @@ extension MoviesView {
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
-                PartsView.TitleHeader(router: $router.routes)
+                PartsView.TitleHeader()
 #endif
                 if !set.description.isEmpty {
                     ItemsView.Description(description: set.description)
@@ -97,7 +91,7 @@ extension MoviesView {
                 /// Get set movies
                 movies = kodi.library.filter(KodiFilter(media: .movie, setID: set.setID))
                 /// Set fanart
-                router.fanart = set.fanart
+                //router.fanart = set.fanart
 //                if let item = kodi.library.first(where: { $0.setID == set.setID}) {
 //                    //appState.filter.title = item.setInfo.title
 //                    //setDescription = item.setInfo.description

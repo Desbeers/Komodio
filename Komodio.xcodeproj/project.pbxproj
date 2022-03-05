@@ -78,6 +78,9 @@
 		D7D0B86827D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
 		D7D0B86927D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
 		D7D0B86A27D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
+		D7D0B86C27D2DE0B00C1C873 /* RouterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */; };
+		D7D0B86D27D2DE0B00C1C873 /* RouterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */; };
+		D7D0B86E27D2DE0B00C1C873 /* RouterLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */; };
 		D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
 		D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
 		D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EC594327C9BB53004FFC57 /* PlayerView.swift */; };
@@ -106,7 +109,6 @@
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D788807327CC76D400F0C51A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
-		D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+macOS.swift"; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7ADD15127C9763A00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7ADD15727C9763A00321E23 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 		D7D0B86127D052B900C1C873 /* RouterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterModel.swift; sourceTree = "<group>"; };
 		D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainView+macOS.swift"; sourceTree = "<group>"; };
 		D7D0B86727D0673B00C1C873 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterLink.swift; sourceTree = "<group>"; };
 		D7EC594327C9BB53004FFC57 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		D7EC594727C9C5B8004FFC57 /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,6 +192,7 @@
 				D735DEB827C9F23600C63E1D /* ButtonStyles.swift */,
 				D7D0B86727D0673B00C1C873 /* Route.swift */,
 				D7D0B86127D052B900C1C873 /* RouterModel.swift */,
+				D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */,
 				D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */,
 			);
 			path = SharedItems;
@@ -209,7 +213,6 @@
 			children = (
 				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
 				D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */,
-				D7ADD14B27C9763900321E23 /* ContentView+macOS.swift */,
 				D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */,
 				D735DED527CB07D800C63E1D /* Extensions+macOS.swift */,
 				D7ADD15927C9763A00321E23 /* macOS.entitlements */,
@@ -434,6 +437,7 @@
 				D735DEC327CA81B100C63E1D /* NavbarView.swift in Sources */,
 				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */,
+				D7D0B86C27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D735DEC127CA732700C63E1D /* RootView+iOS.swift in Sources */,
 				D735DEDE27CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D7D0B86827D0673B00C1C873 /* Route.swift in Sources */,
@@ -479,6 +483,7 @@
 				D735DEB227C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D7B2F22927C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+				D7D0B86D27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D735DED727CB07D800C63E1D /* Extensions+macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +515,7 @@
 				D7B2F20727C97926002DFC41 /* KomodioApp.swift in Sources */,
 				D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D735DEB327C9EB9E00C63E1D /* Extensions.swift in Sources */,
+				D7D0B86E27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

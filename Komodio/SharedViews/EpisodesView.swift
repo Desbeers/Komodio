@@ -30,7 +30,7 @@ struct EpisodesView: View {
     var body: some View {
         ItemsView.List() {
 #if os(tvOS)
-            PartsView.TitleHeader(router: $router.routes)
+            PartsView.TitleHeader()
 #endif
             ItemsView.Description(description: tvshow.description)
                 .padding()
@@ -62,7 +62,7 @@ struct EpisodesView: View {
             /// Filter the episodes
             getEpisodes()
             /// Set fanart
-            router.fanart = tvshow.fanart
+            //router.fanart = tvshow.fanart
         }
         //.iOS { $0.navigationTitle("Movies") }
         

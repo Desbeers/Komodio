@@ -78,7 +78,7 @@ extension GenresView {
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
-            PartsView.TitleHeader(router: $router.routes)
+            PartsView.TitleHeader()
 #endif
                 ForEach(items) { item in
                     ItemsView.Item(item: item.binding())

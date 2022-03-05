@@ -49,6 +49,9 @@ extension PartsView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.thinMaterial)
             .ignoresSafeArea()
+            .onChange(of: router.routes) { newRoutes in
+                print("TitleHeader: ROUTER CHANGED")
+            }
         }
         
     }
