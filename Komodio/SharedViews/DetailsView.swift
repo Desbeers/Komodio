@@ -9,15 +9,7 @@ import SwiftUI
 
 import SwiftlyKodiAPI
 
-struct DetailsView: View {    
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
-    
-    /// The Router model
-    @EnvironmentObject var router: Router
-    
+struct DetailsView: View {
     /// The Kodi item for the details
     @Binding var item: KodiItem
     /// The View
@@ -83,8 +75,6 @@ struct DetailsView: View {
         }
         .task {
             print("DetailsView task!")
-            appState.filter.subtitle = item.subtitle.isEmpty ? appState.filter.title : item.subtitle
-            appState.filter.title = item.title
         }
         .tvOS { $0.ignoresSafeArea() }
         .macOS { $0.ignoresSafeArea() }

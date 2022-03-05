@@ -9,17 +9,10 @@ import SwiftUI
 
 import SwiftlyKodiAPI
 
-
 /// A View for Episode items
 struct EpisodesView: View {
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    
-    /// The Router model
-    @EnvironmentObject var router: Router
-    
     /// The TV show item in the library
     let tvshow: KodiItem
     /// The seasons of this TV show
@@ -56,16 +49,9 @@ struct EpisodesView: View {
         }
         .task {
             print("EpisodesView task!")
-            appState.filter.title = tvshow.title
-            appState.filter.subtitle = "TV shows"
-            appState.filter.fanart = tvshow.fanart
             /// Filter the episodes
             getEpisodes()
-            /// Set fanart
-            //router.fanart = tvshow.fanart
         }
-        //.iOS { $0.navigationTitle("Movies") }
-        
     }
     /// Get the episodes from the Kodi database
     private func getEpisodes() {
@@ -80,21 +66,15 @@ struct EpisodesView: View {
 
 extension EpisodesView {
     
-    /// A View to link an episode to the Details View
+    /// A View to link an episode item to the Details View
     struct Link: View {
-        
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        
+        /// The Kodi item we want to link
         @Binding var item: KodiItem
+        /// The link
         var body: some View {
-            
             RouterLink(item: .details(item: item)) {
                 Item(item: $item)
             }
-            .buttonStyle(ButtonStyles.KodiItem(item: item))
-
-            
             .buttonStyle(ButtonStyles.KodiItem(item: item))
             .tvOS { $0.frame(width: 1000) }
             .contextMenu {

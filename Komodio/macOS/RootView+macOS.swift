@@ -11,12 +11,8 @@ import SwiftlyKodiAPI
 
 /// The Root View of Komodio
 struct RootView: View {
-    /// The AppState model
-    @StateObject var appState: AppState = AppState()
     /// The Router model
     @StateObject var router: Router = Router()
-//    /// The selection in the list
-//    @State private var selection: String?
     /// The View
     var body: some View {
         NavigationView {
@@ -24,7 +20,6 @@ struct RootView: View {
             MainView()
                 .background(Color(nsColor: .textBackgroundColor))
         }
-        .environmentObject(appState)
         .environmentObject(router)
     }
 }

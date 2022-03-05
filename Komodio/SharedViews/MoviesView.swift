@@ -12,8 +12,6 @@ import SwiftlyKodiAPI
 
 /// A View for Movie items
 struct MoviesView: View {
-    /// The Router model
-    @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The movies we want to show
@@ -29,8 +27,6 @@ struct MoviesView: View {
             print("MoviesView task!")
             /// Filter the movies
             movies = kodi.library.filter(KodiFilter(media: .movie))
-            /// Set fanart
-            //router.fanart = ""
         }
     }
 }
@@ -41,8 +37,6 @@ extension MoviesView {
     struct Item: View {
         /// The Movie item from the library
         @Binding var movie: KodiItem
-        /// The current library  filter
-        let filter: KodiFilter
         /// The View
         var body: some View {
             if movie.setID == 0 {
@@ -58,14 +52,8 @@ extension MoviesView {
     }
     
     struct Set: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
-        
-        /// The Router model
-        @EnvironmentObject var router: Router
-        
         /// The Set item for this View
         let set: KodiItem.MovieSetItem
         /// The movies we want to show
@@ -90,31 +78,16 @@ extension MoviesView {
                 print("MoviesView.Set task!")
                 /// Get set movies
                 movies = kodi.library.filter(KodiFilter(media: .movie, setID: set.setID))
-                /// Set fanart
-                //router.fanart = set.fanart
-//                if let item = kodi.library.first(where: { $0.setID == set.setID}) {
-//                    //appState.filter.title = item.setInfo.title
-//                    //setDescription = item.setInfo.description
-//                    //appState.filter.fanart = item.setInfo.fanart
-//                    //appState.filter.subtitle = "Movies"
-//                    //appState.filter.media = .movie
-//                    //appState.filter.setID = set.setID
-//                    movies = kodi.library.filter(appState.filter)
-//                }
             }
-            //.iOS { $0.navigationTitle(appState.filter.title ?? "") }
         }
     }
     
     /// A View for a movie set item
     struct SetItem: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
         /// The Movie item from the library
         let movie: KodiItem
         /// The View
         var body: some View {
-            
             RouterLink(item: .moviesSet(set: movie.setInfo)) {
                 HStack(spacing: 0) {
                     ArtView.PosterList(poster: movie.setInfo.art.isEmpty ? movie.poster : movie.setInfo.poster)

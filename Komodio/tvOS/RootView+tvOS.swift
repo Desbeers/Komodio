@@ -8,8 +8,6 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct RootView: View {
-    /// The AppState model
-    @StateObject var appState: AppState = AppState()
     /// The Router model
     @StateObject var router: Router = Router()
 //    init(){
@@ -22,9 +20,6 @@ struct RootView: View {
                 NavbarView.Items(selection: $router.navbar)
             }
         }
-        .environmentObject(appState)
         .environmentObject(router)
-        //.background(Image("Background").resizable().ignoresSafeArea())
-        //.preferredColorScheme(.dark)
     }
 }

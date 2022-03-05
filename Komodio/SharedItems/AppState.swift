@@ -26,7 +26,7 @@ final class AppState: ObservableObject {
         kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
     }
     
-    var filter = KodiFilter(media: .none)
+    //var filter = KodiFilter(media: .none)
     //@Published var filter = KodiFilter(media: .none)
     
     
@@ -37,12 +37,4 @@ final class AppState: ObservableObject {
             AppState.shared.hoveredKodiItem = item
         }
     }
-    
-    let titles: [(title: String, image: String)] = [
-        ("Home", "house"),
-        ("Movies", "film"),
-        ("TV shows", "tv"),
-        ("Music Videos", "music.quarternote.3"),
-        ("Genres", "list.star"),
-    ]
 }

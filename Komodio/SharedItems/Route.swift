@@ -122,7 +122,7 @@ extension Route {
             EpisodesView(tvshow: tvshow)
         
         case .musicVideos:
-            MusicVideosView(filter: KodiFilter(media: .musicvideo))
+            MusicVideosView()
         case .musicVideosItems(let artist):
             MusicVideosView.Items(artist: artist)
         

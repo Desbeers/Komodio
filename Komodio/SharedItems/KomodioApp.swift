@@ -19,6 +19,9 @@ import SwiftlyKodiAPI
     var body: some Scene {
         WindowGroup {
             RootView()
+                .task {
+                    kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+                }
             .environmentObject(kodi)
             .ignoresSafeArea()
         }
