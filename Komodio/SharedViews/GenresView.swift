@@ -52,29 +52,16 @@ extension GenresView {
         @EnvironmentObject var kodi: KodiConnector
         /// The selected Genre to filter
         let genre: GenreItem
-        /// The list of Kodi items to show
-        @State var items: [KodiItem] = []
         /// The View
         var body: some View {
             ItemsView.List() {
 #if os(tvOS)
             PartsView.TitleHeader()
 #endif
-                ForEach(items) { item in
+                ForEach(kodi.library.filter(KodiFilter(media: .all, genre: genre.label))) { item in
                     ItemsView.Item(item: item.binding())
                 }
             }
-            .task {
-                print("GenresView.Items task!")
-                /// Set the filter
-                let filter = KodiFilter(media: .all,
-                                             fanart: nil,
-                                             setID: nil,
-                                             genre: genre.label)
-                /// Get the items
-                items = kodi.library.filter(filter)
-            }
-            .iOS { $0.navigationTitle(genre.label) }
         }
     }
 }

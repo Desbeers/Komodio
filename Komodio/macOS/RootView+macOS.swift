@@ -16,7 +16,7 @@ struct RootView: View {
     /// The View
     var body: some View {
         NavigationView {
-            NavbarView()
+            SidebarView()
             MainView()
                 .background(Color(nsColor: .textBackgroundColor))
         }
