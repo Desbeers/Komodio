@@ -12,9 +12,9 @@ struct RootView: View {
     @StateObject var appState: AppState = AppState()
     /// The Router model
     @StateObject var router: Router = Router()
-    init(){
-        UINavigationBar.setAnimationsEnabled(false)
-    }
+//    init(){
+//        UINavigationBar.setAnimationsEnabled(false)
+//    }
     /// The View
     var body: some View {
         NavigationView {
