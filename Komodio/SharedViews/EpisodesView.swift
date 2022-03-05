@@ -22,9 +22,6 @@ struct EpisodesView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-#if os(tvOS)
-            PartsView.TitleHeader()
-#endif
             ItemsView.Description(description: tvshow.description)
                 .padding()
             /// More padding for tvOS

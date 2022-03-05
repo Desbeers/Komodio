@@ -29,6 +29,11 @@ extension ItemsView {
         ///The View
         var body: some View {
             ScrollView {
+#if os(tvOS)
+                if router.routes.count > 1 {
+                    PartsView.TitleHeader()
+                }
+#endif
                 LazyVStack(spacing: 0) {
                     content
                 }

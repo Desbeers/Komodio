@@ -15,9 +15,9 @@ struct DetailsView: View {
     /// The View
     var body: some View {
         VStack(spacing: 0) {
-            #if os(tvOS)
+#if os(tvOS)
             PartsView.TitleHeader()
-            #endif
+#endif
             Spacer()
             HStack(alignment: .top, spacing: 0) {
                 ArtView.PosterDetail(item: item)

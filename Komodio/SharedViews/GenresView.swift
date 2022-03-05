@@ -55,9 +55,6 @@ extension GenresView {
         /// The View
         var body: some View {
             ItemsView.List() {
-#if os(tvOS)
-            PartsView.TitleHeader()
-#endif
                 ForEach(kodi.library.filter(KodiFilter(media: .all, genre: genre.label))) { item in
                     ItemsView.Item(item: item.binding())
                 }

@@ -65,9 +65,6 @@ extension MusicVideosView {
         /// The View
         var body: some View {
             ItemsView.List() {
-#if os(tvOS)
-                PartsView.TitleHeader()
-#endif
                 ForEach(musicvideos) { musicvideo in
                     ItemsView.Item(item: musicvideo.binding())
                 }

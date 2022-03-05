@@ -61,9 +61,6 @@ extension MoviesView {
         /// The View
         var body: some View {
             ItemsView.List() {
-#if os(tvOS)
-                PartsView.TitleHeader()
-#endif
                 if !set.description.isEmpty {
                     ItemsView.Description(description: set.description)
                 }
