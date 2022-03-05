@@ -22,8 +22,5 @@ struct MainView: View {
         }
         .fanartBackground(fanart: router.fanart)
         .animation(.default, value: router.currentRoute)
-        .onChange(of: router.routes) { newRoutes in
-            print("ROUTER CHANGED")
-        }
     }
 }

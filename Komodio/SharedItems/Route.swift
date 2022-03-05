@@ -20,8 +20,9 @@ enum Route: Equatable, Hashable {
     case genresItems(genre: GenreItem)
     case details(item: KodiItem)
     case player
+    case table
     /// The items to show in the NavbarView
-    static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, genres]
+    static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, genres, table]
 }
 
 extension Route {
@@ -51,6 +52,8 @@ extension Route {
             return item.title
         case .player:
             return "Player"
+        case .table:
+            return "Debug Table"
         }
     }
 }
@@ -74,6 +77,8 @@ extension Route {
             return "Genres Items"
         case .details(let item):
             return item.title
+        case .table:
+            return "testtube.2"
         default:
             return "questionmark"
         }
@@ -96,7 +101,7 @@ extension Route {
         case .musicVideosItems(let artist):
             fanart = artist.fanart
         case .details(let item):
-            fanart = item.fanart
+            fanart = item.fanart.isEmpty ? item.poster : item.fanart
         default:
             break
         }
@@ -133,8 +138,12 @@ extension Route {
             GenresView.Items(genre: genre)
         case .details(let item):
             DetailsView(item: item.binding())
+#if os(macOS)
+        case .table:
+            TableView()
+#endif
         default:
-            Text("TODO")
+            Text("Not implemented")
         }
     }
 }

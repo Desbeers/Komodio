@@ -18,7 +18,6 @@ class Router: ObservableObject {
     @Published var routes: [Route] = [.home]
     
     func push(_ route: Route) {
-        debugPrint("Push \(route.title)")
         /// Need below because `routes` is an `[Enum]`??
         objectWillChange.send()
         routes.append(route)
@@ -26,7 +25,6 @@ class Router: ObservableObject {
     
     @discardableResult
     func pop() -> Route? {
-        debugPrint("Pop \(currentRoute.title)")
         return routes.popLast()
     }
 #endif

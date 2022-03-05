@@ -37,6 +37,7 @@
 		D74F34A327D30768009377FA /* SidebarView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A127D303A1009377FA /* SidebarView+macOS.swift */; };
 		D74F34A527D30F2A009377FA /* SidebarView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */; };
 		D74F34A727D31232009377FA /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A627D31232009377FA /* TabsView.swift */; };
+		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
 		D788807427CC76D400F0C51A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D788807327CC76D400F0C51A /* LaunchScreen.storyboard */; };
 		D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
@@ -108,6 +109,7 @@
 		D74F34A127D303A1009377FA /* SidebarView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView+macOS.swift"; sourceTree = "<group>"; };
 		D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView+iOS.swift"; sourceTree = "<group>"; };
 		D74F34A627D31232009377FA /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
+		D74F34A827D3FB5D009377FA /* TableView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView+macOS.swift"; sourceTree = "<group>"; };
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D788807327CC76D400F0C51A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
 				D74F34A127D303A1009377FA /* SidebarView+macOS.swift */,
 				D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */,
+				D74F34A827D3FB5D009377FA /* TableView+macOS.swift */,
 				D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */,
 				D735DED527CB07D800C63E1D /* Extensions+macOS.swift */,
 				D7ADD15927C9763A00321E23 /* macOS.entitlements */,
@@ -474,6 +477,7 @@
 				D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEB627C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */,
+				D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */,
 				D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7D0B86927D0673B00C1C873 /* Route.swift in Sources */,
 				D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */,

@@ -39,7 +39,7 @@ extension PartsView {
                             .transition(AnyTransition.opacity.combined(with: .slide))
                     }
                     Text(router.title)
-                        .font(router.subtitle == nil ? .title : .title2)
+                        .font(router.subtitle == nil ? .title : .title)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -49,10 +49,7 @@ extension PartsView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.thinMaterial)
             .ignoresSafeArea()
-            .onChange(of: router.routes) { newRoutes in
-                print("TitleHeader: ROUTER CHANGED")
-            }
         }
-        
+
     }
 }
