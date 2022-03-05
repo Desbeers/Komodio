@@ -37,10 +37,11 @@ extension ItemsView {
                 LazyVStack(spacing: 0) {
                     content
                 }
-                /// On macOS, give it some padding because the TitleHeader is on top
+                /// On macOS, give it some padding because the `TitleHeader` is on top in a `ZStack`
                 .macOS { $0.padding(.top, 60)}
-                /// Move the first row below the tabs on tvOS
-                .tvOS { $0.padding(.top, router.routes.count == 1 ? 160 : 0) }
+                /// Move the content below the tabs on tvOS
+                /// - Note: Padding is the space needed by the `TitleHeader` above to avoid jumping
+                .tvOS { $0.padding(.top, router.routes.count == 1 ? 206 : 0) }
             }
             .tvOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea() }
             .macOS { $0.ignoresSafeArea() }

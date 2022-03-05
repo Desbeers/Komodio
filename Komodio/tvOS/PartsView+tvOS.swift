@@ -17,21 +17,17 @@ extension PartsView {
         @EnvironmentObject var router: Router
         /// The View
         var body: some View {
-            VStack(alignment: .leading) {
-                if let subtitle = router.subtitle {
-                    Text(subtitle)
-                        .padding(.leading, 2)
-                        .font(.subheadline)
-                } else {
-                    Text(" ")
-                }
+            VStack(alignment: .leading, spacing: 0) {
+                Text(router.subtitle ?? " ")
+                    .padding(.leading, 2)
+                    .font(.subheadline)
                 Text(router.title)
                     .font(.title)
             }
             .animation(.default, value: router.title)
             .padding(.leading, 60)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 160)
+            .frame(height: 180)
             .background(.ultraThinMaterial)
         }
     }

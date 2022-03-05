@@ -91,6 +91,8 @@ extension PlayerView {
     /// - On macOS, the player will open in a new Window
     /// - On tvOS and iOS it is just another NavigationLink for the stack
     struct Link<Label: View, Destination: View>: View {
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
         /// The Kodi item we want to play
@@ -117,7 +119,7 @@ extension PlayerView {
             })
                 .keyboardShortcut(.defaultAction)
 #else
-            NavigationLink(destination: destination) {
+            NavigationLink(destination: destination.onAppear { router.push(Route.player) }) {
                 label
             }
             .padding()
