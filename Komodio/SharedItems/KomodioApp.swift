@@ -19,11 +19,15 @@ import SwiftlyKodiAPI
     var body: some Scene {
         WindowGroup {
             RootView()
-                .task {
-                    kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
-                }
             .environmentObject(kodi)
             .ignoresSafeArea()
+            .task {
+                print("Scene task!")
+                if kodi.media.isEmpty {
+                    debugPrint("Ask to load the library")
+                    await kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+                }
+            }
         }
 #if os(macOS)
         //.windowToolbarStyle(.unifiedCompact(showsTitle: true))

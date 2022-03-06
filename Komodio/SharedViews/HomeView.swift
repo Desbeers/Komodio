@@ -63,7 +63,9 @@ extension HomeView {
             HStack {
                 /// On macOS, the reload button is in the toolbar, so no need here
                 Button(action: {
-                    kodi.reloadHost()
+                    Task {
+                        await kodi.reloadHost()
+                    }
                 }, label: {
                     Text("Reload Library")
                 })

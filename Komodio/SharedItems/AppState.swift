@@ -22,9 +22,9 @@ final class AppState: ObservableObject {
     @Published var hoveredMediaItem: MediaItem?
     /// Init the AppState class
     /// - Set the IP address for the Kodo host
-    init() {
-        kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
-    }
+//    init() {
+//        kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+//    }
     
     //var filter = KodiFilter(media: .none)
     //@Published var filter = KodiFilter(media: .none)

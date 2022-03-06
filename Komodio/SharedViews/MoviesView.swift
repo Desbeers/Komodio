@@ -85,32 +85,9 @@ extension MoviesView {
         /// The View
         var body: some View {
             RouterLink(item: .moviesSet(set: movieSet)) {
-                HStack(spacing: 0) {
-                    ArtView.PosterList(poster: movieSet.poster)
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(movieSet.title)
-                                .font(.headline)
-                            Spacer()
-//                            Text(movie.setInfo.genres)
-//                                .font(.caption)
-                        }
-//                        Text("\(movie.setInfo.count) movies")
-//                            .font(.caption.italic())
-                        Divider()
-                        Text(movieSet.description.isEmpty ? "Movie Set" : movieSet.description)
-                            .lineLimit(2)
-//                        Divider()
-//                        Text(movie.setInfo.movies)
-//                            .font(.caption)
-//                            .lineLimit(1)
-                    }
-                    .padding(.horizontal)
-                }
+                ItemsView.Basic(item: movieSet.binding())
             }
             .buttonStyle(ButtonStyles.MediaItem(item: movieSet))
         }
     }
-    
-    
 }
