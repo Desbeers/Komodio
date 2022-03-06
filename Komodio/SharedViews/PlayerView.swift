@@ -16,7 +16,7 @@ struct PlayerView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Video item we want to play
-    let video: KodiItem
+    let video: MediaItem
     /// The presentation mode
     /// - Note: Need this to go back a View on iOS after the video has finnished
     @Environment(\.presentationMode) var presentationMode
@@ -42,11 +42,11 @@ extension PlayerView {
     /// and act after a video has finnised playing
     struct Wrapper: View {
         /// The video we want to play
-        let video: KodiItem
+        let video: MediaItem
         /// Observe the player
         @StateObject private var playerModel: PlayerModel
         /// Init the Wrapper View
-        init(video: KodiItem, endAction: @escaping () -> Void) {
+        init(video: MediaItem, endAction: @escaping () -> Void) {
             self.video = video
             _playerModel = StateObject(wrappedValue: PlayerModel(video: video, endAction: endAction))
         }
@@ -68,9 +68,9 @@ extension PlayerView {
             /// Bool if the video has completed or not
             @Published var completed: Bool = false
             /// Init the PlayerModel class
-            init(video: KodiItem, endAction: @escaping () -> Void) {
+            init(video: MediaItem, endAction: @escaping () -> Void) {
                 /// Setup the player
-                let playerItem = AVPlayerItem(url: video.fileURL)
+                let playerItem = AVPlayerItem(url: video.file)
 #if os(tvOS)
                 /// tvOS can add aditional info to the player
                 playerItem.externalMetadata = createMetadataItems(video: video)
@@ -96,13 +96,13 @@ extension PlayerView {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
         /// The Kodi item we want to play
-        private var item: KodiItem
+        private var item: MediaItem
         /// The label for the link; it is a View
         private var label: Label
         /// Thej View destinatiomn for the link
         private var destination: Destination
         /// Create a `label` and `destination`
-        init(item: KodiItem, destination: Destination, @ViewBuilder label: () -> Label) {
+        init(item: MediaItem, destination: Destination, @ViewBuilder label: () -> Label) {
             self.item = item
             self.label = label()
             self.destination = destination

@@ -29,11 +29,11 @@ extension ButtonStyles {
     }
     
     /// Button style for a Kodi item
-    struct KodiItem: ButtonStyle {
+    struct MediaItem: ButtonStyle {
         /// The focus state from the environment
         @Environment(\.isFocused) var focused: Bool
         /// The Kodi item
-        var item: SwiftlyKodiAPI.KodiItem
+        var item: SwiftlyKodiAPI.MediaItem
         /// The function to make a button style for a Kodi item
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
@@ -46,7 +46,7 @@ extension ButtonStyles {
                 .padding(.vertical, 30)
                 .onChange(of: focused) { focus in
                     if focus {
-                        AppState.setHoveredKodiItem(item: item)
+                        AppState.setHoveredMediaItem(item: item)
                     }
                 }
                 .scaleEffect(focused ? 1.05 : 1)

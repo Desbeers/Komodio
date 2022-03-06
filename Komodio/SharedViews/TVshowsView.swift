@@ -13,20 +13,18 @@ struct TVshowsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The tv shows we want to show
-    @State var tvshows: [KodiItem] = []
+    @State var tvshows: [MediaItem] = []
     /// The library filter
     @State var filter: KodiFilter
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(kodi.library.filter(filter)) { tvshow in
+            ForEach(kodi.media.filter(KodiFilter(media: .tvshow))) { tvshow in
                 Item(tvshow: tvshow.binding())
             }
         }
         .task {
             print("TVshowView task!")
-            /// Filter the movies
-            tvshows = kodi.library.filter(KodiFilter(media: .tvshow))
         }
     }
 }
@@ -36,13 +34,13 @@ extension TVshowsView {
     /// View a TV show item
     struct Item: View {
         /// The TV show item
-        @Binding var tvshow: KodiItem
+        @Binding var tvshow: MediaItem
         /// The View
         var body: some View {
             RouterLink(item: .episodes(tvshow: tvshow)) {
                 ItemsView.Basic(item: tvshow.binding())
             }
-            .buttonStyle(ButtonStyles.KodiItem(item: tvshow))
+            .buttonStyle(ButtonStyles.MediaItem(item: tvshow))
         }
     }
 }

@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 
 struct DetailsView: View {
     /// The Kodi item for the details
-    @Binding var item: KodiItem
+    @Binding var item: MediaItem
     /// The View
     var body: some View {
         VStack(spacing: 0) {
@@ -49,7 +49,7 @@ struct DetailsView: View {
                     .padding(.vertical)
                 /// Details
                 VStack(alignment: .leading) {
-                    Text(item.genres)
+                    Text(item.genres.joined(separator: "・"))
                     Text("Duration: \(item.duration)")
                     Text("Released: \(item.releaseDate, style: .date)")
                     Spacer()

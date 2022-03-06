@@ -13,10 +13,10 @@ struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// Library loading state
-    @State var libraryLoaded: Bool = false
+    @State var mediaLoaded: Bool = false
     var body: some View {
         VStack {
-            if libraryLoaded {
+            if mediaLoaded {
                 Items()
             } else {
                 LoadingView()
@@ -24,11 +24,11 @@ struct HomeView: View {
         }
         .task {
             print("HomeView Task!")
-            libraryLoaded = kodi.library.isEmpty ? false : true
+            mediaLoaded = kodi.media.isEmpty ? false : true
         }
-        .onChange(of: kodi.library) { newLibrary in
+        .onChange(of: kodi.media) { newMedia in
             print("Library changed")
-            libraryLoaded = newLibrary.isEmpty ? false : true
+            mediaLoaded = newMedia.isEmpty ? false : true
         }
     }
 }
@@ -54,7 +54,7 @@ extension HomeView {
             .tvOS { $0.ignoresSafeArea(.all) }
             .task {
                 print("HomeView.Items task!")
-                items = getHomeItems(library: kodi.library)
+                items = getHomeItems()
             }
         }
         /// A library 'reload' button
@@ -77,16 +77,16 @@ extension HomeView {
         }
         
         /// Get the home items
-        private func getHomeItems(library: [KodiItem]) -> HomeItems {
-            return HomeItems(movies: Array(library
+        private func getHomeItems() -> HomeItems {
+            return HomeItems(movies: Array(kodi.media
                                                 .filter { $0.media == .movie && $0.playcount == 0 }
                                                 .sorted { $0.dateAdded > $1.dateAdded }
                                                 .prefix(10)),
-                              musicvideos: Array(library
+                             musicvideos: Array(kodi.media
                                                     .filter { $0.media == .musicvideo && !$0.poster.isEmpty }
                                                     .shuffled()
                                                     .prefix(10)),
-                              episodes: Array(library
+                             episodes: Array(kodi.media
                                                 .filter { $0.media == .episode && $0.playcount == 0 }
                                                 .sorted { $0.dateAdded > $1.dateAdded }
                                                 .unique { $0.tvshowID }
@@ -104,7 +104,7 @@ extension HomeView {
         /// The title of the row
         let title: String
         /// The Kodi items to show in this row
-        @Binding var items: [KodiItem]
+        @Binding var items: [MediaItem]
         /// The View
         var body: some View {
             VStack(alignment: .leading) {
@@ -129,7 +129,7 @@ extension HomeView {
     /// A Kodi item on the homescreen
     struct Item: View {
         /// The Kodi item
-        @Binding var item: KodiItem
+        @Binding var item: MediaItem
         /// The View
         var body: some View {
             VStack(spacing: 0) {
@@ -154,10 +154,10 @@ extension HomeView {
     /// A struct to collect items for the HomeView
     struct HomeItems: Equatable {
         /// Movie items
-        var movies: [KodiItem] = []
+        var movies: [MediaItem] = []
         /// Music Video items
-        var musicvideos: [KodiItem] = []
+        var musicvideos: [MediaItem] = []
         /// Episode items
-        var episodes: [KodiItem] = []
+        var episodes: [MediaItem] = []
     }
 }

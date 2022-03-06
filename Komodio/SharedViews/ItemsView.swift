@@ -9,7 +9,7 @@ import SwiftUI
 
 import SwiftlyKodiAPI
 
-/// An 'Item' can be any kind of ``KodiItem``; e.g., movie, tvshow, episode etc...
+/// An 'Item' can be any kind of ``MediaItem``; e.g., movie, tvshow, episode etc...
 struct ItemsView {
     /// Just a Namespace here...
 }
@@ -54,8 +54,8 @@ extension ItemsView {
 extension ItemsView {
     
     struct Item: View {
-        /// The ``KodiItem`` to show in this View
-        @Binding var item: KodiItem
+        /// The ``MediaItem`` to show in this View
+        @Binding var item: MediaItem
         var body: some View {
             
             switch item.media {
@@ -69,7 +69,7 @@ extension ItemsView {
                 RouterLink(item: .details(item: item)) {
                     Basic(item: $item)
                 }
-                .buttonStyle(ButtonStyles.KodiItem(item: item))
+                .buttonStyle(ButtonStyles.MediaItem(item: item))
             }
         }
     }
@@ -79,8 +79,8 @@ extension ItemsView {
     
     /// A basic View for a Kodi item
     struct Basic: View {
-        /// The ``KodiItem`` to show in this View
-        @Binding var item: KodiItem
+        /// The ``MediaItem`` to show in this View
+        @Binding var item: MediaItem
         /// The View
         var body: some View {
             HStack(spacing: 0) {

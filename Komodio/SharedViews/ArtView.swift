@@ -119,7 +119,7 @@ extension ArtView {
     /// A View to show the poster of a Kodi item in a detail View
     struct PosterDetail: View {
         /// The Kodi item
-        let item: KodiItem
+        let item: MediaItem
         /// The View
         var body: some View {
             Group {

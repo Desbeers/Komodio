@@ -20,7 +20,7 @@ extension PartsView {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
         /// The item we want to toggle
-        @Binding var item: KodiItem
+        @Binding var item: MediaItem
         /// The View
         var body: some View {
             Button(action: {
@@ -41,7 +41,7 @@ extension PartsView {
     /// A View to show the watched status of a Kodi item
     struct WatchStatusViewModifier: ViewModifier {
         /// The Kodi media item
-        @Binding var item: KodiItem
+        @Binding var item: MediaItem
         /// The modifier
         func body(content: Content) -> some View {
             content

@@ -14,11 +14,11 @@ struct EpisodesView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The TV show item in the library
-    let tvshow: KodiItem
+    let tvshow: MediaItem
     /// The seasons of this TV show
     @State var seasons: [Int] = []
     /// The Episode items to show in this view
-    @State var episodes: [KodiItem] = []
+    @State var episodes: [MediaItem] = []
     /// The View
     var body: some View {
         ItemsView.List() {
@@ -53,7 +53,7 @@ struct EpisodesView: View {
     /// Get the episodes from the Kodi database
     private func getEpisodes() {
         let filter = KodiFilter(media: .episode, tvshowID: tvshow.tvshowID)
-        episodes = kodi.library.filter(filter)
+        episodes = kodi.media.filter(filter)
         /// Group by seasons; specials (season 0) as last
         seasons = episodes.map { $0.season }
         .removingDuplicates()
@@ -66,13 +66,13 @@ extension EpisodesView {
     /// A View to link an episode item to the Details View
     struct Link: View {
         /// The Kodi item we want to link
-        @Binding var item: KodiItem
+        @Binding var item: MediaItem
         /// The link
         var body: some View {
             RouterLink(item: .details(item: item)) {
                 Item(item: $item)
             }
-            .buttonStyle(ButtonStyles.KodiItem(item: item))
+            .buttonStyle(ButtonStyles.MediaItem(item: item))
             .tvOS { $0.frame(width: 1000) }
             .contextMenu {
                 Button(action: {
@@ -87,7 +87,7 @@ extension EpisodesView {
     /// A View for an episode item
     struct Item: View {
         /// The Episode item from the library
-        @Binding var item: KodiItem
+        @Binding var item: MediaItem
         /// The View
         var body: some View {
             VStack(alignment: .leading) {

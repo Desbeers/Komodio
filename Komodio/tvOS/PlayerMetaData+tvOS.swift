@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 /// Create meta data for the video player
 /// - Parameter video: The Kodi video item
 /// - Returns: Meta data for the player
-func createMetadataItems(video: KodiItem) -> [AVMetadataItem] {
+func createMetadataItems(video: MediaItem) -> [AVMetadataItem] {
     /// Helper function
     func createMetadataItem(for identifier: AVMetadataIdentifier, value: Any) -> AVMetadataItem {
         let item = AVMutableMetadataItem()

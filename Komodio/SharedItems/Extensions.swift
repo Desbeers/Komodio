@@ -62,7 +62,7 @@ extension View {
     }
     
     /// Shortcut to the ``WatchStatusViewModifier``
-    func watchStatus(of item: Binding<KodiItem>) -> some View {
+    func watchStatus(of item: Binding<MediaItem>) -> some View {
         modifier(PartsView.WatchStatusViewModifier(item: item))
     }
     

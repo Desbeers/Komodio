@@ -11,14 +11,14 @@ import SwiftlyKodiAPI
 enum Route: Equatable, Hashable {
     case home
     case movies
-    case moviesSet(set: KodiItem.MovieSetItem)
+    case moviesSet(set: MediaItem)
     case tvshows
-    case episodes(tvshow: KodiItem)
+    case episodes(tvshow: MediaItem)
     case musicVideos
-    case musicVideosItems(artist: KodiItem)
+    case musicVideosItems(artist: MediaItem)
     case genres
     case genresItems(genre: GenreItem)
-    case details(item: KodiItem)
+    case details(item: MediaItem)
     case player
     case table
     /// The items to show in the NavbarView

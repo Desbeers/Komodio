@@ -19,7 +19,7 @@ final class AppState: ObservableObject {
     /// The selected item in the sidebar of the application
     @Published var sidebarSelection: Int?
     /// The selected item in the sidebar of the application
-    @Published var hoveredKodiItem: KodiItem?
+    @Published var hoveredMediaItem: MediaItem?
     /// Init the AppState class
     /// - Set the IP address for the Kodo host
     init() {
@@ -32,9 +32,9 @@ final class AppState: ObservableObject {
     
     /// Set the hovered Kodi item from the UI to the published Var
     /// - Parameter item: The Kodi item
-    static func setHoveredKodiItem(item: KodiItem?) {
+    static func setHoveredMediaItem(item: MediaItem?) {
         Task { @MainActor in
-            AppState.shared.hoveredKodiItem = item
+            AppState.shared.hoveredMediaItem = item
         }
     }
 }

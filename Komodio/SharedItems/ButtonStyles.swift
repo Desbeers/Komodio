@@ -45,13 +45,13 @@ extension ButtonStyles {
 extension ButtonStyles {
     
     /// Button style for a Kodi item
-    struct KodiItem: ButtonStyle {
+    struct MediaItem: ButtonStyle {
         /// The focus state from the environment
         @Environment(\.isFocused) var focused: Bool
         /// Is the button hovered or not
         @State private var isHovered = false
         /// The Kodi item
-        var item: SwiftlyKodiAPI.KodiItem
+        var item: SwiftlyKodiAPI.MediaItem
         /// The function to make a button style for a Kodi item
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
@@ -83,7 +83,7 @@ extension ButtonStyles {
             /// Is the button hovered or not
             @State private var isHovered = false
             /// The configaration of the Button
-            let configuration: ButtonStyles.KodiItem.Configuration
+            let configuration: ButtonStyles.MediaItem.Configuration
             /// The View
             var body: some View {
                 configuration.label
