@@ -1,6 +1,6 @@
 project: Komodio.xcodeproj
 retain_public: true
 schemes:
-- Komodio-macOS
+- Komodio (macOS)
 targets:
-- Komodio
+- Komodio (macOS)

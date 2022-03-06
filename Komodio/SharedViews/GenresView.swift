@@ -24,9 +24,9 @@ struct GenresView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 30) {
-                ForEach(kodi.genres) { genre in
+                ForEach(kodi.media.filter(KodiFilter(media: .genre))) { genre in
                     RouterLink(item: .genresItems(genre: genre)) {
-                        Label(genre.label, systemImage: genre.symbol)
+                        Label(genre.title, systemImage: genre.poster)
                             .labelStyle(LabelStyles.GridItem())
                             .tvOS { $0.frame(width: 260, height: 120) }
                             .macOS { $0.frame(width: 130, height: 60) }
@@ -51,11 +51,11 @@ extension GenresView {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
         /// The selected Genre to filter
-        let genre: GenreItem
+        let genre: MediaItem
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(KodiFilter(media: .all, genre: genre.label))) { item in
+                ForEach(kodi.media.filter(KodiFilter(media: .all, genre: genre.title))) { item in
                     ItemsView.Item(item: item.binding())
                 }
             }

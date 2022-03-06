@@ -17,7 +17,7 @@ enum Route: Equatable, Hashable {
     case musicVideos
     case musicVideosItems(artist: MediaItem)
     case genres
-    case genresItems(genre: GenreItem)
+    case genresItems(genre: MediaItem)
     case details(item: MediaItem)
     case player
     case table
@@ -47,7 +47,7 @@ extension Route {
         case .genres:
             return "Genres"
         case .genresItems(let genre):
-            return genre.label
+            return genre.title
         case .details(let item):
             return item.title
         case .player:

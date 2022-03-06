@@ -61,6 +61,8 @@ extension ItemsView {
             switch item.media {
             case .movie:
                 MoviesView.Item(movie: $item)
+            case .movieSet:
+                MoviesView.SetItem(movieSet: item)
             case .tvshow:
                 TVshowsView.Item(tvshow: $item)
             case .musicvideo:

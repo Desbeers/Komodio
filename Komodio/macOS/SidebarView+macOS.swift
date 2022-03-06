@@ -35,11 +35,9 @@ extension SidebarView {
     }
     
     var genres: some View {
-        ForEach(kodi.genres) { genre in
-            if let genreItem = kodi.genres.first(where: { $0.genreID == genre.genreID } ) {
-                Label(genre.label, systemImage: genre.symbol)
-                    .tag(Route.genresItems(genre: genreItem))
-            }
+        ForEach(kodi.media.filter(KodiFilter(media: .genre))) { genre in
+            Label(genre.title, systemImage: genre.poster)
+                .tag(Route.genresItems(genre: genre))
         }
     }
 }
