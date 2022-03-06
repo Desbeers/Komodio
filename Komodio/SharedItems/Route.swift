@@ -100,8 +100,6 @@ extension Route {
             fanart = tvshow.fanart
         case .musicVideosItems(let artist):
             fanart = artist.fanart
-        case .details(let item):
-            fanart = item.fanart.isEmpty ? item.poster : item.fanart
         default:
             break
         }
