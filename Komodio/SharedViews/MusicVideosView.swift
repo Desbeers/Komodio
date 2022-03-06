@@ -59,7 +59,9 @@ extension MusicVideosView {
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(KodiFilter(media: .musicvideo, artist: artist.artists))) { musicvideo in
+                ForEach(kodi
+                            .media.filter(KodiFilter(media: .musicvideo, artist: artist.artists))
+                ) { musicvideo in
                     ItemsView.Item(item: musicvideo.binding())
                 }
             }
@@ -68,14 +70,66 @@ extension MusicVideosView {
             }
         }
     }
-    
+
+    /// A View for one Music Video Item
     struct Item: View {
         @Binding var musicvideo: MediaItem
         var body: some View {
-            RouterLink(item: .details(item: musicvideo)) {
-                ItemsView.Basic(item: $musicvideo)
+            if musicvideo.album.isEmpty {
+                RouterLink(item: .details(item: musicvideo)) {
+                    ItemsView.Basic(item: $musicvideo)
+                }
+                .buttonStyle(ButtonStyles.MediaItem(item: musicvideo))
+            } else {
+                AlbumItem(album: musicvideo)
             }
-            .buttonStyle(ButtonStyles.MediaItem(item: musicvideo))
+        }
+    }
+    
+    struct Album: View {
+        /// The KodiConnector model
+        @EnvironmentObject var kodi: KodiConnector
+        /// The album item for this View
+        let album: MediaItem
+        /// The View
+        var body: some View {
+            ItemsView.List() {
+                ForEach(kodi.media.filter(KodiFilter(media: .musicvideo,
+                                                     artist: album.artists,
+                                                     album: album.album)
+                                         )
+                ) { movie in
+                    RouterLink(item: .details(item: movie)) {
+                        ItemsView.Basic(item: movie.binding())
+                    }
+                    .buttonStyle(ButtonStyles.MediaItem(item: movie))
+                }
+            }
+            .task {
+                print("MoviesView.Set task!")
+            }
+        }
+    }
+    
+    /// A View for an album item
+    struct AlbumItem: View {
+        /// The Movie Set item from the library
+        let album: MediaItem
+        /// The View
+        var body: some View {
+            RouterLink(item: .musicVideosAlbum(album: album)) {
+                HStack {
+                    ArtView.PosterList(poster: album.poster)
+                    VStack {
+                        Text(album.album)
+                            .font(.title)
+                        Divider()
+                        Text(album.artists.joined(separator: " & "))
+                    }
+                }
+                //ItemsView.Basic(item: movieSet.binding())
+            }
+            .buttonStyle(ButtonStyles.MediaItem(item: album))
         }
     }
 }

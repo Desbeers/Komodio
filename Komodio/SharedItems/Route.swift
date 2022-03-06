@@ -16,6 +16,7 @@ enum Route: Equatable, Hashable {
     case episodes(tvshow: MediaItem)
     case musicVideos
     case musicVideosItems(artist: MediaItem)
+    case musicVideosAlbum(album: MediaItem)
     case genres
     case genresItems(genre: MediaItem)
     case details(item: MediaItem)
@@ -44,6 +45,8 @@ extension Route {
             return "Music Videos"
         case .musicVideosItems(let artist):
             return artist.title
+        case .musicVideosAlbum(let album):
+            return album.album
         case .genres:
             return "Genres"
         case .genresItems(let genre):
@@ -100,6 +103,8 @@ extension Route {
             fanart = tvshow.fanart
         case .musicVideosItems(let artist):
             fanart = artist.fanart
+        case .musicVideosAlbum(let album):
+            fanart = album.fanart
         default:
             break
         }
@@ -110,7 +115,6 @@ extension Route {
 extension Route {
     
     @ViewBuilder var destination: some View {
-    //@ViewBuilder func destination() -> some View {
         switch self {
         case .home:
             HomeView()
@@ -124,11 +128,14 @@ extension Route {
         case .episodes(let tvshow):
             EpisodesView(tvshow: tvshow)
         
+            /// # Music Videos
+            
         case .musicVideos:
             MusicVideosView()
         case .musicVideosItems(let artist):
             MusicVideosView.Items(artist: artist)
-        
+        case .musicVideosAlbum(let album):
+            MusicVideosView.Album(album: album)
         
         case .genres:
             GenresView()
