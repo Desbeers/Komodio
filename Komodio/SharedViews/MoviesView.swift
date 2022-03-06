@@ -13,8 +13,6 @@ import SwiftlyKodiAPI
 struct MoviesView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The movies we want to show
-    @State var movies: [MediaItem] = []
     /// The View
     var body: some View {
         ItemsView.List() {
@@ -57,8 +55,6 @@ extension MoviesView {
         @EnvironmentObject var kodi: KodiConnector
         /// The Set item for this View
         let set: MediaItem
-        /// The movies we want to show
-        @State var movies: [MediaItem] = []
         /// The View
         var body: some View {
             ItemsView.List() {

@@ -12,17 +12,15 @@ import SwiftlyKodiAPI
 struct MusicVideosView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The Music Video items to show in this view
-    @State var musicvideos: [MediaItem] = []
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(kodi.media.filter(KodiFilter(media: .musicvideo))) { musicvideo in
-                let artist = kodi.getArtistInfo(artist: musicvideo.artists)
+            ForEach(kodi.media.filter(KodiFilter(media: .musicVideoArtist))) { artist in
+                //let artist = kodi.getArtistInfo(artist: musicvideo.artists)
                 RouterLink(item: .musicVideosItems(artist: artist)) {
                     Artist(artist: artist)
                 }
-                .buttonStyle(ButtonStyles.MediaItem(item: musicvideo))
+                .buttonStyle(ButtonStyles.MediaItem(item: artist))
             }
         }
         .task {

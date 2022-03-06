@@ -12,10 +12,6 @@ import SwiftlyKodiAPI
 struct TVshowsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The tv shows we want to show
-    @State var tvshows: [MediaItem] = []
-    /// The library filter
-    @State var filter: KodiFilter
     /// The View
     var body: some View {
         ItemsView.List() {

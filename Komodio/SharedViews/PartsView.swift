@@ -17,8 +17,6 @@ extension PartsView {
     
     /// A Button to toggle the watched status of a Kodi item
     struct WatchedToggle: View {
-        /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
         /// The item we want to toggle
         @Binding var item: MediaItem
         /// The View

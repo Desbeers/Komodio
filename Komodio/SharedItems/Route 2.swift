@@ -11,18 +11,17 @@ import SwiftlyKodiAPI
 enum Route: Equatable, Hashable {
     case home
     case movies
-    case moviesSet(set: MediaItem)
+    case moviesSet(set: KodiItem.MovieSetItem)
     case tvshows
-    case episodes(tvshow: MediaItem)
+    case episodes(tvshow: KodiItem)
     case musicVideos
-    case musicVideosItems(artist: MediaItem)
+    case musicVideosItems(artist: KodiItem)
     case genres
-    case genresItems(genre: MediaItem)
-    case details(item: MediaItem)
+    case genresItems(genre: GenreItem)
+    case details(item: KodiItem)
     case player
-    case table
     /// The items to show in the NavbarView
-    static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, genres, table]
+    static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, genres]
 }
 
 extension Route {
@@ -47,13 +46,11 @@ extension Route {
         case .genres:
             return "Genres"
         case .genresItems(let genre):
-            return genre.title
+            return genre.label
         case .details(let item):
             return item.title
         case .player:
             return "Player"
-        case .table:
-            return "Debug Table"
         }
     }
 }
@@ -77,8 +74,6 @@ extension Route {
             return "Genres Items"
         case .details(let item):
             return item.title
-        case .table:
-            return "testtube.2"
         default:
             return "questionmark"
         }
@@ -100,6 +95,8 @@ extension Route {
             fanart = tvshow.fanart
         case .musicVideosItems(let artist):
             fanart = artist.fanart
+        case .details(let item):
+            fanart = item.fanart
         default:
             break
         }
@@ -120,12 +117,12 @@ extension Route {
             MoviesView.Set(set: set)
         
         case .tvshows:
-            TVshowsView()
+            TVshowsView(filter: KodiFilter(media: .tvshow))
         case .episodes(let tvshow):
             EpisodesView(tvshow: tvshow)
         
         case .musicVideos:
-            MusicVideosView()
+            MusicVideosView(filter: KodiFilter(media: .musicvideo))
         case .musicVideosItems(let artist):
             MusicVideosView.Items(artist: artist)
         
@@ -136,12 +133,8 @@ extension Route {
             GenresView.Items(genre: genre)
         case .details(let item):
             DetailsView(item: item.binding())
-#if os(macOS)
-        case .table:
-            TableView()
-#endif
         default:
-            Text("Not implemented")
+            Text("TODO")
         }
     }
 }
