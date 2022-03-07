@@ -24,7 +24,7 @@ struct PlayerView: View {
     var body: some View {
         Wrapper(video: video) {
             /// # Actions after a video has finnished
-            /// Mark the video as watched
+            /// Mark the video as played
             video.markAsPlayed()
             /// Go back a View on tvOS or iOS; macOS ignores this
             presentationMode.wrappedValue.dismiss()
