@@ -16,7 +16,6 @@ struct MusicVideosView: View {
     var body: some View {
         ItemsView.List() {
             ForEach(kodi.media.filter(MediaFilter(media: .musicVideoArtist))) { artist in
-                //let artist = kodi.getArtistInfo(artist: musicvideo.artists)
                 RouterLink(item: .musicVideosItems(artist: artist)) {
                     Artist(artist: artist)
                 }

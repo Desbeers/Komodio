@@ -22,7 +22,7 @@ extension PartsView {
         /// The View
         var body: some View {
             Button(action: {
-                item.toggleWatchedState()
+                item.togglePlayedState()
             }, label: {
                 Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
                     .macOS { $0.frame(width: 110) }

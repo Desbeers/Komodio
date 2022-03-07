@@ -108,7 +108,7 @@ extension ItemsView {
             .watchStatus(of: $item)
             .contextMenu {
                 Button(action: {
-                    item.toggleWatchedState()
+                    item.togglePlayedState()
                 }, label: {
                     Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
                 })

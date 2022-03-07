@@ -23,7 +23,10 @@ import SwiftlyKodiAPI
             .ignoresSafeArea()
             .task {
                 print("Scene task!")
-                await kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+                if kodi.media.isEmpty {
+                    debugPrint("Ask to load the library")
+                    await kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+                }
             }
         }
 #if os(macOS)
