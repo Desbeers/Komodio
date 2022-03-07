@@ -32,6 +32,7 @@ struct DetailsView: View {
                     }
                     /// Description
                     Text(item.description)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer()
                     /// Buttons
                     HStack {
