@@ -91,11 +91,11 @@ public struct StackNavItem<Destination, V: Hashable> : View where Destination : 
 
 public struct StackNavLink<Label: View, Destination: View>: View {
     private var path: String
-    private var filter: KodiFilter
+    private var filter: MediaFilter
     private var label: Label
     private var destination: Destination
     /// Init the StackNavLink
-    public init(path: String, filter: KodiFilter, destination: Destination, @ViewBuilder label: () -> Label) {
+    public init(path: String, filter: MediaFilter, destination: Destination, @ViewBuilder label: () -> Label) {
         self.path = path
         self.filter = filter
         self.label = label()

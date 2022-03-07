@@ -24,7 +24,7 @@ struct GenresView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 30) {
-                ForEach(kodi.media.filter(KodiFilter(media: .genre))) { genre in
+                ForEach(kodi.media.filter(MediaFilter(media: .genre))) { genre in
                     RouterLink(item: .genresItems(genre: genre)) {
                         Label(genre.title, systemImage: genre.poster)
                             .labelStyle(LabelStyles.GridItem())
@@ -55,7 +55,7 @@ extension GenresView {
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(KodiFilter(media: .all, genre: genre.title))) { item in
+                ForEach(kodi.media.filter(MediaFilter(media: .all, genre: genre.title))) { item in
                     ItemsView.Item(item: item.binding())
                 }
             }

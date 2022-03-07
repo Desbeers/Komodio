@@ -52,7 +52,7 @@ struct EpisodesView: View {
     }
     /// Get the episodes from the Kodi database
     private func getEpisodes() {
-        let filter = KodiFilter(media: .episode, tvshowID: tvshow.tvshowID)
+        let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
         episodes = kodi.media.filter(filter)
         /// Group by seasons; specials (season 0) as last
         seasons = episodes.map { $0.season }

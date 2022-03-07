@@ -35,7 +35,7 @@ extension SidebarView {
     }
     
     var genres: some View {
-        ForEach(kodi.media.filter(KodiFilter(media: .genre))) { genre in
+        ForEach(kodi.media.filter(MediaFilter(media: .genre))) { genre in
             Label(genre.title, systemImage: genre.poster)
                 .tag(Route.genresItems(genre: genre))
         }

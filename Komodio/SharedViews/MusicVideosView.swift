@@ -15,7 +15,7 @@ struct MusicVideosView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(kodi.media.filter(KodiFilter(media: .musicVideoArtist))) { artist in
+            ForEach(kodi.media.filter(MediaFilter(media: .musicVideoArtist))) { artist in
                 //let artist = kodi.getArtistInfo(artist: musicvideo.artists)
                 RouterLink(item: .musicVideosItems(artist: artist)) {
                     Artist(artist: artist)
@@ -60,7 +60,7 @@ extension MusicVideosView {
         var body: some View {
             ItemsView.List() {
                 ForEach(kodi
-                            .media.filter(KodiFilter(media: .musicvideo, artist: artist.artists))
+                            .media.filter(MediaFilter(media: .musicvideo, artist: artist.artists))
                 ) { musicvideo in
                     ItemsView.Item(item: musicvideo.binding())
                 }
@@ -94,7 +94,7 @@ extension MusicVideosView {
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(KodiFilter(media: .musicvideo,
+                ForEach(kodi.media.filter(MediaFilter(media: .musicvideo,
                                                      artist: album.artists,
                                                      album: album.album)
                                          )

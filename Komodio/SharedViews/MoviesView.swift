@@ -16,7 +16,7 @@ struct MoviesView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(kodi.media.filter(KodiFilter(media: .movie))) { movie in
+            ForEach(kodi.media.filter(MediaFilter(media: .movie))) { movie in
                 ItemsView.Item(item: movie.binding())
             }
         }
@@ -61,7 +61,7 @@ extension MoviesView {
                 if !set.description.isEmpty {
                     ItemsView.Description(description: set.description)
                 }
-                ForEach(kodi.media.filter(KodiFilter(media: .movie, setID: set.movieSetID))) { movie in
+                ForEach(kodi.media.filter(MediaFilter(media: .movie, setID: set.movieSetID))) { movie in
                     RouterLink(item: .details(item: movie)) {
                         ItemsView.Basic(item: movie.binding())
                     }

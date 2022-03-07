@@ -52,7 +52,7 @@ struct DetailsView: View {
                 VStack(alignment: .leading) {
                     Text(item.genres.joined(separator: "・"))
                     Text("Duration: \(item.duration)")
-                    Text("Released: \(item.releaseDate, style: .date)")
+                    Text("Released: \(item.releaseDate.kodiDate(), style: .date)")
                     Spacer()
                 }
                 .font(.caption)

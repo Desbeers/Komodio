@@ -15,7 +15,7 @@ struct TVshowsView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            ForEach(kodi.media.filter(KodiFilter(media: .tvshow))) { tvshow in
+            ForEach(kodi.media.filter(MediaFilter(media: .tvshow))) { tvshow in
                 Item(tvshow: tvshow.binding())
             }
         }

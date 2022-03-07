@@ -9,7 +9,7 @@ import SwiftUI
 import AVKit
 import SwiftlyKodiAPI
 
-extension KodiMedia {
+extension MediaType {
     var color: Color {
         switch self {
         case .movie:
