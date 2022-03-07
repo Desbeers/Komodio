@@ -106,7 +106,7 @@ extension MusicVideosView {
                 }
             }
             .task {
-                print("MoviesView.Set task!")
+                print("MusicVideosView.Album task!")
             }
         }
     }
@@ -120,11 +120,13 @@ extension MusicVideosView {
             RouterLink(item: .musicVideosAlbum(album: album)) {
                 HStack {
                     ArtView.PosterList(poster: album.poster)
-                    VStack {
+                    VStack(alignment: .leading) {
                         Text(album.album)
-                            .font(.title)
-                        Divider()
+                            .font(.headline)
                         Text(album.artists.joined(separator: " & "))
+                            .font(.caption.italic())
+                        Divider()
+                        Text("Album with Music Videos")
                     }
                 }
                 //ItemsView.Basic(item: movieSet.binding())
