@@ -34,7 +34,6 @@ extension TVshowsView {
         /// The View
         var body: some View {
             RouterLink(item: .episodes(tvshow: tvshow)) {
-                Text(tvshow.episode.description)
                 ItemsView.Basic(item: tvshow.binding())
             }
             .buttonStyle(ButtonStyles.MediaItem(item: tvshow))
