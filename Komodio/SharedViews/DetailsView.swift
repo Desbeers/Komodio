@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 
 struct DetailsView: View {
     /// The Kodi item for the details
-    @Binding var item: MediaItem
+    @State var item: MediaItem
     /// The View
     var body: some View {
         VStack(spacing: 0) {
@@ -36,7 +36,7 @@ struct DetailsView: View {
                     Spacer()
                     /// Buttons
                     HStack {
-                        PlayerView.Link(item: item, destination: PlayerView(video: item)) {
+                        PlayerView.Link(item: item, destination: PlayerView(video: $item)) {
                             Text("Play")
                         }
                         PartsView.WatchedToggle(item: $item)

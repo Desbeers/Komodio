@@ -142,7 +142,7 @@ extension Route {
         case .genresItems(let genre):
             GenresView.Items(genre: genre)
         case .details(let item):
-            DetailsView(item: item.binding())
+            DetailsView(item: item)
 #if os(macOS)
         case .table:
             TableView()
