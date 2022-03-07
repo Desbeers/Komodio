@@ -61,7 +61,10 @@ extension MoviesView {
                 if !set.description.isEmpty {
                     ItemsView.Description(description: set.description)
                 }
-                ForEach(kodi.media.filter(MediaFilter(media: .movie, setID: set.movieSetID))) { movie in
+                ForEach(kodi.media.filter(MediaFilter(media: .movie,
+                                                      movieSetID: set.movieSetID)
+                                         )
+                ) { movie in
                     RouterLink(item: .details(item: movie)) {
                         ItemsView.Basic(item: movie.binding())
                     }
