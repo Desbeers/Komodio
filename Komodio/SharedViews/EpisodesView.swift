@@ -45,7 +45,7 @@ struct EpisodesView: View {
             }
         }
         .task {
-            print("EpisodesView task!")
+            logger("EpisodesView task!")
             /// Filter the episodes
             let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
             episodes = kodi.media.filter(filter)

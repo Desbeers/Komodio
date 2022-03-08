@@ -75,7 +75,7 @@ struct DetailsView: View {
                 .iOS { $0.edgesIgnoringSafeArea(.bottom) }
         }
         .task {
-            print("DetailsView task!")
+            logger("DetailsView task!")
         }
         .tvOS { $0.ignoresSafeArea() }
         .macOS { $0.ignoresSafeArea() }

@@ -21,7 +21,7 @@ struct MoviesView: View {
             }
         }
         .task {
-            print("MoviesView task!")
+            logger("MoviesView task!")
         }
     }
 }
@@ -72,7 +72,7 @@ extension MoviesView {
                 }
             }
             .task {
-                print("MoviesView.Set task!")
+                logger("MoviesView.Set task!")
             }
         }
     }

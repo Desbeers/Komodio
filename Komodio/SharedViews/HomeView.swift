@@ -23,11 +23,11 @@ struct HomeView: View {
             }
         }
         .task {
-            print("HomeView Task!")
+            logger("HomeView Task!")
             mediaLoaded = kodi.media.isEmpty ? false : true
         }
         .onChange(of: kodi.media) { newMedia in
-            print("Library changed")
+            logger("Library changed")
             mediaLoaded = newMedia.isEmpty ? false : true
         }
     }
@@ -53,7 +53,7 @@ extension HomeView {
             .buttonStyle(ButtonStyles.HomeItem())
             .tvOS { $0.ignoresSafeArea(.all) }
             .task {
-                print("HomeView.Items task!")
+                logger("HomeView.Items task!")
                 items = getHomeItems()
             }
         }

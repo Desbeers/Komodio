@@ -23,7 +23,7 @@ struct MusicVideosView: View {
             }
         }
         .task {
-            print("MusicVideos task!")
+            logger("MusicVideos task!")
         }
     }
 }
@@ -65,7 +65,7 @@ extension MusicVideosView {
                 }
             }
             .task {
-                print("MusicVideos.Items task!")
+                logger("MusicVideos.Items task!")
             }
         }
     }
@@ -105,7 +105,7 @@ extension MusicVideosView {
                 }
             }
             .task {
-                print("MusicVideosView.Album task!")
+                logger("MusicVideosView.Album task!")
             }
         }
     }

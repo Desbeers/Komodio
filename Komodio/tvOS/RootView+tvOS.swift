@@ -22,7 +22,7 @@ struct RootView: View {
         }
         .environmentObject(router)
         .task {
-            print("RootView task!")
+            logger("RootView task!")
         }
     }
 }

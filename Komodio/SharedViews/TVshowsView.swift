@@ -20,7 +20,7 @@ struct TVshowsView: View {
             }
         }
         .task {
-            print("TVshowView task!")
+            logger("TVshowView task!")
         }
     }
 }
