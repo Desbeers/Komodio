@@ -41,6 +41,8 @@ extension MusicVideosView {
                 VStack(alignment: .leading) {
                     Text(artist.title)
                         .font(.headline)
+                    Text(artist.subtitle)
+                        .font(.caption.italic())
                     Divider()
                     Text(artist.description)
                         .lineLimit(2)
