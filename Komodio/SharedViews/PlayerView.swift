@@ -70,7 +70,7 @@ extension PlayerView {
             /// Init the PlayerModel class
             init(video: MediaItem, endAction: @escaping () -> Void) {
                 /// Setup the player
-                let playerItem = AVPlayerItem(url: video.file)
+                let playerItem = AVPlayerItem(url: URL(string: video.file)!)
 #if os(tvOS)
                 /// tvOS can add aditional info to the player
                 playerItem.externalMetadata = createMetadataItems(video: video)
