@@ -16,7 +16,7 @@ struct EpisodesView: View {
     /// The TV show item in the library
     let tvshow: MediaItem
     /// The seasons of this TV show
-    @State var seasons: [Int] = []
+    //@State var seasons: [Int] = []
     /// The Episode items to show in this view
     @State var episodes: [MediaItem] = []
     /// The View
@@ -26,7 +26,7 @@ struct EpisodesView: View {
                 .padding()
             /// More padding for tvOS
                 .tvOS { $0.padding(.horizontal, 60)}
-            ForEach(seasons, id: \.self) { season in
+            ForEach(tvshow.seasons, id: \.self) { season in
                 VStack {
                     Text(season == 0 ? "Specials" : "Season \(season)")
                         .font(.title3)
@@ -47,17 +47,9 @@ struct EpisodesView: View {
         .task {
             print("EpisodesView task!")
             /// Filter the episodes
-            getEpisodes()
+            let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
+            episodes = kodi.media.filter(filter)
         }
-    }
-    /// Get the episodes from the Kodi database
-    private func getEpisodes() {
-        let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
-        episodes = kodi.media.filter(filter)
-        /// Group by seasons; specials (season 0) as last
-        seasons = episodes.map { $0.season }
-        .removingDuplicates()
-        .sorted { ($0 == 0 ? Int.max: $0) < ($1 == 0 ? Int.max : $1) }
     }
 }
 
