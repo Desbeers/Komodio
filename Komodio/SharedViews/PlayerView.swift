@@ -13,8 +13,6 @@ import AVKit
 
 /// A View with the player
 struct PlayerView: View {
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
     /// The Video item we want to play
     @Binding var video: MediaItem
     /// The presentation mode
@@ -41,13 +39,10 @@ extension PlayerView {
     /// A wrapper View around the ``VideoPlayer`` so we can observe it
     /// and act after a video has finnised playing
     struct Wrapper: View {
-        /// The video we want to play
-        let video: MediaItem
         /// Observe the player
         @StateObject private var playerModel: PlayerModel
         /// Init the Wrapper View
         init(video: MediaItem, endAction: @escaping () -> Void) {
-            self.video = video
             _playerModel = StateObject(wrappedValue: PlayerModel(video: video, endAction: endAction))
         }
         /// The View
@@ -65,8 +60,6 @@ extension PlayerView {
         class PlayerModel: ObservableObject {
             /// The AVplayer
             let player: AVPlayer
-            /// Bool if the video has completed or not
-            @Published var completed: Bool = false
             /// Init the PlayerModel class
             init(video: MediaItem, endAction: @escaping () -> Void) {
                 /// Setup the player

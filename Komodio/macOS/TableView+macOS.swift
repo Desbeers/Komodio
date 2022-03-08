@@ -12,8 +12,6 @@ import SwiftlyKodiAPI
 struct TableView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The list of items
-    @State var items: [MediaItem] = []
     /// Sort order for the table
     @State var sortOrder: [KeyPathComparator<MediaItem>] = [ .init(\.title, order: SortOrder.forward)]
     /// The View

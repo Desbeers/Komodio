@@ -36,8 +36,8 @@ func createMetadataItems(video: MediaItem) -> [AVMetadataItem] {
         .commonIdentifierArtwork: artData!.pngData() as Any,
         .commonIdentifierDescription: video.description,
         /// .iTunesMetadataContentRating: "100",
-        .quickTimeMetadataGenre: video.genres,
-        .quickTimeMetadataCreationDate: video.releaseDate
+        .quickTimeMetadataGenre: video.genres.joined(separator: "・"),
+        .quickTimeMetadataCreationDate: video.releaseDate.kodiDate()
     ]
     return mapping.compactMap { createMetadataItem(for: $0, value: $1) }
 }
