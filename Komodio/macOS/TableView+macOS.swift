@@ -13,15 +13,27 @@ struct TableView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// Sort order for the table
-    @State var sortOrder: [KeyPathComparator<MediaItem>] = [ .init(\.title, order: SortOrder.forward)]
+    @State var sortOrder: [KeyPathComparator<MediaItem>] = [ .init(\.media.rawValue, order: SortOrder.forward)]
     /// The View
     var body: some View {
         Table(sortOrder: $sortOrder) {
             TableColumn("Media", value: \.media.rawValue)
-            TableColumn("ID", value: \.id)
+//            TableColumn("ID", value: \.id)
             TableColumn("Title", value: \.title)
+            TableColumn("Playcount", value: \.playcount.description)
+            TableColumn("Rating", value: \.rating.description)
+            //TableColumn("Runtime", value: \.runtime.description)
+            TableColumn("Duration", value: \.duration)
+            TableColumn("Compilation", value: \.compilation.description)
             TableColumn("Subtitle", value: \.subtitle)
-            TableColumn("Description", value: \.description)
+//            TableColumn("artist", value: \.artist) { item in
+//                Text("\(item.artists.description)")
+//            }
+            TableColumn("Sort title", value: \.sorttitle)
+            TableColumn("Details", value: \.details)
+            
+            //TableColumn("Subtitle", value: \.subtitle)
+            //TableColumn("Description", value: \.description)
 //            TableColumn("Playcount", value: \.playcount) { item in
 //                Text("\(item.playcount)")
 //            }
