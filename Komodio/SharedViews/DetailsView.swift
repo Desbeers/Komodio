@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct DetailsView: View {
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
     /// The Kodi item for the details
     @State var item: MediaItem
     /// The View
@@ -75,6 +77,12 @@ struct DetailsView: View {
         }
         .task {
             logger("DetailsView task!")
+        }
+        .onChange(of: kodi.media ) { _ in
+            print("Media changed, update item state")
+            if let update = kodi.media.first(where: { $0.id == item.id} ) {
+                item = update
+            }
         }
         .tvOS { $0.ignoresSafeArea() }
         .macOS { $0.ignoresSafeArea() }
