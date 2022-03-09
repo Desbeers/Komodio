@@ -140,40 +140,40 @@ extension PlayerView {
     /// Create a link to the PlayerView
     /// - On macOS, the player will open in a new Window
     /// - On tvOS and iOS it is just another NavigationLink for the stack
-    struct Link<Label: View, Destination: View>: View {
-        /// The Router model
-        @EnvironmentObject var router: Router
-        /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
-        /// The Kodi item we want to play
-        private var item: MediaItem
-        /// The label for the link; it is a View
-        private var label: Label
-        /// The View destination for the link
-        private var destination: Destination
-        /// Create a `label` and `destination`
-        init(item: MediaItem, destination: Destination, @ViewBuilder label: () -> Label) {
-            self.item = item
-            self.label = label()
-            self.destination = destination
-        }
-        /// The View
-        var body: some View {
-#if os(macOS)
-            Button(action: {
-                destination
-                    .environmentObject(kodi)
-                    .openInWindow(title: item.title, size: NSSize(width: 640, height: 360))
-            }, label: {
-                label
-            })
-                .keyboardShortcut(.defaultAction)
-#else
-            NavigationLink(destination: destination.onAppear { router.push(Route.player) }) {
-                label
-            }
-            .padding()
-#endif
-        }
-    }
+//    struct Link<Label: View, Destination: View>: View {
+//        /// The Router model
+//        @EnvironmentObject var router: Router
+//        /// The KodiConnector model
+//        @EnvironmentObject var kodi: KodiConnector
+//        /// The Kodi item we want to play
+//        private var item: MediaItem
+//        /// The label for the link; it is a View
+//        private var label: Label
+//        /// The View destination for the link
+//        private var destination: Destination
+//        /// Create a `label` and `destination`
+//        init(item: MediaItem, destination: Destination, @ViewBuilder label: () -> Label) {
+//            self.item = item
+//            self.label = label()
+//            self.destination = destination
+//        }
+//        /// The View
+//        var body: some View {
+//#if os(macOS)
+//            Button(action: {
+//                destination
+//                    .environmentObject(kodi)
+//                    .openInWindow(title: item.title, size: NSSize(width: 640, height: 360))
+//            }, label: {
+//                label
+//            })
+//                .keyboardShortcut(.defaultAction)
+//#else
+//            NavigationLink(destination: destination.onAppear { router.push(Route.player) }) {
+//                label
+//            }
+//            .padding()
+//#endif
+//        }
+//    }
 }

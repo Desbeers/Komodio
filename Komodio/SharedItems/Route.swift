@@ -20,12 +20,12 @@ enum Route: Equatable, Hashable {
     case genres
     case genresItems(genre: MediaItem)
     case details(item: MediaItem)
-    case player
+    case player(items: [MediaItem])
     case artists
     case albums(artist: MediaItem)
     case songs(album: MediaItem)
     case table
-    /// The items to show in the NavbarView
+    /// The items to show as main menu items
     static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, artists, genres]
 }
 
@@ -56,8 +56,8 @@ extension Route {
             return genre.title
         case .details(let item):
             return item.title
-        case .player:
-            return "Player"
+        case .player(let items):
+            return items.first?.title ?? "Player"
         case .table:
             return "Debug Table"
         case .artists:
@@ -73,6 +73,7 @@ extension Route {
 extension Route {
     
     /// The SF symbol for the route item
+    /// - Note: Only main menu items need to have a symbol
     var symbol: String {
         switch self {
         case .home:
@@ -161,6 +162,11 @@ extension Route {
             AlbumsView(artist: artist)
         case .songs(let album):
             SongsView(album: album)
+            
+            /// # Player
+        case .player(let items):
+            PlayerView(items: items)
+            
 #if os(macOS)
         case .table:
             TableView()

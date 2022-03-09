@@ -24,22 +24,15 @@ struct SongsView: View {
                         .cornerRadius(9)
                         .shadow(radius: 6)
                         .padding(6)
-                    
-                    PlayerView.Link(item: album, destination: PlayerView(items: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})) {
+                    let items = kodi.media.filter { $0.media == .song && $0.albumID == album.albumID}
+                    RouterLink(item: .player(items: items)) {
                         Text("Play album")
                     }
                     
-//                    Button(action: {
-//                        playAlbum(songs: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})
-//                    }, label: {
+//                    PlayerView.Link(item: album, destination: PlayerView(items: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})) {
 //                        Text("Play album")
-//                    })
-//                    Button(action: {
-//                        //audioPlayer?.advanceToNextItem()
-//                    }, label: {
-//                        Text("Play next song")
-//                    })
-                        //.disabled(audioPlayer?.isPlaying == true ? false : true)
+//                    }
+                    
                     Text(album.description.isEmpty ? "\(album.itemsCount) tracks" : album.description)
                     //VideoPlayer(player: audioPlayer)
                 }
