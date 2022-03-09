@@ -36,20 +36,42 @@ struct PlayerView: View {
 }
 
 extension PlayerView {
+    struct Overlay: View {
+        let item: MediaItem?
+        var body: some View {
+            /// Show art when we are playing audio
+            if let item = item, item.media == .song {
+                ArtView.PosterDetail(item: item)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.black)
+            } else {
+                /// Force macOS to use all space in the window
+                Color.clear
+            }
+        }
+    }
+}
+
+extension PlayerView {
     
     /// A wrapper View around the ``VideoPlayer`` so we can observe it
     /// and act after a video has finnised playing
     struct Wrapper: View {
+        /// The items we want to play
+        let items: [MediaItem]
         /// Observe the player
         @StateObject private var playerModel: PlayerModel
         /// Init the Wrapper View
         init(items: [MediaItem], endAction: @escaping () -> Void) {
             _playerModel = StateObject(wrappedValue: PlayerModel(items: items, endAction: endAction))
+            self.items = items
         }
         /// The View
         var body: some View {
             
-            VideoPlayer(player: playerModel.player)
+            VideoPlayer(player: playerModel.player) {
+                Overlay(item: items.first ?? nil)
+            }
                 .task {
                     /// Check if we are already playing or not
                     if playerModel.player.isPlaying == false {
@@ -127,7 +149,7 @@ extension PlayerView {
         private var item: MediaItem
         /// The label for the link; it is a View
         private var label: Label
-        /// Thej View destinatiomn for the link
+        /// The View destination for the link
         private var destination: Destination
         /// Create a `label` and `destination`
         init(item: MediaItem, destination: Destination, @ViewBuilder label: () -> Label) {
