@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftlyKodiAPI
 
 struct LoadingView: View {
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
     var body: some View {
         VStack {
             Spacer()
@@ -15,8 +18,10 @@ struct LoadingView: View {
                 .font(.title)
             ProgressView()
             Spacer()
+            Text(kodi.loadingState.rawValue)
             Spacer()
         }
+        .animation(.default, value: kodi.loadingState)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         //.fanartBackground(fanart: router.fanart)
     }

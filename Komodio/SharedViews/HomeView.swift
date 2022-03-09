@@ -12,23 +12,13 @@ import SwiftlyKodiAPI
 struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// Library loading state
-    @State var mediaLoaded: Bool = false
     var body: some View {
         VStack {
-            if mediaLoaded {
+            if kodi.loadingState == .done {
                 Items()
             } else {
                 LoadingView()
             }
-        }
-        .task {
-            logger("HomeView Task!")
-            mediaLoaded = kodi.media.isEmpty ? false : true
-        }
-        .onChange(of: kodi.media) { newMedia in
-            logger("Library changed")
-            mediaLoaded = newMedia.isEmpty ? false : true
         }
     }
 }
@@ -61,20 +51,21 @@ extension HomeView {
         var libraryReloadButton: some View {
             /// In a HStack to make it focusable in tvOS
             HStack {
-                /// On macOS, the reload button is in the toolbar, so no need here
                 Button(action: {
+                    logger("Reload request")
                     Task {
                         await kodi.reloadHost()
                     }
                 }, label: {
                     Text("Reload Library")
+                        .padding()
                 })
-                    .buttonStyle(.bordered)
                     .padding(.all, 40)
             }
             .frame(maxWidth: .infinity)
     #if os(tvOS)
             .focusSection()
+            .buttonStyle(.card)
     #endif
         }
         
