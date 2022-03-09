@@ -7,11 +7,15 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+import AVKit
 
 struct SongsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     let album: MediaItem
+    
+    @State var audioPlayer: AVQueuePlayer? = nil
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top, spacing: 0) {
@@ -20,15 +24,19 @@ struct SongsView: View {
                         .cornerRadius(9)
                         .shadow(radius: 6)
                         .padding(6)
-                    HStack {
-                        PlayerView.Link(item: album, destination: PlayerView(video: album.binding())) {
-                            Text("Play album")
-                        }
-                        PlayerView.Link(item: album, destination: PlayerView(video: album.binding())) {
-                            Text("Shuffle album")
-                        }
-                    }
+                    Button(action: {
+                        playAlbum(songs: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})
+                    }, label: {
+                        Text("Play album")
+                    })
+                    Button(action: {
+                        audioPlayer?.advanceToNextItem()
+                    }, label: {
+                        Text("Play next song")
+                    })
+                        .disabled(audioPlayer?.isPlaying == true ? false : true)
                     Text(album.description.isEmpty ? "\(album.itemsCount) tracks" : album.description)
+                    //VideoPlayer(player: audioPlayer)
                 }
 #if os(tvOS)
                 .focusSection()
@@ -41,17 +49,22 @@ struct SongsView: View {
                         .frame(width: .infinity)
                     }
                 }
-//#if os(tvOS)
-//                .focusSection()
-//#endif
             }
             .padding()
         }
         /// On macOS, give it some padding because the `TitleHeader` is on top in a `ZStack`
         .macOS { $0.padding(.top, 60)}
         .ignoresSafeArea()
-        //.buttonStyle(ButtonStyles.HomeItem())
-        //}
+    }
+    func playAlbum(songs: [MediaItem]) {
+        logger("Going to play songs")
+        var items: [AVPlayerItem] = []
         
+        for song in songs {
+            items.append(AVPlayerItem(url: URL(string: song.file)!))
+        }
+        
+        audioPlayer = AVQueuePlayer(items: items)
+        audioPlayer?.play()
     }
 }

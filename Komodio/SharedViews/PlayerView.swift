@@ -69,7 +69,8 @@ extension PlayerView {
                 playerItem.externalMetadata = createMetadataItems(video: video)
 #endif
                 /// Create a new Player
-                player = AVPlayer(playerItem: playerItem)
+                player = AVQueuePlayer(items: [playerItem])
+                //player = AVPlayer(playerItem: playerItem)
                 player.actionAtItemEnd = .none
                 /// Get notifications
                 NotificationCenter
