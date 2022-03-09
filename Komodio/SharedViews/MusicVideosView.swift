@@ -87,6 +87,7 @@ extension MusicVideosView {
         }
     }
     
+    /// View all music videos from an album
     struct Album: View {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector

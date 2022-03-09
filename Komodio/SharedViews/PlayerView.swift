@@ -13,17 +13,18 @@ import AVKit
 
 /// A View with the player
 struct PlayerView: View {
-    /// The Video item we want to play
-    @Binding var video: MediaItem
+    /// The  items we want to play
+    let items: [MediaItem]
     /// The presentation mode
     /// - Note: Need this to go back a View on iOS after the video has finnished
     @Environment(\.presentationMode) var presentationMode
     /// The View
     var body: some View {
-        Wrapper(video: video) {
-            /// # Actions after a video has finnished
-            /// Mark the video as played
-            video.markAsPlayed()
+        Wrapper(items: items) {
+            /// # Actions after a video has finished
+            logger("END OF PLAYLIST")
+            /// Mark the item as played
+            //items.markAsPlayed()
             /// Go back a View on tvOS or iOS; macOS ignores this
             presentationMode.wrappedValue.dismiss()
 #if os(macOS)
@@ -42,11 +43,12 @@ extension PlayerView {
         /// Observe the player
         @StateObject private var playerModel: PlayerModel
         /// Init the Wrapper View
-        init(video: MediaItem, endAction: @escaping () -> Void) {
-            _playerModel = StateObject(wrappedValue: PlayerModel(video: video, endAction: endAction))
+        init(items: [MediaItem], endAction: @escaping () -> Void) {
+            _playerModel = StateObject(wrappedValue: PlayerModel(items: items, endAction: endAction))
         }
         /// The View
         var body: some View {
+            
             VideoPlayer(player: playerModel.player)
                 .task {
                     /// Check if we are already playing or not
@@ -54,29 +56,62 @@ extension PlayerView {
                         playerModel.player.play()
                     }
                 }
+                .onDisappear {
+                    playerModel.player.removeAllItems()
+                }
                 .ignoresSafeArea(.all)
+            #if os(tvOS)
+                .onPlayPauseCommand {
+                    logger("PLAY/PAUSE")
+                    playerModel.player.isPlaying ? playerModel.player.pause() : playerModel.player.play()
+                }
+            #endif
+//                .onMoveCommand(perform: { direction in
+//                    if direction == .right {
+//                        playerModel.player.advanceToNextItem()
+//                    }
+//                })
         }
         /// The PlayerModel class
         class PlayerModel: ObservableObject {
             /// The AVplayer
-            let player: AVPlayer
+            let player: AVQueuePlayer
             /// Init the PlayerModel class
-            init(video: MediaItem, endAction: @escaping () -> Void) {
+            init(items: [MediaItem], endAction: @escaping () -> Void) {
                 /// Setup the player
-                let playerItem = AVPlayerItem(url: URL(string: video.file)!)
+            var playerItems: [AVPlayerItem] = []
+                for item in items {
+                let playerItem = AVPlayerItem(url: URL(string: item.file)!)
 #if os(tvOS)
                 /// tvOS can add aditional info to the player
-                playerItem.externalMetadata = createMetadataItems(video: video)
+                playerItem.externalMetadata = createMetadataItems(video: item)
 #endif
+                    playerItems.append(playerItem)
+                }
                 /// Create a new Player
-                player = AVQueuePlayer(items: [playerItem])
+                player = AVQueuePlayer(items: playerItems)
                 //player = AVPlayer(playerItem: playerItem)
                 player.actionAtItemEnd = .none
                 /// Get notifications
                 NotificationCenter
                     .default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                                          object: nil,
-                                         queue: nil) { _ in endAction() }
+                                         queue: nil) { [self] notification in
+                        let currentItem = notification.object as? AVPlayerItem
+                        
+                        let file: String? = (currentItem?.asset as? AVURLAsset)?.url.absoluteString
+                        
+                        if var match = KodiConnector.shared.media.first(where: { $0.file == file }) {
+                            match.markAsPlayed()
+                        }
+                        
+                        if currentItem == playerItems.last {
+                            endAction()
+                        } else {
+                            player.advanceToNextItem()
+                        }
+                        
+                    }
             }
         }
     }

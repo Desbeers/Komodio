@@ -14,7 +14,7 @@ struct SongsView: View {
     @EnvironmentObject var kodi: KodiConnector
     let album: MediaItem
     
-    @State var audioPlayer: AVQueuePlayer? = nil
+    //@State var audioPlayer: AVQueuePlayer? = nil
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,17 +24,22 @@ struct SongsView: View {
                         .cornerRadius(9)
                         .shadow(radius: 6)
                         .padding(6)
-                    Button(action: {
-                        playAlbum(songs: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})
-                    }, label: {
+                    
+                    PlayerView.Link(item: album, destination: PlayerView(items: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})) {
                         Text("Play album")
-                    })
-                    Button(action: {
-                        audioPlayer?.advanceToNextItem()
-                    }, label: {
-                        Text("Play next song")
-                    })
-                        .disabled(audioPlayer?.isPlaying == true ? false : true)
+                    }
+                    
+//                    Button(action: {
+//                        playAlbum(songs: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})
+//                    }, label: {
+//                        Text("Play album")
+//                    })
+//                    Button(action: {
+//                        //audioPlayer?.advanceToNextItem()
+//                    }, label: {
+//                        Text("Play next song")
+//                    })
+                        //.disabled(audioPlayer?.isPlaying == true ? false : true)
                     Text(album.description.isEmpty ? "\(album.itemsCount) tracks" : album.description)
                     //VideoPlayer(player: audioPlayer)
                 }
@@ -43,9 +48,9 @@ struct SongsView: View {
 #endif
                 ScrollView {
                     ForEach(kodi.media.filter(MediaFilter(media: .song, album: album))) { song in
-                        PlayerView.Link(item: song, destination: PlayerView(video: song.binding())) {
+                        //PlayerView.Link(item: song, destination: PlayerView(video: song.binding())) {
                             Text(song.title)
-                        }
+                        //}
                         .frame(width: .infinity)
                     }
                 }
@@ -58,13 +63,13 @@ struct SongsView: View {
     }
     func playAlbum(songs: [MediaItem]) {
         logger("Going to play songs")
-        var items: [AVPlayerItem] = []
-        
-        for song in songs {
-            items.append(AVPlayerItem(url: URL(string: song.file)!))
-        }
-        
-        audioPlayer = AVQueuePlayer(items: items)
-        audioPlayer?.play()
+//        var items: [AVPlayerItem] = []
+//        
+//        for song in songs {
+//            items.append(AVPlayerItem(url: URL(string: song.file)!))
+//        }
+//        
+//        audioPlayer = AVQueuePlayer(items: items)
+//        audioPlayer?.play()
     }
 }

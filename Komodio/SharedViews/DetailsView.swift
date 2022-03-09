@@ -35,7 +35,7 @@ struct DetailsView: View {
                     Spacer()
                     /// Buttons
                     HStack {
-                        PlayerView.Link(item: item, destination: PlayerView(video: $item)) {
+                        PlayerView.Link(item: item, destination: PlayerView(items: [item])) {
                             Text("Play")
                         }
                         PartsView.WatchedToggle(item: $item)
