@@ -21,8 +21,8 @@ struct PlayerView: View {
     /// The View
     var body: some View {
         Wrapper(items: items) {
-            /// # Actions after a video has finished
-            logger("END OF PLAYLIST")
+            /// # Actions after a playlist has finished
+            logger("End of the playlist, close the Vies")
             /// Mark the item as played
             //items.markAsPlayed()
             /// Go back a View on tvOS or iOS; macOS ignores this
@@ -90,7 +90,7 @@ extension PlayerView {
                 }
                 /// Create a new Player
                 player = AVQueuePlayer(items: playerItems)
-                //player = AVPlayer(playerItem: playerItem)
+                /// The NotificationCenter will take care of actions, so set this to .none for the player
                 player.actionAtItemEnd = .none
                 /// Get notifications
                 NotificationCenter
@@ -98,19 +98,18 @@ extension PlayerView {
                                          object: nil,
                                          queue: nil) { [self] notification in
                         let currentItem = notification.object as? AVPlayerItem
-                        
-                        let file: String? = (currentItem?.asset as? AVURLAsset)?.url.absoluteString
-                        
+                        /// Get the file location of the item that was played
+                        let file = (currentItem?.asset as? AVURLAsset)?.url.absoluteString
+                        /// Mark the item as played
                         if var match = KodiConnector.shared.media.first(where: { $0.file == file }) {
                             match.markAsPlayed()
                         }
-                        
+                        /// Close the window if all items are played or else go to the next item
                         if currentItem == playerItems.last {
                             endAction()
                         } else {
                             player.advanceToNextItem()
                         }
-                        
                     }
             }
         }
