@@ -65,7 +65,7 @@ extension ItemsView {
                 MoviesView.SetItem(movieSet: item)
             case .tvshow:
                 TVshowsView.Item(tvshow: $item)
-            case .musicvideo:
+            case .musicVideo:
                 MusicVideosView.Item(musicvideo: $item)
             default:
                 RouterLink(item: .details(item: item)) {

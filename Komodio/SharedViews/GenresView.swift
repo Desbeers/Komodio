@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
 
 /// A View for Genre items

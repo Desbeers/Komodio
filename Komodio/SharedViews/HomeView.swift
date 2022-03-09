@@ -85,7 +85,7 @@ extension HomeView {
                                                 .sorted { $0.dateAdded > $1.dateAdded }
                                                 .prefix(10)),
                              musicvideos: Array(kodi.media
-                                                    .filter { $0.media == .musicvideo && !$0.poster.isEmpty }
+                                                    .filter { $0.media == .musicVideo && !$0.poster.isEmpty }
                                                     .shuffled()
                                                     .prefix(10)),
                              episodes: Array(kodi.media

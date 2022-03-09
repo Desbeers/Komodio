@@ -38,6 +38,12 @@
 		D74F34A527D30F2A009377FA /* SidebarView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */; };
 		D74F34A727D31232009377FA /* TabsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A627D31232009377FA /* TabsView+tvOS.swift */; };
 		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
+		D78850C727D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
+		D78850C827D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
+		D78850C927D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
+		D78850CB27D83389002DC6FC /* ArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850CA27D83389002DC6FC /* ArtistsView.swift */; };
+		D78850CC27D83389002DC6FC /* ArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850CA27D83389002DC6FC /* ArtistsView.swift */; };
+		D78850CD27D83389002DC6FC /* ArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850CA27D83389002DC6FC /* ArtistsView.swift */; };
 		D788807427CC76D400F0C51A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D788807327CC76D400F0C51A /* LaunchScreen.storyboard */; };
 		D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
 		D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ADD14A27C9763900321E23 /* KomodioApp.swift */; };
@@ -111,6 +117,8 @@
 		D74F34A627D31232009377FA /* TabsView+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabsView+tvOS.swift"; sourceTree = "<group>"; };
 		D74F34A827D3FB5D009377FA /* TableView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView+macOS.swift"; sourceTree = "<group>"; };
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		D78850C627D82C21002DC6FC /* AlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsView.swift; sourceTree = "<group>"; };
+		D78850CA27D83389002DC6FC /* ArtistsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsView.swift; sourceTree = "<group>"; };
 		D788807327CC76D400F0C51A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7ADD14A27C9763900321E23 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7ADD14C27C9763A00321E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -253,6 +261,8 @@
 				D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */,
 				D735DED127CAF76300C63E1D /* EpisodesView.swift */,
 				D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */,
+				D78850CA27D83389002DC6FC /* ArtistsView.swift */,
+				D78850C627D82C21002DC6FC /* AlbumsView.swift */,
 				D7B2F23C27C98FDB002DFC41 /* GenresView.swift */,
 				D735DEB427C9F1C400C63E1D /* ItemsView.swift */,
 				D7B2F22F27C9846B002DFC41 /* LoadingView.swift */,
@@ -438,6 +448,7 @@
 			files = (
 				D7B2F23427C98578002DFC41 /* HomeView.swift in Sources */,
 				D7B2F22C27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
+				D78850C727D82C21002DC6FC /* AlbumsView.swift in Sources */,
 				D7B2F22427C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D735DED227CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */,
@@ -447,6 +458,7 @@
 				D735DEDE27CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D7D0B86827D0673B00C1C873 /* Route.swift in Sources */,
 				D735DED027CACAA400C63E1D /* DetailsView.swift in Sources */,
+				D78850CB27D83389002DC6FC /* ArtistsView.swift in Sources */,
 				D735DEB527C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F21B27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7EC594827C9C5B8004FFC57 /* PartsView.swift in Sources */,
@@ -467,6 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D735DED327CAF76300C63E1D /* EpisodesView.swift in Sources */,
+				D78850CC27D83389002DC6FC /* ArtistsView.swift in Sources */,
 				D7D0B86627D052EB00C1C873 /* MainView+macOS.swift in Sources */,
 				D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */,
 				D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */,
@@ -486,6 +499,7 @@
 				D74F34A327D30768009377FA /* SidebarView+macOS.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */,
+				D78850C827D82C21002DC6FC /* AlbumsView.swift in Sources */,
 				D7ADD15B27C9763A00321E23 /* KomodioApp.swift in Sources */,
 				D735DEB227C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */,
@@ -502,6 +516,7 @@
 				D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */,
 				D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */,
 				D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */,
+				D78850CD27D83389002DC6FC /* ArtistsView.swift in Sources */,
 				D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */,
 				D735DED427CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
@@ -523,6 +538,7 @@
 				D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */,
 				D735DEB327C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7D0B86E27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
+				D78850C927D82C21002DC6FC /* AlbumsView.swift in Sources */,
 				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,9 +21,11 @@ enum Route: Equatable, Hashable {
     case genresItems(genre: MediaItem)
     case details(item: MediaItem)
     case player
+    case artists
+    case albums(artist: MediaItem)
     case table
     /// The items to show in the NavbarView
-    static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, genres, table]
+    static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, genres, table, artists]
 }
 
 extension Route {
@@ -57,6 +59,10 @@ extension Route {
             return "Player"
         case .table:
             return "Debug Table"
+        case .artists:
+            return "Artists"
+        case .albums(let artist):
+            return artist.title
         }
     }
 }
@@ -143,6 +149,10 @@ extension Route {
             GenresView.Items(genre: genre)
         case .details(let item):
             DetailsView(item: item)
+        case .artists:
+            ArtistsView()
+        case .albums(let artist):
+            AlbumsView(artist: artist)
 #if os(macOS)
         case .table:
             TableView()

@@ -61,7 +61,7 @@ extension MusicVideosView {
         var body: some View {
             ItemsView.List() {
                 ForEach(kodi
-                            .media.filter(MediaFilter(media: .musicvideo, artist: artist.artists))
+                            .media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))
                 ) { musicvideo in
                     ItemsView.Item(item: musicvideo.binding())
                 }
@@ -95,7 +95,7 @@ extension MusicVideosView {
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(MediaFilter(media: .musicvideo,
+                ForEach(kodi.media.filter(MediaFilter(media: .musicVideo,
                                                      artist: album.artists,
                                                      album: album.album)
                                          )

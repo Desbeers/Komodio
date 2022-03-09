@@ -16,7 +16,7 @@ extension MediaType {
             return Color.blue
         case .tvshow:
             return Color.orange
-        case .musicvideo:
+        case .musicVideo:
             return Color.green
         default:
             return Color("tvOSbackground")
