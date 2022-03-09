@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
 
 struct DetailsView: View {

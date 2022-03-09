@@ -97,7 +97,7 @@ extension MusicVideosView {
             ItemsView.List() {
                 ForEach(kodi.media.filter(MediaFilter(media: .musicVideo,
                                                      artist: album.artists,
-                                                     album: album.album)
+                                                     album: album)
                                          )
                 ) { movie in
                     RouterLink(item: .details(item: movie)) {

@@ -13,7 +13,7 @@ struct ArtistsView: View {
     @EnvironmentObject var kodi: KodiConnector
 #if os(tvOS)
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 320))]
+    let grid = [GridItem(.adaptive(minimum: 300))]
 #else
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 300))]
@@ -27,10 +27,12 @@ struct ArtistsView: View {
                         VStack(spacing: 0) {
                             ArtView.PosterDetail(item: artist)
                                 .macOS { $0.frame(height: 300) }
-                                .tvOS { $0.frame(height: 500) }
+                                .tvOS { $0.frame(width: 300, height: 300) }
                                 .iOS { $0.frame(height: 200) }
                                 Text(artist.title)
-                                    .font(.caption)                        }
+                                    .font(.caption)
+                        }
+                        .frame(width: 300)
                     }
 
                 }
@@ -38,10 +40,7 @@ struct ArtistsView: View {
                 //.buttonStyle(ButtonStyles.GridItem())
             }
             .macOS { $0.padding(.top, 40) }
+            .tvOS { $0.padding(.horizontal, 100) }
         }
-        .task {
-            logger("GenresView task!")
-        }
-        .tvOS { $0.padding(.horizontal, 100) }
     }
 }

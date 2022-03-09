@@ -51,3 +51,30 @@ extension PartsView {
         }
     }
 }
+
+extension PartsView {
+    /// View a rotating record
+    struct RotatingIcon: View {
+        /// The animation
+        var foreverAnimation: Animation {
+            Animation.linear(duration: 3.6)
+                .repeatForever(autoreverses: false)
+        }
+        /// The state of the animation
+        @State var rotate: Bool = false
+        /// The view
+        var body: some View {
+            Image("Huge Icon")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .rotationEffect(Angle(degrees: self.rotate ? 360 : 0.0))
+                .animation(rotate ? foreverAnimation : .easeInOut, value: rotate)
+                .task {
+                    /// Give it a moment to settle; else the animation can be strange on macOS
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        rotate = true
+                    }
+                }
+        }
+    }
+}

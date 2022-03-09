@@ -10,11 +10,14 @@ import SwiftlyKodiAPI
 struct RootView: View {
     /// The Router model
     @StateObject var router: Router = Router()
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
 //    init(){
 //        UINavigationBar.setAnimationsEnabled(false)
 //    }
     /// The View
     var body: some View {
+        if kodi.loadingState == .done {
         NavigationView {
             TabView() {
                 TabsView()
@@ -23,6 +26,9 @@ struct RootView: View {
         .environmentObject(router)
         .task {
             logger("RootView task!")
+        }
+        } else {
+            LoadingView()
         }
     }
 }

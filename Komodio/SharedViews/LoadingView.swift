@@ -16,13 +16,20 @@ struct LoadingView: View {
             Spacer()
             Text("Loading your library")
                 .font(.title)
-            ProgressView()
             Spacer()
-            Text(kodi.loadingState.rawValue)
+//            PartsView.RotatingIcon()
+//                .frame(width: 300, height: 300)
+            HStack {
+                ProgressView()
+                Text(kodi.loadingState.rawValue)
+                    .font(.caption)
+                    .opacity(0.6)
+                    .padding(.leading)
+            }
             Spacer()
         }
         .animation(.default, value: kodi.loadingState)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        //.frame(maxWidth: .infinity, maxHeight: .infinity)
         //.fanartBackground(fanart: router.fanart)
     }
 }

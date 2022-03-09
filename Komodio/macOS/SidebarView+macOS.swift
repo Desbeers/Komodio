@@ -19,6 +19,10 @@ struct SidebarView: View {
             Section(header: Text("Library")) {
                 items
             }
+            Section(header: Text("Debug")) {
+                Label(Route.table.title, systemImage: Route.table.symbol)
+                    .tag(Route.table)
+            }
             Section(header: Text("Genres")) {
                 genres
             }
