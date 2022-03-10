@@ -42,7 +42,9 @@ extension PlayerView {
             /// Show art when we are playing audio
             if let item = item, item.media == .song {
                 ArtView.PosterDetail(item: item)
+                    .cornerRadius(9)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .macOS { $0.padding(.all, 60) }
                     .background(.black)
             } else {
                 /// Force macOS to use all space in the window
@@ -114,6 +116,7 @@ extension PlayerView {
                 player = AVQueuePlayer(items: playerItems)
                 /// The NotificationCenter will take care of actions, so set this to .none for the player
                 player.actionAtItemEnd = .none
+                //player.actionAtItemEnd = .advance
                 /// Get notifications
                 NotificationCenter
                     .default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,

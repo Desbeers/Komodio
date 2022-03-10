@@ -56,8 +56,8 @@ extension Route {
             return genre.title
         case .details(let item):
             return item.title
-        case .player(let items):
-            return items.first?.title ?? "Player"
+        case .player:
+            return "Now playing..."
         case .table:
             return "Debug Table"
         case .artists:
