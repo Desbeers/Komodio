@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftlyKodiAPI
+import Combine
 
 /// A class with the state of the application
 /// - UI selection
@@ -20,16 +21,22 @@ final class AppState: ObservableObject {
     @Published var sidebarSelection: Int?
     /// The selected item in the sidebar of the application
     @Published var hoveredMediaItem: MediaItem?
-    /// Init the AppState class
-    /// - Set the IP address for the Kodo host
-//    init() {
-//        kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+    /// Observe some kodi stuff
+    private var observer: AnyCancellable?
+//    /// Obsere notifications
+//    @Published var Notification: KodiConnector.Method = .notifyAll {
+//        didSet {
+//            
+//        }
 //    }
-    
-    //var filter = MediaFilter(media: .none)
-    //@Published var filter = MediaFilter(media: .none)
-    
-    
+    /// Init the AppState class
+    init() {
+        // Observe notifications
+        self.observer = kodi.$notification.sink(receiveValue: {[weak self] notification in
+            debugPrint("AppState notification: \(notification)")
+        })
+    }
+
     /// Set the hovered Kodi item from the UI to the published Var
     /// - Parameter item: The Kodi item
     static func setHoveredMediaItem(item: MediaItem?) {

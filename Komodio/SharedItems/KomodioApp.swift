@@ -15,6 +15,8 @@ import SwiftlyKodiAPI
 @main struct KomodioApp: App {
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector  = .shared
+    /// The AppState model
+    @StateObject var appState: AppState  = .shared
     /// The Scene
     var body: some Scene {
         WindowGroup {
