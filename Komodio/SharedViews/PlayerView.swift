@@ -22,7 +22,7 @@ struct PlayerView: View {
     var body: some View {
         Wrapper(items: items) {
             /// # Actions after a playlist has finished
-            logger("End of the playlist, close the Vies")
+            logger("End of the playlist, close the View")
             /// Mark the item as played
             //items.markAsPlayed()
             /// Go back a View on tvOS or iOS; macOS ignores this

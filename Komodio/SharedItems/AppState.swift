@@ -33,7 +33,7 @@ final class AppState: ObservableObject {
     init() {
         // Observe notifications
         self.observer = kodi.$notification.sink(receiveValue: {[weak self] notification in
-            debugPrint("AppState notification: \(notification)")
+            //debugPrint("AppState notification: \(notification)")
         })
     }
 
