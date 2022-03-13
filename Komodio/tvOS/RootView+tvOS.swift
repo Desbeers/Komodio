@@ -24,9 +24,6 @@ struct RootView: View {
             }
         }
         .environmentObject(router)
-        .task {
-            logger("RootView task!")
-        }
         } else {
             LoadingView()
         }

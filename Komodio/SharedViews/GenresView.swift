@@ -36,9 +36,6 @@ struct GenresView: View {
             }
             .macOS { $0.padding(.top, 40) }
         }
-        .task {
-            logger("GenresView task!")
-        }
         .tvOS { $0.padding(.horizontal, 100) }
     }
 }

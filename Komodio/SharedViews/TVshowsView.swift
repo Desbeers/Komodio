@@ -19,9 +19,6 @@ struct TVshowsView: View {
                 Item(tvshow: tvshow.binding())
             }
         }
-        .task {
-            logger("TVshowView task!")
-        }
     }
 }
 

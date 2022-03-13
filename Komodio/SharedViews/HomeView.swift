@@ -28,7 +28,6 @@ struct HomeView: View {
         .buttonStyle(ButtonStyles.HomeItem())
         .tvOS { $0.ignoresSafeArea(.all) }
         .task {
-            logger("HomeView.Items task!")
             items = getHomeItems()
         }
         .onChange(of: kodi.media) { _ in
@@ -40,7 +39,6 @@ struct HomeView: View {
         /// In a HStack to make it focusable in tvOS
         HStack {
             Button(action: {
-                logger("Reload request")
                 Task {
                     await kodi.reloadHost()
                 }

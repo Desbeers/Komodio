@@ -76,11 +76,7 @@ struct DetailsView: View {
                 .tvOS { $0.edgesIgnoringSafeArea(.all) }
                 .iOS { $0.edgesIgnoringSafeArea(.bottom) }
         }
-        .task {
-            logger("DetailsView task!")
-        }
         .onChange(of: kodi.media ) { _ in
-            print("Media changed, update item state")
             if let update = kodi.media.first(where: { $0.id == item.id} ) {
                 item = update
             }

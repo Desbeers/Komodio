@@ -20,9 +20,6 @@ struct MoviesView: View {
                 ItemsView.Item(item: movie.binding())
             }
         }
-        .task {
-            logger("MoviesView task!")
-        }
     }
 }
 
@@ -70,9 +67,6 @@ extension MoviesView {
                     }
                     .buttonStyle(ButtonStyles.MediaItem(item: movie))
                 }
-            }
-            .task {
-                logger("MoviesView.Set task!")
             }
         }
     }

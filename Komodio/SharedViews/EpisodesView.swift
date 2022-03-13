@@ -15,8 +15,6 @@ struct EpisodesView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The TV show item in the library
     let tvshow: MediaItem
-    /// The seasons of this TV show
-    //@State var seasons: [Int] = []
     /// The Episode items to show in this view
     @State var episodes: [MediaItem] = []
     /// The View
@@ -26,7 +24,7 @@ struct EpisodesView: View {
                 .padding()
             /// More padding for tvOS
                 .tvOS { $0.padding(.horizontal, 60)}
-            ForEach(tvshow.seasons, id: \.self) { season in
+            ForEach(seasons(episodes), id: \.self) { season in
                 VStack {
                     Text(season == 0 ? "Specials" : "Season \(season)")
                         .font(.title3)
@@ -45,11 +43,25 @@ struct EpisodesView: View {
             }
         }
         .task {
-            logger("EpisodesView task!")
             /// Filter the episodes
-            let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
-            episodes = kodi.media.filter(filter)
+            //let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
+            //episodes = kodi.media.filter(filter)
+            episodes = getEpisodes()
+            dump(episodes)
         }
+        .onChange(of: kodi.media) { _ in
+            episodes = getEpisodes()
+        }
+    }
+    /// Get the episodes
+    private func getEpisodes() -> [MediaItem] {
+        return kodi.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
+    }
+    /// Order by seasons; specials as last
+    private func seasons( _ episodes: [MediaItem]) -> [Int] {
+        return episodes.map { $0.season }
+        .removingDuplicates()
+        .sorted { ($0 == 0 ? Int.max : $0) < ($1 == 0 ? Int.max : $1) }
     }
 }
 

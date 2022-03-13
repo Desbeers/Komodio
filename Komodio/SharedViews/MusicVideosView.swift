@@ -22,9 +22,6 @@ struct MusicVideosView: View {
                 .buttonStyle(ButtonStyles.MediaItem(item: artist))
             }
         }
-        .task {
-            logger("MusicVideos task!")
-        }
     }
 }
 
@@ -66,9 +63,6 @@ extension MusicVideosView {
                     ItemsView.Item(item: musicvideo.binding())
                 }
             }
-            .task {
-                logger("MusicVideos.Items task!")
-            }
         }
     }
 
@@ -106,9 +100,6 @@ extension MusicVideosView {
                     }
                     .buttonStyle(ButtonStyles.MediaItem(item: movie))
                 }
-            }
-            .task {
-                logger("MusicVideosView.Album task!")
             }
         }
     }
