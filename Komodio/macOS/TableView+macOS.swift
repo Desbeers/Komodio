@@ -18,7 +18,7 @@ struct TableView: View {
     var body: some View {
         Table(sortOrder: $sortOrder) {
             TableColumn("Media", value: \.media.rawValue)
-//            TableColumn("ID", value: \.id)
+            TableColumn("ID", value: \.id)
             TableColumn("Title", value: \.title)
             TableColumn("Items count", value: \.itemsCount.description)
             //            TableColumn("Playcount", value: \.playcount.description)
