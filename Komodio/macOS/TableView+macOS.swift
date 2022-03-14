@@ -20,7 +20,7 @@ struct TableView: View {
             TableColumn("Media", value: \.media.rawValue)
             TableColumn("Last Played", value: \.lastPlayed)
             TableColumn("Title", value: \.title)
-            TableColumn("TV show", value: \.tvshowID.description)
+            TableColumn("Artist IDs", value: \.artistIDs.description)
             //            TableColumn("Playcount", value: \.playcount.description)
             //TableColumn("Rating", value: \.rating.description)
             TableColumn("Sort Artist", value: \.sortartist)

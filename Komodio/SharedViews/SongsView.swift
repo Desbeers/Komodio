@@ -50,6 +50,12 @@ struct SongsView: View {
             }
             .padding()
         }
+        .background {
+            ArtView.Fanart(fanart: album.fanart)
+                .macOS {$0.edgesIgnoringSafeArea(.all) }
+                .tvOS { $0.edgesIgnoringSafeArea(.all) }
+                .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+        }
         /// On macOS, give it some padding because the `TitleHeader` is on top in a `ZStack`
         .macOS { $0.padding(.top, 60)}
         .ignoresSafeArea()
