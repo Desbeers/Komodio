@@ -18,12 +18,12 @@ struct RootView: View {
     /// The View
     var body: some View {
         if kodi.loadingState == .done {
-        NavigationView {
-            TabView() {
-                TabsView()
+            NavigationView {
+                TabView() {
+                    TabsView()
+                }
             }
-        }
-        .environmentObject(router)
+            .environmentObject(router)
         } else {
             LoadingView()
         }

@@ -118,7 +118,6 @@ extension HomeView {
                             .tvOS { $0.frame(height: 500) }
                             .iOS { $0.frame(height: 200) }
                             .watchStatus(of: $item)
-                        Text("Playcount: \(item.playcount)")
                         if item.media == .episode {
                             Text(item.title)
                                 .font(.caption)
