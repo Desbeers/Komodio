@@ -27,6 +27,9 @@ struct SidebarView: View {
                 genres
             }
         }
+        .onExitCommand {
+            router.pop()
+        }
     }
 }
 

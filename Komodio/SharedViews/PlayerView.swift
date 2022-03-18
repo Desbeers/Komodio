@@ -34,6 +34,11 @@ struct PlayerView: View {
                 }
         )
         #endif
+        #if os(macOS)
+        .onExitCommand {
+            router.pop()
+        }
+        #endif
     }
 }
 
@@ -81,9 +86,15 @@ extension PlayerView {
                     if playerModel.player.isPlaying == false {
                         playerModel.player.play()
                     }
+#if os(macOS)
+NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+#endif
                 }
                 .onDisappear {
                     playerModel.player.removeAllItems()
+#if os(macOS)
+NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+#endif
                 }
                 .ignoresSafeArea(.all)
             #if os(tvOS)

@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 
 extension PartsView {
     
-    /// View the Ttitle and optional subtitle of the page
+    /// View the title and optional subtitle of the page
     struct TitleHeader: View {
 
         @EnvironmentObject var router: Router

@@ -32,6 +32,9 @@ import SwiftlyKodiAPI
 #if os(macOS)
         //.windowToolbarStyle(.unifiedCompact(showsTitle: true))
         .windowStyle(.hiddenTitleBar)
+        .commands {
+            SidebarCommands()
+        }
 #endif
     }
 }

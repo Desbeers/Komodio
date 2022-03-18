@@ -23,9 +23,11 @@ struct MainView: View {
             } else {
                 LoadingView()
             }
+            if !router.currentRoute.isPlayer {
             VStack {
                 PartsView.TitleHeader()
                 Spacer()
+            }
             }
         }
         .fanartBackground(fanart: router.fanart)
