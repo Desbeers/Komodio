@@ -21,7 +21,7 @@ struct GenresView: View {
 #endif
     /// The View
     var body: some View {
-        ScrollView {
+        ItemsView.List {
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.media.filter(MediaFilter(media: .genre))) { genre in
                     RouterLink(item: .genresItems(genre: genre)) {

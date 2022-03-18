@@ -18,7 +18,7 @@ extension PartsView {
         /// The View
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
-                Text(router.subtitle ?? " ")
+                Text(router.subtitle ?? "Komodio")
                     .padding(.leading, 2)
                     .font(.subheadline)
                 Text(router.title)

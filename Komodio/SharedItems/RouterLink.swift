@@ -20,20 +20,10 @@ struct RouterLink<Label: View>: View {
     }
     /// The View
     var body: some View {
-//#if !os(iOS)
         Button(action: {
             router.push(item)
         }, label: {
             label
         })
-//#else
-//        NavigationLink(destination: item.destination
-//                        .onAppear { router.push(item) }
-//                        .iOS { $0.navigationTitle(item.title) }
-//                       
-//        ) {
-//            label
-//        }
-//#endif
     }
 }

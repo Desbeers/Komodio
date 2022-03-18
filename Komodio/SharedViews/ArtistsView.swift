@@ -20,7 +20,7 @@ struct ArtistsView: View {
 #endif
     /// The View
     var body: some View {
-        ScrollView {
+        ItemsView.List {
             LazyVGrid(columns: grid, spacing: 30) {
                 ForEach(kodi.media.filter(MediaFilter(media: .artist))) { artist in
                     RouterLink(item: .albums(artist: artist)) {
