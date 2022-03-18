@@ -12,6 +12,7 @@ import UIKit
 #endif
 
 struct MainView: View {
+    /// The Router model
     @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector

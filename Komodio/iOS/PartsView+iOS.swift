@@ -13,44 +13,78 @@ extension PartsView {
     
     /// View the Ttitle and optional subtitle of the page
     struct TitleHeader: View {
-
+        
+        @State var isVisible = true
+        
         @EnvironmentObject var router: Router
         
         /// The View
         var body: some View {
-            HStack(alignment: .center) {
-                
-                Button(action: {
-                    router.pop()
-                },
-                       label: {
-                    Image(systemName: "chevron.backward.square.fill")
-                })
+            Group {
+           
+                if isVisible {
+                    HStack(alignment: .center) {
+
+                    Button(action: {
+                        router.pop()
+                    },
+                           label: {
+                        Image(systemName: "chevron.backward.square.fill")
+                            .foregroundColor(.accentColor)
+                    })
                     .disabled(router.routes.count == 1)
                     .help("Go back")
                     .font(.title)
                     .buttonStyle(.plain)
-                VStack(alignment: .leading) {
-                    
-                    if let subtitle = router.subtitle {
-                        Text(subtitle)
+                    VStack(alignment: .leading) {
+                        
+                        //if let subtitle = router.subtitle {
+                        Text(router.subtitle ?? "Komodio")
                             .padding(.leading, 2)
                             .font(.subheadline)
-                            .transition(AnyTransition.opacity.combined(with: .slide))
+                        //.transition(.opacity)
+                        //.transition(AnyTransition.opacity.combined(with: .slide))
+                        //}
+                        Text(router.title)
+                            .font(router.subtitle == nil ? .title : .title)
                     }
-                    Text(router.title)
-                        .font(router.subtitle == nil ? .title : .title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top)
+                    .padding()
+                    .frame(height: 100)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.thinMaterial)
+                    .ignoresSafeArea()
+                    .transition(AnyTransition.opacity.combined(with: .slide))
             }
-            .animation(.default, value: router.routes)
-            .padding()
-            .frame(height: 60)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.thinMaterial)
-            .ignoresSafeArea()
+            }
+            .onChange(of: router.routes) { _ in
+                if (router.currentRoute.isPlayer) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        self.isVisible = false
+                    }
+                } else {
+                    self.isVisible = true
+                }
+            }
+//            .gesture(
+//                DragGesture()
+//                    .onChanged {
+//                        if $0.startLocation.x < $0.location.x {
+//                            logger("DRAG!!")
+//                            router.pop()
+//                        }
+//            })
+            .animation(.default, value: isVisible)
+//            .padding(.top)
+//            .padding()
+//            .frame(height: 100)
+//            .frame(maxWidth: .infinity, alignment: .leading)
+//            .background(.thinMaterial)
+//            .ignoresSafeArea()
         }
-
+        
     }
 }
 

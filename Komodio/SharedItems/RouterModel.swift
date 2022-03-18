@@ -23,10 +23,6 @@ class Router: ObservableObject {
         routes.append(route)
     }
     
-    @discardableResult
-    func pop() -> Route? {
-        return routes.popLast()
-    }
 #endif
     
     // MARK: tvOS
@@ -42,10 +38,6 @@ class Router: ObservableObject {
         }
     }
     
-    @discardableResult
-    func pop() -> Route? {
-        return routes.popLast()
-    }
     
 #endif
     
@@ -63,10 +55,6 @@ class Router: ObservableObject {
         }
     }
     
-    @discardableResult
-    func pop() -> Route? {
-        return routes.popLast()
-    }
 #endif
     
     // MARK: shared
@@ -81,6 +69,14 @@ class Router: ObservableObject {
     
     var fanart: String {
         currentRoute.fanart
+    }
+    
+    @discardableResult
+    func pop() -> Route? {
+        if routes.count > 1 {
+            return routes.popLast()
+        }
+        return nil
     }
     
     @Published var navbar: Route? = .home {

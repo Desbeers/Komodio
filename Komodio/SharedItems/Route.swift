@@ -26,7 +26,8 @@ enum Route: Equatable, Hashable {
     case songs(album: MediaItem)
     case table
     /// The items to show as main menu items
-    #if os(tvOS)
+    /// - Note: iOS has no 'home' button because the buttons are only shown on the homepage
+    #if !os(macOS)
     static let menuItems: [Route] = [.movies, tvshows, musicVideos, artists, genres]
     #else
     static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, artists, genres]
@@ -96,6 +97,17 @@ extension Route {
             return "testtube.2"
         default:
             return "questionmark"
+        }
+    }
+}
+
+extension Route {
+    var isPlayer: Bool {
+        switch self {
+        case .player:
+            return true
+        default:
+            return false
         }
     }
 }

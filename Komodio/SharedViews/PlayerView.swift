@@ -13,25 +13,27 @@ import AVKit
 
 /// A View with the player
 struct PlayerView: View {
+    /// The Router model
+    @EnvironmentObject var router: Router
     /// The  items we want to play
     let items: [MediaItem]
-    /// The presentation mode
-    /// - Note: Need this to go back a View on iOS after the video has finnished
-    @Environment(\.presentationMode) var presentationMode
     /// The View
     var body: some View {
         Wrapper(items: items) {
             /// # Actions after a playlist has finished
             logger("End of the playlist, close the View")
-            /// Mark the item as played
-            //items.markAsPlayed()
-            /// Go back a View on tvOS or iOS; macOS ignores this
-            presentationMode.wrappedValue.dismiss()
-#if os(macOS)
-            /// Close the Player Window on macOS
-            NSApplication.shared.keyWindow?.close()
-#endif
+            router.pop()
         }
+        #if os(iOS)
+        /// Close the player view with a drag gesture
+        .gesture(
+            DragGesture()
+                .onEnded { _ in
+                    logger("DRAG!!")
+                    router.pop()
+                }
+        )
+        #endif
     }
 }
 
