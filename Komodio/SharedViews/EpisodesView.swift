@@ -47,7 +47,7 @@ struct EpisodesView: View {
             //let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
             //episodes = kodi.media.filter(filter)
             episodes = getEpisodes()
-            dump(episodes)
+            //dump(episodes)
         }
         .onChange(of: kodi.media) { _ in
             episodes = getEpisodes()

@@ -81,8 +81,11 @@ struct DetailsView: View {
                 item = update
             }
         }
+        .task {
+            print(item.file)
+            print(item.poster)
+        }
         .tvOS { $0.ignoresSafeArea() }
-        .macOS { $0.ignoresSafeArea() }
         .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }
         .iOS { $0.navigationTitle(item.title) }
     }

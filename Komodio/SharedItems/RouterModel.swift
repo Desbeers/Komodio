@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-@MainActor
+//@MainActor
 class Router: ObservableObject {
     
     // MARK: macOS
