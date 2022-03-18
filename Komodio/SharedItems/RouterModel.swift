@@ -11,53 +11,7 @@ import SwiftlyKodiAPI
 //@MainActor
 class Router: ObservableObject {
     
-    // MARK: macOS
-    
-#if os(macOS)
-    /// Publish the routes for macOS
     @Published var routes: [Route] = [.home]
-    
-    func push(_ route: Route) {
-        /// Need below because `routes` is an `[Enum]`??
-        objectWillChange.send()
-        routes.append(route)
-    }
-    
-#endif
-    
-    // MARK: tvOS
-    
-#if os(tvOS)
-    @Published var routes: [Route] = [.home]
-    
-    func push(_ route: Route) {
-        if routes.contains(route) {
-            _ = routes.popLast()
-        } else {
-            routes.append(route)
-        }
-    }
-    
-    
-#endif
-    
-    // MARK: iOS
-    
-#if os(iOS)
-    /// Don't publish it for iOS or else the NavigationLink got nuts
-    @Published var routes: [Route] = [.home]
-    
-    func push(_ route: Route) {
-        if routes.contains(route) {
-            _ = routes.popLast()
-        } else {
-            routes.append(route)
-        }
-    }
-    
-#endif
-    
-    // MARK: shared
     
     var title: String {
         currentRoute.title
@@ -69,6 +23,12 @@ class Router: ObservableObject {
     
     var fanart: String {
         currentRoute.fanart
+    }
+    
+    func push(_ route: Route) {
+        /// Need below because `routes` is an `[Enum]`??
+        objectWillChange.send()
+        routes.append(route)
     }
     
     @discardableResult

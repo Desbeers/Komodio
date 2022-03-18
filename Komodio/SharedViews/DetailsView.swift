@@ -17,9 +17,6 @@ struct DetailsView: View {
     /// The View
     var body: some View {
         VStack(spacing: 0) {
-#if os(tvOS)
-            PartsView.TitleHeader()
-#endif
             Spacer()
             HStack(alignment: .top, spacing: 0) {
                 ArtView.PosterDetail(item: item)
@@ -39,7 +36,6 @@ struct DetailsView: View {
                     /// Buttons
                     HStack {
                         RouterLink(item: .player(items: [item])) {
-                        //PlayerView.Link(item: item, destination: PlayerView(items: [item])) {
                             Text("Play")
                         }
                         PartsView.WatchedToggle(item: $item)
@@ -66,24 +62,19 @@ struct DetailsView: View {
             .background(.thinMaterial)
             .cornerRadius(12)
             .shadow(radius: 20)
-            .macOS { $0.padding().frame(maxHeight: 200) }
+            .macOS { $0.frame(maxHeight: 200).padding() }
             .tvOS { $0.frame(maxHeight: 300).padding(60) }
-            .iOS { $0.frame(maxHeight: 200).padding(.horizontal) }
+            .iOS { $0.frame(maxHeight: 200).padding() }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background {
             ArtView.Fanart(fanart: item.fanart)
-                .macOS {$0.edgesIgnoringSafeArea(.all) }
-                .tvOS { $0.edgesIgnoringSafeArea(.all) }
-                .iOS { $0.edgesIgnoringSafeArea(.bottom) }
+                .ignoresSafeArea()
         }
         .onChange(of: kodi.media ) { _ in
             if let update = kodi.media.first(where: { $0.id == item.id} ) {
                 item = update
             }
         }
-        .tvOS { $0.ignoresSafeArea() }
-        .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }
-        .iOS { $0.navigationTitle(item.title) }
     }
 }

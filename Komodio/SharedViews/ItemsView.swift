@@ -29,11 +29,6 @@ extension ItemsView {
         ///The View
         var body: some View {
             ScrollView {
-//#if os(tvOS)
-//                if router.routes.count > 1 {
-//                    PartsView.TitleHeader()
-//                }
-//#endif
                 LazyVStack(spacing: 0) {
                     content
                 }
@@ -41,13 +36,7 @@ extension ItemsView {
                 .macOS { $0.padding(.top, 60)}
                 .tvOS { $0.padding(.top, 200)}
                 .iOS { $0.padding(.top, 120)}
-                /// Move the content below the tabs on tvOS
-                /// - Note: Padding is the space needed by the `TitleHeader` above to avoid jumping
-                //.tvOS { $0.padding(.top, router.routes.count == 1 ? 206 : 0) }
             }
-            .tvOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea() }
-            .macOS { $0.ignoresSafeArea() }
-            .iOS { $0.fanartBackground(fanart: router.fanart).ignoresSafeArea(.all, edges: .bottom) }
         }
     }
 }

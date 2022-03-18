@@ -139,7 +139,7 @@ extension HomeView {
                         ArtView.PosterDetail(item: item)
                             .macOS { $0.frame(height: 300) }
                             .tvOS { $0.frame(height: 500) }
-                            .iOS { $0.frame(height: 200) }
+                            .iOS { $0.frame(height: 300) }
                             .watchStatus(of: $item)
                         if item.media == .episode {
                             Text(item.title)

@@ -31,14 +31,15 @@ struct MainView: View {
         .fanartBackground(fanart: router.fanart)
         .animation(.default, value: router.currentRoute)
 #if os(tvOS)
-.onExitCommand {
-    if router.routes.count > 1 {
-        router.pop()
-    } else {
-        logger("We are at the root")
-        UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
-    }
-}
+        /// Take care of the 'menu' button on the Siri remote
+        .onExitCommand {
+            if router.routes.count > 1 {
+                router.pop()
+            } else {
+                logger("We are at the root")
+                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            }
+        }
 #endif
     }
 }
