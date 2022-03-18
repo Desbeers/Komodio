@@ -20,6 +20,7 @@ extension LabelStyles {
             VStack {
                 configuration.icon
                     .macOS { $0.font(.title).foregroundColor(.accentColor) }
+                    .iOS { $0.font(.title).foregroundColor(.accentColor) }
                 configuration.title
                     .padding(.top)
             }
