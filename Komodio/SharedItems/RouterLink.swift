@@ -1,8 +1,8 @@
 //
-//  RouterLinkView.swift
+//  RouterLink.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 04/03/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

@@ -1,5 +1,5 @@
 //
-//  PlayerMetaData.swift
+//  PlayerMetaData+tvOS.swift
 //  Komodio
 //
 //  © 2022 Nick Berendsen

@@ -1,8 +1,8 @@
 //
 //  RouterModel.swift
-//  Router
+//  Komodio
 //
-//  Created by Nick Berendsen on 02/03/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

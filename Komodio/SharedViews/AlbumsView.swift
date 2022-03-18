@@ -2,7 +2,7 @@
 //  AlbumsView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 09/03/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

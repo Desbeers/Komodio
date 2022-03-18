@@ -1,6 +1,8 @@
 //
-//  TabViewRouting
-//  Created by Freek (github.com/frzi) 2021
+//  RootView+tvOS.swift
+//  Komodio
+//
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

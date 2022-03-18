@@ -1,8 +1,8 @@
 //
-//  SidebarView.swift
-//  Komodio (iOS)
+//  SidebarView+macOS.swift
+//  Komodio
 //
-//  Created by Nick Berendsen on 05/03/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

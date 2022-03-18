@@ -2,11 +2,10 @@
 //  PartsView+macOS.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 26/02/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
 
 extension PartsView {

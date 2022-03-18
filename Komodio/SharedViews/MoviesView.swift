@@ -2,7 +2,7 @@
 //  MoviesView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 25/02/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

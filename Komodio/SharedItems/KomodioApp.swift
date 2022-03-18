@@ -1,14 +1,11 @@
 //
 //  KomodioApp.swift
-//  Shared
+//  Komodio
 //
-//  Created by Nick Berendsen on 25/02/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
-
-import SwiftUI
-
 import SwiftlyKodiAPI
 
 /// The startpoint of Komodio

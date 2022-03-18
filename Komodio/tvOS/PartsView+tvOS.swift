@@ -1,8 +1,8 @@
 //
 //  PartsView+tvOS.swift
-//  Komodio (tvOS)
+//  Komodio
 //
-//  Created by Nick Berendsen on 26/02/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  Extensions+macOS.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 27/02/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

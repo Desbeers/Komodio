@@ -35,13 +35,10 @@
 		D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D74F34A327D30768009377FA /* SidebarView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A127D303A1009377FA /* SidebarView+macOS.swift */; };
-		D74F34A527D30F2A009377FA /* SidebarView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */; };
-		D74F34A727D31232009377FA /* TabsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A627D31232009377FA /* TabsView+tvOS.swift */; };
 		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
-		D75630A727E43879007A624C /* MainView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */; };
-		D75630A827E43902007A624C /* SidebarView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */; };
+		D75630A727E43879007A624C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView.swift */; };
 		D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
-		D75630AA27E4594F007A624C /* MainView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */; };
+		D75630AA27E4594F007A624C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView.swift */; };
 		D78850C727D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
 		D78850C827D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
 		D78850C927D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
@@ -87,7 +84,7 @@
 		D7D0B86227D052B900C1C873 /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86127D052B900C1C873 /* RouterModel.swift */; };
 		D7D0B86327D052B900C1C873 /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86127D052B900C1C873 /* RouterModel.swift */; };
 		D7D0B86427D052B900C1C873 /* RouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86127D052B900C1C873 /* RouterModel.swift */; };
-		D7D0B86627D052EB00C1C873 /* MainView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */; };
+		D7D0B86627D052EB00C1C873 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView.swift */; };
 		D7D0B86827D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
 		D7D0B86927D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
 		D7D0B86A27D0673B00C1C873 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86727D0673B00C1C873 /* Route.swift */; };
@@ -119,8 +116,6 @@
 		D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		D74F34A127D303A1009377FA /* SidebarView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView+macOS.swift"; sourceTree = "<group>"; };
-		D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView+iOS.swift"; sourceTree = "<group>"; };
-		D74F34A627D31232009377FA /* TabsView+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabsView+tvOS.swift"; sourceTree = "<group>"; };
 		D74F34A827D3FB5D009377FA /* TableView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView+macOS.swift"; sourceTree = "<group>"; };
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D78850C627D82C21002DC6FC /* AlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsView.swift; sourceTree = "<group>"; };
@@ -150,7 +145,7 @@
 		D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RootView+tvOS.swift"; path = "Komodio/tvOS/RootView+tvOS.swift"; sourceTree = SOURCE_ROOT; };
 		D7CCA96F27CC3B08001B4828 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D7D0B86127D052B900C1C873 /* RouterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterModel.swift; sourceTree = "<group>"; };
-		D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainView+macOS.swift"; sourceTree = "<group>"; };
+		D7D0B86527D052EB00C1C873 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D7D0B86727D0673B00C1C873 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		D7D0B86B27D2DE0B00C1C873 /* RouterLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterLink.swift; sourceTree = "<group>"; };
 		D7EC594327C9BB53004FFC57 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -232,7 +227,6 @@
 			children = (
 				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
 				D74F34A127D303A1009377FA /* SidebarView+macOS.swift */,
-				D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */,
 				D74F34A827D3FB5D009377FA /* TableView+macOS.swift */,
 				D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */,
 				D735DED527CB07D800C63E1D /* Extensions+macOS.swift */,
@@ -263,6 +257,7 @@
 		D7B2F21E27C97D29002DFC41 /* SharedViews */ = {
 			isa = PBXGroup;
 			children = (
+				D7D0B86527D052EB00C1C873 /* MainView.swift */,
 				D7B2F23327C98578002DFC41 /* HomeView.swift */,
 				D7B2F22327C97EF0002DFC41 /* MoviesView.swift */,
 				D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */,
@@ -286,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F23927C98CCB002DFC41 /* RootView+iOS.swift */,
-				D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */,
 				D735DECC27CABCCF00C63E1D /* PartsView+iOS.swift */,
 			);
 			path = iOS;
@@ -296,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */,
-				D74F34A627D31232009377FA /* TabsView+tvOS.swift */,
 				D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */,
 				D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */,
 				D735DED927CB088900C63E1D /* PlayerMetaData+tvOS.swift */,
@@ -474,9 +467,8 @@
 				D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D735DEB927C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
-				D75630AA27E4594F007A624C /* MainView+macOS.swift in Sources */,
+				D75630AA27E4594F007A624C /* MainView.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
-				D74F34A527D30F2A009377FA /* SidebarView+iOS.swift in Sources */,
 				D735DEB127C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */,
 				D7D0B86227D052B900C1C873 /* RouterModel.swift in Sources */,
@@ -490,7 +482,7 @@
 			files = (
 				D735DED327CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D78850CC27D83389002DC6FC /* ArtistsView.swift in Sources */,
-				D7D0B86627D052EB00C1C873 /* MainView+macOS.swift in Sources */,
+				D7D0B86627D052EB00C1C873 /* MainView.swift in Sources */,
 				D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */,
 				D735DEC827CABC2C00C63E1D /* PartsView+macOS.swift in Sources */,
 				D7B2F22D27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
@@ -528,7 +520,7 @@
 				D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */,
 				D78850CD27D83389002DC6FC /* ArtistsView.swift in Sources */,
 				D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */,
-				D75630A727E43879007A624C /* MainView+macOS.swift in Sources */,
+				D75630A727E43879007A624C /* MainView.swift in Sources */,
 				D735DED427CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D78850D127D85A9B002DC6FC /* SongsView.swift in Sources */,
@@ -538,13 +530,11 @@
 				D735DEB727C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */,
 				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
-				D74F34A727D31232009377FA /* TabsView+tvOS.swift in Sources */,
 				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D7D0B86A27D0673B00C1C873 /* Route.swift in Sources */,
 				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
 				D735DEDA27CB088900C63E1D /* PlayerMetaData+tvOS.swift in Sources */,
 				D735DEDC27CB1CB100C63E1D /* Extensions+tvOS.swift in Sources */,
-				D75630A827E43902007A624C /* SidebarView+iOS.swift in Sources */,
 				D7EC594A27C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,

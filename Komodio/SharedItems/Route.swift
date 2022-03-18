@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  Route.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 03/03/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

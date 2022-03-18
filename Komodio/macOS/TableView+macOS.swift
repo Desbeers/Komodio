@@ -1,5 +1,5 @@
 //
-//  TableView.swift
+//  TableView+macOS.swift
 //  Komodio
 //
 //  © 2022 Nick Berendsen

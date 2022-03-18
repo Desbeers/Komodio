@@ -2,21 +2,12 @@
 //  LabelStyles.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 27/02/2022.
-//
-
-import SwiftUI
-
-//
-//  LabelStyles.swift
-//  Komodio
-//
 //  © 2022 Nick Berendsen
 //
 
 import SwiftUI
 
-/// A collection of Label syles
+/// A collection of Label styles
 struct LabelStyles {
     /// Just a Namespace here...
 }

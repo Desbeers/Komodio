@@ -1,15 +1,12 @@
 //
 //  MainView.swift
-//  Router
+//  Komodio
 //
-//  Created by Nick Berendsen on 02/03/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
-#if os(tvOS)
-import UIKit
-#endif
 
 struct MainView: View {
     /// The Router model

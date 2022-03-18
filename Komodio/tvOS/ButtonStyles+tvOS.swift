@@ -1,5 +1,5 @@
 //
-//  ButtonStyle+tvOS.swift
+//  ButtonStyles+tvOS.swift
 //  Komodio
 //
 //  © 2022 Nick Berendsen
