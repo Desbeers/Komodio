@@ -43,7 +43,8 @@ extension PartsView {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .animation(.default, value: router.routes)
-            .padding()
+            //.padding(.top)
+            //.padding()
             .frame(height: 60)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.thinMaterial)

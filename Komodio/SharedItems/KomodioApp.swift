@@ -18,6 +18,7 @@ import SwiftlyKodiAPI
     var body: some Scene {
         WindowGroup {
             RootView()
+                .frame(minWidth: 800, minHeight: 600)
             .environmentObject(kodi)
             .ignoresSafeArea()
             .task {

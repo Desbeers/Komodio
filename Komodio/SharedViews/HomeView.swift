@@ -19,7 +19,7 @@ struct HomeView: View {
         ItemsView.List() {
             VStack {
             //HStack(alignment: .top) {
-            #if !os(macOS)
+            //#if !os(macOS)
             HStack {
                 ForEach(Route.menuItems, id: \.self) { item in
                     RouterLink(item: item) {
@@ -37,7 +37,7 @@ struct HomeView: View {
             //.buttonStyle(.card)
             .padding()
             //.padding(.top, 200)
-            #endif
+            //#endif
                 VStack {
             Row(title: "Latest unwatched Movies", items: $items.movies)
             /// Move the first row below the tabs on tvOS

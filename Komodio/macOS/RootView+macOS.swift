@@ -8,17 +8,18 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The Root View of Komodio
 struct RootView: View {
     /// The Router model
-    @StateObject var router: Router = Router()
+    @StateObject var router = Router()
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
     /// The View
     var body: some View {
-        NavigationView {
-            SidebarView()
+        if kodi.loadingState == .done {
             MainView()
-                .background(Color(nsColor: .textBackgroundColor))
+                .environmentObject(router)
+        } else {
+            LoadingView()
         }
-        .environmentObject(router)
     }
 }
