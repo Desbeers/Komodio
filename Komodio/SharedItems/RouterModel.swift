@@ -41,13 +41,19 @@ class Router: ObservableObject {
             routes.append(route)
         }
     }
+    
+    @discardableResult
+    func pop() -> Route? {
+        return routes.popLast()
+    }
+    
 #endif
     
     // MARK: iOS
     
 #if os(iOS)
     /// Don't publish it for iOS or else the NavigationLink got nuts
-    var routes: [Route] = [.home]
+    @Published var routes: [Route] = [.home]
     
     func push(_ route: Route) {
         if routes.contains(route) {
@@ -55,6 +61,11 @@ class Router: ObservableObject {
         } else {
             routes.append(route)
         }
+    }
+    
+    @discardableResult
+    func pop() -> Route? {
+        return routes.popLast()
     }
 #endif
     

@@ -26,7 +26,11 @@ enum Route: Equatable, Hashable {
     case songs(album: MediaItem)
     case table
     /// The items to show as main menu items
+    #if os(tvOS)
+    static let menuItems: [Route] = [.movies, tvshows, musicVideos, artists, genres]
+    #else
     static let menuItems: [Route] = [.home, .movies, tvshows, musicVideos, artists, genres]
+    #endif
 }
 
 extension Route {

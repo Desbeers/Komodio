@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
 
 struct RootView: View {
@@ -12,18 +11,11 @@ struct RootView: View {
     @StateObject var router = Router()
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-//    init(){
-//        UINavigationBar.setAnimationsEnabled(false)
-//    }
     /// The View
     var body: some View {
         if kodi.loadingState == .done {
-            NavigationView {
-                TabView() {
-                    TabsView()
-                }
-            }
-            .environmentObject(router)
+            MainView()
+                .environmentObject(router)
         } else {
             LoadingView()
         }

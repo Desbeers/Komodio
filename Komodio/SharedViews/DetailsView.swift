@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct DetailsView: View {
+    @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Kodi item for the details
@@ -80,10 +81,6 @@ struct DetailsView: View {
             if let update = kodi.media.first(where: { $0.id == item.id} ) {
                 item = update
             }
-        }
-        .task {
-            print(item.file)
-            print(item.poster)
         }
         .tvOS { $0.ignoresSafeArea() }
         .iOS { $0.ignoresSafeArea(.all, edges: .bottom) }

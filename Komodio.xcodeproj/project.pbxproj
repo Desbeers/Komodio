@@ -38,6 +38,10 @@
 		D74F34A527D30F2A009377FA /* SidebarView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */; };
 		D74F34A727D31232009377FA /* TabsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A627D31232009377FA /* TabsView+tvOS.swift */; };
 		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
+		D75630A727E43879007A624C /* MainView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */; };
+		D75630A827E43902007A624C /* SidebarView+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A427D30F2A009377FA /* SidebarView+iOS.swift */; };
+		D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
+		D75630AA27E4594F007A624C /* MainView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView+macOS.swift */; };
 		D78850C727D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
 		D78850C827D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
 		D78850C927D82C21002DC6FC /* AlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78850C627D82C21002DC6FC /* AlbumsView.swift */; };
@@ -77,7 +81,6 @@
 		D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
 		D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
 		D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24027C99465002DFC41 /* DetailsView.swift */; };
-		D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
 		D7CCA97127CC3B19001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */; };
 		D7CCA97327CC3B21001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */; };
 		D7CCA97527CC3B28001B4828 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */; };
@@ -471,6 +474,7 @@
 				D7EC594427C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D735DEB927C9F23600C63E1D /* ButtonStyles.swift in Sources */,
 				D7B2F23027C9846B002DFC41 /* LoadingView.swift in Sources */,
+				D75630AA27E4594F007A624C /* MainView+macOS.swift in Sources */,
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
 				D74F34A527D30F2A009377FA /* SidebarView+iOS.swift in Sources */,
 				D735DEB127C9EB9E00C63E1D /* Extensions.swift in Sources */,
@@ -520,11 +524,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7B2F24A27C99FA7002DFC41 /* RootView+tvOS.swift in Sources */,
 				D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */,
 				D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */,
 				D78850CD27D83389002DC6FC /* ArtistsView.swift in Sources */,
 				D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */,
+				D75630A727E43879007A624C /* MainView+macOS.swift in Sources */,
 				D735DED427CAF76300C63E1D /* EpisodesView.swift in Sources */,
 				D7B2F22E27C97F2D002DFC41 /* MusicVideosView.swift in Sources */,
 				D78850D127D85A9B002DC6FC /* SongsView.swift in Sources */,
@@ -532,6 +536,7 @@
 				D7B2F22627C97EF0002DFC41 /* MoviesView.swift in Sources */,
 				D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEB727C9F1C400C63E1D /* ItemsView.swift in Sources */,
+				D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */,
 				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D74F34A727D31232009377FA /* TabsView+tvOS.swift in Sources */,
 				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
@@ -539,6 +544,7 @@
 				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
 				D735DEDA27CB088900C63E1D /* PlayerMetaData+tvOS.swift in Sources */,
 				D735DEDC27CB1CB100C63E1D /* Extensions+tvOS.swift in Sources */,
+				D75630A827E43902007A624C /* SidebarView+iOS.swift in Sources */,
 				D7EC594A27C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594627C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */,

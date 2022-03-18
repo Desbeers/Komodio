@@ -8,27 +8,16 @@ import SwiftlyKodiAPI
 
 struct RootView: View {
     /// The Router model
-    @StateObject var router: Router = Router()
+    @StateObject var router = Router()
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The View
     var body: some View {
-        
         if kodi.loadingState == .done {
-            NavigationView {
-                SidebarView()
-                HomeView()
-            }
-            .environmentObject(router)
+            MainView()
+                .environmentObject(router)
         } else {
             LoadingView()
         }
-        
-        
-//        NavigationView {
-//            SidebarView()
-//            HomeView()
-//        }
-//        .environmentObject(router)
     }
 }

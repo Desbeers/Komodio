@@ -7,6 +7,9 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+#if os(tvOS)
+import UIKit
+#endif
 
 struct MainView: View {
     @EnvironmentObject var router: Router
@@ -26,5 +29,15 @@ struct MainView: View {
         }
         .fanartBackground(fanart: router.fanart)
         .animation(.default, value: router.currentRoute)
+#if os(tvOS)
+.onExitCommand {
+    if router.routes.count > 1 {
+        router.pop()
+    } else {
+        logger("We are at the root")
+        UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+    }
+}
+#endif
     }
 }
