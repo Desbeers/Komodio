@@ -64,9 +64,10 @@ extension ButtonStyles {
                 .onHover { hover in
                     isHovered = hover
                 }
-                .scaleEffect(focused ? 1.05 : 1)
-                .animation(.default, value: focused)
+                .scaleEffect(isHovered ? 1.02 : 1)
+                .animation(.default, value: isHovered)
                 .opacity(configuration.isPressed ? 0.8 : 1)
+                .shadow(color: .secondary, radius: 20 , x: 0, y: isHovered ? 20 : 5)
         }
     }
 }

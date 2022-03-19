@@ -38,6 +38,19 @@ extension PartsView {
                     Text(router.title)
                         .font(.title)
                 }
+                .frame(width: 400, alignment: .leading)
+                Spacer()
+                Divider()
+                HStack {
+                    ForEach(Route.menuItems, id: \.self) { item in
+                        RouterLink(item: item) {
+                            Label(item.title, systemImage: item.symbol)
+                                .labelStyle(LabelStyles.MenuItem())
+                                .padding()
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
             }
             .animation(.default, value: router.title)
             .padding(.top)

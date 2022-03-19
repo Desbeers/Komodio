@@ -18,7 +18,9 @@ struct HomeView: View {
     var body: some View {
         ItemsView.List() {
             VStack {
+                #if !os(macOS)
                 PartsView.MenuItems()
+                #endif
                 VStack {
                     Row(title: "Latest unwatched Movies", items: $items.movies)
                     /// Move the first row below the tabs on tvOS
