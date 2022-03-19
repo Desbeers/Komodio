@@ -17,7 +17,7 @@ class Router: ObservableObject {
     
     struct RouteItem: Equatable {
         var route: Route = .home
-        var itemID: String = ""
+        var itemID: String = "home"
     }
     
     var title: String {

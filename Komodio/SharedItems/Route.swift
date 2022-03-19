@@ -77,17 +77,17 @@ extension Route {
 
 extension Route {
     
-    /// The title of the route item
+    /// The ID of the route item
     var itemID: String {
         switch self {
         case .home:
-            return ""
+            return "home"
         case .movies:
-            return ""
+            return "movies"
         case .moviesSet(let set):
             return set.id
         case .tvshows:
-            return "TV shows"
+            return ""
         case .episodes(let tvshow):
             return tvshow.id
         case .musicVideos:

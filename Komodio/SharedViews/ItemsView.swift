@@ -40,15 +40,24 @@ extension ItemsView {
                 }
                 .task {
                     /// Scroll to the last selected item on this View
+                    
+                    logger("Scrolling to \(router.currentRoute.itemID)")
+#if os(tvOS)
+                    /// Focus on top for tvOS, then it will select the last item again
+                    /// - Note: Don't scroll on the homepage, focus will be confused...
+                    if router.currentRoute.route != .home {
+                        proxy.scrollTo(router.currentRoute.itemID, anchor: .top)
+                    }
+#else
                     withAnimation(.linear(duration: 1)) {
                         proxy.scrollTo(router.currentRoute.itemID, anchor: .center)
                     }
+#endif
                 }
             }
         }
     }
 }
-
 
 extension ItemsView {
     
