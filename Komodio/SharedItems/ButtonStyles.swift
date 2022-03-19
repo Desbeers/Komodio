@@ -56,8 +56,8 @@ extension ButtonStyles {
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
             /// Slow in the simulator; check on a real aTV
-            /// .background(focused ? .thickMaterial : .ultraThinMaterial)
-                .background(Color("ListButtonColor").opacity(isHovered ? 0.8 : 0.5))
+                .background(isHovered ? .thickMaterial : .ultraThinMaterial)
+                //.background(Color("ListButtonColor").opacity(isHovered ? 0.8 : 0.5))
                 .cornerRadius(6)
                 .padding(.horizontal, 40)
                 .padding(.vertical, 15)

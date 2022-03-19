@@ -18,7 +18,7 @@ import SwiftlyKodiAPI
     var body: some Scene {
         WindowGroup {
             RootView()
-                .frame(minWidth: 800, minHeight: 600)
+                .frame(minWidth: 1000, minHeight: 600)
             .environmentObject(kodi)
             .ignoresSafeArea()
             .task {
@@ -26,13 +26,16 @@ import SwiftlyKodiAPI
                     await kodi.connectToHost(kodiHost: HostItem(ip: "192.168.11.200"))
                 }
             }
+            #if os(macOS)
+            .background(Color(nsColor: .textBackgroundColor))
+            #endif
         }
 #if os(macOS)
-        //.windowToolbarStyle(.unifiedCompact(showsTitle: true))
+        //.windowToolbarStyle(.unified)
         .windowStyle(.hiddenTitleBar)
-        .commands {
-            SidebarCommands()
-        }
+//        .commands {
+//            SidebarCommands()
+//        }
 #endif
     }
 }

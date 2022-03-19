@@ -33,7 +33,7 @@ extension ItemsView {
                     content
                 }
                 /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
-                .macOS { $0.padding(.top, 60)}
+                .macOS { $0.padding(.top, 80)}
                 .tvOS { $0.padding(.top, 200)}
                 .iOS { $0.padding(.top, 120)}
             }
