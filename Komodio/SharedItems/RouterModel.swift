@@ -33,13 +33,10 @@ class Router: ObservableObject {
     }
     
     func push(_ route: Route) {
-        /// Need below because `routes` is an `[Enum]`??
-        //objectWillChange.send()
-        
-        //logger("Push, id = \(route.itemID)")
-        
+        /// Store the last selected item
         routes[routes.endIndex-1].itemID = route.itemID
-        
+        logger(route.itemID)
+        /// Push the new View
         routes.append(RouteItem(route: route, itemID: route.itemID))
     }
     
