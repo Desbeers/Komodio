@@ -14,6 +14,27 @@ struct PartsView {
 
 extension PartsView {
     
+    /// The menu items
+    struct MenuItems: View {
+        var body: some View {
+            HStack {
+                ForEach(Route.menuItems, id: \.self) { item in
+                    RouterLink(item: item) {
+                        Label(item.title, systemImage: item.symbol)
+                            .labelStyle(LabelStyles.GridItem())
+                            .frame(width: 200)
+                            .padding()
+                    }
+                }
+            }
+            .buttonStyle(ButtonStyles.GridItem())
+            .padding()
+        }
+    }
+}
+
+extension PartsView {
+    
     /// A Button to toggle the watched status of a Kodi item
     struct WatchedToggle: View {
         /// The item we want to toggle

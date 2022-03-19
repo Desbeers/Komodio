@@ -22,20 +22,28 @@ extension ItemsView {
         @EnvironmentObject var router: Router
         
         private var content: Content
-        /// StackNavView
+        /// Build the View
         init(@ViewBuilder content: () -> Content) {
             self.content = content()
         }
-        ///The View
+        /// The View
         var body: some View {
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    content
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        content
+                    }
+                    /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
+                    .macOS { $0.padding(.top, 80)}
+                    .tvOS { $0.padding(.top, 200)}
+                    .iOS { $0.padding(.top, 120)}
                 }
-                /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
-                .macOS { $0.padding(.top, 80)}
-                .tvOS { $0.padding(.top, 200)}
-                .iOS { $0.padding(.top, 120)}
+                .task {
+                    /// Scroll to the last selected item on this View
+                    withAnimation(.linear(duration: 1)) {
+                        proxy.scrollTo(router.currentRoute.itemID, anchor: .center)
+                    }
+                }
             }
         }
     }
@@ -116,7 +124,7 @@ extension ItemsView {
     }
     
     
-
+    
     
     struct FanartModifier: ViewModifier {
         let fanart: String

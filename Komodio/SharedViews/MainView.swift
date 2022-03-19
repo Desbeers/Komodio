@@ -16,15 +16,15 @@ struct MainView: View {
     var body: some View {
         ZStack(alignment: .top) {
             if kodi.loadingState == .done, let route = router.routes.last {
-                route.destination
+                route.route.destination
             } else {
                 LoadingView()
             }
-            if !router.currentRoute.isPlayer {
-            VStack {
-                PartsView.TitleHeader()
-                Spacer()
-            }
+            if !router.currentRoute.route.isPlayer {
+                VStack {
+                    PartsView.TitleHeader()
+                    Spacer()
+                }
             }
         }
         .fanartBackground(fanart: router.fanart)

@@ -77,6 +77,47 @@ extension Route {
 
 extension Route {
     
+    /// The title of the route item
+    var itemID: String {
+        switch self {
+        case .home:
+            return ""
+        case .movies:
+            return ""
+        case .moviesSet(let set):
+            return set.id
+        case .tvshows:
+            return "TV shows"
+        case .episodes(let tvshow):
+            return tvshow.id
+        case .musicVideos:
+            return ""
+        case .musicVideosItems(let artist):
+            return artist.id
+        case .musicVideosAlbum(let album):
+            return album.id
+        case .genres:
+            return ""
+        case .genresItems(let genre):
+            return genre.id
+        case .details(let item):
+            return item.id
+        case .player:
+            return ""
+        case .table:
+            return ""
+        case .artists:
+            return ""
+        case .albums(let artist):
+            return artist.id
+        case .songs(let album):
+            return album.id
+        }
+    }
+}
+
+extension Route {
+    
     /// The SF symbol for the route item
     /// - Note: Only main menu items need to have a symbol
     var symbol: String {

@@ -18,34 +18,15 @@ struct HomeView: View {
     var body: some View {
         ItemsView.List() {
             VStack {
-            //HStack(alignment: .top) {
-            //#if !os(macOS)
-            HStack {
-                ForEach(Route.menuItems, id: \.self) { item in
-                    RouterLink(item: item) {
-                        Label(item.title, systemImage: item.symbol)
-                            .labelStyle(LabelStyles.GridItem())
-                            
-                        //Text(item.title)
-                            .frame(width: 200)
-                            .padding()
-                    }
-                    //.background(.green)
-                }
-            }
-            .buttonStyle(ButtonStyles.GridItem())
-            //.buttonStyle(.card)
-            .padding()
-            //.padding(.top, 200)
-            //#endif
+                PartsView.MenuItems()
                 VStack {
-            Row(title: "Latest unwatched Movies", items: $items.movies)
-            /// Move the first row below the tabs on tvOS
-            //.tvOS { $0.padding(.top, 160) }
-            Row(title: "Random Music Videos", items: $items.musicvideos)
-            Row(title: "Latest TV show Episodes", items: $items.episodes)
-            libraryReloadButton
-            }
+                    Row(title: "Latest unwatched Movies", items: $items.movies)
+                    /// Move the first row below the tabs on tvOS
+                    //.tvOS { $0.padding(.top, 160) }
+                    Row(title: "Random Music Videos", items: $items.musicvideos)
+                    Row(title: "Latest TV show Episodes", items: $items.episodes)
+                    libraryReloadButton
+                }
             }
         }
         .buttonStyle(ButtonStyles.HomeItem())
@@ -69,7 +50,7 @@ struct HomeView: View {
                 Text("Reload Library")
                     .padding()
             })
-                .padding(.all, 40)
+            .padding(.all, 40)
         }
         .frame(maxWidth: .infinity)
 #if os(tvOS)
@@ -81,18 +62,18 @@ struct HomeView: View {
     /// Get the home items
     private func getHomeItems() -> HomeItems {
         return HomeItems(movies: Array(kodi.media
-                                        .filter { $0.media == .movie && $0.playcount == 0 }
-                                        .sorted { $0.dateAdded > $1.dateAdded }
-                                        .prefix(10)),
+            .filter { $0.media == .movie && $0.playcount == 0 }
+            .sorted { $0.dateAdded > $1.dateAdded }
+            .prefix(10)),
                          musicvideos: Array(kodi.media
-                                                .filter { $0.media == .musicVideo && !$0.poster.isEmpty }
-                                                .shuffled()
-                                                .prefix(10)),
+                            .filter { $0.media == .musicVideo && !$0.poster.isEmpty }
+                            .shuffled()
+                            .prefix(10)),
                          episodes: Array(kodi.media
-                                            .filter { $0.media == .episode && $0.playcount == 0 }
-                                            .sorted { $0.dateAdded > $1.dateAdded }
-                                            .unique { $0.tvshowID }
-                                            .prefix(10))
+                            .filter { $0.media == .episode && $0.playcount == 0 }
+                            .sorted { $0.dateAdded > $1.dateAdded }
+                            .unique { $0.tvshowID }
+                            .prefix(10))
         )
         
     }

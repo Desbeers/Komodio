@@ -25,5 +25,6 @@ struct RouterLink<Label: View>: View {
         }, label: {
             label
         })
+        .id(item.itemID)
     }
 }

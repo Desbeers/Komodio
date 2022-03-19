@@ -34,6 +34,7 @@ struct ArtistsView: View {
                         }
                         .frame(width: 300)
                     }
+                    //.id(artist.id)
 
                 }
                 .buttonStyle(ButtonStyles.HomeItem())

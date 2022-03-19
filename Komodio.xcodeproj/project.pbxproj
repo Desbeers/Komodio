@@ -34,7 +34,6 @@
 		D735DEDE27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
-		D74F34A327D30768009377FA /* SidebarView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A127D303A1009377FA /* SidebarView+macOS.swift */; };
 		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
 		D75630A727E43879007A624C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView.swift */; };
 		D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
@@ -115,7 +114,6 @@
 		D735DED927CB088900C63E1D /* PlayerMetaData+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerMetaData+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
-		D74F34A127D303A1009377FA /* SidebarView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView+macOS.swift"; sourceTree = "<group>"; };
 		D74F34A827D3FB5D009377FA /* TableView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView+macOS.swift"; sourceTree = "<group>"; };
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D78850C627D82C21002DC6FC /* AlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsView.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				D7B2F21F27C97D4A002DFC41 /* RootView+macOS.swift */,
-				D74F34A127D303A1009377FA /* SidebarView+macOS.swift */,
 				D74F34A827D3FB5D009377FA /* TableView+macOS.swift */,
 				D735DEC627CABC2C00C63E1D /* PartsView+macOS.swift */,
 				D735DED527CB07D800C63E1D /* Extensions+macOS.swift */,
@@ -498,7 +495,6 @@
 				D7EC594927C9C5B8004FFC57 /* PartsView.swift in Sources */,
 				D7EC594527C9BB53004FFC57 /* PlayerView.swift in Sources */,
 				D735DEBA27C9F23600C63E1D /* ButtonStyles.swift in Sources */,
-				D74F34A327D30768009377FA /* SidebarView+macOS.swift in Sources */,
 				D7B2F23127C9846B002DFC41 /* LoadingView.swift in Sources */,
 				D735DECF27CACAA400C63E1D /* DetailsView.swift in Sources */,
 				D78850C827D82C21002DC6FC /* AlbumsView.swift in Sources */,
