@@ -20,9 +20,9 @@ struct HomeView: View {
     var body: some View {
         ItemsView.List() {
             VStack {
-#if !os(macOS)
+//#if !os(macOS)
                 PartsView.MenuItems()
-#endif
+//#endif
                 VStack {
                     Row(title: "Latest\nunwatched\nMovies", items: $items.movies)
                     Row(title: "Random\nMusic\nVideos", items: $items.musicvideos)
@@ -95,7 +95,7 @@ extension HomeView {
         @Binding var items: [MediaItem]
         /// The View
         var body: some View {
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .center) {
                     Text(title)
                         .multilineTextAlignment(.trailing)
@@ -107,11 +107,20 @@ extension HomeView {
                     ForEach($items) { $item in
                         HStack {
                         Item(item: $item)
+                                .zIndex(2)
                         if item == appState.hoveredMediaItem, !item.description.isEmpty {
+                            
                                 Text(item.description)
+                                
                                     .padding()
-                                    .frame(width: 300, height: 500)
+                                    .background(.ultraThinMaterial)
+                                    .cornerRadius(6)
+                                    .macOS { $0.frame(width: 300, height: 200) }
+                                    .tvOS { $0.padding(.leading, -50).frame(width: 300, height: 500) }
+                                    .iOS { $0.frame(width: 300, height: 300) }
                                     .transition(.opacity)
+                                    .padding(.bottom)
+                                    .zIndex(1)
                             }
                         }
                     }

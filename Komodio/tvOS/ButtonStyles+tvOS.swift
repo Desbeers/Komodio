@@ -23,35 +23,19 @@ extension ButtonStyles {
         @Environment(\.isFocused) var focused: Bool
         /// The Kodi item
         var item: SwiftlyKodiAPI.MediaItem
-        /// Is the button hovered or not
-        //@State private var isHovered = false
         /// The View
         func makeBody(configuration: Configuration) -> some View {
-            //Button(action: configuration.trigger, label: {
-            HStack(spacing: 0) {
-                configuration.label
-//                if focused, !item.description.isEmpty {
-//                    Text(item.description)
-//                        .padding()
-//                        .frame(width: 300, height: 500)
-//                        .transition(.move(edge: .top))
-//                }
-                
-            }
+            configuration.label
             .cornerRadius(6)
             .zIndex(focused ? 2 : 1)
             .padding(.all, 4)
             .background(.ultraThinMaterial)
             .cornerRadius(8)
-            //.padding(.bottom, 20)
             .scaleEffect(focused ? 1.05 : 1)
             .shadow(color: .secondary, radius: focused ? 10 : 0 , x: 0, y: focused ? 10 : 0)
-            //            })
-            //            .buttonStyle(.plain)
             .animation(.default, value: focused)
-            
-            .padding(.vertical, 30)
-            .padding(.bottom, 20)
+            .padding(.vertical, 40)
+            .padding(.bottom, 10)
             .onChange(of: focused) { focus in
                 if focus {
                     appState.setHoveredMediaItem(item: item)
@@ -61,51 +45,7 @@ extension ButtonStyles {
             }
         }
     }
-    
-    /// Button style for a Home item
-    struct AAHomeItem: PrimitiveButtonStyle {
-        /// The focus state from the environment
-        @Environment(\.isFocused) var focused: Bool
-        /// The Kodi item
-        var item: SwiftlyKodiAPI.MediaItem
-        func makeBody(configuration: Configuration) -> some View {
-            return Button(action: configuration.trigger, label: {
-                HomeItemLabel(item: item, label: configuration.label)
-//                HStack {
-//                configuration
-//                    .label
-//                    if focused {
-//                        Text(item.description)
-//                    }
-//                }
-            })
-            .buttonStyle(.card)
-            .padding(.top, 20)
-            .padding(.bottom, 75)
-        }
-    }
-    
-    struct HomeItemLabel: View {
-        /// The focus state from the environment
-        @Environment(\.isFocused) var focused: Bool
-        
-        var item: SwiftlyKodiAPI.MediaItem
-        var label: PrimitiveButtonStyleConfiguration.Label
-        /// Init the HomeItemLabel
-        /// The View
-        var body: some View {
-            VStack {
-                label
-                if focused, !item.description.isEmpty {
-                    Text(item.description)
-                        .padding()
-                        .frame(width: 600, height: 500)
-                        .transition(.move(edge: .top))
-                }
-            }
-            .frame(width: focused ? 600 : 300, height: 500)
-        }
-    }
+
     
     /// Button style for a Kodi item
     struct MediaItem: ButtonStyle {

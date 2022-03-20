@@ -17,41 +17,32 @@ extension PartsView {
         
         /// The View
         var body: some View {
-            HStack(alignment: .center) {
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
                 if router.routes.count > 1 {
                     Button(action: {
                         router.pop()
                     },
                            label: {
-                        Image(systemName: "chevron.backward.square.fill")
+                        Image(systemName: "chevron.backward")
                     })
                     .keyboardShortcut(.cancelAction)
                     .help("Go back")
-                    .font(.title)
+                    //.font(.title)
                     .buttonStyle(.plain)
+                    .padding(.trailing)
                     //.padding(.top)
                 }
-                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                //HStack(alignment: .firstTextBaseline, spacing: 0) {
                     Text(router.subtitle ?? "Komodio")
+                    .opacity(0.5)
                         .padding(.trailing)
-                        .font(.headline)
+                        //.background(.green)
+                        //.font(.headline)
+                //Image(systemName: "arrow.forward")
                     Text(router.title)
-                        .font(.title)
-                }
-                .frame(width: 400, alignment: .leading)
-                Spacer()
-                Divider()
-                HStack(alignment: .bottom) {
-                    ForEach(Route.menuItems, id: \.self) { item in
-                        RouterLink(item: item) {
-                            Label(item.title, systemImage: item.symbol)
-                                .labelStyle(LabelStyles.MenuItem())
-                                .padding()
-                        }
-                    }
-                }
-                .buttonStyle(.plain)
+                        
             }
+            .font(.title)
             .animation(.default, value: router.title)
             .padding(.top)
             .padding()

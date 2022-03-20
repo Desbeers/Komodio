@@ -18,39 +18,48 @@ extension ButtonStyles {
     
     /// Button style for a Home item
     struct HomeItem: PrimitiveButtonStyle {
-        /// The focus state from the environment
-        @Environment(\.isFocused) var focused: Bool
+        /// The AppState model
+        @EnvironmentObject var appState: AppState
         /// The Kodi item
         var item: SwiftlyKodiAPI.MediaItem
         /// Is the button hovered or not
         @State private var isHovered = false
+        private var focused: Bool {
+            if isHovered || appState.hoveredMediaItem == item {
+                return true
+            }
+            return false
+        }
         /// The View
         func makeBody(configuration: Configuration) -> some View {
-            Button(action: configuration.trigger, label: {
-                HStack {
+            //Button(action: configuration.trigger, label: {
+ 
                     configuration.label
-//                    if isHovered, !item.description.isEmpty {
-//                        Text(item.description)
-//                            .padding()
-//                            .frame(width: 300, height: 200)
-//                    }
-                }
+
+
                     .cornerRadius(6)
-                    .zIndex(isHovered ? 2 : 1)
+                    .zIndex(focused ? 2 : 1)
                     .padding(.all, 2)
                     .background(.ultraThinMaterial)
                     .cornerRadius(6)
                     .padding(.bottom, 20)
-                    .scaleEffect(isHovered ? 1.05 : 1)
-                    .shadow(color: .secondary, radius: isHovered ? 10 : 0 , x: 0, y: isHovered ? 10 : 0)
-            })
+                    .scaleEffect(focused ? 1.05 : 1)
+                    .shadow(color: .secondary, radius: focused ? 10 : 0 , x: 0, y: focused ? 10 : 0)
+            //})
                 .buttonStyle(.plain)
                 .animation(.easeInOut, value: isHovered)
                 .onHover { hover in
                     isHovered = hover
-                    //AppState.setHoveredMediaItem(item: item)
                 }
                 .padding(.vertical, 15)
+                .gesture(TapGesture(count: 2).onEnded {
+                    print("double clicked")
+                    configuration.trigger()
+                })
+                .gesture(TapGesture(count: 1).onEnded {
+                    print("single clicked")
+                    appState.setHoveredMediaItem(item: appState.hoveredMediaItem == item ? nil : item)
+                })
         }
     }
 }
