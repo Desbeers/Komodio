@@ -29,6 +29,7 @@ extension PartsView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 180)
             .background(.ultraThinMaterial)
+            .shadow(radius: 1)
         }
     }
 }

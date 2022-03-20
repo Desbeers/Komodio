@@ -39,9 +39,10 @@ final class AppState: ObservableObject {
 
     /// Set the hovered Kodi item from the UI to the published Var
     /// - Parameter item: The Kodi item
-    static func setHoveredMediaItem(item: MediaItem?) {
-        Task { @MainActor in
+    func setHoveredMediaItem(item: MediaItem?) {
+        let _ = print("\(item?.title) has focus")
+        //Task { @MainActor in
             AppState.shared.hoveredMediaItem = item
-        }
+        //}
     }
 }

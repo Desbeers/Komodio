@@ -36,9 +36,10 @@ struct AlbumsView: View {
                         }
                         .frame(width: 300)
                     }
+                    .buttonStyle(ButtonStyles.HomeItem(item: album))
 
                 }
-                .buttonStyle(ButtonStyles.HomeItem())
+                //.buttonStyle(ButtonStyles.HomeItem())
             }
             .macOS { $0.padding(.top, 40) }
             .tvOS { $0.padding(.horizontal, 100) }

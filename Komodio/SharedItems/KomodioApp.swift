@@ -20,6 +20,7 @@ import SwiftlyKodiAPI
             RootView()
                 .frame(minWidth: 1000, minHeight: 600)
             .environmentObject(kodi)
+            .environmentObject(appState)
             .ignoresSafeArea()
             .task {
                 if kodi.loadingState == .start {

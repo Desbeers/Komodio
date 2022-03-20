@@ -29,19 +29,19 @@ extension PartsView {
                     .help("Go back")
                     .font(.title)
                     .buttonStyle(.plain)
-                    .padding(.top)
+                    //.padding(.top)
                 }
-                VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
                     Text(router.subtitle ?? "Komodio")
-                        .padding(.leading, 2)
-                        .font(.subheadline)
+                        .padding(.trailing)
+                        .font(.headline)
                     Text(router.title)
                         .font(.title)
                 }
                 .frame(width: 400, alignment: .leading)
                 Spacer()
                 Divider()
-                HStack {
+                HStack(alignment: .bottom) {
                     ForEach(Route.menuItems, id: \.self) { item in
                         RouterLink(item: item) {
                             Label(item.title, systemImage: item.symbol)

@@ -34,10 +34,11 @@ struct ArtistsView: View {
                         }
                         .frame(width: 300)
                     }
+                    .buttonStyle(ButtonStyles.HomeItem(item: artist))
                     //.id(artist.id)
 
                 }
-                .buttonStyle(ButtonStyles.HomeItem())
+                //.buttonStyle(ButtonStyles.HomeItem())
                 //.buttonStyle(ButtonStyles.GridItem())
             }
             .macOS { $0.padding(.top, 40) }

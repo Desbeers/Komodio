@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct HomeView: View {
+    /// The AppState model
+    //@EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Kodi items to show in this View
@@ -18,27 +20,27 @@ struct HomeView: View {
     var body: some View {
         ItemsView.List() {
             VStack {
-                #if !os(macOS)
+#if !os(macOS)
                 PartsView.MenuItems()
-                #endif
+#endif
                 VStack {
-                    Row(title: "Latest unwatched Movies", items: $items.movies)
-                    /// Move the first row below the tabs on tvOS
-                    //.tvOS { $0.padding(.top, 160) }
-                    Row(title: "Random Music Videos", items: $items.musicvideos)
-                    Row(title: "Latest TV show Episodes", items: $items.episodes)
+                    Row(title: "Latest\nunwatched\nMovies", items: $items.movies)
+                    Row(title: "Random\nMusic\nVideos", items: $items.musicvideos)
+                    Row(title: "Latest\nTV show\nEpisodes", items: $items.episodes)
                     libraryReloadButton
                 }
             }
         }
-        .buttonStyle(ButtonStyles.HomeItem())
-        .tvOS { $0.ignoresSafeArea(.all) }
         .task {
             items = getHomeItems()
         }
         .onChange(of: kodi.media) { _ in
             items = getHomeItems()
         }
+//        .onChange(of: appState.hoveredMediaItem) { item in
+//            logger("Focus: \(item?.title)")
+//        }
+//        .animation(.default, value: appState.hoveredMediaItem)
     }
     /// A library 'reload' button
     var libraryReloadButton: some View {
@@ -85,28 +87,38 @@ extension HomeView {
     
     /// A View with a row of Kodi items
     struct Row: View {
+        /// The AppState model
+        @EnvironmentObject var appState: AppState
         /// The title of the row
         let title: String
         /// The Kodi items to show in this row
         @Binding var items: [MediaItem]
         /// The View
         var body: some View {
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.title2)
-                    .padding(.horizontal)
-                    .tvOS { $0.padding(.horizontal, 50) }
-                    .macOS { $0.padding(.top) }
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach($items) { $item in
-                            Item(item: $item)
+            ScrollView(.horizontal) {
+                HStack(alignment: .center) {
+                    Text(title)
+                        .multilineTextAlignment(.trailing)
+                        .macOS { $0.font(.title).frame(width: 120, alignment: .trailing) }
+                        .tvOS { $0.font(.headline).frame(width: 200, alignment: .trailing) }
+                        .iOS { $0.font(.title).frame(width: 180, alignment: .trailing) }
+                        .padding(.horizontal)
+                    Divider()
+                    ForEach($items) { $item in
+                        HStack {
+                        Item(item: $item)
+                        if item == appState.hoveredMediaItem, !item.description.isEmpty {
+                                Text(item.description)
+                                    .padding()
+                                    .frame(width: 300, height: 500)
+                                    .transition(.opacity)
+                            }
                         }
                     }
-                    .padding(.horizontal, 20)
-                    .tvOS { $0.padding(.horizontal, 50) }
                 }
+                .padding(.trailing, 50)
             }
+            .animation(.default, value: appState.hoveredMediaItem)
         }
     }
     
@@ -120,7 +132,7 @@ extension HomeView {
                 RouterLink(item: .details(item: item)) {
                     VStack(spacing: 0) {
                         ArtView.PosterDetail(item: item)
-                            .macOS { $0.frame(height: 300) }
+                            .macOS { $0.frame(height: 200) }
                             .tvOS { $0.frame(height: 500) }
                             .iOS { $0.frame(height: 300) }
                             .watchStatus(of: $item)
@@ -130,6 +142,7 @@ extension HomeView {
                         }
                     }
                 }
+                .buttonStyle(ButtonStyles.HomeItem(item: item))
             }
         }
     }
