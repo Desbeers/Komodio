@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 struct RootView: View {
     /// The Router model
-    @StateObject var router = Router()
+    @StateObject var router: Router = .shared
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The View

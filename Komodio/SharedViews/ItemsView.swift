@@ -43,7 +43,7 @@ extension ItemsView {
                     
                     logger("Scrolling to \(router.currentRoute.itemID)")
 #if os(tvOS)
-                    /// Focus on top for tvOS, then it will select the last item again
+                    /// Focus on top for tvOS, then it will select the last item row again
                     /// - Note: Don't scroll on the homepage, focus will be confused...
                     if router.currentRoute.route != .home {
                         proxy.scrollTo(router.currentRoute.itemID, anchor: .top)

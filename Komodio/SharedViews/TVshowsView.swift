@@ -14,6 +14,13 @@ struct TVshowsView: View {
     @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    
+    @Namespace private var namespace
+    
+    @FocusState private var focus: Bool
+    
+    @FocusState private var focusedMediaItem: MediaItem?
+    
     /// The TV shows to show
     private var tvshows: [MediaItem]
 #if os(tvOS)
@@ -25,6 +32,7 @@ struct TVshowsView: View {
 #endif
     init() {
         tvshows = KodiConnector.shared.media.filter(MediaFilter(media: .tvshow))
+        //focusedMediaItem = Router.shared.selectedMediaItem
     }
     /// The View
     var body: some View {
@@ -32,9 +40,7 @@ struct TVshowsView: View {
             ItemsView.List {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(tvshows) { tvshow in
-                        //HStack {
                         RouterLink(item: .episodes(tvshow: tvshow)) {
-                            //VStack(spacing: 0) {
                                 ArtView.PosterDetail(item: tvshow)
                                     .macOS { $0.frame(width: 150) }
                                     .tvOS { $0.frame(width: 200) }
@@ -43,6 +49,7 @@ struct TVshowsView: View {
                         .buttonStyle(ButtonStyles.HomeItem(item: tvshow))
                     }
                 }
+                .focusScope(namespace)
                 .padding(.horizontal, 20)
             }
             /// Make room for the details
@@ -51,11 +58,14 @@ struct TVshowsView: View {
             if router.selectedMediaItem != nil {
                 ItemsView.Details(item: router.selectedMediaItem!)
             }
+            
         }
         .animation(.default, value: router.selectedMediaItem)
         .task {
             logger("TV show task: \(tvshows.count)")
-            //router.setSelectedMediaItem(item: tvshows.first)
+            if router.selectedMediaItem == nil {
+                router.setSelectedMediaItem(item: tvshows.first)
+            }
         }
     }
 }

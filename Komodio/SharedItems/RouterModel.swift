@@ -11,6 +11,9 @@ import SwiftlyKodiAPI
 //@MainActor
 class Router: ObservableObject {
     
+    /// The shared instance of this KodiConnector class
+    public static let shared = Router()
+    
     /// The selected media item
     @Published var selectedMediaItem: MediaItem?
     
@@ -65,4 +68,6 @@ class Router: ObservableObject {
     var currentRoute: RouteItem {
         routes.last ?? RouteItem()
     }
+    
+    private init() {}
 }
