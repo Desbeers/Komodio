@@ -11,47 +11,82 @@ import SwiftlyKodiAPI
 
 /// A View for Episode items
 struct EpisodesView: View {
+    /// The Router model
+    @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The TV show item in the library
     let tvshow: MediaItem
     /// The Episode items to show in this view
-    @State var episodes: [MediaItem] = []
+    private var episodes: [MediaItem]
+    
+    init(tvshow: MediaItem) {
+        self.tvshow = tvshow
+        self.episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
+    }
+    
     /// The View
     var body: some View {
-        ItemsView.List() {
-            ItemsView.Description(description: tvshow.description)
-                .padding()
-            /// More padding for tvOS
-                .tvOS { $0.padding(.horizontal, 60)}
-            ForEach(seasons(episodes), id: \.self) { season in
-                VStack {
-                    Text(season == 0 ? "Specials" : "Season \(season)")
-                        .font(.title3)
-                        .padding(.top)
-                    HStack(alignment: .top) {
-                        ArtView.PosterEpisode(poster: episodes.filter { $0.season == season }.first?.poster ?? "")
-                            .cornerRadius(6)
-                            .padding()
-                        VStack {
-                            ForEach(episodes.filter { $0.season == season }) { episode in
+        
+        ZStack(alignment: .topLeading) {
+            ItemsView.List {
+                            ForEach(episodes) { episode in
                                 Link(item: episode.binding())
                             }
-                        }
-                    }
-                }
+            }
+            /// Make room for the details
+            .macOS { $0.padding(.leading, 330) }
+            .tvOS { $0.padding(.leading, 550) }
+            if router.selectedMediaItem != nil {
+                //ArtView.PosterList(poster: router.selectedMediaItem!.poster)
+                ItemsView.Details(item: router.selectedMediaItem!)
+            }
+            
+        }
+        .animation(.default, value: router.selectedMediaItem)
+        .task {
+            logger("TV show task: \(episodes.count)")
+            if router.selectedMediaItem == nil {
+                router.setSelectedMediaItem(item: episodes.first)
             }
         }
-        .task {
-            /// Filter the episodes
-            //let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
-            //episodes = kodi.media.filter(filter)
-            episodes = getEpisodes()
-            //dump(episodes)
-        }
-        .onChange(of: kodi.media) { _ in
-            episodes = getEpisodes()
-        }
+        
+        
+//        ItemsView.List() {
+//
+//            ForEach(episodes) { episode in
+//                ItemsView.Item(item: episode.binding())
+//            }
+//
+//            ForEach(seasons(episodes), id: \.self) { season in
+//                VStack {
+//                    Text(season == 0 ? "Specials" : "Season \(season)")
+//                        .font(.title3)
+//                        .padding(.top)
+//                    HStack(alignment: .top) {
+//                        ArtView.PosterEpisode(poster: episodes.filter { $0.season == season }.first?.poster ?? "")
+//                            .cornerRadius(6)
+//                            .padding()
+//                        VStack {
+//                            ForEach(episodes.filter { $0.season == season }) { episode in
+//                                Link(item: episode.binding())
+//                                    .id(episode.id)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        .task {
+//            /// Filter the episodes
+//            //let filter = MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)
+//            //episodes = kodi.media.filter(filter)
+//            //episodes = getEpisodes()
+//            //dump(episodes)
+//        }
+//        .onChange(of: kodi.media) { _ in
+//            //episodes = getEpisodes()
+//        }
     }
     /// Get the episodes
     private func getEpisodes() -> [MediaItem] {
@@ -76,7 +111,7 @@ extension EpisodesView {
             RouterLink(item: .details(item: item)) {
                 Item(item: $item)
             }
-            .buttonStyle(ButtonStyles.MediaItem(item: item))
+            .buttonStyle(ButtonStyles.HomeItem(item: item))
             .tvOS { $0.frame(width: 1000) }
             .contextMenu {
                 Button(action: {

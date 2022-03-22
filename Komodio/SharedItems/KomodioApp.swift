@@ -28,7 +28,8 @@ import SwiftlyKodiAPI
                 }
             }
             #if os(macOS)
-            .background(Color(nsColor: .textBackgroundColor))
+            //.background(Color.accentColor.blendMode(.screen))
+            //.background(Color(nsColor: .textBackgroundColor))
             #endif
         }
 #if os(macOS)

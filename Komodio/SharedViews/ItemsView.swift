@@ -40,8 +40,6 @@ extension ItemsView {
                 }
                 .task {
                     /// Scroll to the last selected item on this View
-                    
-                    logger("Scrolling to \(router.currentRoute.itemID)")
 #if os(tvOS)
                     /// Focus on top for tvOS, then it will select the last item row again
                     /// - Note: Don't scroll on the homepage, focus will be confused...
@@ -50,7 +48,8 @@ extension ItemsView {
                     }
 #else
                     withAnimation(.linear(duration: 1)) {
-                        proxy.scrollTo(router.currentRoute.itemID, anchor: .center)
+                            logger("Scrolling to \(router.currentRoute.itemID)")
+                            proxy.scrollTo(router.currentRoute.itemID, anchor: .center)
                     }
 #endif
                 }
@@ -132,8 +131,29 @@ extension ItemsView {
         }
     }
 
-    /// The details of a Kodi media item
     struct Details: View {
+        let item: MediaItem
+        var body: some View {
+            VStack {
+                switch item.media {
+                case .episode:
+                    ArtView.PosterList(poster: item.poster)
+                    Text(item.season == 0 ? "Specials" : "Season \(item.season)")
+                default:
+                    DetailsBasic(item: item)
+                }
+            }
+            .padding()
+            .background(.ultraThinMaterial)
+            .cornerRadius(6)
+            .macOS { $0.padding(.top, 100).frame(width: 300).padding() }
+            .tvOS { $0.padding(.top, 200).frame(width: 500).padding() }
+            .transition(.opacity)
+        }
+    }
+    
+    /// The basic details of a Kodi media item
+    struct DetailsBasic: View {
         let item: MediaItem
         var body: some View {
             VStack {
@@ -143,12 +163,6 @@ extension ItemsView {
                     .font(.caption)
                 Text(item.description)
             }
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(6)
-            .macOS { $0.padding(.top, 100).frame(width: 300).padding() }
-            .tvOS { $0.padding(.top, 200).frame(width: 500).padding() }
-            .transition(.opacity)
         }
     }
     

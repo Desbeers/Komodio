@@ -81,9 +81,9 @@ extension Route {
     var itemID: String {
         switch self {
         case .home:
-            return "home"
+            return ""
         case .movies:
-            return "movies"
+            return ""
         case .moviesSet(let set):
             return set.id
         case .tvshows:

@@ -50,16 +50,20 @@ extension ButtonStyles {
                 .animation(.easeInOut, value: isHovered)
                 .onHover { hover in
                     isHovered = hover
+                    
+                    if hover, item.media == .episode {
+                        router.setSelectedMediaItem(item: item)
+                    }
                 }
                 .padding(.vertical, 15)
                 .gesture(TapGesture(count: 2).onEnded {
                     print("double clicked")
-                    router.setSelectedMediaItem(item: router.selectedMediaItem == item ? nil : item)
+                    router.setSelectedMediaItem(item: item)
                     configuration.trigger()
                 })
                 .gesture(TapGesture(count: 1).onEnded {
                     print("single clicked")
-                    router.setSelectedMediaItem(item: router.selectedMediaItem == item ? nil : item)
+                    router.setSelectedMediaItem(item: item)
                 })
         }
     }
@@ -113,7 +117,8 @@ extension ButtonStyles {
                 configuration.label
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
-                    .background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
+                    .background(Color.accentColor.brightness(isHovered ? 0.4 : 0.2))
+                    //.background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
                     .cornerRadius(6)
                     .padding()
                     .scaleEffect(isHovered ? 1.02 : 1)

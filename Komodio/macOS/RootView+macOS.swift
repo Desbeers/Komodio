@@ -17,6 +17,7 @@ struct RootView: View {
     var body: some View {
         if kodi.loadingState == .done {
             MainView()
+                .background(Color.accentColor.blendMode(.screen))
                 .environmentObject(router)
         } else {
             LoadingView()

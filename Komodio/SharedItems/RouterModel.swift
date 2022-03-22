@@ -46,10 +46,14 @@ class Router: ObservableObject {
     }
     
     func push(_ route: Route) {
-        /// Store the last selected item
-        routes[routes.endIndex-1].itemID = route.itemID
-        /// Remove the selection
-        //setSelectedMediaItem(item: nil)
+        
+        if route.itemID.isEmpty {
+            /// Remove the selection; it is not relevant for the next View
+            setSelectedMediaItem(item: nil)
+        } else {
+            /// Store the last selected item
+            routes[routes.endIndex-1].itemID = route.itemID
+        }
         /// Push the new View
         routes.append(RouteItem(route: route, itemID: route.itemID))
     }
@@ -57,9 +61,11 @@ class Router: ObservableObject {
     @discardableResult
     func pop() -> RouteItem? {
         if routes.count > 1 {
-            /// Remove the selection
-            //setSelectedMediaItem(item: nil)
-            /// Pop the previous View
+            /// Remove the selection if not relevant
+//            if routes[routes.endIndex-2].itemID.isEmpty {
+//                setSelectedMediaItem(item: nil)
+//            }
+            /// Pop to the previous View
             return routes.popLast()
         }
         return nil
