@@ -18,14 +18,14 @@ extension ButtonStyles {
     
     /// Button style for a Home item
     struct HomeItem: PrimitiveButtonStyle {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The Kodi item
         var item: SwiftlyKodiAPI.MediaItem
         /// Is the button hovered or not
         @State private var isHovered = false
         private var focused: Bool {
-            if isHovered || appState.hoveredMediaItem == item {
+            if isHovered || router.selectedMediaItem == item {
                 return true
             }
             return false
@@ -58,7 +58,7 @@ extension ButtonStyles {
                 })
                 .gesture(TapGesture(count: 1).onEnded {
                     print("single clicked")
-                    appState.setHoveredMediaItem(item: appState.hoveredMediaItem == item ? nil : item)
+                    router.setSelectedMediaItem(item: router.selectedMediaItem == item ? nil : item)
                 })
         }
     }

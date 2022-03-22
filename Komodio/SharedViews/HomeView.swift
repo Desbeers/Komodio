@@ -87,8 +87,8 @@ extension HomeView {
     
     /// A View with a row of Kodi items
     struct Row: View {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
+        /// The Roter model
+        @EnvironmentObject var router: Router
         /// The title of the row
         let title: String
         /// The Kodi items to show in this row
@@ -108,10 +108,8 @@ extension HomeView {
                         HStack {
                         Item(item: $item)
                                 .zIndex(2)
-                        if item == appState.hoveredMediaItem, !item.description.isEmpty {
-                            
+                            if item == router.selectedMediaItem, !item.description.isEmpty {
                                 Text(item.description)
-                                
                                     .padding()
                                     .background(.ultraThinMaterial)
                                     .cornerRadius(6)
@@ -127,7 +125,7 @@ extension HomeView {
                 }
                 .padding(.trailing, 50)
             }
-            .animation(.default, value: appState.hoveredMediaItem)
+            .animation(.default, value: router.selectedMediaItem)
         }
     }
     

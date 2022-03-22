@@ -19,8 +19,8 @@ final class AppState: ObservableObject {
     let kodi: KodiConnector = .shared
     /// The selected item in the sidebar of the application
     @Published var sidebarSelection: Int?
-    /// The selected item in the sidebar of the application
-    @Published var hoveredMediaItem: MediaItem?
+//    /// The selected item in the sidebar of the application
+//    @Published var hoveredMediaItem: MediaItem?
     /// Observe some kodi stuff
     private var observer: AnyCancellable?
 //    /// Obsere notifications
@@ -39,10 +39,10 @@ final class AppState: ObservableObject {
 
     /// Set the hovered Kodi item from the UI to the published Var
     /// - Parameter item: The Kodi item
-    func setHoveredMediaItem(item: MediaItem?) {
-        let _ = print("\(item?.title) has focus")
-        //Task { @MainActor in
-            AppState.shared.hoveredMediaItem = item
-        //}
-    }
+//    func setHoveredMediaItem(item: MediaItem?) {
+//        let _ = print("\(item?.title) has focus")
+//        //Task { @MainActor in
+//            AppState.shared.hoveredMediaItem = item
+//        //}
+//    }
 }

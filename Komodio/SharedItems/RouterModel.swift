@@ -11,6 +11,16 @@ import SwiftlyKodiAPI
 //@MainActor
 class Router: ObservableObject {
     
+    /// The selected media item
+    @Published var selectedMediaItem: MediaItem?
+    
+    func setSelectedMediaItem(item: MediaItem?) {
+        //let _ = print("\(item?.title) has focus")
+        //Task { @MainActor in
+            selectedMediaItem = item
+        //}
+    }
+    
     //@Published var routes: [Route] = [.home]
     
     @Published var routes: [RouteItem] = [RouteItem()]
@@ -35,7 +45,8 @@ class Router: ObservableObject {
     func push(_ route: Route) {
         /// Store the last selected item
         routes[routes.endIndex-1].itemID = route.itemID
-        logger(route.itemID)
+        /// Remove the selection
+        setSelectedMediaItem(item: nil)
         /// Push the new View
         routes.append(RouteItem(route: route, itemID: route.itemID))
     }
@@ -43,6 +54,9 @@ class Router: ObservableObject {
     @discardableResult
     func pop() -> RouteItem? {
         if routes.count > 1 {
+            /// Remove the selection
+            setSelectedMediaItem(item: nil)
+            /// Pop the previous View
             return routes.popLast()
         }
         return nil
