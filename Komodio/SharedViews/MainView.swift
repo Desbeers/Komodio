@@ -27,7 +27,8 @@ struct MainView: View {
                 }
             }
         }
-        .fanartBackground(fanart: router.fanart)
+        //.fanartBackground(fanart: router.fanart)
+        .fanartBackground(fanart: router.fanart.isEmpty ? router.selectedMediaItem?.poster ?? "" : router.fanart)
         .animation(.default, value: router.currentRoute)
 #if os(tvOS)
         /// Take care of the 'menu' button on the Siri remote

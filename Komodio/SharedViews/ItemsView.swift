@@ -136,22 +136,27 @@ extension ItemsView {
     
     
     struct FanartModifier: ViewModifier {
+        /// The Router model
+        @EnvironmentObject var router: Router
+        /// The fanart
         let fanart: String
         /// The modifier
         func body(content: Content) -> some View {
             content
                 .background {
-                    if !fanart.isEmpty {
-                        ArtView.Fanart(fanart: fanart)
-                            .opacity(0.3)
-                            .blur(radius: 4)
-                            .macOS {$0.edgesIgnoringSafeArea(.all) }
-                            .tvOS { $0.edgesIgnoringSafeArea(.all) }
-                            .iOS { $0.edgesIgnoringSafeArea(.bottom) }
-                    } else {
-                        EmptyView()
+                    VStack {
+                        if !fanart.isEmpty {
+                            ArtView.Fanart(fanart: fanart)
+                                .macOS { $0.overlay(Material.ultraThinMaterial) }
+                                .tvOS { $0.overlay(Material.thinMaterial) }
+                                //.transition(.opacity)
+                        } else {
+                            EmptyView()
+                        }
                     }
+                    //.transition(.opacity)
                 }
+                //.animation(.default, value: router.selectedMediaItem)
         }
     }
 }

@@ -17,8 +17,8 @@ extension ButtonStyles {
     
     /// Button style for a Home item
     struct HomeItem: ButtonStyle {
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The focus state from the environment
         @Environment(\.isFocused) var focused: Bool
         /// The Kodi item
@@ -38,9 +38,9 @@ extension ButtonStyles {
             .padding(.bottom, 10)
             .onChange(of: focused) { focus in
                 if focus {
-                    appState.setHoveredMediaItem(item: item)
-                } else if item == appState.hoveredMediaItem {
-                    appState.setHoveredMediaItem(item: nil)
+                    router.setSelectedMediaItem(item: item)
+                } else if item == router.selectedMediaItem {
+                    router.setSelectedMediaItem(item: nil)
                 }
             }
         }
