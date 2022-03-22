@@ -54,6 +54,7 @@ extension ButtonStyles {
                 .padding(.vertical, 15)
                 .gesture(TapGesture(count: 2).onEnded {
                     print("double clicked")
+                    router.setSelectedMediaItem(item: router.selectedMediaItem == item ? nil : item)
                     configuration.trigger()
                 })
                 .gesture(TapGesture(count: 1).onEnded {

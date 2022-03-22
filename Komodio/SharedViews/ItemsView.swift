@@ -131,7 +131,26 @@ extension ItemsView {
             Text(description)
         }
     }
-    
+
+    /// The details of a Kodi media item
+    struct Details: View {
+        let item: MediaItem
+        var body: some View {
+            VStack {
+                Text(item.title)
+                    .font(.headline)
+                Text(item.details)
+                    .font(.caption)
+                Text(item.description)
+            }
+            .padding()
+            .background(.ultraThinMaterial)
+            .cornerRadius(6)
+            .macOS { $0.padding(.top, 100).frame(width: 300).padding() }
+            .tvOS { $0.padding(.top, 200).frame(width: 500).padding() }
+            .transition(.opacity)
+        }
+    }
     
     
     
