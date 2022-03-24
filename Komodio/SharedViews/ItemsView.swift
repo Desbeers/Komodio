@@ -137,7 +137,7 @@ extension ItemsView {
             VStack {
                 switch item.media {
                 case .episode:
-                    ArtView.PosterList(poster: item.poster)
+                    ArtView.PosterEpisode(poster: item.poster)
                     Text(item.season == 0 ? "Specials" : "Season \(item.season)")
                 default:
                     DetailsBasic(item: item)

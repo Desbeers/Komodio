@@ -80,7 +80,7 @@ extension ArtView {
         }
     }
 
-    /// A View to show the poster of a Kodi item in a list
+    /// A View to show the poster of an episode item
     struct PosterEpisode: View {
         /// The poster
         let poster: String
@@ -111,7 +111,7 @@ extension ArtView {
                 }
             }
             .macOS { $0.frame(width: 150) }
-            .tvOS { $0.frame(height: 300) }
+            .tvOS { $0.frame(width: 300) }
             .iOS { $0.frame(width: 100) }
         }
     }
