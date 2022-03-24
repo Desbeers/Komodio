@@ -27,10 +27,6 @@ import SwiftlyKodiAPI
                     await kodi.connectToHost(kodiHost: HostItem(ip: "192.168.11.200"))
                 }
             }
-            #if os(macOS)
-            //.background(Color.accentColor.blendMode(.screen))
-            //.background(Color(nsColor: .textBackgroundColor))
-            #endif
         }
 #if os(macOS)
         //.windowToolbarStyle(.unified)

@@ -30,6 +30,12 @@ extension ButtonStyles {
             }
             return false
         }
+        private var selected: Bool {
+            if router.selectedMediaItem == item {
+                return true
+            }
+            return false
+        }
         /// The View
         func makeBody(configuration: Configuration) -> some View {
             //Button(action: configuration.trigger, label: {
@@ -40,7 +46,8 @@ extension ButtonStyles {
                     .cornerRadius(6)
                     .zIndex(focused ? 2 : 1)
                     .padding(.all, 2)
-                    .background(.ultraThinMaterial)
+                    //.background(.ultraThinMaterial)
+                    .background(selected ? .accentColor : Color("ListButtonColor"))
                     .cornerRadius(6)
                     .padding(.bottom, 20)
                     .scaleEffect(focused ? 1.05 : 1)
@@ -51,9 +58,9 @@ extension ButtonStyles {
                 .onHover { hover in
                     isHovered = hover
                     
-                    if hover, item.media == .episode {
-                        router.setSelectedMediaItem(item: item)
-                    }
+                    //if hover, item.media == .episode {
+                        //router.setSelectedMediaItem(item: item)
+                    //}
                 }
                 .padding(.vertical, 15)
                 .gesture(TapGesture(count: 2).onEnded {
@@ -63,7 +70,11 @@ extension ButtonStyles {
                 })
                 .gesture(TapGesture(count: 1).onEnded {
                     print("single clicked")
-                    router.setSelectedMediaItem(item: item)
+                    if router.selectedMediaItem == item {
+                        configuration.trigger()
+                    } else {
+                        router.setSelectedMediaItem(item: item)
+                    }
                 })
         }
     }
@@ -117,10 +128,11 @@ extension ButtonStyles {
                 configuration.label
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
-                    .background(Color.accentColor.brightness(isHovered ? 0.4 : 0.2))
+                    .background(Color("ListButtonColor").brightness(isHovered ? 0.2 : 0))
                     //.background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
+                    //.shadow(color: .secondary, radius: isHovered ? 10 : 0 , x: 0, y: isHovered ? 10 : 0)
                     .cornerRadius(6)
-                    .padding()
+                    //.padding()
                     .scaleEffect(isHovered ? 1.02 : 1)
                     .animation(.easeInOut, value: isHovered)
                     .onHover { hover in

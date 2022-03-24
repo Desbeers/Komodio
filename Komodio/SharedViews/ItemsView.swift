@@ -180,8 +180,10 @@ extension ItemsView {
                     VStack {
                         if !fanart.isEmpty {
                             ArtView.Fanart(fanart: fanart)
-                                .macOS { $0.overlay(Material.ultraThinMaterial) }
-                                .tvOS { $0.overlay(Material.thinMaterial) }
+                                .blur(radius: 5)
+                                .opacity(0.2)
+                                //.macOS { $0.overlay(Material.ultraThinMaterial) }
+                                //.tvOS { $0.overlay(Material.thinMaterial) }
                                 //.transition(.opacity)
                         } else {
                             EmptyView()

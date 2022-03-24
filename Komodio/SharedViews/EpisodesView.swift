@@ -36,7 +36,7 @@ struct EpisodesView: View {
             }
             /// Make room for the details
             .macOS { $0.padding(.leading, 330) }
-            .tvOS { $0.padding(.leading, 550) }
+            .tvOS { $0.padding(.leading, 500) }
             if router.selectedMediaItem != nil {
                 //ArtView.PosterList(poster: router.selectedMediaItem!.poster)
                 ItemsView.Details(item: router.selectedMediaItem!)
@@ -112,7 +112,7 @@ extension EpisodesView {
                 Item(item: $item)
             }
             .buttonStyle(ButtonStyles.HomeItem(item: item))
-            .tvOS { $0.frame(width: 1000) }
+            .tvOS { $0.padding(.horizontal, 80) }
             .contextMenu {
                 Button(action: {
                     item.togglePlayedState()
@@ -129,7 +129,9 @@ extension EpisodesView {
         @Binding var item: MediaItem
         /// The View
         var body: some View {
-            VStack(alignment: .leading) {
+            HStack {
+                ArtView.PosterList(poster: item.thumbnail)
+                VStack(alignment: .leading) {
                 Text(item.title)
                     .font(.headline)
                 Text(item.details)
@@ -137,8 +139,9 @@ extension EpisodesView {
                 Divider()
                 Text(item.description)
                     .lineLimit(2)
+                }
             }
-            .tvOS { $0.frame(width: 1000) }
+            //.tvOS { $0.frame(width: 1000) }
             .padding()
             .watchStatus(of: $item)
             .contextMenu {
