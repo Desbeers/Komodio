@@ -45,7 +45,7 @@ struct EpisodesView: View {
         }
         .animation(.default, value: router.selectedMediaItem)
         .task {
-            logger("TV show task: \(episodes.count)")
+            logger("Episode task: \(episodes.count)")
             if router.selectedMediaItem == nil {
                 router.setSelectedMediaItem(item: episodes.first)
             }

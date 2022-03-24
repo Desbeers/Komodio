@@ -77,41 +77,27 @@ extension Route {
 
 extension Route {
     
-    /// The ID of the route item
-    var itemID: String {
+    /// The optional media item for the route item
+    var item: MediaItem? {
         switch self {
-        case .home:
-            return ""
-        case .movies:
-            return ""
         case .moviesSet(let set):
-            return set.id
-        case .tvshows:
-            return ""
+            return set
         case .episodes(let tvshow):
-            return tvshow.id
-        case .musicVideos:
-            return ""
+            return tvshow
         case .musicVideosItems(let artist):
-            return artist.id
+            return artist
         case .musicVideosAlbum(let album):
-            return album.id
-        case .genres:
-            return ""
+            return album
         case .genresItems(let genre):
-            return genre.id
+            return genre
         case .details(let item):
-            return item.id
-        case .player:
-            return ""
-        case .table:
-            return ""
-        case .artists:
-            return ""
+            return item
         case .albums(let artist):
-            return artist.id
+            return artist
         case .songs(let album):
-            return album.id
+            return album
+        default:
+            return nil
         }
     }
 }

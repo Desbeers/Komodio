@@ -75,7 +75,7 @@ extension ArtView {
                 }
             }
             .macOS { $0.frame(width: 100) }
-            .tvOS { $0.frame(width: 400) }
+            .tvOS { $0.frame(height: 200) }
             .iOS { $0.frame(width: 100) }
         }
     }

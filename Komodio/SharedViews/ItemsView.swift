@@ -44,12 +44,12 @@ extension ItemsView {
                     /// Focus on top for tvOS, then it will select the last item row again
                     /// - Note: Don't scroll on the homepage, focus will be confused...
                     if router.currentRoute.route != .home {
-                        proxy.scrollTo(router.currentRoute.itemID, anchor: .top)
+                        proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
                     }
 #else
                     withAnimation(.linear(duration: 1)) {
-                            logger("Scrolling to \(router.currentRoute.itemID)")
-                            proxy.scrollTo(router.currentRoute.itemID, anchor: .center)
+                            //logger("Scrolling to \(router.currentRoute.itemID)")
+                        proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .center)
                     }
 #endif
                 }

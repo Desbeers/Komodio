@@ -30,7 +30,7 @@ class Router: ObservableObject {
     
     struct RouteItem: Equatable {
         var route: Route = .home
-        var itemID: String = "home"
+        var item: MediaItem?
     }
     
     var title: String {
@@ -47,20 +47,25 @@ class Router: ObservableObject {
     
     func push(_ route: Route) {
         
-        if route.itemID.isEmpty {
-            /// Remove the selection; it is not relevant for the next View
-            setSelectedMediaItem(item: nil)
-        } else {
-            /// Store the last selected item
-            routes[routes.endIndex-1].itemID = route.itemID
-        }
+        setSelectedMediaItem(item: nil)
+        
+        routes[routes.endIndex-1].item = route.item
+        
+//        if route.item.isEmpty {
+//            /// Remove the selection; it is not relevant for the next View
+//            setSelectedMediaItem(item: nil)
+//        } else {
+//            /// Store the last selected item
+//            routes[routes.endIndex-1].itemID = route.itemID
+//        }
         /// Push the new View
-        routes.append(RouteItem(route: route, itemID: route.itemID))
+        routes.append(RouteItem(route: route, item: route.item))
     }
     
     @discardableResult
     func pop() -> RouteItem? {
         if routes.count > 1 {
+            setSelectedMediaItem(item: routes[routes.endIndex-2].item)
             /// Remove the selection if not relevant
 //            if routes[routes.endIndex-2].itemID.isEmpty {
 //                setSelectedMediaItem(item: nil)
