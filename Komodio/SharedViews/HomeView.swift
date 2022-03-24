@@ -138,7 +138,7 @@ extension HomeView {
             VStack(spacing: 0) {
                 RouterLink(item: .details(item: item)) {
                     VStack(spacing: 0) {
-                        ArtView.PosterDetail(item: item)
+                        ArtView.Poster(item: item)
                             .macOS { $0.frame(height: 200) }
                             .tvOS { $0.frame(height: 500) }
                             .iOS { $0.frame(height: 300) }

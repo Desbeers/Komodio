@@ -19,7 +19,7 @@ struct DetailsView: View {
         VStack(spacing: 0) {
             Spacer()
             HStack(alignment: .top, spacing: 0) {
-                ArtView.PosterDetail(item: item)
+                ArtView.Poster(item: item)
                     .cornerRadius(9)
                     .shadow(radius: 6)
                     .padding(6)

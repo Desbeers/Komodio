@@ -131,6 +131,7 @@ extension ButtonStyles {
                     .background(isHovered ? .thickMaterial : .ultraThinMaterial)
                     .cornerRadius(6)
                     .scaleEffect(isHovered ? 1.02 : 1)
+                    //.shadow(radius: 1)
                     .animation(.easeInOut, value: isHovered)
                     .onHover { hover in
                         isHovered = hover

@@ -43,7 +43,7 @@ struct EpisodesView: View {
             }
             
         }
-        .animation(.default, value: router.selectedMediaItem)
+        //.animation(.default, value: router.selectedMediaItem)
         .task {
             logger("Episode task: \(episodes.count)")
             if router.selectedMediaItem == nil {
@@ -131,7 +131,10 @@ extension EpisodesView {
         /// The View
         var body: some View {
             HStack {
-                ArtView.PosterList(poster: item.thumbnail)
+                ArtView.Episode(item: item)
+                    .macOS { $0.frame(height: 100) }
+                    .tvOS { $0.frame(height: 200) }
+                    .iOS { $0.frame(height: 200) }
                 VStack(alignment: .leading) {
                 Text(item.title)
                     .font(.headline)
@@ -143,7 +146,7 @@ extension EpisodesView {
                 }
             }
             //.tvOS { $0.frame(width: 1000) }
-            .padding()
+            //.padding()
             .watchStatus(of: $item)
             .contextMenu {
                 Button(action: {

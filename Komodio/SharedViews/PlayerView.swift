@@ -48,7 +48,7 @@ extension PlayerView {
         var body: some View {
             /// Show art when we are playing audio
             if let item = item, item.media == .song {
-                ArtView.PosterDetail(item: item)
+                ArtView.Poster(item: item)
                     .cornerRadius(9)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .macOS { $0.padding(.all, 60) }

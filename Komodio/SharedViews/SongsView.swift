@@ -20,7 +20,7 @@ struct SongsView: View {
         VStack(spacing: 0) {
             HStack(alignment: .top, spacing: 0) {
                 VStack {
-                    ArtView.PosterDetail(item: album)
+                    ArtView.Poster(item: album)
                         .cornerRadius(9)
                         .shadow(radius: 6)
                         .padding(6)
@@ -28,13 +28,7 @@ struct SongsView: View {
                     RouterLink(item: .player(items: items)) {
                         Text("Play album")
                     }
-                    
-//                    PlayerView.Link(item: album, destination: PlayerView(items: kodi.media.filter { $0.media == .song && $0.albumID == album.albumID})) {
-//                        Text("Play album")
-//                    }
-                    
                     Text(album.description.isEmpty ? "\(album.itemsCount) tracks" : album.description)
-                    //VideoPlayer(player: audioPlayer)
                 }
 #if os(tvOS)
                 .focusSection()

@@ -10,6 +10,8 @@
 		D731124027ECA3F000F1BF4A /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731123F27ECA3F000F1BF4A /* MovieSetView.swift */; };
 		D731124127ECA3F000F1BF4A /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731123F27ECA3F000F1BF4A /* MovieSetView.swift */; };
 		D731124227ECA3F000F1BF4A /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731123F27ECA3F000F1BF4A /* MovieSetView.swift */; };
+		D731124527ECB9A000F1BF4A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D731124427ECB9A000F1BF4A /* Kingfisher */; };
+		D731124727ECBB2400F1BF4A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D731124627ECBB2400F1BF4A /* Kingfisher */; };
 		D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
 		D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
 		D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
@@ -169,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D731124527ECB9A000F1BF4A /* Kingfisher in Frameworks */,
 				D7CCA97127CC3B19001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D731124727ECBB2400F1BF4A /* Kingfisher in Frameworks */,
 				D7CCA97527CC3B28001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +355,7 @@
 			name = "Komodio (macOS)";
 			packageProductDependencies = (
 				D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */,
+				D731124427ECB9A000F1BF4A /* Kingfisher */,
 			);
 			productName = "Komodio (macOS)";
 			productReference = D7ADD15727C9763A00321E23 /* Komodio.app */;
@@ -371,6 +376,7 @@
 			name = "Komodio (tvOS)";
 			packageProductDependencies = (
 				D7CCA97427CC3B28001B4828 /* SwiftlyKodiAPI */,
+				D731124627ECBB2400F1BF4A /* Kingfisher */,
 			);
 			productName = Komodio;
 			productReference = D7ADD17127C9789D00321E23 /* Komodio.app */;
@@ -407,6 +413,7 @@
 			);
 			mainGroup = D7ADD14427C9763900321E23;
 			packageReferences = (
+				D731124327ECB9A000F1BF4A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = D7ADD15227C9763A00321E23 /* Products */;
 			projectDirPath = "";
@@ -890,7 +897,28 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		D731124327ECB9A000F1BF4A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		D731124427ECB9A000F1BF4A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D731124327ECB9A000F1BF4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		D731124627ECBB2400F1BF4A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D731124327ECB9A000F1BF4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		D7CCA97027CC3B19001B4828 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftlyKodiAPI;

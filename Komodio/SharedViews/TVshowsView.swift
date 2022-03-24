@@ -33,7 +33,7 @@ struct TVshowsView: View {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(tvshows) { tvshow in
                         RouterLink(item: .episodes(tvshow: tvshow)) {
-                                ArtView.PosterDetail(item: tvshow)
+                                ArtView.Poster(item: tvshow)
                                     .macOS { $0.frame(width: 150) }
                                     .tvOS { $0.frame(width: 200) }
                                     .iOS { $0.frame(height: 200) }

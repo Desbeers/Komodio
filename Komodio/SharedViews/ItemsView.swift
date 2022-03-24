@@ -96,7 +96,10 @@ extension ItemsView {
         /// The View
         var body: some View {
             HStack(spacing: 0) {
-                ArtView.PosterList(poster: item.poster)
+                ArtView.Poster(item: item)
+                    .macOS { $0.frame(width: 150) }
+                    .tvOS { $0.frame(width: 200) }
+                    .iOS { $0.frame(height: 200) }
                 VStack(alignment: .leading) {
                     HStack {
                         Text(item.title)
@@ -144,28 +147,33 @@ extension ItemsView {
             VStack {
                 switch item.media {
                 case .episode:
-                    ArtView.PosterEpisode(poster: item.poster)
+                    ArtView.Poster(item: item)
                     Text(item.season == 0 ? "Specials" : "Season \(item.season)")
+                        .padding(.bottom)
                 case .movieSet:
-                    DetailsBasic(item: item)
-                    Divider()
                     VStack(alignment: .leading) {
+                        DetailsBasic(item: item)
+                        if !item.description.isEmpty {
+                            Divider()
+                        }
                         ForEach(kodi.media.filter { $0.media == .movie && $0.movieSetID == item.movieSetID}) { movie in
                             Label(movie.title, systemImage: "film")
                             
                         }
                     }
+                    .padding()
                     .frame(maxWidth: .infinity)
                 default:
                     DetailsBasic(item: item)
+                        .padding()
                 }
             }
-            .padding()
             .background(.ultraThinMaterial)
             .cornerRadius(6)
+            .shadow(radius: 1)
             .macOS { $0.padding(.top, 100).frame(width: 300).padding() }
             .tvOS { $0.padding(.top, 200).frame(width: 500).padding() }
-            .transition(.opacity)
+            //.transition(.opacity)
         }
     }
     
@@ -176,10 +184,14 @@ extension ItemsView {
             VStack {
                 Text(item.title)
                     .font(.headline)
-                Text(item.details)
-                    .font(.caption)
+                if !item.details.isEmpty {
+                    Text(item.details)
+                        .font(.caption)
+                }
+                Divider()
                 Text(item.description)
             }
+            //.padding()
         }
     }
     

@@ -34,7 +34,7 @@ extension MusicVideosView {
         /// The View
         var body: some View {
             HStack {
-                ArtView.PosterList(poster: artist.poster)
+                ArtView.Poster(item: artist)
                 VStack(alignment: .leading) {
                     Text(artist.title)
                         .font(.headline)
@@ -112,7 +112,7 @@ extension MusicVideosView {
         var body: some View {
             RouterLink(item: .musicVideosAlbum(album: album)) {
                 HStack {
-                    ArtView.PosterList(poster: album.poster)
+                    ArtView.Poster(item: album)
                     VStack(alignment: .leading) {
                         Text(album.album)
                             .font(.headline)

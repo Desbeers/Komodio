@@ -34,7 +34,7 @@ struct MoviesView: View {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(movies) { movie in
                         RouterLink(item: movie.movieSetID == 0 ? .details(item: movie) : .moviesSet(set: movie)) {
-                                ArtView.PosterDetail(item: movie)
+                                ArtView.Poster(item: movie)
                                 .watchStatus(of: movie.binding())
                                     .macOS { $0.frame(width: 150) }
                                     .tvOS { $0.frame(width: 200) }

@@ -48,7 +48,8 @@ extension PartsView {
             .padding()
             .frame(height: 80)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.thinMaterial)
+            .background(.ultraThinMaterial)
+            .shadow(radius: 1)
             .ignoresSafeArea()
         }
         

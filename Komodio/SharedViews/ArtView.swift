@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+import Kingfisher
 
 /// A collection of structs to view Kodi art
 struct ArtView {
@@ -15,109 +16,17 @@ struct ArtView {
 
 extension ArtView {
     
-    /// A View to show the fanart of a Kodi item
     struct Fanart: View {
-        /// The fanart URL
         let fanart: String
-        /// The View
         var body: some View {
-            if fanart.isEmpty {
-                EmptyView()
-            } else {
-                AsyncImage(url: URL(string: fanart)!) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .frame(width: 100, height: 150)
-                    case .success(let image):
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                    case .failure:
-                        EmptyView()
-                    @unknown default:
-                        /// Since the AsyncImagePhase enum isn't frozen,
-                        /// we need to add this currently unused fallback.
-                        EmptyView()
-                    }
-                }
-            }
+            KFImage(URL(string: fanart)!)
+                .fade(duration: 0.25)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
         }
     }
     
-    /// A View to show the poster of a Kodi item in a list
-    struct PosterList: View {
-        /// The poster
-        let poster: String
-        /// The View
-        var body: some View {
-            Group {
-                if poster.isEmpty {
-                    Image("No Poster")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } else {
-                    AsyncImage(url: URL(string: poster)) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        case .failure:
-                            Image("No Poster")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
-            }
-            .macOS { $0.frame(width: 100) }
-            .tvOS { $0.frame(height: 200) }
-            .iOS { $0.frame(width: 100) }
-        }
-    }
-
-    /// A View to show the poster of an episode item
-    struct PosterEpisode: View {
-        /// The poster
-        let poster: String
-        /// The View
-        var body: some View {
-            Group {
-                if poster.isEmpty {
-                    Image("No Poster")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } else {
-                    AsyncImage(url: URL(string: poster)) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        case .failure:
-                            Image("No Poster")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
-            }
-            .macOS { $0.frame(width: 150) }
-            .tvOS { $0.frame(width: 300) }
-            .iOS { $0.frame(width: 100) }
-        }
-    }
-    
-    /// A View to show the poster of a Kodi item in a detail View
-    struct PosterDetail: View {
+    struct Poster: View {
         /// The Kodi item
         let item: MediaItem
         /// The View
@@ -128,27 +37,25 @@ extension ArtView {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 } else {
-                    AsyncImage(url: URL(string: item.poster),
-                               transaction: Transaction(animation: .easeInOut)) { phase in
-                        switch phase {
-                        case .empty:
-                            Image("Loading Poster")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        case .failure:
-                            Image("No Poster")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
+                    KFImage(URL(string: item.poster)!)
+                        .fade(duration: 0.25)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                 }
             }
         }
     }
+    
+    struct Episode: View {
+        /// The Kodi item
+        let item: MediaItem
+        /// The View
+        var body: some View {
+            KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
+                        .fade(duration: 0.25)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+        }
+    }
+    
 }

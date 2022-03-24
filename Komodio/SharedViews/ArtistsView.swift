@@ -29,7 +29,7 @@ struct ArtistsView: View {
                         //HStack {
                         RouterLink(item: .albums(artist: artist)) {
                             VStack(spacing: 0) {
-                                ArtView.PosterDetail(item: artist)
+                                ArtView.Poster(item: artist)
                                     .macOS { $0.frame(height: 150) }
                                     .tvOS { $0.frame(width: 300, height: 300) }
                                     .iOS { $0.frame(height: 200) }

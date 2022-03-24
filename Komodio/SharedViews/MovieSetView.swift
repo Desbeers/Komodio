@@ -35,8 +35,8 @@ struct MovieSetView: View {
                     .buttonStyle(ButtonStyles.MediaItem(item: movie))
                 }
             }
-            .macOS { $0.padding(.horizontal, 40) }
-            .tvOS { $0.padding(.horizontal, 80) }
+            .macOS { $0.padding(.horizontal, 80) }
+            .tvOS { $0.padding(.horizontal, 160) }
         }
         .task {
             logger("MovieSet task: \(movies.count)")
