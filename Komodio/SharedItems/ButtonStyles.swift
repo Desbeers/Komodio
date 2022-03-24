@@ -16,8 +16,8 @@ struct ButtonStyles {
 
 extension ButtonStyles {
     
-    /// Button style for a Home item
-    struct HomeItem: PrimitiveButtonStyle {
+    /// Button style for a media item
+    struct MediaItem: PrimitiveButtonStyle {
         /// The Router model
         @EnvironmentObject var router: Router
         /// The Kodi item
@@ -38,31 +38,28 @@ extension ButtonStyles {
         }
         /// The View
         func makeBody(configuration: Configuration) -> some View {
-            //Button(action: configuration.trigger, label: {
- 
-                    configuration.label
-
-
-                    .cornerRadius(6)
-                    .zIndex(focused ? 2 : 1)
-                    .padding(.all, 2)
-                    //.background(.ultraThinMaterial)
-                    .background(selected ? .accentColor : Color("ListButtonColor"))
-                    .cornerRadius(6)
-                    .padding(.bottom, 20)
-                    .scaleEffect(focused ? 1.05 : 1)
-                    .shadow(color: .secondary, radius: focused ? 10 : 0 , x: 0, y: focused ? 10 : 0)
-            //})
+            configuration.label
+            
+            
+                .cornerRadius(6)
+                .zIndex(focused ? 2 : 1)
+                .padding(.all, 2)
+                .background(Color("ListButtonColor").opacity(focused ? 1 : 0.8))
+                .cornerRadius(6)
+                
+                .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: focused ? 5 : 0 , x: 0, y: focused ? 10 : 0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(selected ? Color.accentColor : Color.clear, lineWidth: 1)
+                )
+                .scaleEffect(focused ? 1.05 : 1)
                 .buttonStyle(.plain)
                 .animation(.easeInOut, value: isHovered)
                 .onHover { hover in
                     isHovered = hover
-                    
-                    //if hover, item.media == .episode {
-                        //router.setSelectedMediaItem(item: item)
-                    //}
                 }
                 .padding(.vertical, 15)
+                .padding(.bottom, 10)
                 .gesture(TapGesture(count: 2).onEnded {
                     print("double clicked")
                     router.setSelectedMediaItem(item: item)
@@ -76,39 +73,41 @@ extension ButtonStyles {
                         router.setSelectedMediaItem(item: item)
                     }
                 })
+                //.background(.green)
+                //.border(.black)
         }
     }
 }
 
-extension ButtonStyles {
-    
-    /// Button style for a Kodi item
-    struct MediaItem: ButtonStyle {
-        /// The focus state from the environment
-        @Environment(\.isFocused) var focused: Bool
-        /// Is the button hovered or not
-        @State private var isHovered = false
-        /// The Kodi item
-        var item: SwiftlyKodiAPI.MediaItem
-        /// The function to make a button style for a Kodi item
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-            /// Slow in the simulator; check on a real aTV
-                .background(isHovered ? .thickMaterial : .ultraThinMaterial)
-                //.background(Color("ListButtonColor").opacity(isHovered ? 0.8 : 0.5))
-                .cornerRadius(6)
-                .padding(.horizontal, 40)
-                .padding(.vertical, 15)
-                .onHover { hover in
-                    isHovered = hover
-                }
-                .scaleEffect(isHovered ? 1.02 : 1)
-                .animation(.default, value: isHovered)
-                .opacity(configuration.isPressed ? 0.8 : 1)
-                .shadow(color: .secondary, radius: 20 , x: 0, y: isHovered ? 20 : 5)
-        }
-    }
-}
+//extension ButtonStyles {
+//
+//    /// Button style for a Kodi item
+//    struct MediaItem: ButtonStyle {
+//        /// The focus state from the environment
+//        @Environment(\.isFocused) var focused: Bool
+//        /// Is the button hovered or not
+//        @State private var isHovered = false
+//        /// The Kodi item
+//        var item: SwiftlyKodiAPI.MediaItem
+//        /// The function to make a button style for a Kodi item
+//        func makeBody(configuration: Configuration) -> some View {
+//            configuration.label
+//            /// Slow in the simulator; check on a real aTV
+//                .background(isHovered ? .thickMaterial : .ultraThinMaterial)
+//                //.background(Color("ListButtonColor").opacity(isHovered ? 0.8 : 0.5))
+//                .cornerRadius(6)
+//                .padding(.horizontal, 40)
+//                .padding(.vertical, 15)
+//                .onHover { hover in
+//                    isHovered = hover
+//                }
+//                .scaleEffect(isHovered ? 1.02 : 1)
+//                .animation(.default, value: isHovered)
+//                .opacity(configuration.isPressed ? 0.8 : 1)
+//                .shadow(color: .secondary, radius: 20 , x: 0, y: isHovered ? 20 : 5)
+//        }
+//    }
+//}
 
 extension ButtonStyles {
     
@@ -122,17 +121,17 @@ extension ButtonStyles {
             /// Is the button hovered or not
             @State private var isHovered = false
             /// The configaration of the Button
-            let configuration: ButtonStyles.MediaItem.Configuration
+            let configuration: ButtonStyles.GridItem.Configuration
             /// The View
             var body: some View {
                 configuration.label
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
                     .background(Color("ListButtonColor").brightness(isHovered ? 0.2 : 0))
-                    //.background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
-                    //.shadow(color: .secondary, radius: isHovered ? 10 : 0 , x: 0, y: isHovered ? 10 : 0)
+                //.background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
+                //.shadow(color: .secondary, radius: isHovered ? 10 : 0 , x: 0, y: isHovered ? 10 : 0)
                     .cornerRadius(6)
-                    //.padding()
+                //.padding()
                     .scaleEffect(isHovered ? 1.02 : 1)
                     .animation(.easeInOut, value: isHovered)
                     .onHover { hover in

@@ -38,7 +38,7 @@ struct ArtistsView: View {
                             }
                         }
                         .frame(width: 300)
-                        .buttonStyle(ButtonStyles.HomeItem(item: artist))
+                        .buttonStyle(ButtonStyles.MediaItem(item: artist))
                     }
                 }
             }

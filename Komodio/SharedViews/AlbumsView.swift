@@ -36,7 +36,7 @@ struct AlbumsView: View {
                         }
                         .frame(width: 300)
                     }
-                    .buttonStyle(ButtonStyles.HomeItem(item: album))
+                    .buttonStyle(ButtonStyles.MediaItem(item: album))
 
                 }
                 //.buttonStyle(ButtonStyles.HomeItem())

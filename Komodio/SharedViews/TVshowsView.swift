@@ -28,7 +28,7 @@ struct TVshowsView: View {
     let grid = [GridItem(.adaptive(minimum: 200))]
 #else
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 150))]
+    let grid = [GridItem(.adaptive(minimum: 154))]
 #endif
     init() {
         tvshows = KodiConnector.shared.media.filter(MediaFilter(media: .tvshow))
@@ -46,7 +46,7 @@ struct TVshowsView: View {
                                     .tvOS { $0.frame(width: 200) }
                                     .iOS { $0.frame(height: 200) }
                         }
-                        .buttonStyle(ButtonStyles.HomeItem(item: tvshow))
+                        .buttonStyle(ButtonStyles.MediaItem(item: tvshow))
                     }
                 }
                 .focusScope(namespace)

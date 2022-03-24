@@ -30,9 +30,9 @@ struct EpisodesView: View {
         
         ZStack(alignment: .topLeading) {
             ItemsView.List {
-                            ForEach(episodes) { episode in
-                                Link(item: episode.binding())
-                            }
+                ForEach(episodes) { episode in
+                    Link(item: episode.binding())
+                }
             }
             /// Make room for the details
             .macOS { $0.padding(.leading, 330) }
@@ -111,7 +111,8 @@ extension EpisodesView {
             RouterLink(item: .details(item: item)) {
                 Item(item: $item)
             }
-            .buttonStyle(ButtonStyles.HomeItem(item: item))
+            .buttonStyle(ButtonStyles.MediaItem(item: item))
+            .macOS { $0.padding(.horizontal, 40) }
             .tvOS { $0.padding(.horizontal, 80) }
             .contextMenu {
                 Button(action: {

@@ -149,7 +149,7 @@ extension HomeView {
                         }
                     }
                 }
-                .buttonStyle(ButtonStyles.HomeItem(item: item))
+                .buttonStyle(ButtonStyles.MediaItem(item: item))
             }
         }
     }
