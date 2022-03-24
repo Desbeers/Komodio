@@ -33,8 +33,9 @@ struct MoviesView: View {
             ItemsView.List {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(movies) { movie in
-                        RouterLink(item: .details(item: movie)) {
+                        RouterLink(item: movie.movieSetID == 0 ? .details(item: movie) : .moviesSet(set: movie)) {
                                 ArtView.PosterDetail(item: movie)
+                                .watchStatus(of: movie.binding())
                                     .macOS { $0.frame(width: 150) }
                                     .tvOS { $0.frame(width: 200) }
                                     .iOS { $0.frame(height: 200) }
@@ -86,54 +87,25 @@ extension MoviesView {
         @Binding var movie: MediaItem
         /// The View
         var body: some View {
-            if movie.movieSetID == 0 {
-                RouterLink(item: .details(item: movie)) {
-                    ItemsView.Basic(item: movie.binding())
-                }
-                .buttonStyle(ButtonStyles.MediaItem(item: movie))
-            } else {
-                /// View this movie as a movie set
-                if let set = kodi.media.first(where: { $0.media == .movieSet && $0.movieSetID == movie.movieSetID } ) {
-                    SetItem(movieSet: set)
-                }
+            RouterLink(item: .details(item: movie)) {
+                ItemsView.Basic(item: movie.binding())
             }
+            .buttonStyle(ButtonStyles.MediaItem(item: movie))
         }
     }
     
-    struct Set: View {
-        /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
-        /// The Set item for this View
-        let set: MediaItem
-        /// The View
-        var body: some View {
-            ItemsView.List() {
-                if !set.description.isEmpty {
-                    ItemsView.Description(description: set.description)
-                }
-                ForEach(kodi.media.filter(MediaFilter(media: .movie,
-                                                      movieSetID: set.movieSetID)
-                                         )
-                ) { movie in
-                    RouterLink(item: .details(item: movie)) {
-                        ItemsView.Basic(item: movie.binding())
-                    }
-                    .buttonStyle(ButtonStyles.MediaItem(item: movie))
-                }
-            }
-        }
-    }
+
     
-    /// A View for a movie set item
-    struct SetItem: View {
-        /// The Movie Set item from the library
-        let movieSet: MediaItem
-        /// The View
-        var body: some View {
-            RouterLink(item: .moviesSet(set: movieSet)) {
-                ItemsView.Basic(item: movieSet.binding())
-            }
-            .buttonStyle(ButtonStyles.MediaItem(item: movieSet))
-        }
-    }
+//    /// A View for a movie set item
+//    struct SetItem: View {
+//        /// The Movie Set item from the library
+//        let movieSet: MediaItem
+//        /// The View
+//        var body: some View {
+//            RouterLink(item: .moviesSet(set: movieSet)) {
+//                ItemsView.Basic(item: movieSet.binding())
+//            }
+//            .buttonStyle(ButtonStyles.MediaItem(item: movieSet))
+//        }
+//    }
 }

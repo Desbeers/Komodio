@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D731124027ECA3F000F1BF4A /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731123F27ECA3F000F1BF4A /* MovieSetView.swift */; };
+		D731124127ECA3F000F1BF4A /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731123F27ECA3F000F1BF4A /* MovieSetView.swift */; };
+		D731124227ECA3F000F1BF4A /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D731123F27ECA3F000F1BF4A /* MovieSetView.swift */; };
 		D735DEAD27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
 		D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
 		D735DEAF27C9EB6D00C63E1D /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEAC27C9EB6D00C63E1D /* ArtView.swift */; };
@@ -101,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		D722643727CC56500037FC76 /* tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = tvOS.plist; sourceTree = "<group>"; };
+		D731123F27ECA3F000F1BF4A /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D735DEA827C9DCD800C63E1D /* StackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackNavigation.swift; sourceTree = "<group>"; };
 		D735DEAC27C9EB6D00C63E1D /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		D735DEB027C9EB9E00C63E1D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 				D7D0B86527D052EB00C1C873 /* MainView.swift */,
 				D7B2F23327C98578002DFC41 /* HomeView.swift */,
 				D7B2F22327C97EF0002DFC41 /* MoviesView.swift */,
+				D731123F27ECA3F000F1BF4A /* MovieSetView.swift */,
 				D7B2F22727C97F1E002DFC41 /* TVshowsView.swift */,
 				D735DED127CAF76300C63E1D /* EpisodesView.swift */,
 				D7B2F22B27C97F2D002DFC41 /* MusicVideosView.swift */,
@@ -471,6 +476,7 @@
 				D7ADD15A27C9763A00321E23 /* KomodioApp.swift in Sources */,
 				D735DEB127C9EB9E00C63E1D /* Extensions.swift in Sources */,
 				D7B2F22827C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+				D731124027ECA3F000F1BF4A /* MovieSetView.swift in Sources */,
 				D7D0B86227D052B900C1C873 /* RouterModel.swift in Sources */,
 				D735DECD27CABCCF00C63E1D /* PartsView+iOS.swift in Sources */,
 			);
@@ -492,6 +498,7 @@
 				D735DEAE27C9EB6D00C63E1D /* ArtView.swift in Sources */,
 				D735DEB627C9F1C400C63E1D /* ItemsView.swift in Sources */,
 				D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */,
+				D731124127ECA3F000F1BF4A /* MovieSetView.swift in Sources */,
 				D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */,
 				D7B2F21C27C97CD9002DFC41 /* AppState.swift in Sources */,
 				D75630AE27E5F368007A624C /* LabelStyles+macOS.swift in Sources */,
@@ -531,6 +538,7 @@
 				D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */,
 				D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */,
 				D7B2F21D27C97CD9002DFC41 /* AppState.swift in Sources */,
+				D731124227ECA3F000F1BF4A /* MovieSetView.swift in Sources */,
 				D7D0B86A27D0673B00C1C873 /* Route.swift in Sources */,
 				D7B2F24327C99465002DFC41 /* DetailsView.swift in Sources */,
 				D735DEDA27CB088900C63E1D /* PlayerMetaData+tvOS.swift in Sources */,

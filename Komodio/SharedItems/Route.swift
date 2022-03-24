@@ -148,8 +148,8 @@ extension Route {
         var fanart = ""
         switch self {
             
-        case .moviesSet(let set):
-            fanart = set.fanart
+//        case .moviesSet(let set):
+//            fanart = set.fanart
         case .episodes(let tvshow):
             fanart = tvshow.fanart
         case .musicVideosItems(let artist):
@@ -176,7 +176,7 @@ extension Route {
         case .movies:
             MoviesView()
         case .moviesSet(let set):
-            MoviesView.Set(set: set)
+            MovieSetView(set: set)
         
         case .tvshows:
             TVshowsView()

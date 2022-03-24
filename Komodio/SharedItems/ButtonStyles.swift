@@ -55,6 +55,7 @@ extension ButtonStyles {
                 .scaleEffect(focused ? 1.05 : 1)
                 .buttonStyle(.plain)
                 .animation(.easeInOut, value: isHovered)
+                .animation(.easeInOut, value: selected)
                 .onHover { hover in
                     isHovered = hover
                 }
@@ -127,7 +128,8 @@ extension ButtonStyles {
                 configuration.label
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
-                    .background(Color("ListButtonColor").brightness(isHovered ? 0.2 : 0))
+                    .background(isHovered ? .thickMaterial : .ultraThinMaterial)
+                    //.background(Color("ListButtonColor").brightness(isHovered ? 0.2 : 0))
                 //.background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
                 //.shadow(color: .secondary, radius: isHovered ? 10 : 0 , x: 0, y: isHovered ? 10 : 0)
                     .cornerRadius(6)

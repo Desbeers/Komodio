@@ -66,10 +66,13 @@ extension ItemsView {
         var body: some View {
             
             switch item.media {
-            case .movie:
-                MoviesView.Item(movie: $item)
+//            case .movie:
+//                MoviesView.Item(movie: $item)
             case .movieSet:
-                MoviesView.SetItem(movieSet: item)
+                RouterLink(item: .moviesSet(set: item)) {
+                    Basic(item: $item)
+                }
+                .buttonStyle(ButtonStyles.MediaItem(item: item))
             case .tvshow:
                 TVshowsView.Item(tvshow: $item)
             case .musicVideo:
@@ -132,6 +135,10 @@ extension ItemsView {
     }
 
     struct Details: View {
+        
+        /// The KodiConnector model
+        @EnvironmentObject var kodi: KodiConnector
+        
         let item: MediaItem
         var body: some View {
             VStack {
@@ -139,6 +146,16 @@ extension ItemsView {
                 case .episode:
                     ArtView.PosterEpisode(poster: item.poster)
                     Text(item.season == 0 ? "Specials" : "Season \(item.season)")
+                case .movieSet:
+                    DetailsBasic(item: item)
+                    Divider()
+                    VStack(alignment: .leading) {
+                        ForEach(kodi.media.filter { $0.media == .movie && $0.movieSetID == item.movieSetID}) { movie in
+                            Label(movie.title, systemImage: "film")
+                            
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
                 default:
                     DetailsBasic(item: item)
                 }
