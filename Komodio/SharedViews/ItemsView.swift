@@ -148,8 +148,11 @@ extension ItemsView {
                 switch item.media {
                 case .episode:
                     ArtView.Poster(item: item)
-                    Text(item.season == 0 ? "Specials" : "Season \(item.season)")
-                        .padding(.bottom)
+                        .macOS { $0.frame(width: 300) }
+                        .tvOS { $0.frame(width: 400) }
+                        .iOS { $0.frame(height: 200) }
+//                    Text(item.season == 0 ? "Specials" : "Season \(item.season)")
+//                        .padding(.bottom)
                 case .movieSet:
                     VStack(alignment: .leading) {
                         DetailsBasic(item: item)

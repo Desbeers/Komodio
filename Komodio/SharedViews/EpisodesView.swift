@@ -30,8 +30,16 @@ struct EpisodesView: View {
         
         ZStack(alignment: .topLeading) {
             ItemsView.List {
-                ForEach(episodes) { episode in
-                    Link(item: episode.binding())
+                ForEach(episodes.indices, id: \.self) { episode in
+                    
+                    if episode == 0 || (episode > 0 && episodes[episode - 1].season != episodes[episode].season) {
+                        Text(episodes[episode].season == 0 ? "Specials" : "Season \(episodes[episode].season)")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .macOS { $0.font(.title) }
+                            .tvOS { $0.font(.title3) }
+                    }
+                    
+                    Link(item: episodes[episode].binding())
                 }
             }
             /// Make room for the details
@@ -88,16 +96,16 @@ struct EpisodesView: View {
 //            //episodes = getEpisodes()
 //        }
     }
-    /// Get the episodes
-    private func getEpisodes() -> [MediaItem] {
-        return kodi.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
-    }
-    /// Order by seasons; specials as last
-    private func seasons( _ episodes: [MediaItem]) -> [Int] {
-        return episodes.map { $0.season }
-        .removingDuplicates()
-        .sorted { ($0 == 0 ? Int.max : $0) < ($1 == 0 ? Int.max : $1) }
-    }
+//    /// Get the episodes
+//    private func getEpisodes() -> [MediaItem] {
+//        return kodi.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
+//    }
+//    /// Order by seasons; specials as last
+//    private func seasons( _ episodes: [MediaItem]) -> [Int] {
+//        return episodes.map { $0.season }
+//        .removingDuplicates()
+//        .sorted { ($0 == 0 ? Int.max : $0) < ($1 == 0 ? Int.max : $1) }
+//    }
 }
 
 extension EpisodesView {
