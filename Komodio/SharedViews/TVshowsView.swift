@@ -14,13 +14,6 @@ struct TVshowsView: View {
     @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    
-    @Namespace private var namespace
-    
-    @FocusState private var focus: Bool
-    
-    @FocusState private var focusedMediaItem: MediaItem?
-    
     /// The TV shows to show
     private var tvshows: [MediaItem]
 #if os(tvOS)
@@ -32,7 +25,6 @@ struct TVshowsView: View {
 #endif
     init() {
         tvshows = KodiConnector.shared.media.filter(MediaFilter(media: .tvshow))
-        //focusedMediaItem = Router.shared.selectedMediaItem
     }
     /// The View
     var body: some View {
@@ -49,7 +41,6 @@ struct TVshowsView: View {
                         .buttonStyle(ButtonStyles.MediaItem(item: tvshow))
                     }
                 }
-                .focusScope(namespace)
                 .padding(.horizontal, 20)
             }
             /// Make room for the details
@@ -58,7 +49,6 @@ struct TVshowsView: View {
             if router.selectedMediaItem != nil {
                 ItemsView.Details(item: router.selectedMediaItem!)
             }
-            
         }
         .animation(.default, value: router.selectedMediaItem)
         .task {
@@ -69,19 +59,6 @@ struct TVshowsView: View {
         }
     }
 }
-
-//struct TVshowsView: View {
-//    /// The KodiConnector model
-//    @EnvironmentObject var kodi: KodiConnector
-//    /// The View
-//    var body: some View {
-//        ItemsView.List() {
-//            ForEach(kodi.media.filter(MediaFilter(media: .tvshow))) { tvshow in
-//                Item(tvshow: tvshow.binding())
-//            }
-//        }
-//    }
-//}
 
 extension TVshowsView {
     
