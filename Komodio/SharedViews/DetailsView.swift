@@ -67,10 +67,10 @@ struct DetailsView: View {
             .iOS { $0.frame(maxHeight: 200).padding() }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background {
-            ArtView.Fanart(fanart: item.fanart)
-                .ignoresSafeArea()
-        }
+//        .background {
+//            ArtView.Fanart(fanart: item.fanart)
+//                .ignoresSafeArea()
+//        }
         .onChange(of: kodi.media ) { _ in
             if let update = kodi.media.first(where: { $0.id == item.id} ) {
                 item = update

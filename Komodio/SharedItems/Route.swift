@@ -160,6 +160,8 @@ extension Route {
             fanart = artist.fanart
         case .songs(let album):
             fanart = album.fanart
+        case .details(let item):
+            fanart = item.fanart
         default:
             break
         }

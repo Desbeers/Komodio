@@ -129,11 +129,7 @@ extension ButtonStyles {
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
                     .background(isHovered ? .thickMaterial : .ultraThinMaterial)
-                    //.background(Color("ListButtonColor").brightness(isHovered ? 0.2 : 0))
-                //.background(Color.accentColor.opacity(isHovered ? 0.4 : 0.2))
-                //.shadow(color: .secondary, radius: isHovered ? 10 : 0 , x: 0, y: isHovered ? 10 : 0)
                     .cornerRadius(6)
-                //.padding()
                     .scaleEffect(isHovered ? 1.02 : 1)
                     .animation(.easeInOut, value: isHovered)
                     .onHover { hover in
