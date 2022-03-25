@@ -74,7 +74,10 @@ extension ItemsView {
                 }
                 .buttonStyle(ButtonStyles.MediaItem(item: item))
             case .tvshow:
-                TVshowsView.Item(tvshow: $item)
+                RouterLink(item: .episodes(tvshow: item)) {
+                    ItemsView.Basic(item: item.binding())
+                }
+                .buttonStyle(ButtonStyles.MediaItem(item: item))
             case .musicVideo:
                 MusicVideosView.Item(musicvideo: $item)
             default:

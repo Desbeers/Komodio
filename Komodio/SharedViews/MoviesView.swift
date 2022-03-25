@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
 
 /// A View for Movie items
@@ -60,52 +59,4 @@ struct MoviesView: View {
             }
         }
     }
-}
-
-
-///// A View for Movie items
-//struct MoviesView: View {
-//    /// The KodiConnector model
-//    @EnvironmentObject var kodi: KodiConnector
-//    /// The View
-//    var body: some View {
-//        ItemsView.List() {
-//            ForEach(kodi.media.filter(MediaFilter(media: .movie))) { movie in
-//                ItemsView.Item(item: movie.binding())
-//            }
-//        }
-//    }
-//}
-
-extension MoviesView {
-    
-    /// A View for a movie item
-    struct Item: View {
-        /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
-        /// The Movie item from the library
-        @Binding var movie: MediaItem
-        /// The View
-        var body: some View {
-            RouterLink(item: .details(item: movie)) {
-                ItemsView.Basic(item: movie.binding())
-            }
-            .buttonStyle(ButtonStyles.MediaItem(item: movie))
-        }
-    }
-    
-
-    
-//    /// A View for a movie set item
-//    struct SetItem: View {
-//        /// The Movie Set item from the library
-//        let movieSet: MediaItem
-//        /// The View
-//        var body: some View {
-//            RouterLink(item: .moviesSet(set: movieSet)) {
-//                ItemsView.Basic(item: movieSet.binding())
-//            }
-//            .buttonStyle(ButtonStyles.MediaItem(item: movieSet))
-//        }
-//    }
 }
