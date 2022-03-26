@@ -84,8 +84,12 @@ extension PlayerView {
             .task {
                 /// Check if we are already playing or not
                 if playerModel.player.isPlaying == false {
-                    sleep(2)
-                    playerModel.player.play()
+                    Task {
+                        try await Task.sleep(nanoseconds: 1_000_000_000)
+                        playerModel.player.play()
+                    }
+                    //sleep(2)
+                    
                 }
             }
             .onDisappear {
