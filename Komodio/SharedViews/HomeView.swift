@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
+import Kingfisher
 
 struct HomeView: View {
-    /// The AppState model
-    //@EnvironmentObject var appState: AppState
+    /// The Router model
+    @EnvironmentObject var router: Router
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Kodi items to show in this View
@@ -33,6 +33,8 @@ struct HomeView: View {
         }
         .task {
             items = getHomeItems()
+            /// Deselect any previous selected media item
+            router.setSelectedMediaItem(item: nil)
         }
         .onChange(of: kodi.media) { _ in
             items = getHomeItems()
@@ -52,6 +54,15 @@ struct HomeView: View {
                 }
             }, label: {
                 Text("Reload Library")
+                    .padding()
+            })
+            .padding(.all, 40)
+            Button(action: {
+                let cache = ImageCache.default
+                cache.clearMemoryCache()
+                cache.clearDiskCache { print("Done") }
+            }, label: {
+                Text("Clear Art")
                     .padding()
             })
             .padding(.all, 40)

@@ -52,10 +52,7 @@ extension GenresView {
         var body: some View {
             ItemsView.List() {
                 ForEach(kodi.media.filter(MediaFilter(media: .all, genre: genre.title))) { item in
-                    HStack {
-                        Text(item.media.rawValue)
                     ItemsView.Item(item: item.binding())
-                    }
                 }
                 .macOS { $0.padding(.horizontal, 40) }
                 .tvOS { $0.padding(.horizontal, 80) }

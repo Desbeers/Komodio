@@ -56,7 +56,8 @@ extension PartsView {
 
 extension PartsView {
     
-    /// A View to show the watched status of a Kodi item
+    /// A View to show a star for unwatched items
+    /// - Note: Movie sets are shown here as well with its own SF symbol
     struct WatchStatusViewModifier: ViewModifier {
         /// The Kodi media item
         @Binding var item: MediaItem
@@ -64,9 +65,11 @@ extension PartsView {
         func body(content: Content) -> some View {
             content
                 .overlay(alignment: .topTrailing) {
-                    Image(systemName: item.playcount == 0 ? "star.fill" : "checkmark.circle.fill")
-                        .font(.subheadline)
-                        .foregroundColor(item.playcount == 0 ? .yellow : .green)
+                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" : "star.fill")
+                        .macOS { $0.font(.headline) }
+                        .tvOS { $0.font(.subheadline) }
+                        .foregroundColor(.yellow)
+                        .opacity(item.playcount == 0 ? 1 : 0)
                 }
         }
     }

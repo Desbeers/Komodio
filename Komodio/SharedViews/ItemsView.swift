@@ -42,8 +42,8 @@ extension ItemsView {
                     /// Scroll to the last selected item on this View
 #if os(tvOS)
                     /// Focus on top for tvOS, then it will select the last item row again
-                    /// - Note: Don't scroll on the homepage, focus will be confused...
-                    if router.currentRoute.route != .home {
+                    /// - Note: Exceptions because otherwise tvOS will be upset...
+                    if router.currentRoute.route != .home && router.currentRoute.route != .genres {
                         proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
                     }
 #else
@@ -66,8 +66,6 @@ extension ItemsView {
         var body: some View {
             
             switch item.media {
-//            case .movie:
-//                MoviesView.Item(movie: $item)
             case .movieSet:
                 RouterLink(item: .moviesSet(set: item)) {
                     Basic(item: $item)
@@ -117,7 +115,7 @@ extension ItemsView {
                     }
                     Divider()
                     Text(item.description)
-                        .lineLimit(2)
+                        .lineLimit(5)
                 }
                 .padding(.horizontal)
             }

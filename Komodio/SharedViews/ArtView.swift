@@ -57,5 +57,16 @@ extension ArtView {
                         .aspectRatio(contentMode: .fit)
         }
     }
+    struct Thumbnail: View {
+        /// The Kodi item
+        let item: MediaItem
+        /// The View
+        var body: some View {
+            KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
+                        .fade(duration: 0.25)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+        }
+    }
     
 }
