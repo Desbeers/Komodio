@@ -18,23 +18,38 @@ extension MusicVideosView {
     
     /// A View with all Music Video items for a selected artist
     struct Artist: View {
+        /// The Router model
+        @EnvironmentObject var router: Router
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
-        /// The Artist item
-        let artist: MediaItem
+        /// The artist who's videos to show
+        private let artist: MediaItem
+        /// The items to show
+        private let items: [MediaItem]
+        /// Init the View
+        init(artist: MediaItem) {
+            self.artist = artist
+            self.items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))
+        }
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))) { musicvideo in
-                    ItemsView.Item(item: musicvideo.binding())
+                ForEach(items) { item in
+                    ItemsView.Item(item: item.binding())
                 }
                 .macOS { $0.padding(.horizontal, 80) }
                 .tvOS { $0.padding(.horizontal, 160) }
+            }
+            .task {
+                if router.selectedMediaItem == nil {
+                    router.setSelectedMediaItem(item: items.first)
+                }
             }
         }
     }
 
     /// A View for one Music Video Item
+    /// - Note: If the video belongs to an album it will be shown as an 'album link'
     struct Item: View {
         @Binding var musicvideo: MediaItem
         var body: some View {
@@ -49,6 +64,7 @@ extension MusicVideosView {
         }
     }
     
+    /// A View for an album of music videos
     struct Album: View {
         /// The Router model
         @EnvironmentObject var router: Router
@@ -60,10 +76,10 @@ extension MusicVideosView {
         private var musicVideos: [MediaItem]
 #if os(tvOS)
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 400))]
+    let grid = [GridItem(.adaptive(minimum: 340))]
 #else
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 154))]
+    let grid = [GridItem(.adaptive(minimum: 240))]
 #endif
         init(album: MediaItem) {
             self.album = album
@@ -77,12 +93,12 @@ extension MusicVideosView {
                         RouterLink(item: .details(item: musicVideo)) {
                             VStack {
                                 ArtView.Thumbnail(item: musicVideo)
+                                    .macOS { $0.frame(width: 240, height: 135) }
+                                    .tvOS { $0.frame(width: 320, height: 180) }
                                 Text(musicVideo.title)
                             }
                                 .watchStatus(of: musicVideo.binding())
-                                    .macOS { $0.frame(width: 150) }
-                                    .tvOS { $0.frame(width: 400) }
-                                    .iOS { $0.frame(height: 200) }
+                                    //.macOS { $0.frame(width: 150) }
                         }
                         .buttonStyle(ButtonStyles.MediaItem(item: musicVideo))
                     }
@@ -100,7 +116,7 @@ extension MusicVideosView {
     
     /// A View for an album item
     struct AlbumItem: View {
-        /// The Movie Set item from the library
+        /// The album to show
         let album: MediaItem
         /// The View
         var body: some View {
@@ -119,7 +135,6 @@ extension MusicVideosView {
                         Text("Album with Music Videos")
                     }
                 }
-                //ItemsView.Basic(item: movieSet.binding())
             }
             .buttonStyle(ButtonStyles.MediaItem(item: album))
         }
