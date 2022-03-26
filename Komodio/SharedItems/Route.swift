@@ -28,9 +28,9 @@ enum Route: Equatable, Hashable {
     /// The items to show as main menu items
     /// - Note: iOS has no 'home' button because the buttons are only shown on the homepage
     #if os(macOS)
-    static let menuItems: [Route] = [.movies, .tvshows, .musicVideos, .genres, .table]
+    static let menuItems: [Route] = [.movies, .tvshows, .musicVideos, .artists, .genres, .table]
     #else
-    static let menuItems: [Route] = [.movies, tvshows, musicVideos, genres]
+    static let menuItems: [Route] = [.movies, tvshows, musicVideos, .artists, genres]
     #endif
 }
 
