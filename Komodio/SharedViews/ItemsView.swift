@@ -98,9 +98,6 @@ extension ItemsView {
         var body: some View {
             HStack(spacing: 0) {
                 ArtView.Poster(item: item)
-                    .macOS { $0.frame(width: 150) }
-                    .tvOS { $0.frame(width: 200) }
-                    .iOS { $0.frame(height: 200) }
                 VStack(alignment: .leading) {
                     HStack {
                         Text(item.title)
@@ -148,12 +145,12 @@ extension ItemsView {
             VStack {
                 switch item.media {
                 case .episode:
-                    ArtView.Poster(item: item)
-                        .macOS { $0.frame(width: 300) }
-                        .tvOS { $0.frame(width: 400) }
-                        .iOS { $0.frame(height: 200) }
-//                    Text(item.season == 0 ? "Specials" : "Season \(item.season)")
-//                        .padding(.bottom)
+                    ArtView.SeasonPoster(item: item)
+//                        .macOS { $0.frame(width: 300) }
+//                        .tvOS { $0.frame(width: 400) }
+//                        .iOS { $0.frame(height: 200) }
+////                    Text(item.season == 0 ? "Specials" : "Season \(item.season)")
+////                        .padding(.bottom)
                 case .movieSet:
                     VStack(alignment: .leading) {
                         DetailsBasic(item: item)
@@ -201,7 +198,7 @@ extension ItemsView {
     
     
     
-    struct FanartModifier: ViewModifier {
+    struct BackgroundModifier: ViewModifier {
         /// The Router model
         @EnvironmentObject var router: Router
         /// The fanart
@@ -212,19 +209,14 @@ extension ItemsView {
                 .background {
                     VStack {
                         if !fanart.isEmpty {
-                            ArtView.Fanart(fanart: fanart)
+                            ArtView.Background(fanart: fanart)
                                 .blur(radius: 5)
                                 .opacity(0.2)
-                                //.macOS { $0.overlay(Material.ultraThinMaterial) }
-                                //.tvOS { $0.overlay(Material.thinMaterial) }
-                                //.transition(.opacity)
                         } else {
                             EmptyView()
                         }
                     }
-                    //.transition(.opacity)
                 }
-                //.animation(.default, value: router.selectedMediaItem)
         }
     }
 }

@@ -18,7 +18,7 @@ struct TVshowsView: View {
     private var tvshows: [MediaItem]
 #if os(tvOS)
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 200))]
+    let grid = [GridItem(.adaptive(minimum: 300))]
 #else
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 154))]
@@ -34,9 +34,9 @@ struct TVshowsView: View {
                     ForEach(tvshows) { tvshow in
                         RouterLink(item: .episodes(tvshow: tvshow)) {
                                 ArtView.Poster(item: tvshow)
-                                    .macOS { $0.frame(width: 150) }
-                                    .tvOS { $0.frame(width: 200) }
-                                    .iOS { $0.frame(height: 200) }
+//                                    .macOS { $0.frame(width: 150) }
+//                                    .tvOS { $0.frame(width: 200) }
+//                                    .iOS { $0.frame(height: 200) }
                         }
                         .buttonStyle(ButtonStyles.MediaItem(item: tvshow))
                     }

@@ -123,9 +123,6 @@ extension MusicVideosView {
             RouterLink(item: .musicVideosAlbum(album: album)) {
                 HStack {
                     ArtView.Poster(item: album)
-                        .macOS { $0.frame(width: 150) }
-                        .tvOS { $0.frame(width: 200) }
-                        .iOS { $0.frame(height: 200) }
                     VStack(alignment: .leading) {
                         Text(album.album)
                             .font(.headline)

@@ -18,7 +18,7 @@ struct MoviesView: View {
     private var movies: [MediaItem]
 #if os(tvOS)
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 200))]
+    let grid = [GridItem(.adaptive(minimum: 300))]
 #else
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 154))]
@@ -35,9 +35,9 @@ struct MoviesView: View {
                         RouterLink(item: movie.movieSetID == 0 ? .details(item: movie) : .moviesSet(set: movie)) {
                                 ArtView.Poster(item: movie)
                                 .watchStatus(of: movie.binding())
-                                    .macOS { $0.frame(width: 150) }
-                                    .tvOS { $0.frame(width: 200) }
-                                    .iOS { $0.frame(height: 200) }
+//                                    .macOS { $0.frame(width: 150) }
+//                                    .tvOS { $0.frame(width: 200) }
+//                                    .iOS { $0.frame(height: 200) }
                         }
                         .buttonStyle(ButtonStyles.MediaItem(item: movie))
                     }
