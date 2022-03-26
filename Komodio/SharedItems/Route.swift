@@ -188,9 +188,10 @@ extension Route {
             /// # Music Videos
             
         case .musicVideos:
-            MusicVideosView()
+            //MusicVideosView()
+            ArtistsView(media: .musicVideoArtist)
         case .musicVideosItems(let artist):
-            MusicVideosView.Items(artist: artist)
+            MusicVideosView.Artist(artist: artist)
         case .musicVideosAlbum(let album):
             MusicVideosView.Album(album: album)
         
@@ -204,7 +205,7 @@ extension Route {
             /// # Audio
             
         case .artists:
-            ArtistsView()
+            ArtistsView(media: .artist)
         case .albums(let artist):
             AlbumsView(artist: artist)
         case .songs(let album):

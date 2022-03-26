@@ -8,7 +8,65 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+
 struct ArtistsView: View {
+    /// The Router model
+    @EnvironmentObject var router: Router
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
+    /// The artists to show
+    private var artists: [MediaItem]
+    /// The type of media, ausio or video
+    private let media: MediaType
+#if os(tvOS)
+    /// Define the grid layout
+    let grid = [GridItem(.adaptive(minimum: 300))]
+#else
+    /// Define the grid layout
+    let grid = [GridItem(.adaptive(minimum: 154))]
+#endif
+    init(media: MediaType) {
+        self.media = media
+        artists = KodiConnector.shared.media.filter(MediaFilter(media: media))
+    }
+    /// The View
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            ItemsView.List {
+                LazyVGrid(columns: grid, spacing: 0) {
+                    ForEach(artists) { artist in
+                        RouterLink(item: media == .musicVideoArtist ? .musicVideosItems(artist: artist) : .albums(artist: artist)) {
+                        //RouterLink(item: .musicVideosItems(artist: artist)) {
+                            VStack {
+                                ArtView.Poster(item: artist)
+                                Text(artist.title)
+                            }
+                                    .macOS { $0.frame(width: 150) }
+                                    .tvOS { $0.frame(width: 300) }
+                                    .iOS { $0.frame(height: 200) }
+                        }
+                        .buttonStyle(ButtonStyles.MediaItem(item: artist))
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+            /// Make room for the details
+            .macOS { $0.padding(.leading, 330) }
+            .tvOS { $0.padding(.leading, 550) }
+            if router.selectedMediaItem != nil {
+                ItemsView.Details(item: router.selectedMediaItem!)
+            }
+        }
+        .animation(.default, value: router.selectedMediaItem)
+        .task {
+            if router.selectedMediaItem == nil {
+                router.setSelectedMediaItem(item: artists.first)
+            }
+        }
+    }
+}
+
+struct AAAArtistsView: View {
     /// The Router model
     @EnvironmentObject var router: Router
     /// The KodiConnector model
