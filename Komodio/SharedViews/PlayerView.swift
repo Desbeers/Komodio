@@ -24,7 +24,7 @@ struct PlayerView: View {
             logger("End of the playlist, close the View")
             router.pop()
         }
-        #if os(iOS)
+#if os(iOS)
         /// Close the player view with a drag gesture
         .gesture(
             DragGesture()
@@ -33,12 +33,12 @@ struct PlayerView: View {
                     router.pop()
                 }
         )
-        #endif
-        #if os(macOS)
+#endif
+#if os(macOS)
         .onExitCommand {
             router.pop()
         }
-        #endif
+#endif
     }
 }
 
@@ -81,27 +81,28 @@ extension PlayerView {
             VideoPlayer(player: playerModel.player) {
                 Overlay(item: items.first ?? nil)
             }
-                .task {
-                    /// Check if we are already playing or not
-                    if playerModel.player.isPlaying == false {
-                        playerModel.player.play()
-                    }
+            .task {
+                /// Check if we are already playing or not
+                if playerModel.player.isPlaying == false {
+                    sleep(2)
+                    playerModel.player.play()
                 }
-                .onDisappear {
-                    playerModel.player.removeAllItems()
-                }
-                .ignoresSafeArea(.all)
-            #if os(tvOS)
-                .onPlayPauseCommand {
-                    logger("PLAY/PAUSE")
-                    playerModel.player.isPlaying ? playerModel.player.pause() : playerModel.player.play()
-                }
-            #endif
-//                .onMoveCommand(perform: { direction in
-//                    if direction == .right {
-//                        playerModel.player.advanceToNextItem()
-//                    }
-//                })
+            }
+            .onDisappear {
+                playerModel.player.removeAllItems()
+            }
+            .ignoresSafeArea(.all)
+#if os(tvOS)
+            .onPlayPauseCommand {
+                logger("PLAY/PAUSE")
+                playerModel.player.isPlaying ? playerModel.player.pause() : playerModel.player.play()
+            }
+#endif
+            //                .onMoveCommand(perform: { direction in
+            //                    if direction == .right {
+            //                        playerModel.player.advanceToNextItem()
+            //                    }
+            //                })
         }
         /// The PlayerModel class
         class PlayerModel: ObservableObject {
@@ -110,12 +111,12 @@ extension PlayerView {
             /// Init the PlayerModel class
             init(items: [MediaItem], endAction: @escaping () -> Void) {
                 /// Setup the player
-            var playerItems: [AVPlayerItem] = []
+                var playerItems: [AVPlayerItem] = []
                 for item in items {
-                let playerItem = AVPlayerItem(url: URL(string: item.file)!)
+                    let playerItem = AVPlayerItem(url: URL(string: item.file)!)
 #if os(tvOS)
-                /// tvOS can add aditional info to the player
-                playerItem.externalMetadata = createMetadataItems(video: item)
+                    /// tvOS can add aditional info to the player
+                    playerItem.externalMetadata = createMetadataItems(video: item)
 #endif
                     playerItems.append(playerItem)
                 }
@@ -123,7 +124,10 @@ extension PlayerView {
                 player = AVQueuePlayer(items: playerItems)
                 /// The NotificationCenter will take care of actions, so set this to .none for the player
                 player.actionAtItemEnd = .none
-                //player.actionAtItemEnd = .advance
+                //                /// Sleep for a moment or else tvOS does not show the metadata
+                //                sleep(10)
+                //                /// Start the player
+                //                player.play()
                 /// Get notifications
                 NotificationCenter
                     .default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
@@ -146,44 +150,4 @@ extension PlayerView {
             }
         }
     }
-    
-    /// Create a link to the PlayerView
-    /// - On macOS, the player will open in a new Window
-    /// - On tvOS and iOS it is just another NavigationLink for the stack
-//    struct Link<Label: View, Destination: View>: View {
-//        /// The Router model
-//        @EnvironmentObject var router: Router
-//        /// The KodiConnector model
-//        @EnvironmentObject var kodi: KodiConnector
-//        /// The Kodi item we want to play
-//        private var item: MediaItem
-//        /// The label for the link; it is a View
-//        private var label: Label
-//        /// The View destination for the link
-//        private var destination: Destination
-//        /// Create a `label` and `destination`
-//        init(item: MediaItem, destination: Destination, @ViewBuilder label: () -> Label) {
-//            self.item = item
-//            self.label = label()
-//            self.destination = destination
-//        }
-//        /// The View
-//        var body: some View {
-//#if os(macOS)
-//            Button(action: {
-//                destination
-//                    .environmentObject(kodi)
-//                    .openInWindow(title: item.title, size: NSSize(width: 640, height: 360))
-//            }, label: {
-//                label
-//            })
-//                .keyboardShortcut(.defaultAction)
-//#else
-//            NavigationLink(destination: destination.onAppear { router.push(Route.player) }) {
-//                label
-//            }
-//            .padding()
-//#endif
-//        }
-//    }
 }
