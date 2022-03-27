@@ -44,7 +44,7 @@ extension ItemsView {
                     /// Focus on top for tvOS, then it will select the last item row again
                     /// - Note: Exceptions because otherwise tvOS will be upset...
                     if router.currentRoute.route != .home && router.currentRoute.route != .genres {
-                        proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
+                        //proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
                     }
 #else
                     withAnimation(.linear(duration: 1)) {
@@ -112,7 +112,7 @@ extension ItemsView {
                     }
                     Divider()
                     Text(item.description)
-                        .lineLimit(5)
+                        .lineLimit(3)
                 }
                 .padding(.horizontal)
             }
