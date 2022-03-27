@@ -34,9 +34,9 @@ struct GenresView: View {
                 }
                 .buttonStyle(ButtonStyles.GridItem())
             }
+            .tvOS { $0.padding(.horizontal, 100).padding(.vertical, 40) }
             .macOS { $0.padding(.top, 40) }
         }
-        .tvOS { $0.padding(.horizontal, 100) }
     }
 }
 

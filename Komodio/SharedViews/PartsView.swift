@@ -29,6 +29,7 @@ extension PartsView {
             }
             .buttonStyle(ButtonStyles.GridItem())
             .padding()
+            .tvOS { $0.padding(.vertical)}
         }
     }
 }

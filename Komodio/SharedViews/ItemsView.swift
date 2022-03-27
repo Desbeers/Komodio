@@ -35,16 +35,17 @@ extension ItemsView {
                     }
                     /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
                     .macOS { $0.padding(.top, 100)}
-                    .tvOS { $0.padding(.top, 200)}
+                    
                     .iOS { $0.padding(.top, 120)}
                 }
+                .tvOS { $0.padding(.top, 180)}
                 .task {
                     /// Scroll to the last selected item on this View
 #if os(tvOS)
                     /// Focus on top for tvOS, then it will select the last item row again
                     /// - Note: Exceptions because otherwise tvOS will be upset...
                     if router.currentRoute.route != .home && router.currentRoute.route != .genres {
-                        //proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
+                        proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
                     }
 #else
                     withAnimation(.linear(duration: 1)) {

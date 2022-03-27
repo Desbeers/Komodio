@@ -75,7 +75,7 @@ extension ArtView {
                 /// Just the 'standard' poster
                 KFImage(URL(string: item.poster)!)
                     .placeholder { Image(systemName: "film").resizable().padding() }
-                    .fade(duration: 0.25)
+                    //.fade(duration: 0.25)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .macOS { $0.frame(width: 150, height: 225) }
@@ -97,7 +97,7 @@ extension ArtView {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .macOS { $0.frame(width: 150, height: 225) }
-                .tvOS { $0.frame(width: 300, height: 450) }
+                .tvOS { $0.frame(width: 400, height: 600) }
                 .iOS { $0.frame(height: 200) }
         }
         

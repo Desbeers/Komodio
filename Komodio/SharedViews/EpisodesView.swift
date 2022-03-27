@@ -35,7 +35,7 @@ struct EpisodesView: View {
                             .padding(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .macOS { $0.font(.title) }
-                            .tvOS { $0.font(.title3) }
+                            .tvOS { $0.font(.title3).padding(.top) }
                     }
                     
                     Link(item: episodes[episode].binding())
