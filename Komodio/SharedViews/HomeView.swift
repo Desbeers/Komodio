@@ -27,8 +27,10 @@ struct HomeView: View {
                     Row(title: "Latest\nunwatched\nMovies", items: $items.movies)
                     Row(title: "Random\nMusic\nVideos", items: $items.musicvideos)
                     Row(title: "Latest\nTV show\nEpisodes", items: $items.episodes)
-                    libraryReloadButton
                 }
+#if os(tvOS)
+        .focusSection()
+#endif
             }
         }
         .task {
@@ -43,35 +45,6 @@ struct HomeView: View {
 //            logger("Focus: \(item?.title)")
 //        }
 //        .animation(.default, value: appState.hoveredMediaItem)
-    }
-    /// A library 'reload' button
-    var libraryReloadButton: some View {
-        /// In a HStack to make it focusable in tvOS
-        HStack {
-            Button(action: {
-                Task {
-                    await kodi.reloadHost()
-                }
-            }, label: {
-                Text("Reload Library")
-                    .padding()
-            })
-            .padding(.all, 40)
-            Button(action: {
-                let cache = ImageCache.default
-                cache.clearMemoryCache()
-                cache.clearDiskCache { print("Done") }
-            }, label: {
-                Text("Clear Art")
-                    .padding()
-            })
-            .padding(.all, 40)
-        }
-        .frame(maxWidth: .infinity)
-#if os(tvOS)
-        .focusSection()
-        .buttonStyle(.card)
-#endif
     }
     
     /// Get the home items
@@ -117,19 +90,36 @@ extension HomeView {
                     Divider()
                     ForEach($items) { $item in
                         HStack {
-                        Item(item: $item)
+                            Item(item: $item)
                                 .zIndex(2)
-                            if item == router.selectedMediaItem, !item.description.isEmpty {
-                                Text(item.description)
-                                    .padding()
-                                    .background(.ultraThinMaterial)
-                                    .cornerRadius(6)
-                                    .macOS { $0.frame(width: 300, height: 200) }
-                                    .tvOS { $0.padding(.leading, -50).frame(width: 300, height: 500) }
-                                    .iOS { $0.frame(width: 300, height: 300) }
-                                    .transition(.opacity)
-                                    .padding(.bottom)
-                                    .zIndex(1)
+                            if item == router.selectedMediaItem {
+                                Group {
+                                    switch item.media {
+                                    case .episode:
+                                        VStack {
+                                            Text("Season \(item.season)")
+                                            Text("Episode \(item.episode)")
+                                                .font(.caption)
+                                        }
+                                    case .musicVideo:
+                                        VStack {
+                                            Text("\(item.title)")
+                                            Text("\(item.subtitle)")
+                                                .font(.caption)
+                                        }
+                                        //Text(item.subtitle)
+                                    default:
+                                        Text(item.description)
+                                            .lineLimit(10)
+                                            .frame(width: 300)
+                                    }
+                                }
+                                .padding()
+                                .background(.ultraThinMaterial)
+                                .cornerRadius(6)
+                                
+                                .tvOS { $0.padding(.leading, -50).padding(.trailing, -30) }
+                                .zIndex(1)
                             }
                         }
                     }
@@ -155,7 +145,7 @@ extension HomeView {
 //                            .iOS { $0.frame(height: 300) }
                             .watchStatus(of: $item)
                         if item.media == .episode {
-                            Text(item.title)
+                            Text(item.subtitle)
                                 .font(.caption)
                         }
                     }

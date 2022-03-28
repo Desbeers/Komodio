@@ -24,13 +24,14 @@ enum Route: Equatable, Hashable {
     case artists
     case albums(artist: MediaItem)
     case songs(album: MediaItem)
+    case system
     case table
     /// The items to show as main menu items
     /// - Note: iOS has no 'home' button because the buttons are only shown on the homepage
     #if os(macOS)
-    static let menuItems: [Route] = [.movies, .tvshows, .musicVideos, .artists, .genres, .table]
+    static let menuItems: [Route] = [.movies, .tvshows, .musicVideos, .artists, .genres, .table, .system]
     #else
-    static let menuItems: [Route] = [.movies, tvshows, musicVideos, .artists, genres]
+    static let menuItems: [Route] = [.movies, tvshows, musicVideos, .artists, genres, .system]
     #endif
 }
 
@@ -71,6 +72,8 @@ extension Route {
             return artist.title
         case .songs(let album):
             return album.title
+        case .system:
+            return "Komodio"
         }
     }
 }
@@ -120,6 +123,8 @@ extension Route {
             return "list.star"
         case .artists:
             return "person.2"
+        case .system:
+            return "gear"
         case .table:
             return "testtube.2"
         default:
@@ -214,6 +219,11 @@ extension Route {
             /// # Player
         case .player(let items):
             PlayerView(items: items)
+            
+            /// # System
+        case .system:
+            KomodioView()
+            
             
 #if os(macOS)
         case .table:

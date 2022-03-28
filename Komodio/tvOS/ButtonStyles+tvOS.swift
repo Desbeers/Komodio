@@ -81,7 +81,7 @@ extension ButtonStyles {
             return Button(action: configuration.trigger, label: {
                 configuration
                     .label
-                    .background(Color("ListButtonColor").opacity(0.5))
+                    //.background(Color("ListButtonColor").opacity(0.5))
             })
             .buttonStyle(.card)
         }
