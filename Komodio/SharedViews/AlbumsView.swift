@@ -27,14 +27,14 @@ struct AlbumsView: View {
                 ForEach(kodi.media.filter(MediaFilter(media: .album, artist: artist.artists))) { album in
                     RouterLink(item: .songs(album: album)) {
                         VStack(spacing: 0) {
-                            ArtView.Poster(item: album)
-                                .macOS { $0.frame(height: 300) }
+                            ArtView.Thumbnail(item: album)
+                                .macOS { $0.frame(width: 300, height: 300) }
                                 .tvOS { $0.frame(width: 300, height: 300) }
                                 .iOS { $0.frame(height: 200) }
                                 Text(album.title)
                                     .font(.caption)
                         }
-                        .frame(width: 300)
+                        //.frame(width: 300)
                     }
                     .buttonStyle(ButtonStyles.MediaItem(item: album))
 

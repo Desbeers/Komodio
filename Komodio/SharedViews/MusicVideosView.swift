@@ -33,12 +33,20 @@ extension MusicVideosView {
         }
         /// The View
         var body: some View {
-            ItemsView.List() {
-                ForEach(items) { item in
-                    ItemsView.Item(item: item.binding())
+            ZStack(alignment: .topLeading)  {
+                ItemsView.List() {
+                    ForEach(items) { item in
+                        ItemsView.Item(item: item.binding())
+                    }
+                    .macOS { $0.padding(.horizontal, 80) }
+                    .tvOS { $0.padding(.horizontal, 80) }
                 }
-                .macOS { $0.padding(.horizontal, 80) }
-                .tvOS { $0.padding(.horizontal, 160) }
+                /// Make room for the details
+                .macOS { $0.padding(.leading, 330) }
+                .tvOS { $0.padding(.leading, 550) }
+                .iOS { $0.padding(.leading, 330) }
+                /// View the details
+                ItemsView.Details(item: artist)
             }
             .task {
                 if router.selectedMediaItem == nil {
@@ -98,7 +106,6 @@ extension MusicVideosView {
                                 Text(musicVideo.title)
                             }
                                 .watchStatus(of: musicVideo.binding())
-                                    //.macOS { $0.frame(width: 150) }
                         }
                         .buttonStyle(ButtonStyles.MediaItem(item: musicVideo))
                     }
@@ -114,7 +121,7 @@ extension MusicVideosView {
         }
     }
     
-    /// A View for an album item
+    /// A View for an album item that contains music videos
     struct AlbumItem: View {
         /// The album to show
         let album: MediaItem

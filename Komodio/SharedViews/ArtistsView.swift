@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-
+/// A View for Artists for Audio and Music Videos
 struct ArtistsView: View {
     /// The Router model
     @EnvironmentObject var router: Router
@@ -16,14 +16,14 @@ struct ArtistsView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The artists to show
     private var artists: [MediaItem]
-    /// The type of media, ausio or video
+    /// The type of media, audio or video
     private let media: MediaType
 #if os(tvOS)
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 300))]
+    let grid = [GridItem(.adaptive(minimum: 340))]
 #else
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 154))]
+    let grid = [GridItem(.adaptive(minimum: 180))]
 #endif
     init(media: MediaType) {
         self.media = media
@@ -36,88 +36,41 @@ struct ArtistsView: View {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(artists) { artist in
                         RouterLink(item: media == .musicVideoArtist ? .musicVideosItems(artist: artist) : .albums(artist: artist)) {
-                        //RouterLink(item: .musicVideosItems(artist: artist)) {
-                            VStack {
-                                ArtView.Poster(item: artist)
-                                Text(artist.title)
-                            }
-                                    .macOS { $0.frame(width: 150) }
-                                    .tvOS { $0.frame(width: 300) }
-                                    .iOS { $0.frame(height: 200) }
+                            Item(artist: artist)
                         }
                         .buttonStyle(ButtonStyles.MediaItem(item: artist))
                     }
                 }
-                .padding(.horizontal, 20)
+                .macOS { $0.padding(.horizontal, 20) }
+                .tvOS { $0.padding(.horizontal, 80) }
             }
-            /// Make room for the details
-            .macOS { $0.padding(.leading, 330) }
-            .tvOS { $0.padding(.leading, 550) }
-            if router.selectedMediaItem != nil {
-                ItemsView.Details(item: router.selectedMediaItem!)
-            }
+//            /// Make room for the details
+//            .macOS { $0.padding(.leading, 330) }
+//            .tvOS { $0.padding(.leading, 550) }
+//            .iOS { $0.padding(.leading, 330) }
+//            if router.selectedMediaItem != nil {
+//                ItemsView.Details(item: router.selectedMediaItem!)
+//            }
         }
         .animation(.default, value: router.selectedMediaItem)
-        .task {
-            if router.selectedMediaItem == nil {
-                router.setSelectedMediaItem(item: artists.first)
-            }
-        }
+//        .task {
+//            if router.selectedMediaItem == nil {
+//                router.setSelectedMediaItem(item: artists.first)
+//            }
+//        }
     }
 }
 
-struct AAAArtistsView: View {
-    /// The Router model
-    @EnvironmentObject var router: Router
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
-#if os(tvOS)
-    /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 300))]
-#else
-    /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 150))]
-#endif
-    /// The View
-    var body: some View {
-        ZStack(alignment: .topLeading) {
-            ItemsView.List {
-                LazyVGrid(columns: grid, spacing: 30) {
-                    ForEach(kodi.media.filter(MediaFilter(media: .artist))) { artist in
-                        //HStack {
-                        RouterLink(item: .albums(artist: artist)) {
-                            VStack(spacing: 0) {
-                                ArtView.Poster(item: artist)
-                                    .macOS { $0.frame(height: 150) }
-                                    .tvOS { $0.frame(width: 300, height: 300) }
-                                    .iOS { $0.frame(height: 200) }
-                                Text(artist.title)
-                                    .font(.caption)
-                            }
-                        }
-                        .frame(width: 300)
-                        .buttonStyle(ButtonStyles.MediaItem(item: artist))
-                    }
-                }
-            }
-            .padding(.leading, 500)
-            .macOS { $0.padding(.top, 40) }
-            //.tvOS { $0.padding(.horizontal, 100) }
-            if router.selectedMediaItem != nil {
-                Text(router.selectedMediaItem?.description ?? "Description")
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(6)
-                    .macOS { $0.frame(width: 300, height: 200) }
-                    .tvOS { $0.frame(width: 500, height: 300) }
-                    .iOS { $0.frame(width: 300, height: 300) }
-                    .transition(.opacity)
-                    .padding(.bottom)
-                    .zIndex(1)
-                    .padding(.top, 300)
-                    .transition(.slide)
+extension ArtistsView {
+    /// A View for one Artist Item
+    struct Item: View {
+        let artist: MediaItem
+        var body: some View {
+            VStack(spacing: 0) {
+                ArtView.Poster(item: artist)
+                Text(artist.title)
+                    .font(.caption)
             }
         }
-        .animation(.default, value: router.selectedMediaItem)
     }
 }

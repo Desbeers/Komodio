@@ -42,6 +42,7 @@
 		D735DEDE27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
+		D749AF142812CE8800A684C8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D749AF132812CE8800A684C8 /* Kingfisher */; };
 		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
 		D75630A727E43879007A624C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView.swift */; };
 		D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
@@ -167,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D749AF142812CE8800A684C8 /* Kingfisher in Frameworks */,
 				D7CCA97327CC3B21001B4828 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +342,7 @@
 			name = "Komodio (iOS)";
 			packageProductDependencies = (
 				D7CCA97227CC3B21001B4828 /* SwiftlyKodiAPI */,
+				D749AF132812CE8800A684C8 /* Kingfisher */,
 			);
 			productName = "Komodio (iOS)";
 			productReference = D7ADD15127C9763A00321E23 /* Komodio.app */;
@@ -923,6 +926,11 @@
 			productName = Kingfisher;
 		};
 		D731124627ECBB2400F1BF4A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D731124327ECB9A000F1BF4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		D749AF132812CE8800A684C8 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D731124327ECB9A000F1BF4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;

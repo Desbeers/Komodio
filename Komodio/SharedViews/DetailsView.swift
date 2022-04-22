@@ -38,13 +38,13 @@ struct DetailsView: View {
             }
             /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
             .macOS { $0.padding(.top, 100).padding()}
-            .tvOS { $0.padding(.top, 140).padding(.horizontal, 60)}
+            .tvOS { $0.padding(.top, 200).padding(.horizontal, 60)}
             .iOS { $0.padding(.top, 120)}
-            .frame(maxWidth: .infinity, alignment: .leading)
+            //.frame(maxWidth: .infinity, alignment: .leading)
             //.frame(width: 400)
             Spacer()
             HStack(alignment: .center, spacing: 0) {
-                ArtView.Poster(item: item)
+                ArtView.DetailsPoster(item: item)
                     .cornerRadius(9)
                     .padding(6)
                 VStack {
@@ -59,8 +59,9 @@ struct DetailsView: View {
                     }
                     .buttonStyle(.bordered)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
+                .padding(.leading)
+                //.frame(maxWidth: .infinity, alignment: .leading)
+                //.padding()
                 Divider()
                     .padding(.vertical)
                 /// Details
@@ -71,13 +72,14 @@ struct DetailsView: View {
                 }
                 .font(.caption)
                 .frame(minWidth: 0, idealWidth: 100)
+                .padding(.horizontal)
                 .padding()
             }
             .background(.thinMaterial)
             .cornerRadius(12)
             .shadow(radius: 20)
             .macOS { $0.frame(maxHeight: 200).padding() }
-            .tvOS { $0.frame(maxHeight: 200).padding(60) }
+            .tvOS { $0.frame(maxHeight: 200).padding(60).padding(.bottom, 40) }
             .iOS { $0.frame(maxHeight: 200).padding() }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

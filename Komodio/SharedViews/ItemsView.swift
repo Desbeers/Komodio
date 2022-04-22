@@ -35,9 +35,9 @@ extension ItemsView {
                     }
                     /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
                     .macOS { $0.padding(.top, 100)}
-                    
                     .iOS { $0.padding(.top, 120)}
                 }
+                /// tvOS can't scroll into the `TitleHeader` because the `scrollTo` is messy...
                 .tvOS { $0.padding(.top, 180)}
                 .task {
                     /// Scroll to the last selected item on this View
@@ -147,11 +147,16 @@ extension ItemsView {
                 switch item.media {
                 case .episode:
                     ArtView.SeasonPoster(item: item)
-//                        .macOS { $0.frame(width: 300) }
-//                        .tvOS { $0.frame(width: 400) }
-//                        .iOS { $0.frame(height: 200) }
-////                    Text(item.season == 0 ? "Specials" : "Season \(item.season)")
-////                        .padding(.bottom)
+                case .artist:
+                    VStack {
+                        if !item.details.isEmpty {
+                            Text(item.details)
+                                .font(.caption)
+                            Divider()
+                        }
+                        Text(item.description)
+                    }
+                    .padding()
                 case .movieSet:
                     VStack(alignment: .leading) {
                         DetailsBasic(item: item)
@@ -175,6 +180,7 @@ extension ItemsView {
             .shadow(radius: 1)
             .macOS { $0.padding(.top, 100).frame(width: 300).padding() }
             .tvOS { $0.padding(.top, 200).frame(width: 500).padding() }
+            .iOS { $0.padding(.top, 100).frame(width: 300).padding() }
             //.transition(.opacity)
         }
     }
