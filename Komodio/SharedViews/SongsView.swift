@@ -17,8 +17,9 @@ struct SongsView: View {
     //@State var audioPlayer: AVQueuePlayer? = nil
     
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(alignment: .top, spacing: 0) {
+        VStack(alignment: .center) {
+            //Spacer()
+            HStack {
                 VStack {
                     ArtView.Poster(item: album)
                         .cornerRadius(9)
@@ -28,41 +29,20 @@ struct SongsView: View {
                     RouterLink(item: .player(items: items)) {
                         Text("Play album")
                     }
-                    Text(album.description.isEmpty ? "\(album.itemsCount) tracks" : album.description)
+                    Text(album.description.isEmpty ? "\(items.count) tracks" : album.description)
                 }
-#if os(tvOS)
-                .focusSection()
-#endif
-                ScrollView {
-                    ForEach(kodi.media.filter(MediaFilter(media: .song, album: album))) { song in
-                        //PlayerView.Link(item: song, destination: PlayerView(video: song.binding())) {
+                VStack(alignment: .center) {
+                    ScrollView {
+                        ForEach(kodi.media.filter(MediaFilter(media: .song, album: album))) { song in
                             Text(song.title)
-                        //}
-                        .frame(width: .infinity)
+                        }
                     }
+                    .frame(maxHeight: 350)
                 }
+                .background(.green)
             }
-            .padding()
+            .padding(.top, 200)
+            //Spacer()
         }
-        .background {
-            ArtView.Fanart(fanart: album.fanart)
-                .macOS {$0.edgesIgnoringSafeArea(.all) }
-                .tvOS { $0.edgesIgnoringSafeArea(.all) }
-                .iOS { $0.edgesIgnoringSafeArea(.bottom) }
-        }
-        /// On macOS, give it some padding because the `TitleHeader` is on top in a `ZStack`
-        .macOS { $0.padding(.top, 60)}
-        .ignoresSafeArea()
-    }
-    func playAlbum(songs: [MediaItem]) {
-        logger("Going to play songs")
-//        var items: [AVPlayerItem] = []
-//        
-//        for song in songs {
-//            items.append(AVPlayerItem(url: URL(string: song.file)!))
-//        }
-//        
-//        audioPlayer = AVQueuePlayer(items: items)
-//        audioPlayer?.play()
     }
 }

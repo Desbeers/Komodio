@@ -26,9 +26,8 @@ struct EpisodesView: View {
     }
     /// The View
     var body: some View {
-        
-        ZStack(alignment: .topLeading) {
-            ItemsView.List {
+        ItemsView.List(details: router.selectedMediaItem) {
+            LazyVStack(spacing: 0) {
                 ForEach(episodes.indices, id: \.self) { episode in
                     if episode == 0 || (episode > 0 && episodes[episode - 1].season != episodes[episode].season) {
                         Text(episodes[episode].season == 0 ? "Specials" : "Season \(episodes[episode].season)")
@@ -41,16 +40,9 @@ struct EpisodesView: View {
                     Link(item: episodes[episode].binding())
                 }
             }
-            /// Make room for the details
-            .macOS { $0.padding(.leading, 330) }
-            .tvOS { $0.padding(.leading, 500) }
-            if router.selectedMediaItem != nil {
-                //ArtView.PosterList(poster: router.selectedMediaItem!.poster)
-                ItemsView.Details(item: router.selectedMediaItem!)
-            }
         }
         .task {
-            logger("Episode task: \(episodes.count)")
+            /// Select the first item in the list
             if router.selectedMediaItem == nil {
                 router.setSelectedMediaItem(item: episodes.first)
             }
@@ -89,18 +81,15 @@ extension EpisodesView {
         /// The View
         var body: some View {
             HStack {
-                ArtView.Episode(item: item)
-                    .macOS { $0.frame(height: 100) }
-                    .tvOS { $0.frame(height: 200) }
-                    .iOS { $0.frame(height: 200) }
+                ArtView.Poster(item: item)
                 VStack(alignment: .leading) {
-                Text(item.title)
-                    .font(.headline)
-                Text(item.details)
-                    .font(.caption)
-                Divider()
-                Text(item.description)
-                    .lineLimit(2)
+                    Text(item.title)
+                        .font(.headline)
+                    Text(item.details)
+                        .font(.caption)
+                    Divider()
+                    Text(item.description)
+                        .lineLimit(2)
                 }
             }
             .watchStatus(of: $item)

@@ -51,8 +51,10 @@ extension GenresView {
         /// The View
         var body: some View {
             ItemsView.List() {
-                ForEach(kodi.media.filter(MediaFilter(media: .all, genre: genre.title))) { item in
-                    ItemsView.Item(item: item.binding())
+                LazyVStack(spacing: 0) {
+                    ForEach(kodi.media.filter(MediaFilter(media: .all, genre: genre.title))) { item in
+                        ItemsView.Item(item: item.binding())
+                    }
                 }
                 .macOS { $0.padding(.horizontal, 40) }
                 .tvOS { $0.padding(.horizontal, 80) }

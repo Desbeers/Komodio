@@ -139,4 +139,32 @@ extension ButtonStyles {
             }
         }
     }
+    
+    /// Button style for a Menu item
+    struct MenuItem: ButtonStyle {
+        func makeBody(configuration: Self.Configuration) -> some View {
+            MenuItemView(configuration: configuration)
+        }
+        /// The View
+        private struct MenuItemView: View {
+            /// Is the button hovered or not
+            @State private var isHovered = false
+            /// The configaration of the Button
+            let configuration: ButtonStyles.GridItem.Configuration
+            /// The View
+            var body: some View {
+                configuration.label
+                    .frame(minWidth: 0, maxWidth: 100)
+                    .padding()
+                    .background(isHovered ? .thickMaterial : .ultraThinMaterial)
+                    .cornerRadius(6)
+                    .scaleEffect(isHovered ? 1.02 : 1)
+                    .shadow(radius: 1)
+                    .animation(.easeInOut, value: isHovered)
+                    .onHover { hover in
+                        isHovered = hover
+                    }
+            }
+        }
+    }
 }

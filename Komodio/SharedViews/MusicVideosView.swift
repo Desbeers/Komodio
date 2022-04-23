@@ -33,20 +33,14 @@ extension MusicVideosView {
         }
         /// The View
         var body: some View {
-            ZStack(alignment: .topLeading)  {
-                ItemsView.List() {
+            ItemsView.List(details: artist) {
+                LazyVStack(spacing: 0) {
                     ForEach(items) { item in
                         ItemsView.Item(item: item.binding())
                     }
-                    .macOS { $0.padding(.horizontal, 80) }
-                    .tvOS { $0.padding(.horizontal, 80) }
                 }
-                /// Make room for the details
-                .macOS { $0.padding(.leading, 330) }
-                .tvOS { $0.padding(.leading, 550) }
-                .iOS { $0.padding(.leading, 330) }
-                /// View the details
-                ItemsView.Details(item: artist)
+                .macOS { $0.padding(.horizontal, 80) }
+                .tvOS { $0.padding(.horizontal, 80) }
             }
             .task {
                 if router.selectedMediaItem == nil {
@@ -100,9 +94,9 @@ extension MusicVideosView {
                     ForEach(musicVideos) { musicVideo in
                         RouterLink(item: .details(item: musicVideo)) {
                             VStack {
-                                ArtView.Thumbnail(item: musicVideo)
-                                    .macOS { $0.frame(width: 240, height: 135) }
-                                    .tvOS { $0.frame(width: 320, height: 180) }
+                                ArtView.MusicVideoIcon(item: musicVideo)
+                                    //.macOS { $0.frame(width: 240, height: 135) }
+                                    //.tvOS { $0.frame(width: 320, height: 180) }
                                 Text(musicVideo.title)
                             }
                                 .watchStatus(of: musicVideo.binding())

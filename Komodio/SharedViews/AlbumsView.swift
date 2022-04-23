@@ -9,10 +9,12 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct AlbumsView: View {
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    /// The Router model
+    @EnvironmentObject var router: Router
     /// The artist
-    let artist: MediaItem
+    private var artist: MediaItem
+    /// The albums to show
+    private var albums: [MediaItem]
 #if os(tvOS)
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 300))]
@@ -20,29 +22,36 @@ struct AlbumsView: View {
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 300))]
 #endif
+    /// Init the view
+    init(artist: MediaItem) {
+        self.artist = artist
+        self.albums = KodiConnector.shared.media.filter(MediaFilter(media: .album, artist: artist.artists))
+    }
     /// The View
     var body: some View {
-        ItemsView.List() {
+        ItemsView.List(details: artist) {
             LazyVGrid(columns: grid, spacing: 30) {
-                ForEach(kodi.media.filter(MediaFilter(media: .album, artist: artist.artists))) { album in
+                ForEach(albums) { album in
                     RouterLink(item: .songs(album: album)) {
                         VStack(spacing: 0) {
-                            ArtView.Thumbnail(item: album)
-                                .macOS { $0.frame(width: 300, height: 300) }
-                                .tvOS { $0.frame(width: 300, height: 300) }
-                                .iOS { $0.frame(height: 200) }
+                            ArtView.Poster(item: album)
                                 Text(album.title)
                                     .font(.caption)
                         }
-                        //.frame(width: 300)
                     }
                     .buttonStyle(ButtonStyles.MediaItem(item: album))
 
                 }
-                //.buttonStyle(ButtonStyles.HomeItem())
             }
-            .macOS { $0.padding(.top, 40) }
+            //.macOS { $0.padding(.top, 40) }
             .tvOS { $0.padding(.horizontal, 100) }
+        }
+        .animation(.default, value: router.selectedMediaItem)
+        .task {
+            /// Select the first item in the list
+            if router.selectedMediaItem == nil {
+                router.setSelectedMediaItem(item: albums.first)
+            }
         }
     }
 }

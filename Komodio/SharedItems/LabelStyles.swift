@@ -26,4 +26,18 @@ extension LabelStyles {
             }
         }
     }
+    
+    /// Label style for a Menu item
+    struct MenuItem: LabelStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            VStack {
+                configuration.icon
+                    .macOS { $0.font(.title3).foregroundColor(.accentColor) }
+                    .iOS { $0.font(.title).foregroundColor(.accentColor) }
+                    .frame(maxHeight: 50)
+                configuration.title
+                    //.padding(.top)
+            }
+        }
+    }
 }

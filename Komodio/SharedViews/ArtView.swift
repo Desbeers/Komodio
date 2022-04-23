@@ -58,9 +58,9 @@ extension ArtView {
                     .placeholder { Image("No Poster").resizable() }
                     .fade(duration: 0.25)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .macOS { $0.frame(width: 192, height: 108) }
-                    .tvOS { $0.frame(width: 384, height: 216) }
+                    .aspectRatio(contentMode: .fit)
+                    .macOS { $0.frame(height: 100) }
+                    .tvOS { $0.frame(height: 200) }
                     .iOS { $0.frame(height: 200) }
             case .musicVideo:
                 /// This can be an actual Music Video or an album with Music Videos
@@ -72,6 +72,22 @@ extension ArtView {
                     .macOS { $0.frame(width: 100, height: 150) }
                     .tvOS { $0.frame(width: 200, height: 300) }
                     .iOS { $0.frame(height: 200) }
+            case .album:
+                KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
+                    .fade(duration: 0.25)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .macOS { $0.frame(width: 300, height: 300) }
+                    .tvOS { $0.frame(width: 300, height: 300) }
+                    .iOS { $0.frame(height: 200) }
+            case .song:
+                KFImage(URL(string: item.poster))
+                    .fade(duration: 0.25)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    //.macOS { $0.frame(width: 300, height: 300) }
+                    //.tvOS { $0.frame(width: 300, height: 300) }
+                    //.iOS { $0.frame(height: 200) }
             default:
                 /// Just the 'standard' poster
                 KFImage(URL(string: item.poster))
@@ -97,11 +113,26 @@ extension ArtView {
                 .fade(duration: 0.25)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .macOS { $0.frame(width: 150, height: 225) }
+                .macOS { $0.frame(height: 200) }
                 .tvOS { $0.frame(height: 240) }
                 .iOS { $0.frame(height: 200) }
         }
         
+    }
+
+    struct MusicVideoIcon: View {
+        /// The Kodi item
+        let item: MediaItem
+        /// The View
+        var body: some View {
+            KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
+                .fade(duration: 0.25)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .macOS { $0.frame(width: 240) }
+                .tvOS { $0.frame(width: 340) }
+                .iOS { $0.frame(width: 240) }
+        }
     }
     
     struct SeasonPoster: View {
@@ -109,7 +140,6 @@ extension ArtView {
         let item: MediaItem
         /// The View
         var body: some View {
-            
             KFImage(URL(string: item.poster))
                 .placeholder { Image(systemName: "person").resizable().padding() }
                 .fade(duration: 0.25)
@@ -119,30 +149,21 @@ extension ArtView {
                 .tvOS { $0.frame(width: 400, height: 600) }
                 .iOS { $0.frame(height: 200) }
         }
-        
     }
     
-    struct Episode: View {
+    struct BasicPoster: View {
         /// The Kodi item
         let item: MediaItem
         /// The View
         var body: some View {
-            KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
-                        .fade(duration: 0.25)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+            KFImage(URL(string: item.poster))
+                .placeholder { Image(systemName: "person").resizable().padding() }
+                .fade(duration: 0.25)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .macOS { $0.frame(height: 225) }
+                .tvOS { $0.frame(height: 300) }
+                .iOS { $0.frame(height: 200) }
         }
     }
-    struct Thumbnail: View {
-        /// The Kodi item
-        let item: MediaItem
-        /// The View
-        var body: some View {
-            KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
-                        .fade(duration: 0.25)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-        }
-    }
-    
 }

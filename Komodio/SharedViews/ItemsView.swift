@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 import SwiftlyKodiAPI
 
 /// An 'Item' can be any kind of ``MediaItem``; e.g., movie, tvshow, episode etc...
@@ -20,39 +19,51 @@ extension ItemsView {
     struct List<Content: View>: View {
         
         @EnvironmentObject var router: Router
-        
+        /// The content that is going to be wrapped
         private var content: Content
+        /// Show details of the optional selected item
+        private var details: MediaItem?
         /// Build the View
-        init(@ViewBuilder content: () -> Content) {
+        init(details: MediaItem? = nil, @ViewBuilder content: () -> Content) {
+            self.details = details
             self.content = content()
         }
         /// The View
         var body: some View {
-            ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVStack(spacing: 0) {
-                        content
+            ZStack(alignment: .topLeading) {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        //LazyVStack(spacing: 0) {
+                            content
+                        //}
+                        /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
+                        .macOS { $0.padding(.top, 100)}
+                        //.tvOS { $0.padding(.top, 180)}
+                        .iOS { $0.padding(.top, 120)}
                     }
-                    /// Give it some padding because the `TitleHeader` is on top in a `ZStack`
-                    .macOS { $0.padding(.top, 100)}
-                    .iOS { $0.padding(.top, 120)}
-                }
-                /// tvOS can't scroll into the `TitleHeader` because the `scrollTo` is messy...
-                .tvOS { $0.padding(.top, 180)}
-                .task {
-                    /// Scroll to the last selected item on this View
+                    /// tvOS can't scroll into the `TitleHeader` because the `scrollTo` is messy...
+                    .tvOS { $0.padding(.top, 180)}
+                    .task {
+                        /// Scroll to the last selected item on this View
 #if os(tvOS)
-                    /// Focus on top for tvOS, then it will select the last item row again
-                    /// - Note: Exceptions because otherwise tvOS will be upset...
-                    if router.currentRoute.route != .home && router.currentRoute.route != .genres {
-                        proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
-                    }
+                        /// Focus on top for tvOS, then it will select the last item row again
+                        /// - Note: Exceptions because otherwise tvOS will be upset...
+                        if router.currentRoute.route != .home && router.currentRoute.route != .genres {
+                            proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .top)
+                        }
 #else
-                    withAnimation(.linear(duration: 1)) {
+                        withAnimation(.linear(duration: 1)) {
                             //logger("Scrolling to \(router.currentRoute.itemID)")
-                        proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .center)
-                    }
+                            proxy.scrollTo(router.currentRoute.item?.id ?? "", anchor: .center)
+                        }
 #endif
+                    }
+                }
+                /// Make room for the details
+                .macOS { $0.padding(.leading, details != nil ? 330 : 0) }
+                .tvOS { $0.padding(.leading, details != nil ? 500 : 0) }
+                if details != nil {
+                    ItemsView.Details(item: details!)
                 }
             }
         }
@@ -98,7 +109,7 @@ extension ItemsView {
         /// The View
         var body: some View {
             HStack(spacing: 0) {
-                ArtView.Poster(item: item)
+                ArtView.BasicPoster(item: item)
                 VStack(alignment: .leading) {
                     HStack {
                         Text(item.title)
@@ -135,7 +146,7 @@ extension ItemsView {
             Text(description)
         }
     }
-
+    
     struct Details: View {
         
         /// The KodiConnector model

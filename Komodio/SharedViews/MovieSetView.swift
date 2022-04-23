@@ -24,7 +24,7 @@ struct MovieSetView: View {
     /// The View
     var body: some View {
         ItemsView.List() {
-            Group {
+            LazyVStack(spacing: 0) {
                 if !set.description.isEmpty {
                     ItemsView.Description(description: set.description)
                 }

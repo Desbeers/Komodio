@@ -84,10 +84,10 @@ extension PlayerView {
             .task {
                 /// Check if we are already playing or not
                 if playerModel.player.isPlaying == false {
-                    Task {
-                        try await Task.sleep(nanoseconds: 1_000_000_000)
+                    //Task {
+                        //try await Task.sleep(nanoseconds: 1_000_000_000)
                         playerModel.player.play()
-                    }
+                    //}
                     //sleep(2)
                     
                 }
@@ -126,6 +126,7 @@ extension PlayerView {
                 }
                 /// Create a new Player
                 player = AVQueuePlayer(items: playerItems)
+                
                 /// The NotificationCenter will take care of actions, so set this to .none for the player
                 player.actionAtItemEnd = .none
                 //                /// Sleep for a moment or else tvOS does not show the metadata

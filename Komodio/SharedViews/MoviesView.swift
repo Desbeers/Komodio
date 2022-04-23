@@ -28,32 +28,21 @@ struct MoviesView: View {
     }
     /// The View
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            ItemsView.List {
-                LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach(movies) { movie in
-                        RouterLink(item: movie.movieSetID == 0 ? .details(item: movie) : .moviesSet(set: movie)) {
-                                ArtView.Poster(item: movie)
-                                .watchStatus(of: movie.binding())
-//                                    .macOS { $0.frame(width: 150) }
-//                                    .tvOS { $0.frame(width: 200) }
-//                                    .iOS { $0.frame(height: 200) }
-                        }
-                        .buttonStyle(ButtonStyles.MediaItem(item: movie))
+        ItemsView.List(details: router.selectedMediaItem) {
+            LazyVGrid(columns: grid, spacing: 0) {
+                ForEach(movies) { movie in
+                    RouterLink(item: movie.movieSetID == 0 ? .details(item: movie) : .moviesSet(set: movie)) {
+                        ArtView.Poster(item: movie)
+                            .watchStatus(of: movie.binding())
                     }
+                    .buttonStyle(ButtonStyles.MediaItem(item: movie))
                 }
-                .padding(.horizontal, 20)
             }
-            /// Make room for the details
-            .macOS { $0.padding(.leading, 330) }
-            .tvOS { $0.padding(.leading, 550) }
-            if router.selectedMediaItem != nil {
-                ItemsView.Details(item: router.selectedMediaItem!)
-            }
+            .padding(.horizontal, 20)
         }
         .animation(.default, value: router.selectedMediaItem)
         .task {
-            logger("Movies task: \(movies.count)")
+            /// Select the first item in the list
             if router.selectedMediaItem == nil {
                 router.setSelectedMediaItem(item: movies.first)
             }
