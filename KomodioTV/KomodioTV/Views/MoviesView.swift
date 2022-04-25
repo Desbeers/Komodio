@@ -18,10 +18,46 @@ struct MoviesView: View {
     let grid = [GridItem(.adaptive(minimum: 300))]
     /// The focused item
     @FocusState var selectedItem: MediaItem?
+    /// Hide watched
+    @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// Init the View
     /// The View
     var body: some View {
-        VStack(spacing: 0 ) {
+        HStack(alignment: .top) {
+            VStack {
+                Button(action: {
+                    hideWatched.toggle()
+                }, label: {
+                    Text(hideWatched ? "Show all movies" : "Hide watched")
+                })
+                Text("\(movies.count)" + (hideWatched ? " unwatched" : "") + " movies")
+                    .font(.caption)
+                if let item = selectedItem {
+                    VStack {
+                        Text(item.title)
+                            .font(.headline)
+                        Text(item.details)
+                            .font(.caption)
+                        Divider()
+                        Text(item.description)
+                            //.lineLimit(2)
+                        if item.movieSetID != 0 {
+                            
+                            ForEach(KodiConnector.shared.media.filter { $0.media == .movie && $0.movieSetID == item.movieSetID}) { movie in
+                                Label(movie.title, systemImage: "film")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                    }
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .padding(1)
+                    //.frame(maxWidth: .infinity)
+                    
+                }
+            }
+            .frame(width: 500)
+            .focusSection()
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(movies) { movie in
@@ -43,21 +79,15 @@ struct MoviesView: View {
                     }
                 }
             }
-            if let item = selectedItem {
-                VStack {
-                    Text(item.title)
-                        .font(.title3)
-                    Text(item.description)
-                        .lineLimit(2)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(.ultraThinMaterial)
-            }
         }
         .animation(.default, value: selectedItem)
+        .animation(.default, value: hideWatched)
         .task {
-            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie))
+            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
+        }
+        .onChange(of: hideWatched) { _ in
+            print("filter")
+            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
         }
     }
 }
