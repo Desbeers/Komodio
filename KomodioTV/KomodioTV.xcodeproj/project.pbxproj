@@ -36,12 +36,12 @@
 		D749AF352815AC4800A684C8 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		D749AF372815AC5400A684C8 /* TVshowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVshowsView.swift; sourceTree = "<group>"; };
 		D749AF392815AC6200A684C8 /* MusicVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideosView.swift; sourceTree = "<group>"; };
-		D749AF3B2815AD6500A684C8 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D749AF432815B10100A684C8 /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		D749AF452815B8B200A684C8 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		D749AF472815C4A900A684C8 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D7AFBA992815CB17001CCD89 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		D7AFBA9B2816951C001CCD89 /* EpisodesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesView.swift; sourceTree = "<group>"; };
+		D7AFBA9D2816CD23001CCD89 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,7 @@
 		D749AF172815A7AD00A684C8 = {
 			isa = PBXGroup;
 			children = (
-				D749AF3B2815AD6500A684C8 /* SwiftlyKodiAPI */,
+				D7AFBA9D2816CD23001CCD89 /* SwiftlyKodiAPI */,
 				D749AF222815A7AD00A684C8 /* KomodioTV */,
 				D749AF212815A7AD00A684C8 /* Products */,
 				D749AF3C2815AE9200A684C8 /* Frameworks */,
