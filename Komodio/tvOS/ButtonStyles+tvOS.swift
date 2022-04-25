@@ -23,6 +23,8 @@ extension ButtonStyles {
         @Environment(\.isFocused) var focused: Bool
         /// The Kodi item
         var item: SwiftlyKodiAPI.MediaItem
+        /// Single click for details, double click for trigger (ignored for tvOS)
+        var doubleClick: Bool = false
         /// The View
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
@@ -84,6 +86,13 @@ extension ButtonStyles {
                     //.background(Color("ListButtonColor").opacity(0.5))
             })
             .buttonStyle(.card)
+        }
+    }
+    
+    /// Button style for a Menu item
+    struct MenuItem: ButtonStyle {
+        func makeBody(configuration: Self.Configuration) -> some View {
+            configuration.label
         }
     }
 }

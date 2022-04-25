@@ -16,21 +16,61 @@ struct HomeView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The Kodi items to show in this View
     @State var items = HomeItems()
+    
+    @FocusState var selectedItem: MediaItem?
+    
     /// The View
     var body: some View {
         ItemsView.List() {
             VStack {
-//#if !os(macOS)
+                //#if !os(macOS)
                 PartsView.MenuItems()
-//#endif
-                VStack {
-                    Row(title: "Latest\nunwatched\nMovies", items: $items.movies)
-                    Row(title: "Random\nMusic\nVideos", items: $items.musicvideos)
-                    Row(title: "Latest\nTV show\nEpisodes", items: $items.episodes)
+                Text(selectedItem != nil ? selectedItem!.title : "No selection")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                //#endif
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach($items.movies) { $movie in
+                            Button(action: {
+                            }, label: {
+                                ArtView.Poster(item: movie)
+                            })
+                            .buttonStyle(.card)
+                            .contextMenu {
+                                    Button {
+                                        print("Change country setting")
+                                    } label: {
+                                        Label("Choose Country", systemImage: "globe")
+                                    }
+                            }
+                            .padding(40)
+                            .focused($selectedItem, equals: movie)
+                        }
+                        //Row(title: "Latest\nunwatched\nMovies", items: $items.movies)
+                        //Row(title: "Random\nMusic\nVideos", items: $items.musicvideos)
+                        //Row(title: "Latest\nTV show\nEpisodes", items: $items.episodes)
+                    }
                 }
-#if os(tvOS)
-        .focusSection()
-#endif
+                .focusSection()
+                if let item = selectedItem {
+                    Text(item.description)
+                }
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach($items.musicvideos) { $movie in
+                            Button(action: {
+                            }, label: {
+                                ArtView.Poster(item: movie)
+                            })
+                            .buttonStyle(.card)
+                            .focused($selectedItem, equals: movie)
+                        }
+                        //Row(title: "Latest\nunwatched\nMovies", items: $items.movies)
+                        //Row(title: "Random\nMusic\nVideos", items: $items.musicvideos)
+                        //Row(title: "Latest\nTV show\nEpisodes", items: $items.episodes)
+                    }
+                }
+                .focusSection()
             }
         }
         .task {

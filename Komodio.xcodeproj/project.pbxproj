@@ -43,6 +43,7 @@
 		D735DEDF27CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D735DEE027CB1FC700C63E1D /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */; };
 		D749AF142812CE8800A684C8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D749AF132812CE8800A684C8 /* Kingfisher */; };
+		D749AF1628159D1700A684C8 /* HomeView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF1528159D1700A684C8 /* HomeView+tvOS.swift */; };
 		D74F34A927D3FB5D009377FA /* TableView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F34A827D3FB5D009377FA /* TableView+macOS.swift */; };
 		D75630A727E43879007A624C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0B86527D052EB00C1C873 /* MainView.swift */; };
 		D75630A927E43A87007A624C /* RootView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */; };
@@ -82,7 +83,6 @@
 		D7B2F23227C9846B002DFC41 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F22F27C9846B002DFC41 /* LoadingView.swift */; };
 		D7B2F23427C98578002DFC41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23327C98578002DFC41 /* HomeView.swift */; };
 		D7B2F23527C98578002DFC41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23327C98578002DFC41 /* HomeView.swift */; };
-		D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23327C98578002DFC41 /* HomeView.swift */; };
 		D7B2F23D27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
 		D7B2F23E27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
 		D7B2F23F27C98FDB002DFC41 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2F23C27C98FDB002DFC41 /* GenresView.swift */; };
@@ -126,6 +126,7 @@
 		D735DED927CB088900C63E1D /* PlayerMetaData+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerMetaData+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDB27CB1CB100C63E1D /* Extensions+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+tvOS.swift"; sourceTree = "<group>"; };
 		D735DEDD27CB1FC700C63E1D /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
+		D749AF1528159D1700A684C8 /* HomeView+tvOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeView+tvOS.swift"; sourceTree = "<group>"; };
 		D74F34A827D3FB5D009377FA /* TableView+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView+macOS.swift"; sourceTree = "<group>"; };
 		D75630AC27E5F2F3007A624C /* LabelStyles+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelStyles+macOS.swift"; sourceTree = "<group>"; };
 		D76FE5A427CC25C1006A1DF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -305,6 +306,7 @@
 		D7B2F24827C99F8C002DFC41 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				D749AF1528159D1700A684C8 /* HomeView+tvOS.swift */,
 				D7B2F24927C99FA7002DFC41 /* RootView+tvOS.swift */,
 				D735DECA27CABCB800C63E1D /* PartsView+tvOS.swift */,
 				D735DEBC27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift */,
@@ -542,7 +544,6 @@
 			files = (
 				D735DECB27CABCB800C63E1D /* PartsView+tvOS.swift in Sources */,
 				D731124D27F0B25C00F1BF4A /* KomodioView.swift in Sources */,
-				D7B2F23627C98578002DFC41 /* HomeView.swift in Sources */,
 				D78850CD27D83389002DC6FC /* ArtistsView.swift in Sources */,
 				D735DEBF27C9F4FD00C63E1D /* ButtonStyles+tvOS.swift in Sources */,
 				D75630A727E43879007A624C /* MainView.swift in Sources */,
@@ -570,6 +571,7 @@
 				D7D0B86E27D2DE0B00C1C873 /* RouterLink.swift in Sources */,
 				D78850C927D82C21002DC6FC /* AlbumsView.swift in Sources */,
 				D7B2F22A27C97F1E002DFC41 /* TVshowsView.swift in Sources */,
+				D749AF1628159D1700A684C8 /* HomeView+tvOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

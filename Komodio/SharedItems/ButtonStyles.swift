@@ -22,6 +22,8 @@ extension ButtonStyles {
         @EnvironmentObject var router: Router
         /// The Kodi item
         var item: SwiftlyKodiAPI.MediaItem
+        /// Single click for details, double click for trigger
+        var doubleClick: Bool = false
         /// Is the button hovered or not
         @State private var isHovered = false
         private var focused: Bool {
@@ -72,6 +74,9 @@ extension ButtonStyles {
                         configuration.trigger()
                     } else {
                         router.setSelectedMediaItem(item: item)
+                        if !doubleClick {
+                            configuration.trigger()
+                        }
                     }
                 })
                 //.background(.green)

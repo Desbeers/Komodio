@@ -35,7 +35,7 @@ struct MoviesView: View {
                         ArtView.Poster(item: movie)
                             .watchStatus(of: movie.binding())
                     }
-                    .buttonStyle(ButtonStyles.MediaItem(item: movie))
+                    .buttonStyle(ButtonStyles.MediaItem(item: movie, doubleClick: true))
                 }
             }
             .padding(.horizontal, 20)

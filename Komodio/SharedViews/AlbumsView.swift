@@ -35,8 +35,8 @@ struct AlbumsView: View {
                     RouterLink(item: .songs(album: album)) {
                         VStack(spacing: 0) {
                             ArtView.Poster(item: album)
-                                Text(album.title)
-                                    .font(.caption)
+//                                Text(album.title)
+//                                    .font(.caption)
                         }
                     }
                     .buttonStyle(ButtonStyles.MediaItem(item: album))

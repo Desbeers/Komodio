@@ -21,14 +21,14 @@ extension PartsView {
                 ForEach(Route.menuItems, id: \.self) { item in
                     RouterLink(item: item) {
                         Label(item.title, systemImage: item.symbol)
-                            .labelStyle(LabelStyles.MenuItem())
-                            
-                            //.padding()
+                            .labelStyle(LabelStyles.GridItem())
+                            .frame(width: 200)
+                            .padding()
                     }
                     //.frame(width: 120, height: 100)
                 }
             }
-            .buttonStyle(ButtonStyles.MenuItem())
+            .buttonStyle(ButtonStyles.GridItem())
             .padding()
             .tvOS { $0.padding(.vertical)}
         }

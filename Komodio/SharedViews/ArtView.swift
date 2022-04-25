@@ -54,7 +54,7 @@ extension ArtView {
                     .tvOS { $0.frame(width: 300, height: 300) }
                     .iOS { $0.frame(height: 200) }
             case .episode:
-                KFImage(URL(string: item.thumbnail))
+                KFImage(URL(string: item.thumbnail.isEmpty ? item.poster : item.thumbnail)!)
                     .placeholder { Image("No Poster").resizable() }
                     .fade(duration: 0.25)
                     .resizable()
@@ -144,8 +144,8 @@ extension ArtView {
                 .placeholder { Image(systemName: "person").resizable().padding() }
                 .fade(duration: 0.25)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .macOS { $0.frame(width: 150, height: 225) }
+                .aspectRatio(contentMode: .fit)
+                .macOS { $0.frame(width: 300) }
                 .tvOS { $0.frame(width: 400, height: 600) }
                 .iOS { $0.frame(height: 200) }
         }

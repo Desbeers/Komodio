@@ -38,7 +38,7 @@ struct TVshowsView: View {
 //                                    .tvOS { $0.frame(width: 200) }
 //                                    .iOS { $0.frame(height: 200) }
                         }
-                        .buttonStyle(ButtonStyles.MediaItem(item: tvshow))
+                        .buttonStyle(ButtonStyles.MediaItem(item: tvshow, doubleClick: true))
                     }
                 }
                 .padding(.horizontal, 20)
