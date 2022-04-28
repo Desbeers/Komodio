@@ -82,11 +82,12 @@ struct HomeView: View {
             }
         }
         .ignoresSafeArea(.all, edges: .horizontal)
-        //.edgesIgnoringSafeArea(.horizontal)
+        .background(ArtView.SelectionBackground(item: selectedItem))
         .task {
             items = getHomeItems()
         }
         .animation(.default, value: selectedItem)
+        .animation(.default, value: items)
     }
 }
 

@@ -29,7 +29,9 @@ struct MoviesView: View {
                     hideWatched.toggle()
                 }, label: {
                     Text(hideWatched ? "Show all movies" : "Hide watched")
+                        .padding()
                 })
+                .buttonStyle(.card)
                 Text("\(movies.count)" + (hideWatched ? " unwatched" : "") + " movies")
                     .font(.caption)
                 if let item = selectedItem {
@@ -51,6 +53,7 @@ struct MoviesView: View {
                     }
                     .padding()
                     .background(.ultraThinMaterial)
+                    .cornerRadius(20)
                     .padding(1)
                     //.frame(maxWidth: .infinity)
                     
@@ -80,6 +83,7 @@ struct MoviesView: View {
                 }
             }
         }
+        .background(ArtView.SelectionBackground(item: selectedItem))
         .animation(.default, value: selectedItem)
         .animation(.default, value: hideWatched)
         .task {

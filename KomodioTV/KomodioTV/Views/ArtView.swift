@@ -70,4 +70,24 @@ extension ArtView {
                 .aspectRatio(contentMode: .fill)
         }
     }
+    
+    struct SelectionBackground: View {
+        let item: MediaItem?
+        var body: some View {
+            //if item != nil {
+            if item?.fanart != nil {
+                KFImage(URL(string: item!.fanart)!)
+                    //.fade(duration: 0.25)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea()
+                    .opacity(0.3)
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
+            } else {
+                EmptyView()
+            }
+        }
+    }
 }
