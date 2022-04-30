@@ -54,17 +54,24 @@ extension MusicVideosView {
         @State private var items: [MediaItem] = []
         /// The focused item
         @FocusState var selectedItem: MediaItem?
-        /// Define the grid layout
-        let grid = [GridItem(.adaptive(minimum: 300))]
         /// The View
         var body: some View {
             VStack {
-                ScrollView {
-                    LazyVGrid(columns: grid, spacing: 0) {
-                        ForEach(items) { item in
+                if let selected = selectedItem {
+                    Text(artist.title)
+                        .font(.title)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(selected.album.isEmpty ? selected.title : selected.album)
+                        .font(.title2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 0) {
+                        ForEach($items) { $item in
                             Group {
                                 if item.album.isEmpty {
-                                    NavigationLink(destination: DetailsView(item: item)) {
+                                    NavigationLink(destination: DetailsView(item: $item)) {
                                         ArtView.Poster(item: item)
                                     }
                                 } else {
@@ -80,8 +87,16 @@ extension MusicVideosView {
                         }
                     }
                 }
+                VStack {
+                if let selected = selectedItem {
+                    Text(selected.description)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                }
+                .frame(height: 200)
             }
-            .navigationTitle(artist.title)
+            .background(ArtView.SelectionBackground(item: selectedItem))
+            .animation(.default, value: selectedItem)
             .task {
                 items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))
             }
@@ -103,14 +118,22 @@ extension MusicVideosView {
         var body: some View {
             VStack {
                 ScrollView {
+                    Text(album.artists.joined(separator: " & "))
+                            .font(.title)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(album.album)
+                            .font(.title2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     LazyVGrid(columns: grid, spacing: 0) {
-                        ForEach(items) { item in
-                            NavigationLink(destination: DetailsView(item: item)) {
+                        ForEach($items) { $item in
+                            NavigationLink(destination: DetailsView(item: $item)) {
                                 VStack {
                                     ArtView.MusicVideoIcon(item: item)
                                     Text(item.title)
                                         .font(.caption)
                                 }
+                                .watchStatus(of: $item)
                             }
                             .buttonStyle(.card)
                             .padding()
@@ -120,7 +143,6 @@ extension MusicVideosView {
                     }
                 }
             }
-            .navigationTitle(album.album)
             .task {
                 items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: album.artists, album: album))
             }

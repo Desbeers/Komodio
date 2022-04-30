@@ -10,8 +10,6 @@ import SwiftlyKodiAPI
 
 /// A View for Movie items
 struct MoviesView: View {
-    /// The KodiConnector model
-    //@EnvironmentObject var kodi: KodiConnector
     /// The movies to show
     @State private var movies: [MediaItem] = []
     /// Define the grid layout
@@ -28,12 +26,18 @@ struct MoviesView: View {
                 Button(action: {
                     hideWatched.toggle()
                 }, label: {
-                    Text(hideWatched ? "Show all movies" : "Hide watched")
+                    Text(hideWatched ? "Show all movies" : "Hide watched movies")
                         .padding()
                 })
                 .buttonStyle(.card)
+                /// Don't animate the button
+                .transaction { transaction in
+                    transaction.animation = nil
+                }
                 Text("\(movies.count)" + (hideWatched ? " unwatched" : "") + " movies")
                     .font(.caption)
+                    .foregroundColor(.secondary)
+                /// Show selected item info
                 if let item = selectedItem {
                     VStack {
                         Text(item.title)
@@ -42,9 +46,8 @@ struct MoviesView: View {
                             .font(.caption)
                         Divider()
                         Text(item.description)
-                            //.lineLimit(2)
+                        /// If the item is a set; list all movies that is part of this set
                         if item.movieSetID != 0 {
-                            
                             ForEach(KodiConnector.shared.media.filter { $0.media == .movie && $0.movieSetID == item.movieSetID}) { movie in
                                 Label(movie.title, systemImage: "film")
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -54,44 +57,52 @@ struct MoviesView: View {
                     .padding()
                     .background(.ultraThinMaterial)
                     .cornerRadius(20)
-                    .padding(1)
-                    //.frame(maxWidth: .infinity)
-                    
                 }
             }
             .frame(width: 500)
             .focusSection()
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach(movies) { movie in
+                    ForEach($movies) { $movie in
                         Group {
                             if movie.movieSetID == 0 {
-                                NavigationLink(destination: DetailsView(item: movie)) {
+                                NavigationLink(destination: DetailsView(item: $movie)) {
                                     ArtView.Poster(item: movie)
+                                        .watchStatus(of: $movie)
                                 }
                             } else {
                                 NavigationLink(destination: MovieSetView(set: movie)) {
                                     ArtView.Poster(item: movie)
+                                        .watchStatus(of: $movie)
                                 }
                             }
                         }
                         .buttonStyle(.card)
                         .padding()
                         .focused($selectedItem, equals: movie)
+                        .itemContextMenu(for: $movie)
                         .zIndex(movie == selectedItem ? 2 : 1)
                     }
+                }
+                /// Don't animate the grid; posters will 'fly'...
+                .transaction { transaction in
+                    transaction.animation = nil
                 }
             }
         }
         .background(ArtView.SelectionBackground(item: selectedItem))
         .animation(.default, value: selectedItem)
-        .animation(.default, value: hideWatched)
         .task {
-            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
+            movies = getMovies()
         }
         .onChange(of: hideWatched) { _ in
-            print("filter")
-            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
+            movies = getMovies()
         }
+    }
+    
+    /// Get the list of movies
+    /// - Returns: All movies, optional filtered by watched state
+    private func getMovies() -> [MediaItem] {
+        return KodiConnector.shared.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
     }
 }

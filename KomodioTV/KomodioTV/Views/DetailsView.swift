@@ -9,18 +9,20 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct DetailsView: View {
-    let item: MediaItem
+    @Binding var item: MediaItem
     var body: some View {
         VStack {
             Text("Details for \(item.title)")
             
-            NavigationLink(destination: PlayerView(video: item)) {
+            PartsView.WatchedToggle(item: $item)
+            
+            NavigationLink(destination: PlayerView(video: $item)) {
                 Text("Play")
             }
 
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(ArtView.Background(fanart: item.fanart))
+        .background(ArtView.SelectionBackground(item: item))
         .ignoresSafeArea()
     }
 }

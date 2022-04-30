@@ -15,13 +15,15 @@ struct PlayerView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Video item we want to play
-    let video: MediaItem
+    @Binding var video: MediaItem
     /// The presentation mode
     /// - Note: Need this to go back a View on iOS after the video has finnished
     @Environment(\.presentationMode) var presentationMode
     /// The View
     var body: some View {
         Wrapper(video: video) {
+            /// Mark the video as played
+            video.markAsPlayed()
             /// Go back a View
             presentationMode.wrappedValue.dismiss()
         }

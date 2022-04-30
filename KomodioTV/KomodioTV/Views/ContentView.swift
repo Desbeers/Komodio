@@ -24,11 +24,19 @@ struct ContentView: View {
                     }
                 TVshowsView()
                     .tabItem {
-                        Label("TV shows", systemImage: "tv")
+                        Label("Shows", systemImage: "tv")
                     }
                 MusicVideosView()
                     .tabItem {
-                        Label("Music Videos", systemImage: "music.quarternote.3")
+                        Label("Music", systemImage: "music.quarternote.3")
+                    }
+                SearchView()
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
                     }
             }
         }

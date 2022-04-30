@@ -12,31 +12,27 @@ struct MovieSetView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Set item for this View
-    private var set: MediaItem
+    let set: MediaItem
     /// The focused item
     @FocusState var selectedItem: MediaItem?
     /// The movies to show
-    private var movies: [MediaItem]
-    /// Init the View
-    init(set: MediaItem) {
-        self.set = set
-        movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie, movieSetID: set.movieSetID))
-    }
+    @State private var movies: [MediaItem] = []
     /// The View
     var body: some View {
         VStack {
-            if !set.description.isEmpty {
-                Text(set.description)
-            }
             if let selected = selectedItem {
+                Text(set.title)
+                    .font(.title)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Text(selected.title)
                     .font(.title2)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
-                    ForEach(movies) { movie in
-                        NavigationLink(destination: DetailsView(item: movie)) {
+                    ForEach($movies) { $movie in
+                        NavigationLink(destination: DetailsView(item: $movie)) {
                             ArtView.Poster(item: movie)
                         }
                         .buttonStyle(.card)
@@ -46,12 +42,18 @@ struct MovieSetView: View {
                     }
                 }
             }
+            VStack {
             if let selected = selectedItem {
                 Text(selected.description)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            }
+            .frame(height: 200)
         }
-        .navigationTitle(set.title)
+        .background(ArtView.SelectionBackground(item: selectedItem))
         .animation(.default, value: selectedItem)
+        .task {
+            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie, movieSetID: set.movieSetID))
+        }
     }
 }

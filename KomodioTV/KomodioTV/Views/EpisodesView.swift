@@ -24,9 +24,21 @@ struct EpisodesView: View {
 //    }
     /// The View
     var body: some View {
+        VStack {
+            if let selected = selectedItem {
+                Text(tvshow.title)
+                    .font(.title)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text(selected.season == 0 ? "Specials" : "Season \(selected.season)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text(selected.title)
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 0) {
-                ForEach(episodes.indices, id: \.self) { episode in
+                ForEach($episodes) { $episode in
 //                    if episode == 0 || (episode > 0 && episodes[episode - 1].season != episodes[episode].season) {
 //                        Text(episodes[episode].season == 0 ? "Specials" : "Season \(episodes[episode].season)")
 //                            .padding(.leading)
@@ -34,20 +46,22 @@ struct EpisodesView: View {
 //                            .macOS { $0.font(.title) }
 //                            .tvOS { $0.font(.title3).padding(.top) }
 //                    }
-                    NavigationLink(destination: DetailsView(item: episodes[episode])) {
-                        ArtView.Poster(item: episodes[episode])
+                    NavigationLink(destination: DetailsView(item: $episode)) {
+                        VStack {
+                        ArtView.Poster(item: episode)
+                            Text(episode.title)
+                        }
                     }
                     .buttonStyle(.card)
                     .padding()
-                    .focused($selectedItem, equals: tvshow)
+                    .focused($selectedItem, equals: episode)
                     .zIndex(tvshow == selectedItem ? 2 : 1)
                 }
             }
         }
-        .navigationTitle(tvshow.title)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(ArtView.Background(fanart: tvshow.fanart).opacity(0.3))
-        .ignoresSafeArea()
+        }
+        .background(ArtView.SelectionBackground(item: tvshow))
+        //.ignoresSafeArea()
         .task {
             episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
         }

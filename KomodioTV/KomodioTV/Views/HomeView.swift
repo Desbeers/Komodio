@@ -25,7 +25,7 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach($items.movies) { $movie in
-                        NavigationLink(destination: DetailsView(item: movie)) {
+                        NavigationLink(destination: DetailsView(item: $movie)) {
                             ArtView.Poster(item: movie)
                         }
                         .buttonStyle(.card)
@@ -33,6 +33,9 @@ struct HomeView: View {
                         .padding(.horizontal, 20)
                         .padding(.bottom, 80)
                         .focused($selectedItem, equals: movie)
+                        .contextMenu {
+                            PartsView.WatchedToggle(item: $movie)
+                        }
                     }
                 }
                 .padding(.horizontal, 40)
@@ -49,7 +52,7 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach($items.musicvideos) { $movie in
-                        NavigationLink(destination: DetailsView(item: movie)) {
+                        NavigationLink(destination: DetailsView(item: $movie)) {
                             ArtView.Poster(item: movie)
                         }
                         .buttonStyle(.card)
@@ -68,7 +71,7 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach($items.episodes) { $movie in
-                        NavigationLink(destination: DetailsView(item: movie)) {
+                        NavigationLink(destination: DetailsView(item: $movie)) {
                             ArtView.Poster(item: movie)
                         }
                         .buttonStyle(.card)
