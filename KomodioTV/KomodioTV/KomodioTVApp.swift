@@ -24,6 +24,7 @@ struct KomodioTVApp: App {
                     Text("Loading...")
                 }
             }
+            .preferredColorScheme(.dark)
             .task {
                 if kodi.loadingState == .start {
                     await kodi.connectToHost(kodiHost: HostItem(ip: "192.168.11.200"))

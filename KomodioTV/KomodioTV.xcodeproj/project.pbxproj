@@ -21,6 +21,9 @@
 		D749AF442815B10100A684C8 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF432815B10100A684C8 /* ArtView.swift */; };
 		D749AF462815B8B200A684C8 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF452815B8B200A684C8 /* DetailsView.swift */; };
 		D749AF482815C4A900A684C8 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF472815C4A900A684C8 /* MovieSetView.swift */; };
+		D7601137281EAC170020845A /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D7601136281EAC170020845A /* Introspect */; };
+		D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7601138281EED6C0020845A /* ButtonStyles.swift */; };
+		D760113B281EEEF20020845A /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D760113A281EEEF20020845A /* LabelStyles.swift */; };
 		D7AFBA9A2815CB17001CCD89 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBA992815CB17001CCD89 /* PlayerView.swift */; };
 		D7AFBA9C2816951C001CCD89 /* EpisodesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBA9B2816951C001CCD89 /* EpisodesView.swift */; };
 		D7AFBAA0281A96E6001CCD89 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = D7AFBA9F281A96E6001CCD89 /* NukeUI */; };
@@ -43,6 +46,8 @@
 		D749AF432815B10100A684C8 /* ArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		D749AF452815B8B200A684C8 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		D749AF472815C4A900A684C8 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
+		D7601138281EED6C0020845A /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		D760113A281EEEF20020845A /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		D7AFBA992815CB17001CCD89 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		D7AFBA9B2816951C001CCD89 /* EpisodesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesView.swift; sourceTree = "<group>"; };
 		D7AFBA9D2816CD23001CCD89 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7AFBAA0281A96E6001CCD89 /* NukeUI in Frameworks */,
+				D7601137281EAC170020845A /* Introspect in Frameworks */,
 				D749AF422815B0F100A684C8 /* Kingfisher in Frameworks */,
 				D749AF3E2815AE9200A684C8 /* SwiftlyKodiAPI in Frameworks */,
 			);
@@ -126,6 +132,8 @@
 				D7AFBAA1281AD29E001CCD89 /* PartsView.swift */,
 				D7AFBAA3281BC827001CCD89 /* SettingsView.swift */,
 				D7AFBAA5281BC877001CCD89 /* SearchView.swift */,
+				D760113A281EEEF20020845A /* LabelStyles.swift */,
+				D7601138281EED6C0020845A /* ButtonStyles.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 				D749AF3D2815AE9200A684C8 /* SwiftlyKodiAPI */,
 				D749AF412815B0F100A684C8 /* Kingfisher */,
 				D7AFBA9F281A96E6001CCD89 /* NukeUI */,
+				D7601136281EAC170020845A /* Introspect */,
 			);
 			productName = KomodioTV;
 			productReference = D749AF202815A7AD00A684C8 /* Komodio.app */;
@@ -182,6 +191,7 @@
 			packageReferences = (
 				D749AF402815B0F100A684C8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D7AFBA9E281A96E6001CCD89 /* XCRemoteSwiftPackageReference "NukeUI" */,
+				D7601135281EAC170020845A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = D749AF212815A7AD00A684C8 /* Products */;
 			projectDirPath = "";
@@ -210,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D760113B281EEEF20020845A /* LabelStyles.swift in Sources */,
 				D749AF342815AC3B00A684C8 /* HomeView.swift in Sources */,
 				D749AF362815AC4800A684C8 /* MoviesView.swift in Sources */,
 				D749AF3A2815AC6200A684C8 /* MusicVideosView.swift in Sources */,
@@ -223,6 +234,7 @@
 				D7AFBAA6281BC877001CCD89 /* SearchView.swift in Sources */,
 				D749AF242815A7AD00A684C8 /* KomodioTVApp.swift in Sources */,
 				D749AF382815AC5400A684C8 /* TVshowsView.swift in Sources */,
+				D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */,
 				D7AFBAA4281BC827001CCD89 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +442,14 @@
 				kind = branch;
 			};
 		};
+		D7601135281EAC170020845A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		D7AFBA9E281A96E6001CCD89 /* XCRemoteSwiftPackageReference "NukeUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/NukeUI";
@@ -449,6 +469,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D749AF402815B0F100A684C8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		D7601136281EAC170020845A /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7601135281EAC170020845A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		D7AFBA9F281A96E6001CCD89 /* NukeUI */ = {
 			isa = XCSwiftPackageProductDependency;

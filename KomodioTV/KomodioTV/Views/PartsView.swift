@@ -70,6 +70,7 @@ extension View {
 extension PartsView {
     
     /// A Button to toggle the watched status of a Kodi item
+    /// Don't add an buttonstyle, else it will not work as contets menu
     struct WatchedToggle: View {
         /// The item we want to toggle
         @Binding var item: MediaItem
@@ -78,7 +79,9 @@ extension PartsView {
                 Button(action: {
                     item.togglePlayedState()
                 }, label: {
-                    Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
+                    //Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
+                    Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
+                        .labelStyle(LabelStyles.DetailsItem())
                 })
         }
     }
