@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
-import Nuke
 
 struct SettingsView: View {
     var body: some View {
@@ -24,12 +23,6 @@ struct SettingsView: View {
                     }
                 }, label: {
                     Text("Reload library")
-                })
-                Button(action: {
-                    Nuke.ImageCache.shared.removeAll()
-                    Nuke.DataLoader.sharedUrlCache.removeAllCachedResponses()
-                }, label: {
-                    Text("Remove image cache")
                 })
             }
         }

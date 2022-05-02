@@ -7,8 +7,6 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
-import Kingfisher
-import NukeUI
 
 /// A collection of structs to view Kodi art
 struct ArtView {
@@ -23,31 +21,36 @@ extension ArtView {
         var body: some View {
             switch item.media {
             case .episode:
-                LazyImage(source: item.thumbnail)
-                    .frame(width: 480, height: 270)
-//                KFImage(URL(string: item.thumbnail))
-//                    .placeholder { Image(systemName: "film").resizable().padding() }
-//                    //.fade(duration: 0.25)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: 320, height: 180)
+                AsyncImage(url: URL(string: item.thumbnail)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 480, height: 270)
+                } placeholder: {
+                    Color.black
+                        .frame(width: 480, height: 270)
+                }
             case .artist:
-                KFImage(URL(string: item.thumbnail))
-                    .placeholder { Image(systemName: "film").resizable().padding() }
-                    //.fade(duration: 0.25)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 300, height: 300)
+                AsyncImage(url: URL(string: item.thumbnail)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300, height: 300)
+                } placeholder: {
+                    Color.black
+                        .frame(width: 300, height: 300)
+                }
             default:
                 /// Just the 'standard' poster
-                LazyImage(source: item.poster)
-                    .frame(width: 320, height: 480)
-//                KFImage(URL(string: item.poster))
-//                    .placeholder { Image(systemName: "film").resizable().padding() }
-//                    //.fade(duration: 0.25)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: 300, height: 450)
+                AsyncImage(url: URL(string: item.poster)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 320, height: 480)
+                } placeholder: {
+                    Color.black
+                        .frame(width: 320, height: 480)
+                }
             }
         }
     }
@@ -57,22 +60,15 @@ extension ArtView {
         let item: MediaItem
         /// The View
         var body: some View {
-                KFImage(URL(string: item.thumbnail))
-                    .placeholder { Image(systemName: "film").resizable().padding() }
-                    //.fade(duration: 0.25)
+            AsyncImage(url: URL(string: item.thumbnail)) { image in
+                image
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 320, height: 180)
-        }
-    }
-    
-    struct Background: View {
-        let fanart: String
-        var body: some View {
-            KFImage(URL(string: fanart)!)
-                .fade(duration: 0.25)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Color.black
+                    .frame(width: 320, height: 180)
+            }
         }
     }
     
