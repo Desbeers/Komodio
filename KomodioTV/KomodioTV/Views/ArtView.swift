@@ -77,60 +77,24 @@ extension ArtView {
     }
     
     struct SelectionBackground: View {
-        @Environment(\.colorScheme) var colorScheme
         let item: MediaItem?
         var body: some View {
-            
-
-            
-            //if item != nil {
             if item?.fanart != nil {
-                
                 ZStack(alignment: .bottom) {
-                
-                AsyncImage(url: URL(string: item!.fanart)) { image in
-                    image
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    Color.gray
+                    AsyncImage(url: URL(string: item!.fanart)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 1920, height: 1080)
+                            .opacity(0.5)
+                            .id(item!.file)
+                    } placeholder: {
+                        Color.black
+                    }
+                    .ignoresSafeArea()
                 }
-                .ignoresSafeArea()
-                .frame(width: 1920, height: 1080)
-                .opacity(0.5)
-                //.opacity(colorScheme == .dark ? 0.5 : 0.3)
-                .id(item!.file)
-            //}
-//                    LinearGradient(stops: [
-//                        .init(color: .clear, location: 0.5),
-//                        .init(color: colorScheme == .dark ? .black.opacity(0.6) : .white.opacity(0.6), location: 0.7),
-//                        .init(color: colorScheme == .dark ? .black.opacity(0.6) : .white.opacity(0.6), location: 1),
-////                        .init(color: .secondary.opacity(0.6), location: 0.7),
-////                        .init(color: .secondary, location: 1),
-//                    ],
-//                    startPoint: .top,
-//                    endPoint: .bottom)
-//                        .ignoresSafeArea()
-                }
-                
-//                LazyImage(source: item!.fanart)
-//                    .frame(width: 1920, height: 1080)
-//                    //.blendMode(.screen)
-//                    .opacity(colorScheme == .dark ? 0.5 : 0.3)
-//                    .ignoresSafeArea()
-//                    .id(item!.file)
-                
-//                KFImage(URL(string: item!.fanart)!)
-//                    //.fade(duration: 0.25)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .ignoresSafeArea()
-//                    .opacity(0.3)
-//                    .transaction { transaction in
-//                        transaction.animation = nil
-//                    }
             } else {
-                EmptyView()
+                Color.clear.ignoresSafeArea()
             }
         }
     }
