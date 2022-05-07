@@ -72,9 +72,27 @@ extension ArtView {
         }
     }
     
+    struct ActorIcon: View {
+        /// The Kodi item actor
+        let item: String
+        /// The View
+        var body: some View {
+            AsyncImage(url: URL(string: item)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 180, height: 180)
+            } placeholder: {
+                Color.black
+                    .frame(width: 180, height: 180)
+            }
+        }
+    }
+    
     struct SelectionBackground: View {
         let item: MediaItem?
         var body: some View {
+            Group {
             if item?.fanart != nil {
                 ZStack(alignment: .bottom) {
                     AsyncImage(url: URL(string: item!.fanart)) { image in
@@ -82,16 +100,19 @@ extension ArtView {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 1920, height: 1080)
-                            .opacity(0.5)
-                            .id(item!.file)
+                            //.opacity(0.5)
+                            //.id(item!.file)
                     } placeholder: {
                         Color.black
                     }
                     .ignoresSafeArea()
+                    
                 }
             } else {
-                Color.clear.ignoresSafeArea()
+                Color.black.ignoresSafeArea()
             }
+            }
+            .overlay(.ultraThinMaterial)
         }
     }
 }

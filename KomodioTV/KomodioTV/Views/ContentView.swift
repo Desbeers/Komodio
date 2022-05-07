@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-import SwiftlyKodiAPI
 
+/// The Content View for Komodio
 struct ContentView: View {
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
     var body: some View {
         NavigationView {
             TabView {

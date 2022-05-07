@@ -19,9 +19,9 @@ struct MusicVideosView: View {
     @FocusState var selectedItem: MediaItem?
     /// The View
     var body: some View {
-        VStack(spacing: 0 ) {
+        VStack {
             ScrollView {
-                LazyVGrid(columns: grid, spacing: 0) {
+                LazyVGrid(columns: grid) {
                     ForEach(artists) { artist in
                         NavigationLink(destination: Artist(artist: artist)) {
                             VStack {
@@ -38,6 +38,8 @@ struct MusicVideosView: View {
                 }
             }
         }
+        .background(ArtView.SelectionBackground(item: selectedItem))
+        .animation(.default, value: selectedItem)
         .task {
             artists = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideoArtist))
         }
@@ -45,6 +47,8 @@ struct MusicVideosView: View {
 }
 
 extension MusicVideosView {
+    
+    /// A View for all music videos from one artist
     struct Artist: View {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
@@ -54,18 +58,25 @@ extension MusicVideosView {
         @State private var items: [MediaItem] = []
         /// The focused item
         @FocusState var selectedItem: MediaItem?
+        /// The subtitle for this View
+        var subtitle: String? {
+            if let subtitle = selectedItem {
+                switch subtitle.media {
+                case .artist:
+                    return "Artist details"
+                default:
+                    return subtitle.album.isEmpty ? subtitle.title : subtitle.album
+                }
+            }
+            return nil
+        }
+        /// Show details
+        @State var showDetail: Bool = false
         /// The View
         var body: some View {
             VStack {
-                if let selected = selectedItem {
-                    Text(artist.title)
-                        .font(.title)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(selected.album.isEmpty ? selected.title : selected.album)
-                        .font(.title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                /// Header
+                PartsView.Header(title: artist.title, subtitle: subtitle)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 0) {
                         ForEach($items) { $item in
@@ -87,16 +98,35 @@ extension MusicVideosView {
                         }
                     }
                 }
-                VStack {
-                if let selected = selectedItem {
-                    Text(selected.description)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                //HStack {
+                if !artist.description.isEmpty {
+                    Button(action: {
+                        showDetail.toggle()
+                    }, label: {
+                        Text(artist.description)
+                            .lineLimit(2)
+                            .padding()
+                            .frame(width: UIScreen.main.bounds.width - 160)
+                    })
+                    .focused($selectedItem, equals: artist)
+                    .buttonStyle(.card)
                 }
-                }
-                .frame(height: 200)
+                    
+                    //Text(artist.description)
+//                    if let selected = selectedItem {
+//                        Text(selected.description)
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                    }
+                //}
+                //.frame(width: 200)
             }
-            .background(ArtView.SelectionBackground(item: selectedItem))
+            .background(ArtView.SelectionBackground(item: artist))
             .animation(.default, value: selectedItem)
+            .fullScreenCover(isPresented: $showDetail) {
+                Text(artist.description)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.thinMaterial)
+            }
             .task {
                 items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))
             }
@@ -104,8 +134,8 @@ extension MusicVideosView {
     }
     
     struct Album: View {
-        /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
+//        /// The KodiConnector model
+//        @EnvironmentObject var kodi: KodiConnector
         /// The album who's videos to show
         let album: MediaItem
         /// The items to show
@@ -118,13 +148,8 @@ extension MusicVideosView {
         var body: some View {
             VStack {
                 ScrollView {
-                    Text(album.artists.joined(separator: " & "))
-                            .font(.title)
-                            .foregroundColor(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(album.album)
-                            .font(.title2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    /// Header
+                    PartsView.Header(title: album.artists.joined(separator: " & "), subtitle: album.album)
                     LazyVGrid(columns: grid, spacing: 0) {
                         ForEach($items) { $item in
                             NavigationLink(destination: DetailsView(item: $item)) {
@@ -143,6 +168,8 @@ extension MusicVideosView {
                     }
                 }
             }
+            .background(ArtView.SelectionBackground(item: album))
+            .animation(.default, value: selectedItem)
             .task {
                 items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: album.artists, album: album))
             }

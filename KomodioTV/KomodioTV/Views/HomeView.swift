@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// The Home View for Komodio
 struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -18,6 +19,7 @@ struct HomeView: View {
     /// The View
     var body: some View {
         ScrollView {
+            /// Unwatched movies
             Text(selectedItem?.media == .movie ? selectedItem!.title : "Unwatched Movies")
                 .font(.title3)
                 .padding(.horizontal, 40)
@@ -42,9 +44,11 @@ struct HomeView: View {
             }
             if selectedItem?.media == .movie {
                 Text(selectedItem!.description)
+                    .lineLimit(2)
                     .padding(.bottom)
                     .padding(.horizontal, 40)
             }
+            /// Random music videos
             Text(selectedItem?.media == .musicVideo ? selectedItem!.title : "Random Music Videos")
                 .font(.title3)
                 .padding(.horizontal, 40)
@@ -64,6 +68,7 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 40)
             }
+            /// New TV episodes
             Text(selectedItem?.media == .episode ? "\(selectedItem!.subtitle): \(selectedItem!.title)" : "New TV show episodes")
                 .font(.title3)
                 .padding(.horizontal, 40)
@@ -122,11 +127,5 @@ extension HomeView {
         var musicvideos: [MediaItem] = []
         /// Episode items
         var episodes: [MediaItem] = []
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
     }
 }

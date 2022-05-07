@@ -86,3 +86,32 @@ extension PartsView {
         }
     }
 }
+
+extension PartsView {
+    struct Header: View {
+        let title: String
+        let subtitle: String?
+        
+        var body: some View {
+            VStack(alignment: .center) {
+                Text(title)
+                    .font(.title2)
+                    .foregroundColor(.black)
+                    //.frame(maxWidth: .infinity, alignment: .leading)
+                if let subtitle = subtitle {
+                    Text(subtitle)
+                        .font(.callout)
+                        .foregroundColor(.white)
+                        //.transition(.opacity)
+                        //.frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding(.horizontal, 100)
+            .frame(height: 140)
+            //.frame(maxWidth: .infinity, alignment: .center)
+            .background(.secondary)
+            .clipShape(Capsule())
+        }
+        
+    }
+}

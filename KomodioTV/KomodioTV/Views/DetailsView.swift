@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
-import Introspect
 
 /// View details for a media item
 struct DetailsView: View {
@@ -32,9 +31,57 @@ struct DetailsView: View {
                                 VStack(alignment: .leading) {
                                     if !item.description.isEmpty {
                                         AboutView(item: $item)
-                                            .padding(.bottom)
                                     }
+                                    if !item.cast.isEmpty {
+                                        CastView(cast: item.cast)
+//                                        let cast = item.cast.map(\.name)
+//                                        Text("Cast:")
+//                                            .font(.callout)
+//                                            .padding(.top)
+//                                        Text(cast.joined(separator: ", "))
+//                                            .font(.caption)
+//                                            .padding(.horizontal)
+                                    }
+                                    //let video = item.streamDetails.video.map(\.height)
+                                    Text("Video:")
+                                        .font(.callout)
+                                        .padding(.top)
+                                    Text("\(item.streamDetails.video.first?.width ?? 0)")
+                                        .font(.caption)
+                                        .padding(.horizontal)
+                                    let audio = item.streamDetails.audio.map(\.codec)
+                                    Text("Audio:")
+                                        .font(.callout)
+                                        .padding(.top)
+                                    Text(audio.joined(separator: ", "))
+                                        .font(.caption)
+                                        .padding(.horizontal)
+                                    /// Subtitles
+                                    if !item.streamDetails.subtitle.isEmpty {
+                                        Text("Subtitles:")
+                                            .font(.callout)
+                                            .padding(.top)
+                                        
+                                        
+                                        ForEach(item.streamDetails.subtitle) {subtitle in
+                                            HStack {
+                                            if subtitle.language.isEmpty {
+                                                Text("External")
+                                            } else {
+                                                Text(countryName(from: subtitle.language))
+                                            }
+                                                     }
+                                            .font(.caption)
+                                            .padding(.horizontal)
+                                        }
+//
+//                                        Text(subtitles.joined(separator: ", "))
+//                                            .font(.caption)
+//                                            .padding(.horizontal)
+                                    }
+                                    
                                     ActionsView(item: $item)
+                                        .padding(.top)
                                 }
                                 /// Make sure the poster is always shown
                                 .frame(maxWidth: .infinity, minHeight: 560, alignment: .leading)
@@ -133,5 +180,33 @@ extension DetailsView {
             .ignoresSafeArea()
             .frame(width: 1920, height: 1080)
         }
+    }
+    
+    struct CastView: View {
+        let cast: [ActorItem]
+        var body: some View {
+            let _ = print(cast)
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack {
+                ForEach(cast) { item in
+                    VStack {
+                        ArtView.ActorIcon(item: item.icon)
+                    Text(item.name)
+                    }
+                }
+                }
+            }
+        }
+    }
+}
+
+
+func countryName(from countryCode: String) -> String {
+    if let name = (Locale.current as NSLocale).displayName(forKey: .countryCode, value: countryCode) {
+        // Country name was found
+        return name
+    } else {
+        // Country name cannot be found
+        return countryCode
     }
 }

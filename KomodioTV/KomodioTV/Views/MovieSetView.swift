@@ -20,14 +20,10 @@ struct MovieSetView: View {
     /// The View
     var body: some View {
         VStack {
-            if let selected = selectedItem {
-                Text(set.title)
-                    .font(.title)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text(selected.title)
-                    .font(.title2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            /// Header
+            PartsView.Header(title: set.title, subtitle: selectedItem?.title)
+            if !set.description.isEmpty {
+                Text(set.description)
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
@@ -44,7 +40,7 @@ struct MovieSetView: View {
             }
             VStack {
             if let selected = selectedItem {
-                Text(selected.description)
+                Text(selected.details)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             }

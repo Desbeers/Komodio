@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "SwiftUIRouter",
-        "repositoryURL": "https://github.com/frzi/SwiftUIRouter",
-        "state": {
-          "branch": null,
-          "revision": "a6f6c67fab0f040a72f4416f4173367b57683d46",
-          "version": "1.3.1"
-        }
+  "pins" : [
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "1a7b5480eb750a8e171654b9b1cb0a2cbeb27a55",
+        "version" : "7.2.1"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }
