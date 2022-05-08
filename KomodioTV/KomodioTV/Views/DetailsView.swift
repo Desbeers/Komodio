@@ -34,52 +34,47 @@ struct DetailsView: View {
                                     }
                                     if !item.cast.isEmpty {
                                         CastView(cast: item.cast)
-//                                        let cast = item.cast.map(\.name)
-//                                        Text("Cast:")
-//                                            .font(.callout)
-//                                            .padding(.top)
-//                                        Text(cast.joined(separator: ", "))
-//                                            .font(.caption)
-//                                            .padding(.horizontal)
+                                        //                                        let cast = item.cast.map(\.name)
+                                        //                                        Text("Cast:")
+                                        //                                            .font(.callout)
+                                        //                                            .padding(.top)
+                                        //                                        Text(cast.joined(separator: ", "))
+                                        //                                            .font(.caption)
+                                        //                                            .padding(.horizontal)
                                     }
-                                    //let video = item.streamDetails.video.map(\.height)
-                                    Text("Video:")
-                                        .font(.callout)
-                                        .padding(.top)
-                                    Text("\(item.streamDetails.video.first?.width ?? 0)")
-                                        .font(.caption)
-                                        .padding(.horizontal)
-                                    let audio = item.streamDetails.audio.map(\.codec)
-                                    Text("Audio:")
-                                        .font(.callout)
-                                        .padding(.top)
-                                    Text(audio.joined(separator: ", "))
-                                        .font(.caption)
-                                        .padding(.horizontal)
-                                    /// Subtitles
-                                    if !item.streamDetails.subtitle.isEmpty {
-                                        Text("Subtitles:")
-                                            .font(.callout)
-                                            .padding(.top)
-                                        
-                                        
-                                        ForEach(item.streamDetails.subtitle) {subtitle in
-                                            HStack {
-                                            if subtitle.language.isEmpty {
-                                                Text("External")
-                                            } else {
-                                                Text(countryName(from: subtitle.language))
-                                            }
-                                                     }
-                                            .font(.caption)
-                                            .padding(.horizontal)
+                                    /// Stream detals
+                                    HStack {
+                                        /// Video
+                                        VStack(alignment: .leading) {
+                                            Text("Video:")
+                                                .font(.callout)
+                                                .padding(.top)
+                                            Text("\(item.streamDetails.videoLabel)")
+                                                .font(.caption)
+                                                .padding(.horizontal)
                                         }
-//
-//                                        Text(subtitles.joined(separator: ", "))
-//                                            .font(.caption)
-//                                            .padding(.horizontal)
+                                        /// Audio
+                                        VStack(alignment: .leading) {
+                                            Text("Audio:")
+                                                .font(.callout)
+                                                .padding(.top)
+                                            Text(item.streamDetails.audioLabel)
+                                                .font(.caption)
+                                                .padding(.horizontal)
+                                        }
+                                        
+                                        /// Subtitles
+                                        if !item.streamDetails.subtitleLabel.isEmpty {
+                                            VStack(alignment: .leading) {
+                                                Text("Subtitles:")
+                                                    .font(.callout)
+                                                    .padding(.top)
+                                                Text(item.streamDetails.subtitleLabel)
+                                                    .font(.caption)
+                                                    .padding(.horizontal)
+                                            }
+                                        }
                                     }
-                                    
                                     ActionsView(item: $item)
                                         .padding(.top)
                                 }
@@ -185,28 +180,16 @@ extension DetailsView {
     struct CastView: View {
         let cast: [ActorItem]
         var body: some View {
-            let _ = print(cast)
             ScrollView(.horizontal, showsIndicators: true) {
                 HStack {
-                ForEach(cast) { item in
-                    VStack {
-                        ArtView.ActorIcon(item: item.icon)
-                    Text(item.name)
+                    ForEach(cast) { item in
+                        VStack {
+                            ArtView.ActorIcon(item: item.icon)
+                            Text(item.name)
+                        }
                     }
-                }
                 }
             }
         }
-    }
-}
-
-
-func countryName(from countryCode: String) -> String {
-    if let name = (Locale.current as NSLocale).displayName(forKey: .countryCode, value: countryCode) {
-        // Country name was found
-        return name
-    } else {
-        // Country name cannot be found
-        return countryCode
     }
 }
