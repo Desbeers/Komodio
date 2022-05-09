@@ -50,6 +50,7 @@ extension PlayerView {
                 .task {
                     /// Check if we are already playing or not
                     if playerModel.player.isPlaying == false {
+                        print("INFO start player")
                         playerModel.player.play()
                     }
                 }
@@ -62,10 +63,13 @@ extension PlayerView {
             /// Init the PlayerModel class
             init(video: MediaItem, endAction: @escaping () -> Void) {
                 /// Setup the player
-                let playerItem = AVPlayerItem(url:  URL(string: video.file)!)
+                let playerItem = AVPlayerItem(url: URL(string: video.file)!)
+                print("INFO start metadata")
                 /// tvOS can add aditional info to the player
                 playerItem.externalMetadata = createMetadataItems(video: video)
+                print("INFO end metadata")
                 /// Create a new Player
+                print("INFO create player")
                 player = AVPlayer(playerItem: playerItem)
                 player.actionAtItemEnd = .none
                 /// Get notifications
@@ -101,7 +105,7 @@ func createMetadataItems(video: MediaItem) -> [AVMetadataItem] {
     }
     let mapping: [AVMetadataIdentifier: Any] = [
         .commonIdentifierTitle: video.title,
-        .iTunesMetadataTrackSubTitle: video.subtitle as Any,
+        .iTunesMetadataTrackSubTitle: video.subtitle,
         .commonIdentifierArtwork: artData!.pngData() as Any,
         .commonIdentifierDescription: video.description,
         /// .iTunesMetadataContentRating: "100",

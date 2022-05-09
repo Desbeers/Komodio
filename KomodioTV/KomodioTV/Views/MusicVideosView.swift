@@ -84,6 +84,7 @@ extension MusicVideosView {
                                 if item.album.isEmpty {
                                     NavigationLink(destination: DetailsView(item: $item)) {
                                         ArtView.Poster(item: item)
+                                            .watchStatus(of: $item)
                                     }
                                 } else {
                                     NavigationLink(destination: Album(album: item)) {

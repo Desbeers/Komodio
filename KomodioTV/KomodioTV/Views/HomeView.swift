@@ -69,7 +69,7 @@ struct HomeView: View {
                 .padding(.horizontal, 40)
             }
             /// New TV episodes
-            Text(selectedItem?.media == .episode ? "\(selectedItem!.subtitle): \(selectedItem!.title)" : "New TV show episodes")
+            Text(selectedItem?.media == .episode ? "\(selectedItem!.showTitle)" : "New TV show episodes")
                 .font(.title3)
                 .padding(.horizontal, 40)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -77,7 +77,11 @@ struct HomeView: View {
                 HStack {
                     ForEach($items.episodes) { $movie in
                         NavigationLink(destination: DetailsView(item: $movie)) {
-                            ArtView.Poster(item: movie)
+                            VStack {
+                                ArtView.Poster(item: movie)
+                                Text(movie.title)
+                                    .font(.caption2)
+                            }
                         }
                         .buttonStyle(.card)
                         .padding(.top, 20)
@@ -111,7 +115,7 @@ extension HomeView {
                             .shuffled()
                             .prefix(10)),
                          episodes: Array(kodi.media
-                            .filter { $0.media == .episode && $0.playcount == 0 }
+                            .filter { $0.media == .episode && $0.playcount == 0 && $0.season != 0 }
                             .sorted { $0.dateAdded > $1.dateAdded }
                             .unique { $0.tvshowID }
                             .prefix(10))

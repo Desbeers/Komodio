@@ -26,23 +26,31 @@ struct DetailsView: View {
                     ZStack(alignment: .topLeading) {
                         Color.black.ignoresSafeArea()
                         VStack(alignment: .leading) {
-                            HStack(alignment: .center) {
+                            HStack(alignment: .top) {
                                 PosterView(item: $item)
                                 VStack(alignment: .leading) {
+                                    if !item.subtitle.isEmpty {
+                                        Text(item.subtitle)
+                                            .font(.headline).italic()
+                                            .padding(.bottom)
+                                    }
                                     if !item.description.isEmpty {
                                         AboutView(item: $item)
                                     }
+                                    /// Cast details
                                     if !item.cast.isEmpty {
-                                        CastView(cast: item.cast)
-                                        //                                        let cast = item.cast.map(\.name)
-                                        //                                        Text("Cast:")
-                                        //                                            .font(.callout)
-                                        //                                            .padding(.top)
-                                        //                                        Text(cast.joined(separator: ", "))
-                                        //                                            .font(.caption)
-                                        //                                            .padding(.horizontal)
+                                        VStack(alignment: .leading) {
+                                        //CastView(cast: item.cast)
+                                        let cast = item.cast.map(\.name)
+                                        Text("Cast:")
+                                            .font(.callout)
+                                            .padding(.top)
+                                        Text(cast.joined(separator: ", "))
+                                            .font(.caption)
+                                            .padding(.horizontal)
                                     }
-                                    /// Stream detals
+                                    }
+                                    /// Stream details
                                     HStack {
                                         /// Video
                                         VStack(alignment: .leading) {
@@ -76,13 +84,14 @@ struct DetailsView: View {
                                         }
                                     }
                                     ActionsView(item: $item)
-                                        .padding(.top)
+                                        .padding(.vertical)
                                 }
                                 /// Make sure the poster is always shown
                                 .frame(maxWidth: .infinity, minHeight: 560, alignment: .leading)
                             }
                         }
                         .padding(.horizontal,80)
+                        .padding(.bottom, 40)
                         .focusSection()
                     }
                 }
@@ -165,7 +174,7 @@ extension DetailsView {
     struct BackgroundView: View {
         let item: MediaItem
         var body: some View {
-            AsyncImage(url: URL(string: item.fanart)) { image in
+            AsyncImage(url: URL(string: item.media == .episode ? item.thumbnail : item.fanart)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -174,22 +183,6 @@ extension DetailsView {
             }
             .ignoresSafeArea()
             .frame(width: 1920, height: 1080)
-        }
-    }
-    
-    struct CastView: View {
-        let cast: [ActorItem]
-        var body: some View {
-            ScrollView(.horizontal, showsIndicators: true) {
-                HStack {
-                    ForEach(cast) { item in
-                        VStack {
-                            ArtView.ActorIcon(item: item.icon)
-                            Text(item.name)
-                        }
-                    }
-                }
-            }
         }
     }
 }
