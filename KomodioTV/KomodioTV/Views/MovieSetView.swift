@@ -23,7 +23,7 @@ struct MovieSetView: View {
     var body: some View {
         VStack {
             /// Header
-            PartsView.Header(title: set.title, subtitle: selectedItem?.title)
+            PartsView.Header2(item: set)
             if !set.description.isEmpty {
                 Text(set.description)
             }

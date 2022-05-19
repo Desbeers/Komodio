@@ -23,6 +23,8 @@ struct EpisodesView: View {
     @FocusState var selectedItem: MediaItem?
     /// The selected tab
     @State private var selectedTab: Int = 1
+    /// Show details
+    @State var showDetail: Bool = false
     /// The subtitle for this View
     var subtitle: String? {
         if let subtitle = selectedItem {
@@ -34,9 +36,8 @@ struct EpisodesView: View {
     var body: some View {
         VStack {
             /// Header
-            PartsView.Header(title: tvshow.title, subtitle: tvshow.subtitle)
-            Text(tvshow.description)
-                .padding(.top)
+            PartsView.Header2(item: tvshow)
+
             if seasons.count > 1 {
             TabView(selection: $selectedTab) {
                 ForEach(seasons, id: \.self) {season in
@@ -50,6 +51,19 @@ struct EpisodesView: View {
             } else {
                 Season(tvshow: tvshow, season: 1)
             }
+            Button(action: {
+                showDetail.toggle()
+            }, label: {
+                Text(tvshow.description)
+                    .lineLimit(2)
+                    .padding()
+                    .frame(width: UIScreen.main.bounds.width - 160)
+            })
+            //.focused($selectedItem, equals: artist)
+            .buttonStyle(.card)
+//            Text(tvshow.description)
+//                .lineLimit(2)
+                //.padding(.top)
 //            ScrollView(.horizontal, showsIndicators: false) {
 //                LazyHStack(spacing: 0) {
 //                    ForEach($episodes) { $episode in
@@ -72,6 +86,11 @@ struct EpisodesView: View {
 //            appState.selection = item
 //        }
         .background(ArtView.SelectionBackground(item: tvshow))
+        .fullScreenCover(isPresented: $showDetail) {
+            Text(tvshow.description)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.thinMaterial)
+        }
         .task {
             episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
             seasons = episodes.unique { $0.season }.map { $0.season }
@@ -96,12 +115,14 @@ extension EpisodesView {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .cornerRadius(8)
+                                //.shadow(radius: 20)
                         } placeholder: {
                             Color.gray
                         }
                         .frame(height: 400)
                         .padding(6)
                         .background(.secondary)
+                        
                         .cornerRadius(10)
                     }
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -117,11 +138,12 @@ extension EpisodesView {
                         }
                         .buttonStyle(.card)
                         .padding()
+                        .padding(.horizontal)
                         .focused($selectedItem, equals: episode)
                         //.zIndex(tvshow == selectedItem ? 2 : 1)
                     }
                         }
-                        .padding(.leading)
+                        .padding(.leading, 100)
                 }
             }
             .task {

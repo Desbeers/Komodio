@@ -92,9 +92,10 @@ struct TVshowsView: View {
         .onChange(of: hideWatched) { _ in
             tvshows = getTVshows()
         }
-        .onChange(of: selectedItem) { item in
-            appState.selection = item
-        }
+        .modifier(ViewModifierSelection(selectedItem: selectedItem))
+//        .onChange(of: selectedItem) { item in
+//            appState.selection = item
+//        }
     }
     
     /// Get the list of tv shows

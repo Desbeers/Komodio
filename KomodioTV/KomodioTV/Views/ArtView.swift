@@ -44,10 +44,10 @@ extension ArtView {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 480, height: 270)
+                        .frame(width: 400, height: 225)
                 } placeholder: {
                     Color.black
-                        .frame(width: 480, height: 270)
+                        .frame(width: 400, height: 225)
                 }
             case .artist:
                 AsyncImage(url: URL(string: item.thumbnail)) { image in
@@ -115,7 +115,7 @@ extension ArtView {
                 }
             }
             .blur(radius: 25, opaque: false)
-            .opacity(0.8)
+            .opacity(0.5)
             .frame(width: 1920, height: 1080)
             .ignoresSafeArea()
             /// Give it an id so it will fade the fanart in and out

@@ -114,4 +114,44 @@ extension PartsView {
         }
         
     }
+    
+    struct Header2: View {
+        let item: MediaItem
+        
+        var body: some View {
+            HStack {
+                AsyncImage(url: URL(string: item.fanart)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 225)
+                        .clipShape(Capsule())
+                } placeholder: {
+                    Color.black
+                        .frame(width: 400, height: 225)
+                }
+            VStack(alignment: .center) {
+                Text(item.title)
+                    .font(.title2)
+                    .foregroundColor(.black)
+                    //.frame(maxWidth: .infinity, alignment: .leading)
+                if let subtitle = item.subtitle {
+                    Text(subtitle)
+                        .font(.callout)
+                        .foregroundColor(.white)
+                        //.transition(.opacity)
+                        //.frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            }
+            .padding(.trailing, 100)
+            //.padding(.horizontal, 100)
+            //.frame(height: 140)
+            //.frame(maxWidth: .infinity, alignment: .center)
+            .padding(4)
+            .background(.secondary)
+            .clipShape(Capsule())
+        }
+        
+    }
 }
