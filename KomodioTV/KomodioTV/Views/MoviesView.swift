@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 
 /// A View for Movie items
 struct MoviesView: View {
+    /// The AppState
+    @EnvironmentObject var appState: AppState
     /// The movies to show
     @State private var movies: [MediaItem] = []
     /// Define the grid layout
@@ -90,7 +92,7 @@ struct MoviesView: View {
                 }
             }
         }
-        .background(ArtView.SelectionBackground(item: selectedItem))
+        //.background(ArtView.SelectionBackground(item: selectedItem))
         .animation(.default, value: selectedItem)
         .task {
             movies = getMovies()
@@ -98,6 +100,13 @@ struct MoviesView: View {
         .onChange(of: hideWatched) { _ in
             movies = getMovies()
         }
+        .modifier(ViewModifierSelection(selectedItem: selectedItem))
+//        .onChange(of: selectedItem) { item in
+//            if item != nil {
+//                appState.selection = item
+//            }
+//            //appState.selection = item
+//        }
     }
     
     /// Get the list of movies

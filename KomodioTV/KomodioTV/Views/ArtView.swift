@@ -97,26 +97,30 @@ extension ArtView {
         let item: MediaItem?
         var body: some View {
             Group {
-            if item?.fanart != nil {
-                ZStack(alignment: .bottom) {
-                    AsyncImage(url: URL(string: item!.fanart)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 1920, height: 1080)
-                            //.opacity(0.5)
-                            //.id(item!.file)
-                    } placeholder: {
-                        Color.black
+                if let fanart = item?.fanart {
+                    ZStack(alignment: .bottom) {
+                        AsyncImage(url: URL(string: fanart)) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                            
+                        } placeholder: {
+                            Color.black
+                        }
+                        //.ignoresSafeArea()
+                        
                     }
-                    .ignoresSafeArea()
-                    
+                } else {
+                    Color.clear
                 }
-            } else {
-                Color.black.ignoresSafeArea()
             }
-            }
-            .overlay(.ultraThinMaterial)
+            .blur(radius: 25, opaque: false)
+            .opacity(0.8)
+            .frame(width: 1920, height: 1080)
+            .ignoresSafeArea()
+            /// Give it an id so it will fade the fanart in and out
+            .id(item)
+            .animation(.default, value: item)
         }
     }
 }

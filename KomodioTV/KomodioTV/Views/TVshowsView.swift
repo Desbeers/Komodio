@@ -12,6 +12,8 @@ import SwiftlyKodiAPI
 struct TVshowsView: View {
     /// The KodiConnector model
     //@EnvironmentObject var kodi: KodiConnector
+    /// The AppState
+    @EnvironmentObject var appState: AppState
     /// The tv shows to show
     @State private var tvshows: [MediaItem] = []
     /// Define the grid layout
@@ -82,13 +84,16 @@ struct TVshowsView: View {
                 }
             }
         }
-        .background(ArtView.SelectionBackground(item: selectedItem))
+        //.background(ArtView.SelectionBackground(item: selectedItem))
         .animation(.default, value: selectedItem)
         .task {
             tvshows = getTVshows()
         }
         .onChange(of: hideWatched) { _ in
             tvshows = getTVshows()
+        }
+        .onChange(of: selectedItem) { item in
+            appState.selection = item
         }
     }
     

@@ -11,6 +11,8 @@ import SwiftlyKodiAPI
 struct MovieSetView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    /// The AppState
+    @EnvironmentObject var appState: AppState
     /// The Set item for this View
     let set: MediaItem
     /// The focused item
@@ -46,7 +48,7 @@ struct MovieSetView: View {
             }
             .frame(height: 200)
         }
-        .background(ArtView.SelectionBackground(item: selectedItem))
+        .background(ArtView.SelectionBackground(item: set))
         .animation(.default, value: selectedItem)
         .task {
             movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie, movieSetID: set.movieSetID))

@@ -12,6 +12,8 @@ import SwiftlyKodiAPI
 struct KomodioTVApp: App {
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector  = .shared
+    /// The AppState
+    @StateObject var appState = AppState()
     var body: some Scene {
         WindowGroup {
             Group {
@@ -19,6 +21,7 @@ struct KomodioTVApp: App {
                     //NavigationView {
                         ContentView()
                             .environmentObject(kodi)
+                            .environmentObject(appState)
                     //}
                 } else {
                     Text("Loading...")

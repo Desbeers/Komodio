@@ -12,10 +12,16 @@ import SwiftlyKodiAPI
 struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    /// The AppState
+    @EnvironmentObject var appState: AppState
     /// The Kodi items to show in this View
     @State var items = HomeItems()
     /// The focused item
     @FocusState var selectedItem: MediaItem?
+    
+//    /// The focused item
+//    @FocusState var selection = AppState.shared.selection?
+    
     /// The View
     var body: some View {
         ScrollView {
@@ -94,11 +100,17 @@ struct HomeView: View {
             }
         }
         .ignoresSafeArea(.all, edges: .horizontal)
-        .background(ArtView.SelectionBackground(item: selectedItem))
+        //.background(ArtView.SelectionBackground(item: appState.selection))
         .task {
             items = getHomeItems()
         }
-        .animation(.default, value: selectedItem)
+//        .onChange(of: selectedItem) { item in
+//            if item != nil {
+//                appState.selection = item
+//            }
+//        }
+        .modifier(ViewModifierSelection(selectedItem: selectedItem))
+        //.animation(.default, value: selectedItem)
         .animation(.default, value: items)
     }
 }
