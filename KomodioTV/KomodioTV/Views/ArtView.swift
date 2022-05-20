@@ -115,7 +115,7 @@ extension ArtView {
                 }
             }
             .blur(radius: 25, opaque: false)
-            .opacity(0.5)
+            .opacity(0.3)
             .frame(width: 1920, height: 1080)
             .ignoresSafeArea()
             /// Give it an id so it will fade the fanart in and out
