@@ -36,55 +36,33 @@ struct EpisodesView: View {
     var body: some View {
         VStack {
             /// Header
-            PartsView.Header2(item: tvshow)
-
+            //PartsView.Header2(item: tvshow)
+            
             if seasons.count > 1 {
-            TabView(selection: $selectedTab) {
-                ForEach(seasons, id: \.self) {season in
-                    Season(tvshow: tvshow, season: season)
-                        .tabItem {
-                            Text(season == 0 ? "Specials" : "Season \(season)")
-                        }
-                        .tag(season)
+                TabView(selection: $selectedTab) {
+                    ForEach(seasons, id: \.self) {season in
+                        Season(tvshow: tvshow, season: season)
+                            .tabItem {
+                                Text(season == 0 ? "Specials" : "Season \(season)")
+                            }
+                            .tag(season)
+                    }
                 }
-            }
+                .tabViewStyle(.page)
             } else {
                 Season(tvshow: tvshow, season: 1)
             }
-            Button(action: {
-                showDetail.toggle()
-            }, label: {
-                Text(tvshow.description)
-                    .lineLimit(2)
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width - 160)
-            })
-            //.focused($selectedItem, equals: artist)
-            .buttonStyle(.card)
-//            Text(tvshow.description)
-//                .lineLimit(2)
-                //.padding(.top)
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                LazyHStack(spacing: 0) {
-//                    ForEach($episodes) { $episode in
-//                        NavigationLink(destination: DetailsView(item: $episode)) {
-//                            VStack {
-//                                ArtView.Poster(item: episode)
-//                                Text(episode.title)
-//                            }
-//                            .watchStatus(of: $episode)
-//                        }
-//                        .buttonStyle(.card)
-//                        .padding()
-//                        .focused($selectedItem, equals: episode)
-//                        .zIndex(tvshow == selectedItem ? 2 : 1)
-//                    }
-//                }
-//            }
+//            Button(action: {
+//                showDetail.toggle()
+//            }, label: {
+//                Text(tvshow.description)
+//                    .lineLimit(2)
+//                    .padding()
+//                    .frame(width: UIScreen.main.bounds.width - 160)
+//            })
+//            //.focused($selectedItem, equals: artist)
+//            .buttonStyle(.card)
         }
-//        .onChange(of: selectedItem) { item in
-//            appState.selection = item
-//        }
         .background(ArtView.SelectionBackground(item: tvshow))
         .fullScreenCover(isPresented: $showDetail) {
             Text(tvshow.description)
@@ -107,45 +85,59 @@ extension EpisodesView {
         /// The focused item
         @FocusState var selectedItem: MediaItem?
         var body: some View {
-            //ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 0) {
-                    if let season = episodes.first {
+            //ScrollView(.vertical, showsIndicators: false) {
+            HStack(spacing: 0) {
+                if let season = episodes.first {
+                    VStack {
+                        Text(tvshow.title)
+                            .font(.title3)
+                        Text(season.season == 0 ? "Specials" : "Season \(season.season)")
                         AsyncImage(url: URL(string: season.poster)) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .cornerRadius(8)
-                                //.shadow(radius: 20)
+                            //.shadow(radius: 20)
                         } placeholder: {
                             Color.gray
                         }
-                        .frame(height: 400)
+                        .frame(width: 400, height: 600)
                         .padding(6)
                         .background(.secondary)
                         
                         .cornerRadius(10)
                     }
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 0) {
-                    ForEach($episodes) { $episode in
-                        NavigationLink(destination: DetailsView(item: $episode)) {
-                            VStack {
-                                ArtView.Poster(item: episode)
-                                Text(episode.title)
-                                    .font(.caption2)
+                    .padding(.trailing, 100)
+                }
+                ScrollView(.vertical, showsIndicators: false) {
+                    LazyVStack(spacing: 0) {
+                        ForEach($episodes) { $episode in
+                            NavigationLink(destination: DetailsView(item: $episode)) {
+                                HStack(spacing: 0) {
+                                    ArtView.Poster(item: episode)
+                                        .padding(.trailing)
+                                    VStack(alignment: .leading) {
+                                        Text(episode.title)
+                                            
+                                        Text(episode.description)
+                                            .font(.caption2)
+                                            .lineLimit(5)
+                                    }
+                                }
+                                .frame(width: UIScreen.main.bounds.width - 900, alignment: .leading)
+                                .watchStatus(of: $episode)
                             }
-                            .watchStatus(of: $episode)
+                            .buttonStyle(.card)
+                            .padding()
+                            .padding(.horizontal)
+                            .focused($selectedItem, equals: episode)
+                            //.zIndex(tvshow == selectedItem ? 2 : 1)
                         }
-                        .buttonStyle(.card)
-                        .padding()
-                        .padding(.horizontal)
-                        .focused($selectedItem, equals: episode)
-                        //.zIndex(tvshow == selectedItem ? 2 : 1)
                     }
-                        }
-                        .padding(.leading, 100)
+                    .padding(.horizontal, 100)
                 }
             }
+            .frame(width: UIScreen.main.bounds.width - 300)
             .task {
                 episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)).filter { $0.season == season}
                 //seasons = episodes.unique { $0.season }.map { $0.season }
