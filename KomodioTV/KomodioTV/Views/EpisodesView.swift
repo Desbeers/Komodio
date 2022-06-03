@@ -27,7 +27,7 @@ struct EpisodesView: View {
             if seasons.count > 1 {
                 TabView(selection: $selectedTab) {
                     ForEach(seasons, id: \.self) {season in
-                        Season(tvshow: tvshow, season: season)
+                        Season(tvshow: tvshow, episodes: episodes.filter { $0.season == season } )
                             .tabItem {
                                 Text(season == 0 ? "Specials" : "Season \(season)")
                             }
@@ -35,8 +35,8 @@ struct EpisodesView: View {
                     }
                 }
                 .tabViewStyle(.page)
-            } else {
-                Season(tvshow: tvshow, season: 1)
+            } else if !episodes.isEmpty {
+                Season(tvshow: tvshow, episodes: episodes)
             }
         }
         .background(ArtView.SelectionBackground(item: tvshow))
@@ -48,16 +48,18 @@ struct EpisodesView: View {
 }
 
 extension EpisodesView {
+    
+    /// A View with all episodes from a TV show season
     struct Season: View {
         /// The TV show
         let tvshow: MediaItem
-        /// The season number
-        let season: Int
         /// The Episode items to show in this view
-        @State private var episodes: [MediaItem] = []
+        //@State private var episodes: [MediaItem] = []
+        @State var episodes: [MediaItem]
         /// The View
         var body: some View {
             HStack(spacing: 0) {
+                // MARK: Display the season cover
                 if let season = episodes.first {
                     VStack {
                         Text(tvshow.title)
@@ -79,6 +81,7 @@ extension EpisodesView {
                     }
                     .padding(.trailing, 100)
                 }
+                // MARK: Diplay all episodes from the selected season
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach($episodes) { $episode in
@@ -105,10 +108,6 @@ extension EpisodesView {
                 }
             }
             .frame(width: UIScreen.main.bounds.width - 300)
-            .task {
-                episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)).filter { $0.season == season}
-            }
         }
     }
 }
-
