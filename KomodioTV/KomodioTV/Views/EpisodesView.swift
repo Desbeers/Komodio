@@ -8,36 +8,22 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// A View for episodes of a TV show
 struct EpisodesView: View {
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
-    /// The AppState
-    @EnvironmentObject var appState: AppState
-    /// The TV show item in the library
+    /// The selected TV show for this View
     let tvshow: MediaItem
-    /// The Episode items to show in this view
+    /// The episode items to show in this view
     @State private var episodes: [MediaItem] = []
-    /// The Season items to show in this view
+    /// The seasons to show in this view
     @State private var seasons: [Int] = []
-    /// The focused item
-    @FocusState var selectedItem: MediaItem?
-    /// The selected tab
+    /// The selected season tab
     @State private var selectedTab: Int = 1
-    /// Show details
-    @State var showDetail: Bool = false
-    /// The subtitle for this View
-    var subtitle: String? {
-        if let subtitle = selectedItem {
-            return subtitle.season == 0 ? "Specials" : "Season \(subtitle.season)"
-        }
-        return nil
-    }
     /// The View
     var body: some View {
         VStack {
-            /// Header
-            //PartsView.Header2(item: tvshow)
-            
+            /// Show seasons on page tabs if we have more than one season
+            /// - Note: Shown in 'page' style because SwiftUI can only show 7 tabs when using the 'normal' style
+            ///         and there might be more seasons
             if seasons.count > 1 {
                 TabView(selection: $selectedTab) {
                     ForEach(seasons, id: \.self) {season in
@@ -52,23 +38,8 @@ struct EpisodesView: View {
             } else {
                 Season(tvshow: tvshow, season: 1)
             }
-//            Button(action: {
-//                showDetail.toggle()
-//            }, label: {
-//                Text(tvshow.description)
-//                    .lineLimit(2)
-//                    .padding()
-//                    .frame(width: UIScreen.main.bounds.width - 160)
-//            })
-//            //.focused($selectedItem, equals: artist)
-//            .buttonStyle(.card)
         }
         .background(ArtView.SelectionBackground(item: tvshow))
-        .fullScreenCover(isPresented: $showDetail) {
-            Text(tvshow.description)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.thinMaterial)
-        }
         .task {
             episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
             seasons = episodes.unique { $0.season }.map { $0.season }
@@ -78,14 +49,14 @@ struct EpisodesView: View {
 
 extension EpisodesView {
     struct Season: View {
+        /// The TV show
         let tvshow: MediaItem
+        /// The season number
         let season: Int
         /// The Episode items to show in this view
         @State private var episodes: [MediaItem] = []
-        /// The focused item
-        @FocusState var selectedItem: MediaItem?
+        /// The View
         var body: some View {
-            //ScrollView(.vertical, showsIndicators: false) {
             HStack(spacing: 0) {
                 if let season = episodes.first {
                     VStack {
@@ -97,7 +68,6 @@ extension EpisodesView {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .cornerRadius(8)
-                            //.shadow(radius: 20)
                         } placeholder: {
                             Color.gray
                         }
@@ -118,7 +88,6 @@ extension EpisodesView {
                                         .padding(.trailing)
                                     VStack(alignment: .leading) {
                                         Text(episode.title)
-                                            
                                         Text(episode.description)
                                             .font(.caption2)
                                             .lineLimit(5)
@@ -130,8 +99,6 @@ extension EpisodesView {
                             .buttonStyle(.card)
                             .padding()
                             .padding(.horizontal)
-                            .focused($selectedItem, equals: episode)
-                            //.zIndex(tvshow == selectedItem ? 2 : 1)
                         }
                     }
                     .padding(.horizontal, 100)
@@ -140,7 +107,6 @@ extension EpisodesView {
             .frame(width: UIScreen.main.bounds.width - 300)
             .task {
                 episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID)).filter { $0.season == season}
-                //seasons = episodes.unique { $0.season }.map { $0.season }
             }
         }
     }

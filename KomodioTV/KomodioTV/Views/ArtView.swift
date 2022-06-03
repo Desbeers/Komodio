@@ -14,25 +14,6 @@ struct ArtView {
 }
 
 extension ArtView {
-    struct HorizontalStrip: View {
-        /// The Kodi item
-        let item: MediaItem
-        /// The View
-        var body: some View {
-            AsyncImage(url: URL(string: item.poster)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 160, height: 240)
-            } placeholder: {
-                Color.black
-                    .frame(width: 160, height: 240)
-            }
-        }
-    }
-}
-
-extension ArtView {
     struct Poster: View {
         /// The Kodi item
         let item: MediaItem
@@ -91,7 +72,7 @@ extension ArtView {
         }
     }
     
-
+    
     
     struct SelectionBackground: View {
         let item: MediaItem?

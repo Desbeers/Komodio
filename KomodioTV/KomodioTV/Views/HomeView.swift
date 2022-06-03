@@ -12,20 +12,14 @@ import SwiftlyKodiAPI
 struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The AppState
-    @EnvironmentObject var appState: AppState
     /// The Kodi items to show in this View
     @State var items = HomeItems()
     /// The focused item
     @FocusState var selectedItem: MediaItem?
-    
-//    /// The focused item
-//    @FocusState var selection = AppState.shared.selection?
-    
     /// The View
     var body: some View {
         ScrollView {
-            /// Unwatched movies
+            // MARK: Unwatched movies
             Text(selectedItem?.media == .movie ? selectedItem!.title : "Unwatched Movies")
                 .font(.title3)
                 .padding(.horizontal, 40)
@@ -53,8 +47,9 @@ struct HomeView: View {
                     .lineLimit(2)
                     .padding(.bottom)
                     .padding(.horizontal, 40)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            /// Random music videos
+            // MARK: Random music videos
             Text(selectedItem?.media == .musicVideo ? selectedItem!.title : "Random Music Videos")
                 .font(.title3)
                 .padding(.horizontal, 40)
@@ -74,7 +69,7 @@ struct HomeView: View {
                 }
                 .padding(.horizontal, 40)
             }
-            /// New TV episodes
+            // MARK: New TV episodes
             Text(selectedItem?.media == .episode ? "\(selectedItem!.showTitle)" : "New TV show episodes")
                 .font(.title3)
                 .padding(.horizontal, 40)
@@ -99,23 +94,17 @@ struct HomeView: View {
                 .padding(.horizontal, 40)
             }
         }
-        .ignoresSafeArea(.all, edges: .horizontal)
-        //.background(ArtView.SelectionBackground(item: appState.selection))
         .task {
             items = getHomeItems()
         }
-//        .onChange(of: selectedItem) { item in
-//            if item != nil {
-//                appState.selection = item
-//            }
-//        }
         .modifier(ViewModifierSelection(selectedItem: selectedItem))
-        //.animation(.default, value: selectedItem)
-        .animation(.default, value: items)
+        .animation(.default, value: selectedItem)
+        .ignoresSafeArea(.all, edges: .horizontal)
     }
 }
 
 extension HomeView {
+    
     /// Get the home items
     private func getHomeItems() -> HomeItems {
         return HomeItems(movies: Array(kodi.media

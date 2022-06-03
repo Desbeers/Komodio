@@ -21,10 +21,7 @@ extension LabelStyles {
             HStack(spacing: 0) {
                 configuration.icon
                     .padding(.trailing)
-                    //.font(.title3)
-                    //.foregroundColor(focused ? .green : .yellow)
                 configuration.title
-                    //.padding(.top)
             }
             .padding(.horizontal, 40)
             .frame(height: 100)

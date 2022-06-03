@@ -10,10 +10,6 @@ import SwiftlyKodiAPI
 
 /// A View for TV show items
 struct TVshowsView: View {
-    /// The KodiConnector model
-    //@EnvironmentObject var kodi: KodiConnector
-    /// The AppState
-    @EnvironmentObject var appState: AppState
     /// The tv shows to show
     @State private var tvshows: [MediaItem] = []
     /// Define the grid layout
@@ -49,13 +45,6 @@ struct TVshowsView: View {
                             .font(.caption)
                         Divider()
                         Text(item.description)
-                        /// If the item is a set; list all movies that is part of this set
-                        if item.movieSetID != 0 {
-                            ForEach(KodiConnector.shared.media.filter { $0.media == .movie && $0.movieSetID == item.movieSetID}) { movie in
-                                Label(movie.title, systemImage: "film")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                        }
                     }
                     .padding()
                     .background(.ultraThinMaterial)
@@ -84,7 +73,6 @@ struct TVshowsView: View {
                 }
             }
         }
-        //.background(ArtView.SelectionBackground(item: selectedItem))
         .animation(.default, value: selectedItem)
         .task {
             tvshows = getTVshows()
@@ -93,9 +81,6 @@ struct TVshowsView: View {
             tvshows = getTVshows()
         }
         .modifier(ViewModifierSelection(selectedItem: selectedItem))
-//        .onChange(of: selectedItem) { item in
-//            appState.selection = item
-//        }
     }
     
     /// Get the list of tv shows

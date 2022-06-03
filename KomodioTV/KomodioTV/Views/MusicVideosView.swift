@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct MusicVideosView: View {
-    /// The KodiConnector model
-    //@EnvironmentObject var kodi: KodiConnector
     /// The artists to show
     @State private var artists: [MediaItem] = []
     /// Define the grid layout
@@ -99,7 +97,6 @@ extension MusicVideosView {
                         }
                     }
                 }
-                //HStack {
                 if !artist.description.isEmpty {
                     Button(action: {
                         showDetail.toggle()
@@ -112,14 +109,6 @@ extension MusicVideosView {
                     .focused($selectedItem, equals: artist)
                     .buttonStyle(.card)
                 }
-                    
-                    //Text(artist.description)
-//                    if let selected = selectedItem {
-//                        Text(selected.description)
-//                            .frame(maxWidth: .infinity, alignment: .leading)
-//                    }
-                //}
-                //.frame(width: 200)
             }
             .background(ArtView.SelectionBackground(item: artist))
             .animation(.default, value: selectedItem)
@@ -135,8 +124,6 @@ extension MusicVideosView {
     }
     
     struct Album: View {
-//        /// The KodiConnector model
-//        @EnvironmentObject var kodi: KodiConnector
         /// The album who's videos to show
         let album: MediaItem
         /// The items to show

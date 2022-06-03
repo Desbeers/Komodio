@@ -36,12 +36,12 @@ extension PlayerView {
     /// and act after a video has finnised playing
     struct Wrapper: View {
         /// The video we want to play
-        let video: MediaItem
+        //let video: MediaItem
         /// Observe the player
         @StateObject private var playerModel: PlayerModel
         /// Init the Wrapper View
         init(video: MediaItem, endAction: @escaping () -> Void) {
-            self.video = video
+            //self.video = video
             _playerModel = StateObject(wrappedValue: PlayerModel(video: video, endAction: endAction))
         }
         /// The View

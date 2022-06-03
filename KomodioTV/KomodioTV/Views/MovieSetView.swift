@@ -27,39 +27,15 @@ struct MovieSetView: View {
             if !set.description.isEmpty {
                 Text(set.description)
             }
-            
             if !movies.isEmpty {
               TabView {
                 ForEach($movies) { movie in
                     Movie(movie: movie)
-                    //.focusable()
                 }
               }
               .tabViewStyle(.page)
               .padding(.bottom)
-              //.frame(maxHeight: 400)
             }
-            
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                LazyHStack(spacing: 0) {
-//                    ForEach($movies) { $movie in
-//                        NavigationLink(destination: DetailsView(item: $movie)) {
-//                            ArtView.Poster(item: movie)
-//                        }
-//                        .buttonStyle(.card)
-//                        .padding()
-//                        .focused($selectedItem, equals: movie)
-//                        .zIndex(movie == selectedItem ? 2 : 1)
-//                    }
-//                }
-//            }
-//            VStack {
-//            if let selected = selectedItem {
-//                Text(selected.details)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//            }
-//            }
-//            .frame(height: 200)
         }
         .background(ArtView.SelectionBackground(item: set))
         .animation(.default, value: selectedItem)
