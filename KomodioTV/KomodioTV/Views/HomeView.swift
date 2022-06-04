@@ -29,15 +29,14 @@ struct HomeView: View {
                     ForEach($items.movies) { $movie in
                         NavigationLink(destination: DetailsView(item: $movie)) {
                             ArtView.Poster(item: movie)
+                                .watchStatus(of: $movie)
                         }
                         .buttonStyle(.card)
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 80)
                         .focused($selectedItem, equals: movie)
-                        .contextMenu {
-                            PartsView.WatchedToggle(item: $movie)
-                        }
+                        .contextMenu(for: $movie)
                     }
                 }
                 .padding(.horizontal, 40)
@@ -56,15 +55,16 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach($items.musicvideos) { $movie in
-                        NavigationLink(destination: DetailsView(item: $movie)) {
-                            ArtView.Poster(item: movie)
+                    ForEach($items.musicvideos) { $musicVideo in
+                        NavigationLink(destination: DetailsView(item: $musicVideo)) {
+                            ArtView.Poster(item: musicVideo)
+                                .watchStatus(of: $musicVideo)
                         }
                         .buttonStyle(.card)
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 80)
-                        .focused($selectedItem, equals: movie)
+                        .focused($selectedItem, equals: musicVideo)
                     }
                 }
                 .padding(.horizontal, 40)
@@ -76,19 +76,20 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach($items.episodes) { $movie in
-                        NavigationLink(destination: DetailsView(item: $movie)) {
+                    ForEach($items.episodes) { $episode in
+                        NavigationLink(destination: DetailsView(item: $episode)) {
                             VStack {
-                                ArtView.Poster(item: movie)
-                                Text(movie.title)
+                                ArtView.Poster(item: episode)
+                                Text(episode.title)
                                     .font(.caption2)
                             }
+                            .watchStatus(of: $episode)
                         }
                         .buttonStyle(.card)
                         .padding(.top, 20)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 80)
-                        .focused($selectedItem, equals: movie)
+                        .focused($selectedItem, equals: episode)
                     }
                 }
                 .padding(.horizontal, 40)
@@ -104,8 +105,9 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    
-    /// Get the home items
+
+    /// Get the Home items
+    /// - Returns: A Struct with the ``HomeItems``
     private func getHomeItems() -> HomeItems {
         return HomeItems(movies: Array(kodi.media
             .filter { $0.media == .movie && $0.playcount == 0 }
@@ -124,7 +126,7 @@ extension HomeView {
         
     }
     
-    /// A struct to collect items for the HomeView
+    /// A struct with MediaItems  for the HomeView
     struct HomeItems: Equatable {
         /// Movie items
         var movies: [MediaItem] = []

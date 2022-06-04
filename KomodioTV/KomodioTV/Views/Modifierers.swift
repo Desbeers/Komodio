@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 struct ViewModifierSelection: ViewModifier {
     /// The AppState
     @EnvironmentObject var appState: AppState
-    /// The selected item
+    /// The selected media item
     let selectedItem: MediaItem?
     /// The view
     func body(content: Content) -> some View {

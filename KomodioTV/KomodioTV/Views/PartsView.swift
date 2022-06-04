@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct PartsView {
-    struct PartsView {
-        /// Just a namespace
-    }
+    /// Just a namespace
 }
+
+// MARK: Watch Status
 
 extension PartsView {
     
@@ -41,18 +41,46 @@ extension View {
     }
 }
 
+// MARK: Watch Toggle
 
 extension PartsView {
+    
+    /// A Button to toggle the watched status of a Kodi item
+    /// - Note: Don't add a buttonstyle, else it will not work as context menu
+    struct WatchedToggle: View {
+        /// The item we want to toggle
+        @Binding var item: MediaItem
+        /// The View
+        var body: some View {
+                Button(action: {
+                    item.togglePlayedState()
+                }, label: {
+                    /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
+                    Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
+                        .labelStyle(LabelStyles.DetailsItem())
+                })
+        }
+    }
+}
+
+// MARK: Context Menu
+
+extension PartsView {
+    
+    /// View Modifier to show a Context Menu
     struct ContextMenuViewModifier: ViewModifier {
         /// The Kodi media item
         @Binding var item: MediaItem
+        /// Add a Context Menu
+        /// - Parameter content: The content of the View
+        /// - Returns: A new View with a Context Menu added
         func body(content: Content) -> some View {
             content
                 .contextMenu {
                     WatchedToggle(item: $item)
-                    /// The cancel button, because pressing 'menu' does not go back
+                    /// - Note: Add a cancel button, because pressing 'menu' does not go back a View
                     Button(action: {
-                        //
+                        ///  No action needed
                     }, label: {
                         Text("Cancel")
                     })
@@ -62,28 +90,10 @@ extension PartsView {
 }
 
 extension View {
-    func itemContextMenu(for item: Binding<MediaItem>) -> some View {
-        modifier(PartsView.ContextMenuViewModifier(item: item))
-    }
-}
-
-extension PartsView {
     
-    /// A Button to toggle the watched status of a Kodi item
-    /// Don't add an buttonstyle, else it will not work as contets menu
-    struct WatchedToggle: View {
-        /// The item we want to toggle
-        @Binding var item: MediaItem
-        /// The View
-        var body: some View {
-                Button(action: {
-                    item.togglePlayedState()
-                }, label: {
-                    //Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
-                    Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
-                        .labelStyle(LabelStyles.DetailsItem())
-                })
-        }
+    /// Shortcut for  ``PartsView/ContextMenuViewModifier``
+    func contextMenu(for item: Binding<MediaItem>) -> some View {
+        modifier(PartsView.ContextMenuViewModifier(item: item))
     }
 }
 

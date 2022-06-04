@@ -21,6 +21,7 @@ struct MoviesView: View {
     /// The View
     var body: some View {
         HStack(alignment: .top) {
+            // MARK: Sidebar
             VStack {
                 Button(action: {
                     hideWatched.toggle()
@@ -29,14 +30,14 @@ struct MoviesView: View {
                         .padding()
                 })
                 .buttonStyle(.card)
-                /// Don't animate the button
+                /// - Note: Don't animate the button
                 .transaction { transaction in
                     transaction.animation = nil
                 }
                 Text("\(movies.count)" + (hideWatched ? " unwatched" : "") + " movies")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                /// Show selected item info
+                // MARK: Show selected item info
                 if let item = selectedItem {
                     VStack {
                         Text(item.title)
@@ -60,6 +61,7 @@ struct MoviesView: View {
             }
             .frame(width: 500)
             .focusSection()
+            // MARK: Movie Grid
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach($movies) { $movie in
@@ -79,7 +81,8 @@ struct MoviesView: View {
                         .buttonStyle(.card)
                         .padding()
                         .focused($selectedItem, equals: movie)
-                        .itemContextMenu(for: $movie)
+                        /// - Note: Context Menu must go after the Button Style or else it does not work...
+                        .contextMenu(for: $movie)
                         .zIndex(movie == selectedItem ? 2 : 1)
                     }
                 }

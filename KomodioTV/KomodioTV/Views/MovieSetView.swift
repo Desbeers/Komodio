@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+//A View for a set of Movie items
 struct MovieSetView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -46,6 +47,8 @@ struct MovieSetView: View {
 }
 
 extension MovieSetView {
+    
+    /// A View for one Movie in a Movie Set
     struct Movie: View {
         @Binding var movie: MediaItem
         var body: some View {

@@ -92,10 +92,10 @@
 			children = (
 				D749AF3F2815B06500A684C8 /* Views */,
 				D749AF232815A7AD00A684C8 /* KomodioTVApp.swift */,
+				D7C406132835860100913078 /* AppState.swift */,
 				D749AF272815A7AF00A684C8 /* Assets.xcassets */,
 				D749AF312815A8AC00A684C8 /* LaunchScreen.storyboard */,
 				D749AF292815A7AF00A684C8 /* Preview Content */,
-				D7C406132835860100913078 /* AppState.swift */,
 			);
 			path = KomodioTV;
 			sourceTree = "<group>";

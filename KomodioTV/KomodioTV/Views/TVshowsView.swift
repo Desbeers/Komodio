@@ -63,11 +63,12 @@ struct TVshowsView: View {
                         .buttonStyle(.card)
                         .padding()
                         .focused($selectedItem, equals: tvshow)
-                        .itemContextMenu(for: $tvshow)
+                        /// - Note: Context Menu must go after the Button Style or else it does not work...
+                        .contextMenu(for: $tvshow)
                         .zIndex(tvshow == selectedItem ? 2 : 1)
                     }
                 }
-                /// Don't animate the grid; posters will 'fly'...
+                /// - Note: Don't animate the grid; posters will 'fly'...
                 .transaction { transaction in
                     transaction.animation = nil
                 }

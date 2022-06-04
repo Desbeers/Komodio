@@ -102,6 +102,8 @@ extension EpisodesView {
                             .buttonStyle(.card)
                             .padding()
                             .padding(.horizontal)
+                            /// - Note: Context Menu must go after the Button Style or else it does not work...
+                            .contextMenu(for: $episode)
                         }
                     }
                     .padding(.horizontal, 100)

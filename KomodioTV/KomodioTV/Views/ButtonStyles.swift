@@ -7,14 +7,11 @@
 
 import SwiftUI
 
+/// A collection of Button styles
 struct ButtonStyles {
-
+    /// Just a Namespace here...
 }
 
 extension ButtonStyles {
-    
-    
-    
-    
-    
+
 }

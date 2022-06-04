@@ -49,7 +49,8 @@ struct ContentView: View {
             }
         }
         .background(ArtView.SelectionBackground(item: appState.selection))
-        .onChange(of: selectedTab) { tab in
+        /// - Note: Reset the selected item when moving to another tab
+        .onChange(of: selectedTab) { _ in
             appState.selection = nil
         }
     }
