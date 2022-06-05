@@ -18,7 +18,7 @@ struct TVshowsView: View {
     @FocusState var selectedItem: MediaItem?
     /// Hide watched
     @AppStorage("hideWatched") private var hideWatched: Bool = false
-    /// The View
+    /// The body of this View
     var body: some View {
         HStack(alignment: .top) {
             VStack {
@@ -81,7 +81,7 @@ struct TVshowsView: View {
         .onChange(of: hideWatched) { _ in
             tvshows = getTVshows()
         }
-        .modifier(ViewModifierSelection(selectedItem: selectedItem))
+        .setSelection(of: selectedItem)
     }
     
     /// Get the list of tv shows

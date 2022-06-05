@@ -8,19 +8,19 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-//A View for a set of Movie items
+/// A View for a set of Movie items
 struct MovieSetView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The AppState
     @EnvironmentObject var appState: AppState
-    /// The Set item for this View
+    /// The Set item to show in this View
     let set: MediaItem
     /// The focused item
-    @FocusState var selectedItem: MediaItem?
+    @FocusState private var selectedItem: MediaItem?
     /// The movies to show
     @State private var movies: [MediaItem] = []
-    /// The View
+    /// The body of this View
     var body: some View {
         VStack {
             /// Header
@@ -31,7 +31,7 @@ struct MovieSetView: View {
             if !movies.isEmpty {
               TabView {
                 ForEach($movies) { movie in
-                    Movie(movie: movie)
+                    MovieItem(movie: movie)
                 }
               }
               .tabViewStyle(.page)
@@ -48,14 +48,17 @@ struct MovieSetView: View {
 
 extension MovieSetView {
     
-    /// A View for one Movie in a Movie Set
-    struct Movie: View {
+    /// A View for one Movie item in a Movie Set
+    struct MovieItem: View {
+        /// The Movie item to show in this View
         @Binding var movie: MediaItem
+        /// The body of this View
         var body: some View {
             NavigationLink(destination: DetailsView(item: $movie)) {
                 HStack(alignment: .top) {
                     ArtView.Poster(item: movie)
                         .cornerRadius(6)
+                        .watchStatus(of: $movie)
                     VStack(alignment: .leading) {
                         Text(movie.title)
                             .font(.title2)
@@ -70,6 +73,8 @@ extension MovieSetView {
                 .frame(width: UIScreen.main.bounds.width - 300)
             }
             .buttonStyle(.card)
+            /// - Note: Context Menu must go after the Button Style or else it does not work...
+            .contextMenu(for: $movie)
         }
     }
 }

@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 struct DetailsView: View {
     /// The media item for the details
     @Binding var item: MediaItem
-    /// The View
+    /// The body of this View
     var body: some View {
         ZStack {
             BackgroundView(item: item)
@@ -40,15 +40,15 @@ struct DetailsView: View {
                                     /// Cast details
                                     if !item.cast.isEmpty {
                                         VStack(alignment: .leading) {
-                                        //CastView(cast: item.cast)
-                                        let cast = item.cast.map(\.name)
-                                        Text("Cast:")
-                                            .font(.callout)
-                                            .padding(.top)
-                                        Text(cast.joined(separator: ", "))
-                                            .font(.caption)
-                                            .padding(.horizontal)
-                                    }
+                                            //CastView(cast: item.cast)
+                                            let cast = item.cast.map(\.name)
+                                            Text("Cast:")
+                                                .font(.callout)
+                                                .padding(.top)
+                                            Text(cast.joined(separator: ", "))
+                                                .font(.caption)
+                                                .padding(.horizontal)
+                                        }
                                     }
                                     /// Stream details
                                     HStack {
@@ -119,7 +119,7 @@ extension DetailsView {
                     HStack(alignment: .bottom) {
                         NavigationLink(destination: PlayerView(video: $item)) {
                             Label("Play", systemImage: "play.fill")
-                                .labelStyle(LabelStyles.DetailsItem())
+                                .labelStyle(LabelStyles.DetailsButton())
                         }
                         .buttonStyle(.card)
                         VStack(alignment: .leading, spacing: 5) {

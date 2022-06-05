@@ -50,14 +50,14 @@ extension PartsView {
     struct WatchedToggle: View {
         /// The item we want to toggle
         @Binding var item: MediaItem
-        /// The View
+        /// The body of this View
         var body: some View {
                 Button(action: {
                     item.togglePlayedState()
                 }, label: {
                     /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
                     Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
-                        .labelStyle(LabelStyles.DetailsItem())
+                        .labelStyle(LabelStyles.DetailsButton())
                 })
         }
     }
@@ -96,6 +96,40 @@ extension View {
         modifier(PartsView.ContextMenuViewModifier(item: item))
     }
 }
+
+// MARK: Selected Media Item
+
+extension PartsView {
+    
+    /// Store the selected MediItem in the AppState Class
+    struct SelectionViewModifier: ViewModifier {
+        /// The AppState
+        @EnvironmentObject var appState: AppState
+        /// The selected media item
+        let selectedItem: MediaItem?
+        /// The body of this View
+        func body(content: Content) -> some View {
+                content
+                .animation(.default, value: selectedItem)
+                .onChange(of: selectedItem) { item in
+                    if item != nil {
+                        appState.selection = item
+                    }
+                }
+        }
+    }
+}
+
+extension View {
+    
+    /// Shortcut for  ``PartsView/SelectionViewModifier``
+    func setSelection(of item: MediaItem?) -> some View {
+        modifier(PartsView.SelectionViewModifier(selectedItem: item))
+    }
+}
+
+
+// MARK: Page Header
 
 extension PartsView {
     struct Header: View {

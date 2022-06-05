@@ -8,14 +8,15 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// A View for Music Videos
 struct MusicVideosView: View {
     /// The artists to show
     @State private var artists: [MediaItem] = []
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 340))]
-    /// The focused item
-    @FocusState var selectedItem: MediaItem?
-    /// The View
+    private let grid = [GridItem(.adaptive(minimum: 340))]
+    /// The focused media item
+    @FocusState private var selectedItem: MediaItem?
+    /// The body of this View
     var body: some View {
         VStack {
             ScrollView {
@@ -36,7 +37,7 @@ struct MusicVideosView: View {
                 }
             }
         }
-        .background(ArtView.SelectionBackground(item: selectedItem))
+        .setSelection(of: selectedItem)
         .animation(.default, value: selectedItem)
         .task {
             artists = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideoArtist))
@@ -46,7 +47,9 @@ struct MusicVideosView: View {
 
 extension MusicVideosView {
     
-    /// A View for all music videos from one artist
+    /// A View for all music items from one artist
+    ///
+    /// - An item can be a video or a link to an album
     struct Artist: View {
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
@@ -70,7 +73,7 @@ extension MusicVideosView {
         }
         /// Show details
         @State var showDetail: Bool = false
-        /// The View
+        /// The body of this View
         var body: some View {
             VStack {
                 /// Header
@@ -78,6 +81,7 @@ extension MusicVideosView {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 0) {
                         ForEach($items) { $item in
+                            /// - Note: `NavigationLink` is in a `Group` because it cannot have a 'dynamic' destination
                             Group {
                                 if item.album.isEmpty {
                                     NavigationLink(destination: DetailsView(item: $item)) {
@@ -123,6 +127,7 @@ extension MusicVideosView {
         }
     }
     
+    /// A View to show a Music Album
     struct Album: View {
         /// The album who's videos to show
         let album: MediaItem
@@ -132,7 +137,7 @@ extension MusicVideosView {
         @FocusState var selectedItem: MediaItem?
         /// Define the grid layout
         let grid = [GridItem(.adaptive(minimum: 300))]
-        /// The View
+        /// The body of this View
         var body: some View {
             VStack {
                 ScrollView {

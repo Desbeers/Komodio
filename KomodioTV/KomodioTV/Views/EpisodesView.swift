@@ -18,7 +18,7 @@ struct EpisodesView: View {
     @State private var seasons: [Int] = []
     /// The selected season tab
     @State private var selectedTab: Int = 1
-    /// The View
+    /// The body of this View
     var body: some View {
         VStack {
             /// Show seasons on page tabs if we have more than one season
@@ -56,7 +56,7 @@ extension EpisodesView {
         /// The Episode items to show in this view
         //@State private var episodes: [MediaItem] = []
         @State var episodes: [MediaItem]
-        /// The View
+        /// The body of this View
         var body: some View {
             HStack(spacing: 0) {
                 // MARK: Display the season cover

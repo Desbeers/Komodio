@@ -8,17 +8,23 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A View for Movie items
+/// A SwiftUI View for Movie items
+///
+/// This View will show all movies from the Kodi database.
+///
+/// - A 'toggle' can hide the watched movies.
+/// - The movies are sorted by title.
+/// - Movies that are part of a Movie Set will be grouped together and linked to ``MovieSetView``.
 struct MoviesView: View {
-    /// The movies to show
+    /// The movies to show; loaded by a 'Task'.
     @State private var movies: [MediaItem] = []
     /// Define the grid layout
-    let grid = [GridItem(.adaptive(minimum: 300))]
+    private let grid = [GridItem(.adaptive(minimum: 300))]
     /// The focused item
-    @FocusState var selectedItem: MediaItem?
-    /// Hide watched
+    @FocusState private var selectedItem: MediaItem?
+    /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
-    /// The View
+    /// The body of this View
     var body: some View {
         HStack(alignment: .top) {
             // MARK: Sidebar
@@ -30,14 +36,14 @@ struct MoviesView: View {
                         .padding()
                 })
                 .buttonStyle(.card)
-                /// - Note: Don't animate the button
+                /// - Remark: Don't animate the button; it is ugly
                 .transaction { transaction in
                     transaction.animation = nil
                 }
                 Text("\(movies.count)" + (hideWatched ? " unwatched" : "") + " movies")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                // MARK: Show selected item info
+                // MARK: Selected item info
                 if let item = selectedItem {
                     VStack {
                         Text(item.title)
@@ -46,11 +52,12 @@ struct MoviesView: View {
                             .font(.caption)
                         Divider()
                         Text(item.description)
-                        /// If the item is a set; list all movies that is part of this set
+                        /// - Note: If the item is a movie set item; list all movies that is part of this set
                         if item.movieSetID != 0 {
                             ForEach(KodiConnector.shared.media.filter { $0.media == .movie && $0.movieSetID == item.movieSetID}) { movie in
                                 Label(movie.title, systemImage: "film")
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .labelStyle(LabelStyles.MovieSet())
                             }
                         }
                     }
@@ -60,11 +67,13 @@ struct MoviesView: View {
                 }
             }
             .frame(width: 500)
+            /// - Note: Make the section focussable so we can reach the 'watched' toggle-button
             .focusSection()
             // MARK: Movie Grid
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach($movies) { $movie in
+                        /// - Note: `NavigationLink` is in a `Group` because it cannot have a 'dynamic' destination
                         Group {
                             if movie.movieSetID == 0 {
                                 NavigationLink(destination: DetailsView(item: $movie)) {
@@ -99,7 +108,7 @@ struct MoviesView: View {
         .onChange(of: hideWatched) { _ in
             movies = getMovies()
         }
-        .modifier(ViewModifierSelection(selectedItem: selectedItem))
+        .setSelection(of: selectedItem)
     }
     
     /// Get the list of movies

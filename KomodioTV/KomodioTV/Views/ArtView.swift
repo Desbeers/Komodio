@@ -17,7 +17,7 @@ extension ArtView {
     struct Poster: View {
         /// The Kodi item
         let item: MediaItem
-        /// The View
+        /// The body of this View
         var body: some View {
             switch item.media {
             case .episode:
@@ -58,7 +58,7 @@ extension ArtView {
     struct MusicVideoIcon: View {
         /// The Kodi item
         let item: MediaItem
-        /// The View
+        /// The body of this View
         var body: some View {
             AsyncImage(url: URL(string: item.thumbnail)) { image in
                 image

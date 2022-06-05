@@ -14,8 +14,8 @@ struct LabelStyles {
 
 extension LabelStyles {
     
-    /// Label style for a Grid item
-    struct DetailsItem: LabelStyle {
+    /// Label style for a DetailsView Button
+    struct DetailsButton: LabelStyle {
         @Environment(\.isFocused) var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
             HStack(spacing: 0) {
@@ -30,4 +30,22 @@ extension LabelStyles {
             .opacity(focused ? 1 : 0.8)
         }
     }
+
+    /// Label style for a MovieSet Movie
+    struct MovieSet: LabelStyle {
+        @Environment(\.isFocused) var focused: Bool
+        func makeBody(configuration: Configuration) -> some View {
+            HStack(alignment: .top, spacing: 0) {
+                configuration.icon
+                    .padding(.trailing)
+                configuration.title
+            }
+//            .padding(.horizontal, 40)
+//            .frame(height: 100)
+//            .foregroundColor(.black)
+//            .background(.white)
+//            .opacity(focused ? 1 : 0.8)
+        }
+    }
+
 }

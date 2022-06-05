@@ -15,7 +15,7 @@ struct SearchView: View {
     @State private var movies: [MediaItem] = []
     /// Define the grid layout
     let grid = [GridItem(.adaptive(minimum: 300))]
-    /// The View
+    /// The body of this View
     var body: some View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 0) {

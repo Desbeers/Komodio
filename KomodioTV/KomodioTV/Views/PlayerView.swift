@@ -19,7 +19,7 @@ struct PlayerView: View {
     /// The presentation mode
     /// - Note: Need this to go back a View on iOS after the video has finnished
     @Environment(\.presentationMode) var presentationMode
-    /// The View
+    /// The body of this View
     var body: some View {
         Wrapper(video: video) {
             /// Mark the video as played
@@ -32,7 +32,7 @@ struct PlayerView: View {
 
 extension PlayerView {
     
-    /// A wrapper View around the ``VideoPlayer`` so we can observe it
+    /// A wrapper View around the `VideoPlayer` so we can observe it
     /// and act after a video has finnised playing
     struct Wrapper: View {
         /// The video we want to play
@@ -44,7 +44,7 @@ extension PlayerView {
             //self.video = video
             _playerModel = StateObject(wrappedValue: PlayerModel(video: video, endAction: endAction))
         }
-        /// The View
+        /// The body of this View
         var body: some View {
             VideoPlayer(player: playerModel.player)
                 .task {

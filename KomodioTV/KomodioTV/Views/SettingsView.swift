@@ -37,7 +37,7 @@ extension SettingsView {
         let host: HostItem = HostItem()
         /// The values of the form
         @State var values = HostItem()
-        /// The View
+        /// The body of this View
         var body: some View {
             VStack {
             Text("Your Kodi host")
@@ -94,7 +94,7 @@ extension SettingsView {
         }
         /// The text underneath a form item
         /// - Parameter text: The text to display
-        /// - Returns: A ``Text`` view
+        /// - Returns: A `Text` View
         func footer(text: String) -> some View {
             Text(text)
                 .font(.caption)

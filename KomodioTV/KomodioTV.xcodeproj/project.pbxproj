@@ -28,7 +28,6 @@
 		D7AFBAA4281BC827001CCD89 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBAA3281BC827001CCD89 /* SettingsView.swift */; };
 		D7AFBAA6281BC877001CCD89 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBAA5281BC877001CCD89 /* SearchView.swift */; };
 		D7C406142835860100913078 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C406132835860100913078 /* AppState.swift */; };
-		D7C4061628364A3500913078 /* Modifierers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C4061528364A3500913078 /* Modifierers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +53,6 @@
 		D7AFBAA3281BC827001CCD89 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D7AFBAA5281BC877001CCD89 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D7C406132835860100913078 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		D7C4061528364A3500913078 /* Modifierers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifierers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,12 +126,11 @@
 				D749AF432815B10100A684C8 /* ArtView.swift */,
 				D749AF452815B8B200A684C8 /* DetailsView.swift */,
 				D7AFBA992815CB17001CCD89 /* PlayerView.swift */,
-				D7AFBAA1281AD29E001CCD89 /* PartsView.swift */,
-				D7AFBAA3281BC827001CCD89 /* SettingsView.swift */,
 				D7AFBAA5281BC877001CCD89 /* SearchView.swift */,
+				D7AFBAA3281BC827001CCD89 /* SettingsView.swift */,
+				D7AFBAA1281AD29E001CCD89 /* PartsView.swift */,
 				D760113A281EEEF20020845A /* LabelStyles.swift */,
 				D7601138281EED6C0020845A /* ButtonStyles.swift */,
-				D7C4061528364A3500913078 /* Modifierers.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,7 +228,6 @@
 				D749AF382815AC5400A684C8 /* TVshowsView.swift in Sources */,
 				D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */,
 				D7AFBAA4281BC827001CCD89 /* SettingsView.swift in Sources */,
-				D7C4061628364A3500913078 /* Modifierers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

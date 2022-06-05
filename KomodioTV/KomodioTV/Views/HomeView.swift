@@ -16,7 +16,7 @@ struct HomeView: View {
     @State var items = HomeItems()
     /// The focused item
     @FocusState var selectedItem: MediaItem?
-    /// The View
+    /// The body of this View
     var body: some View {
         ScrollView {
             // MARK: Unwatched movies
@@ -98,7 +98,7 @@ struct HomeView: View {
         .task {
             items = getHomeItems()
         }
-        .modifier(ViewModifierSelection(selectedItem: selectedItem))
+        .setSelection(of: selectedItem)
         .animation(.default, value: selectedItem)
         .ignoresSafeArea(.all, edges: .horizontal)
     }
