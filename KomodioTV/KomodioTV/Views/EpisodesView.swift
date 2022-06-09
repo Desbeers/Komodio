@@ -10,12 +10,24 @@ import SwiftlyKodiAPI
 
 /// A View for episodes of a TV show
 struct EpisodesView: View {
+    /// The KodiConnector model
+    @EnvironmentObject private var kodi: KodiConnector
     /// The selected TV show for this View
     let tvshow: MediaItem
     /// The episode items to show in this view
-    @State private var episodes: [MediaItem] = []
+    //@State private var episodes: [MediaItem] = []
     /// The seasons to show in this view
-    @State private var seasons: [Int] = []
+    //@State private var seasons: [Int] = []
+    
+    /// The episode items to show in this View
+    private var episodes: [MediaItem] {
+        return kodi.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
+    }
+    /// The seasons to show in this View
+    private var seasons: [Int] {
+        return episodes.unique { $0.season }.map { $0.season }
+    }
+    
     /// The selected season tab
     @State private var selectedTab: Int = 1
     /// The body of this View
@@ -40,10 +52,10 @@ struct EpisodesView: View {
             }
         }
         .background(ArtView.SelectionBackground(item: tvshow))
-        .task {
-            episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
-            seasons = episodes.unique { $0.season }.map { $0.season }
-        }
+//        .task {
+//            episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
+//            seasons = episodes.unique { $0.season }.map { $0.season }
+//        }
     }
 }
 
@@ -55,7 +67,7 @@ extension EpisodesView {
         let tvshow: MediaItem
         /// The Episode items to show in this view
         //@State private var episodes: [MediaItem] = []
-        @State var episodes: [MediaItem]
+        let episodes: [MediaItem]
         /// The body of this View
         var body: some View {
             HStack(spacing: 0) {
@@ -84,8 +96,8 @@ extension EpisodesView {
                 // MARK: Diplay all episodes from the selected season
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach($episodes) { $episode in
-                            NavigationLink(destination: DetailsView(item: $episode)) {
+                        ForEach(episodes) { episode in
+                            NavigationLink(destination: DetailsView(item: episode)) {
                                 HStack(spacing: 0) {
                                     ArtView.Poster(item: episode)
                                         .padding(.trailing)
@@ -97,13 +109,13 @@ extension EpisodesView {
                                     }
                                 }
                                 .frame(width: UIScreen.main.bounds.width - 900, alignment: .leading)
-                                .watchStatus(of: $episode)
+                                .watchStatus(of: episode)
                             }
                             .buttonStyle(.card)
                             .padding()
                             .padding(.horizontal)
                             /// - Note: Context Menu must go after the Button Style or else it does not work...
-                            .contextMenu(for: $episode)
+                            .contextMenu(for: episode)
                         }
                     }
                     .padding(.horizontal, 100)

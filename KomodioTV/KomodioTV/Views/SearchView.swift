@@ -19,8 +19,8 @@ struct SearchView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 0) {
-                ForEach($movies) { $item in
-                    NavigationLink(destination: DetailsView(item: $item)) {
+                ForEach(movies) { item in
+                    NavigationLink(destination: DetailsView(item: item)) {
                         ArtView.Poster(item: item)
                     }
                     .padding()

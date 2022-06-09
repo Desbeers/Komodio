@@ -16,8 +16,14 @@ import SwiftlyKodiAPI
 /// - The movies are sorted by title.
 /// - Movies that are part of a Movie Set will be grouped together and linked to ``MovieSetView``.
 struct MoviesView: View {
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
+    /// The movies to show in this View
+    private var movies: [MediaItem] {
+        kodi.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
+    }
     /// The movies to show; loaded by a 'Task'.
-    @State private var movies: [MediaItem] = []
+    //@State private var movies: [MediaItem] = []
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 300))]
     /// The focused item
@@ -72,18 +78,18 @@ struct MoviesView: View {
             // MARK: Movie Grid
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach($movies) { $movie in
+                    ForEach(movies) { movie in
                         /// - Note: `NavigationLink` is in a `Group` because it cannot have a 'dynamic' destination
                         Group {
                             if movie.movieSetID == 0 {
-                                NavigationLink(destination: DetailsView(item: $movie)) {
+                                NavigationLink(destination: DetailsView(item: movie)) {
                                     ArtView.Poster(item: movie)
-                                        .watchStatus(of: $movie)
+                                        .watchStatus(of: movie)
                                 }
                             } else {
                                 NavigationLink(destination: MovieSetView(set: movie)) {
                                     ArtView.Poster(item: movie)
-                                        .watchStatus(of: $movie)
+                                        .watchStatus(of: movie)
                                 }
                             }
                         }
@@ -91,29 +97,32 @@ struct MoviesView: View {
                         .padding()
                         .focused($selectedItem, equals: movie)
                         /// - Note: Context Menu must go after the Button Style or else it does not work...
-                        .contextMenu(for: $movie)
+                        .contextMenu(for: movie)
                         .zIndex(movie == selectedItem ? 2 : 1)
                     }
                 }
-                /// Don't animate the grid; posters will 'fly'...
-                .transaction { transaction in
-                    transaction.animation = nil
-                }
+//                /// Don't animate the grid; posters will 'fly'...
+//                .transaction { transaction in
+//                    transaction.animation = nil
+//                }
             }
         }
         .animation(.default, value: selectedItem)
-        .task {
-            movies = getMovies()
-        }
-        .onChange(of: hideWatched) { _ in
-            movies = getMovies()
-        }
+        .animation(.default, value: movies)
+//        .task {
+//            movies = getMovies()
+//        }
+//        .onChange(of: hideWatched) { _ in
+//            movies = getMovies()
+//        }
         .setSelection(of: selectedItem)
     }
     
     /// Get the list of movies
     /// - Returns: All movies, optional filtered by watched state
     private func getMovies() -> [MediaItem] {
-        return KodiConnector.shared.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
+        return kodi.media.filter(MediaFilter(media: .movie)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
     }
+    
+
 }

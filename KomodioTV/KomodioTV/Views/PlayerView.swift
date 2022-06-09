@@ -15,7 +15,7 @@ struct PlayerView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The Video item we want to play
-    @Binding var video: MediaItem
+    let video: MediaItem
     /// The presentation mode
     /// - Note: Need this to go back a View on iOS after the video has finnished
     @Environment(\.presentationMode) var presentationMode

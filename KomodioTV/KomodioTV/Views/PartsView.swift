@@ -20,7 +20,7 @@ extension PartsView {
     /// - Note: Movie sets are shown here as well with its own SF symbol
     struct WatchStatusViewModifier: ViewModifier {
         /// The Kodi media item
-        @Binding var item: MediaItem
+        let item: MediaItem
         /// The modifier
         func body(content: Content) -> some View {
             content
@@ -36,7 +36,7 @@ extension PartsView {
 
 extension View {
     /// Shortcut to the ``WatchStatusViewModifier``
-    func watchStatus(of item: Binding<MediaItem>) -> some View {
+    func watchStatus(of item: MediaItem) -> some View {
         modifier(PartsView.WatchStatusViewModifier(item: item))
     }
 }
@@ -49,7 +49,7 @@ extension PartsView {
     /// - Note: Don't add a buttonstyle, else it will not work as context menu
     struct WatchedToggle: View {
         /// The item we want to toggle
-        @Binding var item: MediaItem
+        let item: MediaItem
         /// The body of this View
         var body: some View {
                 Button(action: {
@@ -70,14 +70,14 @@ extension PartsView {
     /// View Modifier to show a Context Menu
     struct ContextMenuViewModifier: ViewModifier {
         /// The Kodi media item
-        @Binding var item: MediaItem
+        let item: MediaItem
         /// Add a Context Menu
         /// - Parameter content: The content of the View
         /// - Returns: A new View with a Context Menu added
         func body(content: Content) -> some View {
             content
                 .contextMenu {
-                    WatchedToggle(item: $item)
+                    WatchedToggle(item: item)
                     /// - Note: Add a cancel button, because pressing 'menu' does not go back a View
                     Button(action: {
                         ///  No action needed
@@ -92,7 +92,7 @@ extension PartsView {
 extension View {
     
     /// Shortcut for  ``PartsView/ContextMenuViewModifier``
-    func contextMenu(for item: Binding<MediaItem>) -> some View {
+    func contextMenu(for item: MediaItem) -> some View {
         modifier(PartsView.ContextMenuViewModifier(item: item))
     }
 }

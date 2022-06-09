@@ -18,8 +18,10 @@ struct MovieSetView: View {
     let set: MediaItem
     /// The focused item
     @FocusState private var selectedItem: MediaItem?
-    /// The movies to show
-    @State private var movies: [MediaItem] = []
+    /// The movies to show in this View
+    private var movies: [MediaItem] {
+        kodi.media.filter(MediaFilter(media: .movie, movieSetID: set.movieSetID))
+    }
     /// The body of this View
     var body: some View {
         VStack {
@@ -30,7 +32,7 @@ struct MovieSetView: View {
             }
             if !movies.isEmpty {
               TabView {
-                ForEach($movies) { movie in
+                ForEach(movies) { movie in
                     MovieItem(movie: movie)
                 }
               }
@@ -40,9 +42,6 @@ struct MovieSetView: View {
         }
         .background(ArtView.SelectionBackground(item: set))
         .animation(.default, value: selectedItem)
-        .task {
-            movies = KodiConnector.shared.media.filter(MediaFilter(media: .movie, movieSetID: set.movieSetID))
-        }
     }
 }
 
@@ -51,14 +50,14 @@ extension MovieSetView {
     /// A View for one Movie item in a Movie Set
     struct MovieItem: View {
         /// The Movie item to show in this View
-        @Binding var movie: MediaItem
+        let movie: MediaItem
         /// The body of this View
         var body: some View {
-            NavigationLink(destination: DetailsView(item: $movie)) {
+            NavigationLink(destination: DetailsView(item: movie)) {
                 HStack(alignment: .top) {
                     ArtView.Poster(item: movie)
                         .cornerRadius(6)
-                        .watchStatus(of: $movie)
+                        .watchStatus(of: movie)
                     VStack(alignment: .leading) {
                         Text(movie.title)
                             .font(.title2)
@@ -74,7 +73,7 @@ extension MovieSetView {
             }
             .buttonStyle(.card)
             /// - Note: Context Menu must go after the Button Style or else it does not work...
-            .contextMenu(for: $movie)
+            .contextMenu(for: movie)
         }
     }
 }
