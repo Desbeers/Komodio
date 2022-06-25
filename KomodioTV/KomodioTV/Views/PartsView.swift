@@ -59,6 +59,7 @@ extension PartsView {
                     Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
                         .labelStyle(LabelStyles.DetailsButton())
                 })
+            Text("\(item.playcount)")
         }
     }
 }

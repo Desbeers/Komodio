@@ -95,14 +95,12 @@ struct MoviesView: View {
                         .zIndex(movie == selectedItem ? 2 : 1)
                     }
                 }
-                /// Don't animate the grid; posters will 'fly'...
-                .transaction { transaction in
-                    transaction.animation = nil
-                }
             }
         }
         .animation(.default, value: selectedItem)
+        .animation(.default, value: movies)
         .task {
+            logger("Movie TASK")
             movies = getMovies()
         }
         .onChange(of: hideWatched) { _ in

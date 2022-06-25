@@ -68,13 +68,10 @@ struct TVshowsView: View {
                         .zIndex(tvshow == selectedItem ? 2 : 1)
                     }
                 }
-                /// - Note: Don't animate the grid; posters will 'fly'...
-                .transaction { transaction in
-                    transaction.animation = nil
-                }
             }
         }
         .animation(.default, value: selectedItem)
+        .animation(.default, value: tvshows)
         .task {
             tvshows = getTVshows()
         }
