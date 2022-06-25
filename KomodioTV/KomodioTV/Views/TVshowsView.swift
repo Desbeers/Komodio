@@ -10,17 +10,13 @@ import SwiftlyKodiAPI
 
 /// A View for TV show items
 struct TVshowsView: View {
-    /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
-    /// The tv shows to show in this View
-    private var tvshows: [MediaItem] {
-        kodi.media.filter(MediaFilter(media: .tvshow)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
-    }
+    /// The tv shows to show
+    @State private var tvshows: [MediaItem] = []
     /// Define the grid layout
-    private let grid = [GridItem(.adaptive(minimum: 300))]
+    let grid = [GridItem(.adaptive(minimum: 300))]
     /// The focused item
-    @FocusState private var selectedItem: MediaItem?
-    /// Hide watched movie items
+    @FocusState var selectedItem: MediaItem?
+    /// Hide watched
     @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The body of this View
     var body: some View {
@@ -59,23 +55,38 @@ struct TVshowsView: View {
             .focusSection()
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach(tvshows) { tvshow in
+                    ForEach($tvshows) { $tvshow in
                         NavigationLink(destination: EpisodesView(tvshow: tvshow)) {
                             ArtView.Poster(item: tvshow)
-                                .watchStatus(of: tvshow)
+                                .watchStatus(of: $tvshow)
                         }
                         .buttonStyle(.card)
                         .padding()
                         .focused($selectedItem, equals: tvshow)
                         /// - Note: Context Menu must go after the Button Style or else it does not work...
-                        .contextMenu(for: tvshow)
+                        .contextMenu(for: $tvshow)
                         .zIndex(tvshow == selectedItem ? 2 : 1)
                     }
+                }
+                /// - Note: Don't animate the grid; posters will 'fly'...
+                .transaction { transaction in
+                    transaction.animation = nil
                 }
             }
         }
         .animation(.default, value: selectedItem)
-        .animation(.default, value: tvshows)
+        .task {
+            tvshows = getTVshows()
+        }
+        .onChange(of: hideWatched) { _ in
+            tvshows = getTVshows()
+        }
         .setSelection(of: selectedItem)
+    }
+    
+    /// Get the list of tv shows
+    /// - Returns: All TV shows, optional filtered by watched state
+    private func getTVshows() -> [MediaItem] {
+        return KodiConnector.shared.media.filter(MediaFilter(media: .tvshow)).filter { $0.playcount < (hideWatched ? 1 : 1000) }
     }
 }

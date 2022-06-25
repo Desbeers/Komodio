@@ -10,12 +10,8 @@ import SwiftlyKodiAPI
 
 /// A View for Music Videos
 struct MusicVideosView: View {
-    /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
     /// The artists to show
-    private var artists: [MediaItem] {
-        kodi.media.filter(MediaFilter(media: .musicVideoArtist))
-    }
+    @State private var artists: [MediaItem] = []
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 340))]
     /// The focused media item
@@ -43,6 +39,9 @@ struct MusicVideosView: View {
         }
         .setSelection(of: selectedItem)
         .animation(.default, value: selectedItem)
+        .task {
+            artists = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideoArtist))
+        }
     }
 }
 
@@ -53,13 +52,11 @@ extension MusicVideosView {
     /// - An item can be a video or a link to an album
     struct Artist: View {
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @EnvironmentObject var kodi: KodiConnector
         /// The artist who's videos to show
         let artist: MediaItem
-        /// The items to show in this View
-        private var items: [MediaItem] {
-            kodi.media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))
-        }
+        /// The items to show
+        @State private var items: [MediaItem] = []
         /// The focused item
         @FocusState var selectedItem: MediaItem?
         /// The subtitle for this View
@@ -83,24 +80,21 @@ extension MusicVideosView {
                 PartsView.Header(title: artist.title, subtitle: subtitle)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 0) {
-                        ForEach(items) { item in
+                        ForEach($items) { $item in
                             /// - Note: `NavigationLink` is in a `Group` because it cannot have a 'dynamic' destination
                             Group {
                                 if item.album.isEmpty {
-                                    NavigationLink(destination: DetailsView(item: item)) {
+                                    NavigationLink(destination: DetailsView(item: $item)) {
                                         ArtView.Poster(item: item)
-                                            .watchStatus(of: item)
+                                            .watchStatus(of: $item)
                                     }
-                                    .buttonStyle(.card)
-                                    /// - Note: Context Menu must go after the Button Style or else it does not work...
-                                    .contextMenu(for: item)
                                 } else {
                                     NavigationLink(destination: Album(album: item)) {
                                         ArtView.Poster(item: item)
                                     }
-                                    .buttonStyle(.card)
                                 }
                             }
+                            .buttonStyle(.card)
                             .padding()
                             .focused($selectedItem, equals: item)
                             .zIndex(item == selectedItem ? 2 : 1)
@@ -127,19 +121,18 @@ extension MusicVideosView {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(.thinMaterial)
             }
+            .task {
+                items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: artist.artists))
+            }
         }
     }
     
     /// A View to show a Music Album
     struct Album: View {
-        /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
         /// The album who's videos to show
         let album: MediaItem
-        /// The items to show in this View
-        private var items: [MediaItem] {
-            kodi.media.filter(MediaFilter(media: .musicVideo, artist: album.artists, album: album))
-        }
+        /// The items to show
+        @State private var items: [MediaItem] = []
         /// The focused item
         @FocusState var selectedItem: MediaItem?
         /// Define the grid layout
@@ -151,19 +144,17 @@ extension MusicVideosView {
                     /// Header
                     PartsView.Header(title: album.artists.joined(separator: " & "), subtitle: album.album)
                     LazyVGrid(columns: grid, spacing: 0) {
-                        ForEach(items) { item in
-                            NavigationLink(destination: DetailsView(item: item)) {
+                        ForEach($items) { $item in
+                            NavigationLink(destination: DetailsView(item: $item)) {
                                 VStack {
                                     ArtView.MusicVideoIcon(item: item)
                                     Text(item.title)
                                         .font(.caption)
                                 }
-                                .watchStatus(of: item)
+                                .watchStatus(of: $item)
                             }
                             .buttonStyle(.card)
                             .padding()
-                            /// - Note: Context Menu must go after the Button Style or else it does not work...
-                            .contextMenu(for: item)
                             .focused($selectedItem, equals: item)
                             .zIndex(item == selectedItem ? 2 : 1)
                         }
@@ -172,6 +163,9 @@ extension MusicVideosView {
             }
             .background(ArtView.SelectionBackground(item: album))
             .animation(.default, value: selectedItem)
+            .task {
+                items = KodiConnector.shared.media.filter(MediaFilter(media: .musicVideo, artist: album.artists, album: album))
+            }
         }
     }
 }

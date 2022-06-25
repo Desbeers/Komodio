@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 /// View details for a media item
 struct DetailsView: View {
     /// The media item for the details
-    let item: MediaItem
+    @Binding var item: MediaItem
     /// The body of this View
     var body: some View {
         ZStack {
@@ -19,7 +19,7 @@ struct DetailsView: View {
             ScrollView {
                 /// Top row
                 VStack(spacing: 0) {
-                    TopView(item: item)
+                    TopView(item: $item)
                         .frame(height: UIScreen.main.bounds.height)
                         .focusSection()
                     /// Details row
@@ -27,7 +27,7 @@ struct DetailsView: View {
                         Color.black.ignoresSafeArea()
                         VStack(alignment: .leading) {
                             HStack(alignment: .top) {
-                                PosterView(item: item)
+                                PosterView(item: $item)
                                 VStack(alignment: .leading) {
                                     if !item.subtitle.isEmpty {
                                         Text(item.subtitle)
@@ -35,7 +35,7 @@ struct DetailsView: View {
                                             .padding(.bottom)
                                     }
                                     if !item.description.isEmpty {
-                                        Text(item.description)
+                                        AboutView(item: $item)
                                     }
                                     /// Cast details
                                     if !item.cast.isEmpty {
@@ -83,7 +83,7 @@ struct DetailsView: View {
                                             }
                                         }
                                     }
-                                    ActionsView(item: item)
+                                    ActionsView(item: $item)
                                         .padding(.vertical)
                                 }
                                 /// Make sure the poster is always shown
@@ -103,7 +103,7 @@ struct DetailsView: View {
 extension DetailsView {
     
     struct TopView: View {
-        let item: MediaItem
+        @Binding var item: MediaItem
         
         @Environment(\.isFocused) var envFocused: Bool
         var body: some View {
@@ -117,7 +117,7 @@ extension DetailsView {
                     Spacer()
                     
                     HStack(alignment: .bottom) {
-                        NavigationLink(destination: PlayerView(video: item)) {
+                        NavigationLink(destination: PlayerView(video: $item)) {
                             Label("Play", systemImage: "play.fill")
                                 .labelStyle(LabelStyles.DetailsButton())
                         }
@@ -136,23 +136,31 @@ extension DetailsView {
         }
     }
     
-    struct ActionsView: View {
-        let item: MediaItem
+    struct AboutView: View {
+        @Binding var item: MediaItem
+        @Environment(\.isFocused) var isFocused: Bool
         var body: some View {
-            PartsView.WatchedToggle(item: item)
+            Text(item.description)
+            
+        }
+    }
+    
+    struct ActionsView: View {
+        @Binding var item: MediaItem
+        var body: some View {
+            PartsView.WatchedToggle(item: $item)
                 .buttonStyle(.card)
         }
     }
     
     struct PosterView: View {
-        let item: MediaItem
+        @Binding var item: MediaItem
         var body: some View {
             AsyncImage(url: URL(string: item.poster)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(8)
-                    .watchStatus(of: item)
             } placeholder: {
                 Color.gray
             }
