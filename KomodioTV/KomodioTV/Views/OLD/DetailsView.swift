@@ -117,11 +117,11 @@ extension DetailsView {
                     Spacer()
                     
                     HStack(alignment: .bottom) {
-                        NavigationLink(destination: PlayerView(video: $item)) {
-                            Label("Play", systemImage: "play.fill")
-                                .labelStyle(LabelStyles.DetailsButton())
-                        }
-                        .buttonStyle(.card)
+//                        NavigationLink(destination: PlayerView(video: $item)) {
+//                            Label("Play", systemImage: "play.fill")
+//                                .labelStyle(LabelStyles.DetailsButton())
+//                        }
+//                        .buttonStyle(.card)
                         VStack(alignment: .leading, spacing: 5) {
                             Text(item.title)
                                 .font(.title2)

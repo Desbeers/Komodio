@@ -10,12 +10,10 @@ import SwiftlyKodiAPI
 
 /// A View for episodes of a TV show
 struct EpisodesView: View {
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
     /// The selected TV show for this View
-    let tvshow: Video.Details.TVShow
+    let tvshow: MediaItem
     /// The episode items to show in this view
-    @State private var episodes: [Video.Details.Episode] = []
+    @State private var episodes: [MediaItem] = []
     /// The seasons to show in this view
     @State private var seasons: [Int] = []
     /// The selected season tab
@@ -41,8 +39,9 @@ struct EpisodesView: View {
                 Season(tvshow: tvshow, episodes: episodes)
             }
         }
-        .task(id: kodi.library.episodes) {
-            episodes = kodi.library.episodes.filter({$0.tvshowID == tvshow.tvshowID})
+        .background(ArtView.SelectionBackground(item: tvshow))
+        .task {
+            episodes = KodiConnector.shared.media.filter(MediaFilter(media: .episode, tvshowID: tvshow.tvshowID))
             seasons = episodes.unique { $0.season }.map { $0.season }
         }
     }
@@ -53,9 +52,10 @@ extension EpisodesView {
     /// A View with all episodes from a TV show season
     struct Season: View {
         /// The TV show
-        let tvshow: Video.Details.TVShow
+        let tvshow: MediaItem
         /// The Episode items to show in this view
-        let episodes: [Video.Details.Episode]
+        //@State private var episodes: [MediaItem] = []
+        @State var episodes: [MediaItem]
         /// The body of this View
         var body: some View {
             HStack(spacing: 0) {
@@ -65,7 +65,7 @@ extension EpisodesView {
                         Text(tvshow.title)
                             .font(.title3)
                         Text(season.season == 0 ? "Specials" : "Season \(season.season)")
-                        AsyncImage(url: URL(string: Files.getFullPath(file: season.art.seasonPoster, type: .art))) { image in
+                        AsyncImage(url: URL(string: season.poster)) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -76,7 +76,7 @@ extension EpisodesView {
                         .frame(width: 400, height: 600)
                         .padding(6)
                         .background(.secondary)
-
+                        
                         .cornerRadius(10)
                     }
                     .padding(.trailing, 100)
@@ -84,27 +84,26 @@ extension EpisodesView {
                 // MARK: Diplay all episodes from the selected season
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(episodes) { episode in
-                            NavigationLink(destination: PlayerView(video: episode)) {
+                        ForEach($episodes) { $episode in
+                            NavigationLink(destination: DetailsView(item: $episode)) {
                                 HStack(spacing: 0) {
-                                    MediaArt.Poster(item: episode)
-                                        .frame(width: 300, height: 450)
+                                    ArtView.Poster(item: episode)
                                         .padding(.trailing)
                                     VStack(alignment: .leading) {
                                         Text(episode.title)
-                                        Text(episode.plot)
+                                        Text(episode.description)
                                             .font(.caption2)
                                             .lineLimit(5)
                                     }
                                 }
                                 .frame(width: UIScreen.main.bounds.width - 900, alignment: .leading)
-                                .watchStatus(of: episode)
+                                .watchStatus(of: $episode)
                             }
                             .buttonStyle(.card)
                             .padding()
                             .padding(.horizontal)
                             /// - Note: Context Menu must go after the Button Style or else it does not work...
-                            .contextMenu(for: episode)
+                            .contextMenu(for: $episode)
                         }
                     }
                     .padding(.horizontal, 100)

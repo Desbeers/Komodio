@@ -13,14 +13,14 @@ struct KomodioTVApp: App {
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector  = .shared
     /// The AppState
-    @StateObject var appState = AppState()
+    //@StateObject var appState = AppState()
     var body: some Scene {
         WindowGroup {
             Group {
                 if kodi.loadingState == .done {
                     ContentView()
                         .environmentObject(kodi)
-                        .environmentObject(appState)
+                        //.environmentObject(appState)
                 } else {
                     Text("Loading...")
                 }
@@ -28,7 +28,7 @@ struct KomodioTVApp: App {
             .preferredColorScheme(.dark)
             .task {
                 if kodi.loadingState == .start {
-                    await kodi.connectToHost(kodiHost: HostItem(ip: "192.168.11.200"))
+                    await kodi.connectToHost(kodiHost: HostItem(ip: "192.168.11.200", media: .video))
                     //await kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
                 }
             }
