@@ -9,50 +9,31 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct DetailsView: View {
-//    init(item: any KodiItem) {
-//        self.item = item
-//        self.kodiItem = item
-//    }
-    
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+
+    /// The item to show
     let item: any KodiItem
-    //@State private var kodiItem: (any KodiItem)?
+    /// The View
     var body: some View {
-        ZStack {
-            BackgroundView(item: item)
-            NavigationView {
+        NavigationView {
+            ZStack {
+                KodiArt.Fanart(item: item)
+                    .frame(width: 1920, height: 1080)
                 ScrollView {
                     /// Top row
                     VStack(spacing: 0) {
                         TopView(item: item)
                             .frame(height: UIScreen.main.bounds.height)
                             .focusSection()
-                        //Details(item: kodiItem == nil ? item : kodiItem)
                         Details(item: item)
                     }
                 }
             }
         }
+        .ignoresSafeArea()
     }
 }
 
 extension DetailsView {
-    struct BackgroundView: View {
-        let item: any KodiItem
-        var body: some View {
-            AsyncImage(url: URL(string: item.media == .episode ? item.poster : Files.getFullPath(file: item.fanart, type: .art))) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                Color.gray
-            }
-            .ignoresSafeArea()
-            .frame(width: 1920, height: 1080)
-        }
-    }
-
     
     struct TopView: View {
         let item: any KodiItem
@@ -63,24 +44,25 @@ extension DetailsView {
                 LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8), .black]),
                                startPoint: .top,
                                endPoint: .bottom)
-                .ignoresSafeArea()
+                //.ignoresSafeArea()
                 .frame(height: 210)
                 VStack {
                     Spacer()
                     
                     HStack(alignment: .bottom) {
-                        PartsView.WatchedToggle(item: item)
-                            .buttonStyle(.card)
+//                        PartsView.WatchedToggle(item: item)
+//                            .buttonStyle(.card)
                         NavigationLink(destination: PlayerView(video: item)) {
                             Label("Play", systemImage: "play.fill")
                                 .labelStyle(LabelStyles.DetailsButton())
                         }
                         .buttonStyle(.card)
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(item.title)
-                                .font(.title2)
-                            Text("Playcount: \(item.playcount)")
-                        }
+                        Text(item.title)
+                            .font(.title)
+//                        VStack(alignment: .leading, spacing: 5) {
+//
+//                            Text("Playcount: \(item.playcount)")
+//                        }
                     }
                     .padding(.horizontal, 80)
                     .padding(.bottom, 80)
@@ -97,10 +79,30 @@ extension DetailsView {
                 Color.black.ignoresSafeArea()
                 VStack(alignment: .leading) {
                     HStack {
-                        PosterView(item: item)
-                        Text(item.title)
-                        PartsView.WatchedToggle(item: item)
-                            .buttonStyle(.card)
+                        KodiArt.Poster(item: item)
+                            .watchStatus(of: item)
+                            .frame(height: 400)
+                            .padding(6)
+                            .background(.secondary)
+                            .cornerRadius(10)
+                        VStack(alignment: .leading) {
+                            switch item {
+                            case let movie as Video.Details.Movie:
+                                MovieDetails(movie: movie)
+                                //            case let tvshow as Video.Details.TVShow:
+                                //                await VideoLibrary.setTVShowDetails(tvshow: tvshow)
+                            case let episode as Video.Details.Episode:
+                                EpisodeDetails(episode: episode)
+                                //            case let musicVideo as Video.Details.MusicVideo:
+                                //                await VideoLibrary.setMusicVideoDetails(musicVideo: musicVideo)
+                                //            case let song as Audio.Details.Song:
+                                //                await AudioLibrary.setSongDetails(song: song)
+                            default:
+                                Text("No details for this item")
+                            }
+                            PartsView.WatchedToggle(item: item)
+                                .buttonStyle(.card)
+                        }
                     }
                 }
                 .padding(.horizontal,80)
@@ -109,22 +111,21 @@ extension DetailsView {
             }
         }
     }
-    
-    struct PosterView: View {
-        let item: any KodiItem
+}
+
+extension DetailsView {
+    struct MovieDetails: View {
+        let movie: Video.Details.Movie
         var body: some View {
-            AsyncImage(url: URL(string: Files.getFullPath(file: item.poster, type: .art))) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(8)
-            } placeholder: {
-                Color.gray
-            }
-            .frame(height: 400)
-            .padding(6)
-            .background(.secondary)
-            .cornerRadius(10)
+            Text(movie.plot)
+        }
+    }
+    struct EpisodeDetails: View {
+        let episode: Video.Details.Episode
+        var body: some View {
+            Text(episode.showTitle)
+            Text("Season \(episode.season), episode \(episode.episode)")
+            Text(episode.plot)
         }
     }
 }

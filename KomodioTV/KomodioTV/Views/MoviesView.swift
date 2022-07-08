@@ -64,7 +64,7 @@ extension MoviesView {
                     isPresented.toggle()
                 }
             }, label: {
-                MediaArt.Poster(item: movie)
+                KodiArt.Poster(item: movie)
                     .frame(width: 300, height: 450)
                     .watchStatus(of: movie)
             })
@@ -84,7 +84,7 @@ extension MoviesView {
         let movieSet: any KodiItem
         var body: some View {
             NavigationLink(destination: MovieSetView(set: movieSet as! Video.Details.MovieSet)) {
-                MediaArt.Poster(item: movieSet)
+                KodiArt.Poster(item: movieSet)
                     .frame(width: 300, height: 450)
                     .watchStatus(of: movieSet)
             }

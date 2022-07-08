@@ -47,7 +47,7 @@ extension TVShowsView {
         let tvshow: Video.Details.TVShow
         var body: some View {
             NavigationLink(destination: EpisodesView(tvshow: tvshow)) {
-                MediaArt.Poster(item: tvshow)
+                KodiArt.Poster(item: tvshow)
                     .frame(width: 300, height: 450)
                     .watchStatus(of: tvshow)
             }
