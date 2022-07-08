@@ -24,7 +24,6 @@ struct MoviesView: View {
     /// The body of this View
     var body: some View {
         VStack {
-            Text("Movies View: \(movies.count)")
             ScrollView {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(movies, id: \.id) { movie in
@@ -57,12 +56,27 @@ extension MoviesView {
     
     struct MovieItem: View {
         let movie: any KodiItem
+        @State private var isPresented = false
         var body: some View {
-            NavigationLink(destination: PlayerView(video: movie)) {
+            
+            Button(action: {
+                withAnimation {
+                    isPresented.toggle()
+                }
+            }, label: {
                 MediaArt.Poster(item: movie)
                     .frame(width: 300, height: 450)
                     .watchStatus(of: movie)
+            })
+            .fullScreenCover(isPresented: $isPresented) {
+                DetailsView(item: movie)
             }
+            
+//            NavigationLink(destination: DetailsView(item: movie)) {
+//                MediaArt.Poster(item: movie)
+//                    .frame(width: 300, height: 450)
+//                    .watchStatus(of: movie)
+//            }
         }
     }
     

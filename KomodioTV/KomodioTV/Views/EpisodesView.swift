@@ -88,8 +88,8 @@ extension EpisodesView {
                             NavigationLink(destination: PlayerView(video: episode)) {
                                 HStack(spacing: 0) {
                                     MediaArt.Poster(item: episode)
-                                        .frame(width: 300, height: 450)
-                                        .padding(.trailing)
+                                        .frame(width: 320, height: 180)
+                                        .padding()
                                     VStack(alignment: .leading) {
                                         Text(episode.title)
                                         Text(episode.plot)
