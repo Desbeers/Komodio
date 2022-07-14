@@ -16,13 +16,19 @@
 		D749AF362815AC4800A684C8 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF352815AC4800A684C8 /* MoviesView.swift */; };
 		D749AF3E2815AE9200A684C8 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D749AF3D2815AE9200A684C8 /* SwiftlyKodiAPI */; };
 		D749AF482815C4A900A684C8 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF472815C4A900A684C8 /* MovieSetView.swift */; };
+		D75BAE4228803C0100401AF3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBAA5281BC877001CCD89 /* SearchView.swift */; };
 		D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7601138281EED6C0020845A /* ButtonStyles.swift */; };
 		D760113B281EEEF20020845A /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D760113A281EEEF20020845A /* LabelStyles.swift */; };
+		D781536F287C8ECF00F97483 /* UIVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7809B82287C81E3009D7DC8 /* UIVideoPlayer.swift */; };
+		D7815370287C8ED300F97483 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7809B84287C8273009D7DC8 /* PlayerView.swift */; };
 		D79C4D4728771E7A00EBFAE8 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D4628771E7A00EBFAE8 /* PartsView.swift */; };
 		D79C4D492877234A00EBFAE8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBAA3281BC827001CCD89 /* SettingsView.swift */; };
 		D79C4D4B2877258C00EBFAE8 /* TVShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D4A2877258C00EBFAE8 /* TVShowsView.swift */; };
 		D79C4D4D2877284800EBFAE8 /* EpisodesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D4C2877284800EBFAE8 /* EpisodesView.swift */; };
 		D79C4D512878555400EBFAE8 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D502878555400EBFAE8 /* DetailsView.swift */; };
+		D79C4D5328795BBC00EBFAE8 /* ArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D5228795BBC00EBFAE8 /* ArtistsView.swift */; };
+		D79C4D5528796FCA00EBFAE8 /* MusicVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D5428796FCA00EBFAE8 /* MusicVideosView.swift */; };
+		D79C4D57287986B900EBFAE8 /* MusicAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D56287986B900EBFAE8 /* MusicAlbumView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,10 +47,16 @@
 		D749AF472815C4A900A684C8 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D7601138281EED6C0020845A /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		D760113A281EEEF20020845A /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
+		D7809B82287C81E3009D7DC8 /* UIVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVideoPlayer.swift; sourceTree = "<group>"; };
+		D7809B84287C8273009D7DC8 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		D7809B86287C82CD009D7DC8 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		D79C4D4628771E7A00EBFAE8 /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 		D79C4D4A2877258C00EBFAE8 /* TVShowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsView.swift; sourceTree = "<group>"; };
 		D79C4D4C2877284800EBFAE8 /* EpisodesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesView.swift; sourceTree = "<group>"; };
 		D79C4D502878555400EBFAE8 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		D79C4D5228795BBC00EBFAE8 /* ArtistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsView.swift; sourceTree = "<group>"; };
+		D79C4D5428796FCA00EBFAE8 /* MusicVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideosView.swift; sourceTree = "<group>"; };
+		D79C4D56287986B900EBFAE8 /* MusicAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicAlbumView.swift; sourceTree = "<group>"; };
 		D7AFBA9B2816951C001CCD89 /* EpisodesViewOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewOLD.swift; sourceTree = "<group>"; };
 		D7AFBA9D2816CD23001CCD89 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D7AFBAA1281AD29E001CCD89 /* PartsViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsViewOld.swift; sourceTree = "<group>"; };
@@ -86,6 +98,7 @@
 		D749AF222815A7AD00A684C8 /* KomodioTV */ = {
 			isa = PBXGroup;
 			children = (
+				D7809B81287C8193009D7DC8 /* Player */,
 				D749AF3F2815B06500A684C8 /* Views */,
 				D749AF232815A7AD00A684C8 /* KomodioTVApp.swift */,
 				D7C406132835860100913078 /* AppState.swift */,
@@ -121,6 +134,10 @@
 				D749AF472815C4A900A684C8 /* MovieSetView.swift */,
 				D79C4D4A2877258C00EBFAE8 /* TVShowsView.swift */,
 				D79C4D4C2877284800EBFAE8 /* EpisodesView.swift */,
+				D79C4D5228795BBC00EBFAE8 /* ArtistsView.swift */,
+				D79C4D5428796FCA00EBFAE8 /* MusicVideosView.swift */,
+				D79C4D56287986B900EBFAE8 /* MusicAlbumView.swift */,
+				D7AFBAA5281BC877001CCD89 /* SearchView.swift */,
 				D79C4D502878555400EBFAE8 /* DetailsView.swift */,
 				D7AFBAA3281BC827001CCD89 /* SettingsView.swift */,
 				D79C4D4628771E7A00EBFAE8 /* PartsView.swift */,
@@ -128,6 +145,16 @@
 				D7601138281EED6C0020845A /* ButtonStyles.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D7809B81287C8193009D7DC8 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				D7809B82287C81E3009D7DC8 /* UIVideoPlayer.swift */,
+				D7809B84287C8273009D7DC8 /* PlayerView.swift */,
+				D7809B86287C82CD009D7DC8 /* PlayerViewModel.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		D79C4D48287722AE00EBFAE8 /* OLD */ = {
@@ -138,7 +165,6 @@
 				D749AF392815AC6200A684C8 /* MusicVideosView.swift */,
 				D749AF432815B10100A684C8 /* ArtView.swift */,
 				D749AF452815B8B200A684C8 /* DetailsViewOld.swift */,
-				D7AFBAA5281BC877001CCD89 /* SearchView.swift */,
 				D7AFBAA1281AD29E001CCD89 /* PartsViewOld.swift */,
 			);
 			path = OLD;
@@ -220,18 +246,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D781536F287C8ECF00F97483 /* UIVideoPlayer.swift in Sources */,
 				D760113B281EEEF20020845A /* LabelStyles.swift in Sources */,
 				D749AF342815AC3B00A684C8 /* HomeView.swift in Sources */,
 				D749AF362815AC4800A684C8 /* MoviesView.swift in Sources */,
+				D7815370287C8ED300F97483 /* PlayerView.swift in Sources */,
 				D79C4D492877234A00EBFAE8 /* SettingsView.swift in Sources */,
 				D79C4D4D2877284800EBFAE8 /* EpisodesView.swift in Sources */,
 				D79C4D512878555400EBFAE8 /* DetailsView.swift in Sources */,
 				D79C4D4728771E7A00EBFAE8 /* PartsView.swift in Sources */,
 				D749AF262815A7AD00A684C8 /* ContentView.swift in Sources */,
+				D75BAE4228803C0100401AF3 /* SearchView.swift in Sources */,
+				D79C4D5528796FCA00EBFAE8 /* MusicVideosView.swift in Sources */,
 				D749AF482815C4A900A684C8 /* MovieSetView.swift in Sources */,
 				D749AF242815A7AD00A684C8 /* KomodioTVApp.swift in Sources */,
+				D79C4D57287986B900EBFAE8 /* MusicAlbumView.swift in Sources */,
 				D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */,
 				D79C4D4B2877258C00EBFAE8 /* TVShowsView.swift in Sources */,
+				D79C4D5328795BBC00EBFAE8 /* ArtistsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +408,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
 			};
 			name = Debug;
 		};
@@ -403,6 +436,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
 			};
 			name = Release;
 		};

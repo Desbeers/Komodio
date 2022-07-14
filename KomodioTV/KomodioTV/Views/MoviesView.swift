@@ -25,14 +25,24 @@ struct MoviesView: View {
     var body: some View {
         VStack {
             ScrollView {
+                Button(action: {
+                    hideWatched.toggle()
+                }, label: {
+                    Text(hideWatched ? "Show all movies" : "Hide watched movies")
+                        .frame(width: 400)
+                        .padding()
+                })
+                .buttonStyle(.card)
+                .padding()
                 LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach(movies, id: \.id) { movie in
-                        /// - Note: `NavigationLink` is in a `Group` because it cannot have a 'dynamic' destination
+                    ForEach(movies.filter { $0.playcount < (hideWatched ? 1 : 1000) }, id: \.id) { movie in
                         Group {
                             if movie.media == .movie {
                                 MovieItem(movie: movie)
+                                    .padding(.bottom, 40)
                             } else {
                                 MovieSetItem(movieSet: movie)
+                                    .padding(.bottom, 40)
                             }
                         }
                         .buttonStyle(.card)
@@ -42,12 +52,11 @@ struct MoviesView: View {
                 }
             }
         }
-        .ignoresSafeArea(.all)
+        .animation(.default, value: hideWatched)
         .task(id: kodi.library.movies) {
             /// Remove all movies that are a part of a set and add the sets instead
-            movies = (kodi.library.movieSets + kodi.library.movies.filter({$0.setID == 0})).sorted {
-                $0.sortByTitle < $1.sortByTitle
-            }
+            movies = (kodi.library.movieSets + kodi.library.movies.filter({$0.setID == 0}))
+                .sorted { $0.sortByTitle < $1.sortByTitle }
         }
     }
 }
@@ -71,12 +80,6 @@ extension MoviesView {
             .fullScreenCover(isPresented: $isPresented) {
                 DetailsView(item: movie)
             }
-            
-//            NavigationLink(destination: DetailsView(item: movie)) {
-//                MediaArt.Poster(item: movie)
-//                    .frame(width: 300, height: 450)
-//                    .watchStatus(of: movie)
-//            }
         }
     }
     

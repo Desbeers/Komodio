@@ -42,7 +42,8 @@ struct EpisodesView: View {
             }
         }
         .task(id: kodi.library.episodes) {
-            episodes = kodi.library.episodes.filter({$0.tvshowID == tvshow.tvshowID})
+            episodes = kodi.library.episodes
+                .filter({$0.tvshowID == tvshow.tvshowID})
             seasons = episodes.unique { $0.season }.map { $0.season }
         }
     }
@@ -66,14 +67,6 @@ extension EpisodesView {
                             .font(.title3)
                         Text(season.season == 0 ? "Specials" : "Season \(season.season)")
                         KodiArt.Poster(item: season)
-//                        AsyncImage(url: URL(string: Files.getFullPath(file: season.art.seasonPoster, type: .art))) { image in
-//                            image
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .cornerRadius(8)
-//                        } placeholder: {
-//                            Color.gray
-//                        }
                         .frame(width: 400, height: 600)
                         .padding(6)
                         .background(.secondary)
@@ -87,21 +80,6 @@ extension EpisodesView {
                     LazyVStack(spacing: 0) {
                         ForEach(episodes) { episode in
                             Episode(episode: episode)
-//                            NavigationLink(destination: PlayerView(video: episode)) {
-//                                HStack(spacing: 0) {
-//                                    MediaArt.Poster(item: episode)
-//                                        .frame(width: 320, height: 180)
-//                                        .padding()
-//                                    VStack(alignment: .leading) {
-//                                        Text(episode.title)
-//                                        Text(episode.plot)
-//                                            .font(.caption2)
-//                                            .lineLimit(5)
-//                                    }
-//                                }
-//                                .frame(width: UIScreen.main.bounds.width - 900, alignment: .leading)
-//                                .watchStatus(of: episode)
-//                            }
                             .buttonStyle(.card)
                             .padding()
                             .padding(.horizontal)
@@ -147,4 +125,31 @@ extension EpisodesView {
             }
         }
     }
+    
+    
+    struct Item: View {
+        let episode: Video.Details.Episode
+        @State private var isPresented = false
+        var body: some View {
+            
+            Button(action: {
+                withAnimation {
+                    isPresented.toggle()
+                }
+            }, label: {
+                VStack {
+                    KodiArt.Art(file: episode.thumbnail)
+                        .frame(width: 400, height: 225)
+                        .watchStatus(of: episode)
+                    Text(episode.showTitle)
+                        .font(.caption2)
+                        .padding(.bottom, 8)
+                }
+            })
+            .fullScreenCover(isPresented: $isPresented) {
+                DetailsView(item: episode)
+            }
+        }
+    }
+    
 }

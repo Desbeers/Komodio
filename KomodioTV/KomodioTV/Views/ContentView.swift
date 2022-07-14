@@ -29,16 +29,16 @@ struct ContentView: View {
                         Label("Shows", systemImage: "tv")
                     }
                     .tag("shows")
-//                MusicVideosView()
-//                    .tabItem {
-//                        Label("Music", systemImage: "music.quarternote.3")
-//                    }
-//                    .tag("music")
-//                SearchView()
-//                    .tabItem {
-//                        Label("Search", systemImage: "magnifyingglass")
-//                    }
-//                    .tag("search")
+                ArtistsView()
+                    .tabItem {
+                        Label("Music", systemImage: "music.quarternote.3")
+                    }
+                    .tag("music")
+                SearchView()
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                    .tag("search")
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gear")

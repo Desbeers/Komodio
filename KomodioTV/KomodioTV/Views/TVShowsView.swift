@@ -24,17 +24,28 @@ struct TVShowsView: View {
     var body: some View {
         VStack {
             ScrollView {
+                Button(action: {
+                    hideWatched.toggle()
+                }, label: {
+                    Text(hideWatched ? "Show all shows" : "Hide watched shows")
+                        .frame(width: 400)
+                        .padding()
+                })
+                .buttonStyle(.card)
+                .padding()
                 LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach(tvshows) { tvshow in
+                    ForEach(tvshows.filter { $0.playcount < (hideWatched ? 1 : 1000) }) { tvshow in
                         TVShowItem(tvshow: tvshow)
                         .buttonStyle(.card)
                         /// - Note: Context Menu must go after the Button Style or else it does not work...
                         .contextMenu(for: tvshow)
+                        .padding(.bottom, 40)
                     }
                 }
             }
         }
-        .ignoresSafeArea(.all)
+        //.ignoresSafeArea(.all)
+        .animation(.default, value: hideWatched)
         .task(id: kodi.library.tvshows) {
             tvshows = kodi.library.tvshows
         }

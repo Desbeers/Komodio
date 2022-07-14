@@ -50,19 +50,14 @@ extension DetailsView {
                     Spacer()
                     
                     HStack(alignment: .bottom) {
-//                        PartsView.WatchedToggle(item: item)
-//                            .buttonStyle(.card)
-                        NavigationLink(destination: PlayerView(video: item)) {
+                        NavigationLink(destination: KodiPlayerView(video: item)) {
                             Label("Play", systemImage: "play.fill")
                                 .labelStyle(LabelStyles.DetailsButton())
                         }
                         .buttonStyle(.card)
                         Text(item.title)
                             .font(.title)
-//                        VStack(alignment: .leading, spacing: 5) {
-//
-//                            Text("Playcount: \(item.playcount)")
-//                        }
+                            .foregroundColor(.white)
                     }
                     .padding(.horizontal, 80)
                     .padding(.bottom, 80)
@@ -89,20 +84,17 @@ extension DetailsView {
                             switch item {
                             case let movie as Video.Details.Movie:
                                 MovieDetails(movie: movie)
-                                //            case let tvshow as Video.Details.TVShow:
-                                //                await VideoLibrary.setTVShowDetails(tvshow: tvshow)
                             case let episode as Video.Details.Episode:
                                 EpisodeDetails(episode: episode)
-                                //            case let musicVideo as Video.Details.MusicVideo:
-                                //                await VideoLibrary.setMusicVideoDetails(musicVideo: musicVideo)
-                                //            case let song as Audio.Details.Song:
-                                //                await AudioLibrary.setSongDetails(song: song)
+                            case let musicVideo as Video.Details.MusicVideo:
+                                MusicVideoDetails(musicVideo: musicVideo)
                             default:
                                 Text("No details for this item")
                             }
                             PartsView.WatchedToggle(item: item)
                                 .buttonStyle(.card)
                         }
+                        .foregroundColor(.white)
                     }
                 }
                 .padding(.horizontal,80)
@@ -117,6 +109,9 @@ extension DetailsView {
     struct MovieDetails: View {
         let movie: Video.Details.Movie
         var body: some View {
+            Text(movie.tagline)
+                .font(.headline)
+                .padding()
             Text(movie.plot)
         }
     }
@@ -126,6 +121,14 @@ extension DetailsView {
             Text(episode.showTitle)
             Text("Season \(episode.season), episode \(episode.episode)")
             Text(episode.plot)
+        }
+    }
+    struct MusicVideoDetails: View {
+        let musicVideo: Video.Details.MusicVideo
+        var body: some View {
+            Text(musicVideo.artist.joined(separator: " & "))
+                .font(.title2)
+            Text(musicVideo.plot)
         }
     }
 }
