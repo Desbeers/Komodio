@@ -76,6 +76,7 @@ extension DetailsView {
                     HStack {
                         KodiArt.Poster(item: item)
                             .watchStatus(of: item)
+                            .aspectRatio(contentMode: .fit)
                             .frame(height: 400)
                             .padding(6)
                             .background(.secondary)

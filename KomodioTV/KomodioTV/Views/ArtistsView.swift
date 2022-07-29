@@ -36,6 +36,8 @@ struct ArtistsView: View {
         //}
         //.ignoresSafeArea(.all)
         .task(id: kodi.library.musicVideos) {
+            print("VIDEO TASK")
+            print(kodi.library.musicVideos.count)
             artists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
 //            //let musicArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).map({$0.artist})
 //            let musicArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})

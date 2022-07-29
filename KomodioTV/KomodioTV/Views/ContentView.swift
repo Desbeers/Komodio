@@ -26,7 +26,13 @@ struct ContentView: View {
                     .tag("movies")
                 TVShowsView()
                     .tabItem {
-                        Label("Shows", systemImage: "tv")
+                        /// tvOS is acting weird if the image has no rendering mode
+                        Label(title: {
+                            Text("Shows")
+                        }, icon: {
+                            Image(systemName: "tv")
+                                .renderingMode(.original)
+                        })
                     }
                     .tag("shows")
                 ArtistsView()
