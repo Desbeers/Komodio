@@ -13,5 +13,14 @@ struct ButtonStyles {
 }
 
 extension ButtonStyles {
+    struct DetailsButton: ButtonStyle {
 
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .padding(0)
+                .font(.headline)
+                .cornerRadius(10)
+        }
+
+    }
 }

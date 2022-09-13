@@ -12,7 +12,7 @@ struct ContentView: View {
     /// The selected tab
     @State private var selectedTab: String = "home"
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TabView(selection: $selectedTab) {
                 HomeView()
                     .tabItem {

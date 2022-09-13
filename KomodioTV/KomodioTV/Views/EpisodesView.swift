@@ -68,8 +68,8 @@ extension EpisodesView {
                         Text(season.season == 0 ? "Specials" : "Season \(season.season)")
                         KodiArt.Poster(item: season)
                         .frame(width: 400, height: 600)
-                        .padding(6)
-                        .background(.secondary)
+                        //.padding(6)
+                        //.background(.secondary)
 
                         .cornerRadius(10)
                     }

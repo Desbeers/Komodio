@@ -51,6 +51,8 @@ extension MusicAlbumView {
                     KodiArt.Art(file: musicVideo.art.icon)
                         .frame(width: 480, height: 270)
                     Text(musicVideo.title)
+                        .font(.caption)
+                        .padding(.bottom)
                 }
                     .watchStatus(of: musicVideo)
             })

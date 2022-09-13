@@ -25,10 +25,10 @@ extension PartsView {
         func body(content: Content) -> some View {
             content
                 .overlay(alignment: .topTrailing) {
-                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" : "star.fill")
+                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" :  item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled")
                         .font(.subheadline)
                         .foregroundColor(.yellow)
-                        .opacity(item.playcount == 0 ? 1 : 0)
+                        .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)
                 }
         }
     }
@@ -61,6 +61,36 @@ extension PartsView {
                     Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
                         .labelStyle(LabelStyles.DetailsButton())
                 })
+        }
+    }
+    
+    /// A Button to toggle the resume status of a Kodi item
+    /// - Note: Don't add a buttonstyle, else it will not work as context menu
+    struct ResumeToggle: View {
+        /// The item we want to toggle
+        let item: any KodiItem
+        /// The body of this View
+        var body: some View {
+            HStack {
+                Button(action: {
+                    Task {
+                        await item.markAsPlayed()
+                    }
+                }, label: {
+                    /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
+                    Label("Mark as finished", systemImage: "eye.fill")
+                        .labelStyle(LabelStyles.DetailsButton())
+                })
+                Button(action: {
+                    Task {
+                        await item.setResumeTime(time: 0)
+                    }
+                }, label: {
+                    /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
+                    Label("Start again", systemImage: "eye")
+                        .labelStyle(LabelStyles.DetailsButton())
+                })
+            }
         }
     }
 }

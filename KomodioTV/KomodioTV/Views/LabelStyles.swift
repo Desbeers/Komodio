@@ -22,6 +22,7 @@ extension LabelStyles {
                 configuration.icon
                     .padding(.trailing)
                 configuration.title
+                    .lineLimit(1)
             }
             .padding(.horizontal, 40)
             .frame(height: 100)

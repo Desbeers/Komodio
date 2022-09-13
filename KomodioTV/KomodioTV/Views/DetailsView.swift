@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct DetailsView: View {
-
     /// The item to show
     let item: any KodiItem
     /// The View
@@ -17,6 +16,7 @@ struct DetailsView: View {
         NavigationView {
             ZStack {
                 KodiArt.Fanart(item: item)
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 1920, height: 1080)
                 ScrollView {
                     /// Top row
@@ -44,26 +44,52 @@ extension DetailsView {
                 LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8), .black]),
                                startPoint: .top,
                                endPoint: .bottom)
-                //.ignoresSafeArea()
                 .frame(height: 210)
                 VStack {
                     Spacer()
                     
                     HStack(alignment: .bottom) {
-                        NavigationLink(destination: KodiPlayerView(video: item)) {
-                            Label("Play", systemImage: "play.fill")
-                                .labelStyle(LabelStyles.DetailsButton())
+                        if item.resume.position != 0 {
+                            NavigationLink(destination: KodiPlayerView(video: item, resume: true)) {
+                                Label(title: {
+                                    VStack(alignment: .leading) {
+                                        Text("Resume")
+                                        Text("\(secondsToTime(seconds:item.resume.total - item.resume.position)) to go")
+                                            .font(.footnote)
+                                    }
+                                }, icon: {
+                                    Image(systemName: "play.fill")
+                                })
+                            }
                         }
-                        .buttonStyle(.card)
+                        NavigationLink(destination: KodiPlayerView(video: item)) {
+                            Label(title: {
+                                VStack(alignment: .leading) {
+                                    Text("Play")
+                                    if item.resume.position != 0 {
+                                        Text("From beginning")
+                                            .font(.footnote)
+                                    }
+                                }
+                            }, icon: {
+                                Image(systemName: "play.fill")
+                            })
+                        }
                         Text(item.title)
                             .font(.title)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                             .foregroundColor(.white)
                     }
+                    .labelStyle(LabelStyles.DetailsButton())
+                    .buttonStyle(ButtonStyles.DetailsButton())
                     .padding(.horizontal, 80)
                     .padding(.bottom, 80)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .animation(.default, value: item.playcount)
+            .animation(.default, value: item.resume.position)
         }
     }
     
@@ -92,8 +118,13 @@ extension DetailsView {
                             default:
                                 Text("No details for this item")
                             }
-                            PartsView.WatchedToggle(item: item)
-                                .buttonStyle(.card)
+                            if item.resume.position == 0 {
+                                PartsView.WatchedToggle(item: item)
+                                    .buttonStyle(ButtonStyles.DetailsButton())
+                            } else {
+                                PartsView.ResumeToggle(item: item)
+                                    .buttonStyle(ButtonStyles.DetailsButton())
+                            }
                         }
                         .foregroundColor(.white)
                     }
@@ -102,6 +133,7 @@ extension DetailsView {
                 .padding(.bottom, 40)
                 .focusSection()
             }
+            .animation(.default, value: item.playcount)
         }
     }
 }
@@ -112,7 +144,7 @@ extension DetailsView {
         var body: some View {
             Text(movie.tagline)
                 .font(.headline)
-                .padding()
+                .padding(.bottom)
             Text(movie.plot)
         }
     }
@@ -127,9 +159,19 @@ extension DetailsView {
     struct MusicVideoDetails: View {
         let musicVideo: Video.Details.MusicVideo
         var body: some View {
+            Text(musicVideo.year.description)
             Text(musicVideo.artist.joined(separator: " & "))
                 .font(.title2)
             Text(musicVideo.plot)
         }
     }
+}
+
+func secondsToTime(seconds: Double) -> String {
+
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.hour, .minute]
+    formatter.unitsStyle = .brief
+
+    return formatter.string(from: TimeInterval(seconds))!
 }

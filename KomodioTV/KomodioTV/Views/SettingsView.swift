@@ -19,7 +19,7 @@ struct SettingsView: View {
                     .font(.title2)
                 Button(action: {
                     Task {
-                        await KodiConnector.shared.reloadHost()
+                        await KodiConnector.shared.loadLibrary(cache: false)
                     }
                 }, label: {
                     Text("Reload library")

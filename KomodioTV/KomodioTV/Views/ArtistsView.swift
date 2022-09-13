@@ -15,7 +15,7 @@ struct ArtistsView: View {
     /// The artists to show; loaded by a 'Task'.
     @State private var artists: [String] = []
     /// Define the grid layout
-    private let grid = [GridItem(.adaptive(minimum: 540))]
+    private let grid = [GridItem(.adaptive(minimum: 340))]
     /// The focused item
     //@FocusState private var selectedItem: MediaItem?
     /// Hide watched items toggle
@@ -36,13 +36,7 @@ struct ArtistsView: View {
         //}
         //.ignoresSafeArea(.all)
         .task(id: kodi.library.musicVideos) {
-            print("VIDEO TASK")
-            print(kodi.library.musicVideos.count)
             artists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
-//            //let musicArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).map({$0.artist})
-//            let musicArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
-//            artists = kodi.library.artists.filter({musicArtists.contains($0.artist)})
-//            dump(musicArtists)
         }
     }
 }
@@ -58,14 +52,16 @@ extension ArtistsView {
                     if let artistDetails = KodiConnector.shared.library.artists.first(where: {$0.artist == artist}) {
                         
                         KodiArt.Poster(item: artistDetails)
-                            .frame(width: 500, height: 500)
+                            .frame(width: 300, height: 300)
                     } else {
                         Image(systemName: "music.quarternote.3")
                             .resizable()
                             .padding(80)
-                            .frame(width: 500, height: 500)
+                            .frame(width: 300, height: 300)
                     }
                     Text(artist)
+                        .font(.caption)
+                        .padding(.bottom)
                 }
             }
         }
