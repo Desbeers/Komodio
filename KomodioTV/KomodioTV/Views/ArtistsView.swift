@@ -1,6 +1,6 @@
 //
-//  MoviesView.swift
-//  Komodio
+//  ArtistsView.swift
+//  KomodioTV
 //
 //  © 2022 Nick Berendsen
 //

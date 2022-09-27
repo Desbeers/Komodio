@@ -2,12 +2,13 @@
 //  DetailsView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 08/07/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// A SwiftUI View for 'KodiItem' details
 struct DetailsView: View {
     /// The item to show
     let item: any KodiItem
@@ -35,10 +36,11 @@ struct DetailsView: View {
 
 extension DetailsView {
     
+    /// A SwiftUI View for 'KodiItem' details TopView
     struct TopView: View {
+        /// The item to show
         let item: any KodiItem
-        
-        @Environment(\.isFocused) var envFocused: Bool
+        /// The body of this View
         var body: some View {
             ZStack(alignment: .bottom) {
                 LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8), .black]),
@@ -54,7 +56,7 @@ extension DetailsView {
                                 Label(title: {
                                     VStack(alignment: .leading) {
                                         Text("Resume")
-                                        Text("\(secondsToTime(seconds:item.resume.total - item.resume.position)) to go")
+                                        Text("\(secondsToTime(seconds: item.resume.total - item.resume.position)) to go")
                                             .font(.footnote)
                                     }
                                 }, icon: {
@@ -91,10 +93,18 @@ extension DetailsView {
             .animation(.default, value: item.playcount)
             .animation(.default, value: item.resume.position)
         }
+        /// Convert seconds to time
+        private func secondsToTime(seconds: Double) -> String {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.hour, .minute]
+            formatter.unitsStyle = .brief
+            return formatter.string(from: TimeInterval(seconds))!
+        }
     }
     
     struct Details: View {
         let item: any KodiItem
+        /// The body of this View
         var body: some View {
             ZStack(alignment: .topLeading) {
                 Color.black.ignoresSafeArea()
@@ -132,7 +142,7 @@ extension DetailsView {
                         .foregroundColor(.white)
                     }
                 }
-                .padding(.horizontal,80)
+                .padding(.horizontal, 80)
                 .padding(.bottom, 40)
                 .focusSection()
             }
@@ -155,6 +165,7 @@ extension DetailsView {
             }
             return cast.joined(separator: " ∙ ")
         }
+        /// The body of this View
         var body: some View {
             if !movie.tagline.isEmpty {
                 Text(movie.tagline)
@@ -181,6 +192,7 @@ extension DetailsView {
             let details = (show?.studio ?? []) + ["Season \(episode.season)"] + ["Episode \(episode.episode)"]
             return details.joined(separator: " ∙ ")
         }
+        /// The body of this View
         var body: some View {
             Text(episode.showTitle)
                 .font(.headline)
@@ -191,6 +203,7 @@ extension DetailsView {
     }
     struct MusicVideoDetails: View {
         let musicVideo: Video.Details.MusicVideo
+        /// The body of this View
         var body: some View {
             Text(musicVideo.year.description)
             Text(musicVideo.artist.joined(separator: " & "))
@@ -198,13 +211,4 @@ extension DetailsView {
             Text(musicVideo.plot)
         }
     }
-}
-
-func secondsToTime(seconds: Double) -> String {
-
-    let formatter = DateComponentsFormatter()
-    formatter.allowedUnits = [.hour, .minute]
-    formatter.unitsStyle = .brief
-
-    return formatter.string(from: TimeInterval(seconds))!
 }

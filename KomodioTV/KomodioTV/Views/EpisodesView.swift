@@ -2,7 +2,7 @@
 //  EpisodesView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 25/04/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -20,6 +20,8 @@ struct EpisodesView: View {
     @State private var seasons: [Int] = []
     /// The selected season tab
     @State private var selectedTab: Int = -1
+    /// The optional selected episode
+    @State var selectedEpisode: Video.Details.Episode?
     /// The body of this View
     var body: some View {
         VStack {
@@ -28,31 +30,45 @@ struct EpisodesView: View {
             ///         and there might be more seasons
             if !seasons.isEmpty {
                 TabView(selection: $selectedTab) {
-                    TVshowInfo(tvshow: tvshow, selectedTab: $selectedTab)
+                    TVshowInfo(tvshow: tvshow, selectedTab: $selectedTab, selectedEpisode: $selectedEpisode)
                         .tag(-1)
                     ForEach(seasons, id: \.self) {season in
-                        Season(tvshow: tvshow, episodes: episodes.filter { $0.season == season } )
+                        Season(tvshow: tvshow, episodes: episodes.filter { $0.season == season }, selectedEpisode: $selectedEpisode )
                             .tag(season)
                     }
                 }
                 .tabViewStyle(.page)
             }
         }
+        .background {
+            KodiArt.Fanart(item: tvshow)
+                .opacity(0.2)
+                .ignoresSafeArea(.all)
+                .scaledToFill()
+        }
         .task(id: kodi.library.episodes) {
             episodes = kodi.library.episodes
                 .filter({$0.tvshowID == tvshow.tvshowID})
-            seasons = episodes.unique { $0.season }.map { $0.season }.sorted{ ($0 == 0 ? Int.max : $0) < ($1 == 0 ? Int.max : $1) }
+            seasons = episodes.unique { $0.season }.map { $0.season }.sorted { ($0 == 0 ? Int.max : $0) < ($1 == 0 ? Int.max : $1) }
         }
     }
 }
 
 extension EpisodesView {
     
+    /// A View with TV show info
     struct TVshowInfo: View {
         /// The TV show
         let tvshow: Video.Details.TVShow
         /// The selected tab
         @Binding var selectedTab: Int
+        /// The selected episode
+        @Binding var selectedEpisode: Video.Details.Episode?
+        /// Details of the TV show
+        var details: String {
+            let details = tvshow.studio + tvshow.genre + [tvshow.year.description]
+            return details.joined(separator: " ∙ ")
+        }
         /// The body of this View
         var body: some View {
             VStack {
@@ -65,31 +81,35 @@ extension EpisodesView {
                     VStack(alignment: .leading) {
                         Text(tvshow.plot)
                             .padding(.bottom)
+                        Label(details, systemImage: "info.circle.fill")
                         Label("\(tvshow.season) \(tvshow.season == 1 ? " season" : "seasons"), \(tvshow.episode) episodes", systemImage: "display")
-                            .padding(.bottom)
-                        Label("\(tvshow.watchedEpisodes) episodes watched", systemImage: "eye")
-                        //                        if tvshow.watchedEpisodes != tvshow.episode {
-                        //                            Button(action: {
-                        //                                if let episode = KodiConnector.shared.library.episodes.first(where: { $0.tvshowID == tvshow.tvshowID && $0.playcount == 0}) {
-                        //                                    selectedTab = episode.season
-                        //                                }
-                        //                            }, label: {
-                        //                                Text("Jump to first \(tvshow.watchedEpisodes != tvshow.episode ? " unwached" : "") episode")
-                        //                            })
-                        //                        }
+                        Label(watchedLabel, systemImage: "eye")
                         Button(action: {
                             if tvshow.watchedEpisodes != tvshow.episode, let episode = KodiConnector.shared.library.episodes.first(where: { $0.tvshowID == tvshow.tvshowID && $0.playcount == 0}) {
                                 selectedTab = episode.season
+                                selectedEpisode = episode
+                            } else if let episode = KodiConnector.shared.library.episodes.first(where: { $0.tvshowID == tvshow.tvshowID && $0.season != 0}) {
+                                selectedTab = episode.season
                             }
                         }, label: {
-                            Text("Jump to first \(tvshow.watchedEpisodes != tvshow.episode ? " unwached" : "") episode")
+                            Text("Jump to first \(tvshow.watchedEpisodes != tvshow.episode ? " unwatched" : "") episode")
                         })
                         Spacer()
                     }
                     .focusSection()
+                    .labelStyle(LabelStyles.Details())
                 }
             }
-            //.focusable()
+        }
+        /// Watched label
+        var watchedLabel: String {
+            if tvshow.watchedEpisodes == 0 {
+                return "No episodes watched"
+            } else if tvshow.watchedEpisodes == tvshow.episode {
+                return "All episodes watched"
+            } else {
+                return "\(tvshow.watchedEpisodes) episodes watched"
+            }
         }
     }
     
@@ -99,10 +119,10 @@ extension EpisodesView {
         let tvshow: Video.Details.TVShow
         /// The Episode items to show in this view
         let episodes: [Video.Details.Episode]
-        
+        /// The optional selected episode
+        @Binding var selectedEpisode: Video.Details.Episode?
+        /// The episode that has the focus
         @FocusState var selectedItem: Video.Details.Episode?
-        
-        
         /// The body of this View
         var body: some View {
             HStack(spacing: 0) {
@@ -114,9 +134,6 @@ extension EpisodesView {
                         Text(season.season == 0 ? "Specials" : "Season \(season.season)")
                         KodiArt.Poster(item: season)
                             .frame(width: 400, height: 600)
-                        //.padding(6)
-                        //.background(.secondary)
-                        
                             .cornerRadius(10)
                     }
                     .padding(.trailing, 100)
@@ -138,8 +155,12 @@ extension EpisodesView {
                 }
             }
             .task {
-                print("SEASON TASK")
-                selectedItem = episodes.first
+                if let episode = selectedEpisode {
+                    selectedItem = episode
+                    selectedEpisode = nil
+                } else {
+                    selectedItem = episodes.first
+                }
             }
             .frame(width: UIScreen.main.bounds.width - 300)
         }
@@ -158,7 +179,6 @@ extension EpisodesView {
             }, label: {
                 HStack(spacing: 0) {
                     KodiArt.Art(file: episode.thumbnail)
-                    //MediaArt.Poster(item: episode)
                         .frame(width: 320, height: 180)
                         .padding()
                     VStack(alignment: .leading) {
@@ -177,12 +197,11 @@ extension EpisodesView {
         }
     }
     
-    
+    /// A View with an episode item
     struct Item: View {
         let episode: Video.Details.Episode
         @State private var isPresented = false
         var body: some View {
-            
             Button(action: {
                 withAnimation {
                     isPresented.toggle()
@@ -202,5 +221,4 @@ extension EpisodesView {
             }
         }
     }
-    
 }

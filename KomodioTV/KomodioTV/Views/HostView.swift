@@ -2,7 +2,7 @@
 //  HostView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 25/09/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -10,65 +10,29 @@ import SwiftlyKodiAPI
 
 /// A form to edit a host
 struct HostView: View {
+    /// The AppState model
+    @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The host we want to edit
-    //let host: HostItem = HostItem()
-    /// The AppState
-    @EnvironmentObject var appState: AppState
     /// The values of the form
     @State var values = HostItem()
     /// The body of this View
     var body: some View {
         VStack {
             Form {
-                //Section(footer: footer(text: "Kodi's that are available")) {
-                    ForEach(kodi.bonjourHosts, id: \.ip) { host in
-                        
-                        Button(action: {
-                            values.description = host.name
-                            values.ip = host.ip
-                            appState.selectedTab = .home
-                            AppState.saveHost(host: values)
-                        }, label: {
-                            Text(host.name)
-                        })
-                        .disabled(AppState.shared.host?.ip == host.ip)
-                    }
-                //}
-                //.focusable()
-                
-//                Section(footer: footer(text: "The TCP and UDP ports")) {
-//                    HStack(spacing: 10) {
-//                        TextField("8080", text: $values.port, prompt: Text("TCP port"))
-//                        //.frame(width: 105)
-//
-//                        Divider()
-//
-//                        TextField("9090", text: $values.tcp, prompt: Text("UDP port"))
-//                        //.frame(width: 105)
-//                    }
-//                }
-//                Section(footer: footer(text: "Your username and password")) {
-//                    HStack(spacing: 10) {
-//                        TextField("username", text: $values.username, prompt: Text("Your username"))
-//                        //.frame(width: 105)
-//
-//                        Divider()
-//
-//                        TextField("password", text: $values.password, prompt: Text("Your password"))
-//                        //.frame(width: 105)
-//                    }
-//                }
+                ForEach(kodi.bonjourHosts, id: \.ip) { host in
+                    
+                    Button(action: {
+                        values.description = host.name
+                        values.ip = host.ip
+                        appState.selectedTab = .home
+                        AppState.saveHost(host: values)
+                    }, label: {
+                        Text(host.name)
+                    })
+                    .disabled(AppState.shared.host?.ip == host.ip)
+                }
             }
-            
-//            Button(action: {
-//                AppState.saveHost(host: values)
-//            }, label: {
-//                Text("Save")
-//            })
-//            .disabled(!validateForm(host: values))
-//            //.buttonStyle(.card)
         }
         .padding()
         .task {

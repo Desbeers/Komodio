@@ -1,6 +1,6 @@
 //
 //  MoviesView.swift
-//  Komodio
+//  KomodioTV
 //
 //  © 2022 Nick Berendsen
 //
@@ -17,8 +17,6 @@ struct MoviesView: View {
     @State private var movies: [any KodiItem] = []
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 300))]
-    /// The focused item
-    //@FocusState private var selectedItem: MediaItem?
     /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The loading state of the view

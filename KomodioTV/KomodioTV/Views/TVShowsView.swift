@@ -1,6 +1,6 @@
 //
-//  MoviesView.swift
-//  Komodio
+//  TVShowsView.swift
+//  KomodioTV
 //
 //  © 2022 Nick Berendsen
 //
@@ -16,8 +16,6 @@ struct TVShowsView: View {
     @State private var tvshows: [Video.Details.TVShow] = []
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 300))]
-    /// The focused item
-    //@FocusState private var selectedItem: MediaItem?
     /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The loading state of the view

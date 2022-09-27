@@ -2,7 +2,7 @@
 //  StartView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 25/09/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

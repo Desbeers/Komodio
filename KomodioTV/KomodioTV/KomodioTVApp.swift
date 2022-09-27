@@ -2,7 +2,7 @@
 //  KomodioTVApp.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 24/04/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -10,10 +10,10 @@ import SwiftlyKodiAPI
 
 @main
 struct KomodioTVApp: App {
-    /// The KodiConnector model
-    @StateObject var kodi: KodiConnector  = .shared
-    /// The AppState
+    /// The AppState model
     @StateObject var appState: AppState = .shared
+    /// The KodiConnector model
+    @StateObject var kodi: KodiConnector = .shared
     var body: some Scene {
         WindowGroup {
             ContentView()

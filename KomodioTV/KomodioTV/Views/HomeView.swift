@@ -2,8 +2,9 @@
 //  HomeView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 24/04/2022.
+//  © 2022 Nick Berendsen
 //
+
 import SwiftUI
 import SwiftlyKodiAPI
 

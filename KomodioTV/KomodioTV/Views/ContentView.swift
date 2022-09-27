@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 24/04/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -10,12 +10,11 @@ import SwiftlyKodiAPI
 
 /// The Content View for Komodio
 struct ContentView: View {
-    /// The selected tab
-    //@State private var selectedTab: String = "home"
-    /// The AppState
+    /// The AppState model
     @EnvironmentObject var appState: AppState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    /// The body of this View
     var body: some View {
         NavigationStack {
             TabView(selection: $appState.selectedTab) {

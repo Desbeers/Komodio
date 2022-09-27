@@ -1,6 +1,6 @@
 //
 //  MovieSetView.swift
-//  Komodio
+//  KomodioTV
 //
 //  © 2022 Nick Berendsen
 //
@@ -12,8 +12,6 @@ import SwiftlyKodiAPI
 struct MovieSetView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The AppState
-    //@EnvironmentObject var appState: AppState
     /// The movie set to show in this View
     let set: Video.Details.MovieSet
     /// The movies to show
@@ -47,37 +45,16 @@ struct MovieSetView: View {
                             .minimumScaleFactor(0.5)
                         Text("\(selection.plot)")
                             .lineLimit(2)
-                            //.padding(.bottom, 40)
-                            //.padding(.horizontal, 80)
                     }
                     .frame(minWidth: 1600, maxWidth: 1600, alignment: .leading)
                 }
             }
             Spacer()
-//            /// TabView will crash when movies is still empty
-//            if !movies.isEmpty {
-//                TabView {
-//                    ForEach(movies) { movie in
-//                        HStack {
-//                            MoviesView.MovieItem(movie: movie)
-//                                .buttonStyle(.card)
-//                            VStack {
-//                                Text(movie.title)
-//                                    .font(.title2)
-//                                Text(movie.year.description)
-//                                    .font(.subheadline)
-//                                Text(movie.plot)
-//                            }
-//                        }
-//                    }
-//                }
-//                .tabViewStyle(.page)
-//            }
         }
         .animation(.default, value: selectedMovie)
         .buttonStyle(.card)
         .task(id: kodi.library.movies) {
-            movies = kodi.library.movies.filter( {$0.setID == set.setID } ).sorted {$0.year < $1.year}
+            movies = kodi.library.movies.filter { $0.setID == set.setID }.sorted {$0.year < $1.year}
         }
     }
 }

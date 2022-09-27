@@ -2,7 +2,7 @@
 //  PartsView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 07/07/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -25,7 +25,7 @@ extension PartsView {
         func body(content: Content) -> some View {
             content
                 .overlay(alignment: .topTrailing) {
-                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" :  item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled")
+                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" : item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled")
                         .font(.subheadline)
                         .foregroundColor(.yellow)
                         .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)

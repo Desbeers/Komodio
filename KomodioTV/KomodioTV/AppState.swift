@@ -2,7 +2,7 @@
 //  AppState.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 18/05/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI

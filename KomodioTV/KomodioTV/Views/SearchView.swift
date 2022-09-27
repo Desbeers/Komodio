@@ -2,7 +2,7 @@
 //  SearchView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 29/04/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -52,7 +52,6 @@ struct SearchView: View {
         .padding(.horizontal, 80)
         .buttonStyle(.card)
         .searchable(text: $searchText)
-        
         .task(id: searchText) {
             do {
                 try await Task.sleep(nanoseconds: 300_000_000)
@@ -64,11 +63,9 @@ struct SearchView: View {
                     movies = kodi.library.movies.search(searchText)
                     tvshows = kodi.library.tvshows.search(searchText)
                 }
-                //movies = kodi.library.movies.filter({$0.title.contains(searchText)})
             } catch {
-                // Task cancelled without network request.
+                /// Task cancelled without network request
             }
         }
-
     }
 }

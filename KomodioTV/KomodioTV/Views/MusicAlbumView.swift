@@ -1,8 +1,8 @@
 //
-//  MusicVideosView.swift
+//  MusicAlbumView.swift
 //  KomodioTV
 //
-//  Created by Nick Berendsen on 09/07/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
