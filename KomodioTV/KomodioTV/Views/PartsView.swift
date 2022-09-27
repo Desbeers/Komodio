@@ -71,7 +71,7 @@ extension PartsView {
         let item: any KodiItem
         /// The body of this View
         var body: some View {
-            HStack {
+            VStack {
                 Button(action: {
                     Task {
                         await item.markAsPlayed()

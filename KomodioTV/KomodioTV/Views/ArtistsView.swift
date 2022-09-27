@@ -16,27 +16,47 @@ struct ArtistsView: View {
     @State private var artists: [String] = []
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 340))]
-    /// The focused item
-    //@FocusState private var selectedItem: MediaItem?
+    /// The loading state of the view
+    @State private var state: AppState.State = .loading
     /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The body of this View
     var body: some View {
-        //VStack {
-            ScrollView {
-                LazyVGrid(columns: grid, spacing: 0) {
-                    ForEach(artists, id: \.self) { artist in
-                        ArtistItem(artist: artist)
-                            .buttonStyle(.card)
-                            .padding(.bottom, 40)
-                    }
+        VStack {
+            VStack {
+                switch state {
+                case .loading:
+                    Text("Loading your music videos")
+                case .empty:
+                    Text("There are no music videos in your library")
+                case .ready:
+                    content
+                case .offline:
+                    state.offlineMessage
                 }
-                //.padding(.vertical, 100)
             }
-        //}
-        //.ignoresSafeArea(.all)
+        }
         .task(id: kodi.library.musicVideos) {
-            artists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
+            if kodi.state != .loadedLibrary {
+                state = .offline
+            } else if kodi.library.musicVideos.isEmpty {
+                state = .empty
+            } else {
+                artists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
+                state = .ready
+            }
+        }
+    }
+    /// The content of this View
+    var content: some View {
+        ScrollView {
+            LazyVGrid(columns: grid, spacing: 0) {
+                ForEach(artists, id: \.self) { artist in
+                    ArtistItem(artist: artist)
+                        .buttonStyle(.card)
+                        .padding(.bottom, 40)
+                }
+            }
         }
     }
 }

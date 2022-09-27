@@ -81,7 +81,7 @@ extension DetailsView {
                             .minimumScaleFactor(0.5)
                             .foregroundColor(.white)
                     }
-                    .labelStyle(LabelStyles.DetailsButton())
+                    .labelStyle(LabelStyles.PlayButton())
                     .buttonStyle(ButtonStyles.DetailsButton())
                     .padding(.horizontal, 80)
                     .padding(.bottom, 80)
@@ -99,13 +99,11 @@ extension DetailsView {
             ZStack(alignment: .topLeading) {
                 Color.black.ignoresSafeArea()
                 VStack(alignment: .leading) {
-                    HStack {
+                    HStack(alignment: .top) {
                         KodiArt.Poster(item: item)
                             .watchStatus(of: item)
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 400)
-                            .padding(6)
-                            .background(.secondary)
                             .cornerRadius(10)
                         VStack(alignment: .leading) {
                             switch item {
@@ -118,6 +116,11 @@ extension DetailsView {
                             default:
                                 Text("No details for this item")
                             }
+                            Spacer()
+                        }
+                        .foregroundColor(.white)
+                        .focusable()
+                        VStack(alignment: .leading) {
                             if item.resume.position == 0 {
                                 PartsView.WatchedToggle(item: item)
                                     .buttonStyle(ButtonStyles.DetailsButton())
@@ -141,18 +144,48 @@ extension DetailsView {
 extension DetailsView {
     struct MovieDetails: View {
         let movie: Video.Details.Movie
+        var details: String {
+            let details = [movie.year.description] + movie.country + movie.genre
+            return details.joined(separator: " ∙ ")
+        }
+        var cast: String {
+            var cast: [String] = []
+            for person in movie.cast {
+                cast.append(person.name)
+            }
+            return cast.joined(separator: " ∙ ")
+        }
         var body: some View {
-            Text(movie.tagline)
-                .font(.headline)
-                .padding(.bottom)
+            if !movie.tagline.isEmpty {
+                Text(movie.tagline)
+                    .font(.headline)
+                .padding(.bottom)}
             Text(movie.plot)
+                .padding(.bottom)
+            Label(details, systemImage: "info.circle.fill")
+                .font(.caption)
+                .padding(.bottom)
+            if !movie.director.isEmpty {
+                Text("Directed by \(movie.director.joined(separator: " ∙ "))")
+                    .font(.caption)
+                    .padding(.bottom)
+            }
+            Label(cast, systemImage: "person.fill")
+                .font(.caption)
         }
     }
     struct EpisodeDetails: View {
         let episode: Video.Details.Episode
+        var details: String {
+            let show = KodiConnector.shared.library.tvshows.first(where: {$0.tvshowID == episode.tvshowID})
+            let details = (show?.studio ?? []) + ["Season \(episode.season)"] + ["Episode \(episode.episode)"]
+            return details.joined(separator: " ∙ ")
+        }
         var body: some View {
             Text(episode.showTitle)
-            Text("Season \(episode.season), episode \(episode.episode)")
+                .font(.headline)
+            Text(details)
+                .font(.caption)
             Text(episode.plot)
         }
     }

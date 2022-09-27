@@ -6,24 +6,29 @@
 //
 
 import SwiftUI
+import SwiftlyKodiAPI
 
 /// The Content View for Komodio
 struct ContentView: View {
     /// The selected tab
-    @State private var selectedTab: String = "home"
+    //@State private var selectedTab: String = "home"
+    /// The AppState
+    @EnvironmentObject var appState: AppState
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
     var body: some View {
         NavigationStack {
-            TabView(selection: $selectedTab) {
-                HomeView()
+            TabView(selection: $appState.selectedTab) {
+                StartView()
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }
-                    .tag("home")
+                    .tag(AppState.Tabs.home)
                 MoviesView()
                     .tabItem {
                         Label("Movies", systemImage: "film")
                     }
-                    .tag("movies")
+                    .tag(AppState.Tabs.movies)
                 TVShowsView()
                     .tabItem {
                         /// tvOS is acting weird if the image has no rendering mode
@@ -34,22 +39,22 @@ struct ContentView: View {
                                 .renderingMode(.original)
                         })
                     }
-                    .tag("shows")
+                    .tag(AppState.Tabs.shows)
                 ArtistsView()
                     .tabItem {
                         Label("Music", systemImage: "music.quarternote.3")
                     }
-                    .tag("music")
+                    .tag(AppState.Tabs.music)
                 SearchView()
                     .tabItem {
                         Label("Search", systemImage: "magnifyingglass")
                     }
-                    .tag("search")
+                    .tag(AppState.Tabs.search)
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
-                    .tag("settings")
+                    .tag(AppState.Tabs.settings)
             }
         }
     }

@@ -18,30 +18,64 @@ struct MovieSetView: View {
     let set: Video.Details.MovieSet
     /// The movies to show
     @State private var movies: [Video.Details.Movie] = []
+    
+    @FocusState var selectedMovie: Video.Details.Movie?
     /// The body of this View
     var body: some View {
         VStack {
             Text(set.title)
                 .font(.title)
-            /// TabView will crash when movies is still empty
+            Text(set.plot)
+                .font(.caption)
             if !movies.isEmpty {
-                TabView {
-                    ForEach(movies) { movie in
-                        HStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(movies) { movie in
                             MoviesView.MovieItem(movie: movie)
-                            VStack {
-                                Text(movie.title)
-                                    .font(.headline)
-                                Text(movie.year.description)
-                                    .font(.subheadline)
-                                Text(movie.plot)
-                            }
+                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                                .focused($selectedMovie, equals: movie)
                         }
                     }
+                    
+                    .padding(.horizontal, 80)
                 }
-                .tabViewStyle(.page)
+                if let selection = selectedMovie {
+                    VStack(alignment: .leading) {
+                        Text("\(selection.title) | \(selection.year.description)")
+                            .font(.title2)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                        Text("\(selection.plot)")
+                            .lineLimit(2)
+                            //.padding(.bottom, 40)
+                            //.padding(.horizontal, 80)
+                    }
+                    .frame(minWidth: 1600, maxWidth: 1600, alignment: .leading)
+                }
             }
+            Spacer()
+//            /// TabView will crash when movies is still empty
+//            if !movies.isEmpty {
+//                TabView {
+//                    ForEach(movies) { movie in
+//                        HStack {
+//                            MoviesView.MovieItem(movie: movie)
+//                                .buttonStyle(.card)
+//                            VStack {
+//                                Text(movie.title)
+//                                    .font(.title2)
+//                                Text(movie.year.description)
+//                                    .font(.subheadline)
+//                                Text(movie.plot)
+//                            }
+//                        }
+//                    }
+//                }
+//                .tabViewStyle(.page)
+//            }
         }
+        .animation(.default, value: selectedMovie)
+        .buttonStyle(.card)
         .task(id: kodi.library.movies) {
             movies = kodi.library.movies.filter( {$0.setID == set.setID } ).sorted {$0.year < $1.year}
         }

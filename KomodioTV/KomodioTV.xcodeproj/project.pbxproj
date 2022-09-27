@@ -19,8 +19,8 @@
 		D75BAE4228803C0100401AF3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBAA5281BC877001CCD89 /* SearchView.swift */; };
 		D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7601138281EED6C0020845A /* ButtonStyles.swift */; };
 		D760113B281EEEF20020845A /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D760113A281EEEF20020845A /* LabelStyles.swift */; };
-		D781536F287C8ECF00F97483 /* UIVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7809B82287C81E3009D7DC8 /* UIVideoPlayer.swift */; };
-		D7815370287C8ED300F97483 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7809B84287C8273009D7DC8 /* PlayerView.swift */; };
+		D766CC4B28E0AAD8004D5B70 /* HostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766CC4A28E0AAD8004D5B70 /* HostView.swift */; };
+		D766CC4D28E0ABB6004D5B70 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766CC4C28E0ABB6004D5B70 /* StartView.swift */; };
 		D79C4D4728771E7A00EBFAE8 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D4628771E7A00EBFAE8 /* PartsView.swift */; };
 		D79C4D492877234A00EBFAE8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFBAA3281BC827001CCD89 /* SettingsView.swift */; };
 		D79C4D4B2877258C00EBFAE8 /* TVShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D4A2877258C00EBFAE8 /* TVShowsView.swift */; };
@@ -44,9 +44,8 @@
 		D749AF472815C4A900A684C8 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D7601138281EED6C0020845A /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		D760113A281EEEF20020845A /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
-		D7809B82287C81E3009D7DC8 /* UIVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVideoPlayer.swift; sourceTree = "<group>"; };
-		D7809B84287C8273009D7DC8 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		D7809B86287C82CD009D7DC8 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		D766CC4A28E0AAD8004D5B70 /* HostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostView.swift; sourceTree = "<group>"; };
+		D766CC4C28E0ABB6004D5B70 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D79C4D4628771E7A00EBFAE8 /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 		D79C4D4A2877258C00EBFAE8 /* TVShowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsView.swift; sourceTree = "<group>"; };
 		D79C4D4C2877284800EBFAE8 /* EpisodesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesView.swift; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 		D749AF222815A7AD00A684C8 /* KomodioTV */ = {
 			isa = PBXGroup;
 			children = (
-				D7809B81287C8193009D7DC8 /* Player */,
 				D749AF3F2815B06500A684C8 /* Views */,
 				D749AF232815A7AD00A684C8 /* KomodioTVApp.swift */,
 				D7C406132835860100913078 /* AppState.swift */,
@@ -123,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				D749AF252815A7AD00A684C8 /* ContentView.swift */,
+				D766CC4C28E0ABB6004D5B70 /* StartView.swift */,
 				D749AF332815AC3B00A684C8 /* HomeView.swift */,
 				D749AF352815AC4800A684C8 /* MoviesView.swift */,
 				D749AF472815C4A900A684C8 /* MovieSetView.swift */,
@@ -134,21 +133,12 @@
 				D7AFBAA5281BC877001CCD89 /* SearchView.swift */,
 				D79C4D502878555400EBFAE8 /* DetailsView.swift */,
 				D7AFBAA3281BC827001CCD89 /* SettingsView.swift */,
+				D766CC4A28E0AAD8004D5B70 /* HostView.swift */,
 				D79C4D4628771E7A00EBFAE8 /* PartsView.swift */,
 				D760113A281EEEF20020845A /* LabelStyles.swift */,
 				D7601138281EED6C0020845A /* ButtonStyles.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		D7809B81287C8193009D7DC8 /* Player */ = {
-			isa = PBXGroup;
-			children = (
-				D7809B82287C81E3009D7DC8 /* UIVideoPlayer.swift */,
-				D7809B84287C8273009D7DC8 /* PlayerView.swift */,
-				D7809B86287C82CD009D7DC8 /* PlayerViewModel.swift */,
-			);
-			path = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,12 +217,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D781536F287C8ECF00F97483 /* UIVideoPlayer.swift in Sources */,
 				D760113B281EEEF20020845A /* LabelStyles.swift in Sources */,
+				D766CC4D28E0ABB6004D5B70 /* StartView.swift in Sources */,
 				D7D5FAA628D0D0CA008ECE8A /* AppState.swift in Sources */,
 				D749AF342815AC3B00A684C8 /* HomeView.swift in Sources */,
 				D749AF362815AC4800A684C8 /* MoviesView.swift in Sources */,
-				D7815370287C8ED300F97483 /* PlayerView.swift in Sources */,
+				D766CC4B28E0AAD8004D5B70 /* HostView.swift in Sources */,
 				D79C4D492877234A00EBFAE8 /* SettingsView.swift in Sources */,
 				D79C4D4D2877284800EBFAE8 /* EpisodesView.swift in Sources */,
 				D79C4D512878555400EBFAE8 /* DetailsView.swift in Sources */,
@@ -378,6 +368,7 @@
 				DEVELOPMENT_TEAM = FHPCJ7396C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Komodio;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -408,6 +399,7 @@
 				DEVELOPMENT_TEAM = FHPCJ7396C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Komodio;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;

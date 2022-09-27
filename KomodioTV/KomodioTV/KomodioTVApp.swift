@@ -16,20 +16,23 @@ struct KomodioTVApp: App {
     @StateObject var appState: AppState = .shared
     var body: some Scene {
         WindowGroup {
-            Group {
-                if kodi.state == .loadedLibrary{
-                    ContentView()
-                        .environmentObject(kodi)
-                        .environmentObject(appState)
-                } else {
-                    Text("Loading...")
+            ContentView()
+                .environmentObject(kodi)
+                .environmentObject(appState)
+            .task(id: appState.host) {
+                if let host = appState.host {
+                    if kodi.state == .none {
+                        print("Load new host")
+                        kodi.connect(host: host)
+                    }
                 }
             }
-            //.preferredColorScheme(.dark)
-            .task {
-                if kodi.state == .none {
-                    kodi.connect(host: HostItem(ip: "192.168.11.200", media: .video))
-                    //await kodi.connectToHost(kodiHost: HostItem(ip: "127.0.0.1"))
+            .task(id: kodi.state) {
+                switch kodi.state {
+                case .offline, .loadedLibrary:
+                    appState.selectedTab = .home
+                default:
+                    break
                 }
             }
         }

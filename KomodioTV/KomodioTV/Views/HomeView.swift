@@ -44,44 +44,48 @@ struct HomeView: View {
                 }
             }
             // MARK: Unwatched movies
-            Text("Unwatched Movies")
-                .font(.title3)
-                .padding(.horizontal, 40)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(shelf.movies) { movie in
-                        MoviesView.MovieItem(movie: movie)
-                            .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
-                            .focused($selectedMovie, equals: movie)
+            if !shelf.movies.isEmpty {
+                Text("Unwatched Movies")
+                    .font(.title3)
+                    .padding(.horizontal, 40)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(shelf.movies) { movie in
+                            MoviesView.MovieItem(movie: movie)
+                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                                .focused($selectedMovie, equals: movie)
+                        }
                     }
-                }
-                
-                .padding(.horizontal, 80)
-            }
-            if let selection = selectedMovie {
-                Text("\(selection.plot)")
-                    .lineLimit(2)
-                    .padding(.bottom, 40)
+                    
                     .padding(.horizontal, 80)
+                }
+                if let selection = selectedMovie {
+                    Text("\(selection.plot)")
+                        .lineLimit(2)
+                        .padding(.bottom, 40)
+                        .padding(.horizontal, 80)
+                }
             }
             // MARK: Unwatched episodes
-            Text("Unwatched episodes")
-                .font(.title3)
-                .padding(.horizontal, 40)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(shelf.episodes) { episode in
-                        EpisodesView.Item(episode: episode)
-                            .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
-                            .focused($selectedEpisode, equals: episode)
+            if !shelf.episodes.isEmpty {
+                Text("Unwatched episodes")
+                    .font(.title3)
+                    .padding(.horizontal, 40)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(shelf.episodes) { episode in
+                            EpisodesView.Item(episode: episode)
+                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                                .focused($selectedEpisode, equals: episode)
+                        }
                     }
+                    .padding(.horizontal, 80)
                 }
-                .padding(.horizontal, 80)
-            }
-            if let selection = selectedEpisode {
-                Text("\(selection.showTitle): season \(selection.season), episode \(selection.episode)")
+                if let selection = selectedEpisode {
+                    Text("\(selection.showTitle): season \(selection.season), episode \(selection.episode)")
+                }
             }
         }
         .edgesIgnoringSafeArea(.horizontal)
