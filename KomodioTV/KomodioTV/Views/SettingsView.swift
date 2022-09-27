@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// The 'Settings' SwiftUI View
 struct SettingsView: View {
     /// The AppState
     @EnvironmentObject var appState: AppState

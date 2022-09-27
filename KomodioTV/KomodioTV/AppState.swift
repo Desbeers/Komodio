@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// The AppState model
 class AppState: ObservableObject {
     
     /// The shared instance of this AppState class

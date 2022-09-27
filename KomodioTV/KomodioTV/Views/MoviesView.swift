@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A SwiftUI View for Movie items
+/// The 'Movies' SwiftUI View
 /// - Note: Movies that are part of a Movie Set will be grouped together and linked to ``MovieSetView``.
 struct MoviesView: View {
     /// The KodiConnector model

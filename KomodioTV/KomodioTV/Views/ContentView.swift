@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The Content View for Komodio
+/// The 'Content' SwiftUI View
 struct ContentView: View {
     /// The AppState model
     @EnvironmentObject var appState: AppState

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A form to edit a host
+/// The 'Host' SwiftUI View
 struct HostView: View {
     /// The AppState model
     @EnvironmentObject var appState: AppState

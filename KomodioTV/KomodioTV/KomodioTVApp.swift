@@ -8,12 +8,13 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-@main
-struct KomodioTVApp: App {
+/// The App struct for KomodioTV
+@main struct KomodioTVApp: App {
     /// The AppState model
     @StateObject var appState: AppState = .shared
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared
+    /// The body of this App
     var body: some Scene {
         WindowGroup {
             ContentView()

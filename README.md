@@ -1,24 +1,24 @@
 #  Komodio
 
-## An `Apple` Video Client for  [Kodi](https://kodi.tv)
+## An `Apple TV` Video Client for  [Kodi](https://kodi.tv)
 
-Komodio is a video player for macOS, iPadOS and tvOS that can stream videos from your local Kodi host.
+Komodio is a video player for tvOS 16 that can stream videos from your local Kodi host.
+
+![Komodio](screenshot.png)
 
 ### Limitations
 
-It is all very much work in progress...
-
-- Because it's an `Apple` client using AVkit, it can only play Quicktime compatible files. So, no mkv's...
-- The 'Kodi login' configuration is currently hardcoded in the ``AppState.swift`` file.
+- Because it's an `Apple` client using AVkit, it can only play Quicktime compatible files. So, **no MKV's**...
+- Komodio depends on Bonjour to find your Kodi hosts.
+- The 'Kodi login' configuration is using default settings.
+- If your media is on a harddisk and it's sleeping; the media wil sometimes not start because of a timeout. Try again and it will work.
+- Komodio is written in SwiftUI 4, so well, a bit buggy :-)
 
 ## Dependencies
 
 Komodio depends on the following Swift Packages that are in my GitHub account:
 
-- [SwiftlyKodiAPI](https://github.com/Desbeers/swiftlykodiapi/). The Swift API to talk to Kodio. 
-- [SwiflyStackNavigation](https://github.com/Desbeers/swiftlystacknavigation/). Stack navigation for macOS.
-
-Both packages are specially written for Komodio and also still very, very much work in progress.
+- [SwiftlyKodiAPI](https://github.com/Desbeers/swiftlykodiapi/). The Swift API to talk to Kodio.
 
 ## What's in a name?
 

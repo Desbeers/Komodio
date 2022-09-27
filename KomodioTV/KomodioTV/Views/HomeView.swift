@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The Home View for Komodio
+/// The 'Home' SwiftUI View
 struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector

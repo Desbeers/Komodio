@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A SwiftUI View for 'KodiItem' details
+/// The 'Details' SwiftUI View for a 'KodiItem'
 struct DetailsView: View {
     /// The item to show
     let item: any KodiItem

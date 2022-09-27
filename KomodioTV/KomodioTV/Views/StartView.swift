@@ -8,14 +8,15 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// The 'Start' SwiftUI View
 struct StartView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The AppState
     @EnvironmentObject var appState: AppState
+    /// The body of this View
     var body: some View {
         VStack {
-            
             switch kodi.state {
             case .offline:
                 Label(title: {
@@ -31,9 +32,7 @@ struct StartView: View {
                         .aspectRatio(contentMode: .fit)
                 })
                 HostView()
-                
             case .none:
-                
                 Label(title: {
                     VStack(alignment: .leading) {
                         Text("Welcome to Komodio!")
@@ -46,16 +45,15 @@ struct StartView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 })
-                
                 HostView()
             case .loadedLibrary:
                 HomeView()
             default:
-                                    VStack {
-                                        ProgressView()
-                                            .padding()
-                                        Text("Loading your library...")
-                                    }
+                VStack {
+                    ProgressView()
+                        .padding()
+                    Text("Loading your library...")
+                }
             }
         }
     }

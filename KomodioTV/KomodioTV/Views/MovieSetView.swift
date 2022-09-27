@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A View for a set of Movie items
+/// The 'MovieSet' SwiftUI View
 struct MovieSetView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector

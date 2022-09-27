@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// The 'MusicVideos' SwiftUI View
 struct MusicVideosView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector

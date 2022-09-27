@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-/// A collection of Label styles
+/// A collection of SwiftUI Label styles
 struct LabelStyles {
     /// Just a Namespace here...
 }
 
 extension LabelStyles {
 
-    /// Label style for a DetailsView Play Button
+    /// Label style for a ``DetailsView`` Play Button
     struct PlayButton: LabelStyle {
         @Environment(\.isFocused) var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
@@ -32,7 +32,7 @@ extension LabelStyles {
         }
     }
     
-    /// Label style for a DetailsView Button
+    /// Label style for a ``DetailsView`` Button
     struct DetailsButton: LabelStyle {
         @Environment(\.isFocused) var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
@@ -51,7 +51,7 @@ extension LabelStyles {
         }
     }
     
-    /// Label style for details
+    /// Label style for 'KodiItem' details
     struct Details: LabelStyle {
         @Environment(\.isFocused) var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
@@ -63,5 +63,4 @@ extension LabelStyles {
             .padding(.bottom)
         }
     }
-
 }

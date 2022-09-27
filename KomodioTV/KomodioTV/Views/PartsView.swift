@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// A collection of bits ad pieces uses elsewhere
 struct PartsView {
     /// Just a namespace
 }

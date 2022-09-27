@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-/// A collection of Button styles
+/// A collection of SwiftUI Button styles
 struct ButtonStyles {
     /// Just a Namespace here...
 }
 
 extension ButtonStyles {
+    
+    /// The style for a ``DetailsView`` button
     struct DetailsButton: ButtonStyle {
-
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding(0)
                 .font(.headline)
                 .cornerRadius(10)
         }
-
     }
 }
