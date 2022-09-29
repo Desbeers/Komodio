@@ -41,7 +41,7 @@ struct SearchView: View {
                     .font(.title)
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(tvshows) { item in
-                        NavigationLink(destination: DetailsView(item: item)) {
+                        NavigationLink(destination: EpisodesView(tvshow: item)) {
                             KodiArt.Poster(item: item)
                                 .frame(width: 150, height: 225)
                         }
