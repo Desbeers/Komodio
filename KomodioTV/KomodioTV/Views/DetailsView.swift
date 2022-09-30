@@ -63,7 +63,7 @@ extension DetailsView {
                             .padding(.top, 80)
                     }
                     Spacer()
-                    HStack(alignment: .bottom) {
+                    HStack(alignment: .center) {
                         if canPlay {
                             if item.resume.position != 0 {
                                 NavigationLink(destination: KodiPlayerView(video: item, resume: true)) {
@@ -92,11 +92,16 @@ extension DetailsView {
                                 })
                             }
                         }
-                        Text(item.title)
-                            .font(.title)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                            .foregroundColor(.white)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(item.title)
+                                .font(.title2)
+                                .lineLimit(1)
+                            Text("\(secondsToTime(seconds: Double(item.runtime)))")
+                                .font(.caption)
+                                .opacity(0.6)
+                        }
+                        .minimumScaleFactor(0.5)
+                        .foregroundColor(.white)
                     }
                     .labelStyle(LabelStyles.PlayButton())
                     .buttonStyle(ButtonStyles.DetailsButton())
