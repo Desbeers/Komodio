@@ -47,7 +47,7 @@ extension DetailsView {
         /// The body of this View
         var body: some View {
             ZStack(alignment: .bottom) {
-                LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.8), .black]),
+                LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5), .black.opacity(0.8), .black]),
                                startPoint: .top,
                                endPoint: .bottom)
                 .frame(height: 210)
@@ -178,21 +178,22 @@ extension DetailsView {
             for person in movie.cast {
                 cast.append(person.name)
             }
-            return cast.joined(separator: " ∙ ")
+            return cast.prefix(10).joined(separator: " ∙ ")
         }
         /// The body of this View
         var body: some View {
             if !movie.tagline.isEmpty {
                 Text(movie.tagline)
                     .font(.headline)
-                .padding(.bottom)}
+                    .padding(.bottom)
+            }
             Text(movie.plot)
                 .padding(.bottom)
             Label(details, systemImage: "info.circle.fill")
                 .font(.caption)
                 .padding(.bottom)
             if !movie.director.isEmpty {
-                Text("Directed by \(movie.director.joined(separator: " ∙ "))")
+                Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
                     .font(.caption)
                     .padding(.bottom)
             }

@@ -64,7 +64,7 @@ struct MoviesView: View {
             .buttonStyle(.card)
             .padding()
             LazyVGrid(columns: grid, spacing: 0) {
-                ForEach(movies.filter { $0.playcount < (hideWatched ? 1 : 1000) }, id: \.title) { movie in
+                ForEach(movies.filter { $0.playcount < (hideWatched ? 1 : 1000) }, id: \.id) { movie in
                     Group {
                         if movie.media == .movie {
                             MovieItem(movie: movie)
