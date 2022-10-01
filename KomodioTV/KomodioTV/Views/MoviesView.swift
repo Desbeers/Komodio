@@ -122,7 +122,7 @@ struct MoviesView: View {
             movieList = movies.sorted(by: {$0.runtime < $1.runtime})
         }
         if hideWatched {
-            movieList = movies.filter {$0.playcount < 1}
+            movieList = movieList.filter {$0.playcount < 1}
         }
         return movieList
     }
@@ -134,7 +134,6 @@ extension MoviesView {
         let movie: any KodiItem
         @State private var isPresented = false
         var body: some View {
-            
             Button(action: {
                 withAnimation {
                     isPresented.toggle()
