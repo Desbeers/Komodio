@@ -9,18 +9,22 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 /// The 'Movies' SwiftUI View
-/// - Note: Movies that are part of a Movie Set will be grouped together and linked to ``MovieSetView``.
+/// - Note: Movies that are part of a Movie Set will be grouped together and linked to ``MovieSetView`` when sorted by 'title.
 struct MoviesView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The movies to show; loaded by a 'Task'.
-    @State private var movies: [any KodiItem] = []
+    @State private var movies: [Video.Details.Movie] = []
+    /// The movie sets to show; loaded by a 'Task'.
+    @State private var movieSets: [Video.Details.MovieSet] = []
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 300))]
     /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
+    /// Sort items toggle
+    @AppStorage("sortOrder") private var sortOrder: Parts.Sort = .title
     /// The loading state of the view
-    @State private var state: AppState.State = .loading
+    @State private var state: Parts.State = .loading
     /// The body of this View
     var body: some View {
         VStack {
@@ -38,15 +42,15 @@ struct MoviesView: View {
             }
         }
         .animation(.default, value: hideWatched)
+        .animation(.default, value: sortOrder)
         .task(id: kodi.library.movies) {
             if kodi.state != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
                 state = .empty
             } else {
-                /// Remove all movies that are a part of a set and add the sets instead
-                movies = (kodi.library.movieSets + kodi.library.movies.filter({$0.setID == 0}))
-                    .sorted { $0.sortByTitle < $1.sortByTitle }
+                movies = kodi.library.movies
+                movieSets = kodi.library.movieSets
                 state = .ready
             }
         }
@@ -54,20 +58,40 @@ struct MoviesView: View {
     /// The content of this View
     var content: some View {
         ScrollView {
-            Button(action: {
-                hideWatched.toggle()
-            }, label: {
-                Text(hideWatched ? "Show all movies" : "Hide watched movies")
-                    .frame(width: 400)
-                    .padding()
-            })
+            HStack {
+                Button(action: {
+                    hideWatched.toggle()
+                }, label: {
+                    Text(hideWatched ? "Show all movies" : "Hide watched movies")
+                        .frame(width: 400)
+                        .padding()
+                })
+                Picker(selection: $sortOrder, label: Text("Sort order").padding(.leading)) {
+                    ForEach(Array(Parts.Sort.allCases), id: \.self) {
+                        Text($0.rawValue)
+                            .padding(.vertical)
+                            .padding(.trailing)
+                            .frame(width: 240, alignment: .leading)
+                    }
+                }
+                .pickerStyle(.navigationLink)
+            }
             .buttonStyle(.card)
             .padding()
             LazyVGrid(columns: grid, spacing: 0) {
-                ForEach(movies.filter { $0.playcount < (hideWatched ? 1 : 1000) }, id: \.id) { movie in
+                ForEach(filterMovies(movies, sortOrder: sortOrder, hideWatched: hideWatched), id: \.id) { movie in
                     Group {
                         if movie.media == .movie {
                             MovieItem(movie: movie)
+                                .overlay(alignment: .bottom) {
+                                    if sortOrder != .title {
+                                        Text(Parts.secondsToTime(seconds: movie.runtime))
+                                            .frame(maxWidth: .infinity)
+                                            .background(.thinMaterial)
+                                            .cornerRadius(10)
+                                            .padding(2)
+                                    }
+                                }
                                 .padding(.bottom, 40)
                         } else {
                             MovieSetItem(movieSet: movie)
@@ -80,6 +104,27 @@ struct MoviesView: View {
                 }
             }
         }
+    }
+    
+    /// Filyter and sort the list of movies
+    /// - Parameters:
+    ///   - movies: All the movies
+    ///   - sortOrder: The sort order
+    ///   - hideWatched: Book to hide watched movies
+    /// - Returns: A filtered list of movies, optional with 'sets'
+    private func filterMovies(_ movies: [Video.Details.Movie], sortOrder: Parts.Sort, hideWatched: Bool) -> [any KodiItem] {
+        var movieList: [any KodiItem] = []
+        switch sortOrder {
+        case .title:
+            /// Remove all movies that are a part of a set and add the sets instead
+            movieList = (movies.filter({$0.setID == 0}) + self.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
+        case .runtime:
+            movieList = movies.sorted(by: {$0.runtime < $1.runtime})
+        }
+        if hideWatched {
+            movieList = movies.filter {$0.playcount < 1}
+        }
+        return movieList
     }
 }
 

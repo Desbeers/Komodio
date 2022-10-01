@@ -19,7 +19,7 @@ struct TVShowsView: View {
     /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The loading state of the view
-    @State private var state: AppState.State = .loading
+    @State private var state: Parts.State = .loading
     /// The body of this View
     var body: some View {
         VStack {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D72D002528E84837003E39FC /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72D002428E84837003E39FC /* Parts.swift */; };
 		D749AF242815A7AD00A684C8 /* KomodioTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF232815A7AD00A684C8 /* KomodioTVApp.swift */; };
 		D749AF262815A7AD00A684C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D749AF252815A7AD00A684C8 /* ContentView.swift */; };
 		D749AF282815A7AF00A684C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D749AF272815A7AF00A684C8 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D72D002428E84837003E39FC /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D749AF202815A7AD00A684C8 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D749AF232815A7AD00A684C8 /* KomodioTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioTVApp.swift; sourceTree = "<group>"; };
 		D749AF252815A7AD00A684C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D72D002628E85389003E39FC /* General */ = {
+			isa = PBXGroup;
+			children = (
+				D7C406132835860100913078 /* AppState.swift */,
+				D72D002428E84837003E39FC /* Parts.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		D749AF172815A7AD00A684C8 = {
 			isa = PBXGroup;
 			children = (
@@ -90,9 +101,9 @@
 		D749AF222815A7AD00A684C8 /* KomodioTV */ = {
 			isa = PBXGroup;
 			children = (
+				D72D002628E85389003E39FC /* General */,
 				D749AF3F2815B06500A684C8 /* Views */,
 				D749AF232815A7AD00A684C8 /* KomodioTVApp.swift */,
-				D7C406132835860100913078 /* AppState.swift */,
 				D749AF272815A7AF00A684C8 /* Assets.xcassets */,
 				D749AF312815A8AC00A684C8 /* LaunchScreen.storyboard */,
 				D749AF292815A7AF00A684C8 /* Preview Content */,
@@ -238,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D72D002528E84837003E39FC /* Parts.swift in Sources */,
 				D760113B281EEEF20020845A /* LabelStyles.swift in Sources */,
 				D766CC4D28E0ABB6004D5B70 /* StartView.swift in Sources */,
 				D7D5FAA628D0D0CA008ECE8A /* AppState.swift in Sources */,

@@ -37,26 +37,6 @@ extension AppState {
 
 extension AppState {
     
-    /// The state of  loading a View
-    /// - Note: This `enum` is not used in this `class` but in Views that load items via a `Task`
-    enum State {
-        /// The Task is loading the items
-        case loading
-        /// No items where found by the `Task`
-        case empty
-        /// The `Task` is done and items where found
-        case ready
-        /// The host is offline
-        case offline
-        
-        var offlineMessage: Text {
-            Text("Komodio is not connected to a host")
-        }
-    }
-}
-
-extension AppState {
-    
     /// Save the hosts to the cache
     /// - Parameter hosts: The array of hosts
     static func saveHost(host: HostItem) {

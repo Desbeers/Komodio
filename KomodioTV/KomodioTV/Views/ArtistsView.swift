@@ -17,7 +17,7 @@ struct ArtistsView: View {
     /// Define the grid layout
     private let grid = [GridItem(.adaptive(minimum: 340))]
     /// The loading state of the view
-    @State private var state: AppState.State = .loading
+    @State private var state: Parts.State = .loading
     /// Hide watched items toggle
     @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The body of this View

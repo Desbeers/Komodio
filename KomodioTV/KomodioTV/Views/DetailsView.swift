@@ -70,7 +70,7 @@ extension DetailsView {
                                     Label(title: {
                                         VStack(alignment: .leading) {
                                             Text("Resume")
-                                            Text("\(secondsToTime(seconds: item.resume.total - item.resume.position)) to go")
+                                            Text("\(Parts.secondsToTime(seconds: Int(item.resume.total - item.resume.position))) to go")
                                                 .font(.footnote)
                                         }
                                     }, icon: {
@@ -96,7 +96,7 @@ extension DetailsView {
                             Text(item.title)
                                 .font(.title2)
                                 .lineLimit(1)
-                            Text("\(secondsToTime(seconds: Double(item.runtime)))")
+                            Text("\(Parts.secondsToTime(seconds: item.runtime))")
                                 .font(.caption)
                                 .opacity(0.6)
                         }
@@ -112,13 +112,6 @@ extension DetailsView {
             }
             .animation(.default, value: item.playcount)
             .animation(.default, value: item.resume.position)
-        }
-        /// Convert seconds to time
-        private func secondsToTime(seconds: Double) -> String {
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.hour, .minute]
-            formatter.unitsStyle = .brief
-            return formatter.string(from: TimeInterval(seconds))!
         }
     }
     
