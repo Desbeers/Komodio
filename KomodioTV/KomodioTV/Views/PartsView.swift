@@ -9,37 +9,8 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 /// A collection of bits ad pieces uses elsewhere
-struct PartsView {
+enum PartsView {
     /// Just a namespace
-}
-
-// MARK: Watch Status
-
-extension PartsView {
-    
-    /// A View to show a star for unwatched items
-    /// - Note: Movie sets are shown here as well with its own SF symbol
-    struct WatchStatusViewModifier: ViewModifier {
-        /// The Kodi  item
-        let item: any KodiItem
-        /// The modifier
-        func body(content: Content) -> some View {
-            content
-                .overlay(alignment: .topTrailing) {
-                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" : item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled")
-                        .font(.subheadline)
-                        .foregroundColor(.yellow)
-                        .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)
-                }
-        }
-    }
-}
-
-extension View {
-    /// Shortcut to the ``WatchStatusViewModifier``
-    func watchStatus(of item: any KodiItem) -> some View {
-        modifier(PartsView.WatchStatusViewModifier(item: item))
-    }
 }
 
 // MARK: Watch Toggle
@@ -79,7 +50,7 @@ extension PartsView {
                     }
                 }, label: {
                     /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
-                    Label("Mark as finished", systemImage: "eye.fill")
+                    Label("Mark as watched", systemImage: "eye.fill")
                         .labelStyle(LabelStyles.DetailsButton())
                 })
                 Button(action: {
@@ -110,7 +81,12 @@ extension PartsView {
         func body(content: Content) -> some View {
             content
                 .contextMenu {
-                    WatchedToggle(item: item)
+                    if item.resume.position != 0 {
+                        Text("'\(item.title)' is partly watched")
+                        PartsView.ResumeToggle(item: item)
+                    } else {
+                        WatchedToggle(item: item)
+                    }
                     /// - Note: Add a cancel button, because pressing 'menu' does not go back a View
                     Button(action: {
                         ///  No action needed

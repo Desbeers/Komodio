@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A collection of SwiftUI Button styles
-struct ButtonStyles {
+enum ButtonStyles {
     /// Just a Namespace here...
 }
 

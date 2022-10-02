@@ -28,21 +28,22 @@ struct HomeView: View {
                     .font(.title3)
                     .padding(.horizontal, 40)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                Divider()
+                    .padding(.horizontal, 60)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(shelf.inProgress.movies) { movie in
-                            MoviesView.MovieItem(movie: movie)
-                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                            MoviesView.Item(movie: movie, size: .init(width: 150, height: 225), overlay: .timeToGo)
+                                .padding(EdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0))
                         }
-                        .scaleEffect(0.6)
                         ForEach(shelf.inProgress.episodes) { episode in
-                            EpisodesView.Item(episode: episode)
-                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                            EpisodesView.Item(episode: episode, overlay: .timeToGo)
+                                .padding(EdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0))
                         }
                     }
-                    .frame(height: 360)
                     .padding(.horizontal, 80)
                 }
+                .focusSection()
             }
             // MARK: Unwatched movies
             if !shelf.movies.isEmpty {
@@ -50,17 +51,19 @@ struct HomeView: View {
                     .font(.title3)
                     .padding(.horizontal, 40)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                Divider()
+                    .padding(.horizontal, 60)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(shelf.movies) { movie in
-                            MoviesView.MovieItem(movie: movie)
-                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                            MoviesView.Item(movie: movie)
+                                .padding(EdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0))
                                 .focused($selectedMovie, equals: movie)
                         }
                     }
-                    
                     .padding(.horizontal, 80)
                 }
+                .focusSection()
                 if let selection = selectedMovie {
                     Text("\(selection.plot)")
                         .lineLimit(2)
@@ -74,25 +77,28 @@ struct HomeView: View {
                     .font(.title3)
                     .padding(.horizontal, 40)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                Divider()
+                    .padding(.horizontal, 60)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(shelf.episodes) { episode in
                             EpisodesView.Item(episode: episode)
-                                .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
+                                .padding(EdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0))
                                 .focused($selectedEpisode, equals: episode)
                         }
                     }
                     .padding(.horizontal, 80)
                 }
+                .focusSection()
                 if let selection = selectedEpisode {
                     Text("\(selection.showTitle): season \(selection.season), episode \(selection.episode)")
                 }
             }
         }
         .edgesIgnoringSafeArea(.horizontal)
-        .buttonStyle(.card)
         .animation(.default, value: selectedMovie)
         .animation(.default, value: selectedEpisode)
+        .animation(.default, value: shelf.animate)
         .task(id: kodi.library.movies) {
             shelf.movies = Array(kodi.library.movies
                 .filter { $0.playcount == 0 && $0.resume.position == 0 }
@@ -102,6 +108,7 @@ struct HomeView: View {
                 .filter { $0.resume.position != 0 }
                 .sorted { $0.dateAdded > $1.dateAdded }
                 .prefix(10))
+            shelf.animate.toggle()
         }
         .task(id: kodi.library.episodes) {
             shelf.episodes = Array(kodi.library.episodes
@@ -116,6 +123,7 @@ struct HomeView: View {
                 .unique { $0.tvshowID }
                 .sorted { $0.dateAdded > $1.dateAdded }
             )
+            shelf.animate.toggle()
         }
     }
 }
@@ -125,6 +133,8 @@ extension HomeView {
     struct Shelf {
         var movies: [Video.Details.Movie] = []
         var episodes: [Video.Details.Episode] = []
+        
+        var animate: Bool = false
         
         var inProgress = InProgress()
     

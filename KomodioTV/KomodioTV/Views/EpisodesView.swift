@@ -200,6 +200,8 @@ extension EpisodesView {
     /// A View with an episode item
     struct Item: View {
         let episode: Video.Details.Episode
+        var size = CGSize(width: 400, height: 225)
+        var overlay: Parts.Overlay = .none
         @State private var isPresented = false
         var body: some View {
             Button(action: {
@@ -207,15 +209,22 @@ extension EpisodesView {
                     isPresented.toggle()
                 }
             }, label: {
-                VStack {
-                    KodiArt.Art(file: episode.thumbnail)
-                        .frame(width: 400, height: 225)
-                        .watchStatus(of: episode)
-                    Text(episode.showTitle)
-                        .font(.caption2)
-                        .padding(.bottom, 8)
-                }
+                KodiArt.Art(file: episode.thumbnail)
+                    .scaledToFill()
+                    .frame(width: size.width, height: size.height)
+                    .watchStatus(of: episode)
+                    .overlay(alignment: .bottom) {
+                        Text(episode.showTitle)
+                            .font(.caption2)
+                            .padding(.bottom, overlay == .none ? 0 : 20)
+                            .frame(maxWidth: .infinity)
+                            .background(.thinMaterial)
+                    }
+                    .itemOverlay(for: episode, overlay: overlay)
             })
+            .buttonStyle(.card)
+            /// - Note: Context Menu must go after the Button Style or else it does not work...
+            .contextMenu(for: episode)
             .fullScreenCover(isPresented: $isPresented) {
                 DetailsView(item: episode)
             }

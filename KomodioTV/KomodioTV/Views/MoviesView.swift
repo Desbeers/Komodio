@@ -82,31 +82,19 @@ struct MoviesView: View {
                 ForEach(filterMovies(movies, sortOrder: sortOrder, hideWatched: hideWatched), id: \.id) { movie in
                     Group {
                         if movie.media == .movie {
-                            MovieItem(movie: movie)
-                                .overlay(alignment: .bottom) {
-                                    if sortOrder != .title {
-                                        Text(Parts.secondsToTime(seconds: movie.runtime))
-                                            .frame(maxWidth: .infinity)
-                                            .background(.thinMaterial)
-                                            .cornerRadius(10)
-                                            .padding(2)
-                                    }
-                                }
+                            Item(movie: movie, overlay: movie.resume.position == 0 ? (sortOrder == .title ? .none : .runtime) : .timeToGo)
                                 .padding(.bottom, 40)
                         } else {
-                            MovieSetItem(movieSet: movie)
+                            MovieSetView.Item(movieSet: movie)
                                 .padding(.bottom, 40)
                         }
                     }
-                    .buttonStyle(.card)
-                    /// - Note: Context Menu must go after the Button Style or else it does not work...
-                    .contextMenu(for: movie)
                 }
             }
         }
     }
     
-    /// Filyter and sort the list of movies
+    /// Filter and sort the list of movies
     /// - Parameters:
     ///   - movies: All the movies
     ///   - sortOrder: The sort order
@@ -130,8 +118,11 @@ struct MoviesView: View {
 
 extension MoviesView {
     
-    struct MovieItem: View {
+    /// A View with an movie item
+    struct Item: View {
         let movie: any KodiItem
+        var size = CGSize(width: 300, height: 450)
+        var overlay: Parts.Overlay = .none
         @State private var isPresented = false
         var body: some View {
             Button(action: {
@@ -141,23 +132,15 @@ extension MoviesView {
             }, label: {
                 KodiArt.Poster(item: movie)
                     .scaledToFill()
-                    .frame(width: 300, height: 450)
+                    .frame(width: size.width, height: size.height)
                     .watchStatus(of: movie)
+                    .itemOverlay(for: movie, overlay: overlay)
             })
+            .buttonStyle(.card)
+            /// - Note: Context Menu must go after the Button Style or else it does not work...
+            .contextMenu(for: movie)
             .fullScreenCover(isPresented: $isPresented) {
                 DetailsView(item: movie)
-            }
-        }
-    }
-    
-    struct MovieSetItem: View {
-        let movieSet: any KodiItem
-        var body: some View {
-            NavigationLink(destination: MovieSetView(set: movieSet as! Video.Details.MovieSet)) {
-                KodiArt.Poster(item: movieSet)
-                    .scaledToFill()
-                    .frame(width: 300, height: 450)
-                    .watchStatus(of: movieSet)
             }
         }
     }

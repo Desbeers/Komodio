@@ -18,8 +18,6 @@ struct ArtistsView: View {
     private let grid = [GridItem(.adaptive(minimum: 340))]
     /// The loading state of the view
     @State private var state: Parts.State = .loading
-    /// Hide watched items toggle
-    @AppStorage("hideWatched") private var hideWatched: Bool = false
     /// The body of this View
     var body: some View {
         VStack {
@@ -52,7 +50,7 @@ struct ArtistsView: View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(artists, id: \.self) { artist in
-                    ArtistItem(artist: artist)
+                    Item(artist: artist)
                         .buttonStyle(.card)
                         .padding(.bottom, 40)
                 }
@@ -63,25 +61,31 @@ struct ArtistsView: View {
 
 extension ArtistsView {
     
-    struct ArtistItem: View {
+    /// A View with an artist item
+    struct Item: View {
         let artist: String
         var body: some View {
             NavigationLink(destination: MusicVideosView(artist: artist)) {
                 VStack {
-                    
                     if let artistDetails = KodiConnector.shared.library.artists.first(where: {$0.artist == artist}) {
                         
                         KodiArt.Poster(item: artistDetails)
                             .frame(width: 300, height: 300)
+                            .itemOverlay(for: artistDetails, overlay: .title)
                     } else {
                         Image(systemName: "music.quarternote.3")
                             .resizable()
                             .padding(80)
                             .frame(width: 300, height: 300)
+                            .overlay(alignment: .bottom) {
+                                Text(artist)
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(2)
+                                    .background(.thinMaterial)
+                                    .shadow(radius: 5)
+                            }
                     }
-                    Text(artist)
-                        .font(.caption)
-                        .padding(.bottom)
                 }
             }
         }

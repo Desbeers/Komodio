@@ -38,6 +38,8 @@ struct MusicAlbumView: View {
 }
 
 extension MusicAlbumView {
+    
+    /// A View with a music video album item
     struct Item: View {
         let musicVideo: Video.Details.MusicVideo
         @State private var isPresented = false
@@ -48,14 +50,10 @@ extension MusicAlbumView {
                     isPresented.toggle()
                 }
             }, label: {
-                VStack {
-                    KodiArt.Art(file: musicVideo.art.icon)
-                        .frame(width: 480, height: 270)
-                    Text(musicVideo.title)
-                        .font(.caption)
-                        .padding(.bottom)
-                }
+                KodiArt.Art(file: musicVideo.art.icon)
+                    .frame(width: 480, height: 270)
                     .watchStatus(of: musicVideo)
+                    .itemOverlay(for: musicVideo, overlay: .title)
             })
             .buttonStyle(.card)
             .fullScreenCover(isPresented: $isPresented) {

@@ -42,7 +42,7 @@ extension DetailsView {
         let item: any KodiItem
         /// Can we play this item?
         var canPlay: Bool {
-            KomodioTVApp.fileExtension.contains(URL(filePath: item.file).pathExtension)
+            Parts.fileExtension.contains(URL(filePath: item.file).pathExtension)
         }
         /// The body of this View
         var body: some View {

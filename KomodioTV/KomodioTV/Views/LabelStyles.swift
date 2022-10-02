@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A collection of SwiftUI Label styles
-struct LabelStyles {
+enum LabelStyles {
     /// Just a Namespace here...
 }
 

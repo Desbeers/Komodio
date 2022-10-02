@@ -31,6 +31,7 @@
 		D79C4D5528796FCA00EBFAE8 /* MusicVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D5428796FCA00EBFAE8 /* MusicVideosView.swift */; };
 		D79C4D57287986B900EBFAE8 /* MusicAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79C4D56287986B900EBFAE8 /* MusicAlbumView.swift */; };
 		D7D5FAA628D0D0CA008ECE8A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C406132835860100913078 /* AppState.swift */; };
+		D7FD10C028E99136000FE43E /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FD10BF28E99136000FE43E /* Modifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		D7AFBAA3281BC827001CCD89 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D7AFBAA5281BC877001CCD89 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D7C406132835860100913078 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D7FD10BF28E99136000FE43E /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				D79C4D4628771E7A00EBFAE8 /* PartsView.swift */,
 				D760113A281EEEF20020845A /* LabelStyles.swift */,
 				D7601138281EED6C0020845A /* ButtonStyles.swift */,
+				D7FD10BF28E99136000FE43E /* Modifiers.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				D79C4D5528796FCA00EBFAE8 /* MusicVideosView.swift in Sources */,
 				D749AF482815C4A900A684C8 /* MovieSetView.swift in Sources */,
 				D749AF242815A7AD00A684C8 /* KomodioTVApp.swift in Sources */,
+				D7FD10C028E99136000FE43E /* Modifiers.swift in Sources */,
 				D79C4D57287986B900EBFAE8 /* MusicAlbumView.swift in Sources */,
 				D7601139281EED6C0020845A /* ButtonStyles.swift in Sources */,
 				D79C4D4B2877258C00EBFAE8 /* TVShowsView.swift in Sources */,

@@ -29,7 +29,7 @@ struct MovieSetView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(movies) { movie in
-                            MoviesView.MovieItem(movie: movie)
+                            MoviesView.Item(movie: movie)
                                 .padding(EdgeInsets(top: 40, leading: 0, bottom: 80, trailing: 0))
                                 .focused($selectedMovie, equals: movie)
                         }
@@ -52,9 +52,29 @@ struct MovieSetView: View {
             Spacer()
         }
         .animation(.default, value: selectedMovie)
-        .buttonStyle(.card)
         .task(id: kodi.library.movies) {
             movies = kodi.library.movies.filter { $0.setID == set.setID }.sorted {$0.year < $1.year}
+        }
+    }
+}
+
+extension MovieSetView {
+    
+    /// A View with an movie set item
+    struct Item: View {
+        let movieSet: any KodiItem
+        var overlay = Parts.Overlay.movieSet
+        var body: some View {
+            NavigationLink(destination: MovieSetView(set: movieSet as! Video.Details.MovieSet)) {
+                KodiArt.Poster(item: movieSet)
+                    .scaledToFill()
+                    .frame(width: 300, height: 450)
+                    .watchStatus(of: movieSet)
+                    .itemOverlay(for: movieSet, overlay: .movieSet)
+            }
+            .buttonStyle(.card)
+            /// - Note: Context Menu must go after the Button Style or else it does not work...
+            .contextMenu(for: movieSet)
         }
     }
 }
