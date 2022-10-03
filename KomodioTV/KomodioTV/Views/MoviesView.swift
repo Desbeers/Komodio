@@ -79,7 +79,7 @@ struct MoviesView: View {
             .buttonStyle(.card)
             .padding()
             LazyVGrid(columns: grid, spacing: 0) {
-                ForEach(filterMovies(movies, sortOrder: sortOrder, hideWatched: hideWatched), id: \.id) { movie in
+                ForEach(filterMovies(movies: movies, movieSets: movieSets, sortOrder: sortOrder, hideWatched: hideWatched), id: \.id) { movie in
                     Group {
                         if movie.media == .movie {
                             Item(movie: movie, overlay: movie.resume.position == 0 ? (sortOrder == .title ? .none : .runtime) : .timeToGo)
@@ -100,7 +100,7 @@ struct MoviesView: View {
     ///   - sortOrder: The sort order
     ///   - hideWatched: Book to hide watched movies
     /// - Returns: A filtered list of movies, optional with 'sets'
-    private func filterMovies(_ movies: [Video.Details.Movie], sortOrder: Parts.Sort, hideWatched: Bool) -> [any KodiItem] {
+    private func filterMovies(movies: [Video.Details.Movie], movieSets: [Video.Details.MovieSet], sortOrder: Parts.Sort, hideWatched: Bool) -> [any KodiItem] {
         var movieList: [any KodiItem] = []
         switch sortOrder {
         case .title:

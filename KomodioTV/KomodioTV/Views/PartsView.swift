@@ -24,15 +24,15 @@ extension PartsView {
         let item: any KodiItem
         /// The body of this View
         var body: some View {
-                Button(action: {
-                    Task {
-                        await item.togglePlayedState()
-                    }
-                }, label: {
-                    /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
-                    Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
-                        .labelStyle(LabelStyles.DetailsButton())
-                })
+            Button(action: {
+                Task {
+                    await item.togglePlayedState()
+                }
+            }, label: {
+                /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
+                Label(item.playcount == 0 ? "Mark as watched" : "Mark as new", systemImage: item.playcount == 0 ? "eye.fill" : "eye")
+                    .labelStyle(LabelStyles.DetailsButton())
+            })
         }
     }
     
@@ -65,43 +65,34 @@ extension PartsView {
             }
         }
     }
-}
-
-// MARK: Context Menu
-
-extension PartsView {
     
-    /// View Modifier to show a Context Menu
-    struct ContextMenuViewModifier: ViewModifier {
-        /// The Kodi item
-        let item: any KodiItem
-        /// Add a Context Menu
-        /// - Parameter content: The content of the View
-        /// - Returns: A new View with a Context Menu added
-        func body(content: Content) -> some View {
-            content
-                .contextMenu {
-                    if item.resume.position != 0 {
-                        Text("'\(item.title)' is partly watched")
-                        PartsView.ResumeToggle(item: item)
-                    } else {
-                        WatchedToggle(item: item)
+    /// A Button to toggle the watched state of a movie set
+    /// - Note: Don't add a buttonstyle, else it will not work as context menu
+    struct MovieSetToggle: View {
+        /// The set we want to toggle
+        let set: Video.Details.MovieSet
+        /// The body of this View
+        var body: some View {
+            VStack {
+                Button(action: {
+                    Task {
+                        await set.markAsPlayed()
                     }
-                    /// - Note: Add a cancel button, because pressing 'menu' does not go back a View
-                    Button(action: {
-                        ///  No action needed
-                    }, label: {
-                        Text("Cancel")
-                    })
-                }
+                }, label: {
+                    /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
+                    Label("Mark all movies as watched", systemImage: "eye.fill")
+                        .labelStyle(LabelStyles.DetailsButton())
+                })
+                Button(action: {
+                    Task {
+                        await set.markAsNew()
+                    }
+                }, label: {
+                    /// - Note: below will only render as Text in the Context Menu but as a full Label for a 'normal' button
+                    Label("Mark all movies as new", systemImage: "eye")
+                        .labelStyle(LabelStyles.DetailsButton())
+                })
+            }
         }
-    }
-}
-
-extension View {
-    
-    /// Shortcut for  ``PartsView/ContextMenuViewModifier``
-    func contextMenu(for item: any KodiItem) -> some View {
-        modifier(PartsView.ContextMenuViewModifier(item: item))
     }
 }

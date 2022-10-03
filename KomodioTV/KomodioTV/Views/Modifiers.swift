@@ -28,9 +28,7 @@ extension Modifiers {
         func body(content: Content) -> some View {
             content
                 .overlay(alignment: .bottom) {
-                    
                     switch overlay {
-                        
                     case .title:
                         Text(item.title)
                             .font(.caption)
@@ -38,14 +36,18 @@ extension Modifiers {
                             .padding(2)
                             .background(.thinMaterial)
                             .shadow(radius: 20)
-                        
                     case .movieSet:
-                        Label("Movie Set", systemImage: "circle.grid.cross.fill")
-                            .font(.caption)
-                            .frame(maxWidth: .infinity)
-                            .padding(2)
-                            .background(.thinMaterial)
-                            .shadow(radius: 20)
+                        Label(title: {
+                            Text("Movie Set")
+                        }, icon: {
+                            Image(systemName: "circle.grid.cross.fill")
+                                .imageScale(.small)
+                        })
+                        .font(.caption)
+                        .frame(maxWidth: .infinity)
+                        .padding(2)
+                        .background(.thinMaterial)
+                        .shadow(radius: 20)
                     case .runtime:
                         Text(Parts.secondsToTime(seconds: item.runtime))
                             .font(.caption)
@@ -99,5 +101,50 @@ extension View {
     /// Shortcut to the ``Modifiers/WatchStatus``
     func watchStatus(of item: any KodiItem) -> some View {
         modifier(Modifiers.WatchStatus(item: item))
+    }
+}
+
+// MARK: Context Menu
+
+extension Modifiers {
+    
+    /// View Modifier to show a Context Menu
+    struct ContextMenu: ViewModifier {
+        /// The Kodi item
+        let item: any KodiItem
+        /// Add a Context Menu
+        /// - Parameter content: The content of the View
+        /// - Returns: A new View with a Context Menu added
+        func body(content: Content) -> some View {
+            content
+                .contextMenu {
+                    if item.resume.position != 0 {
+                        Text("'\(item.title)' is partly watched")
+                        PartsView.ResumeToggle(item: item)
+                    } else {
+                        Text("'\(item.title)'")
+                        switch item {
+                        case let movieSet as Video.Details.MovieSet:
+                            PartsView.MovieSetToggle(set: movieSet)
+                        default:
+                            PartsView.WatchedToggle(item: item)
+                        }
+                    }
+                    /// - Note: Add a cancel button, because pressing 'menu' does not go back a View
+                    Button(action: {
+                        ///  No action needed
+                    }, label: {
+                        Text("Cancel")
+                    })
+                }
+        }
+    }
+}
+
+extension View {
+    
+    /// Shortcut for  ``Modifiers/ContextMenu``
+    func contextMenu(for item: any KodiItem) -> some View {
+        modifier(Modifiers.ContextMenu(item: item))
     }
 }
