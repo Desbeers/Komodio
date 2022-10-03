@@ -12,12 +12,11 @@ import SwiftlyKodiAPI
 struct HomeView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    @State var movies: [Video.Details.Movie] = []
-    @State var episodes: [Video.Details.Episode] = []
-    
+    /// The items to show in this View
     @State var shelf = Shelf()
-    
+    /// The focussed movie
     @FocusState var selectedMovie: Video.Details.Movie?
+    /// The focussed TV show
     @FocusState var selectedEpisode: Video.Details.Episode?
     /// The body of this View
     var body: some View {
@@ -130,14 +129,14 @@ struct HomeView: View {
 
 extension HomeView {
     
+    /// The items to show in this View
     struct Shelf {
         var movies: [Video.Details.Movie] = []
         var episodes: [Video.Details.Episode] = []
-        
-        var animate: Bool = false
-        
         var inProgress = InProgress()
-    
+        /// Dirty trick to get animations for this Struct
+        var animate: Bool = false
+        /// The 'in progress items
         struct InProgress {
             var movies: [Video.Details.Movie] = []
             var episodes: [Video.Details.Episode] = []

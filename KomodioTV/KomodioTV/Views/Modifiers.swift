@@ -56,8 +56,22 @@ extension Modifiers {
                             .background(.thinMaterial)
                             .shadow(radius: 20)
                     case .timeToGo:
-                        ProgressView(value: item.resume.position, total: item.resume.total)
-                            .padding(8)
+                        /// ProgressView flickers a lot, so, a custom View...
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                Rectangle()
+                                    .frame(width: geometry.size.width, height: geometry.size.height)
+                                    .opacity(0.6)
+                                    .foregroundColor(.black)
+                                
+                                Rectangle()
+                                    .frame(width: min(CGFloat(item.resume.position / item.resume.total) * geometry.size.width, geometry.size.width), height: geometry.size.height)
+                                    .foregroundColor(.gray)
+                            }
+                            .cornerRadius(8)
+                        }
+                        .frame(height: 10)
+                        .padding(8)
                     default:
                         EmptyView()
                     }

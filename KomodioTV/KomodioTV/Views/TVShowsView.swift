@@ -60,7 +60,7 @@ struct TVShowsView: View {
             .padding()
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(tvshows.filter { $0.playcount < (hideWatched ? 1 : 1000) }) { tvshow in
-                    TVShowItem(tvshow: tvshow)
+                    Item(tvshow: tvshow)
                     .buttonStyle(.card)
                     /// - Note: Context Menu must go after the Button Style or else it does not work...
                     .contextMenu(for: tvshow)
@@ -73,11 +73,12 @@ struct TVShowsView: View {
 
 extension TVShowsView {
     
-    struct TVShowItem: View {
+    struct Item: View {
         let tvshow: Video.Details.TVShow
         var body: some View {
             NavigationLink(destination: EpisodesView(tvshow: tvshow)) {
                 KodiArt.Poster(item: tvshow)
+                    .scaledToFill()
                     .frame(width: 300, height: 450)
                     .watchStatus(of: tvshow)
             }
