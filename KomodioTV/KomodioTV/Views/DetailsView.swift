@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+import SwiftlyKodiPlayer
 
 /// The 'Details' SwiftUI View for a 'KodiItem'
 struct DetailsView: View {
@@ -40,10 +41,6 @@ extension DetailsView {
     struct TopView: View {
         /// The item to show
         let item: any KodiItem
-        /// Can we play this item?
-        var canPlay: Bool {
-            Parts.fileExtension.contains(URL(filePath: item.file).pathExtension)
-        }
         /// The body of this View
         var body: some View {
             ZStack(alignment: .bottom) {
@@ -52,45 +49,33 @@ extension DetailsView {
                                endPoint: .bottom)
                 .frame(height: 210)
                 VStack(alignment: .leading) {
-                    if !canPlay {
-                        Label("Komodio cannot play this type of file", systemImage: "lock.square.fill")
-                            .font(.headline)
-                            .padding()
-                            .focusable()
-                            .background(.thinMaterial)
-                            .cornerRadius(10)
-                            .padding(.horizontal, 80)
-                            .padding(.top, 80)
-                    }
                     Spacer()
                     HStack(alignment: .center) {
-                        if canPlay {
-                            if item.resume.position != 0 {
-                                NavigationLink(destination: KodiPlayerView(video: item, resume: true)) {
-                                    Label(title: {
-                                        VStack(alignment: .leading) {
-                                            Text("Resume")
-                                            Text("\(Parts.secondsToTime(seconds: Int(item.resume.total - item.resume.position))) to go")
-                                                .font(.footnote)
-                                        }
-                                    }, icon: {
-                                        Image(systemName: "play.fill")
-                                    })
-                                }
-                            }
-                            NavigationLink(destination: KodiPlayerView(video: item)) {
+                        if item.resume.position != 0 {
+                            NavigationLink(destination: KodiPlayerView(item: item, resume: true)) {
                                 Label(title: {
                                     VStack(alignment: .leading) {
-                                        Text("Play")
-                                        if item.resume.position != 0 {
-                                            Text("From beginning")
-                                                .font(.footnote)
-                                        }
+                                        Text("Resume")
+                                        Text("\(Parts.secondsToTime(seconds: item.runtime - Int(item.resume.position))) to go")
+                                            .font(.footnote)
                                     }
                                 }, icon: {
                                     Image(systemName: "play.fill")
                                 })
                             }
+                        }
+                        NavigationLink(destination: KodiPlayerView(item: item)) {
+                            Label(title: {
+                                VStack(alignment: .leading) {
+                                    Text("Play")
+                                    if item.resume.position != 0 {
+                                        Text("From beginning")
+                                            .font(.footnote)
+                                    }
+                                }
+                            }, icon: {
+                                Image(systemName: "play.fill")
+                            })
                         }
                         VStack(alignment: .leading, spacing: 0) {
                             Text(item.title)
