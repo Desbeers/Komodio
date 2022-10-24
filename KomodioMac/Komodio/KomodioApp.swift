@@ -20,8 +20,13 @@ struct KomodioMacApp: App {
             MainView()
                 .environmentObject(kodi)
                 .environmentObject(appState)
-                .task {
-                    kodi.connect(host: .init(ip: "192.168.11.200", media: .video))
+                .task(id: appState.host) {
+                    if let host = appState.host {
+                        if kodi.state == .none {
+                            print("Load new host")
+                            kodi.connect(host: host)
+                        }
+                    }
                 }
         }
         .windowToolbarStyle(.unifiedCompact)

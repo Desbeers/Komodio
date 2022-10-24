@@ -33,14 +33,5 @@ struct MainView: View {
                 DetailsView()
             })
         .environmentObject(scene)
-//        .toolbar{
-//            ToolbarItem(placement: .navigation) {
-//                Button(action: {
-//                    
-//                }, label: {
-//                    Image(systemName: "chevron.backward")
-//                })
-//            }
-//        }
     }
 }
