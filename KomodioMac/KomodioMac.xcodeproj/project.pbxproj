@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D71BD53529056A5C00037DC9 /* KomodioMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53429056A5C00037DC9 /* KomodioMacApp.swift */; };
+		D71BD53729056A5C00037DC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53629056A5C00037DC9 /* MainView.swift */; };
+		D71BD53929056A5E00037DC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
+		D71BD53C29056A5E00037DC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */; };
+		D71BD54529056AD800037DC9 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */; };
+		D71BD54829056C8F00037DC9 /* SwiftlyKodiPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */; };
+		D71BD54C29056F1100037DC9 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Route.swift */; };
+		D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54D29056F3700037DC9 /* SidebarView.swift */; };
+		D71BD55029056FA500037DC9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54F29056FA500037DC9 /* AppState.swift */; };
+		D71BD55229056FB500037DC9 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
+		D71BD5542905726A00037DC9 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
+		D71BD55629057E6600037DC9 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55529057E6600037DC9 /* DetailsView.swift */; };
+		D71BD55829057F1A00037DC9 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55729057F1A00037DC9 /* Buttons.swift */; };
+		D71BD55A29057FE400037DC9 /* VideoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* VideoItem.swift */; };
+		D71BD55C2905809900037DC9 /* WindowManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55B2905809900037DC9 /* WindowManagement.swift */; };
+		D71BD55E290583F600037DC9 /* TVShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55D290583F600037DC9 /* TVShowsView.swift */; };
+		D71BD5602905849A00037DC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55F2905849A00037DC9 /* ContentView.swift */; };
+		D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD561290595FF00037DC9 /* Modifiers.swift */; };
+		D71BD56429059B1400037DC9 /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56329059B1400037DC9 /* SeasonView.swift */; };
+		D71BD56629059B6000037DC9 /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56529059B6000037DC9 /* EpisodeView.swift */; };
+		D71BD56829059C6D00037DC9 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56729059C6D00037DC9 /* SeasonsView.swift */; };
+		D7325D522906852000D15D79 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D71BD53129056A5C00037DC9 /* KomodioMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KomodioMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D71BD53429056A5C00037DC9 /* KomodioMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioMacApp.swift; sourceTree = "<group>"; };
+		D71BD53629056A5C00037DC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D71BD53829056A5E00037DC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D71BD53D29056A5E00037DC9 /* KomodioMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KomodioMac.entitlements; sourceTree = "<group>"; };
+		D71BD54B29056F1100037DC9 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		D71BD54D29056F3700037DC9 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		D71BD54F29056FA500037DC9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D71BD55129056FB500037DC9 /* SceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneState.swift; sourceTree = "<group>"; };
+		D71BD5532905726A00037DC9 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
+		D71BD55529057E6600037DC9 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		D71BD55729057F1A00037DC9 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		D71BD55929057FE400037DC9 /* VideoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoItem.swift; sourceTree = "<group>"; };
+		D71BD55B2905809900037DC9 /* WindowManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManagement.swift; sourceTree = "<group>"; };
+		D71BD55D290583F600037DC9 /* TVShowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsView.swift; sourceTree = "<group>"; };
+		D71BD55F2905849A00037DC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D71BD561290595FF00037DC9 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		D71BD56329059B1400037DC9 /* SeasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonView.swift; sourceTree = "<group>"; };
+		D71BD56529059B6000037DC9 /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
+		D71BD56729059C6D00037DC9 /* SeasonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
+		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D71BD52E29056A5C00037DC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D71BD54529056AD800037DC9 /* SwiftlyKodiAPI in Frameworks */,
+				D71BD54829056C8F00037DC9 /* SwiftlyKodiPlayer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D71BD52829056A5C00037DC9 = {
+			isa = PBXGroup;
+			children = (
+				D71BD53329056A5C00037DC9 /* KomodioMac */,
+				D71BD53229056A5C00037DC9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D71BD53229056A5C00037DC9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D71BD53129056A5C00037DC9 /* KomodioMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D71BD53329056A5C00037DC9 /* KomodioMac */ = {
+			isa = PBXGroup;
+			children = (
+				D71BD54A29056F0500037DC9 /* General */,
+				D71BD54929056CA400037DC9 /* Views */,
+				D71BD53429056A5C00037DC9 /* KomodioMacApp.swift */,
+				D71BD53829056A5E00037DC9 /* Assets.xcassets */,
+				D71BD53D29056A5E00037DC9 /* KomodioMac.entitlements */,
+				D71BD53A29056A5E00037DC9 /* Preview Content */,
+			);
+			path = KomodioMac;
+			sourceTree = "<group>";
+		};
+		D71BD53A29056A5E00037DC9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D71BD54929056CA400037DC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D71BD53629056A5C00037DC9 /* MainView.swift */,
+				D71BD54D29056F3700037DC9 /* SidebarView.swift */,
+				D71BD55F2905849A00037DC9 /* ContentView.swift */,
+				D71BD5532905726A00037DC9 /* MoviesView.swift */,
+				D7325D512906852000D15D79 /* MovieSetView.swift */,
+				D71BD55D290583F600037DC9 /* TVShowsView.swift */,
+				D71BD56729059C6D00037DC9 /* SeasonsView.swift */,
+				D71BD56329059B1400037DC9 /* SeasonView.swift */,
+				D71BD56529059B6000037DC9 /* EpisodeView.swift */,
+				D71BD55529057E6600037DC9 /* DetailsView.swift */,
+				D71BD55729057F1A00037DC9 /* Buttons.swift */,
+				D71BD561290595FF00037DC9 /* Modifiers.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D71BD54A29056F0500037DC9 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				D71BD54B29056F1100037DC9 /* Route.swift */,
+				D71BD54F29056FA500037DC9 /* AppState.swift */,
+				D71BD55129056FB500037DC9 /* SceneState.swift */,
+				D71BD55929057FE400037DC9 /* VideoItem.swift */,
+				D71BD55B2905809900037DC9 /* WindowManagement.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D71BD53029056A5C00037DC9 /* KomodioMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "KomodioMac" */;
+			buildPhases = (
+				D71BD52D29056A5C00037DC9 /* Sources */,
+				D71BD52E29056A5C00037DC9 /* Frameworks */,
+				D71BD52F29056A5C00037DC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KomodioMac;
+			packageProductDependencies = (
+				D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */,
+				D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */,
+			);
+			productName = KomodioMac;
+			productReference = D71BD53129056A5C00037DC9 /* KomodioMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D71BD52929056A5C00037DC9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					D71BD53029056A5C00037DC9 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+				};
+			};
+			buildConfigurationList = D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "KomodioMac" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D71BD52829056A5C00037DC9;
+			packageReferences = (
+				D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */,
+				D71BD54629056C8F00037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiPlayer" */,
+			);
+			productRefGroup = D71BD53229056A5C00037DC9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D71BD53029056A5C00037DC9 /* KomodioMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D71BD52F29056A5C00037DC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D71BD53C29056A5E00037DC9 /* Preview Assets.xcassets in Resources */,
+				D71BD53929056A5E00037DC9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D71BD52D29056A5C00037DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D71BD56629059B6000037DC9 /* EpisodeView.swift in Sources */,
+				D71BD56429059B1400037DC9 /* SeasonView.swift in Sources */,
+				D71BD55A29057FE400037DC9 /* VideoItem.swift in Sources */,
+				D71BD55C2905809900037DC9 /* WindowManagement.swift in Sources */,
+				D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */,
+				D71BD55829057F1A00037DC9 /* Buttons.swift in Sources */,
+				D7325D522906852000D15D79 /* MovieSetView.swift in Sources */,
+				D71BD55229056FB500037DC9 /* SceneState.swift in Sources */,
+				D71BD54C29056F1100037DC9 /* Route.swift in Sources */,
+				D71BD55029056FA500037DC9 /* AppState.swift in Sources */,
+				D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */,
+				D71BD5542905726A00037DC9 /* MoviesView.swift in Sources */,
+				D71BD55629057E6600037DC9 /* DetailsView.swift in Sources */,
+				D71BD56829059C6D00037DC9 /* SeasonsView.swift in Sources */,
+				D71BD55E290583F600037DC9 /* TVShowsView.swift in Sources */,
+				D71BD5602905849A00037DC9 /* ContentView.swift in Sources */,
+				D71BD53729056A5C00037DC9 /* MainView.swift in Sources */,
+				D71BD53529056A5C00037DC9 /* KomodioMacApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D71BD53E29056A5E00037DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D71BD53F29056A5E00037DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		D71BD54129056A5E00037DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KomodioMac/KomodioMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"KomodioMac/Preview Content\"";
+				DEVELOPMENT_TEAM = FHPCJ7396C;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.KomodioMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D71BD54229056A5E00037DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KomodioMac/KomodioMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"KomodioMac/Preview Content\"";
+				DEVELOPMENT_TEAM = FHPCJ7396C;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.KomodioMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "KomodioMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D71BD53E29056A5E00037DC9 /* Debug */,
+				D71BD53F29056A5E00037DC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "KomodioMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D71BD54129056A5E00037DC9 /* Debug */,
+				D71BD54229056A5E00037DC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Desbeers/SwiftlyKodiAPI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		D71BD54629056C8F00037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiPlayer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Desbeers/SwiftlyKodiPlayer";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */;
+			productName = SwiftlyKodiAPI;
+		};
+		D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D71BD54629056C8F00037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiPlayer" */;
+			productName = SwiftlyKodiPlayer;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D71BD52929056A5C00037DC9 /* Project object */;
+}
