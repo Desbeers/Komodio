@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D71BD53529056A5C00037DC9 /* KomodioMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53429056A5C00037DC9 /* KomodioMacApp.swift */; };
+		D71BD53529056A5C00037DC9 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53429056A5C00037DC9 /* KomodioApp.swift */; };
 		D71BD53729056A5C00037DC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53629056A5C00037DC9 /* MainView.swift */; };
 		D71BD53929056A5E00037DC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D71BD53C29056A5E00037DC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */; };
@@ -32,12 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D71BD53129056A5C00037DC9 /* KomodioMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KomodioMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D71BD53429056A5C00037DC9 /* KomodioMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioMacApp.swift; sourceTree = "<group>"; };
+		D71BD53129056A5C00037DC9 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D71BD53429056A5C00037DC9 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D71BD53629056A5C00037DC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D71BD53829056A5E00037DC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D71BD53D29056A5E00037DC9 /* KomodioMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KomodioMac.entitlements; sourceTree = "<group>"; };
+		D71BD53D29056A5E00037DC9 /* Komodio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Komodio.entitlements; sourceTree = "<group>"; };
 		D71BD54B29056F1100037DC9 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		D71BD54D29056F3700037DC9 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D71BD54F29056FA500037DC9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
-				D71BD53329056A5C00037DC9 /* KomodioMac */,
+				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,22 +80,22 @@
 		D71BD53229056A5C00037DC9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D71BD53129056A5C00037DC9 /* KomodioMac.app */,
+				D71BD53129056A5C00037DC9 /* Komodio.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D71BD53329056A5C00037DC9 /* KomodioMac */ = {
+		D71BD53329056A5C00037DC9 /* Komodio */ = {
 			isa = PBXGroup;
 			children = (
 				D71BD54A29056F0500037DC9 /* General */,
 				D71BD54929056CA400037DC9 /* Views */,
-				D71BD53429056A5C00037DC9 /* KomodioMacApp.swift */,
+				D71BD53429056A5C00037DC9 /* KomodioApp.swift */,
 				D71BD53829056A5E00037DC9 /* Assets.xcassets */,
-				D71BD53D29056A5E00037DC9 /* KomodioMac.entitlements */,
+				D71BD53D29056A5E00037DC9 /* Komodio.entitlements */,
 				D71BD53A29056A5E00037DC9 /* Preview Content */,
 			);
-			path = KomodioMac;
+			path = Komodio;
 			sourceTree = "<group>";
 		};
 		D71BD53A29056A5E00037DC9 /* Preview Content */ = {
@@ -140,9 +140,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D71BD53029056A5C00037DC9 /* KomodioMac */ = {
+		D71BD53029056A5C00037DC9 /* Komodio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "KomodioMac" */;
+			buildConfigurationList = D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "Komodio" */;
 			buildPhases = (
 				D71BD52D29056A5C00037DC9 /* Sources */,
 				D71BD52E29056A5C00037DC9 /* Frameworks */,
@@ -152,13 +152,13 @@
 			);
 			dependencies = (
 			);
-			name = KomodioMac;
+			name = Komodio;
 			packageProductDependencies = (
 				D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */,
 				D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */,
 			);
 			productName = KomodioMac;
-			productReference = D71BD53129056A5C00037DC9 /* KomodioMac.app */;
+			productReference = D71BD53129056A5C00037DC9 /* Komodio.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "KomodioMac" */;
+			buildConfigurationList = D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "Komodio" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -193,7 +193,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D71BD53029056A5C00037DC9 /* KomodioMac */,
+				D71BD53029056A5C00037DC9 /* Komodio */,
 			);
 		};
 /* End PBXProject section */
@@ -232,7 +232,7 @@
 				D71BD55E290583F600037DC9 /* TVShowsView.swift in Sources */,
 				D71BD5602905849A00037DC9 /* ContentView.swift in Sources */,
 				D71BD53729056A5C00037DC9 /* MainView.swift in Sources */,
-				D71BD53529056A5C00037DC9 /* KomodioMacApp.swift in Sources */,
+				D71BD53529056A5C00037DC9 /* KomodioApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,11 +357,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = KomodioMac/KomodioMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Komodio/Komodio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"KomodioMac/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Komodio/Preview Content\"";
 				DEVELOPMENT_TEAM = FHPCJ7396C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -384,11 +384,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = KomodioMac/KomodioMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Komodio/Komodio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"KomodioMac/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Komodio/Preview Content\"";
 				DEVELOPMENT_TEAM = FHPCJ7396C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -409,7 +409,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "KomodioMac" */ = {
+		D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "Komodio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D71BD53E29056A5E00037DC9 /* Debug */,
@@ -418,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "KomodioMac" */ = {
+		D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "Komodio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D71BD54129056A5E00037DC9 /* Debug */,
