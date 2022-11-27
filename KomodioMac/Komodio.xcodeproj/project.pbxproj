@@ -12,7 +12,6 @@
 		D71BD53929056A5E00037DC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D71BD53C29056A5E00037DC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */; };
 		D71BD54529056AD800037DC9 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */; };
-		D71BD54829056C8F00037DC9 /* SwiftlyKodiPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */; };
 		D71BD54C29056F1100037DC9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
 		D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54D29056F3700037DC9 /* SidebarView.swift */; };
 		D71BD55029056FA500037DC9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54F29056FA500037DC9 /* AppState.swift */; };
@@ -30,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D71170AA2933B77B0059FCD3 /* SwiftlyKodiPlayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiPlayer; path = ../../SwiftlyKodiPlayer; sourceTree = "<group>"; };
+		D71170AB2933E5790059FCD3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D71BD53129056A5C00037DC9 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D71BD53429056A5C00037DC9 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D71BD53629056A5C00037DC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -61,7 +60,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D71BD54529056AD800037DC9 /* SwiftlyKodiAPI in Frameworks */,
-				D71BD54829056C8F00037DC9 /* SwiftlyKodiPlayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +69,6 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
-				D71170AA2933B77B0059FCD3 /* SwiftlyKodiPlayer */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 			);
@@ -94,6 +91,7 @@
 				D71BD53829056A5E00037DC9 /* Assets.xcassets */,
 				D71BD53D29056A5E00037DC9 /* Komodio.entitlements */,
 				D71BD53A29056A5E00037DC9 /* Preview Content */,
+				D71170AB2933E5790059FCD3 /* README.md */,
 			);
 			path = Komodio;
 			sourceTree = "<group>";
@@ -155,7 +153,6 @@
 			name = Komodio;
 			packageProductDependencies = (
 				D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */,
-				D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */,
 			);
 			productName = KomodioMac;
 			productReference = D71BD53129056A5C00037DC9 /* Komodio.app */;
@@ -187,7 +184,6 @@
 			mainGroup = D71BD52829056A5C00037DC9;
 			packageReferences = (
 				D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */,
-				D71BD54629056C8F00037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiPlayer" */,
 			);
 			productRefGroup = D71BD53229056A5C00037DC9 /* Products */;
 			projectDirPath = "";
@@ -436,14 +432,6 @@
 				kind = branch;
 			};
 		};
-		D71BD54629056C8F00037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiPlayer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Desbeers/SwiftlyKodiPlayer";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -451,11 +439,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */;
 			productName = SwiftlyKodiAPI;
-		};
-		D71BD54729056C8F00037DC9 /* SwiftlyKodiPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D71BD54629056C8F00037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiPlayer" */;
-			productName = SwiftlyKodiPlayer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

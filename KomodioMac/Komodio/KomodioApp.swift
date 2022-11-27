@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
-import SwiftlyKodiPlayer
 
 @main
 struct KomodioMacApp: App {
@@ -34,7 +33,7 @@ struct KomodioMacApp: App {
         WindowGroup("Player", for: VideoItem.self) { $item in
             /// Check if `item` isn't `nil`
             if let item = item {
-                KodiPlayerView(item: item.video, resume: item.resume)
+                KodiPlayerView(video: item.video, resume: item.resume)
                     .withHostingWindow { window in
                         if let window = window?.windowController?.window {
                             window.setPosition(vertical: .center, horizontal: .center, padding: 0)
