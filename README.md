@@ -8,6 +8,7 @@ Komodio is a video player for tvOS 16 that can stream videos from your local Kod
 
 ### Limitations
 
+- Because it's an `Apple` client using AVkit, it can only play Quicktime compatible files. So, **no MKV's**...
 - Komodio depends on Bonjour to find your Kodi hosts.
 - The 'Kodi login' configuration is using default settings.
 - If your media is on a harddisk and it's sleeping; the media wil sometimes not start because of a timeout. Try again and it will work.
@@ -15,11 +16,9 @@ Komodio is a video player for tvOS 16 that can stream videos from your local Kod
 
 ## Dependencies
 
-Komodio depends on the following Swift Packages that are in my GitHub account:
+Komodio depends on the following Swift Package that are in my GitHub account:
 
 - [SwiftlyKodiAPI](https://github.com/Desbeers/swiftlykodiapi). The Swift API to talk to Kodio.
-- [SwiftlyKodiPlayer](https://github.com/Desbeers/SwiftlyKodiPlayer). The wrapper around a player.
-- The actual player is [KSPlayer](https://github.com/kingslay/KSPlayer); added by the 'SwiftlyKodiPlayer' package.
 
 ## What's in a name?
 
