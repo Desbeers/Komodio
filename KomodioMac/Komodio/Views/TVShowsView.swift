@@ -13,38 +13,30 @@ struct TVShowsView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    /// The movies in this view
+    /// The tv shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
-    
-    @State private var status: SceneState.Status = .tvshows
-    
+    /// The body of the view
     var body: some View {
-        
         ZStack {
-            List(selection: $scene.selectedTVShow) {
+            List(selection: $scene.selection.tvshow) {
                 ForEach(tvshows) { tvshow in
                     Item(tvshow: tvshow)
                         .tag(tvshow)
                 }
             }
-            .offset(x: status == .episodes ? -400 : 0, y: 0)
+            .offset(x: scene.selection.route == .season ? -400 : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            SeasonsView(status: $status, tvshow: $scene.selectedTVShow)
-                .transition(.move(edge: .leading))
-                .offset(x: status == .tvshows ? 400 : 0, y: 0)
+                SeasonsView()
+                    .transition(.move(edge: .leading))
+                    .offset(x: scene.selection.route == .season ? 0 : 400, y: 0)
         }
-        .navigationSubtitle(scene.selectedTVShow != nil ? scene.selectedTVShow!.title : "TV Shows")
-        .animation(.default, value: status)
+        .navigationSubtitle(scene.selection.tvshow != nil ? scene.selection.tvshow!.title : "TV Shows")
+        .animation(.default, value: scene.selection.route)
         .task(id: kodi.library.tvshows) {
             tvshows = kodi.library.tvshows
         }
-        .task(id: scene.selectedTVShow) {
-            if scene.selectedTVShow != nil {
-                status = .episodes
-            } else {
-                status = .tvshows
-            }
-
+        .task(id: scene.selection.tvshow) {
+            scene.selection.route = scene.selection.tvshow == nil ? .tvshows : .season
         }
     }
 }
@@ -75,18 +67,34 @@ extension TVShowsView {
     
     struct Details: View {
         /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        //@EnvironmentObject var scene: SceneState
+        
+        let tvshow: Video.Details.TVShow
         var body: some View {
             VStack {
-                if let tvshow = scene.selectedTVShow {
-                    Text(tvshow.title)
-                        .font(.largeTitle)
-                } else {
-                    Text("TV shows")
-                        .font(.largeTitle)
-                }
+                KodiArt.Fanart(item: tvshow)
+                    .padding(.bottom, 40)
+                Text(tvshow.title)
+                    .font(.largeTitle)
+                Text(tvshow.plot)
             }
-            .animation(.default, value: scene.selectedTVShow)
+            .padding(40)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background(
+                KodiArt.Fanart(item: tvshow)
+                    .scaledToFill()
+                    .opacity(0.2)
+            )
+//            VStack {
+//                if let tvshow = scene.selectedTVShow {
+//                    Text(tvshow.title)
+//                        .font(.largeTitle)
+//                } else {
+//                    Text("TV shows")
+//                        .font(.largeTitle)
+//                }
+//            }
+//            .animation(.default, value: scene.selectedTVShow)
         }
     }
 }

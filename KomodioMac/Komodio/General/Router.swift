@@ -18,11 +18,15 @@ enum Router: Hashable {
     case favorites
     case playingQueue
     case playlist(file: List.Item.File)
-    case musicVideos
+    
     case search
     case musicMatch
+    
     case movies
+    case movieSet
     case tvshows
+    case season
+    case musicVideos
     
     var empty: String {
         switch self {
@@ -52,10 +56,14 @@ enum Router: Hashable {
             return "You have no movies"
         case .tvshows:
             return "You have no TV shows"
+        case .movieSet:
+            return "The movie set is empty"
+        case .season:
+            return "There are no episodes for this season"
         }
     }
     
-    var sidebar: Item {
+    var label: Item {
         switch self {
         case .start:
             return Item(title: "Start",
@@ -120,6 +128,16 @@ enum Router: Hashable {
         case .tvshows:
             return Item(title: "TV shows",
                         description: "Your TV shows",
+                        icon: "tv"
+            )
+        case .movieSet:
+            return Item(title: "Movie Set",
+                        description: "The movies in the set",
+                        icon: "film"
+            )
+        case .season:
+            return Item(title: "Seasons",
+                        description: "The episodes in the season",
                         icon: "tv"
             )
         }

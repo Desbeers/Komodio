@@ -25,3 +25,8 @@ struct VideoItem: Hashable, Codable {
         case resume
     }
 }
+
+struct MediaItem: Hashable {
+    var id: String
+    var media: Library.Media
+}

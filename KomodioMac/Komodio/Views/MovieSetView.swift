@@ -13,19 +13,12 @@ struct MovieSetView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    /// The TV show
-    //let tvshow: Video.Details.TVShow
-    /// The episode items to show in this view
-    //@State private var episodes: [Video.Details.Episode] = []
     /// The movies to show in this view
     @State private var movies: [Video.Details.Movie] = []
-    
-    @Binding var status: SceneState.Status
-    @Binding var movieSet: Video.Details.MovieSet?
-    
+    /// The body of the View
     var body: some View {
         VStack {
-            List(selection: $scene.selectedMovie) {
+            List(selection: $scene.selection.movie) {
                 ForEach(movies) { movie in
                     MoviesView.Item(movie: movie)
                         .tag(movie)
@@ -34,22 +27,28 @@ struct MovieSetView: View {
             .listStyle(.inset(alternatesRowBackgrounds: true))
         }
         .toolbar{
-            if scene.selectedMovieSet != nil {
+            if scene.selection.movieSet != nil {
                 ToolbarItem(placement: .navigation) {
                     Button(action: {
-                        scene.selectedMedia = nil
+                        scene.selection = SceneState.Selection(route: .movies)
                     }, label: {
                         Image(systemName: "chevron.backward")
                     })
                 }
             }
         }
-        .onChange(of: movieSet) { movieSet in
-            if let movieSet = self.movieSet {
+        .task(id: scene.selection.movieSet) {
+            if let movieSet = scene.selection.movieSet {
                 movies = kodi.library.movies
                     .filter({$0.setID == movieSet.setID})
             }
         }
+//        .onChange(of: movieSet) { movieSet in
+//            if let movieSet = self.movieSet {
+//                movies = kodi.library.movies
+//                    .filter({$0.setID == movieSet.setID})
+//            }
+//        }
     }
 }
 
@@ -75,21 +74,25 @@ extension MovieSetView {
 extension MovieSetView {
     
     struct Details: View {
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        /// The movie set
+        let movieSet: Video.Details.MovieSet
         var body: some View {
             VStack {
-                if let _ = scene.selectedMovie {
-                    MoviesView.Details()
-                } else if let movieSet = scene.selectedMovieSet {
-                        Text(movieSet.title)
-                            .font(.largeTitle)
-                } else {
-                    Text("Movie Set")
+                VStack {
+                    KodiArt.Fanart(item: movieSet)
+                        .padding(.bottom, 40)
+                    Text(movieSet.title)
                         .font(.largeTitle)
+                    Text(movieSet.plot)
                 }
+                .padding(40)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .background(
+                    KodiArt.Fanart(item: movieSet)
+                        .scaledToFill()
+                        .opacity(0.2)
+                )
             }
-            .animation(.default, value: scene.selectedTVShow)
         }
     }
 }

@@ -13,24 +13,60 @@ struct DetailsView: View {
     @EnvironmentObject var scene: SceneState
     var body: some View {
         VStack {
-            switch scene.selection {
+            switch scene.selection.route {
             case .movies:
-                if scene.selectedMovieSet != nil {
-                    MovieSetView.Details()
-                        .id(scene.selectedSeason)
+                if let movie = scene.selection.movie {
+                    MoviesView.Details(movie: movie)
                 } else {
-                    MoviesView.Details()
+                    Default(selection: .movies)
+                }
+            case .movieSet:
+                if let movie = scene.selection.movie {
+                    MoviesView.Details(movie: movie)
+                } else if let movieSet = scene.selection.movieSet {
+                    MovieSetView.Details(movieSet: movieSet)
+                } else {
+                    Default(selection: .movieSet)
                 }
             case .tvshows:
-                if scene.selectedSeason != nil {
-                    SeasonView()
-                        .id(scene.selectedSeason)
+                if let tvshow = scene.selection.tvshow {
+                    TVShowsView.Details(tvshow: tvshow)
                 } else {
-                    TVShowsView.Details()
+                    Default(selection: .tvshows)
+                }
+            case .season:
+                if let tvshow = scene.selection.tvshow, let season = scene.selection.season {
+                    SeasonsView.Details(tvshow: tvshow, season: season)
+                        .id(season)
+                } else if let tvshow = scene.selection.tvshow {
+                    TVShowsView.Details(tvshow: tvshow)
+                } else {
+                    Default(selection: .tvshows)
                 }
             default:
-                Text("Not implemented")
+                Default(selection: scene.sidebar)
             }
+        }
+        .animation(.default, value: scene.selection)
+    }
+}
+
+extension DetailsView {
+    
+    struct Default: View {
+        let selection: Router
+        var body: some View {
+            Text(selection.label.title)
+                .font(.largeTitle)
+                .padding(40)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .background {
+                    Image(systemName: selection.label.icon)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(40)
+                        .opacity(0.1)
+                }
         }
     }
 }

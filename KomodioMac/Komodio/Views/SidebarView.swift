@@ -14,7 +14,7 @@ struct SidebarView: View {
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
     var body: some View {
-        List(selection: $scene.selection) {
+        List(selection: $scene.sidebar) {
             Section("Your Kodio's") {
                 ForEach(kodi.bonjourHosts, id: \.ip) { host in
                     Button(action: {
@@ -42,14 +42,14 @@ struct SidebarView: View {
                 sidebarItem(item: Router.musicVideos)
             }
         }
-        .onChange(of: scene.selection) { _ in
-            /// Make sure there are no TV shows selected
-            scene.selectedTVShow = nil
+        .onChange(of: scene.sidebar) { _ in
+            /// Reset the selection
+            scene.selection = SceneState.Selection(route: scene.sidebar)
         }
     }
     
     @ViewBuilder func sidebarItem(item: Router) -> some View {
-            Label(item.sidebar.title, systemImage: item.sidebar.icon)
+            Label(item.label.title, systemImage: item.label.icon)
                 .tag(item)
     }
 }

@@ -14,10 +14,6 @@ struct SeasonView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-//    /// The TV show
-//    let tvshow: Video.Details.TVShow
-//    /// The season to show in this view
-//    let season: Int
     /// The episodes we want to view
     @State private var episodes: [Video.Details.Episode] = []
     /// The body of this View
@@ -35,7 +31,8 @@ struct SeasonView: View {
             }
         }
         .task(id: kodi.library.episodes) {
-            episodes = kodi.library.episodes.filter( { $0.tvshowID == scene.selectedTVShow?.tvshowID && $0.season == scene.selectedSeason })
+            episodes = kodi.library.episodes
+                .filter( { $0.tvshowID == scene.selection.tvshow?.tvshowID && $0.season == scene.selection.season })
         }
     }
 }

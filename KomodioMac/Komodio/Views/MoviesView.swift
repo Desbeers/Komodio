@@ -13,68 +13,51 @@ struct MoviesView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    /// The movies in this view
+    /// The videos in this view (movies + movie sets)
     @State var videos: [any KodiItem] = []
-    
-    //@State private var selectedMovie: (any KodiItem)?
-    //@State private var selectedVideo: VideoSelection?
-    
-    @State private var status: SceneState.Status = .movies
-    
-
-    
+    /// The body of this view
     var body: some View {
         ZStack {
-            List(selection: $scene.selectedMedia) {
+            List(selection: $scene.selection.mediaItem) {
                 ForEach(videos, id: \.id) { video in
-                    
                     switch video {
-
                     case let movie as Video.Details.Movie:
                         Item(movie: movie)
-                            .tag(SceneState.MediaSelection(id: movie.id, media: .movie))
+                            .tag(MediaItem(id: movie.id, media: .movie))
                     case let movieSet as Video.Details.MovieSet:
                         MovieSetView.Item(movieSet: movieSet)
-                            .tag(SceneState.MediaSelection(id: movieSet.id, media: .movieSet))
+                            .tag(MediaItem(id: movieSet.id, media: .movieSet))
                     default:
                         EmptyView()
                     }
                 }
             }
-            .offset(x: status == .movieSet ? -400 : 0, y: 0)
+            .offset(x: scene.selection.route == .movieSet ? -400 : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            MovieSetView(status: $status, movieSet: $scene.selectedMovieSet)
-                .transition(.move(edge: .leading))
-                .offset(x: status == .movies ? 400 : 0, y: 0)
+            MovieSetView()
+                .offset(x: scene.selection.route == .movieSet ? 0 : 400, y: 0)
         }
-        .navigationSubtitle(scene.selectedMovieSet != nil ? scene.selectedMovieSet!.title : "Movies")
-        .animation(.default, value: status)
+        .navigationSubtitle(scene.selection.movieSet != nil ? scene.selection.movieSet!.title : "Movies")
+        .animation(.default, value: scene.selection.route)
         .task(id: kodi.library.movies) {
             /// Remove all movies that are a part of a set and add the sets instead
             videos = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
+            scene.selection.route = .movies
         }
-        .task(id: scene.selectedMedia) {
-            if let video = scene.selectedMedia {
+        .task(id: scene.selection.mediaItem) {
+            if let video = scene.selection.mediaItem {
                 switch video.media {
                 case .movie:
                     if let movie = kodi.library.movies.first(where: {$0.id == video.id}) {
-                        scene.selectedMovie = movie
-                        scene.selectedMovieSet = nil
+                        scene.selection = SceneState.Selection(route: .movies, mediaItem: video, movie: movie, movieSet: nil)
                     }
                 case .movieSet:
                     if let movieSet = kodi.library.movieSets.first(where: {$0.id == video.id}) {
-                        scene.selectedMovie = nil
-                        scene.selectedMovieSet = movieSet
-                        status = .movieSet
+                        scene.selection = SceneState.Selection(route: .movieSet, movie: nil, movieSet: movieSet)
                     }
                 default:
                     break
                 }
-            } else {
-                /// Reset the state
-                scene.selectedMovie = nil
-                scene.selectedMovieSet = nil
-                status = .movies
             }
         }
     }
@@ -105,32 +88,32 @@ extension MoviesView {
 extension MoviesView {
     
     struct Details: View {
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        /// The movie
+        let movie: Video.Details.Movie
         var body: some View {
             VStack {
-                if let movie = scene.selectedMovie {
-                    VStack {
-                        KodiArt.Fanart(item: movie)
-                            .padding(.bottom, 40)
-                        Text(movie.title)
-                            .font(.largeTitle)
-                        Text(movie.plot)
-                        Buttons.Player(item: movie)
-                    }
-                    .padding(40)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    .background(
-                        KodiArt.Fanart(item: movie)
-                            .scaledToFill()
-                            .opacity(0.2)
-                    )
-                } else {
-                    Text("Movies")
+                VStack {
+                    Text(movie.title)
                         .font(.largeTitle)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    KodiArt.Fanart(item: movie)
+                        .cornerRadius(10)
+                        .padding(.bottom, 40)
+                    Text(movie.plot)
                 }
+                .padding(40)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .overlay(alignment: .bottom) {
+                    Buttons.Player(item: movie)
+                        .padding(40)
+                }
+                .background(
+                    KodiArt.Fanart(item: movie)
+                        .scaledToFill()
+                        .opacity(0.2)
+                )
             }
-            .animation(.default, value: scene.selectedMovie)
         }
     }
 }
