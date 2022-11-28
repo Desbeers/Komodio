@@ -1,8 +1,8 @@
 //
 //  MainView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -27,7 +27,7 @@ struct MainView: View {
             },
             content: {
                 ContentView()
-                    .navigationSplitViewColumnWidth(400)
+                    .navigationSplitViewColumnWidth(AppState.contentColumnWidth)
             },
             detail: {
                 DetailsView()

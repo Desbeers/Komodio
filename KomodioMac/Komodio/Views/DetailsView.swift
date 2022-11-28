@@ -1,8 +1,8 @@
 //
 //  DetailsView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -16,13 +16,13 @@ struct DetailsView: View {
             switch scene.selection.route {
             case .movies:
                 if let movie = scene.selection.movie {
-                    MoviesView.Details(movie: movie)
+                    MovieView(movie: movie)
                 } else {
                     Default(selection: .movies)
                 }
             case .movieSet:
                 if let movie = scene.selection.movie {
-                    MoviesView.Details(movie: movie)
+                    MovieView(movie: movie)
                 } else if let movieSet = scene.selection.movieSet {
                     MovieSetView.Details(movieSet: movieSet)
                 } else {
@@ -30,16 +30,16 @@ struct DetailsView: View {
                 }
             case .tvshows:
                 if let tvshow = scene.selection.tvshow {
-                    TVShowsView.Details(tvshow: tvshow)
+                    TVShowView(tvshow: tvshow)
                 } else {
                     Default(selection: .tvshows)
                 }
             case .season:
                 if let tvshow = scene.selection.tvshow, let season = scene.selection.season {
-                    SeasonsView.Details(tvshow: tvshow, season: season)
+                    SeasonView(tvshow: tvshow, season: season)
                         .id(season)
                 } else if let tvshow = scene.selection.tvshow {
-                    TVShowsView.Details(tvshow: tvshow)
+                    TVShowView(tvshow: tvshow)
                 } else {
                     Default(selection: .tvshows)
                 }

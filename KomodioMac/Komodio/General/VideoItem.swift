@@ -1,13 +1,14 @@
 //
 //  VideoItem.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import Foundation
 import SwiftlyKodiAPI
 
+/// Struct for a Komodio Video Item
 struct VideoItem: Hashable, Codable {
     static func == (lhs: VideoItem, rhs: VideoItem) -> Bool {
         lhs.id == rhs.id
@@ -26,6 +27,7 @@ struct VideoItem: Hashable, Codable {
     }
 }
 
+/// Struct for a Komodio Media Item
 struct MediaItem: Hashable {
     var id: String
     var media: Library.Media

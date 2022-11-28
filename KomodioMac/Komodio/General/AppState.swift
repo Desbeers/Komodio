@@ -1,19 +1,22 @@
 //
 //  AppState.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import Foundation
 import SwiftlyKodiAPI
 
-/// The class to observe the Kodio App state
+/// Class to observe the Komodio App state
 class AppState: ObservableObject {
     /// The shared instance of this AppState class
     static let shared = AppState()
     /// The currently selected host
     @Published private(set) var host: HostItem?
+    /// The ContentView Column Width
+    /// - Note: Used for the width as well the animation in the Content View
+    static let contentColumnWidth: Double = 400
     /// Init the class; get host information
     private init() {
         self.host = AppState.getHost()

@@ -1,8 +1,8 @@
 //
 //  MoviesView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -32,10 +32,10 @@ struct MoviesView: View {
                     }
                 }
             }
-            .offset(x: scene.selection.route == .movieSet ? -400 : 0, y: 0)
+            .offset(x: scene.selection.route == .movieSet ? -AppState.contentColumnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
             MovieSetView()
-                .offset(x: scene.selection.route == .movieSet ? 0 : 400, y: 0)
+                .offset(x: scene.selection.route == .movieSet ? 0 : AppState.contentColumnWidth, y: 0)
         }
         .navigationSubtitle(scene.selection.movieSet != nil ? scene.selection.movieSet!.title : "Movies")
         .animation(.default, value: scene.selection.route)
@@ -80,39 +80,6 @@ extension MoviesView {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .watchStatus(of: movie)
-            }
-        }
-    }
-}
-
-extension MoviesView {
-    
-    struct Details: View {
-        /// The movie
-        let movie: Video.Details.Movie
-        var body: some View {
-            VStack {
-                VStack {
-                    Text(movie.title)
-                        .font(.largeTitle)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                    KodiArt.Fanart(item: movie)
-                        .cornerRadius(10)
-                        .padding(.bottom, 40)
-                    Text(movie.plot)
-                }
-                .padding(40)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .overlay(alignment: .bottom) {
-                    Buttons.Player(item: movie)
-                        .padding(40)
-                }
-                .background(
-                    KodiArt.Fanart(item: movie)
-                        .scaledToFill()
-                        .opacity(0.2)
-                )
             }
         }
     }

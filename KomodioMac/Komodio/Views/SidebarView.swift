@@ -1,8 +1,8 @@
 //
 //  SidebarView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -40,6 +40,16 @@ struct SidebarView: View {
                 sidebarItem(item: Router.movies)
                 sidebarItem(item: Router.tvshows)
                 sidebarItem(item: Router.musicVideos)
+            }
+            Section("Maintanance") {
+                Button(action: {
+                    Task {
+                        await KodiConnector.shared.loadLibrary(cache: false)
+                    }
+                }, label: {
+                    Text("Reload library")
+                })
+                .disabled(kodi.state != .loadedLibrary)
             }
         }
         .onChange(of: scene.sidebar) { _ in

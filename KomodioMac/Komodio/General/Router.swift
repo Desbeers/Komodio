@@ -1,14 +1,14 @@
 //
 //  Router.swift
-//  Kodio
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 15/07/2022.
+//  © 2022 Nick Berendsen
 //
 
 import Foundation
 import SwiftlyKodiAPI
 
-/// The Router for Kodio navigation
+/// Router for Komodio navigation
 enum Router: Hashable {
     case start
     case library

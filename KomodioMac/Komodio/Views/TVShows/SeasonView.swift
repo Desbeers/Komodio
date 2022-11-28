@@ -1,8 +1,8 @@
 //
 //  SeasonView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 
 /// A View with all episodes from a TV show season
 struct SeasonView: View {
+    let tvshow: Video.Details.TVShow
+    let season: Int
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
@@ -19,20 +21,16 @@ struct SeasonView: View {
     /// The body of this View
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-
-            // MARK: Diplay all episodes from the selected season
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack(spacing: 0) {
-                    ForEach(episodes) { episode in
-                        EpisodeView(episode: episode)
-                    }
+            List {
+                ForEach(episodes) { episode in
+                    EpisodeView(episode: episode)
                 }
-                //.padding(.horizontal, 100)
             }
+            .listStyle(.inset(alternatesRowBackgrounds: true))
         }
         .task(id: kodi.library.episodes) {
             episodes = kodi.library.episodes
-                .filter( { $0.tvshowID == scene.selection.tvshow?.tvshowID && $0.season == scene.selection.season })
+                .filter({ $0.tvshowID == scene.selection.tvshow?.tvshowID && $0.season == scene.selection.season })
         }
     }
 }
