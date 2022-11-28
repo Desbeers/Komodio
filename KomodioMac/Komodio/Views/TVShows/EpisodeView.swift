@@ -1,8 +1,8 @@
 //
 //  EpisodeView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -22,7 +22,8 @@ struct EpisodeView: View {
             HStack(spacing: 0) {
                 KodiArt.Art(file: episode.thumbnail)
                     .watchStatus(of: episode)
-                    .frame(width: 320, height: 180)
+                    .frame(width: 213, height: 120)
+                    .cornerRadius(6)
                     .overlay(alignment: .bottom) {
                         Buttons.Player(item: episode)
                     }

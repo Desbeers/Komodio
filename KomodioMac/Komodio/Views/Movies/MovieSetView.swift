@@ -1,8 +1,8 @@
 //
 //  MovieSetView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 24/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -26,7 +26,7 @@ struct MovieSetView: View {
             }
             .listStyle(.inset(alternatesRowBackgrounds: true))
         }
-        .toolbar{
+        .toolbar {
             if scene.selection.movieSet != nil {
                 ToolbarItem(placement: .navigation) {
                     Button(action: {
@@ -43,12 +43,6 @@ struct MovieSetView: View {
                     .filter({$0.setID == movieSet.setID})
             }
         }
-//        .onChange(of: movieSet) { movieSet in
-//            if let movieSet = self.movieSet {
-//                movies = kodi.library.movies
-//                    .filter({$0.setID == movieSet.setID})
-//            }
-//        }
     }
 }
 

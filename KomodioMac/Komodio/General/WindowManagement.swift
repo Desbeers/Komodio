@@ -1,8 +1,8 @@
 //
 //  WindowManagement.swift
-//  Kodio
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/09/2022.
+//  © 2022 Nick Berendsen
 //
 
 // Code from https://www.woodys-findings.com/posts/positioning-window-macos

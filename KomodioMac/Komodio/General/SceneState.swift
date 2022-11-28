@@ -1,14 +1,14 @@
 //
 //  SceneState.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import Foundation
 import SwiftlyKodiAPI
 
-/// The class to observe the current Kodio Scene state
+/// Class to observe the current Komodio Scene state
 class SceneState: ObservableObject {
     /// The current selection in the sidebar
     @Published var sidebar: Router = .movies
@@ -16,21 +16,7 @@ class SceneState: ObservableObject {
     @Published var selection = Selection()
     /// The current search query
     var query: String = ""
-
-//    /// The selected video (Can be any KodiItem)
-//    @Published var selectedMedia: MediaSelection?
-//
-//    /// The selected movie
-//    @Published var selectedMovie: Video.Details.Movie?
-//    /// The selected movie set
-//    @Published var selectedMovieSet: Video.Details.MovieSet?
-//    /// The selected TV show
-//    @Published var selectedTVShow: Video.Details.TVShow?
-//    /// The selected Season
-//    @Published var selectedSeason: Int?
-//    /// The status of the view
-//    @Published var status: Status = .loading
-    
+    /// The navigation selection
     struct Selection: Equatable {
         /// Where are we in the application
         var route: Router = .start
@@ -45,20 +31,4 @@ class SceneState: ObservableObject {
         /// The selected Season
         var season: Int?
     }
-    
-
-    
-//    enum Status {
-//        
-//        /// The Task is loading the items
-//        case loading
-//        /// No items where found by the `Task`
-//        case empty
-//        /// The `Task` is done and items where found
-//        case ready
-//        case movies
-//        case movieSet
-//        case tvshows
-//        case episodes
-//    }
 }

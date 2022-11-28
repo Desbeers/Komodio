@@ -1,8 +1,8 @@
 //
 //  TVShowsView.swift
-//  KomodioMac
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 23/10/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -24,11 +24,11 @@ struct TVShowsView: View {
                         .tag(tvshow)
                 }
             }
-            .offset(x: scene.selection.route == .season ? -400 : 0, y: 0)
+            .offset(x: scene.selection.route == .season ? -AppState.contentColumnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
                 SeasonsView()
                     .transition(.move(edge: .leading))
-                    .offset(x: scene.selection.route == .season ? 0 : 400, y: 0)
+                    .offset(x: scene.selection.route == .season ? 0 : AppState.contentColumnWidth, y: 0)
         }
         .navigationSubtitle(scene.selection.tvshow != nil ? scene.selection.tvshow!.title : "TV Shows")
         .animation(.default, value: scene.selection.route)
@@ -62,40 +62,3 @@ extension TVShowsView {
         }
     }
 }
-
-extension TVShowsView {
-    
-    struct Details: View {
-        /// The SceneState model
-        //@EnvironmentObject var scene: SceneState
-        
-        let tvshow: Video.Details.TVShow
-        var body: some View {
-            VStack {
-                KodiArt.Fanart(item: tvshow)
-                    .padding(.bottom, 40)
-                Text(tvshow.title)
-                    .font(.largeTitle)
-                Text(tvshow.plot)
-            }
-            .padding(40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(
-                KodiArt.Fanart(item: tvshow)
-                    .scaledToFill()
-                    .opacity(0.2)
-            )
-//            VStack {
-//                if let tvshow = scene.selectedTVShow {
-//                    Text(tvshow.title)
-//                        .font(.largeTitle)
-//                } else {
-//                    Text("TV shows")
-//                        .font(.largeTitle)
-//                }
-//            }
-//            .animation(.default, value: scene.selectedTVShow)
-        }
-    }
-}
-
