@@ -8,17 +8,13 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for the main navigation
 struct MainView: View {
-    
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @StateObject var scene = SceneState()
-    
+    /// Set the column visibility
     @State private var columnVisibility = NavigationSplitViewVisibility.automatic
-    
+    /// The body of the view
     var body: some View {
         NavigationSplitView(
             columnVisibility: $columnVisibility,
@@ -27,11 +23,12 @@ struct MainView: View {
             },
             content: {
                 ContentView()
-                    .navigationSplitViewColumnWidth(AppState.contentColumnWidth)
+                    .navigationSplitViewColumnWidth(ContentView.columnWidth)
             },
             detail: {
-                DetailsView()
+                DetailView()
             })
+        .navigationSubtitle(scene.navigationSubtitle)
         .environmentObject(scene)
     }
 }

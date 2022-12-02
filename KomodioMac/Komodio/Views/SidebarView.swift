@@ -13,6 +13,7 @@ struct SidebarView: View {
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
+    /// The body of the view
     var body: some View {
         List(selection: $scene.sidebar) {
             Section("Your Kodio's") {
@@ -52,9 +53,9 @@ struct SidebarView: View {
                 .disabled(kodi.state != .loadedLibrary)
             }
         }
-        .onChange(of: scene.sidebar) { _ in
-            /// Reset the selection
-            scene.selection = SceneState.Selection(route: scene.sidebar)
+        .onChange(of: scene.sidebar) { selection in
+            /// Reset the details
+            scene.details = selection
         }
     }
     

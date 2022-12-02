@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A collection of View Modifiers
+/// Collection of SwiftUI View Modifiers
 enum Modifiers {
     /// Just a Namespace here...
 }

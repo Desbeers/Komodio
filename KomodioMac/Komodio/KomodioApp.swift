@@ -8,12 +8,13 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-@main
-struct KomodioMacApp: App {
+/// The Komodio App Scene
+@main struct KomodioMacApp: App {
     /// The AppState model
     @StateObject var appState: AppState = .shared
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared
+    /// The body of the scene
     var body: some Scene {
         WindowGroup {
             MainView()
@@ -28,7 +29,6 @@ struct KomodioMacApp: App {
                     }
                 }
         }
-        .windowToolbarStyle(.unifiedCompact)
         /// Open a Video Window
         WindowGroup("Player", for: VideoItem.self) { $item in
             /// Check if `item` isn't `nil`

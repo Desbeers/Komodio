@@ -1,0 +1,55 @@
+//
+//  DetailView.swift
+//  Komodio (macOS)
+//
+//  © 2022 Nick Berendsen
+//
+
+import SwiftUI
+import SwiftlyKodiAPI
+
+/// SwiftUI View for details of the selection
+struct DetailView: View {
+    /// The SceneState model
+    @EnvironmentObject private var scene: SceneState
+    /// The Navigation Subtitle
+    @State private var navigationSubtitle: String = "hallo"
+    /// The body of the view
+    var body: some View {
+        VStack {
+            switch scene.details {
+            case .movie(let movie):
+                MovieView(movie: movie)
+            case .movieSet(let movieSet):
+                MovieSetView.Details(movieSet: movieSet)
+            case .tvshow(let tvshow):
+                TVShowView(tvshow: tvshow)
+            case .season(let tvshow, let episodes):
+                SeasonView(tvshow: tvshow, episodes: episodes)
+            case .artist(let artist):
+                ArtistView(artist: artist)
+            case .musicVideo(let musicVideo):
+                MusicVideoView(musicVideo: musicVideo)
+            case .album(let album):
+                AlbumView(title: album.id, musicVideos: album.musicVideos ?? [])
+            default:
+                fallback
+            }
+        }
+        .animation(.default, value: scene.details)
+    }
+    /// The fallback view
+    private var fallback: some View {
+        Text(scene.sidebar.label.title)
+            .font(.largeTitle)
+            .padding(40)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background {
+                Image(systemName: scene.sidebar.label.icon)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(40)
+                    .opacity(0.1)
+            }
+    }
+}

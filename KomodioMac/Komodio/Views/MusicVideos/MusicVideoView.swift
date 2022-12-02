@@ -1,46 +1,46 @@
 //
-//  MovieView.swift
-//  Komodio (macOS)
+//  MusicVideoView.swift
+//  Komodio
 //
-//  © 2022 Nick Berendsen
+//  Created by Nick Berendsen on 28/11/2022.
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for a Movie
-struct MovieView: View {
-    /// The movie
-    let movie: Video.Details.Movie
+/// SwiftUI View for a Music Video
+struct MusicVideoView: View {
+    /// The Music Video to show
+    let musicVideo: Video.Details.MusicVideo
     /// The body of the view
     var body: some View {
         VStack {
             VStack {
-                Text(movie.title)
+                Text(musicVideo.title)
                     .font(.largeTitle)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                 Button(action: {
                     Task {
-                        await movie.togglePlayedState()
+                        await musicVideo.togglePlayedState()
                     }
                 }, label: {
                     Text("Toggle watch state")
                 })
-                KodiArt.Fanart(item: movie)
-                    .watchStatus(of: movie)
+                KodiArt.Fanart(item: musicVideo)
+                    .watchStatus(of: musicVideo)
                     .cornerRadius(10)
                     .padding(.bottom, 40)
-                Text(movie.plot)
+                Text(musicVideo.plot)
             }
             .padding(40)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .overlay(alignment: .bottom) {
-                Buttons.Player(item: movie)
+                Buttons.Player(item: musicVideo)
                     .padding(40)
             }
             .background(
-                KodiArt.Fanart(item: movie)
+                KodiArt.Fanart(item: musicVideo)
                     .scaledToFill()
                     .opacity(0.2)
             )

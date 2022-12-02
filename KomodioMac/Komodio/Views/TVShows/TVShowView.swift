@@ -8,9 +8,11 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// A View for one TV show
+/// SwiftUI View for a TV show
 struct TVShowView: View {
+    /// The TV show
     let tvshow: Video.Details.TVShow
+    /// The body of the view
     var body: some View {
         VStack {
             KodiArt.Fanart(item: tvshow)

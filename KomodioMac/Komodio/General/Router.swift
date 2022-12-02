@@ -23,10 +23,19 @@ enum Router: Hashable {
     case musicMatch
     
     case movies
-    case movieSet
+    
     case tvshows
-    case season
+    case seasons
     case musicVideos
+
+    case movie(movie: Video.Details.Movie)
+    case movieSet(movieSet: Video.Details.MovieSet)
+    case tvshow(tvshow: Video.Details.TVShow)
+    case season(tvshow: Video.Details.TVShow, episodes: [Video.Details.Episode])
+    
+    case artist(artist: Audio.Details.Artist)
+    case musicVideo(musicVideo: Video.Details.MusicVideo)
+    case album(album: MediaItem)
     
     var empty: String {
         switch self {
@@ -58,8 +67,15 @@ enum Router: Hashable {
             return "You have no TV shows"
         case .movieSet:
             return "The movie set is empty"
-        case .season:
-            return "There are no episodes for this season"
+        case .seasons:
+            return "There are no seasons for this TV show"
+
+        case .artist:
+            return "This artist is not in your library"
+        case .album:
+            return "There are no albums for this artist"
+        default:
+            return "Navigation error"
         }
     }
     
@@ -135,10 +151,25 @@ enum Router: Hashable {
                         description: "The movies in the set",
                         icon: "film"
             )
-        case .season:
+        case .seasons:
             return Item(title: "Seasons",
-                        description: "The episodes in the season",
+                        description: "The seasons in a TV show",
                         icon: "tv"
+            )
+        case .artist:
+            return Item(title: "Artist",
+                        description: "An artist",
+                        icon: "person"
+            )
+        case .album:
+            return Item(title: "Albums",
+                        description: "The albums of the artist",
+                        icon: "square.stack"
+            )
+        default:
+            return Item(title: "Details",
+                        description: "Details of an item",
+                        icon: "square.dashed"
             )
         }
     }

@@ -28,7 +28,16 @@ struct VideoItem: Hashable, Codable {
 }
 
 /// Struct for a Komodio Media Item
-struct MediaItem: Hashable {
+struct MediaItem: Hashable, Identifiable {
+    static func == (lhs: MediaItem, rhs: MediaItem) -> Bool {
+        lhs.id == rhs.id && lhs.musicVideos == rhs.musicVideos
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     var id: String
     var media: Library.Media
+    var musicVideos: [Video.Details.MusicVideo]?
+    var episodes: [Video.Details.Episode]?
 }

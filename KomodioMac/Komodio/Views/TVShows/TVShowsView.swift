@@ -8,35 +8,41 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for all TV shows
 struct TVShowsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    /// The tv shows in this view
+    /// The TV shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
+    /// The optional selected TV show
+    @State private var tvshow: Video.Details.TVShow?
     /// The body of the view
     var body: some View {
         ZStack {
-            List(selection: $scene.selection.tvshow) {
+            List(selection: $tvshow) {
                 ForEach(tvshows) { tvshow in
                     Item(tvshow: tvshow)
                         .tag(tvshow)
                 }
             }
-            .offset(x: scene.selection.route == .season ? -AppState.contentColumnWidth : 0, y: 0)
+            .offset(x: tvshow != nil ? -ContentView.columnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-                SeasonsView()
+            SeasonsView(tvshow: $tvshow)
                     .transition(.move(edge: .leading))
-                    .offset(x: scene.selection.route == .season ? 0 : AppState.contentColumnWidth, y: 0)
+                    .offset(x: tvshow != nil ? 0 : ContentView.columnWidth, y: 0)
         }
-        .navigationSubtitle(scene.selection.tvshow != nil ? scene.selection.tvshow!.title : "TV Shows")
-        .animation(.default, value: scene.selection.route)
+        .animation(.default, value: tvshow)
         .task(id: kodi.library.tvshows) {
             tvshows = kodi.library.tvshows
         }
-        .task(id: scene.selection.tvshow) {
-            scene.selection.route = scene.selection.tvshow == nil ? .tvshows : .season
+        .task(id: tvshow) {
+            if let tvshow {
+                scene.details = .tvshow(tvshow: tvshow)
+            } else {
+                scene.navigationSubtitle = Router.tvshows.label.title
+            }
         }
     }
 }

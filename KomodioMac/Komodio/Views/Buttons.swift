@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// Collection of SwiftUI Buttons
 enum Buttons {}
 
 extension Buttons {

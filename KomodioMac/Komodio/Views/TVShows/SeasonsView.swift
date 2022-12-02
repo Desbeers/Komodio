@@ -8,7 +8,11 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for all Seasons of a TV show
 struct SeasonsView: View {
+    
+    @Binding var tvshow: Video.Details.TVShow?
+    
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
@@ -17,10 +21,12 @@ struct SeasonsView: View {
     @State private var episodes: [Video.Details.Episode] = []
     /// The seasons to show in this view
     @State private var seasons: [Video.Details.Episode] = []
+    /// The optional selected season
+    @State private var season: Int?
     /// The body of the view
     var body: some View {
         VStack {
-            List(selection: $scene.selection.season) {
+            List(selection: $season) {
                 ForEach(seasons) { season in
                     Item(season: season)
                         .tag(season.season)
@@ -29,22 +35,42 @@ struct SeasonsView: View {
             .listStyle(.inset(alternatesRowBackgrounds: true))
         }
         .toolbar {
-            if scene.selection.tvshow != nil {
+            if tvshow != nil {
                 ToolbarItem(placement: .navigation) {
                     Button(action: {
-                        scene.selection = SceneState.Selection(route: .tvshows)
+                        tvshow = nil
+                        scene.details = .tvshows
                     }, label: {
                         Image(systemName: "chevron.backward")
                     })
                 }
             }
         }
-        .task(id: scene.selection.tvshow) {
-            if let tvshow = scene.selection.tvshow {
-                seasons = kodi.library.episodes
-                    .filter({$0.tvshowID == tvshow.tvshowID}).unique { $0.season }
-            }
-            
+        .task(id: tvshow) {
+            getTVShowSeasons()
+        }
+        
+        .task(id: season) {
+            setSeasonDetails()
+        }
+        .task(id: kodi.library.episodes) {
+            getTVShowSeasons()
+            setSeasonDetails()
+        }
+    }
+    
+    func getTVShowSeasons() {
+        if let tvshow {
+            seasons = kodi.library.episodes
+                .filter({$0.tvshowID == tvshow.tvshowID}).unique { $0.season }
+        }
+    }
+    
+    func setSeasonDetails() {
+        if let tvshow, let season {
+            let episodes = kodi.library.episodes
+                .filter({ $0.tvshowID == tvshow.tvshowID && $0.season == season })
+            scene.details = .season(tvshow: tvshow, episodes: episodes)
         }
     }
 }

@@ -8,65 +8,87 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for all Movies
+///
+/// Movies that are part of a set will be removed and replaced with the set
 struct MoviesView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
-    /// The videos in this view (movies + movie sets)
-    @State var videos: [any KodiItem] = []
-    /// The body of this view
+    @EnvironmentObject private var scene: SceneState
+    /// The items in this view (movies + movie sets)
+    @State private var items: [any KodiItem] = []
+    /// The optional selected item
+    @State private var selectedItem: MediaItem?
+    /// The body of the view
     var body: some View {
         ZStack {
-            List(selection: $scene.selection.mediaItem) {
-                ForEach(videos, id: \.id) { video in
+            List(selection: $selectedItem) {
+                ForEach(items, id: \.id) { video in
                     switch video {
                     case let movie as Video.Details.Movie:
                         Item(movie: movie)
                             .tag(MediaItem(id: movie.id, media: .movie))
                     case let movieSet as Video.Details.MovieSet:
                         MovieSetView.Item(movieSet: movieSet)
-                            .tag(MediaItem(id: movieSet.id, media: .movieSet))
+                            .tag(MediaItem(id: String(movieSet.setID), media: .movieSet))
                     default:
                         EmptyView()
                     }
                 }
             }
-            .offset(x: scene.selection.route == .movieSet ? -AppState.contentColumnWidth : 0, y: 0)
+            .offset(x: selectedItem?.media == .movieSet ? -ContentView.columnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            MovieSetView()
-                .offset(x: scene.selection.route == .movieSet ? 0 : AppState.contentColumnWidth, y: 0)
+            MovieSetView(selectedSet: $selectedItem)
+                .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
         }
-        .navigationSubtitle(scene.selection.movieSet != nil ? scene.selection.movieSet!.title : "Movies")
-        .animation(.default, value: scene.selection.route)
+        .animation(.default, value: selectedItem)
         .task(id: kodi.library.movies) {
-            /// Remove all movies that are a part of a set and add the sets instead
-            videos = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
-            scene.selection.route = .movies
+            getItems()
+            setItemDetails()
         }
-        .task(id: scene.selection.mediaItem) {
-            if let video = scene.selection.mediaItem {
-                switch video.media {
-                case .movie:
-                    if let movie = kodi.library.movies.first(where: {$0.id == video.id}) {
-                        scene.selection = SceneState.Selection(route: .movies, mediaItem: video, movie: movie, movieSet: nil)
-                    }
-                case .movieSet:
-                    if let movieSet = kodi.library.movieSets.first(where: {$0.id == video.id}) {
-                        scene.selection = SceneState.Selection(route: .movieSet, movie: nil, movieSet: movieSet)
-                    }
-                default:
-                    break
+        .task(id: selectedItem) {
+            setItemDetails()
+        }
+    }
+    
+    /// Get all items from the library
+    ///
+    /// Movies that are part of a set will be removed and replaced with the set
+    private func getItems() {
+        items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
+    }
+    
+    /// Set the details of a selected item
+    private func setItemDetails() {
+        dump(selectedItem?.id)
+        if let item = selectedItem {
+            switch item.media {
+            case .movie:
+                if let movie = kodi.library.movies.first(where: {$0.id == item.id}) {
+                    scene.details = .movie(movie: movie)
                 }
+            case .movieSet:
+                if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(item.id)}) {
+                    scene.details = .movieSet(movieSet: movieSet)
+                }
+            default:
+                break
             }
+        } else {
+            /// Set the default Navigation Subtitle for Movies
+            scene.navigationSubtitle = Router.movies.label.title
         }
     }
 }
 
 extension MoviesView {
     
+    /// SwiftUI View for a movie in ``MoviesView``
     struct Item: View {
+        /// The movie
         let movie: Video.Details.Movie
+        /// The body of the view
         var body: some View {
             HStack {
                 KodiArt.Poster(item: movie)
