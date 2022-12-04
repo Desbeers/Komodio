@@ -21,6 +21,13 @@ extension Buttons {
                 if item.resume.position != 0 {
                     Buttons.Resume(item: item)
                 }
+                Button(action: {
+                    Task {
+                        await item.togglePlayedState()
+                    }
+                }, label: {
+                    Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
+                })
             }
         }
     }
@@ -30,7 +37,7 @@ extension Buttons {
         @Environment(\.openWindow) var openWindow
         var body: some View {
             Button(action: {
-                let video = VideoItem(id: item.id, resume: false, video: item)
+                let video = MediaItem(id: item.id, resume: false, item: item)
                 openWindow(value: video)
             }, label: {
                 Text("Play")
@@ -42,7 +49,7 @@ extension Buttons {
         @Environment(\.openWindow) var openWindow
         var body: some View {
             Button(action: {
-                let video = VideoItem(id: item.id, resume: true, video: item)
+                let video = MediaItem(id: item.id, resume: true, item: item)
                 openWindow(value: video)
             }, label: {
                 Text("Resume")

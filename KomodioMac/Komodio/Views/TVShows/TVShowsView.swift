@@ -17,32 +17,58 @@ struct TVShowsView: View {
     /// The TV shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
     /// The optional selected TV show
-    @State private var tvshow: Video.Details.TVShow?
+    @State var selectedTVShow: Video.Details.TVShow?
+    /// The loading state of the view
+    @State private var state: Parts.State = .loading
     /// The body of the view
     var body: some View {
+        VStack {
+            switch state {
+            case .loading:
+                Text(Router.tvshows.loading)
+            case .empty:
+                Text(Router.tvshows.empty)
+            case .ready:
+                content
+            case .offline:
+                state.offlineMessage
+            }
+        }
+        .animation(.default, value: selectedTVShow)
+        .task(id: kodi.library.tvshows) {
+            if kodi.state != .loadedLibrary {
+                state = .offline
+            } else if kodi.library.tvshows.isEmpty {
+                state = .empty
+            } else {
+                tvshows = kodi.library.tvshows
+                state = .ready
+            }
+        }
+        .task(id: selectedTVShow) {
+            /// We might came here from a search
+            scene.selectedTVShow = nil
+            if let selectedTVShow {
+                scene.details = .tvshow(tvshow: selectedTVShow)
+            } else {
+                scene.navigationSubtitle = Router.tvshows.label.title
+            }
+        }
+    }
+    /// The content of the view
+    var content: some View {
         ZStack {
-            List(selection: $tvshow) {
+            List(selection: $selectedTVShow) {
                 ForEach(tvshows) { tvshow in
                     Item(tvshow: tvshow)
                         .tag(tvshow)
                 }
             }
-            .offset(x: tvshow != nil ? -ContentView.columnWidth : 0, y: 0)
+            .offset(x: selectedTVShow != nil ? -ContentView.columnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            SeasonsView(tvshow: $tvshow)
+            SeasonsView(tvshow: $selectedTVShow)
                     .transition(.move(edge: .leading))
-                    .offset(x: tvshow != nil ? 0 : ContentView.columnWidth, y: 0)
-        }
-        .animation(.default, value: tvshow)
-        .task(id: kodi.library.tvshows) {
-            tvshows = kodi.library.tvshows
-        }
-        .task(id: tvshow) {
-            if let tvshow {
-                scene.details = .tvshow(tvshow: tvshow)
-            } else {
-                scene.navigationSubtitle = Router.tvshows.label.title
-            }
+                    .offset(x: selectedTVShow != nil ? 0 : ContentView.columnWidth, y: 0)
         }
     }
 }
@@ -60,7 +86,8 @@ extension TVShowsView {
                     Text(tvshow.title)
                         .font(.headline)
                     Text(tvshow.genre.joined(separator: "∙"))
-                    Text(tvshow.premiered)
+                    Text(tvshow.year.description)
+                        .font(.caption)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .watchStatus(of: tvshow)

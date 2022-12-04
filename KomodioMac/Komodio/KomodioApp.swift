@@ -14,9 +14,11 @@ import SwiftlyKodiAPI
     @StateObject var appState: AppState = .shared
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared
+    /// Open new windows
+    @Environment(\.openWindow) var openWindow
     /// The body of the scene
     var body: some Scene {
-        WindowGroup {
+        WindowGroup(id: "Main") {
             MainView()
                 .environmentObject(kodi)
                 .environmentObject(appState)
@@ -29,11 +31,18 @@ import SwiftlyKodiAPI
                     }
                 }
         }
+        .commands {
+            CommandGroup(replacing: .newItem) {
+                Button("New Window") {
+                    openWindow(id: "Main")
+                }
+            }
+        }
         /// Open a Video Window
-        WindowGroup("Player", for: VideoItem.self) { $item in
+        WindowGroup("Player", for: MediaItem.self) { $item in
             /// Check if `item` isn't `nil`
             if let item = item {
-                KodiPlayerView(video: item.video, resume: item.resume)
+                KodiPlayerView(video: item.item, resume: item.resume)
                     .withHostingWindow { window in
                         if let window = window?.windowController?.window {
                             window.setPosition(vertical: .center, horizontal: .center, padding: 0)

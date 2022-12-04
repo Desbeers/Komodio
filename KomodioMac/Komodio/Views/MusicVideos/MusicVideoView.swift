@@ -20,13 +20,6 @@ struct MusicVideoView: View {
                     .font(.largeTitle)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                Button(action: {
-                    Task {
-                        await musicVideo.togglePlayedState()
-                    }
-                }, label: {
-                    Text("Toggle watch state")
-                })
                 KodiArt.Fanart(item: musicVideo)
                     .watchStatus(of: musicVideo)
                     .cornerRadius(10)

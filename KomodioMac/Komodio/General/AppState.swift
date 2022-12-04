@@ -13,7 +13,7 @@ class AppState: ObservableObject {
     /// The shared instance of this AppState class
     static let shared = AppState()
     /// The currently selected host
-    @Published private(set) var host: HostItem?
+    @Published var host: HostItem?
     /// Init the class; get host information
     private init() {
         self.host = AppState.getHost()

@@ -16,12 +16,20 @@ struct ContentView: View {
     /// The body of the view
     var body: some View {
         switch scene.sidebar {
+        case .start:
+            StartView()
         case .movies:
             MoviesView()
+        case .unwatchedMovies:
+            MoviesView(filter: .unwatched)
         case .tvshows:
-            TVShowsView()
+            TVShowsView(selectedTVShow: scene.selectedTVShow)
+        case .unwachedEpisodes:
+            UpNextView()
         case .musicVideos:
             ArtistsView()
+        case .search:
+            SearchView()
         default:
             Text("Not implemented")
         }

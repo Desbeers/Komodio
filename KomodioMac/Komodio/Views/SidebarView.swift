@@ -8,51 +8,73 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for the sidebar
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+    /// The AppState model
+    @EnvironmentObject var appState: AppState
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
+    /// The selected host
+    @State private var selectedHost: String?
     /// The body of the view
     var body: some View {
-        List(selection: $scene.sidebar) {
-            Section("Your Kodio's") {
-                ForEach(kodi.bonjourHosts, id: \.ip) { host in
-                    Button(action: {
-                        var values = HostItem()
-                        values.description = host.name
-                        values.ip = host.ip
-                        AppState.saveHost(host: values)
-                    }, label: {
-                        Label(title: {
-                            Text(host.name)
-                        }, icon: {
-                            Image(systemName: "globe")
-                                .opacity(0.5)
+        VStack {
+            List(selection: $scene.sidebar) {
+                Section("Your Kodio's") {
+                    ForEach(kodi.bonjourHosts, id: \.ip) { host in
+                        Button(action: {
+                            if AppState.shared.host?.ip != host.ip {
+                                var values = HostItem()
+                                values.description = host.name
+                                values.ip = host.ip
+                                AppState.saveHost(host: values)
+                            }
+                        }, label: {
+                            Label(title: {
+                                Text(host.name)
+                            }, icon: {
+                                Image(systemName: "globe")
+                                    .font(.title3)
+                            })
+                            .tint(AppState.shared.host?.ip == host.ip ? .green : .gray)
                         })
-                        .foregroundColor(AppState.shared.host?.ip == host.ip ? .black : .gray)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    })
-                    .disabled(AppState.shared.host?.ip == host.ip)
-                }
-                .buttonStyle(.plain)
-            }
-            Section("Videos") {
-                sidebarItem(item: Router.movies)
-                sidebarItem(item: Router.tvshows)
-                sidebarItem(item: Router.musicVideos)
-            }
-            Section("Maintanance") {
-                Button(action: {
-                    Task {
-                        await KodiConnector.shared.loadLibrary(cache: false)
                     }
-                }, label: {
-                    Text("Reload library")
-                })
-                .disabled(kodi.state != .loadedLibrary)
+                }
+                Section("Movies") {
+                    sidebarItem(item: Router.movies)
+                    sidebarItem(item: Router.unwatchedMovies)
+                }
+                Section("TV shows") {
+                    sidebarItem(item: Router.tvshows)
+                    sidebarItem(item: Router.unwachedEpisodes)
+                }
+                Section("Music Videos") {
+                    sidebarItem(item: Router.musicVideos)
+                }
+                if !scene.query.isEmpty {
+                    Section("Search") {
+                        sidebarItem(item: Router.search)
+                    }
+                }
+                Section("Maintanance") {
+                    Button(action: {
+                        Task {
+                            scene.sidebar = .start
+                            scene.navigationSubtitle = ""
+                            await KodiConnector.shared.loadLibrary(cache: false)
+                        }
+                    }, label: {
+                        Label("Reload library", systemImage: "arrow.triangle.2.circlepath")
+                    })
+                    .disabled(kodi.state != .loadedLibrary)
+                }
+                .tint(.orange)
             }
         }
+        .animation(.default, value: scene.query)
+        .buttonStyle(.plain)
         .onChange(of: scene.sidebar) { selection in
             /// Reset the details
             scene.details = selection
@@ -60,7 +82,7 @@ struct SidebarView: View {
     }
     
     @ViewBuilder func sidebarItem(item: Router) -> some View {
-            Label(item.label.title, systemImage: item.label.icon)
-                .tag(item)
+        Label(item.label.title, systemImage: item.label.icon)
+            .tag(item)
     }
 }

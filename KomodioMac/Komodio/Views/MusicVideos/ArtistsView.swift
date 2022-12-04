@@ -18,8 +18,40 @@ struct ArtistsView: View {
     @State var artists: [Audio.Details.Artist] = []
     /// The optional selected artist
     @State private var selectedArtist: Audio.Details.Artist?
+    /// The loading state of the view
+    @State private var state: Parts.State = .loading
     /// The body of the view
     var body: some View {
+        VStack {
+            switch state {
+            case .loading:
+                Text(Router.musicVideos.loading)
+            case .empty:
+                Text(Router.musicVideos.empty)
+            case .ready:
+                content
+            case .offline:
+                state.offlineMessage
+            }
+        }
+        .animation(.default, value: selectedArtist)
+        .task(id: kodi.library.musicVideos) {
+            if kodi.state != .loadedLibrary {
+                state = .offline
+            } else if kodi.library.movies.isEmpty {
+                state = .empty
+            } else {
+                getItems()
+                setItemDetails()
+                state = .ready
+            }
+        }
+        .task(id: selectedArtist) {
+            setItemDetails()
+        }
+    }
+    /// The content of the view
+    var content: some View {
         ZStack {
             List(selection: $selectedArtist) {
                 ForEach(artists, id: \.id) { artist in
@@ -33,21 +65,25 @@ struct ArtistsView: View {
                 .transition(.move(edge: .leading))
                 .offset(x: selectedArtist != nil ? 0 : ContentView.columnWidth, y: 0)
         }
-        .animation(.default, value: selectedArtist)
-        .task(id: kodi.library.musicVideos) {
-            var artistList: [Audio.Details.Artist] = []
-            let allArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
-            for artist in allArtists {
-                artistList.append(artistItem(artist: artist))
-            }
-            artists = artistList
+    }
+    /// Get all items from the library
+    ///
+    /// Movies that are part of a set will be removed and replaced with the set
+    private func getItems() {
+        var artistList: [Audio.Details.Artist] = []
+        let allArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
+        for artist in allArtists {
+            artistList.append(artistItem(artist: artist))
         }
-        .task(id: selectedArtist) {
-            if let selectedArtist {
-                scene.details = Router.artist(artist: selectedArtist)
-            } else {
-                scene.navigationSubtitle = Router.musicVideos.label.title
-            }
+        artists = artistList
+    }
+    
+    /// Set the details of a selected item
+    private func setItemDetails() {
+        if let selectedArtist {
+            scene.details = Router.artist(artist: selectedArtist)
+        } else {
+            scene.navigationSubtitle = Router.musicVideos.label.title
         }
     }
 }

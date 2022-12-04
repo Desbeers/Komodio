@@ -12,6 +12,8 @@ import SwiftlyKodiAPI
 struct MainView: View {
     /// The SceneState model
     @StateObject var scene = SceneState()
+    /// The search field in the toolbar
+    @State var searchField: String = ""
     /// Set the column visibility
     @State private var columnVisibility = NavigationSplitViewVisibility.automatic
     /// The body of the view
@@ -29,6 +31,10 @@ struct MainView: View {
                 DetailView()
             })
         .navigationSubtitle(scene.navigationSubtitle)
+        .searchable(text: $searchField, prompt: "Search library")
+        .task(id: searchField) {
+            await scene.updateSearch(query: searchField)
+        }
         .environmentObject(scene)
     }
 }

@@ -18,10 +18,44 @@ struct MoviesView: View {
     @EnvironmentObject private var scene: SceneState
     /// The items in this view (movies + movie sets)
     @State private var items: [any KodiItem] = []
+    /// The optional filter
+    var filter: Parts.Filter?
     /// The optional selected item
     @State private var selectedItem: MediaItem?
+    /// The loading state of the view
+    @State private var state: Parts.State = .loading
     /// The body of the view
     var body: some View {
+        VStack {
+            switch state {
+            case .loading:
+                Text(Router.movies.loading)
+            case .empty:
+                Text(Router.movies.empty)
+            case .ready:
+                content
+            case .offline:
+                state.offlineMessage
+            }
+        }
+        .animation(.default, value: selectedItem)
+        .task(id: kodi.library.movies) {
+            if kodi.state != .loadedLibrary {
+                state = .offline
+            } else if kodi.library.movies.isEmpty {
+                state = .empty
+            } else {
+                getItems()
+                setItemDetails()
+                state = .ready
+            }
+        }
+        .task(id: selectedItem) {
+            setItemDetails()
+        }
+    }
+    /// The content of the view
+    var content: some View {
         ZStack {
             List(selection: $selectedItem) {
                 ForEach(items, id: \.id) { video in
@@ -42,26 +76,27 @@ struct MoviesView: View {
             MovieSetView(selectedSet: $selectedItem)
                 .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
         }
-        .animation(.default, value: selectedItem)
-        .task(id: kodi.library.movies) {
-            getItems()
-            setItemDetails()
-        }
-        .task(id: selectedItem) {
-            setItemDetails()
-        }
     }
     
     /// Get all items from the library
     ///
     /// Movies that are part of a set will be removed and replaced with the set
     private func getItems() {
+        var items: [any KodiItem] = []
         items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
+        if let filter {
+            switch filter {
+            case .unwatched:
+                items = items.filter({$0.playcount == 0})
+            default:
+                break
+            }
+        }
+        self.items = items
     }
     
     /// Set the details of a selected item
     private func setItemDetails() {
-        dump(selectedItem?.id)
         if let item = selectedItem {
             switch item.media {
             case .movie:
@@ -77,7 +112,11 @@ struct MoviesView: View {
             }
         } else {
             /// Set the default Navigation Subtitle for Movies
-            scene.navigationSubtitle = Router.movies.label.title
+            if filter != nil {
+                scene.navigationSubtitle = "Unwatched Movies"
+            } else {
+                scene.navigationSubtitle = Router.movies.label.title
+            }
         }
     }
 }
@@ -98,7 +137,8 @@ extension MoviesView {
                     Text(movie.title)
                         .font(.headline)
                     Text(movie.genre.joined(separator: "∙"))
-                    Text(movie.premiered)
+                    Text(movie.year.description)
+                        .font(.caption)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .watchStatus(of: movie)

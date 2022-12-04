@@ -22,20 +22,15 @@ struct EpisodeView: View {
                 .padding()
             VStack(alignment: .leading) {
                 Text(episode.title)
+                    .font(.headline)
                 Text(episode.plot)
-                    .font(.caption2)
                     .lineLimit(5)
                 HStack {
                     Buttons.Player(item: episode)
-                    Button(action: {
-                        Task {
-                            await episode.togglePlayedState()
-                        }
-                    }, label: {
-                        Text("Toggle watch state")
-                    })
                 }
             }
+            .padding(.trailing)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
     }
 }

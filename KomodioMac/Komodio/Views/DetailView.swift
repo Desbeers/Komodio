@@ -24,6 +24,8 @@ struct DetailView: View {
                 MovieSetView.Details(movieSet: movieSet)
             case .tvshow(let tvshow):
                 TVShowView(tvshow: tvshow)
+            case .episode(let episode):
+                EpisodeView(episode: episode)
             case .season(let tvshow, let episodes):
                 SeasonView(tvshow: tvshow, episodes: episodes)
             case .artist(let artist):
@@ -37,19 +39,34 @@ struct DetailView: View {
             }
         }
         .animation(.default, value: scene.details)
+        .animation(.default, value: scene.sidebar)
     }
     /// The fallback view
     private var fallback: some View {
-        Text(scene.sidebar.label.title)
-            .font(.largeTitle)
-            .padding(40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background {
-                Image(systemName: scene.sidebar.label.icon)
-                    .resizable()
-                    .scaledToFit()
-                    .padding(40)
-                    .opacity(0.1)
+        VStack {
+            switch scene.sidebar {
+            case .start:
+                EmptyView()
+            case .search:
+                SearchView.Details()
+            default:
+                Parts.DetailMessage(title: scene.sidebar.label.title, message: scene.sidebar.label.description)
             }
+            Image(systemName: scene.sidebar.label.icon)
+                .resizable()
+                .scaledToFit()
+                .shadow(radius: 10, x: 10, y: 10)
+                .opacity(0.1)
+                .padding(40)
+        }
+        .padding(40)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+//        .background {
+//            Image(systemName: scene.sidebar.label.icon)
+//                .resizable()
+//                .scaledToFit()
+//                .padding(40)
+//                .opacity(0.1)
+//        }
     }
 }
