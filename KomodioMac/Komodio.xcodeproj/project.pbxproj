@@ -83,7 +83,6 @@
 		D7EFE45B293A525800CE9B8D /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D7EFE45D293A59AC00CE9B8D /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D7EFE45F293B2C3300CE9B8D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
-		D7EFE461293B44F000CE9B8D /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D7EFE462293B6B9100CE9B8D /* UpNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +143,6 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
-				D7EFE461293B44F000CE9B8D /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D7EFE44E293A4E7900CE9B8D /* KomodioTV */,
 				D71BD53229056A5C00037DC9 /* Products */,

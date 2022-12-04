@@ -66,7 +66,7 @@ struct SidebarView: View {
                             await KodiConnector.shared.loadLibrary(cache: false)
                         }
                     }, label: {
-                        Label("Reload library", systemImage: "arrow.triangle.2.circlepath")
+                        Label("Reload Library", systemImage: "arrow.triangle.2.circlepath")
                     })
                     .disabled(kodi.state != .loadedLibrary)
                 }

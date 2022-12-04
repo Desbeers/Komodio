@@ -42,7 +42,7 @@ struct UpNextView: View {
                 state = .empty
             } else {
                 episodes = Array(kodi.library.episodes
-                    .filter { $0.playcount == 0 && $0.season != 0 && $0.resume.position == 0  }
+                    .filter { $0.playcount == 0 && $0.season != 0 }
                     .sorted { $0.firstAired < $1.firstAired }
                     .unique { $0.tvshowID }
                     .sorted { $0.dateAdded > $1.dateAdded }

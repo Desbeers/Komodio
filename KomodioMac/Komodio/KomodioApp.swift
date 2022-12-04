@@ -48,6 +48,7 @@ import SwiftlyKodiAPI
                             window.setPosition(vertical: .center, horizontal: .center, padding: 0)
                         }
                     }
+                    .navigationTitle(item.item.title)
             }
         }
         .defaultSize(width: 1280, height: 720)
