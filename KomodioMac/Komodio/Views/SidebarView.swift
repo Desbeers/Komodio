@@ -27,7 +27,6 @@ struct SidebarView: View {
                         Button(action: {
                             if AppState.shared.host?.ip != host.ip {
                                 var values = HostItem()
-                                values.description = host.name
                                 values.ip = host.ip
                                 AppState.saveHost(host: values)
                             }
@@ -59,6 +58,8 @@ struct SidebarView: View {
                     }
                 }
                 Section("Maintanance") {
+                    sidebarItem(item: Router.kodiSettings)
+                        .disabled(kodi.state != .loadedLibrary)
                     Button(action: {
                         Task {
                             scene.sidebar = .start

@@ -38,6 +38,8 @@ enum Router: Hashable {
     
     case start
     case search
+    case kodiSettings
+    case kodiSettingsDetails(section: Setting.Section, category: Setting.Category)
     
     var loading: String {
         switch self {
@@ -133,6 +135,11 @@ enum Router: Hashable {
             return Item(title: "Albums",
                         description: "The albums of the artist",
                         icon: "square.stack"
+            )
+        case .kodiSettings:
+            return Item(title: "Kodi Settings",
+                        description: "The Settings for your Kodi",
+                        icon: "gear"
             )
         default:
             return Item(title: "Details",

@@ -21,9 +21,7 @@ struct HostView: View {
         VStack {
             Form {
                 ForEach(kodi.bonjourHosts, id: \.ip) { host in
-                    
                     Button(action: {
-                        values.description = host.name
                         values.ip = host.ip
                         appState.selectedTab = .home
                         AppState.saveHost(host: values)

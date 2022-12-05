@@ -30,6 +30,8 @@ struct ContentView: View {
             ArtistsView()
         case .search:
             SearchView()
+        case .kodiSettings:
+            KodiSettings()
         default:
             Text("Not implemented")
         }

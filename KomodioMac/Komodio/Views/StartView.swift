@@ -103,12 +103,11 @@ extension StartView {
             HStack {
                 configuration.icon
                     .foregroundColor(subItem ? .gray : .accentColor)
-                
                     .frame(width: 40)
                 configuration.title
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .font(.system(size: subItem ? 16 : 20))
+            .font(.system(size: subItem ? 12 : 14))
             .padding(.vertical, subItem ? 0 : 10)
             .padding(.leading, subItem ? 20 : 0)
         }

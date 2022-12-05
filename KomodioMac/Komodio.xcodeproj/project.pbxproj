@@ -43,6 +43,7 @@
 		D7EFE45E293A59AC00CE9B8D /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* Parts.swift */; };
 		D7EFE460293B2C3300CE9B8D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
 		D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE462293B6B9100CE9B8D /* UpNextView.swift */; };
+		D7EFE468293CDDE600CE9B8D /* KodiSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		D7EFE45D293A59AC00CE9B8D /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D7EFE45F293B2C3300CE9B8D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D7EFE462293B6B9100CE9B8D /* UpNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextView.swift; sourceTree = "<group>"; };
+		D7EFE467293CDDE600CE9B8D /* KodiSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				D71BD55F2905849A00037DC9 /* ContentView.swift */,
 				D71BD55529057E6600037DC9 /* DetailView.swift */,
 				D7EFE45B293A525800CE9B8D /* SearchView.swift */,
+				D7EFE467293CDDE600CE9B8D /* KodiSettings.swift */,
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
 				D71BD561290595FF00037DC9 /* Modifiers.swift */,
 				D7EFE45D293A59AC00CE9B8D /* Parts.swift */,
@@ -376,6 +379,7 @@
 				D71BD55029056FA500037DC9 /* AppState.swift in Sources */,
 				D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */,
 				D71170AD2934E37A0059FCD3 /* EpisodeView.swift in Sources */,
+				D7EFE468293CDDE600CE9B8D /* KodiSettings.swift in Sources */,
 				D71BD5542905726A00037DC9 /* MoviesView.swift in Sources */,
 				D71BD55629057E6600037DC9 /* DetailView.swift in Sources */,
 				D71BD56829059C6D00037DC9 /* SeasonsView.swift in Sources */,

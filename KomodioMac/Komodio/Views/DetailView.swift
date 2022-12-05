@@ -34,6 +34,10 @@ struct DetailView: View {
                 MusicVideoView(musicVideo: musicVideo)
             case .album(let album):
                 AlbumView(title: album.id, musicVideos: album.musicVideos ?? [])
+            case .kodiSettingsDetails(let section, let category):
+                KodiSettings.Details(section: section, category: category)
+//            case .kodiSettingsSection(let section):
+//                KodiSettings.Section(section: section)
             default:
                 fallback
             }
@@ -49,24 +53,26 @@ struct DetailView: View {
                 EmptyView()
             case .search:
                 SearchView.Details()
+//            case .kodiSettings:
+//                KodiSettings.Details()
             default:
                 Parts.DetailMessage(title: scene.sidebar.label.title, message: scene.sidebar.label.description)
             }
-            Image(systemName: scene.sidebar.label.icon)
-                .resizable()
-                .scaledToFit()
-                .shadow(radius: 10, x: 10, y: 10)
-                .opacity(0.1)
-                .padding(40)
-        }
-        .padding(40)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-//        .background {
 //            Image(systemName: scene.sidebar.label.icon)
 //                .resizable()
 //                .scaledToFit()
-//                .padding(40)
+//                .shadow(radius: 10, x: 10, y: 10)
 //                .opacity(0.1)
-//        }
+//                .padding(40)
+        }
+        .padding(40)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background {
+            Image(systemName: scene.sidebar.label.icon)
+                .resizable()
+                .scaledToFit()
+                .padding(40)
+                .opacity(0.1)
+        }
     }
 }
