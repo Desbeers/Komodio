@@ -81,7 +81,7 @@ struct SidebarView: View {
             scene.details = selection
         }
     }
-    
+
     @ViewBuilder func sidebarItem(item: Router) -> some View {
         Label(item.label.title, systemImage: item.label.icon)
             .tag(item)

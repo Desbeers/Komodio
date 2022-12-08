@@ -10,9 +10,9 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for all Seasons of a TV show
 struct SeasonsView: View {
-    
+
     @Binding var tvshow: Video.Details.TVShow?
-    
+
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
@@ -49,7 +49,7 @@ struct SeasonsView: View {
         .task(id: tvshow) {
             getTVShowSeasons()
         }
-        
+
         .task(id: season) {
             setSeasonDetails()
         }
@@ -58,14 +58,14 @@ struct SeasonsView: View {
             setSeasonDetails()
         }
     }
-    
+
     func getTVShowSeasons() {
         if let tvshow {
             seasons = kodi.library.episodes
                 .filter({$0.tvshowID == tvshow.tvshowID}).unique { $0.season }
         }
     }
-    
+
     func setSeasonDetails() {
         if let tvshow, let season {
             let episodes = kodi.library.episodes
@@ -76,7 +76,7 @@ struct SeasonsView: View {
 }
 
 private extension SeasonsView {
-    
+
     struct Item: View {
         let season: Video.Details.Episode
         var body: some View {

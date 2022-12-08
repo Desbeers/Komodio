@@ -21,7 +21,7 @@ class AppState: ObservableObject {
 }
 
 extension AppState {
-    
+
     /// Save the hosts to the cache
     /// - Parameter hosts: The array of hosts
     static func saveHost(host: HostItem) {
@@ -37,7 +37,7 @@ extension AppState {
             }
         }
     }
-    
+
     /// Get the configured host
     /// - Returns: An optional host
     static func getHost() -> HostItem? {

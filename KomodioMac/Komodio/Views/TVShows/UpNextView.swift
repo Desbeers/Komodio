@@ -50,7 +50,7 @@ struct UpNextView: View {
                 state = .ready
                 /// Update the optional selected item
                 if let selectedEpisode {
-                    
+
                     if let selection = episodes.first(where: {$0.tvshowID == selectedEpisode.tvshowID}) {
                         self.selectedEpisode = selection
                     } else {
@@ -83,7 +83,7 @@ struct UpNextView: View {
 }
 
 extension UpNextView {
-    
+
     struct Item: View {
         let episode: Video.Details.Episode
         var body: some View {

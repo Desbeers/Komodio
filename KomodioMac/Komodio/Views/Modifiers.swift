@@ -16,7 +16,7 @@ enum Modifiers {
 // MARK: Watch Status
 
 extension Modifiers {
-    
+
     /// A View to show a star for unwatched items
     /// - Note: Movie sets are shown here as well with its own SF symbol
     struct WatchStatus: ViewModifier {
@@ -36,7 +36,7 @@ extension Modifiers {
 }
 
 extension View {
-    
+
     /// Shortcut to the ``Modifiers/WatchStatus``
     func watchStatus(of item: any KodiItem) -> some View {
         modifier(Modifiers.WatchStatus(item: item))

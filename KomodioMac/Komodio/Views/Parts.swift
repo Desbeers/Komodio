@@ -33,7 +33,7 @@ extension Parts {
 }
 
 extension Parts {
-    
+
     /// The state of  loading a View
     enum State {
         /// The Task is loading the items
@@ -52,7 +52,7 @@ extension Parts {
 }
 
 extension Parts {
-    
+
     /// Filter for media lists
     enum Filter {
         case none

@@ -58,7 +58,7 @@ struct MovieSetView: View {
             setMovieDetails()
         }
     }
-    
+
     /// Get all movies from the selected set
     private func getMoviesFromSet() {
         /// The selection might not be a set
@@ -71,7 +71,7 @@ struct MovieSetView: View {
             self.movie = movies.first(where: ({$0.id == movie.id}))
         }
     }
-    
+
     /// Set the details of a selected movie
     private func setMovieDetails() {
         if let movie {
@@ -82,7 +82,7 @@ struct MovieSetView: View {
 }
 
 extension MovieSetView {
-    
+
     /// SwiftUI View for a `MovieSet` in ``MoviesView``
     struct Item: View {
         /// The movie set
@@ -104,7 +104,7 @@ extension MovieSetView {
 }
 
 extension MovieSetView {
-    
+
     /// SwiftUI View for the details of a `MovieSet`
     struct Details: View {
         /// The movie set

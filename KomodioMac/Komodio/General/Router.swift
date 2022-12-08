@@ -12,35 +12,35 @@ import SwiftlyKodiAPI
 enum Router: Hashable {
 
     /// # Movies
-    
+
     case movies
     case movie(movie: Video.Details.Movie)
     case movieSet(movieSet: Video.Details.MovieSet)
     case unwatchedMovies
-    
+
     /// # TV shows
-    
+
     case tvshows
     case tvshow(tvshow: Video.Details.TVShow)
     case seasons
     case season(tvshow: Video.Details.TVShow, episodes: [Video.Details.Episode])
     case episode(episode: Video.Details.Episode)
     case unwachedEpisodes
-    
+
     /// # Music Videos
-    
+
     case artist(artist: Audio.Details.Artist)
     case musicVideos
     case musicVideo(musicVideo: Video.Details.MusicVideo)
     case album(album: MediaItem)
-    
+
     /// # Other
-    
+
     case start
     case search
     case kodiSettings
     case kodiSettingsDetails(section: Setting.Section, category: Setting.Category)
-    
+
     var loading: String {
         switch self {
         case .movies:
@@ -53,7 +53,7 @@ enum Router: Hashable {
             return "Loading..."
         }
     }
-    
+
     var empty: String {
         switch self {
         case .start:
@@ -78,7 +78,7 @@ enum Router: Hashable {
             return "Navigation Error"
         }
     }
-    
+
     var label: Item {
         switch self {
         case .start:
@@ -157,5 +157,5 @@ enum Router: Hashable {
         let route: Router = .start
         var visible: Bool = true
     }
-    
+
 }

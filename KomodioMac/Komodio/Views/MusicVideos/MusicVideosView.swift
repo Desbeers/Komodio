@@ -76,7 +76,7 @@ extension MusicVideosView {
             self.selectedItem = items.first(where: {$0.id == selectedItem.id})
         }
     }
-    
+
     /// Set the details of a selected item
     private func setItemDetails() {
         if let selectedItem, let first = selectedItem.musicVideos?.first {
@@ -93,7 +93,7 @@ extension MusicVideosView {
 }
 
 extension MusicVideosView {
-    
+
     /// SwiftUI View for an item in ``MusicVideosView``
     struct Item: View {
         let item: MediaItem

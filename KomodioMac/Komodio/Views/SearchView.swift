@@ -28,15 +28,15 @@ struct SearchView: View {
     }
     /// The body of the View
     var body: some View {
-        
+
         List(selection: $selectedItem) {
-            
+
             if !results {
                 Label("No results found", systemImage: "magnifyingglass")
                     .font(.title)
                     .padding()
             }
-            
+
             if !movies.isEmpty {
                 Label("Movies", systemImage: "magnifyingglass")
                     .font(.title)
@@ -114,7 +114,7 @@ struct SearchView: View {
 }
 
 extension SearchView {
-    
+
     struct Details: View {
         /// The SceneState model
         @EnvironmentObject var scene: SceneState

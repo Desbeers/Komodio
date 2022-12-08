@@ -95,7 +95,7 @@ struct StartView: View {
 }
 
 extension StartView {
-    
+
     /// Label style for statistics
     private struct StatisticsLabel: LabelStyle {
         var subItem: Bool = false

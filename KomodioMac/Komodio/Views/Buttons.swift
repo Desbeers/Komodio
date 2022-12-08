@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 enum Buttons {}
 
 extension Buttons {
-    
+
     struct Player: View {
         var item: any KodiItem
         var body: some View {
@@ -31,7 +31,7 @@ extension Buttons {
             }
         }
     }
-    
+
     struct Play: View {
         var item: any KodiItem
         @Environment(\.openWindow) var openWindow

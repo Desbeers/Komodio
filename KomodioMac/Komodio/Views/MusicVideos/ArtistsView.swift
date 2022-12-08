@@ -77,7 +77,7 @@ struct ArtistsView: View {
         }
         artists = artistList
     }
-    
+
     /// Set the details of a selected item
     private func setItemDetails() {
         if let selectedArtist {
@@ -89,7 +89,7 @@ struct ArtistsView: View {
 }
 
 extension ArtistsView {
-    
+
     /// Convert an 'artist' string to a `KodiItem`
     /// - Parameter artist: Name of the artist
     /// - Returns: A `KodiItem`
@@ -103,7 +103,7 @@ extension ArtistsView {
 }
 
 extension ArtistsView {
-    
+
     /// SwiftUI View for an artist in ``ArtistsView``
     struct Item: View {
         let artist: Audio.Details.Artist

@@ -26,7 +26,7 @@ struct AlbumView: View {
 }
 
 extension AlbumView {
-    
+
     /// SwiftUI View for a music video in ``AlbumView``
     struct Item: View {
         /// The Music Video

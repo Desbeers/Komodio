@@ -77,7 +77,7 @@ struct MoviesView: View {
                 .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
         }
     }
-    
+
     /// Get all items from the library
     ///
     /// Movies that are part of a set will be removed and replaced with the set
@@ -94,7 +94,7 @@ struct MoviesView: View {
         }
         self.items = items
     }
-    
+
     /// Set the details of a selected item
     private func setItemDetails() {
         if let item = selectedItem {
@@ -122,7 +122,7 @@ struct MoviesView: View {
 }
 
 extension MoviesView {
-    
+
     /// SwiftUI View for a movie in ``MoviesView``
     struct Item: View {
         /// The movie

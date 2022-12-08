@@ -74,7 +74,7 @@ struct TVShowsView: View {
 }
 
 extension TVShowsView {
-    
+
     struct Item: View {
         let tvshow: Video.Details.TVShow
         var body: some View {

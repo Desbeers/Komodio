@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 struct KodiSettings: View {
-    
+
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    
+
     @State private var sections: [Setting.Details.Section] = []
     @State private var selectedSection: Setting.Details.Section?
     var body: some View {
@@ -34,7 +34,6 @@ struct KodiSettings: View {
             Section(section: $selectedSection)
                 .transition(.move(edge: .leading))
                 .offset(x: selectedSection != nil ? 0 : ContentView.columnWidth, y: 0)
-            //.id(selectedSection)
         }
         .animation(.default, value: selectedSection)
         .task {
@@ -51,7 +50,7 @@ struct KodiSettings: View {
 }
 
 extension KodiSettings {
-    
+
     struct Section: View {
         @Binding var section: Setting.Details.Section?
         /// The SceneState model
@@ -123,23 +122,18 @@ extension KodiSettings {
 }
 
 extension KodiSettings {
-    
+
     /// The View for a Kodi Setting
     struct KodiSetting: View {
-//        /// The AppState model
-//        @EnvironmentObject var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject var kodi: KodiConnector
-
-        
         /// The Kodi setting
         @State var setting: Setting.Details.Base
-        
+        /// The optional value String
         @State private var valueString: String = ""
         /// The View
         var body: some View {
             VStack(alignment: .leading) {
-                let _ = Self._printChanges()
                 switch setting.control.controlType {
                 case .list:
                     Text(setting.label)
@@ -151,35 +145,32 @@ extension KodiSettings {
                         }
                     }
                     .labelsHidden()
-                    //.disabled(KodioSettings.disabled(setting: setting.id))
                 case .spinner:
                     Text(setting.label)
                         .font(setting.parent == .unknown ? .title2 : .headline)
                     Picker(setting.label, selection: $setting.valueInt) {
-                        
+
                         ForEach((setting.minimum...setting.maximum), id: \.self) { value in
-                            
+
                             Text(value == 0 ? setting.control.minimumLabel : formatLabel(value: value))
                                 .tag(value)
                         }
-                        
+
                         ForEach(setting.settingInt ?? [Setting.Details.SettingInt](), id: \.self) { option in
                             Text(option.label)
                                 .tag(option.value)
                         }
                     }
                     .labelsHidden()
-                    //.disabled(KodioSettings.disabled(setting: setting.id))
                 case .toggle:
                     Toggle(setting.label, isOn: $setting.valueBool)
-                    //.disabled(KodioSettings.disabled(setting: setting.id))
                 case .edit:
                     TextField(setting.label, text: $valueString)
                 default:
                     Text("Setting \(setting.control.controlType.rawValue) is not implemented")
                         .font(.caption)
                 }
-                
+
                 Text(setting.help)
                     .font(.caption)
                     .fixedSize(horizontal: false, vertical: true)
@@ -198,7 +189,6 @@ extension KodiSettings {
             .padding(setting.parent == .unknown ? .all : .horizontal)
             .background(.thickMaterial)
             .cornerRadius(10)
-            //.animation(.default, value: appState.settings)
             .onChange(of: setting.valueInt) { _ in
                 Task { @MainActor in
                     print("valueInt")
@@ -224,7 +214,7 @@ extension KodiSettings {
                 }
             }
         }
-        
+
         func formatLabel(value: Int) -> String {
             // swiftlint:disable:next colon
             let labelRegex = /{0:d}(?<label>.+?)/
@@ -233,8 +223,8 @@ extension KodiSettings {
             } else {
                 return "\(value)"
             }
-            
+
         }
     }
-    
+
 }
