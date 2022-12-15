@@ -21,7 +21,7 @@ struct SidebarView: View {
     /// The body of the view
     var body: some View {
         VStack {
-            List(selection: $scene.sidebar) {
+            List(selection: $scene.sidebarSelection) {
                 Section("Your Kodio's") {
                     ForEach(kodi.bonjourHosts, id: \.ip) { host in
                         Button(action: {
@@ -62,7 +62,7 @@ struct SidebarView: View {
                         .disabled(kodi.state != .loadedLibrary)
                     Button(action: {
                         Task {
-                            scene.sidebar = .start
+                            scene.sidebarSelection = .start
                             scene.navigationSubtitle = ""
                             await KodiConnector.shared.loadLibrary(cache: false)
                         }
@@ -76,9 +76,11 @@ struct SidebarView: View {
         }
         .animation(.default, value: scene.query)
         .buttonStyle(.plain)
-        .onChange(of: scene.sidebar) { selection in
+        .onChange(of: scene.sidebarSelection) { selection in
             /// Reset the details
             scene.details = selection
+            /// Set the contentSelection
+            scene.contentSelection = selection
         }
     }
 

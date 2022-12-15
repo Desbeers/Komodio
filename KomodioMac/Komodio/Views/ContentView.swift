@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftlyKodiAPI
 
 struct ContentView: View {
     /// The ContentView Column Width
@@ -15,7 +16,7 @@ struct ContentView: View {
     @EnvironmentObject var scene: SceneState
     /// The body of the view
     var body: some View {
-        switch scene.sidebar {
+        switch scene.contentSelection {
         case .start:
             StartView()
         case .movies:
@@ -23,7 +24,9 @@ struct ContentView: View {
         case .unwatchedMovies:
             MoviesView(filter: .unwatched)
         case .tvshows:
-            TVShowsView(selectedTVShow: scene.selectedTVShow)
+            TVShowsView()
+        case .seasons(let tvshow):
+            TVShowsView(selectedTVShow: tvshow)
         case .unwachedEpisodes:
             UpNextView()
         case .musicVideos:

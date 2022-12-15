@@ -20,9 +20,10 @@ enum Router: Hashable {
 
     /// # TV shows
 
+    /// The TV shows `View` can have an optional selected TV show
     case tvshows
     case tvshow(tvshow: Video.Details.TVShow)
-    case seasons
+    case seasons(tvhow: Video.Details.TVShow)
     case season(tvshow: Video.Details.TVShow, episodes: [Video.Details.Episode])
     case episode(episode: Video.Details.Episode)
     case unwachedEpisodes

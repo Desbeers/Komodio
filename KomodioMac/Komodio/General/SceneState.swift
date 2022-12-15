@@ -10,8 +10,19 @@ import SwiftlyKodiAPI
 
 /// Class to observe the current Komodio Scene state
 class SceneState: ObservableObject {
-    /// The current selection in the sidebar
-    @Published var sidebar: Router = .start
+    /// The current selection in the ``SidebarView``
+    @Published var sidebarSelection: Router = .start {
+        willSet {
+            /// Reset the details
+            //details = newValue
+        }
+    }
+    /// The current selection in the ``ContentView``
+    @Published var contentSelection: Router = .start {
+        didSet {
+
+        }
+    }
     /// The current search query
     var query: String = ""
     /// The subtitle for the navigation
@@ -33,7 +44,6 @@ class SceneState: ObservableObject {
             }
         }
     }
-    var selectedTVShow: Video.Details.TVShow?
 }
 
 extension SceneState {
@@ -43,10 +53,10 @@ extension SceneState {
             self.query = query
             Task { @MainActor in
                 if !query.isEmpty {
-                    sidebar = .search
-                } else if sidebar == .search {
+                    sidebarSelection = .search
+                } else if sidebarSelection == .search {
                     /// Go to the main browser view; the search is canceled
-                    sidebar = .movies
+                    sidebarSelection = .movies
                 }
             }
         } catch { }

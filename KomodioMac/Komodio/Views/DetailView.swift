@@ -43,12 +43,12 @@ struct DetailView: View {
             }
         }
         .animation(.default, value: scene.details)
-        .animation(.default, value: scene.sidebar)
+        .animation(.default, value: scene.sidebarSelection)
     }
     /// The fallback view
     private var fallback: some View {
         VStack {
-            switch scene.sidebar {
+            switch scene.sidebarSelection {
             case .start:
                 EmptyView()
             case .search:
@@ -56,7 +56,7 @@ struct DetailView: View {
 //            case .kodiSettings:
 //                KodiSettings.Details()
             default:
-                Parts.DetailMessage(title: scene.sidebar.label.title, message: scene.sidebar.label.description)
+                Parts.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
             }
 //            Image(systemName: scene.sidebar.label.icon)
 //                .resizable()
@@ -68,7 +68,7 @@ struct DetailView: View {
         .padding(40)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background {
-            Image(systemName: scene.sidebar.label.icon)
+            Image(systemName: scene.sidebarSelection.label.icon)
                 .resizable()
                 .scaledToFit()
                 .padding(40)

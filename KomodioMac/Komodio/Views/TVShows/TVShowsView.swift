@@ -46,8 +46,6 @@ struct TVShowsView: View {
             }
         }
         .task(id: selectedTVShow) {
-            /// We might came here from a search
-            scene.selectedTVShow = nil
             if let selectedTVShow {
                 scene.details = .tvshow(tvshow: selectedTVShow)
             } else {

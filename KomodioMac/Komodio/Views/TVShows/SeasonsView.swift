@@ -39,7 +39,13 @@ struct SeasonsView: View {
                 ToolbarItem(placement: .navigation) {
                     Button(action: {
                         tvshow = nil
-                        scene.details = .tvshows
+                        /// We might came from the search page
+                        if scene.sidebarSelection == .search {
+                            scene.contentSelection = .search
+                            scene.details = .tvshows
+                        } else {
+                            scene.details = .tvshows
+                        }
                     }, label: {
                         Image(systemName: "chevron.backward")
                     })

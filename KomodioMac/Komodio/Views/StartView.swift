@@ -39,7 +39,7 @@ struct StartView: View {
             if !kodi.library.movies.isEmpty {
                 Button(
                     action: {
-                        scene.sidebar = .movies
+                        scene.sidebarSelection = .movies
                     },
                     label: {
                         Label("\(kodi.library.movies.count) Movies", systemImage: Router.movies.label.icon)
@@ -49,7 +49,7 @@ struct StartView: View {
                 if !unwatched.isEmpty {
                     Button(
                         action: {
-                            scene.sidebar = .unwatchedMovies
+                            scene.sidebarSelection = .unwatchedMovies
                         },
                         label: {
                             Label("\(unwatched.count) Unwatched Movies", systemImage: "eye")
@@ -60,7 +60,7 @@ struct StartView: View {
             if !kodi.library.tvshows.isEmpty {
                 Button(
                     action: {
-                        scene.sidebar = .tvshows
+                        scene.sidebarSelection = .tvshows
                     },
                     label: {
                         Label("\(kodi.library.tvshows.count) TV shows", systemImage: Router.tvshows.label.icon)
@@ -70,7 +70,7 @@ struct StartView: View {
                 if !unwatched.isEmpty {
                     Button(
                         action: {
-                            scene.sidebar = .unwachedEpisodes
+                            scene.sidebarSelection = .unwachedEpisodes
                         },
                         label: {
                             Label("\(unwatched.count) Unwatched Episodes", systemImage: "eye")
@@ -81,7 +81,7 @@ struct StartView: View {
             if !kodi.library.musicVideos.isEmpty {
                 Button(
                     action: {
-                        scene.sidebar = .musicVideos
+                        scene.sidebarSelection = .musicVideos
                     },
                     label: {
                         Label("\(kodi.library.musicVideos.count) Music Videos", systemImage: Router.musicVideos.label.icon)

@@ -61,8 +61,7 @@ struct SearchView: View {
                     .padding()
                     ForEach(tvshows) { tvshow in
                         Button(action: {
-                            scene.selectedTVShow = tvshow
-                            scene.sidebar = Router.tvshows
+                            scene.contentSelection = Router.seasons(tvhow: tvshow)
                         }, label: {
                             TVShowsView.Item(tvshow: tvshow)
                                 .contentShape(Rectangle())
