@@ -16,13 +16,13 @@ struct SeasonView: View {
     let episodes: [Video.Details.Episode]
     /// The body of this View
     var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            List {
-                ForEach(episodes) { episode in
-                    EpisodeView(episode: episode)
-                }
+        List {
+            ForEach(episodes) { episode in
+                EpisodeView(episode: episode)
             }
-            .modifier(Modifiers.ContentListStyle())
         }
+#if os(macOS)
+        .listStyle(.inset(alternatesRowBackgrounds: true))
+#endif
     }
 }

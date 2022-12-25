@@ -30,3 +30,19 @@ import SwiftlyKodiAPI
         }
     }
 }
+
+extension KomodioApp {
+
+    // MARK: Static settings
+
+    /// The default size of poster art
+    static let posterSize = CGSize(width: 240, height: 360)
+
+    /// The width of the sidebar
+    static let sidebarWidth: Double = 450
+
+    /// The width of the sidebar when collapsed
+    static var sidebarCollapsedWidth: Double {
+        KomodioApp.sidebarWidth / 3
+    }
+}

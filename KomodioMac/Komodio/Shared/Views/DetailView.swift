@@ -14,7 +14,7 @@ struct DetailView: View {
     @EnvironmentObject private var scene: SceneState
     /// The Navigation Subtitle
     @State private var navigationSubtitle: String = "hallo"
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         VStack {
             switch scene.details {
@@ -34,10 +34,10 @@ struct DetailView: View {
                 MusicVideoView(musicVideo: musicVideo)
             case .album(let album):
                 AlbumView(title: album.id, musicVideos: album.musicVideos ?? [])
-//            case .kodiSettingsDetails(let section, let category):
-//                KodiSettings.Details(section: section, category: category)
-////            case .kodiSettingsSection(let section):
-////                KodiSettings.Section(section: section)
+#if os(macOS)
+            case .kodiSettingsDetails(let section, let category):
+                KodiSettingsView.Details(section: section, category: category)
+#endif
             default:
                 fallback
             }
@@ -51,19 +51,19 @@ struct DetailView: View {
             switch scene.sidebarSelection {
             case .start:
                 EmptyView()
-//            case .search:
-//                SearchView.Details()
-//            case .kodiSettings:
-//                KodiSettings.Details()
+                //            case .search:
+                //                SearchView.Details()
+                //            case .kodiSettings:
+                //                KodiSettings.Details()
             default:
                 Parts.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
             }
-//            Image(systemName: scene.sidebar.label.icon)
-//                .resizable()
-//                .scaledToFit()
-//                .shadow(radius: 10, x: 10, y: 10)
-//                .opacity(0.1)
-//                .padding(40)
+            //            Image(systemName: scene.sidebar.label.icon)
+            //                .resizable()
+            //                .scaledToFit()
+            //                .shadow(radius: 10, x: 10, y: 10)
+            //                .opacity(0.1)
+            //                .padding(40)
         }
         .padding(40)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

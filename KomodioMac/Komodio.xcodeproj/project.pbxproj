@@ -34,6 +34,12 @@
 		D71BD5602905849A00037DC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55F2905849A00037DC9 /* ContentView.swift */; };
 		D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD561290595FF00037DC9 /* Modifiers.swift */; };
 		D71BD56829059C6D00037DC9 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56729059C6D00037DC9 /* SeasonsView.swift */; };
+		D7254F43295739CA00DC704B /* Buttons+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F42295739CA00DC704B /* Buttons+macOS.swift */; };
+		D7254F4429573BD900DC704B /* Buttons+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F402957399C00DC704B /* Buttons+tvOS.swift */; };
+		D7254F4629573FAB00DC704B /* Modifiers+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */; };
+		D7254F49295853C900DC704B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F48295853C900DC704B /* SearchView.swift */; };
+		D7254F4A295853F800DC704B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45B293A525800CE9B8D /* SearchView.swift */; };
+		D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72DE7B42955F22500DD0FFB /* SidebarView.swift */; };
 		D7325D522906852000D15D79 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
 		D75C3F63294DCF09002BC065 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */; };
 		D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
@@ -63,15 +69,14 @@
 		D785A1A7294B7F3A00530F62 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55529057E6600037DC9 /* DetailView.swift */; };
 		D785A1A8294B7F8E00530F62 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B22934E8570059FCD3 /* MovieView.swift */; };
 		D785A1A9294B7FA000530F62 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55729057F1A00037DC9 /* Buttons.swift */; };
-		D785A1AA294CB90F00530F62 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54D29056F3700037DC9 /* SidebarView.swift */; };
 		D785A1AB294CBC6100530F62 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
+		D7B49BE22953262A00BBCB80 /* SiriRemoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */; };
 		D7EFE450293A4E7900CE9B8D /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */; };
 		D7EFE452293A4E7900CE9B8D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE451293A4E7900CE9B8D /* MainView.swift */; };
-		D7EFE45C293A525800CE9B8D /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45B293A525800CE9B8D /* SearchView.swift */; };
 		D7EFE45E293A59AC00CE9B8D /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* Parts.swift */; };
 		D7EFE460293B2C3300CE9B8D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
 		D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE462293B6B9100CE9B8D /* UpNextView.swift */; };
-		D7EFE468293CDDE600CE9B8D /* KodiSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettings.swift */; };
+		D7EFE468293CDDE600CE9B8D /* KodiSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,10 +108,16 @@
 		D71BD56329059B1400037DC9 /* SeasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonView.swift; sourceTree = "<group>"; };
 		D71BD56529059B6000037DC9 /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
 		D71BD56729059C6D00037DC9 /* SeasonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
+		D7254F402957399C00DC704B /* Buttons+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buttons+tvOS.swift"; sourceTree = "<group>"; };
+		D7254F42295739CA00DC704B /* Buttons+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buttons+macOS.swift"; sourceTree = "<group>"; };
+		D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modifiers+tvOS.swift"; sourceTree = "<group>"; };
+		D7254F48295853C900DC704B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		D72DE7B42955F22500DD0FFB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../KomodioTV/KomodioTV/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D785A1A1294B665600530F62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D785A1A5294B66FD00530F62 /* Extensions+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+tvOS.swift"; sourceTree = "<group>"; };
+		D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiriRemoteController.swift; sourceTree = "<group>"; };
 		D7EFE44D293A4E7900CE9B8D /* KomodioTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KomodioTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7EFE451293A4E7900CE9B8D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -114,7 +125,7 @@
 		D7EFE45D293A59AC00CE9B8D /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D7EFE45F293B2C3300CE9B8D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D7EFE462293B6B9100CE9B8D /* UpNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextView.swift; sourceTree = "<group>"; };
-		D7EFE467293CDDE600CE9B8D /* KodiSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiSettings.swift; sourceTree = "<group>"; };
+		D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,9 +223,11 @@
 			isa = PBXGroup;
 			children = (
 				D71BD53629056A5C00037DC9 /* MainView.swift */,
+				D71BD54D29056F3700037DC9 /* SidebarView.swift */,
 				D71BD55F2905849A00037DC9 /* ContentView.swift */,
 				D7EFE45B293A525800CE9B8D /* SearchView.swift */,
-				D7EFE467293CDDE600CE9B8D /* KodiSettings.swift */,
+				D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */,
+				D7254F42295739CA00DC704B /* Buttons+macOS.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +236,27 @@
 			isa = PBXGroup;
 			children = (
 				D71BD55B2905809900037DC9 /* WindowManagement.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		D72DE7B32955F21200DD0FFB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D7EFE451293A4E7900CE9B8D /* MainView.swift */,
+				D72DE7B42955F22500DD0FFB /* SidebarView.swift */,
+				D785A1A1294B665600530F62 /* ContentView.swift */,
+				D7254F48295853C900DC704B /* SearchView.swift */,
+				D7254F402957399C00DC704B /* Buttons+tvOS.swift */,
+				D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D72DE7B62955F27300DD0FFB /* General */ = {
+			isa = PBXGroup;
+			children = (
+				D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -267,7 +301,6 @@
 				D71170AF2934E6CB0059FCD3 /* TVShows */,
 				D71170B5293502D00059FCD3 /* MusicVideos */,
 				D7EFE45F293B2C3300CE9B8D /* StartView.swift */,
-				D71BD54D29056F3700037DC9 /* SidebarView.swift */,
 				D71BD55529057E6600037DC9 /* DetailView.swift */,
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
 				D71BD561290595FF00037DC9 /* Modifiers.swift */,
@@ -286,9 +319,9 @@
 		D7EFE44E293A4E7900CE9B8D /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				D72DE7B62955F27300DD0FFB /* General */,
+				D72DE7B32955F21200DD0FFB /* Views */,
 				D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */,
-				D7EFE451293A4E7900CE9B8D /* MainView.swift */,
-				D785A1A1294B665600530F62 /* ContentView.swift */,
 				D785A1A5294B66FD00530F62 /* Extensions+tvOS.swift */,
 				D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */,
 			);
@@ -326,6 +359,7 @@
 				D7EFE449293A4E7900CE9B8D /* Sources */,
 				D7EFE44A293A4E7900CE9B8D /* Frameworks */,
 				D7EFE44B293A4E7900CE9B8D /* Resources */,
+				D72DE7B72955F29600DD0FFB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -420,6 +454,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		D72DE7B72955F29600DD0FFB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -436,23 +488,24 @@
 				D71BD55829057F1A00037DC9 /* Buttons.swift in Sources */,
 				D71170B9293503520059FCD3 /* ArtistsView.swift in Sources */,
 				D71170BB293503710059FCD3 /* ArtistView.swift in Sources */,
-				D7EFE45C293A525800CE9B8D /* SearchView.swift in Sources */,
 				D71170B32934E8570059FCD3 /* MovieView.swift in Sources */,
 				D7325D522906852000D15D79 /* MovieSetView.swift in Sources */,
 				D71BD55229056FB500037DC9 /* SceneState.swift in Sources */,
 				D71BD54C29056F1100037DC9 /* Router.swift in Sources */,
 				D71170AC2934E36E0059FCD3 /* SeasonView.swift in Sources */,
 				D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */,
+				D7254F4A295853F800DC704B /* SearchView.swift in Sources */,
 				D71BD55029056FA500037DC9 /* AppState.swift in Sources */,
 				D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */,
 				D71170AD2934E37A0059FCD3 /* EpisodeView.swift in Sources */,
-				D7EFE468293CDDE600CE9B8D /* KodiSettings.swift in Sources */,
+				D7EFE468293CDDE600CE9B8D /* KodiSettingsView.swift in Sources */,
 				D71BD5542905726A00037DC9 /* MoviesView.swift in Sources */,
 				D71BD55629057E6600037DC9 /* DetailView.swift in Sources */,
 				D71BD56829059C6D00037DC9 /* SeasonsView.swift in Sources */,
 				D71BD55E290583F600037DC9 /* TVShowsView.swift in Sources */,
 				D71170BF293503C70059FCD3 /* MusicVideoView.swift in Sources */,
 				D71BD5602905849A00037DC9 /* ContentView.swift in Sources */,
+				D7254F43295739CA00DC704B /* Buttons+macOS.swift in Sources */,
 				D71BD53729056A5C00037DC9 /* MainView.swift in Sources */,
 				D71170B7293502E90059FCD3 /* MusicVideosView.swift in Sources */,
 				D71BD53529056A5C00037DC9 /* KomodioApp.swift in Sources */,
@@ -468,11 +521,13 @@
 				D75C3F69294DDD3F002BC065 /* TVShowView.swift in Sources */,
 				D785A1AB294CBC6100530F62 /* StartView.swift in Sources */,
 				D785A1A9294B7FA000530F62 /* Buttons.swift in Sources */,
-				D785A1AA294CB90F00530F62 /* SidebarView.swift in Sources */,
+				D7B49BE22953262A00BBCB80 /* SiriRemoteController.swift in Sources */,
 				D75C3F68294DDD3B002BC065 /* TVShowsView.swift in Sources */,
 				D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */,
 				D785A1A0294B653C00530F62 /* Parts.swift in Sources */,
+				D7254F4629573FAB00DC704B /* Modifiers+tvOS.swift in Sources */,
 				D75C3F6B294DDD46002BC065 /* SeasonView.swift in Sources */,
+				D7254F49295853C900DC704B /* SearchView.swift in Sources */,
 				D75C3F6F294DED93002BC065 /* MusicVideosView.swift in Sources */,
 				D785A1A4294B668C00530F62 /* Modifiers.swift in Sources */,
 				D75C3F6E294DED8F002BC065 /* ArtistsView.swift in Sources */,
@@ -489,6 +544,8 @@
 				D75C3F71294DED9A002BC065 /* AlbumView.swift in Sources */,
 				D75C3F70294DED96002BC065 /* ArtistView.swift in Sources */,
 				D785A19F294B652100530F62 /* MoviesView.swift in Sources */,
+				D7254F4429573BD900DC704B /* Buttons+tvOS.swift in Sources */,
+				D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */,
 				D785A19C294B63FE00530F62 /* AppState.swift in Sources */,
 				D785A19E294B640800530F62 /* MediaItem.swift in Sources */,
 				D75C3F6A294DDD42002BC065 /* SeasonsView.swift in Sources */,

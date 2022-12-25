@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 struct TVShowView: View {
     /// The TV show
     let tvshow: Video.Details.TVShow
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         VStack {
             KodiArt.Fanart(item: tvshow)
@@ -23,10 +23,12 @@ struct TVShowView: View {
         }
         .padding(40)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+#if os(macOS)
         .background(
             KodiArt.Fanart(item: tvshow)
-                .scaledToFill()
                 .opacity(0.2)
+                .scaledToFill()
         )
+#endif
     }
 }

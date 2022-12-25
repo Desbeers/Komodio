@@ -36,8 +36,6 @@ struct StartView: View {
     }
     @ViewBuilder var statistics: some View {
         VStack {
-            Text(AppState.shared.host?.description ?? "No host selected")
-                .font(.system(size: 30))
             if !kodi.library.movies.isEmpty {
                 Button(
                     action: {
@@ -130,6 +128,7 @@ extension StartView {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .minimumScaleFactor(0.2)
                     .lineLimit(1)
+                    .foregroundColor(.primary)
             }
             .font(subItem ? .subheadline : .headline)
             .frame(width: 400, alignment: .center)

@@ -24,13 +24,17 @@ struct MediaItem: Hashable, Identifiable, Codable {
     var resume: Bool = false
     /// The KodiItem
     var item: any KodiItem = Audio.Details.Stream()
+    /// Optional Movie Set
+    var movieSet: Video.Details.MovieSet?
     /// Optional Music Videos
     var musicVideos: [Video.Details.MusicVideo]?
     /// Optional TV show Episodes
     var episodes: [Video.Details.Episode]?
     /// Make it codable
     enum CodingKeys: CodingKey {
+        /// The ID of the item
         case id
+        /// When playing this item, resume or not
         case resume
     }
 }

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SceneState Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/SceneState" class="dashAnchor"></a>
+    <a title="SceneState Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Komodio</a> (87% documented)</p>
+        <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">KomodioTV Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        SceneState Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../General.html">General</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioApp.html">KomodioApp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Router.html">Router</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Router/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Observable%20Classes.html">Observable Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AppState.html">AppState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SceneState.html">SceneState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../SwiftUI%20Views.html">SwiftUI Views</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MainView.html">MainView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SidebarView.html">SidebarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentView.html">ContentView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DetailView.html">DetailView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView.html">StartView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MoviesView.html">MoviesView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MoviesView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieView.html">MovieView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView.html">MovieSetView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TVShowsView.html">TVShowsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TVShowsView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TVShowView.html">TVShowView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonView.html">SeasonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EpisodeView.html">EpisodeView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpNextView.html">UpNextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpNextView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ArtistsView.html">ArtistsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ArtistsView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ArtistView.html">ArtistView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AlbumView.html">AlbumView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AlbumView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MusicVideosView.html">MusicVideosView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MusicVideosView/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MusicVideoView.html">MusicVideoView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons.html">Buttons</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Player.html">– Player</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Play.html">– Play</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Resume.html">– Resume</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/PlayedState.html">– PlayedState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers.html">Modifiers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/ContentListStyle.html">– ContentListStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/WatchStatus.html">– WatchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/SafeAreas.html">– SafeAreas</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts.html">Parts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/DetailMessage.html">– DetailMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/Filter.html">– Filter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Classes.html">Other Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SiriRemoteController.html">SiriRemoteController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/View.html">View</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Structs.html">Other Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/SwipeGestureActions.html">SwipeGestureActions</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SceneState</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SceneState</span> <span class="p">:</span> <span class="kt">ObservableObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>Class to observe the current Komodio Scene state</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/tvOS%20stuff"></a>
+                <a name="//apple_ref/swift/Section/tvOS stuff" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/tvOS%20stuff"></a>
+                  <h3 class="section-name"><span>tvOS stuff</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC12sidebarItemsSayAA6RouterOGvp"></a>
+                    <a name="//apple_ref/swift/Property/sidebarItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC12sidebarItemsSayAA6RouterOGvp">sidebarItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sidebarItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/Router.html">Router</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC13mainSelectionSivp"></a>
+                    <a name="//apple_ref/swift/Property/mainSelection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC13mainSelectionSivp">mainSelection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">mainSelection</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC19navigationStackPath7SwiftUI010NavigationG0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/navigationStackPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC19navigationStackPath7SwiftUI010NavigationG0Vvp">navigationStackPath</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">navigationStackPath</span><span class="p">:</span> <span class="kt">NavigationPath</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC11showDetailsSbvp"></a>
+                    <a name="//apple_ref/swift/Property/showDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC11showDetailsSbvp">showDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show details</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Published</span>
+<span class="k">var</span> <span class="nv">showDetails</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/shared%20stuff"></a>
+                <a name="//apple_ref/swift/Section/shared stuff" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/shared%20stuff"></a>
+                  <h3 class="section-name"><span>shared stuff</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC16sidebarSelectionAA6RouterOvp"></a>
+                    <a name="//apple_ref/swift/Property/sidebarSelection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC16sidebarSelectionAA6RouterOvp">sidebarSelection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The current selection in the <code><a href="../Structs/SidebarView.html">SidebarView</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Published</span>
+<span class="k">var</span> <span class="nv">sidebarSelection</span><span class="p">:</span> <span class="kt"><a href="../Enums/Router.html">Router</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC16contentSelectionAA6RouterOvp"></a>
+                    <a name="//apple_ref/swift/Property/contentSelection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC16contentSelectionAA6RouterOvp">contentSelection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The current selection in the <code><a href="../Structs/ContentView.html">ContentView</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Published</span>
+<span class="k">var</span> <span class="nv">contentSelection</span><span class="p">:</span> <span class="kt"><a href="../Enums/Router.html">Router</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC5querySSvp"></a>
+                    <a name="//apple_ref/swift/Property/query" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC5querySSvp">query</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The current search query</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC18navigationSubtitleSSvp"></a>
+                    <a name="//apple_ref/swift/Property/navigationSubtitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC18navigationSubtitleSSvp">navigationSubtitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The subtitle for the navigation</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Published</span>
+<span class="k">var</span> <span class="nv">navigationSubtitle</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9KomodioTV10SceneStateC7detailsAA6RouterOvp"></a>
+                    <a name="//apple_ref/swift/Property/details" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9KomodioTV10SceneStateC7detailsAA6RouterOvp">details</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The details for the current selection in the main view</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Published</span>
+<span class="k">var</span> <span class="nv">details</span><span class="p">:</span> <span class="kt"><a href="../Enums/Router.html">Router</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/updateSearch(query:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">updateSearch(query:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update the search query</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2022 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2022-12-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

@@ -20,7 +20,11 @@ struct TVShowsView: View {
     @State var selectedTVShow: Video.Details.TVShow?
     /// The loading state of the view
     @State private var state: Parts.State = .loading
-    /// The body of the view
+
+    /// Define the grid layout (tvOS)
+    private let grid = [GridItem(.adaptive(minimum: 260))]
+
+    /// The body of the View
     var body: some View {
         VStack {
             switch state {
@@ -53,22 +57,47 @@ struct TVShowsView: View {
             }
         }
     }
+    #if os(macOS)
     /// The content of the view
     var content: some View {
         ZStack {
             List(selection: $selectedTVShow) {
                 ForEach(tvshows) { tvshow in
                     Item(tvshow: tvshow)
-                        .modifier(Modifiers.TVShowsViewItem(tvshow: tvshow, selectedTVShow: $selectedTVShow))
+                        .tag(tvshow)
                 }
             }
+            .scaleEffect(selectedTVShow != nil ? 0.6 : 1)
             .offset(x: selectedTVShow != nil ? -ContentView.columnWidth : 0, y: 0)
-            .modifier(Modifiers.ContentListStyle())
+            .listStyle(.inset(alternatesRowBackgrounds: true))
             SeasonsView(tvshow: $selectedTVShow)
                     .transition(.move(edge: .leading))
                     .offset(x: selectedTVShow != nil ? 0 : ContentView.columnWidth, y: 0)
         }
     }
+    #endif
+#if os(tvOS)
+    /// The content of the view
+    var content: some View {
+        ScrollView {
+            LazyVGrid(columns: grid, spacing: 0) {
+                ForEach(tvshows) { tvshow in
+                    NavigationLink(value: tvshow, label: {
+                        Item(tvshow: tvshow)
+                    })
+                }
+            }
+        }
+        .navigationDestination(for: Video.Details.TVShow.self, destination: { tvShow in
+            SeasonsView(tvshow: $selectedTVShow).task(id: selectedTVShow) {
+                self.selectedTVShow = tvShow
+            }
+        })
+        .buttonStyle(.card)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .setSafeAreas()
+    }
+#endif
 }
 
 extension TVShowsView {
@@ -79,7 +108,8 @@ extension TVShowsView {
             HStack {
                 KodiArt.Poster(item: tvshow)
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: MainView.posterSize.width, height: MainView.posterSize.height)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                    .watchStatus(of: tvshow)
                 #if os(macOS)
                 VStack(alignment: .leading) {
                     Text(tvshow.title)
@@ -90,8 +120,6 @@ extension TVShowsView {
                 }
                 #endif
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .watchStatus(of: tvshow)
         }
     }
 }

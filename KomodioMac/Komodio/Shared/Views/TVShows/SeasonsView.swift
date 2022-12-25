@@ -23,17 +23,31 @@ struct SeasonsView: View {
     @State private var seasons: [Video.Details.Episode] = []
     /// The optional selected season
     @State private var selectedSeason: Int?
-    /// The body of the view
+    /// The body of the View
     var body: some View {
+        content
+        .task(id: tvshow) {
+            getTVShowSeasons()
+        }
+        .task(id: selectedSeason) {
+            setSeasonDetails()
+        }
+        .task(id: kodi.library.episodes) {
+            getTVShowSeasons()
+            setSeasonDetails()
+        }
+    }
+#if os(macOS)
+    /// The content of the View
+    var content: some View {
         VStack {
             List(selection: $selectedSeason) {
                 ForEach(seasons) { season in
                     Item(season: season)
-                        .modifier(Modifiers.SeasonsViewItem(season: season.season, selectedSeason: $selectedSeason))
-                        //.tag(season.season)
+                        .tag(season.season)
                 }
             }
-            .modifier(Modifiers.ContentListStyle())
+            .listStyle(.inset(alternatesRowBackgrounds: true))
         }
         .toolbar {
             if tvshow != nil {
@@ -53,21 +67,34 @@ struct SeasonsView: View {
                 }
             }
         }
-        .task(id: tvshow) {
-            getTVShowSeasons()
-        }
-
-        .task(id: selectedSeason) {
-            setSeasonDetails()
-        }
-        .task(id: kodi.library.episodes) {
-            getTVShowSeasons()
-            setSeasonDetails()
-        }
     }
+#endif
+
+#if os(tvOS)
+    /// The content of the View
+    var content: some View {
+        HStack {
+            List(selection: $selectedSeason) {
+                ForEach(seasons) { season in
+                    Button(action: {
+                        selectedSeason = season.season
+                    }, label: {
+                        Item(season: season)
+                            .foregroundColor(season.season == selectedSeason ? .blue : .primary)
+                    })
+                }
+            }
+            .frame(width: 500)
+            DetailView()
+        }
+        .buttonStyle(.card)
+        .setSafeAreas()
+    }
+#endif
 
     func getTVShowSeasons() {
         if let tvshow {
+            scene.details = .tvshow(tvshow: tvshow)
             seasons = kodi.library.episodes
                 .filter({$0.tvshowID == tvshow.tvshowID}).unique { $0.season }
         }

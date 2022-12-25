@@ -12,28 +12,28 @@ import SwiftlyKodiAPI
 struct MusicVideoView: View {
     /// The Music Video to show
     let musicVideo: Video.Details.MusicVideo
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         VStack {
-            VStack {
-                Text(musicVideo.title)
-                    .font(.largeTitle)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                KodiArt.Fanart(item: musicVideo)
-                    .watchStatus(of: musicVideo)
-                    .cornerRadius(10)
-                    .padding(.bottom, 40)
-                Buttons.Player(item: musicVideo)
-                Text(musicVideo.plot)
-            }
-            .padding(40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(
-                KodiArt.Fanart(item: musicVideo)
-                    .scaledToFill()
-                    .opacity(0.2)
-            )
+            Text(musicVideo.title)
+                .font(.largeTitle)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+            KodiArt.Fanart(item: musicVideo)
+                .watchStatus(of: musicVideo)
+                .cornerRadius(10)
+                .padding(.bottom, 40)
+            Buttons.Player(item: musicVideo)
+            Text(musicVideo.plot)
         }
+        .padding(40)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+#if os(macOS)
+        .background(
+            KodiArt.Fanart(item: musicVideo)
+                .scaledToFill()
+                .opacity(0.2)
+        )
+#endif
     }
 }

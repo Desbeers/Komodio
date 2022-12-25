@@ -14,13 +14,26 @@ class AppState: ObservableObject {
     static let shared = AppState()
     /// The currently selected host
     @Published var host: HostItem?
+    /// The plaform
+    let platform: Platform
     /// Init the class; get host information
     private init() {
         self.host = AppState.getHost()
+#if os(macOS)
+        platform = .macOS
+#endif
+#if os(tvOS)
+        platform = .tvOS
+#endif
     }
 }
 
 extension AppState {
+
+    enum Platform {
+        case macOS
+        case tvOS
+    }
 
     /// Save the hosts to the cache
     /// - Parameter hosts: The array of hosts

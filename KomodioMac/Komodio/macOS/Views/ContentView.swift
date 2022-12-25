@@ -14,11 +14,15 @@ struct ContentView: View {
     static let columnWidth: Double = 400
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         switch scene.contentSelection {
         case .start:
-            StartView()
+            VStack {
+                Text(AppState.shared.host?.description ?? "No host selected")
+                    .font(.system(size: 30))
+                StartView()
+            }
         case .movies:
             MoviesView()
         case .unwatchedMovies:
@@ -34,7 +38,7 @@ struct ContentView: View {
         case .search:
             SearchView()
         case .kodiSettings:
-            KodiSettings()
+            KodiSettingsView()
         default:
             Text("Not implemented")
         }

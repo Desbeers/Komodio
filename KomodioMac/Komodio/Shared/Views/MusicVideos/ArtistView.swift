@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 struct ArtistView: View {
     /// The Artist
     let artist: Audio.Details.Artist
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         Text(artist.artist)
     }

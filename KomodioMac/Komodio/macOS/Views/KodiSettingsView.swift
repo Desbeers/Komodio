@@ -1,5 +1,5 @@
 //
-//  KodiSettings.swift
+//  KodiSettingsView.swift
 //  Komodio
 //
 //  Created by Nick Berendsen on 04/12/2022.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-struct KodiSettings: View {
+struct KodiSettingsView: View {
 
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
@@ -49,7 +49,7 @@ struct KodiSettings: View {
     }
 }
 
-extension KodiSettings {
+extension KodiSettingsView {
 
     struct Section: View {
         @Binding var section: Setting.Details.Section?
@@ -99,7 +99,7 @@ extension KodiSettings {
         }
     }
 }
-extension KodiSettings {
+extension KodiSettingsView {
     struct Details: View {
         let section: Setting.Section
         let category: Setting.Category
@@ -121,7 +121,7 @@ extension KodiSettings {
     }
 }
 
-extension KodiSettings {
+extension KodiSettingsView {
 
     /// The View for a Kodi Setting
     struct KodiSetting: View {
@@ -216,7 +216,6 @@ extension KodiSettings {
         }
 
         func formatLabel(value: Int) -> String {
-            // swiftlint:disable:next colon
             let labelRegex = /{0:d}(?<label>.+?)/
             if let result = setting.control.formatLabel.wholeMatch(of: labelRegex) {
                 return "\(value)\(result.label)"

@@ -55,3 +55,12 @@ import SwiftlyKodiAPI
         .windowStyle(.hiddenTitleBar)
     }
 }
+
+extension KomodioApp {
+
+    // MARK: Static settings
+
+    /// The default size of poster art
+    static let posterSize = CGSize(width: 80, height: 120)
+
+}

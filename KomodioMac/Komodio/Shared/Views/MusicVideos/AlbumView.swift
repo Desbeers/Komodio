@@ -14,14 +14,13 @@ struct AlbumView: View {
     let title: String
     /// The Music Videos to show
     let musicVideos: [Video.Details.MusicVideo]
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         List {
             ForEach(musicVideos) { musicVideo in
                 Item(musicVideo: musicVideo)
             }
         }
-        .modifier(Modifiers.ContentListStyle())
     }
 }
 
@@ -31,7 +30,7 @@ extension AlbumView {
     struct Item: View {
         /// The Music Video
         let musicVideo: Video.Details.MusicVideo
-        /// The body of the view
+        /// The body of the View
         var body: some View {
             HStack(spacing: 0) {
                 KodiArt.Art(file: musicVideo.art.icon)

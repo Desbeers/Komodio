@@ -2,7 +2,7 @@
 //  ArtistsView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 28/11/2022.
+//  © 2022 Nick Berendsen
 //
 
 import SwiftUI
@@ -20,7 +20,12 @@ struct ArtistsView: View {
     @State private var selectedArtist: Audio.Details.Artist?
     /// The loading state of the view
     @State private var state: Parts.State = .loading
-    /// The body of the view
+    /// Define the grid layout (tvOS)
+    private let grid = [GridItem(.adaptive(minimum: 350))]
+
+    // MARK: Body of the View
+
+    /// The body of the View
     var body: some View {
         VStack {
             switch state {
@@ -50,22 +55,56 @@ struct ArtistsView: View {
             setItemDetails()
         }
     }
+
+    // MARK: Content of the View
+
+#if os(macOS)
     /// The content of the view
     var content: some View {
         ZStack {
             List(selection: $selectedArtist) {
                 ForEach(artists, id: \.id) { artist in
                     Item(artist: artist)
-                        .modifier(Modifiers.ArtistsViewItem(artist: artist, selectedArtist: $selectedArtist))
+                        .tag(artist)
                 }
             }
+            .scaleEffect(selectedArtist != nil ? 0.6 : 1)
             .offset(x: selectedArtist != nil ? -ContentView.columnWidth : 0, y: 0)
-            .modifier(Modifiers.ContentListStyle())
+            .listStyle(.inset(alternatesRowBackgrounds: true))
             MusicVideosView(artist: $selectedArtist)
                 .transition(.move(edge: .leading))
                 .offset(x: selectedArtist != nil ? 0 : ContentView.columnWidth, y: 0)
         }
     }
+#endif
+
+#if os(tvOS)
+    /// The content of the view
+    var content: some View {
+        ScrollView {
+            LazyVGrid(columns: grid, spacing: 0) {
+                ForEach(artists) { artist in
+                    NavigationLink(value: artist, label: {
+                        Item(artist: artist)
+                    })
+                }
+                .padding(.bottom, 40)
+            }
+        }
+        .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
+            MusicVideosView(artist: $selectedArtist).task {
+                self.selectedArtist = artist
+            }
+        })
+        .buttonStyle(.card)
+        .padding(.horizontal, 80)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .setSafeAreas()
+    }
+#endif
+
+    // MARK: Private functions
+
     /// Get all items from the library
     ///
     /// Movies that are part of a set will be removed and replaced with the set
@@ -86,9 +125,6 @@ struct ArtistsView: View {
             scene.navigationSubtitle = Router.musicVideos.label.title
         }
     }
-}
-
-extension ArtistsView {
 
     /// Convert an 'artist' string to a `KodiItem`
     /// - Parameter artist: Name of the artist
@@ -102,24 +138,37 @@ extension ArtistsView {
     }
 }
 
+// MARK: Extensions
+
 extension ArtistsView {
 
     /// SwiftUI View for an artist in ``ArtistsView``
     struct Item: View {
+        /// The artist
         let artist: Audio.Details.Artist
+        /// The body of the View
         var body: some View {
+#if os(macOS)
             HStack {
                 KodiArt.Poster(item: artist)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 120, height: 120)
-                #if os(macOS)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.width)
                 VStack(alignment: .leading) {
                     Text(artist.artist)
                         .font(.headline)
                 }
-                #endif
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+#endif
+
+#if os(tvOS)
+            VStack {
+                KodiArt.Poster(item: artist)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 360, height: 360)
+                Text(artist.artist)
+                    .font(.caption)
+            }
+#endif
         }
     }
 }

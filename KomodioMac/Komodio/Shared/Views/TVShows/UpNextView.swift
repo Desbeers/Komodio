@@ -20,7 +20,7 @@ struct UpNextView: View {
     @State var selectedEpisode: Video.Details.Episode?
     /// The loading state of the view
     @State private var state: Parts.State = .loading
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         VStack {
             switch state {
@@ -68,22 +68,49 @@ struct UpNextView: View {
             }
         }
     }
+
+    // MARK: Content of the UpNextView
+
+#if os(macOS)
     /// The content of the view
     var content: some View {
-        ZStack {
-            List(selection: $selectedEpisode) {
-                ForEach(episodes) { episode in
-                    Item(episode: episode)
-                        .modifier(Modifiers.EpisodeViewItem(episode: episode, selectedEpisode: $selectedEpisode))
-                }
+        List(selection: $selectedEpisode) {
+            ForEach(episodes) { episode in
+                Item(episode: episode)
+                    .tag(episode)
             }
-            .modifier(Modifiers.ContentListStyle())
+            .listStyle(.inset(alternatesRowBackgrounds: true))
         }
     }
+#endif
+
+#if os(tvOS)
+    /// The content of the view
+    var content: some View {
+        HStack {
+            List {
+                ForEach(episodes) { episode in
+                    Button(action: {
+                        selectedEpisode = episode
+                    }, label: {
+                        Item(episode: episode)
+                            .foregroundColor(episode == selectedEpisode ? .blue : .primary)
+                    })
+                }
+            }
+            .frame(width: 500)
+            DetailView()
+        }
+        .setSafeAreas()
+    }
+#endif
 }
+
+// MARK: Extensions
 
 extension UpNextView {
 
+    /// SwiftUI View for an item in ``UpNextView``
     struct Item: View {
         let episode: Video.Details.Episode
         var body: some View {

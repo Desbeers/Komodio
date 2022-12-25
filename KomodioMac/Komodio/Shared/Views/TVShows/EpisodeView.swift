@@ -1,6 +1,6 @@
 //
 //  EpisodeView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2022 Nick Berendsen
 //
@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 struct EpisodeView: View {
     /// The Episode
     let episode: Video.Details.Episode
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         HStack(spacing: 0) {
             KodiArt.Art(file: episode.thumbnail)
@@ -27,7 +27,6 @@ struct EpisodeView: View {
                     .lineLimit(5)
                 HStack {
                     Buttons.Player(item: episode)
-                        //.buttonStyle(.card)
                 }
             }
             .padding(.trailing)

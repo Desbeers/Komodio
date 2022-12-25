@@ -13,35 +13,53 @@ enum Router: Hashable {
 
     /// # Movies
 
+    /// All movies
     case movies
+    /// A specific movie
     case movie(movie: Video.Details.Movie)
+    /// A movie set
     case movieSet(movieSet: Video.Details.MovieSet)
+    /// All unwatched movies
     case unwatchedMovies
 
     /// # TV shows
 
-    /// The TV shows `View` can have an optional selected TV show
+    /// All TV shows
     case tvshows
+    /// A specific TV show
     case tvshow(tvshow: Video.Details.TVShow)
+    /// All seasons of a specific TV show
     case seasons(tvhow: Video.Details.TVShow)
+    /// A season of a specific TV show
     case season(tvshow: Video.Details.TVShow, episodes: [Video.Details.Episode])
+    /// A specific episode
     case episode(episode: Video.Details.Episode)
+    /// First unwatched episode of unfinnished TV shows
     case unwachedEpisodes
 
     /// # Music Videos
 
+    /// A specific artist
     case artist(artist: Audio.Details.Artist)
+    /// All music videos
     case musicVideos
+    /// A specific music video
     case musicVideo(musicVideo: Video.Details.MusicVideo)
+    /// A music video album
     case album(album: MediaItem)
 
     /// # Other
 
+    /// Start View for Komodio
     case start
+    /// The search View
     case search
+    /// The Kodi settings View
     case kodiSettings
+    /// The Kodi settings details View
     case kodiSettingsDetails(section: Setting.Section, category: Setting.Category)
 
+    /// Message when loading media for a View
     var loading: String {
         switch self {
         case .movies:
@@ -55,6 +73,7 @@ enum Router: Hashable {
         }
     }
 
+    /// Message when media is empty
     var empty: String {
         switch self {
         case .start:
@@ -80,6 +99,7 @@ enum Router: Hashable {
         }
     }
 
+    /// The lable of the ``Router`` item
     var label: Item {
         switch self {
         case .start:
@@ -152,11 +172,13 @@ enum Router: Hashable {
 
     /// An item in the sidebar
     struct Item {
+        /// Title of the item
         let title: String
+        /// Description ofg tghe item
         let description: String
+        /// The SF symbol
         let icon: String
+        /// The ``Router``
         let route: Router = .start
-        var visible: Bool = true
     }
-
 }

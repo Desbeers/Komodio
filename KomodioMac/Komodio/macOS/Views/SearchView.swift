@@ -69,7 +69,9 @@ struct SearchView: View {
                     }
             }
         }
+        #if os(macOS)
         .listStyle(.inset(alternatesRowBackgrounds: true))
+        #endif
         .buttonStyle(.plain)
         .task(id: scene.query) {
             scene.details = .search

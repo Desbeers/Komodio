@@ -10,16 +10,13 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for the main navigation
 struct MainView: View {
-
-    static let posterSize = CGSize(width: 80, height: 120)
-
     /// The SceneState model
     @StateObject var scene = SceneState()
     /// The search field in the toolbar
     @State var searchField: String = ""
     /// Set the column visibility
     @State private var columnVisibility = NavigationSplitViewVisibility.automatic
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         NavigationSplitView(
             columnVisibility: $columnVisibility,

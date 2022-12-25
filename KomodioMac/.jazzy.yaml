@@ -1,0 +1,49 @@
+module: KomodioTV
+title: Komodio
+author: Nick Berendsen
+author_url: https://desbeers.nl
+github_url: https://github.com/desbeers/komodio/
+build_tool_arguments:
+ - -scheme
+ - KomodioTV
+min_acl: private
+output: Documentation
+clean: true
+theme: apple
+
+custom_categories:
+  - name: General
+    children:
+    - KomodioApp
+    - Router
+    - MediaItem
+  - name: Observable Classes
+    children:
+    - AppState
+    - SceneState
+  - name: SwiftUI Views
+    children:
+    - MainView
+    - SidebarView
+    - ContentView
+    - DetailView
+    - StartView
+    - MoviesView
+    - MovieView
+    - MovieSetView
+    - TVShowsView
+    - TVShowView
+    - SeasonsView
+    - SeasonView
+    - EpisodeView
+    - UpNextView
+    - ArtistsView
+    - ArtistView
+    - AlbumView
+    - MusicVideosView
+    - MusicVideoView
+    - SearchView
+    - KodiSettingsView
+    - Buttons
+    - Modifiers
+    - Parts

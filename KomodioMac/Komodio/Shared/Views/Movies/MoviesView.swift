@@ -24,7 +24,12 @@ struct MoviesView: View {
     @State private var selectedItem: MediaItem?
     /// The loading state of the view
     @State private var state: Parts.State = .loading
-    /// The body of the view
+    /// Define the grid layout (tvOS)
+    private let grid = [GridItem(.adaptive(minimum: 260))]
+
+    // MARK: Body of the View
+
+    /// The body of the View
     var body: some View {
         VStack {
             switch state {
@@ -54,6 +59,10 @@ struct MoviesView: View {
             setItemDetails()
         }
     }
+
+    // MARK: Content of the View
+
+#if os(macOS)
     /// The content of the view
     var content: some View {
         ZStack {
@@ -62,20 +71,10 @@ struct MoviesView: View {
                     switch video {
                     case let movie as Video.Details.Movie:
                         Item(movie: movie)
-                            .modifier(
-                                Modifiers.MediaViewItem(
-                                    item: MediaItem(id: movie.id, media: .movie),
-                                    selectedItem: $selectedItem
-                                )
-                            )
+                            .tag(MediaItem(id: movie.id, media: .movie))
                     case let movieSet as Video.Details.MovieSet:
                         MovieSetView.Item(movieSet: movieSet)
-                            .modifier(
-                                Modifiers.MediaViewItem(
-                                    item: MediaItem(id: String(movieSet.setID), media: .movieSet),
-                                    selectedItem: $selectedItem
-                                )
-                            )
+                            .tag(MediaItem(id: String(movieSet.setID), media: .movieSet, movieSet: movieSet))
                     default:
                         EmptyView()
                     }
@@ -83,12 +82,52 @@ struct MoviesView: View {
             }
             .scaleEffect(selectedItem?.media == .movieSet ? 0.6 : 1)
             .offset(x: selectedItem?.media == .movieSet ? -ContentView.columnWidth : 0, y: 0)
-            .modifier(Modifiers.ContentListStyle())
+            .listStyle(.inset(alternatesRowBackgrounds: true))
             MovieSetView(selectedSet: $selectedItem)
                 .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
                 .opacity(selectedItem?.media == .movieSet ? 1 : 0)
         }
     }
+#endif
+
+#if os(tvOS)
+    /// The content of the view
+    var content: some View {
+        ScrollView {
+            LazyVGrid(columns: grid, spacing: 0) {
+                ForEach($items, id: \.id) { $video in
+                    switch video {
+                    case let movie as Video.Details.Movie:
+                        Button(action: {
+                            selectedItem = MediaItem(id: movie.id, media: .movie)
+                            scene.showDetails = true
+                        }, label: {
+                            Item(movie: movie)
+                        })
+                        .padding(.bottom, 40)
+                    case let movieSet as Video.Details.MovieSet:
+                        NavigationLink(value: movieSet, label: {
+                            MovieSetView.Item(movieSet: movieSet)
+                        })
+                        .padding(.bottom, 40)
+                    default:
+                        EmptyView()
+                    }
+                }
+            }
+        }
+        .navigationDestination(for: Video.Details.MovieSet.self, destination: { movieSet in
+            MovieSetView(selectedSet: $selectedItem).task {
+                self.selectedItem = MediaItem(id: String(movieSet.setID), media: .movieSet, movieSet: movieSet)
+            }
+        })
+        .buttonStyle(.card)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .setSafeAreas()
+    }
+#endif
+
+    // MARK: Private functions
 
     /// Get all items from the library
     ///
@@ -133,18 +172,20 @@ struct MoviesView: View {
     }
 }
 
+// MARK: Extensions
+
 extension MoviesView {
 
     /// SwiftUI View for a movie in ``MoviesView``
     struct Item: View {
         /// The movie
         let movie: Video.Details.Movie
-        /// The body of the view
+        /// The body of the View
         var body: some View {
             HStack {
                 KodiArt.Poster(item: movie)
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: MainView.posterSize.width, height: MainView.posterSize.height)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: movie)
 #if os(macOS)
                 VStack(alignment: .leading) {
@@ -154,12 +195,8 @@ extension MoviesView {
                     Text(movie.year.description)
                         .font(.caption)
                 }
-
 #endif
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            //.background(.green)
-            //.frame(alignment: .center)
         }
     }
 }

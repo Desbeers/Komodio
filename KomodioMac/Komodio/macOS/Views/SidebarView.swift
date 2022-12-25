@@ -18,43 +18,25 @@ struct SidebarView: View {
     @EnvironmentObject var scene: SceneState
     /// The selected host
     @State private var selectedHost: String?
-    /// The focus state
-    @FocusState var focusState: Router?
-
-    @FocusState var isFocused: Bool
-
-    /// The body of the view
+    /// The body of the View
     var body: some View {
         VStack {
-#if os(macOS)
             List(selection: $scene.sidebarSelection) {
                 content
             }
-#elseif os(tvOS)
-            List {
-                content
+            .onChange(of: scene.sidebarSelection) { selection in
+                /// Reset the details
+                scene.details = selection
+                /// Set the contentSelection
+                scene.contentSelection = selection
             }
-            .focused($isFocused)
-            .task(id: isFocused) {
-                /// Restore the last selection
-                if isFocused, focusState != scene.sidebarSelection {
-                    focusState = scene.sidebarSelection
-                }
-            }
-#endif
-        }
-        .onChange(of: scene.sidebarSelection) { selection in
-            /// Reset the details
-            scene.details = selection
-            /// Set the contentSelection
-            scene.contentSelection = selection
         }
         .animation(.default, value: scene.query)
         .buttonStyle(.plain)
     }
 
     @ViewBuilder var content: some View {
-        Section("Your Kodio's") {
+        Section("Your Kodi's") {
             ForEach(kodi.bonjourHosts, id: \.ip) { host in
                 Button(action: {
                     if AppState.shared.host?.ip != host.ip {
@@ -68,9 +50,7 @@ struct SidebarView: View {
                     }, icon: {
                         Image(systemName: "globe")
                             .foregroundColor(AppState.shared.host?.ip == host.ip ? .green : .gray)
-                            //.font(.title3)
                     })
-                    //.tint(AppState.shared.host?.ip == host.ip ? .green : .gray)
                 })
             }
         }
@@ -107,30 +87,8 @@ struct SidebarView: View {
         .tint(.orange)
     }
 
-#if os(macOS)
     @ViewBuilder func sidebarItem(item: Router) -> some View {
         Label(item.label.title, systemImage: item.label.icon)
-            //.focused($focusState, equals: item)
             .tag(item)
     }
-#elseif os(tvOS)
-    @ViewBuilder func sidebarItem(item: Router) -> some View {
-        Button(action: {
-            scene.sidebarSelection = item
-        }, label: {
-            Label(title: {
-                VStack(alignment: .leading) {
-                    Text(item.label.title)
-                    Text(item.label.description)
-                        .font(.system(size: 16))
-                        .foregroundColor(.gray)
-                }
-            }, icon: {
-                Image(systemName: item.label.icon)
-                    .foregroundColor(scene.sidebarSelection == item ? .blue : .gray)
-            })
-        })
-        .focused($focusState, equals: item)
-    }
-#endif
 }
