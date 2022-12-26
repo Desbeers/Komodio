@@ -49,12 +49,6 @@ struct SearchView: View {
                 }
             }
         }
-        .navigationDestination(for: Video.Details.Movie.self, destination: { movie in
-            MovieView(movie: movie).setSafeAreas()
-        })
-        .navigationDestination(for: Video.Details.TVShow.self, destination: { tvshow in
-            TVShow(tvshow: tvshow).setSafeAreas()
-        })
         .padding(.horizontal, 80)
         .buttonStyle(.card)
         .setSafeAreas()
@@ -71,22 +65,8 @@ struct SearchView: View {
                     tvshows = kodi.library.tvshows.search(scene.query)
                 }
             } catch {
-                /// Task cancelled without network request
+                // Task cancelled without network request
             }
-        }
-    }
-}
-
-extension SearchView {
-
-    struct TVShow: View {
-        let tvshow: Video.Details.TVShow
-        @State private var selection: Video.Details.TVShow?
-        var body: some View {
-            SeasonsView(tvshow: $selection)
-                .task(id: tvshow) {
-                    selection = tvshow
-                }
         }
     }
 }

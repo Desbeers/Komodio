@@ -46,13 +46,14 @@ class SceneState: ObservableObject {
             contentSelection = sidebarItems[mainSelection]
             /// Reset the navigationStackPath
             navigationStackPath = NavigationPath()
+            /// Reset the background
+            background = nil
         }
     }
 
     @Published var navigationStackPath = NavigationPath()
-
-    /// Show details
-    @Published var showDetails: Bool = false
+    /// The optional background image
+    @Published var background: String?
 
 #endif
 

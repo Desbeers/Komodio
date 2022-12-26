@@ -14,12 +14,17 @@ import SwiftlyKodiAPI
     @StateObject var appState: AppState = .shared
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared
+    /// The SceneState model
+    @StateObject var scene = SceneState()
+    /// The color scheme
+    @Environment(\.colorScheme) var colorScheme
     /// The body of the scene
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environmentObject(kodi)
                 .environmentObject(appState)
+                .environmentObject(scene)
                 .task(id: appState.host) {
                     if let host = appState.host {
                         if kodi.state == .none {
@@ -27,6 +32,22 @@ import SwiftlyKodiAPI
                         }
                     }
                 }
+                .background(
+                    ZStack {
+                        Color(colorScheme == .light ? .white : .black)
+                        if let background = scene.background {
+                            KodiArt.Art(file: background)
+                                .opacity(0.2)
+                        } else {
+                            Image("fanart")
+                                .resizable()
+                                .opacity(0.2)
+                        }
+                    }
+                        .scaledToFill()
+                        .ignoresSafeArea()
+                )
+                .animation(.default, value: scene.background)
         }
     }
 }

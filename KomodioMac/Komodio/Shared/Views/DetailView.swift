@@ -19,7 +19,7 @@ struct DetailView: View {
         VStack {
             switch scene.details {
             case .movie(let movie):
-                MovieView(movie: movie)
+                MovieView.Details(movie: movie).id(movie.id)
             case .movieSet(let movieSet):
                 MovieSetView.Details(movieSet: movieSet)
             case .tvshow(let tvshow):

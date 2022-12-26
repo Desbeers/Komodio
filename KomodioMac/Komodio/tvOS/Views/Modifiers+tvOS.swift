@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Modifiers {
 
-    /// A `ViewModifier` to set the `Safe Areas` with the ``SidebarView`` and the ``DetailView``
+    /// A `ViewModifier` to fill the leading the `Safe Areas` with the ``SidebarView``
     struct SafeAreas: ViewModifier {
         /// The modifier
         func body(content: Content) -> some View {

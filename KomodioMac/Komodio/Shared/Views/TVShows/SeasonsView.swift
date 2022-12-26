@@ -10,9 +10,8 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for all Seasons of a TV show
 struct SeasonsView: View {
-
-    @Binding var tvshow: Video.Details.TVShow?
-
+    /// The TV show
+    let tvshow: Video.Details.TVShow
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
@@ -49,24 +48,6 @@ struct SeasonsView: View {
             }
             .listStyle(.inset(alternatesRowBackgrounds: true))
         }
-        .toolbar {
-            if tvshow != nil {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        tvshow = nil
-                        /// We might came from the search page
-                        if scene.sidebarSelection == .search {
-                            scene.contentSelection = .search
-                            scene.details = .tvshows
-                        } else {
-                            scene.details = .tvshows
-                        }
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                    })
-                }
-            }
-        }
     }
 #endif
 
@@ -88,20 +69,21 @@ struct SeasonsView: View {
             DetailView()
         }
         .buttonStyle(.card)
-        .setSafeAreas()
     }
 #endif
 
     func getTVShowSeasons() {
-        if let tvshow {
+        if tvshow.media == .tvshow {
             scene.details = .tvshow(tvshow: tvshow)
             seasons = kodi.library.episodes
                 .filter({$0.tvshowID == tvshow.tvshowID}).unique { $0.season }
+        } else {
+            selectedSeason = nil
         }
     }
 
     func setSeasonDetails() {
-        if let tvshow, let selectedSeason {
+        if let selectedSeason {
             let episodes = kodi.library.episodes
                 .filter({ $0.tvshowID == tvshow.tvshowID && $0.season == selectedSeason })
             scene.details = .season(tvshow: tvshow, episodes: episodes)

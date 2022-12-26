@@ -16,8 +16,12 @@ struct ArtistsView: View {
     @EnvironmentObject var scene: SceneState
     /// The artists in this view
     @State var artists: [Audio.Details.Artist] = []
-    /// The optional selected artist
+    /// The optional selected artist in the list
     @State private var selectedArtist: Audio.Details.Artist?
+
+    /// The selected artist
+    @State private var artist = Audio.Details.Artist(media: .none)
+
     /// The loading state of the view
     @State private var state: Parts.State = .loading
     /// Define the grid layout (tvOS)
@@ -71,9 +75,22 @@ struct ArtistsView: View {
             .scaleEffect(selectedArtist != nil ? 0.6 : 1)
             .offset(x: selectedArtist != nil ? -ContentView.columnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            MusicVideosView(artist: $selectedArtist)
+            MusicVideosView(artist: artist)
                 .transition(.move(edge: .leading))
                 .offset(x: selectedArtist != nil ? 0 : ContentView.columnWidth, y: 0)
+        }
+        .toolbar {
+            if selectedArtist != nil {
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {
+                        selectedArtist = nil
+                        artist = Audio.Details.Artist(media: .none)
+                        scene.details = Router.musicVideos
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                    })
+                }
+            }
         }
     }
 #endif
@@ -91,11 +108,6 @@ struct ArtistsView: View {
                 .padding(.bottom, 40)
             }
         }
-        .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
-            MusicVideosView(artist: $selectedArtist).task {
-                self.selectedArtist = artist
-            }
-        })
         .buttonStyle(.card)
         .padding(.horizontal, 80)
         .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -120,9 +132,10 @@ struct ArtistsView: View {
     /// Set the details of a selected item
     private func setItemDetails() {
         if let selectedArtist {
-            scene.details = Router.artist(artist: selectedArtist)
+            artist = selectedArtist
         } else {
             scene.navigationSubtitle = Router.musicVideos.label.title
+            artist = Audio.Details.Artist(media: .none)
         }
     }
 

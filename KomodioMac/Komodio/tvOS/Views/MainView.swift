@@ -13,7 +13,7 @@ struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @StateObject var scene = SceneState()
+    @EnvironmentObject private var scene: SceneState
     /// Bool if the sidebar has focus
     @FocusState var isFocused: Bool
     /// The color scheme
@@ -23,6 +23,34 @@ struct MainView: View {
         NavigationStack(path: $scene.navigationStackPath) {
             ContentView()
             /// Set the destinations for sub-views
+                .navigationDestination(for: Video.Details.Movie.self, destination: { movie in
+                    MovieView.Details(movie: movie)
+                        .task {
+                            scene.background = movie.fanart
+                        }
+                        .setSafeAreas()
+                })
+                .navigationDestination(for: Video.Details.MovieSet.self, destination: { movieSet in
+                    MovieSetView(movieSet: movieSet).setSafeAreas()
+                        .task {
+                            scene.background = movieSet.fanart
+                        }
+                        .setSafeAreas()
+                })
+                .navigationDestination(for: Video.Details.TVShow.self, destination: { tvshow in
+                    SeasonsView(tvshow: tvshow)
+                        .task {
+                            scene.background = tvshow.fanart
+                        }
+                        .setSafeAreas()
+                })
+                .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
+                    MusicVideosView(artist: artist)
+                        .task {
+                            scene.background = artist.fanart
+                        }
+                        .setSafeAreas()
+                })
         }
         /// Put the ``SidebarView`` into the `safe area`.
         .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {
@@ -37,16 +65,9 @@ struct MainView: View {
                 .clipped()
                 .ignoresSafeArea()
         }
-        /// Show details in a `FullScreenCover`
-        .fullScreenCover(isPresented: $scene.showDetails) {
-            ZStack {
-                Color(colorScheme == .light ? .white : .black)
-                DetailView()
-            }
-            .ignoresSafeArea()
-        }
         .animation(.default, value: isFocused)
         .animation(.default, value: scene.sidebarSelection)
+        .animation(.default, value: scene.navigationStackPath)
         .environmentObject(scene)
     }
 }

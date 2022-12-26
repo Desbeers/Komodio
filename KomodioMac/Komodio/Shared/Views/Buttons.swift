@@ -26,6 +26,7 @@ extension Buttons {
                 }
                 Buttons.PlayedState(item: item)
             }
+            .padding(.bottom)
         }
     }
 

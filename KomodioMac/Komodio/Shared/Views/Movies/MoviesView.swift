@@ -22,6 +22,8 @@ struct MoviesView: View {
     var filter: Parts.Filter?
     /// The optional selected item
     @State private var selectedItem: MediaItem?
+    /// The optional selected movie set (macOS)
+    @State private var selectedMovieSet = Video.Details.MovieSet(media: .none)
     /// The loading state of the view
     @State private var state: Parts.State = .loading
     /// Define the grid layout (tvOS)
@@ -51,7 +53,6 @@ struct MoviesView: View {
                 state = .empty
             } else {
                 getItems()
-                setItemDetails()
                 state = .ready
             }
         }
@@ -83,9 +84,23 @@ struct MoviesView: View {
             .scaleEffect(selectedItem?.media == .movieSet ? 0.6 : 1)
             .offset(x: selectedItem?.media == .movieSet ? -ContentView.columnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            MovieSetView(selectedSet: $selectedItem)
+            MovieSetView(movieSet: selectedMovieSet)
                 .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
                 .opacity(selectedItem?.media == .movieSet ? 1 : 0)
+        }
+        .toolbar {
+            /// The selection might not be a set
+            if selectedItem?.media == .movieSet {
+                /// Show a 'back' button
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {
+                        selectedMovieSet.media = .none
+                        selectedItem = nil
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                    })
+                }
+            }
         }
     }
 #endif
@@ -98,10 +113,7 @@ struct MoviesView: View {
                 ForEach($items, id: \.id) { $video in
                     switch video {
                     case let movie as Video.Details.Movie:
-                        Button(action: {
-                            selectedItem = MediaItem(id: movie.id, media: .movie)
-                            scene.showDetails = true
-                        }, label: {
+                        NavigationLink(value: movie, label: {
                             Item(movie: movie)
                         })
                         .padding(.bottom, 40)
@@ -116,11 +128,6 @@ struct MoviesView: View {
                 }
             }
         }
-        .navigationDestination(for: Video.Details.MovieSet.self, destination: { movieSet in
-            MovieSetView(selectedSet: $selectedItem).task {
-                self.selectedItem = MediaItem(id: String(movieSet.setID), media: .movieSet, movieSet: movieSet)
-            }
-        })
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .setSafeAreas()
@@ -153,10 +160,13 @@ struct MoviesView: View {
             case .movie:
                 if let movie = kodi.library.movies.first(where: {$0.id == item.id}) {
                     scene.details = .movie(movie: movie)
+                    /// Not a movie set
+                    selectedMovieSet.setID = 0
                 }
             case .movieSet:
                 if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(item.id)}) {
                     scene.details = .movieSet(movieSet: movieSet)
+                    selectedMovieSet = movieSet
                 }
             default:
                 break
@@ -165,8 +175,10 @@ struct MoviesView: View {
             /// Set the default Navigation Subtitle for Movies
             if filter != nil {
                 scene.navigationSubtitle = "Unwatched Movies"
+                scene.details = .unwatchedMovies
             } else {
                 scene.navigationSubtitle = Router.movies.label.title
+                scene.details = .movies
             }
         }
     }

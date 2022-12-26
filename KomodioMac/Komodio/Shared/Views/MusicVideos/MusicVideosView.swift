@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 /// SwiftUI View for all Music Videos of an Artist; grouped by optional Album
 struct MusicVideosView: View {
     /// The selected artist
-    @Binding var artist: Audio.Details.Artist?
+    let artist: Audio.Details.Artist
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
@@ -47,19 +47,6 @@ struct MusicVideosView: View {
             }
         }
         .listStyle(.inset(alternatesRowBackgrounds: true))
-        .toolbar {
-            if artist != nil {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        artist = nil
-                        selectedItem = nil
-                        scene.details = Router.musicVideos
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                    })
-                }
-            }
-        }
     }
 #endif
 
@@ -94,7 +81,7 @@ extension MusicVideosView {
 
     /// Get all items from the library
     private func getItems() {
-        if let artist {
+        if artist.media == .artist {
             var result: [MediaItem] = []
             let allMusicVideosFromArtist = kodi.library.musicVideos.filter({$0.artist.contains(artist.artist)})
             for video in allMusicVideosFromArtist.uniqueAlbum() {
@@ -103,6 +90,8 @@ extension MusicVideosView {
                 result.append(MediaItem(id: count == 1 ? video.id : video.album, media: count == 1 ? .musicVideo : .album, musicVideos: albumMusicVideos))
             }
             items = result
+            scene.details = .artist(artist: artist)
+            selectedItem = nil
         }
         /// Update the optional selected item
         if let selectedItem {

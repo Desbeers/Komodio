@@ -17,7 +17,7 @@ struct TVShowsView: View {
     /// The TV shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
     /// The optional selected TV show
-    @State var selectedTVShow: Video.Details.TVShow?
+    @State var selectedTVShow = Video.Details.TVShow(media: .none)
     /// The loading state of the view
     @State private var state: Parts.State = .loading
 
@@ -50,14 +50,14 @@ struct TVShowsView: View {
             }
         }
         .task(id: selectedTVShow) {
-            if let selectedTVShow {
+            if selectedTVShow.media == .tvshow {
                 scene.details = .tvshow(tvshow: selectedTVShow)
             } else {
                 scene.navigationSubtitle = Router.tvshows.label.title
             }
         }
     }
-    #if os(macOS)
+#if os(macOS)
     /// The content of the view
     var content: some View {
         ZStack {
@@ -67,15 +67,34 @@ struct TVShowsView: View {
                         .tag(tvshow)
                 }
             }
-            .scaleEffect(selectedTVShow != nil ? 0.6 : 1)
-            .offset(x: selectedTVShow != nil ? -ContentView.columnWidth : 0, y: 0)
+            .scaleEffect(selectedTVShow.media == .tvshow ? 0.6 : 1)
+            .offset(x: selectedTVShow.media == .tvshow ? -ContentView.columnWidth : 0, y: 0)
             .listStyle(.inset(alternatesRowBackgrounds: true))
-            SeasonsView(tvshow: $selectedTVShow)
-                    .transition(.move(edge: .leading))
-                    .offset(x: selectedTVShow != nil ? 0 : ContentView.columnWidth, y: 0)
+            SeasonsView(tvshow: selectedTVShow)
+                .transition(.move(edge: .leading))
+                .offset(x: selectedTVShow.media == .tvshow ? 0 : ContentView.columnWidth, y: 0)
+        }
+        .toolbar {
+            if selectedTVShow.media == .tvshow {
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {
+                        /// Deselect the TV show
+                        selectedTVShow.media = .none
+                        /// We might came from the search page
+                        if scene.sidebarSelection == .search {
+                            scene.contentSelection = .search
+                            scene.details = .tvshows
+                        } else {
+                            scene.details = .tvshows
+                        }
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                    })
+                }
+            }
         }
     }
-    #endif
+#endif
 #if os(tvOS)
     /// The content of the view
     var content: some View {
@@ -85,14 +104,10 @@ struct TVShowsView: View {
                     NavigationLink(value: tvshow, label: {
                         Item(tvshow: tvshow)
                     })
+                    .padding(.bottom, 40)
                 }
             }
         }
-        .navigationDestination(for: Video.Details.TVShow.self, destination: { tvShow in
-            SeasonsView(tvshow: $selectedTVShow).task(id: selectedTVShow) {
-                self.selectedTVShow = tvShow
-            }
-        })
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .setSafeAreas()
@@ -110,7 +125,7 @@ extension TVShowsView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: tvshow)
-                #if os(macOS)
+#if os(macOS)
                 VStack(alignment: .leading) {
                     Text(tvshow.title)
                         .font(.headline)
@@ -118,7 +133,7 @@ extension TVShowsView {
                     Text(tvshow.year.description)
                         .font(.caption)
                 }
-                #endif
+#endif
             }
         }
     }

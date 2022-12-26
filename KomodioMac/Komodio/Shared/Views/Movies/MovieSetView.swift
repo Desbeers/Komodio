@@ -10,8 +10,8 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for all Movies in a Movie Set
 struct MovieSetView: View {
-    /// The selected set in the ``MoviesView``
-    @Binding var selectedSet: MediaItem?
+    /// The movie set
+    let movieSet: Video.Details.MovieSet
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
@@ -25,7 +25,7 @@ struct MovieSetView: View {
     /// The body of the View
     var body: some View {
         content
-            .task(id: selectedSet) {
+            .task(id: movieSet) {
                 getMoviesFromSet()
             }
             .task(id: selectedMovie) {
@@ -33,7 +33,6 @@ struct MovieSetView: View {
             }
             .task(id: kodi.library.movies) {
                 getMoviesFromSet()
-                setMovieDetails()
             }
     }
 
@@ -51,52 +50,29 @@ struct MovieSetView: View {
             }
             .listStyle(.inset(alternatesRowBackgrounds: true))
         }
-        .toolbar {
-            /// The selection might not be a set
-            if selectedSet?.media == .movieSet {
-                /// Show a 'back' button
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        selectedSet = nil
-                        selectedMovie = nil
-                        scene.details = .movies
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                    })
-                }
-            }
-        }
     }
 #endif
 
 #if os(tvOS)
     /// The content of the View
     var content: some View {
-        HStack {
-            if let set = selectedSet?.movieSet {
-                MovieSetView.Details(movieSet: set)
-            }
+        VStack {
+            MovieSetView.Details(movieSet: movieSet)
             ScrollView {
-                LazyVGrid(columns: grid, spacing: 0) {
+                HStack {
                     ForEach(movies) { movie in
-                        Button(action: {
-                            selectedMovie = movie
-                            scene.showDetails = true
-                        }, label: {
+                        NavigationLink(value: movie, label: {
                             MoviesView.Item(movie: movie)
                         })
                     }
                 }
+                .padding(80)
+
             }
+            .frame(maxWidth: 400)
+
         }
         .buttonStyle(.card)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .onDisappear {
-            selectedSet = nil
-            selectedMovie = nil
-            scene.details = .movies
-        }
-        .setSafeAreas()
     }
 #endif
 
@@ -105,9 +81,11 @@ struct MovieSetView: View {
     /// Get all movies from the selected set
     private func getMoviesFromSet() {
         /// The selection might not be a set
-        if let set = selectedSet, set.media == .movieSet, let setID = Int(set.id) {
+        if movieSet.media == .movieSet {
             movies = kodi.library.movies
-                .filter({$0.setID == setID})
+                .filter({$0.setID == movieSet.setID})
+        } else {
+            selectedMovie = nil
         }
         /// Update the optional selected movie
         if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
@@ -117,7 +95,7 @@ struct MovieSetView: View {
 
     /// Set the details of a selected movie
     private func setMovieDetails() {
-        if selectedSet?.media == .movieSet, let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
+        if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
             scene.details = .movie(movie: movie)
         }
     }
@@ -159,21 +137,23 @@ extension MovieSetView {
         /// The body of the View
         var body: some View {
             VStack {
-                VStack {
-                    KodiArt.Fanart(item: movieSet)
-                        .padding(.bottom, 40)
-                    Text(movieSet.title)
-                        .font(.largeTitle)
-                    Text(movieSet.plot)
-                }
-                .padding(40)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .background(
-                    KodiArt.Fanart(item: movieSet)
-                        .scaledToFill()
-                        .opacity(0.2)
-                )
+                Text(movieSet.title)
+                    .font(.largeTitle)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                KodiArt.Fanart(item: movieSet)
+                    .padding(.bottom, 40)
+                Text(movieSet.plot)
             }
+            .padding(40)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+#if os(macOS)
+            .background(
+                KodiArt.Fanart(item: movieSet)
+                    .scaledToFill()
+                    .opacity(0.2)
+            )
+#endif
         }
     }
 }
