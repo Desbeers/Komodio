@@ -1,6 +1,6 @@
 //
 //  MovieSetView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -24,6 +24,9 @@ struct MovieSetView: View {
     private let grid = [GridItem(.adaptive(minimum: 260))]
     /// The body of the View
     var body: some View {
+
+        // MARK: Body of the View
+
         content
             .task(id: movieSet) {
                 getMoviesFromSet()
@@ -36,11 +39,12 @@ struct MovieSetView: View {
             }
     }
 
-    // MARK: Content of the MovieSetView
+    // MARK: Content of the View
+
+    /// The content of the View
+    @ViewBuilder var content: some View {
 
 #if os(macOS)
-    /// The content of the View
-    var content: some View {
         VStack {
             List(selection: $selectedMovie) {
                 ForEach(movies) { movie in
@@ -50,12 +54,9 @@ struct MovieSetView: View {
             }
             .listStyle(.inset(alternatesRowBackgrounds: true))
         }
-    }
 #endif
 
 #if os(tvOS)
-    /// The content of the View
-    var content: some View {
         VStack {
             MovieSetView.Details(movieSet: movieSet)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -71,8 +72,9 @@ struct MovieSetView: View {
             }
         }
         .buttonStyle(.card)
-    }
 #endif
+
+    }
 
     // MARK: Private functions
 
@@ -80,14 +82,17 @@ struct MovieSetView: View {
     private func getMoviesFromSet() {
         /// The selection might not be a set
         if movieSet.media == .movieSet {
+            /// Get all the movies from the set
             movies = kodi.library.movies
                 .filter({$0.setID == movieSet.setID})
+                .sorted(by: {$0.year < $1.year})
+            /// Update the optional selected movie
+            if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
+                self.selectedMovie = movie
+            }
         } else {
+            /// Make sure we don't have an old selection
             selectedMovie = nil
-        }
-        /// Update the optional selected movie
-        if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
-            self.selectedMovie = movie
         }
     }
 
@@ -114,6 +119,7 @@ extension MovieSetView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: movieSet)
+
 #if os(macOS)
                 VStack(alignment: .leading) {
                     Text(movieSet.title)
@@ -121,6 +127,7 @@ extension MovieSetView {
                     Text("Movie Set")
                 }
 #endif
+
             }
         }
     }
@@ -128,24 +135,56 @@ extension MovieSetView {
 
 extension MovieSetView {
 
+    // MARK: Details of a  Movie Set
+
     /// SwiftUI View for the details of a `MovieSet`
     struct Details: View {
         /// The movie set
         let movieSet: Video.Details.MovieSet
+
+        // MARK: Body of the View
+
         /// The body of the View
         var body: some View {
-            VStack {
-                Text(movieSet.title)
-                    .font(.largeTitle)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                KodiArt.Fanart(item: movieSet)
-                    .padding(.bottom, 40)
-                Text(movieSet.plot)
+
+#if os(macOS)
+            ScrollView {
+                VStack {
+                    Text(movieSet.title)
+                        .font(.system(size: 40))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    KodiArt.Fanart(item: movieSet)
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                    Text(movieSet.plot)
+                        .font(.system(size: 18))
+                        .lineSpacing(8)
+                        .padding(.vertical)
+                }
+                .padding(40)
             }
-            .padding(40)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(file: movieSet.fanart)
+#endif
+
+#if os(tvOS)
+            HStack {
+                KodiArt.Fanart(item: movieSet)
+                    .cornerRadius(10)
+                VStack {
+                    Text(movieSet.title)
+                        .font(.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .padding(.bottom)
+                    Text(movieSet.plot)
+                }
+            }
+            .padding(40)
+            .background(file: movieSet.fanart)
+#endif
+
         }
     }
 }

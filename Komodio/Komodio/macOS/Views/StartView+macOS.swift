@@ -8,17 +8,27 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View when starting Komodio
+/// SwiftUI View when starting Komodio  (macOS)
 struct StartView: View {
+    /// The AppState model
+    @EnvironmentObject var appState: AppState
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     var body: some View {
         VStack {
+            Parts.DetailMessage(title: appState.host?.description ?? "")
+                .padding(.top, 40)
             switch kodi.state {
             case .loadedLibrary:
-                VStack(spacing: 20) {
+                VStack(alignment: .center) {
+                    StatisticsView.HostInfo()
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
+                        .shadow(radius: 20)
+
                     StatisticsView()
                         .padding()
                 }
@@ -26,7 +36,6 @@ struct StartView: View {
                 ProgressView()
             }
         }
-        .font(.system(size: 30))
         .animation(.default, value: kodi.state)
     }
 }

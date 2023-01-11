@@ -1,6 +1,6 @@
 //
 //  AppState.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -30,8 +30,11 @@ class AppState: ObservableObject {
 
 extension AppState {
 
+    /// The platforms supported by Komodio
     enum Platform {
+        /// macOS
         case macOS
+        /// tvOS
         case tvOS
     }
 

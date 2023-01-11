@@ -1,6 +1,6 @@
 //
 //  MoviesView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for all Movies
 ///
-/// Movies that are part of a set will be removed and replaced with the set
+/// - Movies that are part of a set will be removed and replaced with the set
 struct MoviesView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -24,8 +24,8 @@ struct MoviesView: View {
     @State private var selectedItem: MediaItem?
     /// The optional selected movie set (macOS)
     @State private var selectedMovieSet = Video.Details.MovieSet(media: .none)
-    /// The loading state of the view
-    @State private var state: Parts.State = .loading
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
 
@@ -63,9 +63,10 @@ struct MoviesView: View {
 
     // MARK: Content of the View
 
+    /// The content of the View
+    @ViewBuilder var content: some View {
+
 #if os(macOS)
-    /// The content of the view
-    var content: some View {
         ZStack {
             List(selection: $selectedItem) {
                 ForEach(items, id: \.id) { video in
@@ -75,7 +76,7 @@ struct MoviesView: View {
                             .tag(MediaItem(id: movie.id, media: .movie))
                     case let movieSet as Video.Details.MovieSet:
                         MovieSetView.Item(movieSet: movieSet)
-                            .tag(MediaItem(id: String(movieSet.setID), media: .movieSet, movieSet: movieSet))
+                            .tag(MediaItem(id: String(movieSet.setID), media: .movieSet))
                     default:
                         EmptyView()
                     }
@@ -102,12 +103,9 @@ struct MoviesView: View {
                 }
             }
         }
-    }
 #endif
 
 #if os(tvOS)
-    /// The content of the view
-    var content: some View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach($items, id: \.id) { $video in
@@ -131,14 +129,15 @@ struct MoviesView: View {
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .setSafeAreas()
-    }
 #endif
+
+    }
 
     // MARK: Private functions
 
     /// Get all items from the library
     ///
-    /// Movies that are part of a set will be removed and replaced with the set
+    /// - Movies that are part of a set will be removed and replaced with the set
     private func getItems() {
         var items: [any KodiItem] = []
         items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
@@ -192,6 +191,9 @@ extension MoviesView {
     struct Item: View {
         /// The movie
         let movie: Video.Details.Movie
+
+        // MARK: Body of the View
+
         /// The body of the View
         var body: some View {
             HStack {
@@ -199,15 +201,19 @@ extension MoviesView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: movie)
+
 #if os(macOS)
                 VStack(alignment: .leading) {
                     Text(movie.title)
                         .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     Text(movie.genre.joined(separator: "∙"))
                     Text(movie.year.description)
                         .font(.caption)
                 }
 #endif
+
             }
         }
     }

@@ -2,47 +2,56 @@
 //  KodiSettingsView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 04/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for Kodi settings
 struct KodiSettingsView: View {
-
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-
+    /// The settings sections
     @State private var sections: [Setting.Details.Section] = []
+    /// The optional selected section
     @State private var selectedSection: Setting.Details.Section?
-
-    /// The optional selected section (macOS)
+    /// The optional selected section (for macOS)
     @State private var section = Setting.Details.Section(id: .unknown)
 
+    // MARK: Body of the View
+
+    /// The body of the View
     var body: some View {
         content
-        .animation(.default, value: selectedSection)
-        .task {
-            sections = await Settings.getSections()
-        }
-        .task(id: selectedSection) {
-            if let selectedSection {
-                scene.navigationSubtitle = selectedSection.label
-                section = selectedSection
-            } else {
-                scene.navigationSubtitle = Router.kodiSettings.label.title
-                section.id = .unknown
+            .animation(.default, value: selectedSection)
+            .task {
+                sections = await Settings.getSections()
             }
-        }
+            .task(id: selectedSection) {
+                if let selectedSection {
+                    scene.navigationSubtitle = selectedSection.label
+                    section = selectedSection
+                } else {
+                    scene.navigationSubtitle = Router.kodiSettings.label.title
+                    section.id = .unknown
+                }
+            }
     }
-#if os(macOS)
+
+    // MARK: Content of the View
+
     /// The content of the View
-    var content: some View {
+    @ViewBuilder var content: some View {
+
+#if os(macOS)
         ZStack {
             List(selection: $selectedSection) {
-                // swiftlint:disable:next line_length
-                Label("These are the *Kodi* settings on your host, not *Komodio* settings. **Komodio** might or might not behave according these preferences and they might not be relevant here at all", systemImage: "exclamationmark.circle.fill")
-                    .foregroundColor(.red)
+                Warning()
+                    .padding()
+                    .background(.thinMaterial)
+                    .cornerRadius(10)
+                    .padding()
                 ForEach(sections) { section in
                     VStack(alignment: .leading) {
                         Text(section.label)
@@ -71,11 +80,9 @@ struct KodiSettingsView: View {
                 }
             }
         }
-    }
 #endif
+
 #if os(tvOS)
-    /// The content of the View
-    var content: some View {
         List {
             ForEach(sections) { section in
                 NavigationLink(value: section, label: {
@@ -88,45 +95,56 @@ struct KodiSettingsView: View {
                 })
             }
         }
-    }
 #endif
+    }
 }
+
+// MARK: Extensions
 
 extension KodiSettingsView {
 
+    /// SwiftUI View for a section
     struct Section: View {
+        /// The current section
         let section: Setting.Details.Section
         /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        @EnvironmentObject private var scene: SceneState
+        /// All the categories
         @State private var categories: [Setting.Details.Category] = []
+        /// The optional selected category
         @State private var selectedCategory: Setting.Details.Category?
 
 #if os(tvOS)
-
         /// The focus state of the selection (tvOS)
         @FocusState var isFocused: Bool
-
+        /// The current selection (tvOS)
         @State private var selection: Int = 0
-
 #endif
+
+        // MARK: Body of the View
+
         var body: some View {
             content
-            .task(id: section) {
-                selectedCategory = nil
-                if section.id != .unknown {
-                    categories = await Settings.getCategories(section: section.id)
+                .task(id: section) {
+                    selectedCategory = nil
+                    if section.id != .unknown {
+                        categories = await Settings.getCategories(section: section.id)
+                    }
                 }
-            }
-            .task(id: selectedCategory) {
-                if let selectedCategory {
-                    scene.details = .kodiSettingsDetails(section: section, category: selectedCategory)
+                .task(id: selectedCategory) {
+                    if let selectedCategory {
+                        scene.details = .kodiSettingsDetails(section: section, category: selectedCategory)
+                    }
                 }
-            }
 
         }
-#if os(macOS)
+
+        // MARK: Content of the View
+
         /// The content of the View
-        var content: some View {
+        @ViewBuilder var content: some View {
+
+#if os(macOS)
             List(selection: $selectedCategory) {
                 ForEach(categories) { category in
                     VStack(alignment: .leading) {
@@ -142,11 +160,9 @@ extension KodiSettingsView {
                 }
             }
             .listStyle(.inset(alternatesRowBackgrounds: true))
-        }
 #endif
+
 #if os(tvOS)
-        /// The content of the View
-        var content: some View {
             HStack {
                 VStack(alignment: .leading) {
                     ForEach(categories) { category in
@@ -166,7 +182,7 @@ extension KodiSettingsView {
                         .background(
                             .thickMaterial
                                 .opacity(selectedCategory == category ? 1 : 0)
-                            )
+                        )
                         .cornerRadius(20)
                     }
                 }
@@ -188,7 +204,6 @@ extension KodiSettingsView {
                 )
                 .focused($isFocused)
                 .padding(.trailing)
-                .background(.ultraThinMaterial.opacity(0.8))
                 DetailView()
                     .focusSection()
                     .frame(maxWidth: .infinity)
@@ -205,15 +220,22 @@ extension KodiSettingsView {
                     selectedCategory = categories[selection]
                 }
             }
-        }
 #endif
+        }
     }
 }
 
 extension KodiSettingsView {
+
+    /// SwiftUI View for details of a setting
     struct Details: View {
+        /// The current section
         let section: Setting.Details.Section
+        /// The current category
         let category: Setting.Details.Category
+
+        // MARK: Body of the View
+
         var body: some View {
             ScrollView {
                 Text("\(section.label) - \(category.label)")
@@ -224,6 +246,29 @@ extension KodiSettingsView {
                 }
             }
             .padding(.horizontal)
+        }
+    }
+}
+
+extension KodiSettingsView {
+
+    /// SwiftUI View for warning of Kodi settings
+    struct Warning: View {
+        /// The KodiConnector model
+        @EnvironmentObject var kodi: KodiConnector
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            Label(
+                title: {
+                    // swiftlint:disable:next line_length
+                    Text("These are the *Kodi* settings on your host, not *Komodio* settings. **Komodio** might not behave according these settings and they might not be relevant for **Komodio** at all.")
+                }, icon: {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .foregroundColor(.red)
+                })
         }
     }
 }

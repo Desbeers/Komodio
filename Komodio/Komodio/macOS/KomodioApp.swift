@@ -11,11 +11,11 @@ import SwiftlyKodiAPI
 /// The Komodio App Scene
 @main struct KomodioApp: App {
     /// The AppState model
-    @StateObject var appState: AppState = .shared
+    @StateObject private var appState: AppState = .shared
     /// The KodiConnector model
-    @StateObject var kodi: KodiConnector = .shared
+    @StateObject private var kodi: KodiConnector = .shared
     /// Open new windows
-    @Environment(\.openWindow) var openWindow
+    @Environment(\.openWindow) private var openWindow
     /// The body of the scene
     var body: some Scene {
         WindowGroup(id: "Main") {
@@ -42,7 +42,7 @@ import SwiftlyKodiAPI
         WindowGroup("Player", for: MediaItem.self) { $item in
             /// Check if `item` isn't `nil`
             if let item = item {
-                KodiPlayerView(video: item.item, resume: item.resume)
+                KomodioPlayerView(video: item.item, resume: item.resume)
                     .withHostingWindow { window in
                         if let window = window?.windowController?.window {
                             window.setPosition(vertical: .center, horizontal: .center, padding: 0)

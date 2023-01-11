@@ -1,6 +1,6 @@
 //
 //  SearchView.swift
-//  KomodioTV
+//  Komodio (tvOS)
 //
 //  © 2023 Nick Berendsen
 //

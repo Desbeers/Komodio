@@ -2,7 +2,7 @@
 //  Modifiers+tvOS.swift
 //  Komodio (tvOS)
 //
-//  Created by Nick Berendsen on 24/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
@@ -13,11 +13,19 @@ extension Modifiers {
 
     /// A `ViewModifier` to fill the leading the `Safe Areas` with the ``SidebarView``
     struct SafeAreas: ViewModifier {
+        /// The SceneState model
+        @EnvironmentObject var scene: SceneState
+        /// The Presentation mode
+        @Environment(\.presentationMode) var presentationMode
         /// The modifier
         func body(content: Content) -> some View {
             content
                 .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {
                     Color.clear.frame(width: KomodioApp.sidebarCollapsedWidth)
+                }
+                .onExitCommand {
+                    scene.background = nil
+                    presentationMode.wrappedValue.dismiss()
                 }
         }
     }

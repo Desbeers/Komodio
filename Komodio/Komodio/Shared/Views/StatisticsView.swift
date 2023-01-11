@@ -1,6 +1,6 @@
 //
 //  StatisticsView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -15,7 +15,7 @@ struct StatisticsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             if !kodi.library.movies.isEmpty {
                 Button(
                     action: {
@@ -74,41 +74,54 @@ struct StatisticsView: View {
 
 extension StatisticsView {
 
-#if os(macOS)
     /// Label style for statistics
     private struct StatisticsLabel: LabelStyle {
+        /// Bool if the label is a 'subitem'
         var subItem: Bool = false
         func makeBody(configuration: Configuration) -> some View {
+
+#if os(macOS)
             HStack {
                 configuration.icon
                     .foregroundColor(subItem ? .gray : .accentColor)
                     .frame(width: 40)
                 configuration.title
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .font(.system(size: subItem ? 20 : 25))
+            .font(.system(size: subItem ? 15 : 20))
             .padding(.vertical, subItem ? 10 : 20)
             .padding(.leading, subItem ? 20 : 0)
-        }
-    }
 #endif
 
 #if os(tvOS)
-    /// Label style for statistics
-    private struct StatisticsLabel: LabelStyle {
-        var subItem: Bool = false
-        func makeBody(configuration: Configuration) -> some View {
             HStack {
                 configuration.icon
                     .foregroundColor(subItem ? .secondary : Color("AccentColor"))
-                    .frame(width: 40)
                 configuration.title
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.primary)
             }
             .font(.system(size: subItem ? 30 : 35))
-            .padding(.vertical, subItem ? 0 : 10)
+            .padding(.vertical, subItem ? 0 : 0)
             .padding(.leading, subItem ? 20 : 0)
+#endif
+
         }
     }
-#endif
+}
+
+extension StatisticsView {
+
+    /// SwiftUI View with host info
+    struct HostInfo: View {
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            VStack {
+                Text("Kodi \(kodi.properties.version.major).\(kodi.properties.version.minor)")
+            }
+        }
+    }
 }

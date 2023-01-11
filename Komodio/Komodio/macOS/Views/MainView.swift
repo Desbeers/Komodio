@@ -8,14 +8,17 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for the main navigation
+/// SwiftUI View for the main navigation (macOS)
 struct MainView: View {
     /// The SceneState model
-    @StateObject var scene = SceneState()
+    @StateObject private var scene = SceneState()
     /// The search field in the toolbar
-    @State var searchField: String = ""
+    @State private var searchField: String = ""
     /// Set the column visibility
     @State private var columnVisibility = NavigationSplitViewVisibility.automatic
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         NavigationSplitView(
@@ -27,29 +30,29 @@ struct MainView: View {
                 ContentView()
                     .navigationSplitViewColumnWidth(ContentView.columnWidth)
                     .frame(maxHeight: .infinity, alignment: .top)
-                    .background(
-                        Image("fanart")
-                            .resizable()
-                            .scaledToFill()
-                            .opacity(0.1)
-                    )
             },
             detail: {
                 DetailView()
             })
-        .background(VisualEffect())
+        .background(
+            ZStack {
+                Color(nsColor: .controlBackgroundColor)
+                Image("Background")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.3)
+                    .overlay {
+                        Parts.GradientOverlay()
+                    }
+            }
+        )
         .navigationSubtitle(scene.navigationSubtitle)
         .animation(.default, value: scene.sidebarSelection)
+        .animation(.default, value: scene.contentSelection)
         .searchable(text: $searchField, prompt: "Search library")
         .task(id: searchField) {
             await scene.updateSearch(query: searchField)
         }
         .environmentObject(scene)
     }
-}
-
-/// Transluent background
-struct VisualEffect: NSViewRepresentable {
-    func makeNSView(context: Self.Context) -> NSView { return NSVisualEffectView() }
-    func updateNSView(_ nsView: NSView, context: Context) { }
 }

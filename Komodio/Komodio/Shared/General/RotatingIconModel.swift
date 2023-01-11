@@ -1,8 +1,8 @@
 //
 //  RotatingRecordModel.swift
-//  Kodio
+//  Komodio
 //
-//  Created by Nick Berendsen on 13/08/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

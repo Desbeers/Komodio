@@ -2,7 +2,7 @@
 //  MusicVideosView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 28/11/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
@@ -23,15 +23,16 @@ struct MusicVideosView: View {
     /// The body of the View
     var body: some View {
         content
-        .task(id: artist) {
-            getItems()
-        }
-        .task(id: kodi.library.musicVideos) {
-            getItems()
-        }
-        .task(id: selectedItem) {
-            setItemDetails()
-        }
+            .task(id: artist) {
+                getItems()
+            }
+            .task(id: kodi.library.musicVideos) {
+                print("Get Music Videos from Artist")
+                getItems()
+            }
+            .task(id: selectedItem) {
+                setItemDetails()
+            }
     }
 
     // MARK: Content of the MusicVideosView
@@ -70,41 +71,48 @@ struct MusicVideosView: View {
         .buttonStyle(.card)
     }
 #endif
-}
 
-// MARK: Extensions
-
-extension MusicVideosView {
+    // MARK: Private functions
 
     /// Get all items from the library
     private func getItems() {
         if artist.media == .artist {
+            print("Update Items")
             var result: [MediaItem] = []
             let allMusicVideosFromArtist = kodi.library.musicVideos.filter({$0.artist.contains(artist.artist)})
             for video in allMusicVideosFromArtist.uniqueAlbum() {
                 let albumMusicVideos = allMusicVideosFromArtist.filter({$0.album == video.album})
                 let count = albumMusicVideos.count
-                result.append(MediaItem(id: count == 1 ? video.id : video.album, media: count == 1 ? .musicVideo : .album, musicVideos: albumMusicVideos))
+                result.append(MediaItem(id: count == 1 ? video.id : video.album,
+                                        media: count == 1 ? .musicVideo : .album,
+                                        item: albumMusicVideos.first ?? Audio.Details.Stream()
+                                       )
+                )
             }
             items = result
-            scene.details = .artist(artist: artist)
+            /// Update the optional selected item
+            if let selectedItem {
+                print("Update selected item")
+                self.selectedItem = items.first(where: {$0.id == selectedItem.id})
+            } else {
+                scene.details = .artist(artist: artist)
+            }
         } else {
-            scene.details = .musicVideos
-        }
-        /// Update the optional selected item
-        if let selectedItem {
-            self.selectedItem = items.first(where: {$0.id == selectedItem.id})
+            /// Make sure we don't have an old selection
+            selectedItem = nil
         }
     }
 
     /// Set the details of a selected item
     private func setItemDetails() {
-        if let selectedItem, let first = selectedItem.musicVideos?.first {
+        if let selectedItem, let musicVideo = selectedItem.item as? Video.Details.MusicVideo {
             switch selectedItem.media {
             case .musicVideo:
-                scene.details = Router.musicVideo(musicVideo: first)
+                scene.details = Router.musicVideo(musicVideo: musicVideo)
             case.album:
-                scene.details = Router.album(album: selectedItem)
+                /// Get all Music Videos from the specific artist and album
+                let musicVideos = kodi.library.musicVideos.filter({$0.artist.contains(musicVideo.artist) && $0.album == musicVideo.album})
+                scene.details = Router.album(musicVideos: musicVideos)
             default:
                 break
             }
@@ -112,23 +120,30 @@ extension MusicVideosView {
     }
 }
 
+// MARK: Extensions
+
 extension MusicVideosView {
 
     /// SwiftUI View for an item in ``MusicVideosView``
     struct Item: View {
+        /// The ``MediaItem``
         let item: MediaItem
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
-            if let first = item.musicVideos?.first {
-                HStack {
-                    KodiArt.Poster(item: first)
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                        .watchStatus(of: first)
+            HStack {
+                KodiArt.Poster(item: item.item)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                    .watchStatus(of: item.item)
+
 #if os(macOS)
-                    Text(item.media == .musicVideo ? first.title : first.album)
-                        .font(.headline)
+                Text(item.media == .musicVideo ? item.item.title : item.item.details)
+                    .font(.headline)
 #endif
-                }
+
             }
         }
     }

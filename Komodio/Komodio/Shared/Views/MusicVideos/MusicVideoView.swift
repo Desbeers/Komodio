@@ -2,14 +2,18 @@
 //  MusicVideoView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 28/11/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for a single Music Video
 enum MusicVideoView {
 
+    /// Update a Music Video
+    /// - Parameter musicVideo: The music video to update
+    /// - Returns: If update is found, the updated Music Video, else `nil`
     static func updateMusicVideo(musicVideo: Video.Details.MusicVideo) -> Video.Details.MusicVideo? {
         if let update = KodiConnector.shared.library.musicVideos.first(where: {$0.id == musicVideo.id}), update != musicVideo {
             return update
@@ -26,6 +30,9 @@ extension MusicVideoView {
         @State var musicVideo: Video.Details.MusicVideo
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
+
+        // MARK: Body of the View
+
         /// The body of the View
         var body: some View {
             VStack {
@@ -45,7 +52,6 @@ extension MusicVideoView {
             .background(file: musicVideo.fanart)
             .task(id: kodi.library.musicVideos) {
                 if let update = MusicVideoView.updateMusicVideo(musicVideo: musicVideo) {
-                    print("Update")
                     musicVideo = update
                 }
             }

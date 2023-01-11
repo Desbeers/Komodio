@@ -1,8 +1,8 @@
 //
 //  Extensions+tvOS.swift
-//  KomodioTV
+//  Komodio (tvOS)
 //
-//  Created by Nick Berendsen on 15/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

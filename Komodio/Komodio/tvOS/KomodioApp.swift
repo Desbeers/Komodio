@@ -2,13 +2,13 @@
 //  KomodioApp.swift
 //  Komodio (tvOS)
 //
-//  Created by Nick Berendsen on 02/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The Komodio App Scene
+/// The Komodio App Scene (tvOS)
 @main struct KomodioApp: App {
     /// The AppState model
     @StateObject var appState: AppState = .shared
@@ -16,8 +16,6 @@ import SwiftlyKodiAPI
     @StateObject var kodi: KodiConnector = .shared
     /// The SceneState model
     @StateObject var scene = SceneState()
-    /// The color scheme
-    @Environment(\.colorScheme) var colorScheme
     /// The body of the scene
     var body: some Scene {
         WindowGroup {
@@ -37,10 +35,17 @@ import SwiftlyKodiAPI
                         if let background = scene.background {
                             KodiArt.Art(file: background)
                                 .opacity(0.2)
+                                .overlay {
+                                    Parts.GradientOverlay()
+                                        .opacity(0.3)
+                                }
                         } else {
-                            Image("fanart")
+                            Image("Background")
                                 .resizable()
-                                .opacity(0.1)
+                                .opacity(0.3)
+                                .overlay {
+                                    Parts.GradientOverlay()
+                                }
                         }
                     }
                         .scaledToFill()

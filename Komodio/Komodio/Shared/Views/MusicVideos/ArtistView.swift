@@ -2,22 +2,26 @@
 //  ArtistView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 28/11/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for an Artist
 enum ArtistView {
-    // Jus a NameSpace here
+    // Just a NameSpace here
 }
 
 extension ArtistView {
 
-    /// SwiftUI View for an Artist details
+    /// SwiftUI View for details of an Artist
     struct Details: View {
         /// The Artist
         let artist: Audio.Details.Artist
+
+        // MARK: Body of the View
+
         /// The body of the View
         var body: some View {
             VStack {

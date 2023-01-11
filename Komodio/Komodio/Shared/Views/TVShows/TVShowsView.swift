@@ -1,6 +1,6 @@
 //
 //  TVShowsView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -18,11 +18,12 @@ struct TVShowsView: View {
     @State var tvshows: [Video.Details.TVShow] = []
     /// The optional selected TV show
     @State var selectedTVShow = Video.Details.TVShow(media: .none)
-    /// The loading state of the view
-    @State private var state: Parts.State = .loading
-
-    /// Define the grid layout (tvOS)
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
+    /// Define the grid layout (for tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
+
+    // MARK: Body of the View
 
     /// The body of the View
     var body: some View {
@@ -57,9 +58,13 @@ struct TVShowsView: View {
             }
         }
     }
+
+    // MARK: Content of the View
+
+    /// The content of the View
+    @ViewBuilder var content: some View {
+
 #if os(macOS)
-    /// The content of the view
-    var content: some View {
         ZStack {
             List(selection: $selectedTVShow) {
                 ForEach(tvshows) { tvshow in
@@ -93,11 +98,9 @@ struct TVShowsView: View {
                 }
             }
         }
-    }
 #endif
+
 #if os(tvOS)
-    /// The content of the view
-    var content: some View {
         ScrollView {
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(tvshows) { tvshow in
@@ -111,20 +114,30 @@ struct TVShowsView: View {
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .setSafeAreas()
-    }
 #endif
+
+    }
 }
+
+// MARK: Extensions
 
 extension TVShowsView {
 
+    /// SwiftUI View for a TV show in ``TVShowsView``
     struct Item: View {
+        /// The TV show
         let tvshow: Video.Details.TVShow
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
             HStack {
                 KodiArt.Poster(item: tvshow)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: tvshow)
+
 #if os(macOS)
                 VStack(alignment: .leading) {
                     Text(tvshow.title)
@@ -133,7 +146,11 @@ extension TVShowsView {
                     Text(tvshow.year.description)
                         .font(.caption)
                 }
+                /// Make the whole area clickable
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
 #endif
+
             }
         }
     }

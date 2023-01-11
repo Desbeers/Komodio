@@ -1,6 +1,6 @@
 //
 //  UpNextView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -11,15 +11,18 @@ import SwiftlyKodiAPI
 /// SwiftUI View for next Episode of TV shows that are not completed
 struct UpNextView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
     /// The Episodes in this view
-    @State var episodes: [Video.Details.Episode] = []
+    @State private var episodes: [Video.Details.Episode] = []
     /// The optional selected Episode
-    @State var selectedEpisode: Video.Details.Episode?
-    /// The loading state of the view
-    @State private var state: Parts.State = .loading
+    @State private var selectedEpisode: Video.Details.Episode?
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         VStack {
@@ -69,11 +72,12 @@ struct UpNextView: View {
         }
     }
 
-    // MARK: Content of the UpNextView
+    // MARK: Content of the View
+
+    /// The content of the view
+    @ViewBuilder var content: some View {
 
 #if os(macOS)
-    /// The content of the view
-    var content: some View {
         List(selection: $selectedEpisode) {
             ForEach(episodes) { episode in
                 Item(episode: episode)
@@ -81,12 +85,9 @@ struct UpNextView: View {
             }
         }
         .listStyle(.inset(alternatesRowBackgrounds: true))
-    }
 #endif
 
 #if os(tvOS)
-    /// The content of the view
-    var content: some View {
         HStack {
             List {
                 ForEach(episodes) { episode in
@@ -99,12 +100,15 @@ struct UpNextView: View {
                 }
             }
             .frame(width: 500)
+            .buttonStyle(.card)
             DetailView()
+                .frame(maxWidth: .infinity)
+                .focusSection()
         }
-        .buttonStyle(.card)
         .setSafeAreas()
-    }
 #endif
+
+    }
 }
 
 // MARK: Extensions
@@ -113,16 +117,26 @@ extension UpNextView {
 
     /// SwiftUI View for an item in ``UpNextView``
     struct Item: View {
+        /// The Episode
         let episode: Video.Details.Episode
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
-            HStack {
+            HStack(spacing: 0) {
                 KodiArt.Poster(item: episode)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 80, height: 120)
+                    .padding(.trailing)
                 VStack(alignment: .leading) {
                     Text(episode.showTitle)
                         .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     Text(episode.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     Text("Season \(episode.season), episode \(episode.episode)")
                         .font(.caption)
                 }

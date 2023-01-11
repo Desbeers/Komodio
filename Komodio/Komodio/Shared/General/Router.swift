@@ -1,6 +1,6 @@
 //
 //  Router.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 /// Router for Komodio navigation
 enum Router: Hashable {
 
-    /// # Movies
+    // MARK: Movies
 
     /// All movies
     case movies
@@ -22,7 +22,7 @@ enum Router: Hashable {
     /// All unwatched movies
     case unwatchedMovies
 
-    /// # TV shows
+    // MARK: TV shows
 
     /// All TV shows
     case tvshows
@@ -37,7 +37,7 @@ enum Router: Hashable {
     /// First unwatched episode of unfinnished TV shows
     case unwachedEpisodes
 
-    /// # Music Videos
+    // MARK: Music Videos
 
     /// A specific artist
     case artist(artist: Audio.Details.Artist)
@@ -46,9 +46,9 @@ enum Router: Hashable {
     /// A specific music video
     case musicVideo(musicVideo: Video.Details.MusicVideo)
     /// A music video album
-    case album(album: MediaItem)
+    case album(musicVideos: [Video.Details.MusicVideo])
 
-    /// # Other
+    // MARK: Other items
 
     /// Start View for Komodio
     case start
@@ -58,6 +58,11 @@ enum Router: Hashable {
     case kodiSettings
     /// The Kodi settings details View
     case kodiSettingsDetails(section: Setting.Details.Section, category: Setting.Details.Category)
+}
+
+// MARK: Extensions
+
+extension Router {
 
     /// Message when loading media for a View
     var loading: String {
@@ -99,7 +104,7 @@ enum Router: Hashable {
         }
     }
 
-    /// The lable of the ``Router`` item
+    /// The label of the ``Router`` item
     var label: Item {
         switch self {
         case .start:
@@ -170,7 +175,7 @@ enum Router: Hashable {
         }
     }
 
-    /// An item in the sidebar
+    /// Structure for a ``Router`` Label
     struct Item {
         /// Title of the item
         let title: String

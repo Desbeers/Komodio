@@ -1,6 +1,6 @@
 //
 //  SeasonView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -14,15 +14,20 @@ struct SeasonView: View {
     let tvshow: Video.Details.TVShow
     /// The Episodes to show
     let episodes: [Video.Details.Episode]
+
+    // MARK: Body of the View
+
     /// The body of this View
     var body: some View {
         List {
             ForEach(episodes) { episode in
-                EpisodeView(episode: episode)
+                EpisodeView.Details(episode: episode)
             }
         }
+
 #if os(macOS)
         .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
+
     }
 }

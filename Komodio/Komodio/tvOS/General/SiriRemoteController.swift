@@ -69,38 +69,56 @@ class SiriRemoteController: ObservableObject {
     }
 }
 
-// MARK: View + swipeGestures
+// MARK: SwipeGestureActions Modifier
 
 extension Modifiers {
 
+    /// SwiftUI View Modifier for a swipe gesture
     struct SwipeGestureActions: ViewModifier {
-        /// The shared controller class
-        @StateObject var controller: SiriRemoteController = .shared
-        /// swipeDistance is how much x/y values needs to be acumelated by a gesture in order to consider a swipe (the distance the finger must travel)
-        let swipeDistance: Float = 0.7
-        /// how much pause in milliseconds should be between gestures in order for a gesture to be considered a new gesture
-        /// and not a remenat x/y values from the previous gesture
-        let secondsBetweenInteractions: Double = 0.2
-        /// the closures to execute when up/down/left/right gesture are detected
+        /// The closures to execute when up gesture is detected
         var onUp: () -> Void = {}
+        /// The closures to execute when down gesture is detected
         var onDown: () -> Void = {}
+        /// The closures to execute when right gesture is detected
         var onRight: () -> Void = {}
+        /// The closures to execute when left gesture is detected
         var onLeft: () -> Void = {}
 
-        @State var lastY: Float = 0
-        @State var lastX: Float = 0
-        @State var totalYSwipeDistance: Float = 0
-        @State var totalXSwipeDistance: Float = 0
-        @State var lastInteractionTimeInterval: TimeInterval = Date().timeIntervalSince1970
-        @State var isNewSwipe: Bool = true
+        // MARK: Private stuff
+
+        /// The shared controller class
+        @StateObject private var controller: SiriRemoteController = .shared
+        /// swipeDistance is how much x/y values needs to be acumelated by a gesture in order to consider a swipe (the distance the finger must travel)
+        private let swipeDistance: Float = 0.7
+        /// How much pause in milliseconds should be between gestures in order for a gesture to be considered a new gesture
+        /// and not a remenat x/y values from the previous gesture
+        private let secondsBetweenInteractions: Double = 0.2
+        /// The last 'Y' position
+        @State private var lastY: Float = 0
+        /// The last 'X' position
+        @State private var lastX: Float = 0
+        /// The total 'Y' distance
+        @State private var totalYSwipeDistance: Float = 0
+        /// The total 'X' distance
+        @State private var totalXSwipeDistance: Float = 0
+        /// The 'timeinterval' of the last swipe
+        @State private var lastInteractionTimeInterval: TimeInterval = Date().timeIntervalSince1970
+        /// Bool if the swipe is new or not
+        @State private var isNewSwipe: Bool = true
 
         // swiftlint:disable identifier_name
 
-        func resetCounters(x: Float, y: Float) {
+        /// Reset the swipe counters
+        /// - Parameters:
+        ///   - x: The current 'X' position
+        ///   - y: The current 'Y' position
+        private func resetCounters(x: Float, y: Float) {
             isNewSwipe = true
-            lastY = y // start counting from the y point the finger is touching
+            /// Start counting from the 'Y' point the finger is touching
+            lastY = y
             totalYSwipeDistance = 0
-            lastX = x // start counting from the x point the finger is touching
+            /// start counting from the 'X' point the finger is touching
+            lastX = x
             totalXSwipeDistance = 0
         }
 
@@ -138,19 +156,19 @@ extension Modifiers {
                             /// and waiting for a few milliseconds stop between interactions)
                             if isNewSwipe {
                                 if totalYSwipeDistance > swipeDistance && totalYSwipeDistance > 0 {
-                                    /// swipe up detected
+                                    /// Swipe up detected
                                     isNewSwipe = false // lock so next values will be disregarded until a few milliseconds of 'remote silence' achieved
                                     onUp() // execute the appropriate closure for this detected swipe
                                 } else if totalYSwipeDistance < -swipeDistance && totalYSwipeDistance < 0 {
-                                    /// swipe down detected
+                                    /// Swipe down detected
                                     isNewSwipe = false
                                     onDown()
                                 } else if totalXSwipeDistance > swipeDistance && totalXSwipeDistance > 0 {
-                                    /// swipe right detected
+                                    /// Swipe right detected
                                     isNewSwipe = false
                                     onRight()
                                 } else if totalXSwipeDistance < -swipeDistance && totalXSwipeDistance < 0 {
-                                    /// swipe left detected
+                                    /// Swipe left detected
                                     isNewSwipe = false
                                     onLeft()
                                 }
@@ -165,6 +183,14 @@ extension Modifiers {
 }
 
 extension View {
+
+    /// Shortcut to ``Modifiers/SwipeGestureActions``
+    /// - Parameters:
+    ///   - onUp: The closures to execute when up gesture is detected
+    ///   - onDown: The closures to execute when down gesture is detected
+    ///   - onRight: The closures to execute when right gesture is detected
+    ///   - onLeft: The closures to execute when left gesture is detected
+    /// - Returns: A modified View
     func swipeGestures(
         onUp: @escaping () -> Void = {},
         onDown: @escaping () -> Void = {},

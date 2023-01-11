@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+import AVFoundation
 
 /// SwiftUI View for the sidebar
 struct SidebarView: View {
@@ -16,10 +17,11 @@ struct SidebarView: View {
     @EnvironmentObject var appState: AppState
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
-    /// The selected host
-    @State private var selectedHost: String?
     /// The focus state of the sidebar
     @FocusState var isFocused: Bool
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         VStack(alignment: .leading) {
@@ -60,17 +62,22 @@ struct SidebarView: View {
             onUp: {
                 if isFocused {
                     scene.mainSelection = scene.mainSelection == 0 ? 0 : scene.mainSelection - 1
+                    let systemSoundID: SystemSoundID = 1306
+                    AudioServicesPlaySystemSound(systemSoundID)
                 }
             },
             onDown: {
                 if isFocused {
                     scene.mainSelection = scene.sidebarItems.count - 1 == scene.mainSelection ? scene.mainSelection : scene.mainSelection + 1
+                    let systemSoundID: SystemSoundID = 1104
+                    AudioServicesPlaySystemSound(systemSoundID)
                 }
             }
         )
         .focused($isFocused)
     }
 
+    /// SwiftUI View for an item in the sidebar
     @ViewBuilder func sidebarItem(item: Router, selection: Int = 0) -> some View {
         Label(
             title: {

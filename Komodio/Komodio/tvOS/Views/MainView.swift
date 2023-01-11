@@ -1,14 +1,14 @@
 //
 //  MainView.swift
-//  KomodioTV (tvOS)
+//  Komodio (tvOS)
 //
-//  Created by Nick Berendsen on 02/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for the main navigation
+/// SwiftUI View for the main navigation (tvOS)
 struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -16,8 +16,9 @@ struct MainView: View {
     @EnvironmentObject private var scene: SceneState
     /// Bool if the sidebar has focus
     @FocusState var isFocused: Bool
-    /// The color scheme
-    @Environment(\.colorScheme) var colorScheme
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         NavigationStack(path: $scene.navigationStackPath) {
@@ -48,7 +49,7 @@ struct MainView: View {
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.trailing)
                 .opacity(isFocused ? 1 : 0.2)
-                .background(.regularMaterial)
+                .background(.regularMaterial.opacity(isFocused ? 1 : 0.8))
                 .focused($isFocused)
                 .clipped()
                 .ignoresSafeArea()
@@ -58,7 +59,6 @@ struct MainView: View {
             KodiSettingsView.FullScreen()
         }
         .animation(.default, value: isFocused)
-        .animation(.default, value: scene.showSettings)
         .animation(.default, value: scene.mainSelection)
         .environmentObject(scene)
     }

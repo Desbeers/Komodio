@@ -1,6 +1,6 @@
 //
 //  DetailView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -12,8 +12,9 @@ import SwiftlyKodiAPI
 struct DetailView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The Navigation Subtitle
-    @State private var navigationSubtitle: String = "hallo"
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         VStack {
@@ -21,21 +22,25 @@ struct DetailView: View {
             case .start:
                 StartView.Details()
             case .movie(let movie):
-                MovieView.Details(movie: movie).id(movie.id)
+                MovieView
+                    .Details(movie: movie)
+                    .id(movie.id)
             case .movieSet(let movieSet):
                 MovieSetView.Details(movieSet: movieSet)
             case .tvshow(let tvshow):
-                TVShowView(tvshow: tvshow)
+                TVShowView.Details(tvshow: tvshow).id(tvshow.id)
             case .episode(let episode):
-                EpisodeView(episode: episode)
+                EpisodeView.Item(episode: episode).id(episode.tvshowID)
             case .season(let tvshow, let episodes):
                 SeasonView(tvshow: tvshow, episodes: episodes)
             case .artist(let artist):
                 ArtistView.Details(artist: artist)
             case .musicVideo(let musicVideo):
-                MusicVideoView.Details(musicVideo: musicVideo).id(musicVideo.id)
-            case .album(let album):
-                AlbumView(title: album.id, musicVideos: album.musicVideos ?? [])
+                MusicVideoView
+                    .Details(musicVideo: musicVideo)
+                    .id(musicVideo.id)
+            case .album(let musicVideos):
+                AlbumView(musicVideos: musicVideos)
             case .kodiSettingsDetails(let section, let category):
                 KodiSettingsView.Details(section: section, category: category)
             default:
@@ -43,17 +48,19 @@ struct DetailView: View {
             }
         }
         .animation(.default, value: scene.details)
-        .animation(.default, value: scene.sidebarSelection)
     }
-    /// The fallback view
+
+    // MARK: Fallback of the View
+
+    /// The fallback View
     private var fallback: some View {
-        ZStack {
+        VStack {
+            Parts.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
             Image(systemName: scene.sidebarSelection.label.icon)
                 .resizable()
                 .scaledToFit()
                 .padding(40)
-                .opacity(0.1)
-            Parts.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
+                .foregroundColor(.secondary)
         }
         .padding(40)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

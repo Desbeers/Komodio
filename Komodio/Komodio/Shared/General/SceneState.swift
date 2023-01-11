@@ -14,19 +14,16 @@ class SceneState: ObservableObject {
     // MARK: macOS stuff
 
 #if os(macOS)
-
     /// The current search query
    var query: String = ""
-
 #endif
 
     // MARK: tvOS stuff
 
 #if os(tvOS)
-
     /// The current search query
     @Published var query: String = ""
-
+    /// Router items to show in the sidebar
     let sidebarItems: [Router] = [
         .start,
         .movies,
@@ -36,6 +33,7 @@ class SceneState: ObservableObject {
         .musicVideos,
         .search
     ]
+    /// The main selection of Komodio
     var mainSelection: Int = 0 {
         didSet {
             /// Set the sidebar selection as a ``Router`` item
@@ -50,14 +48,16 @@ class SceneState: ObservableObject {
             background = nil
         }
     }
+    /// Bool to show the Kodi Settings View
     @Published var showSettings: Bool = false
+    /// The Naigation path
     @Published var navigationStackPath = NavigationPath()
     /// The optional background image
     @Published var background: String?
 
 #endif
 
-    // MARK: shared stuff
+    // MARK: Shared stuff
 
     /// The current selection in the ``SidebarView``
     @Published var sidebarSelection: Router = .start

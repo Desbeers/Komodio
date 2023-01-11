@@ -1,18 +1,22 @@
 //
 //  ContentView.swift
-//  KomodioTV
+//  Komodio (tvOS)
 //
-//  Created by Nick Berendsen on 15/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for the main content (tvOS)
 struct ContentView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         switch scene.contentSelection {

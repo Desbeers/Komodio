@@ -1,6 +1,6 @@
 //
 //  Modifiers.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -50,7 +50,7 @@ extension Modifiers {
     /// A `ViewModifier` to set a backgound
     ///
     /// On macOS, it will be set as `background` for the `View`
-    /// On tvOS, it will be set to the ``SceneState/background``
+    /// On tvOS, it will be set to the `SceneState/background`
     struct Background: ViewModifier {
         /// The background file
         let file: String
@@ -61,9 +61,16 @@ extension Modifiers {
             content
 #if os(macOS)
                 .background(
-                    KodiArt.Art(file: file)
-                        .scaledToFill()
-                        .opacity(0.2)
+                    ZStack {
+                        Color(nsColor: .controlBackgroundColor)
+                        KodiArt.Art(file: file)
+                            .scaledToFill()
+                            .opacity(0.2)
+                            .overlay {
+                                Parts.GradientOverlay()
+                                    .opacity(0.3)
+                            }
+                    }
                 )
 #endif
 #if os(tvOS)

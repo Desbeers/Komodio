@@ -13,7 +13,10 @@ struct StartView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         HStack {
@@ -22,6 +25,8 @@ struct StartView: View {
                 StartView.Details()
                 if kodi.state == .loadedLibrary {
                     StatisticsView()
+                        /// Navigation buttons for the statistics does not work on tvOS
+                        .disabled(true)
                         .transition(.move(edge: .trailing))
                 }
             }
@@ -29,10 +34,14 @@ struct StartView: View {
         }
         .buttonStyle(.plain)
     }
+
+    // MARK: Hosts View
+
     /// Host items
     var hosts: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text("Your Kodi's")
+                .foregroundColor(.secondary)
                 .font(.headline)
             ForEach(kodi.bonjourHosts, id: \.ip) { host in
                 VStack(alignment: .leading) {
@@ -71,9 +80,11 @@ struct StartView: View {
         .frame(width: 800)
     }
 
-    // Actions for the selected Kodi
+    // MARK: SwiftUI Buttons
+
+    /// Actions for the selected Kodi
     var buttons: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Button(action: {
                 Task {
                     scene.mainSelection = 0

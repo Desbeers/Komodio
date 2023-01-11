@@ -18,12 +18,10 @@ struct ArtistsView: View {
     @State var artists: [Audio.Details.Artist] = []
     /// The optional selected artist in the list
     @State private var selectedArtist: Audio.Details.Artist?
-
     /// The selected artist
     @State private var artist = Audio.Details.Artist(media: .none)
-
-    /// The loading state of the view
-    @State private var state: Parts.State = .loading
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 350))]
 
@@ -121,7 +119,7 @@ struct ArtistsView: View {
     /// Movies that are part of a set will be removed and replaced with the set
     private func getItems() {
         var artistList: [Audio.Details.Artist] = []
-        let allArtists = kodi.library.musicVideos.unique(by: {$0.artist.first}).flatMap({$0.artist})
+        let allArtists = kodi.library.musicVideos.unique(by: {$0.artist}).flatMap({$0.artist})
         for artist in allArtists {
             artistList.append(artistItem(artist: artist))
         }
@@ -132,6 +130,7 @@ struct ArtistsView: View {
     private func setItemDetails() {
         if let selectedArtist {
             artist = selectedArtist
+            scene.details = .artist(artist: selectedArtist)
         } else {
             scene.navigationSubtitle = Router.musicVideos.label.title
             artist = Audio.Details.Artist(media: .none)

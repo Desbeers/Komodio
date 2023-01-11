@@ -1,8 +1,8 @@
 //
 //  Buttons+tvOS.swift
-//  Komodio
+//  Komodio (tvOS)
 //
-//  Created by Nick Berendsen on 24/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
@@ -12,8 +12,14 @@ extension Buttons {
 
     /// The 'play' button
     struct Play: View {
+        /// The `KodiItem` to play
         var item: any KodiItem
+        /// Bool if the player will be presented
         @State private var isPresented = false
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
             Button(action: {
                 withAnimation {
@@ -31,19 +37,23 @@ extension Buttons {
                 }, icon: {
                     Image(systemName: "play.fill")
                 })
-                .padding()
             })
-            .buttonStyle(.card)
             .fullScreenCover(isPresented: $isPresented) {
-                KodiPlayerView(video: item)
+                KomodioPlayerView(video: item)
             }
         }
     }
 
     /// The 'resume' button
     struct Resume: View {
+        /// The `KodiItem` to resume
         var item: any KodiItem
+        /// Bool if the player will be presented
         @State private var isPresented = false
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
             Button(action: {
                 withAnimation {
@@ -59,28 +69,35 @@ extension Buttons {
                 }, icon: {
                     Image(systemName: "play.fill")
                 })
-                .padding()
             })
-            .buttonStyle(.card)
             .fullScreenCover(isPresented: $isPresented) {
-                KodiPlayerView(video: item, resume: true)
+                KomodioPlayerView(video: item, resume: true)
             }
         }
     }
 
     /// The 'played state' button
     struct PlayedState: View {
+        /// The `KodiItem` to set
         var item: any KodiItem
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
             Button(action: {
                 Task {
                     await item.togglePlayedState()
                 }
             }, label: {
-                Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
-                    .padding()
+                Label(title: {
+                    Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
+                }, icon: {
+                    Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
+                })
             })
-            .buttonStyle(.card)
+            .labelStyle(Styles.PlayLabel())
+            .buttonStyle(Styles.PlayButton())
         }
     }
 }

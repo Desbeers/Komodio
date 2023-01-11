@@ -1,14 +1,14 @@
 //
 //  SearchView.swift
-//  Komodio
+//  Komodio (macOS)
 //
-//  Created by Nick Berendsen on 02/12/2022.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for search results
+/// SwiftUI View for search results  (macOS)
 struct SearchView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -26,6 +26,9 @@ struct SearchView: View {
     var results: Bool {
         return !movies.isEmpty || !musicVideos.isEmpty || !tvshows.isEmpty
     }
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
 
@@ -51,7 +54,7 @@ struct SearchView: View {
                     .font(.title)
                     .padding()
                     ForEach(musicVideos) { musicVideo in
-                        MusicVideosView.Item(item: MediaItem(id: musicVideo.id, media: .musicVideo, musicVideos: [musicVideo]))
+                        MusicVideosView.Item(item: MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
                             .tag(MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
                     }
             }
@@ -64,14 +67,11 @@ struct SearchView: View {
                             scene.contentSelection = Router.seasons(tvhow: tvshow)
                         }, label: {
                             TVShowsView.Item(tvshow: tvshow)
-                                .contentShape(Rectangle())
                         })
                     }
             }
         }
-        #if os(macOS)
         .listStyle(.inset(alternatesRowBackgrounds: true))
-        #endif
         .buttonStyle(.plain)
         .task(id: scene.query) {
             scene.details = .search
@@ -99,14 +99,12 @@ struct SearchView: View {
         }
         .task(id: kodi.library.movies) {
             if let selectedItem, selectedItem.media == .movie, let update = kodi.library.movies.first(where: {$0.id == selectedItem.id}) {
-                print("UPDATE")
                 movies = kodi.library.movies.search(scene.query)
                 self.selectedItem = MediaItem(id: selectedItem.id, media: .movie, item: update)
             }
         }
         .task(id: kodi.library.musicVideos) {
             if let selectedItem, selectedItem.media == .musicVideo, let update = kodi.library.musicVideos.first(where: {$0.id == selectedItem.id}) {
-                print("UPDATE")
                 musicVideos = kodi.library.musicVideos.search(scene.query)
                 self.selectedItem = MediaItem(id: selectedItem.id, media: .musicVideo, item: update)
             }
@@ -116,6 +114,7 @@ struct SearchView: View {
 
 extension SearchView {
 
+    /// SwiftUI View with search details
     struct Details: View {
         /// The SceneState model
         @EnvironmentObject var scene: SceneState

@@ -1,6 +1,6 @@
 //
 //  StartView.swift
-//  Komodio (macOS)
+//  Komodio
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,28 +10,22 @@ import SwiftlyKodiAPI
 
 extension StartView {
 
+    // MARK: Details of the View
+
+    /// SwiftUI View with details of the StartView
     struct Details: View {
-
         /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
-        /// The AppState model
-        @EnvironmentObject var appState: AppState
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
-
+        @EnvironmentObject private var kodi: KodiConnector
         /// Rotate the record
         @State private var rotate: Bool = false
 
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
             VStack {
-                Text(kodi.state.rawValue)
-#if os(macOS)
-                    .font(.largeTitle)
-                    .padding()
-#endif
-#if os(tvOS)
-                    .font(.headline)
-#endif
+                Parts.DetailMessage(title: kodi.state.rawValue)
+                    .padding(.top, 40)
                 Parts.RotatingIcon(rotate: $rotate)
                     .task(id: kodi.state) {
                         rotate = kodi.state == .loadedLibrary ? true : false

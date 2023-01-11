@@ -8,16 +8,20 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for the sidebar
+/// SwiftUI View for the sidebar  (macOS)
 struct SidebarView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The AppState model
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject private var appState: AppState
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
     /// The search query
+    /// - Note: This is here to show or hide the 'search' menu item
     @Binding var searchField: String
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
         VStack {
@@ -36,8 +40,10 @@ struct SidebarView: View {
         .buttonStyle(.plain)
     }
 
-    @ViewBuilder var content: some View {
+    // MARK: Content of the View
 
+    /// The content of the View
+    @ViewBuilder var content: some View {
         label(title: "Komodio", description: kodi.state.rawValue, icon: "sparkles.tv")
             .tag(Router.start)
         Section("Your Kodi's") {
@@ -93,19 +99,29 @@ struct SidebarView: View {
         }
     }
 
-    @ViewBuilder func sidebarItem(item: Router) -> some View {
+    /// SwiftUI View for an item in the sidebar
+    /// - Parameter item: The ``Router`` item
+    /// - Returns: A SwiftUI View with the sidebar item
+    private func sidebarItem(item: Router) -> some View {
         label(title: item.label.title, description: item.label.description, icon: item.label.icon)
         .tag(item)
     }
 
-    /// The label for a button
-    func label(title: String, description: String, icon: String) -> some View {
+    /// SwiftUI View for a `Label` of a `Button` in the sidebar
+    /// - Parameters:
+    ///   - title: The title of the label
+    ///   - description: The description of the label
+    ///   - icon: The SF icon
+    /// - Returns: A SwiftUI `Label` View
+    private func label(title: String, description: String, icon: String) -> some View {
         Label(
             title: {
                 VStack(alignment: .leading) {
                     Text(title)
                     Text(description)
                         .font(.caption)
+                        .opacity(0.6)
+                        .padding(.bottom, 2)
                 }
             }, icon: {
                 Image(systemName: icon)
