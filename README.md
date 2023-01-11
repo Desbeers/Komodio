@@ -6,7 +6,7 @@ Komodio is a video player for tvOS 16 that can stream videos from your local Kod
 
 ![Komodio](screenshot.png)
 
-* The folder 'KomodioTV' contains the current version for tvOS; the folder 'Komodio' will be a brand new version for macOS and tvOS and is currently 'work in prgress'...*
+*The folder 'KomodioTV' contains the current version for tvOS; the folder 'Komodio' will be a brand new version for macOS and tvOS and is currently 'work in prgress'...*
 
 ### Limitations
 
