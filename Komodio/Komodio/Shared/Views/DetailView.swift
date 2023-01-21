@@ -1,6 +1,6 @@
 //
 //  DetailView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for details of the selection
+/// SwiftUI View for details of the selection (shared)
 struct DetailView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
@@ -43,6 +43,8 @@ struct DetailView: View {
                 AlbumView(musicVideos: musicVideos)
             case .kodiSettingsDetails(let section, let category):
                 KodiSettingsView.Details(section: section, category: category)
+            case .kodiHostSettings(let host):
+                KodiHostView.Details(host: host).id(host.ip)
             default:
                 fallback
             }

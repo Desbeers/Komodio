@@ -1,6 +1,6 @@
 //
 //  Modifiers.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// Collection of SwiftUI View Modifiers
+/// Collection of SwiftUI View Modifiers (shared)
 enum Modifiers {
     // Just a namespace here...
 }
@@ -52,8 +52,8 @@ extension Modifiers {
     /// On macOS, it will be set as `background` for the `View`
     /// On tvOS, it will be set to the `SceneState/background`
     struct Background: ViewModifier {
-        /// The background file
-        let file: String
+        /// The `KodiItem`
+        let item: any KodiItem
         /// The SceneState model
         @EnvironmentObject var scene: SceneState
         /// The modifier
@@ -63,7 +63,7 @@ extension Modifiers {
                 .background(
                     ZStack {
                         Color(nsColor: .controlBackgroundColor)
-                        KodiArt.Art(file: file)
+                        KodiArt.Fanart(item: item)
                             .scaledToFill()
                             .opacity(0.2)
                             .overlay {
@@ -75,7 +75,7 @@ extension Modifiers {
 #endif
 #if os(tvOS)
                 .task {
-                    scene.background = file
+                    scene.background = item
                 }
 #endif
         }
@@ -85,7 +85,7 @@ extension Modifiers {
 extension View {
 
     /// Shortcut to the ``Modifiers/Background``
-    func background(file: String) -> some View {
-        modifier(Modifiers.Background(file: file))
+    func background(item: any KodiItem) -> some View {
+        modifier(Modifiers.Background(item: item))
     }
 }

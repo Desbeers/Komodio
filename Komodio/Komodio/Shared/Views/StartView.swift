@@ -1,6 +1,6 @@
 //
 //  StartView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -24,7 +24,7 @@ extension StartView {
         /// The body of the View
         var body: some View {
             VStack {
-                Parts.DetailMessage(title: kodi.state.rawValue)
+                Parts.DetailMessage(title: kodi.state.message)
                     .padding(.top, 40)
                 Parts.RotatingIcon(rotate: $rotate)
                     .task(id: kodi.state) {

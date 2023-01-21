@@ -13,10 +13,6 @@ struct ContentView: View {
     /// The ContentView Column Width
     /// - Note: Used for the width as well the animation in the Content View
     static let columnWidth: Double = 400
-    /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
-    /// The AppState model
-    @EnvironmentObject private var appState: AppState
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
 
@@ -43,6 +39,8 @@ struct ContentView: View {
             SearchView()
         case .kodiSettings:
             KodiSettingsView()
+        case .kodiHostSettings(let host):
+            KodiHostView(host: host)
         default:
             Text("Not implemented")
         }

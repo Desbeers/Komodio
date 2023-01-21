@@ -1,6 +1,6 @@
 //
 //  MusicVideoView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for a single Music Video
+/// SwiftUI View for a single Music Video (shared)
 enum MusicVideoView {
 
     /// Update a Music Video
@@ -49,7 +49,7 @@ extension MusicVideoView {
             }
             .padding(40)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(file: musicVideo.fanart)
+            .background(item: musicVideo)
             .task(id: kodi.library.musicVideos) {
                 if let update = MusicVideoView.updateMusicVideo(musicVideo: musicVideo) {
                     musicVideo = update

@@ -1,6 +1,6 @@
 //
 //  Router.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftlyKodiAPI
 
-/// Router for Komodio navigation
+/// Router for Komodio navigation (shared)
 enum Router: Hashable {
 
     // MARK: Movies
@@ -58,6 +58,8 @@ enum Router: Hashable {
     case kodiSettings
     /// The Kodi settings details View
     case kodiSettingsDetails(section: Setting.Details.Section, category: Setting.Details.Category)
+    /// Kodi Host connection settings
+    case kodiHostSettings(host: HostItem)
 }
 
 // MARK: Extensions
@@ -95,6 +97,8 @@ extension Router {
             return "The movie set is empty"
         case .seasons:
             return "There are no seasons for this TV show"
+        case .unwachedEpisodes:
+            return "There are no new episodes in your library"
         case .artist:
             return "This artist is not in your library"
         case .album:

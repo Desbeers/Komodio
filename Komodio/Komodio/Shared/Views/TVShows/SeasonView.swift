@@ -1,6 +1,6 @@
 //
 //  SeasonView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for one Season of a TV show
+/// SwiftUI View for one Season of a TV show (shared)
 struct SeasonView: View {
     /// The TV show
     let tvshow: Video.Details.TVShow

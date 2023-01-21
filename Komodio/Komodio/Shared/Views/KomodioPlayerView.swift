@@ -1,6 +1,6 @@
 //
 //  KomodioPlayerView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for a video player
+/// SwiftUI View for a video player (shared)
 ///
 /// Currently, Komodio is using the `AVPlayer` from the SwiftlyKodiAPI package
 ///

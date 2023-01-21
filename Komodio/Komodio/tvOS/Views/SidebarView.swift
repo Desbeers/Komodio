@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftlyKodiAPI
 import AVFoundation
 
-/// SwiftUI View for the sidebar
+/// SwiftUI View for the sidebar (tvOS)
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -29,7 +29,7 @@ struct SidebarView: View {
                 title: {
                     VStack(alignment: .leading) {
                         Text("Komodio")
-                        Text(appState.host?.description ?? kodi.state.rawValue)
+                        Text(kodi.host.bonjour?.name ?? kodi.state.message)
                             .font(.system(size: 16))
                             .foregroundColor(.gray)
                     }

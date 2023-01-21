@@ -1,6 +1,6 @@
 //
 //  ArtistsView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all Artists from Music Videos
+/// SwiftUI View for all Artists from Music Videos (shared)
 struct ArtistsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -31,14 +31,10 @@ struct ArtistsView: View {
     var body: some View {
         VStack {
             switch state {
-            case .loading:
-                Text(Router.musicVideos.loading)
-            case .empty:
-                Text(Router.musicVideos.empty)
             case .ready:
                 content
-            case .offline:
-                state.offlineMessage
+            default:
+                Parts.StatusMessage(item: .musicVideos, status: state)
             }
         }
         .animation(.default, value: selectedArtist)

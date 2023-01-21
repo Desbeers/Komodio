@@ -1,6 +1,6 @@
 //
 //  TVShowView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for a single TV show
+/// SwiftUI View for a single TV show (shared)
 enum TVShowView {
     // Just a Namespace
 }
@@ -35,6 +35,7 @@ extension TVShowView {
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     KodiArt.Fanart(item: tvshow)
+                        .aspectRatio(contentMode: .fit)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
                     Text(tvshow.plot)
@@ -45,7 +46,7 @@ extension TVShowView {
                 .padding(40)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(file: tvshow.fanart)
+            .background(item: tvshow)
 #endif
 
 #if os(tvOS)
@@ -60,7 +61,7 @@ extension TVShowView {
                 Text(tvshow.plot)
             }
             .padding(40)
-            .background(file: tvshow.fanart)
+            .background(item: tvshow)
 #endif
 
         }

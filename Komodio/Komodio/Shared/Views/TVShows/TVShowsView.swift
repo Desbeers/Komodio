@@ -1,6 +1,6 @@
 //
 //  TVShowsView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all TV shows
+/// SwiftUI View for all TV shows (shared)
 struct TVShowsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -29,34 +29,30 @@ struct TVShowsView: View {
     var body: some View {
         VStack {
             switch state {
-            case .loading:
-                Text(Router.tvshows.loading)
-            case .empty:
-                Text(Router.tvshows.empty)
             case .ready:
                 content
-            case .offline:
-                state.offlineMessage
+            default:
+                Parts.StatusMessage(item: .tvshows, status: state)
             }
         }
-        .animation(.default, value: selectedTVShow)
-        .task(id: kodi.library.tvshows) {
-            if kodi.state != .loadedLibrary {
-                state = .offline
-            } else if kodi.library.tvshows.isEmpty {
-                state = .empty
-            } else {
-                tvshows = kodi.library.tvshows
-                state = .ready
+            .animation(.default, value: selectedTVShow)
+            .task(id: kodi.library.tvshows) {
+                if kodi.state != .loadedLibrary {
+                    state = .offline
+                } else if kodi.library.tvshows.isEmpty {
+                    state = .empty
+                } else {
+                    tvshows = kodi.library.tvshows
+                    state = .ready
+                }
             }
-        }
-        .task(id: selectedTVShow) {
-            if selectedTVShow.media == .tvshow {
-                scene.details = .tvshow(tvshow: selectedTVShow)
-            } else {
-                scene.navigationSubtitle = Router.tvshows.label.title
+            .task(id: selectedTVShow) {
+                if selectedTVShow.media == .tvshow {
+                    scene.details = .tvshow(tvshow: selectedTVShow)
+                } else {
+                    scene.navigationSubtitle = Router.tvshows.label.title
+                }
             }
-        }
     }
 
     // MARK: Content of the View

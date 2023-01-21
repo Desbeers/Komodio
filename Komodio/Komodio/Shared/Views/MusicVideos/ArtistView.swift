@@ -1,6 +1,6 @@
 //
 //  ArtistView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for an Artist
+/// SwiftUI View for an Artist (shared)
 enum ArtistView {
     // Just a NameSpace here
 }
@@ -29,13 +29,14 @@ extension ArtistView {
                     .font(.largeTitle)
                     .padding(.bottom)
                 KodiArt.Fanart(item: artist)
+                    .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
                     .padding(.bottom, 40)
                 Text(artist.description)
             }
             .padding(40)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .background(file: artist.fanart)
+            .background(item: artist)
         }
     }
 }

@@ -178,7 +178,7 @@ extension EpisodesView {
                 }
             }, label: {
                 HStack(spacing: 0) {
-                    KodiArt.Art(file: episode.thumbnail)
+                    KodiArt.Fanart(item: episode)
                         .frame(width: 320, height: 180)
                         .padding()
                     VStack(alignment: .leading) {
@@ -209,7 +209,7 @@ extension EpisodesView {
                     isPresented.toggle()
                 }
             }, label: {
-                KodiArt.Art(file: episode.thumbnail)
+                KodiArt.Fanart(item: episode)
                     .scaledToFill()
                     .frame(width: size.width, height: size.height)
                     .watchStatus(of: episode)

@@ -10,7 +10,7 @@
 import SwiftUI
 import GameController
 
-/// Class to observe the Siri remote for tvOS
+/// Class to observe the Siri remote (tvOS)
 class SiriRemoteController: ObservableObject {
     /// The shared instance of the class
     static let shared = SiriRemoteController()
@@ -60,7 +60,6 @@ class SiriRemoteController: ObservableObject {
         /// Assign the gameController which is found
         /// - Note: This will break if more than 1 if found
         gameController = notification.object as? GCController
-        print("Found Siri Controller")
     }
     /// Notification when Controller is disconnected
     @objc func handleControllerDidDisconnectNotification(notification: NSNotification) {

@@ -1,6 +1,6 @@
 //
 //  UpNextView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for next Episode of TV shows that are not completed
+/// SwiftUI View for next Episode of TV shows that are not completed (shared)
 struct UpNextView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -27,14 +27,10 @@ struct UpNextView: View {
     var body: some View {
         VStack {
             switch state {
-            case .loading:
-                Text(Router.tvshows.loading)
-            case .empty:
-                Text(Router.tvshows.empty)
             case .ready:
                 content
-            case .offline:
-                state.offlineMessage
+            default:
+                Parts.StatusMessage(item: .unwachedEpisodes, status: state)
             }
         }
         .animation(.default, value: selectedEpisode)
@@ -50,10 +46,10 @@ struct UpNextView: View {
                     .unique { $0.tvshowID }
                     .sorted { $0.dateAdded > $1.dateAdded }
                 )
-                state = .ready
+                dump(episodes)
+                state = episodes.isEmpty ? .empty : .ready
                 /// Update the optional selected item
                 if let selectedEpisode {
-
                     if let selection = episodes.first(where: {$0.tvshowID == selectedEpisode.tvshowID}) {
                         self.selectedEpisode = selection
                     } else {

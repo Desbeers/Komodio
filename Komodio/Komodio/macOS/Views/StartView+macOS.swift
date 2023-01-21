@@ -11,30 +11,37 @@ import SwiftlyKodiAPI
 /// SwiftUI View when starting Komodio  (macOS)
 struct StartView: View {
     /// The AppState model
-    @EnvironmentObject var appState: AppState
-    /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @EnvironmentObject private var appState: AppState
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     var body: some View {
         VStack {
-            Parts.DetailMessage(title: appState.host?.description ?? "")
+            Parts.DetailMessage(title: kodi.host.bonjour?.name ?? "")
                 .padding(.top, 40)
-            switch kodi.state {
-            case .loadedLibrary:
-                VStack(alignment: .center) {
-                    StatisticsView.HostInfo()
-                        .padding()
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(20)
-                        .shadow(radius: 20)
-
-                    StatisticsView()
-                        .padding()
+            VStack {
+                switch kodi.state {
+                case .loadedLibrary:
+                    VStack(alignment: .center) {
+                        StatisticsView.HostInfo()
+                        StatisticsView()
+                    }
+                case .loadingLibrary:
+                    ProgressView()
+                case .offline:
+                    KodiHostItemView.HostIsOffline()
+                    KodiHostItemView.KodiSettings()
+                case .none:
+                    KodiHostItemView.NoHostSelected()
+                    KodiHostItemView.KodiSettings()
+                default:
+                    EmptyView()
                 }
-            default:
-                ProgressView()
             }
+            .padding()
+            .background(.ultraThinMaterial)
+            .cornerRadius(10)
+            .shadow(radius: 10)
+            .padding(.leading)
         }
         .animation(.default, value: kodi.state)
     }

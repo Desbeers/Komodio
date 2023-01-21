@@ -1,6 +1,6 @@
 //
 //  MovieSetView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all Movies in a Movie Set
+/// SwiftUI View for all Movies in a Movie Set (shared)
 struct MovieSetView: View {
     /// The movie set
     let movieSet: Video.Details.MovieSet
@@ -155,6 +155,7 @@ extension MovieSetView {
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     KodiArt.Fanart(item: movieSet)
+                        .aspectRatio(contentMode: .fit)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
                     Text(movieSet.plot)
@@ -165,12 +166,13 @@ extension MovieSetView {
                 .padding(40)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(file: movieSet.fanart)
+            .background(item: movieSet)
 #endif
 
 #if os(tvOS)
             HStack {
                 KodiArt.Fanart(item: movieSet)
+                    .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
                 VStack {
                     Text(movieSet.title)
@@ -182,7 +184,7 @@ extension MovieSetView {
                 }
             }
             .padding(40)
-            .background(file: movieSet.fanart)
+            .background(item: movieSet)
 #endif
 
         }

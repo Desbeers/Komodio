@@ -1,6 +1,6 @@
 //
 //  RotatingRecordModel.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The model to observe ``Parts/RotatingIcon``
+/// Class to observe the ``Parts/RotatingIcon`` SwiftUI View (shared)
 class RotatingIconModel: ObservableObject {
     /// Do we want to rotate or not?
     private var rotate: Bool = false

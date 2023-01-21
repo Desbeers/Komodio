@@ -1,6 +1,6 @@
 //
 //  AlbumsView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for an album of a selected Artist
+/// SwiftUI View for an album of a selected Artist (shared)
 struct AlbumView: View {
     /// The Music Videos to show
     let musicVideos: [Video.Details.MusicVideo]
@@ -41,7 +41,7 @@ extension AlbumView {
 
 #if os(macOS)
             HStack(spacing: 0) {
-                KodiArt.Art(file: musicVideo.art.icon)
+                KodiArt.Fanart(item: musicVideo)
                     .watchStatus(of: musicVideo)
                     .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                     .cornerRadius(KomodioApp.thumbSize.width / 35)
@@ -61,7 +61,7 @@ extension AlbumView {
 
 #if os(tvOS)
             HStack(spacing: 0) {
-                KodiArt.Art(file: musicVideo.art.icon)
+                KodiArt.Fanart(item: musicVideo)
                     .watchStatus(of: musicVideo)
                     .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                     .padding()

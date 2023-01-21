@@ -1,6 +1,6 @@
 //
 //  StatisticsView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for library statistics
+/// SwiftUI View for library statistics (shared)
 struct StatisticsView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState

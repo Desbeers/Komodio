@@ -1,6 +1,6 @@
 //
 //  KodiSettingsView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for Kodi settings
+/// SwiftUI View for Kodi settings (shared)
 struct KodiSettingsView: View {
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
@@ -166,7 +166,6 @@ extension KodiSettingsView {
             HStack {
                 VStack(alignment: .leading) {
                     ForEach(categories) { category in
-
                         VStack(alignment: .leading) {
                             Text(category.label)
                                 .font(.headline)
@@ -254,8 +253,6 @@ extension KodiSettingsView {
 
     /// SwiftUI View for warning of Kodi settings
     struct Warning: View {
-        /// The KodiConnector model
-        @EnvironmentObject var kodi: KodiConnector
 
         // MARK: Body of the View
 

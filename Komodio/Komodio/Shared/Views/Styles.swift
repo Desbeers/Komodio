@@ -1,13 +1,13 @@
 //
 //  Styles.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 
-/// SwiftUI styles for `buttons` and `labels`
+/// SwiftUI styles for `buttons` and `labels` (shared)
 enum Styles {
     // Just a Namespace
 }

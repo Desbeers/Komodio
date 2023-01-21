@@ -50,7 +50,7 @@ extension MusicAlbumView {
                     isPresented.toggle()
                 }
             }, label: {
-                KodiArt.Art(file: musicVideo.art.icon)
+                KodiArt.Poster(item: musicVideo)
                     .frame(width: 480, height: 270)
                     .watchStatus(of: musicVideo)
                     .itemOverlay(for: musicVideo, overlay: .title)

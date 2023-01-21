@@ -44,24 +44,38 @@ struct SidebarView: View {
 
     /// The content of the View
     @ViewBuilder var content: some View {
-        label(title: "Komodio", description: kodi.state.rawValue, icon: "sparkles.tv")
+        label(title: "Komodio", description: kodi.state.message, icon: "sparkles.tv")
             .tag(Router.start)
-        Section("Your Kodi's") {
-            ForEach(kodi.bonjourHosts, id: \.ip) { host in
-                Button(action: {
-                    if AppState.shared.host?.ip != host.ip {
-                        var values = HostItem()
-                        values.ip = host.ip
-                        AppState.saveHost(host: values)
-                    }
-                }, label: {
+        if !kodi.configuredHosts.isEmpty {
+            Section("Your Kodi's") {
+                ForEach(kodi.configuredHosts) { host in
+                    Label(title: {
+                        VStack(alignment: .leading) {
+                            Text(host.name)
+                            Text(host.isOnline ? "Online" : "Offline")
+                                .font(.caption)
+                                .opacity(0.6)
+                                .padding(.bottom, 2)
+                        }
+                    }, icon: {
+                        Image(systemName: "globe")
+                            .foregroundColor(host.isSelected ? host.isOnline ? .green : .red : .gray)
+                    })
+                    .tag(Router.kodiHostSettings(host: host))
+                }
+            }
+        }
+        if !kodi.bonjourHosts.filter({$0.new}).isEmpty {
+            Section("New Kodi's on your network") {
+                ForEach(kodi.bonjourHosts.filter({$0.new}), id: \.ip) { host in
                     Label(title: {
                         Text(host.name)
                     }, icon: {
-                        Image(systemName: "globe")
-                            .foregroundColor(AppState.shared.host?.ip == host.ip ? .green : .gray)
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.orange)
                     })
-                })
+                    .tag(Router.kodiHostSettings(host: HostItem(ip: host.ip, media: .video, status: .new)))
+                }
             }
         }
         Section("Movies") {
@@ -84,13 +98,11 @@ struct SidebarView: View {
                 sidebarItem(item: Router.kodiSettings)
                 Button(action: {
                     Task {
-                        scene.sidebarSelection = .start
-                        scene.navigationSubtitle = ""
                         await KodiConnector.shared.loadLibrary(cache: false)
                     }
                 }, label: {
                     label(title: "Reload Library",
-                          description: "Reload '\(appState.host?.description ?? "")'",
+                          description: "Reload '\(kodi.host.name)'",
                           icon: "arrow.triangle.2.circlepath"
                     )
                 })

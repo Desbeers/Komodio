@@ -1,6 +1,6 @@
 //
 //  SeasonsView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all Seasons of a TV show
+/// SwiftUI View for all Seasons of a TV show (shared)
 struct SeasonsView: View {
     /// The TV show
     let tvshow: Video.Details.TVShow
@@ -50,6 +50,7 @@ struct SeasonsView: View {
         VStack {
             List(selection: $selectedSeason) {
                 KodiArt.Fanart(item: tvshow)
+                    .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
                 ForEach(seasons) { season in
                     Item(season: season)

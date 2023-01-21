@@ -1,6 +1,6 @@
 //
 //  Parts.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// Collection of loose parts
+/// Collection of loose parts (shared)
 enum Parts {
     /// Just a namespace here...
 }
@@ -60,6 +60,37 @@ extension Parts {
 
 extension Parts {
 
+    /// The message to show when a router item is empty, loading or Kodi is offline
+    struct StatusMessage: View {
+        /// The Router item
+        let item: Router
+        /// The status
+        let status: Status
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            VStack {
+                switch status {
+                case .offline:
+                    Text(status.offlineMessage)
+                case .loading:
+                    Text(item.loading)
+                case .empty:
+                    Text(item.empty)
+                default:
+                    EmptyView()
+                }
+            }
+            .font(AppState.shared.platform == .macOS ? .title2 : .title3)
+            .frame(maxHeight: .infinity)
+        }
+    }
+}
+
+extension Parts {
+
     /// The state of  loading a View
     enum Status {
         /// The Task is loading the items
@@ -71,8 +102,8 @@ extension Parts {
         /// The host is offline
         case offline
         /// The message when offline
-        var offlineMessage: Text {
-            Text("Komodio is not connected to a host")
+        var offlineMessage: String {
+            "Komodio is not connected to a host"
         }
     }
 }

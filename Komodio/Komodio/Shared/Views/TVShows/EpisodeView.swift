@@ -1,6 +1,6 @@
 //
 //  EpisodeView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for a single Episode
+/// SwiftUI View for a single Episode (shared)
 enum EpisodeView {
     // Just a Namespace
 }
@@ -34,7 +34,7 @@ extension EpisodeView {
                 Text("Episode \(episode.episode)")
                 Divider()
                 HStack(alignment: .top, spacing: 0) {
-                    KodiArt.Art(file: episode.thumbnail)
+                    KodiArt.Fanart(item: episode)
                         .watchStatus(of: episode)
                         .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                         .padding(4)
@@ -61,7 +61,7 @@ extension EpisodeView {
                     .font(.caption)
                 Rectangle().fill(.secondary).frame(height: 1)
                 HStack(alignment: .top, spacing: 0) {
-                    KodiArt.Art(file: episode.thumbnail)
+                    KodiArt.Fanart(item: episode)
                         .watchStatus(of: episode)
                         .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                         .padding()
@@ -103,7 +103,7 @@ extension EpisodeView {
                         .font(.system(size: 40))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                    KodiArt.Art(file: episode.thumbnail)
+                    KodiArt.Fanart(item: episode)
                         .watchStatus(of: episode)
                         .overlay(alignment: .bottom) {
                             Text(episode.title)
@@ -124,14 +124,14 @@ extension EpisodeView {
                 .lineSpacing(8)
                 .padding(40)
             }
-            .background(file: episode.fanart)
+            .background(item: episode)
 #endif
 
 #if os(tvOS)
             VStack {
                 Text(episode.showTitle)
                     .font(.title)
-                KodiArt.Art(file: episode.thumbnail)
+                KodiArt.Fanart(item: episode)
                     .watchStatus(of: episode)
                     .overlay(alignment: .bottom) {
                         Text(episode.title)
@@ -146,7 +146,7 @@ extension EpisodeView {
                 Text(episode.plot)
                     Buttons.Player(item: episode)
             }
-            .background(file: episode.fanart)
+            .background(item: episode)
 #endif
 
         }

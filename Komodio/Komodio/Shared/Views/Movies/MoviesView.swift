@@ -1,6 +1,6 @@
 //
 //  MoviesView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all Movies
+/// SwiftUI View for all Movies (shared)
 ///
 /// - Movies that are part of a set will be removed and replaced with the set
 struct MoviesView: View {
@@ -35,14 +35,10 @@ struct MoviesView: View {
     var body: some View {
         VStack {
             switch state {
-            case .loading:
-                Text(Router.movies.loading)
-            case .empty:
-                Text(Router.movies.empty)
             case .ready:
                 content
-            case .offline:
-                state.offlineMessage
+            default:
+                Parts.StatusMessage(item: .movies, status: state)
             }
         }
         .animation(.default, value: selectedItem)

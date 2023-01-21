@@ -54,6 +54,12 @@ struct MainView: View {
                 .clipped()
                 .ignoresSafeArea()
         }
+        .task(id: kodi.state) {
+            if kodi.state != .loadedLibrary {
+                scene.mainSelection = 0
+                isFocused = true
+            }
+        }
         .opacity(scene.showSettings ? 0 : 1)
         .fullScreenCover(isPresented: $scene.showSettings) {
             KodiSettingsView.FullScreen()

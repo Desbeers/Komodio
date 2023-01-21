@@ -8,12 +8,14 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View when starting Komodio
+/// SwiftUI View when starting Komodio (tvOS)
 struct StartView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
+    /// The optional selected host
+    @State var selectedHost: HostItem?
 
     // MARK: Body of the View
 
@@ -22,7 +24,13 @@ struct StartView: View {
         HStack {
             hosts
             VStack {
-                StartView.Details()
+                DetailView()
+                VStack {
+                    if kodi.bonjourHosts.isEmpty {
+                        KodiHostItemView.KodiSettings()
+                            .minimumScaleFactor(0.2)
+                    }
+                }
                 if kodi.state == .loadedLibrary {
                     StatisticsView()
                         /// Navigation buttons for the statistics does not work on tvOS
@@ -33,6 +41,14 @@ struct StartView: View {
             .animation(.default, value: kodi.state)
         }
         .buttonStyle(.plain)
+        .sheet(item: $selectedHost) { host in
+            HStack {
+                KodiHostView.Details(host: host)
+                    .frame(width: 600)
+                    .minimumScaleFactor(0.2)
+                KodiHostView(host: host)
+            }
+        }
     }
 
     // MARK: Hosts View
@@ -43,30 +59,68 @@ struct StartView: View {
             Text("Your Kodi's")
                 .foregroundColor(.secondary)
                 .font(.headline)
-            ForEach(kodi.bonjourHosts, id: \.ip) { host in
-                VStack(alignment: .leading) {
-                    Button(action: {
-                        if AppState.shared.host?.ip != host.ip {
-                            var values = HostItem()
-                            values.ip = host.ip
-                            AppState.saveHost(host: values)
+            VStack {
+                if !kodi.configuredHosts.isEmpty {
+                    ForEach(kodi.configuredHosts.sorted { $0.isSelected && !$1.isSelected }) { host in
+                        VStack(alignment: .leading) {
+                            Button(action: {
+                                selectedHost = host
+                            }, label: {
+                                Label(title: {
+                                    VStack(alignment: .leading) {
+                                        Text(host.name)
+                                        Text(host.isOnline ? "Online" : "Offline")
+                                            .font(.caption)
+                                            .opacity(0.6)
+                                            .padding(.bottom, 2)
+                                    }
+                                    .frame(width: 200, alignment: .leading)
+                                }, icon: {
+                                    Image(systemName: "globe")
+                                        .foregroundColor(host.isSelected ? host.isOnline ? .green : .red : .gray)
+                                })
+                            })
+                            if host.isSelected {
+                                VStack {
+                                    Divider()
+                                        .frame(width: 340)
+                                    if kodi.state == .offline {
+                                        KodiHostItemView.HostIsOffline()
+                                            .frame(width: 340, alignment: .leading)
+                                    } else {
+                                        buttons
+                                    }
+                                }
+                                .opacity(0.8)
+                            }
                         }
-                    }, label: {
-                        Label(title: {
-                            Text(host.name)
-                                .frame(width: 200)
-                        }, icon: {
-                            Image(systemName: "globe")
-                                .foregroundColor(AppState.shared.host?.ip == host.ip ? .green : .gray)
+                    }
+                } else {
+                    KodiHostItemView.NoHostSelected()
+                        .frame(width: 380, alignment: .center)
+                }
+            }
+            .padding(.horizontal)
+            .padding(20)
+            .background(.thinMaterial)
+            .cornerRadius(20)
+            if !kodi.bonjourHosts.filter({$0.new}).isEmpty {
+                Text("New Kodi's on your network")
+                    .foregroundColor(.secondary)
+                    .font(.headline)
+                VStack {
+                    ForEach(kodi.bonjourHosts.filter({$0.new}), id: \.ip) { host in
+                        Button(action: {
+                            selectedHost = HostItem(ip: host.ip, media: .video, status: .new)
+                        }, label: {
+                            Label(title: {
+                                Text(host.name)
+                                    .frame(width: 200, alignment: .leading)
+                            }, icon: {
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.orange)
+                            })
                         })
-                    })
-                    if AppState.shared.host?.ip == host.ip {
-                        VStack {
-                            Divider()
-                                .frame(width: 340)
-                            buttons
-                        }
-                        .opacity(0.6)
                     }
                 }
                 .padding(.horizontal)
@@ -87,14 +141,11 @@ struct StartView: View {
         VStack(alignment: .leading) {
             Button(action: {
                 Task {
-                    scene.mainSelection = 0
-                    scene.navigationSubtitle = ""
                     await KodiConnector.shared.loadLibrary(cache: false)
                 }
             }, label: {
                 Label("Reload Library", systemImage: "arrow.triangle.2.circlepath")
             })
-            .disabled(kodi.state != .loadedLibrary)
             Button(action: {
                 Task {
                     scene.showSettings = true
@@ -102,8 +153,8 @@ struct StartView: View {
             }, label: {
                 Label("Kodi Settings", systemImage: "gear")
             })
-            .disabled(kodi.state != .loadedLibrary)
         }
+        .disabled(kodi.state != .loadedLibrary)
         .padding(.leading)
     }
 }

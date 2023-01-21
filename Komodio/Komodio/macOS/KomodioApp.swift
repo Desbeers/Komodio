@@ -22,12 +22,10 @@ import SwiftlyKodiAPI
             MainView()
                 .environmentObject(kodi)
                 .environmentObject(appState)
-                .task(id: appState.host) {
-                    if let host = appState.host {
-                        if kodi.state == .none {
-                            print("Load new host")
-                            kodi.connect(host: host)
-                        }
+                .task {
+                    if kodi.state == .none {
+                        /// Get the selected host (if any)
+                        kodi.getSelectedHost()
                     }
                 }
         }
@@ -43,15 +41,11 @@ import SwiftlyKodiAPI
             /// Check if `item` isn't `nil`
             if let item = item {
                 KomodioPlayerView(video: item.item, resume: item.resume)
-                    .withHostingWindow { window in
-                        if let window = window?.windowController?.window {
-                            window.setPosition(vertical: .center, horizontal: .center, padding: 0)
-                        }
-                    }
                     .navigationTitle(item.item.title)
             }
         }
         .defaultSize(width: 1280, height: 720)
+        .defaultPosition(.center)
         .windowStyle(.hiddenTitleBar)
     }
 }

@@ -21,7 +21,7 @@ struct StartView: View {
             case .offline:
                 Label(title: {
                     VStack(alignment: .leading) {
-                        Text("'\(appState.host?.description ?? "")' is offline")
+                        Text("'\(appState.host?.name ?? "")' is offline")
                             .font(.title)
                         Text(kodi.bonjourHosts.isEmpty ? "There are no Kodi's online" : "Please select another Kodi host")
                             .font(.subheadline)

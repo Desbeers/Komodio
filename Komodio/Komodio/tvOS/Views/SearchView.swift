@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The 'Search' SwiftUI View
+/// SwiftUI View for search results (tvOS)
 struct SearchView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector

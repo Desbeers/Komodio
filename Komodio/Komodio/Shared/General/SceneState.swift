@@ -1,6 +1,6 @@
 //
 //  SceneState.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// Class to observe the current Komodio Scene state
+/// Class to observe the current Komodio Scene state (shared)
 class SceneState: ObservableObject {
 
     // MARK: macOS stuff
@@ -53,7 +53,7 @@ class SceneState: ObservableObject {
     /// The Naigation path
     @Published var navigationStackPath = NavigationPath()
     /// The optional background image
-    @Published var background: String?
+    @Published var background: (any KodiItem)?
 
 #endif
 

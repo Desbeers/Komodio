@@ -1,6 +1,6 @@
 //
 //  MovieView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for a single Movie
+/// SwiftUI View for a single Movie (shared)
 enum MovieView {
 
     /// Update a Movie
@@ -48,7 +48,7 @@ extension MovieView {
         /// The body of the View
         var body: some View {
             content
-                .background(file: movie.fanart)
+                .background(item: movie)
                 .task(id: kodi.library.movies) {
                     if let update = MovieView.updateMovie(movie: movie) {
                         movie = update
@@ -73,6 +73,7 @@ extension MovieView {
                         .minimumScaleFactor(0.5)
                     HStack {
                         KodiArt.Fanart(item: movie)
+                            .aspectRatio(contentMode: .fit)
                             .watchStatus(of: movie)
                             .overlay(alignment: .bottom) {
                                 if !movie.tagline.isEmpty {
@@ -116,21 +117,16 @@ extension MovieView {
 #endif
 
 #if os(tvOS)
-            ZStack {
-                KodiArt.Fanart(item: movie)
-                    .aspectRatio(contentMode: .fill)
-                ScrollView {
-                    VStack(spacing: 0) {
-                        top
-                            .frame(height: UIScreen.main.bounds.height)
-                            .focusSection()
-                        details
-                            .frame(height: UIScreen.main.bounds.height)
-                            .background(.black.opacity(0.8))
-                    }
-                    .foregroundColor(.white)
+            ScrollView {
+                VStack(spacing: 0) {
+                    top
+                        .frame(height: UIScreen.main.bounds.height)
+                        .focusSection()
+                    details
+                        .frame(height: UIScreen.main.bounds.height)
+                        .background(.black.opacity(0.8))
                 }
-
+                .foregroundColor(.white)
             }
             .ignoresSafeArea()
 #endif
@@ -176,6 +172,7 @@ extension MovieView {
         var details: some View {
             HStack {
                 KodiArt.Poster(item: movie)
+                    .aspectRatio(contentMode: .fit)
                     .watchStatus(of: movie)
                     .padding(.leading)
                 VStack(alignment: .leading) {

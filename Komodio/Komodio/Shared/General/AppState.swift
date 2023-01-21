@@ -1,6 +1,6 @@
 //
 //  AppState.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftlyKodiAPI
 
-/// Class to observe the Komodio App state
+/// Class to observe the Komodio App state (shared)
 class AppState: ObservableObject {
     /// The shared instance of this AppState class
     static let shared = AppState()

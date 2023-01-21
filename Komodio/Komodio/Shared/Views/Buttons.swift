@@ -1,6 +1,6 @@
 //
 //  Buttons.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// Collection of SwiftUI Buttons
+/// Collection of SwiftUI Buttons (shared)
 enum Buttons {
     // Just a namespace here
 }

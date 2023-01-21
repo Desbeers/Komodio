@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for the main navigation (macOS)
 struct MainView: View {
+    /// The KodiConnector model
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @StateObject private var scene = SceneState()
     /// The search field in the toolbar
@@ -46,6 +48,11 @@ struct MainView: View {
                     }
             }
         )
+        .task(id: kodi.state) {
+            if kodi.state != .loadedLibrary {
+                scene.sidebarSelection = .start
+            }
+        }
         .navigationSubtitle(scene.navigationSubtitle)
         .animation(.default, value: scene.sidebarSelection)
         .animation(.default, value: scene.contentSelection)

@@ -1,6 +1,6 @@
 //
 //  MediaItem.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftlyKodiAPI
 
-/// Structure for a Komodio 'Media Item'
+/// Structure for a Komodio 'Media Item' (shared)
 ///
 /// Some lists in Komodio, eg Movies and Music Videos, do contain a mixure of `KodiItems`
 /// To make an item in such list selectable, this `MediaItem` struct is used to wrap the item.

@@ -1,6 +1,6 @@
 //
 //  MusicVideosView.swift
-//  Komodio
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all Music Videos of an Artist; grouped by optional Album
+/// SwiftUI View for all Music Videos of an Artist; grouped by optional Album (shared)
 struct MusicVideosView: View {
     /// The selected artist
     let artist: Audio.Details.Artist
@@ -27,7 +27,6 @@ struct MusicVideosView: View {
                 getItems()
             }
             .task(id: kodi.library.musicVideos) {
-                print("Get Music Videos from Artist")
                 getItems()
             }
             .task(id: selectedItem) {
@@ -77,7 +76,6 @@ struct MusicVideosView: View {
     /// Get all items from the library
     private func getItems() {
         if artist.media == .artist {
-            print("Update Items")
             var result: [MediaItem] = []
             let allMusicVideosFromArtist = kodi.library.musicVideos.filter({$0.artist.contains(artist.artist)})
             for video in allMusicVideosFromArtist.uniqueAlbum() {
@@ -92,7 +90,6 @@ struct MusicVideosView: View {
             items = result
             /// Update the optional selected item
             if let selectedItem {
-                print("Update selected item")
                 self.selectedItem = items.first(where: {$0.id == selectedItem.id})
             } else {
                 scene.details = .artist(artist: artist)
