@@ -17,7 +17,7 @@
     <a title="StatisticsView Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Komodio</a> (100% documented)</p>
+        <p><a href="../index.html">Komodio</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../search.json">
@@ -50,6 +50,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
               </li>
             </ul>
           </li>
@@ -95,6 +98,9 @@
                 <a href="../Structs/StartView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/StartView/Content.html">– Content</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MoviesView.html">MoviesView</a>
               </li>
               <li class="nav-group-task">
@@ -129,6 +135,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView/Item.html">– Item</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SeasonView.html">SeasonView</a>
@@ -182,7 +191,16 @@
                 <a href="../Structs/StatisticsView.html">StatisticsView</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView.html">HostItemView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KomodioPlayerView.html">KomodioPlayerView</a>
@@ -239,6 +257,9 @@
                 <a href="../Enums/Parts/DetailMessage.html">– DetailMessage</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Parts/StatusMessage.html">– StatusMessage</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Parts/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
@@ -268,15 +289,6 @@
             <a href="../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions/NSWindow.html">NSWindow</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSWindow/Position.html">– Position</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSWindow/HostingWindowFinder.html">– HostingWindowFinder</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/View.html">View</a>
               </li>
             </ul>
@@ -294,12 +306,40 @@
 
                 </div>
               </div>
-            <p>SwiftUI View for library statistics</p>
+            <p>SwiftUI View for library statistics (shared)</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio14StatisticsViewV5scene33_EE7A5E700B3C6A4F256EC820BEDF9353LLAA10SceneStateCvp"></a>
+                    <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio14StatisticsViewV5scene33_EE7A5E700B3C6A4F256EC820BEDF9353LLAA10SceneStateCvp">scene</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The SceneState model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">scene</span><span class="p">:</span> <span class="kt"><a href="../Classes/SceneState.html">SceneState</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -357,6 +397,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:7Komodio14StatisticsViewV0B5Label33_EE7A5E700B3C6A4F256EC820BEDF9353LLV"></a>
+                    <a name="//apple_ref/swift/Struct/StatisticsLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio14StatisticsViewV0B5Label33_EE7A5E700B3C6A4F256EC820BEDF9353LLV">StatisticsLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Label style for statistics</p>
+
+                        <a href="../Structs/StatisticsView/StatisticsLabel.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">struct</span> <span class="kt">StatisticsLabel</span> <span class="p">:</span> <span class="kt">LabelStyle</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:7Komodio14StatisticsViewV8HostInfoV"></a>
                     <a name="//apple_ref/swift/Struct/HostInfo" class="dashAnchor"></a>
                     <a class="token" href="#/s:7Komodio14StatisticsViewV8HostInfoV">HostInfo</a>
@@ -387,7 +455,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-11)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

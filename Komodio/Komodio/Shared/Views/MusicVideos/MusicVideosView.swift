@@ -28,6 +28,7 @@ struct MusicVideosView: View {
             }
             .task(id: kodi.library.musicVideos) {
                 getItems()
+                setItemDetails()
             }
             .task(id: selectedItem) {
                 setItemDetails()
@@ -81,9 +82,16 @@ struct MusicVideosView: View {
             for video in allMusicVideosFromArtist.uniqueAlbum() {
                 let albumMusicVideos = allMusicVideosFromArtist.filter({$0.album == video.album})
                 let count = albumMusicVideos.count
+                var item = video
+                /// Set the watched state for an album
+                if count != 1, !albumMusicVideos.filter({$0.playcount == 0}).isEmpty {
+                    item.playcount = 0
+                    item.resume.position = 0
+                }
+
                 result.append(MediaItem(id: count == 1 ? video.id : video.album,
                                         media: count == 1 ? .musicVideo : .album,
-                                        item: albumMusicVideos.first ?? Audio.Details.Stream()
+                                        item: item
                                        )
                 )
             }

@@ -158,11 +158,10 @@ extension MovieSetView {
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                        .padding(.bottom)
                     Text(movieSet.plot)
-                        .font(.system(size: 18))
-                        .lineSpacing(8)
-                        .padding(.vertical)
                 }
+                .detailsFontStyle()
                 .padding(40)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

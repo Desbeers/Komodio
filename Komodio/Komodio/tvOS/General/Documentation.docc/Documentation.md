@@ -65,6 +65,7 @@ Komodio depends on the following Swift Package that are in my GitHub account:
 - ``StatisticsView``
 - ``KomodioPlayerView``
 - ``SearchView``
+- ``HostItemView``
 - ``KodiSettingsView``
 - ``Buttons``
 - ``Modifiers``

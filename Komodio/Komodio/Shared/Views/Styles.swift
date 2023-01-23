@@ -99,6 +99,8 @@ extension Styles {
                     .padding(.trailing)
                 configuration.title
             }
+            .font(.caption)
+            .padding(.bottom)
             .foregroundColor(.white)
 #endif
 

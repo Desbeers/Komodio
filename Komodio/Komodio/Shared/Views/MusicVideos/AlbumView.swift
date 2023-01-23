@@ -12,6 +12,8 @@ import SwiftlyKodiAPI
 struct AlbumView: View {
     /// The Music Videos to show
     let musicVideos: [Video.Details.MusicVideo]
+    /// The KodiConnector model
+    @EnvironmentObject var kodi: KodiConnector
     /// The body of the View
     var body: some View {
         List {
@@ -31,8 +33,6 @@ extension AlbumView {
     struct Item: View {
         /// The Music Video
         let musicVideo: Video.Details.MusicVideo
-        /// The focus state of the Movie View (for tvOS)
-        @FocusState var isFocused: Bool
 
         // MARK: Body of the View
 
@@ -74,12 +74,9 @@ extension AlbumView {
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     Rectangle().fill(.secondary).frame(height: 1)
-                    Buttons.Player(item: musicVideo, state: false)
-                        .opacity(isFocused ? 1 : 0.5)
+                    Buttons.Player(item: musicVideo)
                 }
             }
-            .focused($isFocused)
-            .animation(.default, value: isFocused)
 #endif
 
         }

@@ -17,7 +17,7 @@
     <a title="MoviesView Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Komodio</a> (100% documented)</p>
+        <p><a href="../index.html">Komodio</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../search.json">
@@ -50,6 +50,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
               </li>
             </ul>
           </li>
@@ -95,6 +98,9 @@
                 <a href="../Structs/StartView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/StartView/Content.html">– Content</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MoviesView.html">MoviesView</a>
               </li>
               <li class="nav-group-task">
@@ -129,6 +135,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView/Item.html">– Item</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SeasonView.html">SeasonView</a>
@@ -182,7 +191,16 @@
                 <a href="../Structs/StatisticsView.html">StatisticsView</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView.html">HostItemView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KomodioPlayerView.html">KomodioPlayerView</a>
@@ -239,6 +257,9 @@
                 <a href="../Enums/Parts/DetailMessage.html">– DetailMessage</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Parts/StatusMessage.html">– StatusMessage</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Parts/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
@@ -268,15 +289,6 @@
             <a href="../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions/NSWindow.html">NSWindow</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSWindow/Position.html">– Position</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSWindow/HostingWindowFinder.html">– HostingWindowFinder</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/View.html">View</a>
               </li>
             </ul>
@@ -294,7 +306,7 @@
 
                 </div>
               </div>
-            <p>SwiftUI View for all Movies</p>
+            <p>SwiftUI View for all Movies (shared)</p>
 
 <ul>
 <li>Movies that are part of a set will be removed and replaced with the set</li>
@@ -304,6 +316,90 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV4kodi33_570C28E24AD727D7A7927DA94672A575LL14SwiftlyKodiAPI0M9ConnectorCvp"></a>
+                    <a name="//apple_ref/swift/Property/kodi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV4kodi33_570C28E24AD727D7A7927DA94672A575LL14SwiftlyKodiAPI0M9ConnectorCvp">kodi</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The KodiConnector model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">kodi</span><span class="p">:</span> <span class="kt">KodiConnector</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV5scene33_570C28E24AD727D7A7927DA94672A575LLAA10SceneStateCvp"></a>
+                    <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV5scene33_570C28E24AD727D7A7927DA94672A575LLAA10SceneStateCvp">scene</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The SceneState model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">scene</span><span class="p">:</span> <span class="kt"><a href="../Classes/SceneState.html">SceneState</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV5items33_570C28E24AD727D7A7927DA94672A575LLSay14SwiftlyKodiAPI0M4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/items" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV5items33_570C28E24AD727D7A7927DA94672A575LLSay14SwiftlyKodiAPI0M4Item_pGvp">items</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The items in this view (movies + movie sets)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@State</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="n">any</span> <span class="kt">KodiItem</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -325,6 +421,117 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">filter</span><span class="p">:</span> <span class="kt"><a href="../Enums/Parts.html">Parts</a></span><span class="o">.</span><span class="kt">Filter</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV12selectedItem33_570C28E24AD727D7A7927DA94672A575LLAA05MediaE0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/selectedItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV12selectedItem33_570C28E24AD727D7A7927DA94672A575LLAA05MediaE0VSgvp">selectedItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The optional selected item</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@State</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">selectedItem</span><span class="p">:</span> <span class="kt"><a href="../Structs/MediaItem.html">MediaItem</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV16selectedMovieSet33_570C28E24AD727D7A7927DA94672A575LL14SwiftlyKodiAPI5VideoO7DetailsO0eF0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/selectedMovieSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV16selectedMovieSet33_570C28E24AD727D7A7927DA94672A575LL14SwiftlyKodiAPI5VideoO7DetailsO0eF0Vvp">selectedMovieSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The optional selected movie set (macOS)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@State</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">selectedMovieSet</span><span class="p">:</span> <span class="kt">Video</span><span class="o">.</span><span class="kt">Details</span><span class="o">.</span><span class="kt">MovieSet</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV5state33_570C28E24AD727D7A7927DA94672A575LLAA5PartsO6StatusOvp"></a>
+                    <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV5state33_570C28E24AD727D7A7927DA94672A575LLAA5PartsO6StatusOvp">state</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The loading state of the View</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@State</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Enums/Parts.html">Parts</a></span><span class="o">.</span><span class="kt">Status</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV4grid33_570C28E24AD727D7A7927DA94672A575LLSay7SwiftUI8GridItemVGvp"></a>
+                    <a name="//apple_ref/swift/Property/grid" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV4grid33_570C28E24AD727D7A7927DA94672A575LLSay7SwiftUI8GridItemVGvp">grid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Define the grid layout (tvOS)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">grid</span><span class="p">:</span> <span class="p">[</span><span class="kt">GridItem</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -416,6 +623,77 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Private%20functions"></a>
+                <a name="//apple_ref/swift/Section/Private functions" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Private%20functions"></a>
+                  <h3 class="section-name"><span>Private functions</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV8getItems33_570C28E24AD727D7A7927DA94672A575LLyyF"></a>
+                    <a name="//apple_ref/swift/Method/getItems()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV8getItems33_570C28E24AD727D7A7927DA94672A575LLyyF">getItems()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get all items from the library</p>
+
+<ul>
+<li>Movies that are part of a set will be removed and replaced with the set</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">getItems</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio10MoviesViewV14setItemDetails33_570C28E24AD727D7A7927DA94672A575LLyyF"></a>
+                    <a name="//apple_ref/swift/Method/setItemDetails()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio10MoviesViewV14setItemDetails33_570C28E24AD727D7A7927DA94672A575LLyyF">setItemDetails()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set the details of a selected item</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">setItemDetails</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Extensions"></a>
                 <a name="//apple_ref/swift/Section/Extensions" class="dashAnchor"></a>
                 <div class="section-name-container">
@@ -458,7 +736,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-11)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

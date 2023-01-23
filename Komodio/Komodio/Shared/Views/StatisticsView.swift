@@ -17,56 +17,26 @@ struct StatisticsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if !kodi.library.movies.isEmpty {
-                Button(
-                    action: {
-                        scene.sidebarSelection = .movies
-                    },
-                    label: {
-                        Label("\(kodi.library.movies.count) Movies", systemImage: Router.movies.label.icon)
-                            .labelStyle(StatisticsLabel())
-                    })
+                Label("\(kodi.library.movies.count) Movies", systemImage: Router.movies.label.icon)
+                    .labelStyle(StatisticsLabel())
                 let unwatched = kodi.library.movies.filter({$0.playcount == 0})
                 if !unwatched.isEmpty {
-                    Button(
-                        action: {
-                            scene.sidebarSelection = .unwatchedMovies
-                        },
-                        label: {
-                            Label("\(unwatched.count) Unwatched Movies", systemImage: "eye")
-                                .labelStyle(StatisticsLabel(subItem: true))
-                        })
+                    Label("\(unwatched.count) Unwatched Movies", systemImage: "eye")
+                        .labelStyle(StatisticsLabel(subItem: true))
                 }
             }
             if !kodi.library.tvshows.isEmpty {
-                Button(
-                    action: {
-                        scene.sidebarSelection = .tvshows
-                    },
-                    label: {
-                        Label("\(kodi.library.tvshows.count) TV shows", systemImage: Router.tvshows.label.icon)
-                            .labelStyle(StatisticsLabel())
-                    })
+                Label("\(kodi.library.tvshows.count) TV shows", systemImage: Router.tvshows.label.icon)
+                    .labelStyle(StatisticsLabel())
                 let unwatched = kodi.library.episodes.filter({$0.playcount == 0})
                 if !unwatched.isEmpty {
-                    Button(
-                        action: {
-                            scene.sidebarSelection = .unwachedEpisodes
-                        },
-                        label: {
-                            Label("\(unwatched.count) Unwatched Episodes", systemImage: "eye")
-                                .labelStyle(StatisticsLabel(subItem: true))
-                        })
+                    Label("\(unwatched.count) Unwatched Episodes", systemImage: "eye")
+                        .labelStyle(StatisticsLabel(subItem: true))
                 }
             }
             if !kodi.library.musicVideos.isEmpty {
-                Button(
-                    action: {
-                        scene.sidebarSelection = .musicVideos
-                    },
-                    label: {
-                        Label("\(kodi.library.musicVideos.count) Music Videos", systemImage: Router.musicVideos.label.icon)
-                            .labelStyle(StatisticsLabel())
-                    })
+                Label("\(kodi.library.musicVideos.count) Music Videos", systemImage: Router.musicVideos.label.icon)
+                    .labelStyle(StatisticsLabel())
             }
         }
         .buttonStyle(.plain)    }
@@ -93,15 +63,16 @@ extension StatisticsView {
 #endif
 
 #if os(tvOS)
-            HStack {
+            HStack(spacing: 0) {
                 configuration.icon
                     .foregroundColor(subItem ? .secondary : Color("AccentColor"))
+                    .padding(.trailing, 10)
                 configuration.title
                     .foregroundColor(.primary)
             }
-            .font(.system(size: subItem ? 30 : 35))
-            .padding(.vertical, subItem ? 0 : 0)
-            .padding(.leading, subItem ? 20 : 0)
+            .font(.system(size: subItem ? 20 : 35))
+            .padding(.vertical, subItem ? 10 : 0)
+            .padding(.leading, subItem ? 30 : 0)
 #endif
 
         }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>HostingWindowFinder Structure Reference</title>
+    <title>StatisticsLabel Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,11 +13,11 @@
     <script src="../../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/HostingWindowFinder" class="dashAnchor"></a>
-    <a title="HostingWindowFinder Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/StatisticsLabel" class="dashAnchor"></a>
+    <a title="StatisticsLabel Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Komodio</a> (100% documented)</p>
+        <p><a href="../../index.html">Komodio</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../../search.json">
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Komodio Reference</a>
         <img id="carat" src="../../img/carat.png" alt=""/>
-        HostingWindowFinder Structure Reference
+        StatisticsLabel Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -50,6 +50,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
               </li>
             </ul>
           </li>
@@ -95,6 +98,9 @@
                 <a href="../../Structs/StartView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/StartView/Content.html">– Content</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/MoviesView.html">MoviesView</a>
               </li>
               <li class="nav-group-task">
@@ -129,6 +135,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SeasonsView/Item.html">– Item</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/SeasonView.html">SeasonView</a>
@@ -182,7 +191,16 @@
                 <a href="../../Structs/StatisticsView.html">StatisticsView</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/StatisticsView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HostItemView.html">HostItemView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HostItemView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/KomodioPlayerView.html">KomodioPlayerView</a>
@@ -239,6 +257,9 @@
                 <a href="../../Enums/Parts/DetailMessage.html">– DetailMessage</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Enums/Parts/StatusMessage.html">– StatusMessage</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Enums/Parts/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
@@ -268,15 +289,6 @@
             <a href="../../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../../Extensions/NSWindow.html">NSWindow</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions/NSWindow/Position.html">– Position</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions/NSWindow/HostingWindowFinder.html">– HostingWindowFinder</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Extensions/View.html">View</a>
               </li>
             </ul>
@@ -286,15 +298,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>HostingWindowFinder</h1>
+            <h1>StatisticsLabel</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">HostingWindowFinder</span> <span class="p">:</span> <span class="kt">NSViewRepresentable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">struct</span> <span class="kt">StatisticsLabel</span> <span class="p">:</span> <span class="kt">LabelStyle</span></code></pre>
 
                 </div>
               </div>
-            <p>Find the NSWindow of the scene</p>
+            <p>Label style for statistics</p>
 
           </section>
           <section class="section task-group-section">
@@ -303,9 +315,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8NSWindowC7KomodioE19HostingWindowFinderV8callbackyyABSgcvp"></a>
-                    <a name="//apple_ref/swift/Property/callback" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8NSWindowC7KomodioE19HostingWindowFinderV8callbackyyABSgcvp">callback</a>
+                    <a name="/s:7Komodio14StatisticsViewV0B5Label33_EE7A5E700B3C6A4F256EC820BEDF9353LLV7subItemSbvp"></a>
+                    <a name="//apple_ref/swift/Property/subItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio14StatisticsViewV0B5Label33_EE7A5E700B3C6A4F256EC820BEDF9353LLV7subItemSbvp">subItem</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -313,14 +325,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The optional <code>NSWindow</code></p>
+                        <p>Bool if the label is a &lsquo;subitem&rsquo;</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">callback</span><span class="p">:</span> <span class="p">(</span><span class="kt">NSWindow</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">subItem</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -330,9 +342,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7SwiftUI19NSViewRepresentableP04makeC07context0C4TypeQzAA0cD7ContextVyxG_tF"></a>
-                    <a name="//apple_ref/swift/Method/makeNSView(context:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7SwiftUI19NSViewRepresentableP04makeC07context0C4TypeQzAA0cD7ContextVyxG_tF">makeNSView(context:<wbr>)</a>
+                    <a name="/s:7SwiftUI10LabelStyleP8makeBody13configuration0F0QzAA0cD13ConfigurationV_tF"></a>
+                    <a name="//apple_ref/swift/Method/makeBody(configuration:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI10LabelStyleP8makeBody13configuration0F0QzAA0cD13ConfigurationV_tF">makeBody(configuration:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -346,33 +358,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeNSView</span><span class="p">(</span><span class="nv">context</span><span class="p">:</span> <span class="kt">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSView</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7SwiftUI19NSViewRepresentableP06updateC0_7contexty0C4TypeQz_AA0cD7ContextVyxGtF"></a>
-                    <a name="//apple_ref/swift/Method/updateNSView(_:context:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7SwiftUI19NSViewRepresentableP06updateC0_7contexty0C4TypeQz_AA0cD7ContextVyxGtF">updateNSView(_:<wbr>context:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateNSView</span><span class="p">(</span><span class="n">_</span> <span class="nv">nsView</span><span class="p">:</span> <span class="kt">NSView</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">Context</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">makeBody</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="kt">Configuration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
 
                         </div>
                       </div>
@@ -384,7 +370,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-11)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

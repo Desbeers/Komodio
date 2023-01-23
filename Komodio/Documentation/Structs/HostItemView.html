@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>NSWindow Extension Reference</title>
+    <title>HostItemView Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,11 +13,11 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/NSWindow" class="dashAnchor"></a>
-    <a title="NSWindow Extension Reference"></a>
+    <a name="//apple_ref/swift/Struct/HostItemView" class="dashAnchor"></a>
+    <a title="HostItemView Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Komodio</a> (100% documented)</p>
+        <p><a href="../index.html">Komodio</a> (99% documented)</p>
         <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../search.json">
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Komodio Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        NSWindow Extension Reference
+        HostItemView Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -50,6 +50,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
               </li>
             </ul>
           </li>
@@ -95,6 +98,9 @@
                 <a href="../Structs/StartView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/StartView/Content.html">– Content</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MoviesView.html">MoviesView</a>
               </li>
               <li class="nav-group-task">
@@ -129,6 +135,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView/Item.html">– Item</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SeasonView.html">SeasonView</a>
@@ -182,7 +191,16 @@
                 <a href="../Structs/StatisticsView.html">StatisticsView</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView.html">HostItemView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KomodioPlayerView.html">KomodioPlayerView</a>
@@ -239,6 +257,9 @@
                 <a href="../Enums/Parts/DetailMessage.html">– DetailMessage</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Parts/StatusMessage.html">– StatusMessage</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Parts/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
@@ -268,15 +289,6 @@
             <a href="../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions/NSWindow.html">NSWindow</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSWindow/Position.html">– Position</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/NSWindow/HostingWindowFinder.html">– HostingWindowFinder</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/View.html">View</a>
               </li>
             </ul>
@@ -286,15 +298,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>NSWindow</h1>
+            <h1>HostItemView</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">NSWindow</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">HostItemView</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>SwiftUI View for Kodi HostItem settings (shared)</p>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -302,9 +315,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8NSWindowC7KomodioE8PositionV"></a>
-                    <a name="//apple_ref/swift/Struct/Position" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8NSWindowC7KomodioE8PositionV">Position</a>
+                    <a name="/s:7Komodio12HostItemViewV4host14SwiftlyKodiAPI0bC0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/host" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12HostItemViewV4host14SwiftlyKodiAPI0bC0Vvp">host</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -312,15 +325,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Structure for a &lsquo;window position&rsquo;</p>
+                        <p>Undocumented</p>
 
-                        <a href="../Extensions/NSWindow/Position.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Position</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">host</span><span class="p">:</span> <span class="kt">HostItem</span></code></pre>
 
                         </div>
                       </div>
@@ -330,9 +342,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8NSWindowC7KomodioE19HostingWindowFinderV"></a>
-                    <a name="//apple_ref/swift/Struct/HostingWindowFinder" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8NSWindowC7KomodioE19HostingWindowFinderV">HostingWindowFinder</a>
+                    <a name="/s:7Komodio12HostItemViewV4kodi14SwiftlyKodiAPI0G9ConnectorCvp"></a>
+                    <a name="//apple_ref/swift/Property/kodi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12HostItemViewV4kodi14SwiftlyKodiAPI0G9ConnectorCvp">kodi</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -340,15 +352,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Find the NSWindow of the scene</p>
+                        <p>The KodiConnector model</p>
 
-                        <a href="../Extensions/NSWindow/HostingWindowFinder.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">HostingWindowFinder</span> <span class="p">:</span> <span class="kt">NSViewRepresentable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
+<span class="k">var</span> <span class="nv">kodi</span><span class="p">:</span> <span class="kt">KodiConnector</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -358,9 +370,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8NSWindowC7KomodioE11setPosition8position2inyAbCE0D0V_So8NSScreenCSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setPosition(position:in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8NSWindowC7KomodioE11setPosition8position2inyAbCE0D0V_So8NSScreenCSgtF">setPosition(position:<wbr>in:<wbr>)</a>
+                    <a name="/s:7Komodio12HostItemViewV5scene33_935AE6A342A11A8FE9D6DE466214E66ELLAA10SceneStateCvp"></a>
+                    <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12HostItemViewV5scene33_935AE6A342A11A8FE9D6DE466214E66ELLAA10SceneStateCvp">scene</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -368,47 +380,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Set the position of a &lsquo;Window&rsquo;</p>
+                        <p>The SceneState model</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setPosition</span><span class="p">(</span><span class="nv">position</span><span class="p">:</span> <span class="kt"><a href="../Extensions/NSWindow/Position.html">Position</a></span><span class="p">,</span> <span class="k">in</span> <span class="nv">screen</span><span class="p">:</span> <span class="kt">NSScreen</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">scene</span><span class="p">:</span> <span class="kt"><a href="../Classes/SceneState.html">SceneState</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>position</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The <code><a href="../Extensions/NSWindow/Position.html">Position</a></code></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>screen</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The screen to use</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -416,9 +398,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So8NSWindowC7KomodioE11setPosition8vertical10horizontal7padding6screenyAbCE0D0V8VerticalO_AJ10HorizontalO14CoreFoundation7CGFloatVSo8NSScreenCSgtF"></a>
-                    <a name="//apple_ref/swift/Method/setPosition(vertical:horizontal:padding:screen:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So8NSWindowC7KomodioE11setPosition8vertical10horizontal7padding6screenyAbCE0D0V8VerticalO_AJ10HorizontalO14CoreFoundation7CGFloatVSo8NSScreenCSgtF">setPosition(vertical:<wbr>horizontal:<wbr>padding:<wbr>screen:<wbr>)</a>
+                    <a name="/s:7Komodio12HostItemViewV16presentationMode33_935AE6A342A11A8FE9D6DE466214E66ELL7SwiftUI7BindingVyAF012PresentationF0VGvp"></a>
+                    <a name="//apple_ref/swift/Property/presentationMode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12HostItemViewV16presentationMode33_935AE6A342A11A8FE9D6DE466214E66ELL7SwiftUI7BindingVyAF012PresentationF0VGvp">presentationMode</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -426,71 +408,98 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Set the position of a &lsquo;Window&rsquo;</p>
+                        <p>The Presentation mode (tvOS)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setPosition</span><span class="p">(</span><span class="nv">vertical</span><span class="p">:</span> <span class="kt"><a href="../Extensions/NSWindow/Position.html">Position</a></span><span class="o">.</span><span class="kt">Vertical</span><span class="p">,</span> <span class="nv">horizontal</span><span class="p">:</span> <span class="kt"><a href="../Extensions/NSWindow/Position.html">Position</a></span><span class="o">.</span><span class="kt">Horizontal</span><span class="p">,</span> <span class="nv">padding</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="kt"><a href="../Extensions/NSWindow/Position.html">Position</a></span><span class="o">.</span><span class="n">defaultPadding</span><span class="p">,</span> <span class="nv">screen</span><span class="p">:</span> <span class="kt">NSScreen</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@Environment</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">presentationMode</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">PresentationMode</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>vertical</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The vertical <code><a href="../Extensions/NSWindow/Position.html">Position</a></code></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>horizontal</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The horizontal <code><a href="../Extensions/NSWindow/Position.html">Position</a></code></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>padding</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The &lsquo;padding&rsquo; of the Window</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>screen</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The screen to use</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Body%20of%20the%20View"></a>
+                <a name="//apple_ref/swift/Section/Body of the View" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Body%20of%20the%20View"></a>
+                  <h3 class="section-name"><span>Body of the View</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12HostItemViewV4bodyQrvp"></a>
+                    <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12HostItemViewV4bodyQrvp">body</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The body of the View</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Details%20of%20HostItem%20connection"></a>
+                <a name="//apple_ref/swift/Section/Details of HostItem connection" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Details%20of%20HostItem%20connection"></a>
+                  <h3 class="section-name"><span>Details of HostItem connection</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12HostItemViewV7DetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/Details" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12HostItemViewV7DetailsV">Details</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SwiftUI View for HostItem connection details</p>
+
+                        <a href="../Structs/HostItemView/Details.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Details</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -500,7 +509,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-11)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

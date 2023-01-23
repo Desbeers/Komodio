@@ -26,25 +26,30 @@ struct DetailView: View {
                     .Details(movie: movie)
                     .id(movie.id)
             case .movieSet(let movieSet):
-                MovieSetView.Details(movieSet: movieSet)
+                MovieSetView
+                    .Details(movieSet: movieSet)
             case .tvshow(let tvshow):
-                TVShowView.Details(tvshow: tvshow).id(tvshow.id)
+                TVShowView
+                    .Details(tvshow: tvshow)
             case .episode(let episode):
-                EpisodeView.Item(episode: episode).id(episode.tvshowID)
+                EpisodeView
+                    .Item(episode: episode)
             case .season(let tvshow, let episodes):
                 SeasonView(tvshow: tvshow, episodes: episodes)
             case .artist(let artist):
-                ArtistView.Details(artist: artist)
+                ArtistView
+                    .Details(artist: artist)
             case .musicVideo(let musicVideo):
                 MusicVideoView
                     .Details(musicVideo: musicVideo)
-                    .id(musicVideo.id)
             case .album(let musicVideos):
                 AlbumView(musicVideos: musicVideos)
             case .kodiSettingsDetails(let section, let category):
-                KodiSettingsView.Details(section: section, category: category)
-            case .kodiHostSettings(let host):
-                KodiHostView.Details(host: host).id(host.ip)
+                KodiSettingsView
+                    .Details(section: section, category: category)
+            case .hostItemSettings:
+                HostItemView
+                    .KodiSettings()
             default:
                 fallback
             }

@@ -8,41 +8,48 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+extension StartView {
+
 /// SwiftUI View when starting Komodio  (macOS)
-struct StartView: View {
-    /// The AppState model
-    @EnvironmentObject private var appState: AppState
-    /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
-    var body: some View {
-        VStack {
-            Parts.DetailMessage(title: kodi.host.bonjour?.name ?? "")
-                .padding(.top, 40)
+    struct Content: View {
+        /// The AppState model
+        @EnvironmentObject private var appState: AppState
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
             VStack {
-                switch kodi.state {
-                case .loadedLibrary:
-                    VStack(alignment: .center) {
-                        StatisticsView.HostInfo()
-                        StatisticsView()
+                Parts.DetailMessage(title: kodi.host.bonjour?.name ?? "")
+                    .padding(.top, 40)
+                VStack {
+                    switch kodi.state {
+                    case .loadedLibrary:
+                        VStack(alignment: .center) {
+                            StatisticsView.HostInfo()
+                            StatisticsView()
+                        }
+                    case .loadingLibrary:
+                        ProgressView()
+                    case .offline:
+                        KodiHostItemView.HostIsOffline()
+                        KodiHostItemView.KodiSettings()
+                    case .none:
+                        KodiHostItemView.NoHostSelected()
+                        KodiHostItemView.KodiSettings()
+                    default:
+                        EmptyView()
                     }
-                case .loadingLibrary:
-                    ProgressView()
-                case .offline:
-                    KodiHostItemView.HostIsOffline()
-                    KodiHostItemView.KodiSettings()
-                case .none:
-                    KodiHostItemView.NoHostSelected()
-                    KodiHostItemView.KodiSettings()
-                default:
-                    EmptyView()
                 }
+                .padding()
+                .background(.ultraThinMaterial)
+                .cornerRadius(10)
+                .shadow(radius: 10)
+                .padding(.leading)
             }
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(10)
-            .shadow(radius: 10)
-            .padding(.leading)
+            .animation(.default, value: kodi.state)
         }
-        .animation(.default, value: kodi.state)
     }
 }

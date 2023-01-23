@@ -89,3 +89,26 @@ extension View {
         modifier(Modifiers.Background(item: item))
     }
 }
+
+// MARK: Item details font modifier
+
+extension Modifiers {
+
+    /// A `ViewModifier` to set de font style for details of a `MediaItem`
+    struct DetailsFontStyle: ViewModifier {
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+                .font(.system(size: 18))
+                .lineSpacing(8)
+        }
+    }
+}
+
+extension View {
+
+    /// Shortcut to the ``Modifiers/DetailsFontStyle``
+    func detailsFontStyle() -> some View {
+        modifier(Modifiers.DetailsFontStyle())
+    }
+}

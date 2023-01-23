@@ -94,23 +94,11 @@ extension MovieView {
                     VStack(alignment: .leading) {
                         Text(movie.plot)
                             .padding(.bottom)
-                        VStack(alignment: .leading) {
-                            Label("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.runtime))", systemImage: "calendar.badge.clock")
-                            Label(movie.details, systemImage: "info.circle.fill")
-                            if !movie.director.isEmpty {
-                                Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
-                            }
-                            if !cast.isEmpty {
-                                Label(cast, systemImage: "person.fill")
-                            }
-                        }
-                        .padding(.horizontal)
-                        .labelStyle(Styles.DetailLabel())
+                        movieDetails
                         Spacer()
                     }
                 }
-                .font(.system(size: 18))
-                .lineSpacing(8)
+                .detailsFontStyle()
                 .padding(40)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -182,23 +170,10 @@ extension MovieView {
                         .padding(.bottom)
                     Text(movie.plot)
                         .padding(.bottom)
-                    VStack(alignment: .leading) {
-                        Label(movie.details, systemImage: "info.circle.fill")
-                            .font(.caption)
-                            .padding(.bottom)
-                        if !movie.director.isEmpty {
-                            Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
-                                .font(.caption)
-                                .padding(.bottom)
-                        }
-                        if !cast.isEmpty {
-                            Label(cast, systemImage: "person.fill")
-                                .font(.caption)
-                        }
-                    }
+                    movieDetails
                     .labelStyle(Styles.DetailLabel())
                     Spacer()
-                    Buttons.PlayedState(item: movie)
+                    Buttons.Player(item: movie)
                 }
                 .padding(40)
             }
@@ -207,5 +182,21 @@ extension MovieView {
             .padding(.leading, KomodioApp.sidebarCollapsedWidth)
         }
 #endif
+
+        /// The details of the movie
+        var movieDetails: some View {
+            VStack(alignment: .leading) {
+                Label("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.runtime))", systemImage: "calendar.badge.clock")
+                Label(movie.details, systemImage: "info.circle.fill")
+                if !movie.director.isEmpty {
+                    Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
+                }
+                if !cast.isEmpty {
+                    Label(cast, systemImage: "person.fill")
+                }
+            }
+            .labelStyle(Styles.DetailLabel())
+            .padding(.vertical)
+        }
     }
 }

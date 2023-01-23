@@ -62,8 +62,8 @@
 		D77B1362296DECBF00ECE2F9 /* KomodioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */; };
 		D77B1364296ECD2E00ECE2F9 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = D77B1363296ECD2E00ECE2F9 /* Documentation.docc */; };
 		D77B1367296ED6DC00ECE2F9 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = D77B1366296ED6DC00ECE2F9 /* Documentation.docc */; };
-		D77B1372297561AA00ECE2F9 /* KodiHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* KodiHostView.swift */; };
-		D77B1373297561AA00ECE2F9 /* KodiHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* KodiHostView.swift */; };
+		D77B1372297561AA00ECE2F9 /* HostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* HostItemView.swift */; };
+		D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* HostItemView.swift */; };
 		D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D785A199294B63D900530F62 /* SwiftlyKodiAPI */; };
 		D785A19B294B63FA00530F62 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
 		D785A19C294B63FE00530F62 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54F29056FA500037DC9 /* AppState.swift */; };
@@ -130,10 +130,11 @@
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../KomodioTV/KomodioTV/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		D779BE92297EF567009FD90A /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1363296ECD2E00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		D77B1366296ED6DC00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
-		D77B1371297561AA00ECE2F9 /* KodiHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiHostView.swift; sourceTree = "<group>"; };
+		D77B1371297561AA00ECE2F9 /* HostItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostItemView.swift; sourceTree = "<group>"; };
 		D785A1A1294B665600530F62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiriRemoteController.swift; sourceTree = "<group>"; };
 		D7EFE44D293A4E7900CE9B8D /* KomodioTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KomodioTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +210,7 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
+				D779BE92297EF567009FD90A /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 				D785A198294B63D900530F62 /* Frameworks */,
@@ -330,7 +332,7 @@
 				D7EFE45F293B2C3300CE9B8D /* StartView.swift */,
 				D71BD55529057E6600037DC9 /* DetailView.swift */,
 				D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */,
-				D77B1371297561AA00ECE2F9 /* KodiHostView.swift */,
+				D77B1371297561AA00ECE2F9 /* HostItemView.swift */,
 				D7F03A782964635B0026D815 /* StatisticsView.swift */,
 				D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */,
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
@@ -517,7 +519,7 @@
 				D71BD55A29057FE400037DC9 /* MediaItem.swift in Sources */,
 				D71170BD293503A40059FCD3 /* AlbumView.swift in Sources */,
 				D7F03A6D295F141C0026D815 /* KodiSettingsView.swift in Sources */,
-				D77B1372297561AA00ECE2F9 /* KodiHostView.swift in Sources */,
+				D77B1372297561AA00ECE2F9 /* HostItemView.swift in Sources */,
 				D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */,
 				D7F03A7C296466C40026D815 /* StartView+macOS.swift in Sources */,
 				D71BD55829057F1A00037DC9 /* Buttons.swift in Sources */,
@@ -592,7 +594,7 @@
 				D7254F4429573BD900DC704B /* Buttons+tvOS.swift in Sources */,
 				D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */,
 				D785A19C294B63FE00530F62 /* AppState.swift in Sources */,
-				D77B1373297561AA00ECE2F9 /* KodiHostView.swift in Sources */,
+				D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */,
 				D785A19E294B640800530F62 /* MediaItem.swift in Sources */,
 				D75C3F6A294DDD42002BC065 /* SeasonsView.swift in Sources */,
 			);

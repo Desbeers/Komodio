@@ -39,8 +39,8 @@ struct ContentView: View {
             SearchView()
         case .kodiSettings:
             KodiSettingsView()
-        case .kodiHostSettings(let host):
-            KodiHostView(host: host)
+        case .hostItemSettings(let host):
+            HostItemView(host: host)
         default:
             Text("Not implemented")
         }

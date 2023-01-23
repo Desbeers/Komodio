@@ -21,6 +21,11 @@ extension TVShowView {
     struct Details: View {
         /// The TV show
         let tvshow: Video.Details.TVShow
+        /// Info about the TV show
+        var info: String {
+            let details = tvshow.studio + tvshow.genre + [tvshow.year.description]
+            return details.joined(separator: " ∙ ")
+        }
 
         // MARK: Body of the View
 
@@ -38,32 +43,60 @@ extension TVShowView {
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                    Text(tvshow.plot)
-                        .font(.system(size: 18))
-                        .lineSpacing(8)
-                        .padding(.vertical)
+                        .padding(.bottom)
+                    VStack(alignment: .leading) {
+                        Text(tvshow.plot)
+                        tvshowDetails
+                    }
                 }
+                .detailsFontStyle()
                 .padding(40)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(item: tvshow)
 #endif
 
 #if os(tvOS)
-            VStack {
-                Text(tvshow.title)
-                    .font(.title)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                    .padding(.bottom)
-                KodiArt.Fanart(item: tvshow)
+            HStack {
+                KodiArt.Poster(item: tvshow)
                     .cornerRadius(10)
-                Text(tvshow.plot)
+                VStack {
+                    Text(tvshow.title)
+                        .font(.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .padding(.bottom)
+                    KodiArt.Fanart(item: tvshow)
+                        .cornerRadius(10)
+                    Text(tvshow.plot)
+                    tvshowDetails
+                }
             }
-            .padding(40)
             .background(item: tvshow)
 #endif
 
+        }
+
+        /// The details of the TV show
+        var tvshowDetails: some View {
+            VStack(alignment: .leading) {
+                Label(info, systemImage: "info.circle.fill")
+                Label("\(tvshow.season) \(tvshow.season == 1 ? " season" : "seasons"), \(tvshow.episode) episodes", systemImage: "display")
+                Label(watchedLabel, systemImage: "eye")
+            }
+            .labelStyle(Styles.DetailLabel())
+            .padding(.vertical)
+        }
+
+        /// Watched label
+        var watchedLabel: String {
+            if tvshow.watchedEpisodes == 0 {
+                return "No episodes watched"
+            } else if tvshow.watchedEpisodes == tvshow.episode {
+                return "All episodes watched"
+            } else {
+                return "\(tvshow.watchedEpisodes) episodes watched"
+            }
         }
     }
 }

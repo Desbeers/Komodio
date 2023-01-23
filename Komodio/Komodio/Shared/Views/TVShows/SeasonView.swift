@@ -19,14 +19,22 @@ struct SeasonView: View {
 
     /// The body of this View
     var body: some View {
+
+#if os(macOS)
         List {
             ForEach(episodes) { episode in
                 EpisodeView.Details(episode: episode)
             }
         }
-
-#if os(macOS)
         .listStyle(.inset(alternatesRowBackgrounds: true))
+#endif
+
+#if os(tvOS)
+        List {
+            ForEach(episodes) { episode in
+                EpisodeView.Details(episode: episode)
+            }
+        }
 #endif
 
     }

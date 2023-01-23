@@ -6,8 +6,8 @@ github_url: https://github.com/desbeers/komodio/
 build_tool_arguments:
  - -scheme
  - Komodio
-min_acl: internal
-# min_acl: private
+# min_acl: internal
+min_acl: private
 output: Documentation
 clean: true
 theme: apple
@@ -46,6 +46,7 @@ custom_categories:
     - MusicVideosView
     - MusicVideoView
     - StatisticsView
+    - HostItemView
     - KomodioPlayerView
     - SearchView
     - KodiSettingsView

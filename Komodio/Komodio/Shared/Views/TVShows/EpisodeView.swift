@@ -19,8 +19,6 @@ extension EpisodeView {
     struct Details: View {
         /// The Episode
         let episode: Video.Details.Episode
-        /// The focus state of the Movie View (for tvOS)
-        @FocusState private var isFocused: Bool
 
         // MARK: Body of the View
 
@@ -43,17 +41,15 @@ extension EpisodeView {
                         .padding(.trailing)
                     VStack(alignment: .leading) {
                         Text(episode.plot)
-                            .font(.system(size: 18))
-                            .lineSpacing(8)
                         Buttons.Player(item: episode)
                     }
                 }
+                .detailsFontStyle()
             }
             .padding()
 #endif
 
 #if os(tvOS)
-
             VStack(alignment: .leading) {
                 Text(episode.title)
                     .font(.title3)
@@ -70,13 +66,11 @@ extension EpisodeView {
                         .padding(.trailing)
                     VStack(alignment: .leading) {
                         Text(episode.plot)
-                        Buttons.Player(item: episode)
-                            .opacity(isFocused ? 1 : 0.5)
+                            .lineLimit(7, reservesSpace: true)
                     }
                 }
+                Buttons.Player(item: episode)
             }
-            .focused($isFocused)
-            .animation(.default, value: isFocused)
 #endif
 
         }
@@ -120,8 +114,7 @@ extension EpisodeView {
                         .padding()
                     Text(episode.plot)
                 }
-                .font(.system(size: 18))
-                .lineSpacing(8)
+                .detailsFontStyle()
                 .padding(40)
             }
             .background(item: episode)

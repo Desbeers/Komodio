@@ -46,7 +46,6 @@ struct UpNextView: View {
                     .unique { $0.tvshowID }
                     .sorted { $0.dateAdded > $1.dateAdded }
                 )
-                dump(episodes)
                 state = episodes.isEmpty ? .empty : .ready
                 /// Update the optional selected item
                 if let selectedEpisode {
@@ -137,7 +136,6 @@ extension UpNextView {
                         .font(.caption)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .watchStatus(of: episode)
             }
         }
     }

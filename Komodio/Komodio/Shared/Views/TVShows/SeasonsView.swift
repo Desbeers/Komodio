@@ -20,8 +20,10 @@ struct SeasonsView: View {
     @State private var episodes: [Video.Details.Episode] = []
     /// The seasons to show in this view
     @State private var seasons: [Video.Details.Episode] = []
-    /// The optional selected season
+    /// The optional selected season (macOS)
     @State private var selectedSeason: Int?
+    /// The selected season tab (tvOS)
+    @State private var selectedTab: Int = -1
 
     // MARK: Body of the View
 
@@ -62,24 +64,39 @@ struct SeasonsView: View {
 #endif
 
 #if os(tvOS)
-        HStack {
-            List {
+        /// Show seasons on page tabs
+        /// - Note: Shown in 'page' style because SwiftUI can only show 7 tabs when using the 'normal' style
+        ///         and there might be more seasons
+        if !seasons.isEmpty {
+            TabView(selection: $selectedTab) {
+                    TVShowView.Details(tvshow: tvshow)
+                    .focusable()
+                    .focusSection()
+                    .tag(-1)
+                /// It looks like `TabView` is ignoring the custom safe areas
+                    .padding(.leading, KomodioApp.sidebarCollapsedWidth / 1.2)
                 ForEach(seasons) { season in
-                    Button(action: {
-                        selectedSeason = season.season
-                    }, label: {
-                        Item(season: season)
-                            .foregroundColor(season.season == selectedSeason ? Color("AccentColor") : .primary)
-                    })
+                    HStack {
+                        /// Display the season cover
+                        VStack {
+                            Text(tvshow.title)
+                                .font(.title3)
+                            Text(season.season == 0 ? "Specials" : "Season \(season.season)")
+                            KodiArt.Poster(item: season)
+                                .frame(width: 400, height: 600)
+                                .cornerRadius(10)
+                                .watchStatus(of: season)
+                        }
+                        /// It looks like `TabView` is ignoring the custom safe areas
+                        .padding(.leading, KomodioApp.sidebarCollapsedWidth / 1.2)
+                        .padding(.trailing, 100)
+                        SeasonView(tvshow: tvshow, episodes: episodes.filter({$0.season == season.season }))
+                    }
+                    .tag(season.season)
                 }
             }
-            .frame(width: 340)
-            DetailView()
-                .frame(maxWidth: .infinity)
-                .focusSection()
+            .tabViewStyle(.page)
         }
-        .animation(.default, value: selectedSeason)
-        .buttonStyle(.card)
 #endif
 
     }
@@ -90,8 +107,17 @@ struct SeasonsView: View {
     private func getTVShowSeasons() {
         if tvshow.media == .tvshow {
             scene.details = .tvshow(tvshow: tvshow)
-            seasons = kodi.library.episodes
-                .filter({$0.tvshowID == tvshow.tvshowID}).unique { $0.season }
+            episodes = kodi.library.episodes
+                .filter({$0.tvshowID == tvshow.tvshowID})
+            /// Filter the episodes to get the seasons
+            var seasons = episodes.unique { $0.season }
+            /// Find the playcount of the season
+            for index in seasons.indices {
+                let unwatched = episodes.filter({$0.season == seasons[index].season && $0.playcount == 0}).count
+                seasons[index].playcount = unwatched == 0 ? 1 : 0
+                seasons[index].resume.position = 0
+            }
+            self.seasons = seasons
         } else {
             selectedSeason = nil
         }
@@ -100,8 +126,7 @@ struct SeasonsView: View {
     /// Set the details of a selected season
     private func setSeasonDetails() {
         if let selectedSeason {
-            let episodes = kodi.library.episodes
-                .filter({ $0.tvshowID == tvshow.tvshowID && $0.season == selectedSeason })
+            let episodes = self.episodes.filter({$0.season == selectedSeason })
             scene.details = .season(tvshow: tvshow, episodes: episodes)
         }
     }

@@ -59,14 +59,14 @@ struct SidebarView: View {
                         }
                     }, icon: {
                         Image(systemName: "globe")
-                            .foregroundColor(host.isSelected ? host.isOnline ? .green : .red : .gray)
+                            .foregroundColor(host.isOnline ? host.isSelected ? .green : .accentColor : .red)
                     })
-                    .tag(Router.kodiHostSettings(host: host))
+                    .tag(Router.hostItemSettings(host: host))
                 }
             }
         }
         if !kodi.bonjourHosts.filter({$0.new}).isEmpty {
-            Section("New Kodi's on your network") {
+            Section("New Kodi's") {
                 ForEach(kodi.bonjourHosts.filter({$0.new}), id: \.ip) { host in
                     Label(title: {
                         Text(host.name)
@@ -74,7 +74,7 @@ struct SidebarView: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(.orange)
                     })
-                    .tag(Router.kodiHostSettings(host: HostItem(ip: host.ip, media: .video, status: .new)))
+                    .tag(Router.hostItemSettings(host: HostItem(ip: host.ip, media: .video, status: .new)))
                 }
             }
         }
