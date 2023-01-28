@@ -12,8 +12,6 @@ import SwiftlyKodiAPI
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
-    /// The AppState model
-    @EnvironmentObject private var appState: AppState
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The search query

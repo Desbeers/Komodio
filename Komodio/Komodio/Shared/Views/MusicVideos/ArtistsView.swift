@@ -171,7 +171,7 @@ extension ArtistsView {
             VStack {
                 KodiArt.Poster(item: artist)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 360, height: 360)
+                    .frame(width: KomodioApp.posterSize.height, height: KomodioApp.posterSize.height)
                 Text(artist.artist)
                     .font(.caption)
             }

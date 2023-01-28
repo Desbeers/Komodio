@@ -90,11 +90,10 @@ struct UpNextView: View {
                         selectedEpisode = episode
                     }, label: {
                         Item(episode: episode)
-                            .foregroundColor(episode == selectedEpisode ? Color("AccentColor") : .primary)
                     })
                 }
             }
-            .frame(width: 500)
+            .frame(width: KomodioApp.posterSize.width + 80)
             .buttonStyle(.card)
             DetailView()
                 .frame(maxWidth: .infinity)
@@ -122,8 +121,9 @@ extension UpNextView {
             HStack(spacing: 0) {
                 KodiArt.Poster(item: episode)
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 80, height: 120)
-                    .padding(.trailing)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+
+                #if os(macOS)
                 VStack(alignment: .leading) {
                     Text(episode.showTitle)
                         .font(.headline)
@@ -135,7 +135,10 @@ extension UpNextView {
                     Text("Season \(episode.season), episode \(episode.episode)")
                         .font(.caption)
                 }
+                .padding(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                #endif
+
             }
         }
     }

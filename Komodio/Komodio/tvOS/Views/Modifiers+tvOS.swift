@@ -34,7 +34,7 @@ extension Modifiers {
 extension View {
 
     /// Shortcut to the ``Modifiers/SafeAreas``
-    func setSafeAreas() -> some View {
+    @MainActor func setSafeAreas() -> some View {
         modifier(Modifiers.SafeAreas())
     }
 }

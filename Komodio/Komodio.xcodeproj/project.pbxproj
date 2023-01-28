@@ -22,7 +22,6 @@
 		D71BD54529056AD800037DC9 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */; };
 		D71BD54C29056F1100037DC9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
 		D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54D29056F3700037DC9 /* SidebarView.swift */; };
-		D71BD55029056FA500037DC9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54F29056FA500037DC9 /* AppState.swift */; };
 		D71BD55229056FB500037DC9 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D71BD5542905726A00037DC9 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
 		D71BD55629057E6600037DC9 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55529057E6600037DC9 /* DetailView.swift */; };
@@ -66,7 +65,6 @@
 		D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* HostItemView.swift */; };
 		D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D785A199294B63D900530F62 /* SwiftlyKodiAPI */; };
 		D785A19B294B63FA00530F62 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
-		D785A19C294B63FE00530F62 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54F29056FA500037DC9 /* AppState.swift */; };
 		D785A19D294B640300530F62 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D785A19E294B640800530F62 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
 		D785A19F294B652100530F62 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
@@ -109,7 +107,6 @@
 		D71BD53D29056A5E00037DC9 /* Komodio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Komodio.entitlements; sourceTree = "<group>"; };
 		D71BD54B29056F1100037DC9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D71BD54D29056F3700037DC9 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
-		D71BD54F29056FA500037DC9 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D71BD55129056FB500037DC9 /* SceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneState.swift; sourceTree = "<group>"; };
 		D71BD5532905726A00037DC9 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		D71BD55529057E6600037DC9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -130,7 +127,6 @@
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../KomodioTV/KomodioTV/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		D779BE92297EF567009FD90A /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1363296ECD2E00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		D77B1366296ED6DC00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
@@ -210,7 +206,6 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
-				D779BE92297EF567009FD90A /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 				D785A198294B63D900530F62 /* Frameworks */,
@@ -313,7 +308,6 @@
 		D75C3F61294DCCC8002BC065 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				D71BD54F29056FA500037DC9 /* AppState.swift */,
 				D71BD55129056FB500037DC9 /* SceneState.swift */,
 				D71BD54B29056F1100037DC9 /* Router.swift */,
 				D71BD55929057FE400037DC9 /* MediaItem.swift */,
@@ -533,7 +527,6 @@
 				D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */,
 				D7254F4A295853F800DC704B /* SearchView.swift in Sources */,
 				D77B1364296ECD2E00ECE2F9 /* Documentation.docc in Sources */,
-				D71BD55029056FA500037DC9 /* AppState.swift in Sources */,
 				D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */,
 				D7F03A792964635B0026D815 /* StatisticsView.swift in Sources */,
 				D71170AD2934E37A0059FCD3 /* EpisodeView.swift in Sources */,
@@ -593,7 +586,6 @@
 				D785A19F294B652100530F62 /* MoviesView.swift in Sources */,
 				D7254F4429573BD900DC704B /* Buttons+tvOS.swift in Sources */,
 				D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */,
-				D785A19C294B63FE00530F62 /* AppState.swift in Sources */,
 				D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */,
 				D785A19E294B640800530F62 /* MediaItem.swift in Sources */,
 				D75C3F6A294DDD42002BC065 /* SeasonsView.swift in Sources */,
@@ -745,6 +737,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.KomodioMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -774,6 +767,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.KomodioMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -802,6 +796,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 16.1;
@@ -832,6 +827,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 16.1;

@@ -65,7 +65,7 @@ extension HostItemView {
         var body: some View {
             VStack {
                 KodiHostItemView.KodiSettings()
-                .font(AppState.shared.platform == .macOS ? .title2 : .body)
+                .font(KomodioApp.platform == .macOS ? .title2 : .body)
             }
             .padding()
             .background(.ultraThinMaterial)

@@ -29,8 +29,6 @@ struct ContentView: View {
             MoviesView(filter: .unwatched)
         case .tvshows:
             TVShowsView()
-        case .seasons(let tvshow):
-            TVShowsView(selectedTVShow: tvshow)
         case .unwachedEpisodes:
             UpNextView()
         case .musicVideos:

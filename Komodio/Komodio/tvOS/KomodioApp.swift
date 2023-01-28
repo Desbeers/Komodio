@@ -10,8 +10,6 @@ import SwiftlyKodiAPI
 
 /// The Komodio App Scene (tvOS)
 @main struct KomodioApp: App {
-    /// The AppState model
-    @StateObject var appState: AppState = .shared
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared
     /// The SceneState model
@@ -21,7 +19,6 @@ import SwiftlyKodiAPI
         WindowGroup {
             MainView()
                 .environmentObject(kodi)
-                .environmentObject(appState)
                 .environmentObject(scene)
                 .task {
                     if kodi.state == .none {
@@ -59,6 +56,9 @@ import SwiftlyKodiAPI
 extension KomodioApp {
 
     // MARK: Static settings
+
+    /// The plaform
+    static let platform: Parts.Platform = .tvOS
 
     /// The default size of poster art
     static let posterSize = CGSize(width: 240, height: 360)

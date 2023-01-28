@@ -89,21 +89,17 @@ class SceneState: ObservableObject {
 extension SceneState {
 
 #if os(macOS)
-
     /// Update the search query
     /// - Parameter query: The query in the UI
-    func updateSearch(query: String) async {
+    @MainActor func updateSearch(query: String) async {
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
-//            self.query = query
-            Task { @MainActor in
-                self.query = query
-                if !query.isEmpty {
-                    sidebarSelection = .search
-                } else if sidebarSelection == .search {
-                    /// Go to the main browser view; the search is canceled
-                    sidebarSelection = .movies
-                }
+            self.query = query
+            if !query.isEmpty {
+                sidebarSelection = .search
+            } else if sidebarSelection == .search {
+                /// Go to the main browser view; the search is canceled
+                sidebarSelection = .start
             }
         } catch { }
     }

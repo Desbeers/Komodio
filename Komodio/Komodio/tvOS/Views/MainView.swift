@@ -34,7 +34,6 @@ struct MainView: View {
                 })
                 .navigationDestination(for: Video.Details.TVShow.self, destination: { tvshow in
                     SeasonsView(tvshow: tvshow)
-                        .setSafeAreas()
                 })
                 .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
                     MusicVideosView(artist: artist)

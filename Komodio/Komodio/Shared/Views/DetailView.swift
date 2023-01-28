@@ -28,6 +28,7 @@ struct DetailView: View {
             case .movieSet(let movieSet):
                 MovieSetView
                     .Details(movieSet: movieSet)
+                    .id(movieSet.id)
             case .tvshow(let tvshow):
                 TVShowView
                     .Details(tvshow: tvshow)

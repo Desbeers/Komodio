@@ -24,6 +24,8 @@ extension MusicVideoView {
 
         /// The body of the View
         var body: some View {
+
+#if os(macOS)
             VStack {
                 Text(musicVideo.title)
                     .font(.largeTitle)
@@ -40,7 +42,27 @@ extension MusicVideoView {
             .padding(40)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(item: musicVideo)
-            .animation(.default, value: musicVideo)
+#endif
+
+#if os(tvOS)
+            VStack {
+                Text(musicVideo.title)
+                    .font(.title)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .padding(.bottom)
+                KodiArt.Fanart(item: musicVideo)
+                    .watchStatus(of: musicVideo)
+                    .cornerRadius(10)
+                    .padding(.bottom, 40)
+                Buttons.Player(item: musicVideo)
+                Text(musicVideo.plot)
+            }
+            .padding(40)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background(item: musicVideo)
+#endif
+
         }
     }
 }

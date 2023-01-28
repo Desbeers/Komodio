@@ -40,7 +40,8 @@ extension EpisodeView {
                         .cornerRadius(KomodioApp.thumbSize.width / 35)
                         .padding(.trailing)
                     VStack(alignment: .leading) {
-                        Text(episode.plot)
+                        Parts.TextMoreView(text: Text(episode.plot))
+                            .frame(height: KomodioApp.thumbSize.height)
                         Buttons.Player(item: episode)
                     }
                 }
@@ -64,12 +65,13 @@ extension EpisodeView {
                         .background(.thickMaterial)
                         .cornerRadius(KomodioApp.thumbSize.width / 35)
                         .padding(.trailing)
-                    VStack(alignment: .leading) {
-                        Text(episode.plot)
-                            .lineLimit(7, reservesSpace: true)
-                    }
+                    Parts.TextMoreView(text: Text(episode.plot))
+                        .frame(height: KomodioApp.thumbSize.height)
                 }
+                .focusSection()
                 Buttons.Player(item: episode)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .focusSection()
             }
 #endif
 
@@ -124,6 +126,8 @@ extension EpisodeView {
             VStack {
                 Text(episode.showTitle)
                     .font(.title)
+                Text("Season \(episode.season), episode \(episode.episode)")
+                    .font(.caption)
                 KodiArt.Fanart(item: episode)
                     .watchStatus(of: episode)
                     .overlay(alignment: .bottom) {
@@ -137,7 +141,7 @@ extension EpisodeView {
                     .cornerRadius(KomodioApp.thumbSize.width / 35)
                     .padding()
                 Text(episode.plot)
-                    Buttons.Player(item: episode)
+                Buttons.Player(item: episode)
             }
             .background(item: episode)
 #endif

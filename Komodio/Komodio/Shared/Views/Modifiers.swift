@@ -27,7 +27,7 @@ extension Modifiers {
             content
                 .overlay(alignment: .topTrailing) {
                     Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" : item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled")
-                        .font(AppState.shared.platform == .macOS ? .title3 : .body)
+                        .font(KomodioApp.platform == .macOS ? .title3 : .body)
                         .foregroundColor(.yellow)
                         .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)
                 }
@@ -99,8 +99,8 @@ extension Modifiers {
         /// The modifier
         func body(content: Content) -> some View {
             content
-                .font(.system(size: 18))
-                .lineSpacing(8)
+                .font(.system(size: 14))
+                .lineSpacing(6)
         }
     }
 }

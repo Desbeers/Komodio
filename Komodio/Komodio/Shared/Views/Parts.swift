@@ -43,13 +43,13 @@ extension Parts {
         var body: some View {
             VStack {
                 Text(title)
-                    .font(.system(size: 50))
+                    .font(.system(size: KomodioApp.platform == .macOS ? 50 : 80))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .padding(.bottom)
                 if let message {
                     Text(.init(message))
-                        .font(.system(size: 20))
+                        .font(.system(size: KomodioApp.platform == .macOS ? 20 : 40))
                         .opacity(0.6)
                         .padding(.bottom)
                 }
@@ -83,7 +83,7 @@ extension Parts {
                     EmptyView()
                 }
             }
-            .font(AppState.shared.platform == .macOS ? .title2 : .title3)
+            .font(KomodioApp.platform == .macOS ? .title2 : .title3)
             .frame(maxHeight: .infinity)
         }
     }
@@ -116,6 +116,17 @@ extension Parts {
         case none
         /// Filter for unwatched media
         case unwatched
+    }
+}
+
+extension Parts {
+
+    /// The platforms supported by Komodio
+    enum Platform {
+        /// macOS
+        case macOS
+        /// tvOS
+        case tvOS
     }
 }
 
@@ -180,11 +191,11 @@ extension Parts {
                         .modifier(RotatingIconModel.Rotate(rotate: rotateModel.rotating, status: $rotateModel.status))
                 }
                 /// Below is needed or else the View will not center
-                    .frame(
-                        width: geometry.size.width,
-                        height: geometry.size.height,
-                        alignment: .center
-                    )
+                .frame(
+                    width: geometry.size.width,
+                    height: geometry.size.height,
+                    alignment: .center
+                )
             }
             .animation(rotateModel.rotating ? rotateModel.foreverAnimation : .linear(duration: 0), value: rotateModel.rotating)
             .task(id: rotate) {
@@ -206,6 +217,54 @@ extension Parts {
         /// - Returns: The minimum size as `CGFloat`
         func minSize(size: GeometryProxy) -> CGFloat {
             return size.size.width > size.size.height ? size.size.height : size.size.width
+        }
+    }
+}
+
+extension Parts {
+
+    /// Show text with optional 'more' button
+    struct TextMoreView: View {
+        let text: Text
+        @State var showFullText: Bool = false
+
+        var body: some View {
+            ViewThatFits(in: .vertical) {
+                text
+                VStack {
+                    text
+                    Button("More…") {
+                        showFullText = true
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+
+#if os(macOS)
+                    .font(.body)
+#endif
+
+#if os(tvOS)
+                    .buttonStyle(.plain)
+#endif
+
+                }
+            }
+            .sheet(isPresented: $showFullText) {
+                text
+
+#if os(macOS)
+                    .padding(60)
+                    .background(alignment: .bottom) {
+                        Button(action: {
+                            showFullText = false
+                        }, label: {
+                            Text("Close")
+                        })
+                        .padding()
+                    }
+                    .frame(width: 600)
+#endif
+
+            }
         }
     }
 }

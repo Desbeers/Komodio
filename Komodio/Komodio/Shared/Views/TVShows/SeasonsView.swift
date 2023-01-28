@@ -48,7 +48,6 @@ struct SeasonsView: View {
     @ViewBuilder var content: some View {
 
 #if os(macOS)
-
         VStack {
             List(selection: $selectedSeason) {
                 KodiArt.Fanart(item: tvshow)
@@ -89,8 +88,8 @@ struct SeasonsView: View {
                         }
                         /// It looks like `TabView` is ignoring the custom safe areas
                         .padding(.leading, KomodioApp.sidebarCollapsedWidth / 1.2)
-                        .padding(.trailing, 100)
                         SeasonView(tvshow: tvshow, episodes: episodes.filter({$0.season == season.season }))
+                            .focusSection()
                     }
                     .tag(season.season)
                 }

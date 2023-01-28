@@ -10,8 +10,6 @@ import SwiftlyKodiAPI
 
 /// The Komodio App Scene
 @main struct KomodioApp: App {
-    /// The AppState model
-    @StateObject private var appState: AppState = .shared
     /// The KodiConnector model
     @StateObject private var kodi: KodiConnector = .shared
     /// Open new windows
@@ -21,7 +19,6 @@ import SwiftlyKodiAPI
         WindowGroup(id: "Main") {
             MainView()
                 .environmentObject(kodi)
-                .environmentObject(appState)
                 .task {
                     if kodi.state == .none {
                         /// Get the selected host (if any)
@@ -53,6 +50,9 @@ import SwiftlyKodiAPI
 extension KomodioApp {
 
     // MARK: Static settings
+
+    /// The plaform
+    static let platform: Parts.Platform = .macOS
 
     /// The default size of poster art
     static let posterSize = CGSize(width: 80, height: 120)

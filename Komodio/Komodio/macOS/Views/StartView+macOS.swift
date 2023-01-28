@@ -12,8 +12,6 @@ extension StartView {
 
 /// SwiftUI View when starting Komodio  (macOS)
     struct Content: View {
-        /// The AppState model
-        @EnvironmentObject private var appState: AppState
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
 

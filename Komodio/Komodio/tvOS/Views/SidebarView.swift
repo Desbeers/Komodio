@@ -13,8 +13,6 @@ import AVFoundation
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
-    /// The AppState model
-    @EnvironmentObject var appState: AppState
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
     /// The focus state of the sidebar

@@ -49,6 +49,7 @@ struct MoviesView: View {
                 state = .empty
             } else {
                 getItems()
+                setItemDetails()
                 state = .ready
             }
         }
@@ -160,7 +161,6 @@ struct MoviesView: View {
                 }
             case .movieSet:
                 if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(item.id)}) {
-                    scene.details = .movieSet(movieSet: movieSet)
                     selectedMovieSet = movieSet
                 }
             default:

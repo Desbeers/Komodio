@@ -30,6 +30,9 @@ struct MovieSetView: View {
         content
             .task(id: movieSet) {
                 getMoviesFromSet()
+                if movieSet.media == .movieSet {
+                    scene.details = .movieSet(movieSet: movieSet)
+                }
             }
             .task(id: selectedMovie) {
                 setMovieDetails()
@@ -58,7 +61,7 @@ struct MovieSetView: View {
 
 #if os(tvOS)
         VStack {
-            MovieSetView.Details(movieSet: movieSet)
+            DetailView()
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(movies) { movie in
@@ -68,8 +71,9 @@ struct MovieSetView: View {
                     }
                 }
                 .padding(80)
-
             }
+            .frame(maxWidth: .infinity)
+            .focusSection()
         }
         .buttonStyle(.card)
 #endif
@@ -140,52 +144,83 @@ extension MovieSetView {
     /// SwiftUI View for the details of a `MovieSet`
     struct Details: View {
         /// The movie set
-        let movieSet: Video.Details.MovieSet
+        @State var movieSet: Video.Details.MovieSet
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
+
+        /// Update a Movie Set
+        /// - Parameter movie: The movie set to update
+        /// - Returns: If update is found, the updated Movie Set, else `nil`
+        func updateMovieSet(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
+            if let update = kodi.library.movieSets.first(where: {$0.id == movieSet.id}), update != movieSet {
+                return update
+            }
+            return nil
+        }
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
+            Group {
 
 #if os(macOS)
-            ScrollView {
-                VStack {
-                    Text(movieSet.title)
-                        .font(.system(size: 40))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                    KodiArt.Fanart(item: movieSet)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                        .padding(.bottom)
-                    Text(movieSet.plot)
+                ScrollView {
+                    VStack {
+                        Text(movieSet.title)
+                            .font(.system(size: 40))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                        KodiArt.Fanart(item: movieSet)
+                            .aspectRatio(contentMode: .fit)
+                            .watchStatus(of: movieSet)
+                            .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                            .padding(.bottom)
+                        Buttons.MovieSetToggle(set: movieSet)
+                            .padding(.bottom)
+                            .buttonStyle(Styles.PlayButton())
+                        Text(movieSet.plot)
+                    }
+                    .detailsFontStyle()
+                    .padding(40)
                 }
-                .detailsFontStyle()
-                .padding(40)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(item: movieSet)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 #endif
 
 #if os(tvOS)
-            HStack {
-                KodiArt.Fanart(item: movieSet)
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                VStack {
-                    Text(movieSet.title)
-                        .font(.title)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                        .padding(.bottom)
-                    Text(movieSet.plot)
+                HStack {
+                    KodiArt.Fanart(item: movieSet)
+                        .aspectRatio(contentMode: .fit)
+                        .watchStatus(of: movieSet)
+                        .cornerRadius(10)
+                    VStack {
+                        Text(movieSet.title)
+                            .font(.title)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.bottom)
+                        Buttons.MovieSetToggle(set: movieSet)
+                            .padding(.bottom)
+                            .buttonStyle(.card)
+                        Text(movieSet.plot)
+                    }
                 }
-            }
-            .padding(40)
-            .background(item: movieSet)
+                .padding(40)
+                .frame(maxWidth: .infinity)
+                .focusSection()
+
 #endif
 
+            }
+            .background(item: movieSet)
+            .animation(.default, value: movieSet)
+            .task(id: kodi.library.movies) {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                if let update = updateMovieSet(movieSet: movieSet) {
+                    movieSet = update
+                }
+            }
         }
     }
 }
