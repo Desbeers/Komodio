@@ -77,6 +77,7 @@ extension AlbumView {
                     Buttons.Player(item: musicVideo)
                 }
             }
+            .focusSection()
 #endif
 
         }

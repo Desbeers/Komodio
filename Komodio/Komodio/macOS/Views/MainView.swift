@@ -44,7 +44,7 @@ struct MainView: View {
                     .scaledToFill()
                     .opacity(0.3)
                     .overlay {
-                        Parts.GradientOverlay()
+                        PartsView.GradientOverlay()
                     }
             }
         )

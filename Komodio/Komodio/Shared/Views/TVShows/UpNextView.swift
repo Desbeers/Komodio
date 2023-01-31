@@ -30,7 +30,7 @@ struct UpNextView: View {
             case .ready:
                 content
             default:
-                Parts.StatusMessage(item: .unwachedEpisodes, status: state)
+                PartsView.StatusMessage(item: .unwachedEpisodes, status: state)
             }
         }
         .animation(.default, value: selectedEpisode)
@@ -109,7 +109,7 @@ struct UpNextView: View {
 
 extension UpNextView {
 
-    /// SwiftUI View for an item in ``UpNextView``
+    /// SwiftUI View for an item in the ``UpNextView`` list
     struct Item: View {
         /// The Episode
         let episode: Video.Details.Episode
@@ -140,6 +140,76 @@ extension UpNextView {
                 #endif
 
             }
+        }
+    }
+}
+
+extension UpNextView {
+
+    /// SwiftUI View for Episode details in a  ``UpNextView`` list
+    struct Details: View {
+        /// The Episode
+        let episode: Video.Details.Episode
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+
+#if os(macOS)
+            ScrollView {
+                VStack {
+                    Text(episode.showTitle)
+                        .font(.system(size: 40))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    KodiArt.Fanart(item: episode)
+                        .watchStatus(of: episode)
+                        .overlay(alignment: .bottom) {
+                            Text(episode.title)
+                                    .font(.title2)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
+                                    .padding(8)
+                                    .frame(maxWidth: .infinity)
+                                    .background(.regularMaterial)
+                        }
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                    Buttons.Player(item: episode)
+                        .padding()
+                    Text(episode.plot)
+                }
+                .detailsFontStyle()
+                .padding(40)
+            }
+            .background(item: episode)
+#endif
+
+#if os(tvOS)
+            VStack {
+                Text(episode.showTitle)
+                    .font(.title)
+                Text("Season \(episode.season), episode \(episode.episode)")
+                    .font(.caption)
+                KodiArt.Fanart(item: episode)
+                    .watchStatus(of: episode)
+                    .overlay(alignment: .bottom) {
+                        Text(episode.title)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(.regularMaterial)
+                    }
+                    .cornerRadius(KomodioApp.thumbSize.width / 35)
+                    .padding()
+                Text(episode.plot)
+                Buttons.Player(item: episode)
+            }
+            .background(item: episode)
+#endif
+
         }
     }
 }

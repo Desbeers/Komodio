@@ -11,10 +11,15 @@ import SwiftlyKodiAPI
 /// SwiftUI View for a single Movie (shared)
 enum MovieView {
 
+    // MARK: Private functions
+
     /// Update a Movie
+    ///
+    /// On `tvOS`, Movie details are shown in its own View so it needs to update itself when movie details are changed
+    ///
     /// - Parameter movie: The movie to update
     /// - Returns: If update is found, the updated Movie, else `nil`
-    static func updateMovie(movie: Video.Details.Movie) -> Video.Details.Movie? {
+    static private func updateMovie(movie: Video.Details.Movie) -> Video.Details.Movie? {
         if let update = KodiConnector.shared.library.movies.first(where: {$0.id == movie.id}), update != movie {
             return update
         }
@@ -24,7 +29,43 @@ enum MovieView {
 
 extension MovieView {
 
-    // MARK: Details of a Movie
+    // MARK: Movie item
+
+    /// SwiftUI View for a movie item
+    struct Item: View {
+        /// The movie
+        let movie: Video.Details.Movie
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            HStack {
+                KodiArt.Poster(item: movie)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                    .watchStatus(of: movie)
+
+#if os(macOS)
+                VStack(alignment: .leading) {
+                    Text(movie.title)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    Text(movie.genre.joined(separator: "∙"))
+                    Text(movie.year.description)
+                        .font(.caption)
+                }
+#endif
+
+            }
+        }
+    }
+}
+
+extension MovieView {
+
+    // MARK: Movie details
 
     /// SwiftUI View for Movie details
     struct Details: View {

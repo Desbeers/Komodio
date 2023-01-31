@@ -9,13 +9,15 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 /// Collection of SwiftUI Buttons (shared)
+///
+/// - The ``Play`` and ``Resume`` buttons between macOS and tvOS are very different and in its on file
 enum Buttons {
     // Just a namespace here
 }
 
 extension Buttons {
 
-    /// The 'play',  'resume' and 'watch status' buttons
+    /// The 'play',  'resume' and optional 'played state' buttons
     struct Player: View {
         /// The `KodiItem`
         var item: any KodiItem
@@ -49,27 +51,50 @@ extension Buttons {
         }
     }
 
-    /// A Button to toggle the watched state of a movie set
-    /// - Note: Don't add a buttonstyle, else it will not work as context menu
-    struct MovieSetToggle: View {
-        /// The set we want to toggle
-        let set: Video.Details.MovieSet
-        /// The body of this View
+    /// The 'played state' button
+    struct PlayedState: View {
+        /// The `KodiItem` to set
+        let item: any KodiItem
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
-            VStack {
-                Button(action: {
-                    Task {
-                        await set.togglePlayedState()
-                    }
-                }, label: {
-                    Label(title: {
-                        Text(set.playcount == 0 ? "Mark all movies as watched" : "Mark all movies as new")
-                    }, icon: {
-                        Image(systemName: set.playcount == 0 ? "eye.fill" : "eye")
-                    })
+            Button(action: {
+                Task {
+                    await item.togglePlayedState()
+                }
+            }, label: {
+                Label(title: {
+                    Text(item.playcount == 0 ? "Mark \(item.media.description) as watched" : "Mark  \(item.media.description) as new")
+                }, icon: {
+                    Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
                 })
-                .labelStyle(Styles.PlayLabel())
-            }
+            })
         }
     }
+
+//    /// A Button to toggle the watched state of a movie set
+//    /// - Note: Don't add a buttonstyle, else it will not work as context menu
+//    struct MovieSetToggle: View {
+//        /// The set we want to toggle
+//        let set: Video.Details.MovieSet
+//        /// The body of this View
+//        var body: some View {
+//            VStack {
+//                Button(action: {
+//                    Task {
+//                        await set.togglePlayedState()
+//                    }
+//                }, label: {
+//                    Label(title: {
+//                        Text(set.playcount == 0 ? "Mark all movies as watched" : "Mark all movies as new")
+//                    }, icon: {
+//                        Image(systemName: set.playcount == 0 ? "eye.fill" : "eye")
+//                    })
+//                })
+//                .labelStyle(Styles.PlayLabel())
+//            }
+//        }
+//    }
 }

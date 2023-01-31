@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The Komodio App Scene
+/// The Komodio App Scene (macOS)
 @main struct KomodioApp: App {
     /// The KodiConnector model
     @StateObject private var kodi: KodiConnector = .shared

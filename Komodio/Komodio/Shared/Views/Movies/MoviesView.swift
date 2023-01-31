@@ -8,9 +8,10 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for all Movies (shared)
+/// SwiftUI View for all Movies in the library (shared)
 ///
-/// - Movies that are part of a set will be removed and replaced with the set
+/// - Movies that are part of a set will be removed and replaced with the set when showing all movies and sorted by title
+/// - When the library is filtered by 'unwatched', it will be sorted by 'date added'
 struct MoviesView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -19,7 +20,7 @@ struct MoviesView: View {
     /// The items in this view (movies + movie sets)
     @State private var items: [any KodiItem] = []
     /// The optional filter
-    var filter: Parts.Filter?
+    var filter: Parts.Filter = .none
     /// The optional selected item
     @State private var selectedItem: MediaItem?
     /// The optional selected movie set (macOS)
@@ -38,7 +39,7 @@ struct MoviesView: View {
             case .ready:
                 content
             default:
-                Parts.StatusMessage(item: .movies, status: state)
+                PartsView.StatusMessage(item: .movies, status: state)
             }
         }
         .animation(.default, value: selectedItem)
@@ -69,7 +70,7 @@ struct MoviesView: View {
                 ForEach(items, id: \.id) { video in
                     switch video {
                     case let movie as Video.Details.Movie:
-                        Item(movie: movie)
+                        MovieView.Item(movie: movie)
                             .tag(MediaItem(id: movie.id, media: .movie))
                     case let movieSet as Video.Details.MovieSet:
                         MovieSetView.Item(movieSet: movieSet)
@@ -109,7 +110,7 @@ struct MoviesView: View {
                     switch video {
                     case let movie as Video.Details.Movie:
                         NavigationLink(value: movie, label: {
-                            Item(movie: movie)
+                            MovieView.Item(movie: movie)
                         })
                         .padding(.bottom, 40)
                     case let movieSet as Video.Details.MovieSet:
@@ -133,20 +134,15 @@ struct MoviesView: View {
     // MARK: Private functions
 
     /// Get all items from the library
-    ///
-    /// - Movies that are part of a set will be removed and replaced with the set
     private func getItems() {
-        var items: [any KodiItem] = []
-        items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
-        if let filter {
-            switch filter {
-            case .unwatched:
-                items = items.filter({$0.playcount == 0})
-            default:
-                break
-            }
+        switch filter {
+        case .unwatched:
+            /// Movies are sorted by newest first
+            items = kodi.library.movies.filter({$0.playcount == 0}).sorted(by: {$0.dateAdded > $1.dateAdded})
+        default:
+            /// Movies that are part of a set will be removed and replaced with the set
+            items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
         }
-        self.items = items
     }
 
     /// Set the details of a selected item
@@ -168,48 +164,12 @@ struct MoviesView: View {
             }
         } else {
             /// Set the default Navigation Subtitle for Movies
-            if filter != nil {
+            if filter == .unwatched {
                 scene.navigationSubtitle = "Unwatched Movies"
                 scene.details = .unwatchedMovies
             } else {
                 scene.navigationSubtitle = Router.movies.label.title
                 scene.details = .movies
-            }
-        }
-    }
-}
-
-// MARK: Extensions
-
-extension MoviesView {
-
-    /// SwiftUI View for a movie in ``MoviesView``
-    struct Item: View {
-        /// The movie
-        let movie: Video.Details.Movie
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            HStack {
-                KodiArt.Poster(item: movie)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                    .watchStatus(of: movie)
-
-#if os(macOS)
-                VStack(alignment: .leading) {
-                    Text(movie.title)
-                        .font(.headline)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                    Text(movie.genre.joined(separator: "∙"))
-                    Text(movie.year.description)
-                        .font(.caption)
-                }
-#endif
-
             }
         }
     }

@@ -42,7 +42,7 @@ struct MusicVideosView: View {
     var content: some View {
         List(selection: $selectedItem) {
             ForEach(items) { item in
-                Item(item: item)
+                MusicVideoView.Item(item: item)
                     .tag(item)
             }
         }
@@ -59,7 +59,7 @@ struct MusicVideosView: View {
                     Button(action: {
                         selectedItem = item
                     }, label: {
-                        Item(item: item)
+                        MusicVideoView.Item(item: item)
                     })
                 }
             }
@@ -120,35 +120,6 @@ struct MusicVideosView: View {
                 scene.details = Router.album(musicVideos: musicVideos)
             default:
                 break
-            }
-        }
-    }
-}
-
-// MARK: Extensions
-
-extension MusicVideosView {
-
-    /// SwiftUI View for an item in ``MusicVideosView``
-    struct Item: View {
-        /// The ``MediaItem``
-        let item: MediaItem
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            HStack {
-                KodiArt.Poster(item: item.item)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                    .watchStatus(of: item.item)
-
-#if os(macOS)
-                Text(item.media == .musicVideo ? item.item.title : item.item.details)
-                    .font(.headline)
-#endif
-
             }
         }
     }

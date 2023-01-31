@@ -15,6 +15,39 @@ enum MusicVideoView {
 
 extension MusicVideoView {
 
+    // MARK: Music Video item
+
+    /// SwiftUI View for a Music Video item
+    ///
+    /// - This can be an album or a music video
+    struct Item: View {
+        /// The ``MediaItem``
+        let item: MediaItem
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            HStack {
+                KodiArt.Poster(item: item.item)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                    .watchStatus(of: item.item)
+
+#if os(macOS)
+                Text(item.media == .musicVideo ? item.item.title : item.item.details)
+                    .font(.headline)
+#endif
+
+            }
+        }
+    }
+}
+
+extension MusicVideoView {
+
+    // MARK: Music Video details
+
     /// SwiftUI View for a Music Video details
     struct Details: View {
         /// The Music Video
@@ -58,6 +91,7 @@ extension MusicVideoView {
                 Buttons.Player(item: musicVideo)
                 Text(musicVideo.plot)
             }
+            .focusSection()
             .padding(40)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(item: musicVideo)

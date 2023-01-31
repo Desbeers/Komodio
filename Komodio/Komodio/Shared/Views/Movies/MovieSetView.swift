@@ -30,15 +30,16 @@ struct MovieSetView: View {
         content
             .task(id: movieSet) {
                 getMoviesFromSet()
-                if movieSet.media == .movieSet {
-                    scene.details = .movieSet(movieSet: movieSet)
-                }
+                setMovieSetDetails()
             }
             .task(id: selectedMovie) {
                 setMovieDetails()
             }
             .task(id: kodi.library.movies) {
                 getMoviesFromSet()
+            }
+            .task(id: kodi.library.movieSets) {
+                setMovieSetDetails()
             }
     }
 
@@ -51,7 +52,7 @@ struct MovieSetView: View {
         VStack {
             List(selection: $selectedMovie) {
                 ForEach(movies) { movie in
-                    MoviesView.Item(movie: movie)
+                    MovieView.Item(movie: movie)
                         .tag(movie)
                 }
             }
@@ -66,7 +67,7 @@ struct MovieSetView: View {
                 HStack {
                     ForEach(movies) { movie in
                         NavigationLink(value: movie, label: {
-                            MoviesView.Item(movie: movie)
+                            MovieView.Item(movie: movie)
                         })
                     }
                 }
@@ -100,6 +101,13 @@ struct MovieSetView: View {
         }
     }
 
+    /// Set the details of a selected movie set
+    private func setMovieSetDetails() {
+        if movieSet.media == .movieSet, selectedMovie == nil, let movieSet = kodi.library.movieSets.first(where: {$0.id == movieSet.id}) {
+            scene.details = .movieSet(movieSet: movieSet)
+        }
+    }
+
     /// Set the details of a selected movie
     private func setMovieDetails() {
         if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
@@ -108,11 +116,11 @@ struct MovieSetView: View {
     }
 }
 
-// MARK: Extensions
-
 extension MovieSetView {
 
-    /// SwiftUI View for a `MovieSet` in ``MoviesView``
+    // MARK: Movie Set item
+
+    /// SwiftUI View for a `MovieSet` item
     struct Item: View {
         /// The movie set
         let movieSet: Video.Details.MovieSet
@@ -139,24 +147,12 @@ extension MovieSetView {
 
 extension MovieSetView {
 
-    // MARK: Details of a  Movie Set
+    // MARK: Movie Set details
 
     /// SwiftUI View for the details of a `MovieSet`
     struct Details: View {
         /// The movie set
-        @State var movieSet: Video.Details.MovieSet
-        /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
-
-        /// Update a Movie Set
-        /// - Parameter movie: The movie set to update
-        /// - Returns: If update is found, the updated Movie Set, else `nil`
-        func updateMovieSet(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
-            if let update = kodi.library.movieSets.first(where: {$0.id == movieSet.id}), update != movieSet {
-                return update
-            }
-            return nil
-        }
+        let movieSet: Video.Details.MovieSet
 
         // MARK: Body of the View
 
@@ -177,8 +173,9 @@ extension MovieSetView {
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
                             .padding(.bottom)
-                        Buttons.MovieSetToggle(set: movieSet)
+                        Buttons.PlayedState(item: movieSet)
                             .padding(.bottom)
+                            .labelStyle(Styles.PlayLabel())
                             .buttonStyle(Styles.PlayButton())
                         Text(movieSet.plot)
                     }
@@ -200,7 +197,7 @@ extension MovieSetView {
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .padding(.bottom)
-                        Buttons.MovieSetToggle(set: movieSet)
+                        Buttons.PlayedState(item: movieSet)
                             .padding(.bottom)
                             .buttonStyle(.card)
                         Text(movieSet.plot)
@@ -215,12 +212,6 @@ extension MovieSetView {
             }
             .background(item: movieSet)
             .animation(.default, value: movieSet)
-            .task(id: kodi.library.movies) {
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
-                if let update = updateMovieSet(movieSet: movieSet) {
-                    movieSet = update
-                }
-            }
         }
     }
 }

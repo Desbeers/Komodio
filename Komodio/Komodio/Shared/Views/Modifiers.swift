@@ -67,7 +67,7 @@ extension Modifiers {
                             .scaledToFill()
                             .opacity(0.2)
                             .overlay {
-                                Parts.GradientOverlay()
+                                PartsView.GradientOverlay()
                                     .opacity(0.3)
                             }
                     }

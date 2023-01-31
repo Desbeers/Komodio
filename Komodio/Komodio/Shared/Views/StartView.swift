@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View when starting Komodio
+/// SwiftUI View when starting Komodio (shared)
 struct StartView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -54,10 +54,10 @@ extension StartView {
         var body: some View {
             VStack {
                 if kodi.state != .loadedLibrary {
-                    Parts.DetailMessage(title: kodi.state.message)
+                    PartsView.DetailMessage(title: kodi.state.message)
                         .padding(.top, 40)
                 }
-                Parts.RotatingIcon(rotate: $rotate)
+                PartsView.RotatingIcon(rotate: $rotate)
                     .task(id: kodi.state) {
                         rotate = kodi.state == .loadedLibrary ? true : false
                     }

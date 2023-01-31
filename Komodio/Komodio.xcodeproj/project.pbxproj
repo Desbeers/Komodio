@@ -57,6 +57,8 @@
 		D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BE293503C70059FCD3 /* MusicVideoView.swift */; };
 		D76750DB2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
 		D76750DC2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
+		D779BEB029882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
+		D779BEB129882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D77B1361296DECBF00ECE2F9 /* KomodioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */; };
 		D77B1362296DECBF00ECE2F9 /* KomodioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */; };
 		D77B1364296ECD2E00ECE2F9 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = D77B1363296ECD2E00ECE2F9 /* Documentation.docc */; };
@@ -68,7 +70,7 @@
 		D785A19D294B640300530F62 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D785A19E294B640800530F62 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
 		D785A19F294B652100530F62 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
-		D785A1A0294B653C00530F62 /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* Parts.swift */; };
+		D785A1A0294B653C00530F62 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* PartsView.swift */; };
 		D785A1A2294B665600530F62 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D785A1A1294B665600530F62 /* ContentView.swift */; };
 		D785A1A3294B665F00530F62 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
 		D785A1A4294B668C00530F62 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD561290595FF00037DC9 /* Modifiers.swift */; };
@@ -79,7 +81,7 @@
 		D7B49BE22953262A00BBCB80 /* SiriRemoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */; };
 		D7EFE450293A4E7900CE9B8D /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */; };
 		D7EFE452293A4E7900CE9B8D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE451293A4E7900CE9B8D /* MainView.swift */; };
-		D7EFE45E293A59AC00CE9B8D /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* Parts.swift */; };
+		D7EFE45E293A59AC00CE9B8D /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* PartsView.swift */; };
 		D7EFE460293B2C3300CE9B8D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
 		D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE462293B6B9100CE9B8D /* UpNextView.swift */; };
 		D7F03A6D295F141C0026D815 /* KodiSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */; };
@@ -127,6 +129,8 @@
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../KomodioTV/KomodioTV/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		D779BEAE29880818009FD90A /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
+		D779BEAF29882A67009FD90A /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1363296ECD2E00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		D77B1366296ED6DC00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
@@ -137,7 +141,7 @@
 		D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D7EFE451293A4E7900CE9B8D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D7EFE45B293A525800CE9B8D /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		D7EFE45D293A59AC00CE9B8D /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
+		D7EFE45D293A59AC00CE9B8D /* PartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsView.swift; sourceTree = "<group>"; };
 		D7EFE45F293B2C3300CE9B8D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D7EFE462293B6B9100CE9B8D /* UpNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextView.swift; sourceTree = "<group>"; };
 		D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiSettingsView.swift; sourceTree = "<group>"; };
@@ -195,8 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				D71170B8293503520059FCD3 /* ArtistsView.swift */,
-				D71170B6293502E90059FCD3 /* MusicVideosView.swift */,
 				D71170BA293503710059FCD3 /* ArtistView.swift */,
+				D71170B6293502E90059FCD3 /* MusicVideosView.swift */,
 				D71170BC293503A40059FCD3 /* AlbumView.swift */,
 				D71170BE293503C70059FCD3 /* MusicVideoView.swift */,
 			);
@@ -206,6 +210,7 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
+				D779BEAE29880818009FD90A /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 				D785A198294B63D900530F62 /* Frameworks */,
@@ -311,6 +316,7 @@
 				D71BD55129056FB500037DC9 /* SceneState.swift */,
 				D71BD54B29056F1100037DC9 /* Router.swift */,
 				D71BD55929057FE400037DC9 /* MediaItem.swift */,
+				D779BEAF29882A67009FD90A /* Parts.swift */,
 				D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */,
 				D71BD53829056A5E00037DC9 /* Assets.xcassets */,
 			);
@@ -329,9 +335,9 @@
 				D77B1371297561AA00ECE2F9 /* HostItemView.swift */,
 				D7F03A782964635B0026D815 /* StatisticsView.swift */,
 				D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */,
+				D7EFE45D293A59AC00CE9B8D /* PartsView.swift */,
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
 				D71BD561290595FF00037DC9 /* Modifiers.swift */,
-				D7EFE45D293A59AC00CE9B8D /* Parts.swift */,
 				D76750DA2969838800A95D52 /* Styles.swift */,
 			);
 			path = Views;
@@ -509,13 +515,14 @@
 			files = (
 				D71170B12934E72D0059FCD3 /* TVShowView.swift in Sources */,
 				D76750DB2969838800A95D52 /* Styles.swift in Sources */,
-				D7EFE45E293A59AC00CE9B8D /* Parts.swift in Sources */,
+				D7EFE45E293A59AC00CE9B8D /* PartsView.swift in Sources */,
 				D71BD55A29057FE400037DC9 /* MediaItem.swift in Sources */,
 				D71170BD293503A40059FCD3 /* AlbumView.swift in Sources */,
 				D7F03A6D295F141C0026D815 /* KodiSettingsView.swift in Sources */,
 				D77B1372297561AA00ECE2F9 /* HostItemView.swift in Sources */,
 				D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */,
 				D7F03A7C296466C40026D815 /* StartView+macOS.swift in Sources */,
+				D779BEB029882A67009FD90A /* Parts.swift in Sources */,
 				D71BD55829057F1A00037DC9 /* Buttons.swift in Sources */,
 				D71170B9293503520059FCD3 /* ArtistsView.swift in Sources */,
 				D71170BB293503710059FCD3 /* ArtistView.swift in Sources */,
@@ -550,6 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D779BEB129882A67009FD90A /* Parts.swift in Sources */,
 				D75C3F6D294DDD4D002BC065 /* UpNextView.swift in Sources */,
 				D75C3F69294DDD3F002BC065 /* TVShowView.swift in Sources */,
 				D785A1AB294CBC6100530F62 /* StartView.swift in Sources */,
@@ -559,7 +567,7 @@
 				D7F03A7E2964676A0026D815 /* StartView+tvOS.swift in Sources */,
 				D75C3F68294DDD3B002BC065 /* TVShowsView.swift in Sources */,
 				D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */,
-				D785A1A0294B653C00530F62 /* Parts.swift in Sources */,
+				D785A1A0294B653C00530F62 /* PartsView.swift in Sources */,
 				D7254F4629573FAB00DC704B /* Modifiers+tvOS.swift in Sources */,
 				D75C3F6B294DDD46002BC065 /* SeasonView.swift in Sources */,
 				D7254F49295853C900DC704B /* SearchView.swift in Sources */,

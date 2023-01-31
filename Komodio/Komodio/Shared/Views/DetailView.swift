@@ -33,8 +33,8 @@ struct DetailView: View {
                 TVShowView
                     .Details(tvshow: tvshow)
             case .episode(let episode):
-                EpisodeView
-                    .Item(episode: episode)
+                UpNextView
+                    .Details(episode: episode)
             case .season(let tvshow, let episodes):
                 SeasonView(tvshow: tvshow, episodes: episodes)
             case .artist(let artist):
@@ -63,7 +63,7 @@ struct DetailView: View {
     /// The fallback View
     private var fallback: some View {
         VStack {
-            Parts.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
+            PartsView.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
             Image(systemName: scene.sidebarSelection.label.icon)
                 .resizable()
                 .scaledToFit()

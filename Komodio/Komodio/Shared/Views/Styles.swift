@@ -22,9 +22,9 @@ extension Styles {
 
 #if os(macOS)
             configuration.label
-                .cornerRadius(10)
-                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
-                .scaleEffect(configuration.isPressed ? 1.2 : 1)
+                .cornerRadius(6)
+                .shadow(radius: 1)
+                .opacity(configuration.isPressed ? 0.8 : 1)
                 .animation(.default, value: configuration.isPressed)
 #endif
 
@@ -56,8 +56,8 @@ extension Styles {
                     .opacity(0.6)
                 configuration.title
             }
-            .padding()
-            .frame(height: 50)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
             .foregroundColor(.black)
             .background(.white.gradient)
 #endif

@@ -1,12 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/Desbeers/Documents/Github/Komodio/Komodio/Komodio/Shared/Views/HostItemView.swift",
-      "line": 13,
-      "symbol": "HostItemView.host",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/Desbeers/Documents/Github/Komodio/Komodio"
 }

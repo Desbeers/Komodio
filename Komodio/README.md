@@ -1,6 +1,6 @@
 #  Komodio
 
-## An Apple 'tvOS` and `macOS` Video Client for  [Kodi](https://kodi.tv)
+## An Apple 'tvOS' and 'macOS` Video Client for  [Kodi](https://kodi.tv)
 
 Komodio is a video player for tvOS 16 and macOS Ventura that can stream videos from your local Kodi host.
 

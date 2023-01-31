@@ -15,6 +15,43 @@ enum TVShowView {
 
 extension TVShowView {
 
+    // MARK: TV show item
+
+    /// SwiftUI View for a TV show item
+    struct Item: View {
+        /// The TV show
+        let tvshow: Video.Details.TVShow
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            HStack {
+                KodiArt.Poster(item: tvshow)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                    .watchStatus(of: tvshow)
+
+#if os(macOS)
+                VStack(alignment: .leading) {
+                    Text(tvshow.title)
+                        .font(.headline)
+                    Text(tvshow.genre.joined(separator: "∙"))
+                    Text(tvshow.year.description)
+                        .font(.caption)
+                }
+                /// Make the whole area clickable
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+#endif
+
+            }
+        }
+    }
+}
+
+extension TVShowView {
+
     // MARK: Details of a TV show
 
     /// SwiftUI View for TV show details

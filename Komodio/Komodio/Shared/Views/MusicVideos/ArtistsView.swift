@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Artists View
+
 /// SwiftUI View for all Artists from Music Videos (shared)
 struct ArtistsView: View {
     /// The KodiConnector model
@@ -34,7 +36,7 @@ struct ArtistsView: View {
             case .ready:
                 content
             default:
-                Parts.StatusMessage(item: .musicVideos, status: state)
+                PartsView.StatusMessage(item: .musicVideos, status: state)
             }
         }
         .animation(.default, value: selectedArtist)
@@ -61,7 +63,7 @@ struct ArtistsView: View {
         ZStack {
             List(selection: $selectedArtist) {
                 ForEach(artists, id: \.id) { artist in
-                    Item(artist: artist)
+                    ArtistView.Item(artist: artist)
                         .tag(artist)
                 }
             }
@@ -95,7 +97,7 @@ struct ArtistsView: View {
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(artists) { artist in
                     NavigationLink(value: artist, label: {
-                        Item(artist: artist)
+                        ArtistView.Item(artist: artist)
                     })
                 }
                 .padding(.bottom, 40)
@@ -142,40 +144,5 @@ struct ArtistsView: View {
         }
         /// Return an uknown artist
         return Audio.Details.Artist(media: .artist, artist: artist, artistID: Int.random(in: 1...1000))
-    }
-}
-
-// MARK: Extensions
-
-extension ArtistsView {
-
-    /// SwiftUI View for an artist in ``ArtistsView``
-    struct Item: View {
-        /// The artist
-        let artist: Audio.Details.Artist
-        /// The body of the View
-        var body: some View {
-#if os(macOS)
-            HStack {
-                KodiArt.Poster(item: artist)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.width)
-                VStack(alignment: .leading) {
-                    Text(artist.artist)
-                        .font(.headline)
-                }
-            }
-#endif
-
-#if os(tvOS)
-            VStack {
-                KodiArt.Poster(item: artist)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: KomodioApp.posterSize.height, height: KomodioApp.posterSize.height)
-                Text(artist.artist)
-                    .font(.caption)
-            }
-#endif
-        }
     }
 }

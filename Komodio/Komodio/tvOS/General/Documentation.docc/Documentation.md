@@ -33,10 +33,10 @@ Komodio depends on the following Swift Package that are in my GitHub account:
 - ``KomodioApp``
 - ``Router``
 - ``MediaItem``
+- ``Parts``
 
 ### Observable Classes
 
-- ``AppState``
 - ``SceneState``
 - ``RotatingIconModel``
 - ``SiriRemoteController``
@@ -67,8 +67,8 @@ Komodio depends on the following Swift Package that are in my GitHub account:
 - ``SearchView``
 - ``HostItemView``
 - ``KodiSettingsView``
+- ``PartsView``
 - ``Buttons``
 - ``Modifiers``
-- ``Parts``
 - ``Styles``
 

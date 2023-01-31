@@ -18,9 +18,9 @@ custom_categories:
     - KomodioApp
     - Router
     - MediaItem
+    - Parts
   - name: Observable Classes
     children:
-    - AppState
     - SceneState
     - RotatingIconModel
     - SiriRemoteController
@@ -50,7 +50,7 @@ custom_categories:
     - KomodioPlayerView
     - SearchView
     - KodiSettingsView
+    - PartsView
     - Buttons
     - Modifiers
-    - Parts
     - Styles

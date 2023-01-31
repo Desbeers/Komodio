@@ -68,26 +68,26 @@ extension Buttons {
         }
     }
 
-    /// The 'played state' button
-    struct PlayedState: View {
-        /// The `KodiItem` to set
-        var item: any KodiItem
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            Button(action: {
-                Task {
-                    await item.togglePlayedState()
-                }
-            }, label: {
-                Label(title: {
-                    Text(item.playcount == 0 ? "Mark as watched" : "Mark as new")
-                }, icon: {
-                    Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
-                })
-            })
-        }
-    }
+//    /// The 'played state' button
+//    struct PlayedState: View {
+//        /// The `KodiItem` to set
+//        let item: any KodiItem
+//
+//        // MARK: Body of the View
+//
+//        /// The body of the View
+//        var body: some View {
+//            Button(action: {
+//                Task {
+//                    await item.togglePlayedState()
+//                }
+//            }, label: {
+//                Label(title: {
+//                    Text(item.playcount == 0 ? "Mark \(item.media.description) as watched" : "Mark  \(item.media.description) as new")
+//                }, icon: {
+//                    Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
+//                })
+//            })
+//        }
+//    }
 }

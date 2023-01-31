@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for the sidebar  (macOS)
+/// SwiftUI View for the sidebar (macOS)
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector

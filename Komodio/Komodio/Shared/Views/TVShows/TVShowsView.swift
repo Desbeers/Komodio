@@ -32,7 +32,7 @@ struct TVShowsView: View {
             case .ready:
                 content
             default:
-                Parts.StatusMessage(item: .tvshows, status: state)
+                PartsView.StatusMessage(item: .tvshows, status: state)
             }
         }
             .animation(.default, value: selectedTVShow)
@@ -64,7 +64,7 @@ struct TVShowsView: View {
         ZStack {
             List(selection: $selectedTVShow) {
                 ForEach(tvshows) { tvshow in
-                    Item(tvshow: tvshow)
+                    TVShowView.Item(tvshow: tvshow)
                         .tag(tvshow)
                 }
             }
@@ -101,7 +101,7 @@ struct TVShowsView: View {
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(tvshows) { tvshow in
                     NavigationLink(value: tvshow, label: {
-                        Item(tvshow: tvshow)
+                        TVShowView.Item(tvshow: tvshow)
                     })
                     .padding(.bottom, 40)
                 }
@@ -112,42 +112,5 @@ struct TVShowsView: View {
         .setSafeAreas()
 #endif
 
-    }
-}
-
-// MARK: Extensions
-
-extension TVShowsView {
-
-    /// SwiftUI View for a TV show in ``TVShowsView``
-    struct Item: View {
-        /// The TV show
-        let tvshow: Video.Details.TVShow
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            HStack {
-                KodiArt.Poster(item: tvshow)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                    .watchStatus(of: tvshow)
-
-#if os(macOS)
-                VStack(alignment: .leading) {
-                    Text(tvshow.title)
-                        .font(.headline)
-                    Text(tvshow.genre.joined(separator: "∙"))
-                    Text(tvshow.year.description)
-                        .font(.caption)
-                }
-                /// Make the whole area clickable
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-#endif
-
-            }
-        }
     }
 }

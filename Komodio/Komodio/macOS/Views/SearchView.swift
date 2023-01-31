@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for search results  (macOS)
+/// SwiftUI View for search results (macOS)
 struct SearchView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -45,7 +45,7 @@ struct SearchView: View {
                     .font(.title)
                     .padding()
                     ForEach(movies) { movie in
-                        MoviesView.Item(movie: movie)
+                        MovieView.Item(movie: movie)
                             .tag(MediaItem(id: movie.id, media: .movie, item: movie))
                     }
             }
@@ -54,7 +54,7 @@ struct SearchView: View {
                     .font(.title)
                     .padding()
                     ForEach(musicVideos) { musicVideo in
-                        MusicVideosView.Item(item: MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
+                        MusicVideoView.Item(item: MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
                             .tag(MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
                     }
             }
@@ -66,7 +66,7 @@ struct SearchView: View {
                         Button(action: {
                             scene.contentSelection = Router.seasons(tvhow: tvshow)
                         }, label: {
-                            TVShowsView.Item(tvshow: tvshow)
+                            TVShowView.Item(tvshow: tvshow)
                         })
                     }
             }
@@ -119,7 +119,7 @@ extension SearchView {
         /// The SceneState model
         @EnvironmentObject var scene: SceneState
         var body: some View {
-            Parts.DetailMessage(title: Router.search.label.title, message: "Search results for '**\(scene.query)**'")
+            PartsView.DetailMessage(title: Router.search.label.title, message: "Search results for '**\(scene.query)**'")
         }
     }
 }

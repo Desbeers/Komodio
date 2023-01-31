@@ -32,7 +32,7 @@ import SwiftlyKodiAPI
                             KodiArt.Fanart(item: background)
                                 .opacity(background.media == .movie ? 1 : 0.2)
                                 .overlay {
-                                    Parts.GradientOverlay()
+                                    PartsView.GradientOverlay()
                                         .opacity(0.3)
                                 }
                         } else {
@@ -40,7 +40,7 @@ import SwiftlyKodiAPI
                                 .resizable()
                                 .opacity(0.3)
                                 .overlay {
-                                    Parts.GradientOverlay()
+                                    PartsView.GradientOverlay()
                                 }
                         }
                     }

@@ -54,7 +54,7 @@ struct SeasonsView: View {
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
                 ForEach(seasons) { season in
-                    Item(season: season)
+                    SeasonView.Item(season: season)
                         .tag(season.season)
                 }
             }
@@ -127,32 +127,6 @@ struct SeasonsView: View {
         if let selectedSeason {
             let episodes = self.episodes.filter({$0.season == selectedSeason })
             scene.details = .season(tvshow: tvshow, episodes: episodes)
-        }
-    }
-}
-
-// MARK: Extensions
-
-private extension SeasonsView {
-
-    /// SwiftUI View for a season in ``SeasonsView``
-    struct Item: View {
-        /// The Season
-        let season: Video.Details.Episode
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            HStack(spacing: 0) {
-                KodiArt.Poster(item: season)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 100)
-                    .padding(.trailing)
-                Text(season.season == 0 ? "Specials" : "Season \(season.season)")
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .watchStatus(of: season)
         }
     }
 }
