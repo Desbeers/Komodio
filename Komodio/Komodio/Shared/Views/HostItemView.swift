@@ -48,6 +48,9 @@ struct HostItemView: View {
         .onChange(of: kodi.configuredHosts) { _ in
             presentationMode.wrappedValue.dismiss()
         }
+        .onChange(of: kodi.status) { _ in
+            presentationMode.wrappedValue.dismiss()
+        }
 #endif
     }
 }

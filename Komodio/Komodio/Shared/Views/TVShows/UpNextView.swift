@@ -35,7 +35,7 @@ struct UpNextView: View {
         }
         .animation(.default, value: selectedEpisode)
         .task(id: kodi.library.episodes) {
-            if kodi.state != .loadedLibrary {
+            if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.tvshows.isEmpty {
                 state = .empty

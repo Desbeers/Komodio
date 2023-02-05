@@ -35,6 +35,9 @@ struct ContentView: View {
             UpNextView()
         case .musicVideos:
             ArtistsView()
+        case .moviesPlaylist(let file):
+            MoviesView(filter: .playlist(file: file))
+                .id(file)
         case .search:
             SearchView()
         case .kodiSettings:

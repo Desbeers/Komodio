@@ -41,7 +41,7 @@ struct ArtistsView: View {
         }
         .animation(.default, value: selectedArtist)
         .task(id: kodi.library.musicVideos) {
-            if kodi.state != .loadedLibrary {
+            if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.musicVideos.isEmpty {
                 state = .empty

@@ -10,7 +10,9 @@ import SwiftlyKodiAPI
 
 extension StartView {
 
-/// SwiftUI View when starting Komodio (macOS)
+    // MARK: Content of the View
+
+    /// SwiftUI View when starting Komodio (macOS)
     struct Content: View {
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
@@ -23,7 +25,7 @@ extension StartView {
                 PartsView.DetailMessage(title: kodi.host.bonjour?.name ?? "")
                     .padding(.top, 40)
                 VStack {
-                    switch kodi.state {
+                    switch kodi.status {
                     case .loadedLibrary:
                         VStack(alignment: .center) {
                             StatisticsView.HostInfo()
@@ -47,7 +49,7 @@ extension StartView {
                 .shadow(radius: 10)
                 .padding(.leading)
             }
-            .animation(.default, value: kodi.state)
+            .animation(.default, value: kodi.status)
         }
     }
 }

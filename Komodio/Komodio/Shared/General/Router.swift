@@ -21,6 +21,8 @@ enum Router: Hashable {
     case movieSet(movieSet: Video.Details.MovieSet)
     /// All unwatched movies
     case unwatchedMovies
+    /// Playlist
+    case moviesPlaylist(file: List.Item.File)
 
     // MARK: TV shows
 
@@ -155,6 +157,11 @@ extension Router {
             return Item(title: "Seasons",
                         description: "The seasons in a TV show",
                         icon: "tv"
+            )
+        case .moviesPlaylist(let file):
+            return Item(title: file.title,
+                        description: "Playlist",
+                        icon: "list.triangle"
             )
         case .artist:
             return Item(title: "Artist",

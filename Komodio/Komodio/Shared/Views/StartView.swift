@@ -24,7 +24,7 @@ struct StartView: View {
             .opacity(opacity)
             .animation(.default, value: opacity)
             .task {
-                if kodi.state == .loadedLibrary {
+                if kodi.status == .loadedLibrary {
                     opacity = 1
                 } else {
                     /// Give Komodio some time to connect to a host
@@ -53,16 +53,16 @@ extension StartView {
         /// The body of the View
         var body: some View {
             VStack {
-                if kodi.state != .loadedLibrary {
-                    PartsView.DetailMessage(title: kodi.state.message)
+                if kodi.status != .loadedLibrary {
+                    PartsView.DetailMessage(title: kodi.status.message)
                         .padding(.top, 40)
                 }
                 PartsView.RotatingIcon(rotate: $rotate)
-                    .task(id: kodi.state) {
-                        rotate = kodi.state == .loadedLibrary ? true : false
+                    .task(id: kodi.status) {
+                        rotate = kodi.status == .loadedLibrary ? true : false
                     }
             }
-            .animation(.default, value: kodi.state)
+            .animation(.default, value: kodi.status)
         }
     }
 }

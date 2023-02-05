@@ -31,7 +31,7 @@ extension MovieView {
 
     // MARK: Movie item
 
-    /// SwiftUI View for a movie item
+    /// SwiftUI View for a Movie item
     struct Item: View {
         /// The movie
         let movie: Video.Details.Movie
@@ -182,7 +182,7 @@ extension MovieView {
                             Text(movie.title)
                                 .font(.title2)
                                 .lineLimit(1)
-                            Text("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.runtime))")
+                            Text("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.duration))")
                                 .font(.caption)
                                 .opacity(0.6)
                         }
@@ -227,7 +227,7 @@ extension MovieView {
         /// The details of the movie
         var movieDetails: some View {
             VStack(alignment: .leading) {
-                Label("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.runtime))", systemImage: "calendar.badge.clock")
+                Label("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.duration))", systemImage: "calendar.badge.clock")
                 Label(movie.details, systemImage: "info.circle.fill")
                 if !movie.director.isEmpty {
                     Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")

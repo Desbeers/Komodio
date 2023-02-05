@@ -34,7 +34,7 @@ struct SidebarView: View {
             }
         }
         .animation(.default, value: searchField)
-        .animation(.default, value: kodi.state)
+        .animation(.default, value: kodi.status)
         .buttonStyle(.plain)
     }
 
@@ -42,7 +42,7 @@ struct SidebarView: View {
 
     /// The content of the View
     @ViewBuilder var content: some View {
-        label(title: "Komodio", description: kodi.state.message, icon: "sparkles.tv")
+        label(title: "Komodio", description: kodi.status.message, icon: "sparkles.tv")
             .tag(Router.start)
         if !kodi.configuredHosts.isEmpty {
             Section("Your Kodi's") {
@@ -87,11 +87,19 @@ struct SidebarView: View {
         Section("Music Videos") {
             sidebarItem(item: Router.musicVideos)
         }
+        if !kodi.library.videoPlaylists.isEmpty {
+            Section("Playlists") {
+                ForEach(kodi.library.videoPlaylists, id: \.file) { playlist in
+                    sidebarItem(item: .moviesPlaylist(file: playlist))
+                }
+            }
+        }
         if !searchField.isEmpty {
             Section("Search") {
                 sidebarItem(item: Router.search)
-            }        }
-        if kodi.state == .loadedLibrary {
+            }
+        }
+        if kodi.status == .loadedLibrary || kodi.status == .outdatedLibrary {
             Section("Maintanance") {
                 sidebarItem(item: Router.kodiSettings)
                 Button(action: {

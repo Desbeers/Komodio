@@ -48,7 +48,7 @@ extension MusicVideoView {
 
     // MARK: Music Video details
 
-    /// SwiftUI View for a Music Video details
+    /// SwiftUI View for Music Video details
     struct Details: View {
         /// The Music Video
         let musicVideo: Video.Details.MusicVideo
@@ -57,46 +57,49 @@ extension MusicVideoView {
 
         /// The body of the View
         var body: some View {
+            Group {
 
 #if os(macOS)
-            VStack {
-                Text(musicVideo.title)
-                    .font(.largeTitle)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                KodiArt.Fanart(item: musicVideo)
-                    .watchStatus(of: musicVideo)
-                    .cornerRadius(10)
-                    .padding(.bottom, 40)
-                Buttons.Player(item: musicVideo)
-                Text(musicVideo.plot)
-            }
-            .detailsFontStyle()
-            .padding(40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(item: musicVideo)
+                VStack {
+                    Text(musicVideo.title)
+                        .font(.largeTitle)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    KodiArt.Fanart(item: musicVideo)
+                        .watchStatus(of: musicVideo)
+                        .cornerRadius(10)
+                    Buttons.Player(item: musicVideo)
+                        .padding()
+                    Text(musicVideo.plot)
+                }
+                .detailsFontStyle()
+                .padding(40)
 #endif
 
 #if os(tvOS)
-            VStack {
-                Text(musicVideo.title)
-                    .font(.title)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                    .padding(.bottom)
-                KodiArt.Fanart(item: musicVideo)
-                    .watchStatus(of: musicVideo)
-                    .cornerRadius(10)
-                    .padding(.bottom, 40)
-                Buttons.Player(item: musicVideo)
-                Text(musicVideo.plot)
-            }
-            .focusSection()
-            .padding(40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(item: musicVideo)
+                VStack {
+                    Text(musicVideo.title)
+                        .font(.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .frame(height: 80)
+                        .padding(.bottom)
+                    KodiArt.Fanart(item: musicVideo)
+                        .watchStatus(of: musicVideo)
+                        .cornerRadius(10)
+                        .frame(width: 960, height: 540)
+                    Buttons.Player(item: musicVideo)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .focusSection()
+                    PartsView.TextMore(item: musicVideo)
+                }
+                .focusSection()
 #endif
 
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background(item: musicVideo)
         }
     }
 }

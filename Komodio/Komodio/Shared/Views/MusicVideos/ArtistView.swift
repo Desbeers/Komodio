@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// SwiftUI View for an Artist (shared)
+/// SwiftUI View for a single Artist (shared)
 enum ArtistView {
     // Just a NameSpace here
 }
@@ -17,7 +17,7 @@ extension ArtistView {
 
     // MARK: Artist item
 
-    /// SwiftUI View for an artist item
+    /// SwiftUI View for an Artist item
     struct Item: View {
         /// The artist
         let artist: Audio.Details.Artist
@@ -52,7 +52,7 @@ extension ArtistView {
 
     // MARK: Artist details
 
-    /// SwiftUI View for details of an Artist
+    /// SwiftUI View for Artist details
     struct Details: View {
         /// The Artist
         let artist: Audio.Details.Artist

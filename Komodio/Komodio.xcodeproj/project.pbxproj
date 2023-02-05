@@ -129,7 +129,6 @@
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../KomodioTV/KomodioTV/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		D779BEAE29880818009FD90A /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D779BEAF29882A67009FD90A /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1363296ECD2E00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
@@ -210,7 +209,6 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
-				D779BEAE29880818009FD90A /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 				D785A198294B63D900530F62 /* Frameworks */,

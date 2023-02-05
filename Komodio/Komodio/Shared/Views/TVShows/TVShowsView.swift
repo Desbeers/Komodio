@@ -16,7 +16,7 @@ struct TVShowsView: View {
     @EnvironmentObject var scene: SceneState
     /// The TV shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
-    /// The optional selected TV show
+    /// The optional selected TV show (for macOS)
     @State var selectedTVShow = Video.Details.TVShow(media: .none)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
@@ -37,12 +37,12 @@ struct TVShowsView: View {
         }
             .animation(.default, value: selectedTVShow)
             .task(id: kodi.library.tvshows) {
-                if kodi.state != .loadedLibrary {
+                if kodi.status != .loadedLibrary {
                     state = .offline
                 } else if kodi.library.tvshows.isEmpty {
                     state = .empty
                 } else {
-                    tvshows = kodi.library.tvshows
+                    tvshows = kodi.library.tvshows.sorted(using: KeyPathComparator(\.sortByTitle))
                     state = .ready
                 }
             }

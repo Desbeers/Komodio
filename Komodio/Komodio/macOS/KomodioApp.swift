@@ -20,7 +20,7 @@ import SwiftlyKodiAPI
             MainView()
                 .environmentObject(kodi)
                 .task {
-                    if kodi.state == .none {
+                    if kodi.status == .none {
                         /// Get the selected host (if any)
                         kodi.getSelectedHost()
                     }
@@ -36,7 +36,7 @@ import SwiftlyKodiAPI
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $item in
             /// Check if `item` isn't `nil`
-            if let item = item {
+            if let item {
                 KomodioPlayerView(video: item.item, resume: item.resume)
                     .navigationTitle(item.item.title)
             }

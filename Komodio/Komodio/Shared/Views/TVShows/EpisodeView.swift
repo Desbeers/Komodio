@@ -40,7 +40,7 @@ extension EpisodeView {
                         .cornerRadius(KomodioApp.thumbSize.width / 35)
                         .padding(.trailing)
                     VStack(alignment: .leading) {
-                        PartsView.TextMore(text: Text(episode.plot))
+                        PartsView.TextMore(item: episode)
                             .frame(height: KomodioApp.thumbSize.height)
                         Buttons.Player(item: episode)
                     }
@@ -65,7 +65,7 @@ extension EpisodeView {
                         .background(.thickMaterial)
                         .cornerRadius(KomodioApp.thumbSize.width / 35)
                         .padding(.trailing)
-                    PartsView.TextMore(text: Text(episode.plot))
+                    PartsView.TextMore(item: episode)
                         .frame(height: KomodioApp.thumbSize.height)
                 }
                 .focusSection()

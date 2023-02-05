@@ -10,7 +10,21 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for a single TV show (shared)
 enum TVShowView {
-    // Just a Namespace
+
+    // MARK: Private functions
+
+    /// Update a TV show
+    ///
+    /// On `tvOS`, TV show details are shown in its own View so it needs to update itself when movie details are changed
+    ///
+    /// - Parameter tvshow: The TV show to update
+    /// - Returns: If update is found, the updated Movie, else `nil`
+    static private func updateTVshow(tvshow: Video.Details.TVShow) -> Video.Details.TVShow? {
+        if let update = KodiConnector.shared.library.tvshows.first(where: {$0.id == tvshow.id}), update != tvshow {
+            return update
+        }
+        return nil
+    }
 }
 
 extension TVShowView {
@@ -52,67 +66,85 @@ extension TVShowView {
 
 extension TVShowView {
 
-    // MARK: Details of a TV show
+    // MARK: TV show details
 
     /// SwiftUI View for TV show details
     struct Details: View {
         /// The TV show
-        let tvshow: Video.Details.TVShow
-        /// Info about the TV show
-        var info: String {
-            let details = tvshow.studio + tvshow.genre + [tvshow.year.description]
-            return details.joined(separator: " ∙ ")
-        }
+        @State var tvshow: Video.Details.TVShow
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
+            Group {
 
 #if os(macOS)
-            ScrollView {
-                VStack {
-                    Text(tvshow.title)
-                        .font(.system(size: 40))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                    KodiArt.Fanart(item: tvshow)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                        .padding(.bottom)
-                    VStack(alignment: .leading) {
-                        Text(tvshow.plot)
-                        tvshowDetails
+                ScrollView {
+                    VStack {
+                        Text(tvshow.title)
+                            .font(.system(size: 40))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                        KodiArt.Fanart(item: tvshow)
+                            .aspectRatio(contentMode: .fit)
+                            .watchStatus(of: tvshow)
+                            .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                            .padding(.bottom)
+                        Buttons.PlayedState(item: tvshow)
+                            .padding(.bottom)
+                            .labelStyle(Styles.PlayLabel())
+                            .buttonStyle(Styles.PlayButton())
+                        VStack(alignment: .leading) {
+                            Text(tvshow.plot)
+                            tvshowDetails
+                        }
                     }
+                    .detailsFontStyle()
+                    .padding(40)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 }
-                .detailsFontStyle()
-                .padding(40)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            }
-            .background(item: tvshow)
 #endif
 
 #if os(tvOS)
-            HStack {
-                KodiArt.Poster(item: tvshow)
-                    .cornerRadius(10)
-                VStack {
-                    Text(tvshow.title)
-                        .font(.title)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                        .padding(.bottom)
-                    KodiArt.Fanart(item: tvshow)
+                HStack {
+                    KodiArt.Poster(item: tvshow)
+                        .watchStatus(of: tvshow)
                         .cornerRadius(10)
-                    Text(tvshow.plot)
-                    tvshowDetails
+                    VStack {
+                        Text(tvshow.title)
+                            .font(.title)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.bottom)
+                        KodiArt.Fanart(item: tvshow)
+                            .cornerRadius(10)
+                        PartsView.TextMore(item: tvshow)
+                            .focusSection()
+                        HStack {
+                            tvshowDetails
+                            Buttons.PlayedState(item: tvshow)
+                                .labelStyle(Styles.PlayLabel())
+                                .buttonStyle(.card)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                    }
+                }
+#endif
+            }
+            .animation(.default, value: tvshow)
+            .background(item: tvshow)
+            .task(id: kodi.library.tvshows) {
+                if let update = TVShowView.updateTVshow(tvshow: tvshow) {
+                    tvshow = update
                 }
             }
-            .background(item: tvshow)
-#endif
-
         }
+
+        // MARK: TV show details
 
         /// The details of the TV show
         var tvshowDetails: some View {
@@ -123,6 +155,12 @@ extension TVShowView {
             }
             .labelStyle(Styles.DetailLabel())
             .padding(.vertical)
+        }
+
+        /// Info about the TV show
+        var info: String {
+            let details = tvshow.studio + tvshow.genre + [tvshow.year.description]
+            return details.joined(separator: " ∙ ")
         }
 
         /// Watched label

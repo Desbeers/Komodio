@@ -69,7 +69,6 @@ struct SeasonsView: View {
         if !seasons.isEmpty {
             TabView(selection: $selectedTab) {
                     TVShowView.Details(tvshow: tvshow)
-                    .focusable()
                     .focusSection()
                     .tag(-1)
                 /// It looks like `TabView` is ignoring the custom safe areas

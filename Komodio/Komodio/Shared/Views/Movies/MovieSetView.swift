@@ -90,7 +90,10 @@ struct MovieSetView: View {
             /// Get all the movies from the set
             movies = kodi.library.movies
                 .filter({$0.setID == movieSet.setID})
-                .sorted(by: {$0.year < $1.year})
+                .sorted(using: [
+                  KeyPathComparator(\.year),
+                  KeyPathComparator(\.sortByTitle)
+                ])
             /// Update the optional selected movie
             if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
                 self.selectedMovie = movie
@@ -198,6 +201,7 @@ extension MovieSetView {
                             .minimumScaleFactor(0.5)
                             .padding(.bottom)
                         Buttons.PlayedState(item: movieSet)
+                            .labelStyle(Styles.PlayLabel())
                             .padding(.bottom)
                             .buttonStyle(.card)
                         Text(movieSet.plot)

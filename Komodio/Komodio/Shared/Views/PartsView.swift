@@ -169,20 +169,21 @@ extension PartsView {
 
     /// Show text with optional 'more' button
     struct TextMore: View {
-        /// The text to show
-        let text: Text
+        /// The media item to show
+        let item: any KodiItem
         /// Bool if we show the full text in a sheet
         @State private var showFullText: Bool = false
         /// The body of the View
         var body: some View {
             ViewThatFits(in: .vertical) {
-                text
+                Text(item.description)
                 VStack {
-                    text
+                    Text(item.description)
                     Button("More…") {
                         showFullText = true
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .focusSection()
 
 #if os(macOS)
                     .font(.body)
@@ -195,7 +196,14 @@ extension PartsView {
                 }
             }
             .sheet(isPresented: $showFullText) {
-                text
+                VStack {
+                    Text(item.title)
+                        .font(.title)
+                    Text(item.details)
+                        .font(.subheadline)
+                        .padding(.bottom)
+                    Text(item.description)
+                }
 
 #if os(macOS)
                     .padding(60)

@@ -48,8 +48,8 @@ struct MainView: View {
                     }
             }
         )
-        .task(id: kodi.state) {
-            if kodi.state != .loadedLibrary {
+        .task(id: kodi.status) {
+            if kodi.status != .loadedLibrary {
                 scene.sidebarSelection = .start
             }
         }

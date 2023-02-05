@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftlyKodiAPI
 
 /// Collection of loose parts (shared)
 enum Parts {
@@ -34,11 +35,13 @@ extension Parts {
 extension Parts {
 
     /// Filter for media lists
-    enum Filter {
+    enum Filter: Equatable {
         /// Do not filter
         case none
         /// Filter for unwatched media
         case unwatched
+        /// Filter by playlist
+        case playlist(file: List.Item.File)
     }
 }
 

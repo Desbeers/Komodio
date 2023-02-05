@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 
 extension StartView {
 
+    // MARK: Content of the View
+
     /// SwiftUI View when starting Komodio (tvOS)
     struct Content: View {
         /// The SceneState model
@@ -33,13 +35,13 @@ extension StartView {
                                 .minimumScaleFactor(0.2)
                         }
                     }
-                    if kodi.state == .loadedLibrary {
+                    if kodi.status == .loadedLibrary {
                         StatisticsView()
                             .transition(.move(edge: .trailing))
                             .padding(.bottom)
                     }
                 }
-                .animation(.default, value: kodi.state)
+                .animation(.default, value: kodi.status)
             }
             .buttonStyle(.plain)
             .sheet(item: $selectedHost) { host in
@@ -86,7 +88,7 @@ extension StartView {
                                     VStack {
                                         Divider()
                                             .frame(width: 340)
-                                        if kodi.state == .offline {
+                                        if kodi.status == .offline {
                                             KodiHostItemView.HostIsOffline()
                                                 .frame(width: 340, alignment: .leading)
                                         } else {
@@ -158,7 +160,7 @@ extension StartView {
                     Label("Kodi Settings", systemImage: "gear")
                 })
             }
-            .disabled(kodi.state != .loadedLibrary)
+            .disabled(kodi.status != .loadedLibrary && kodi.status != .outdatedLibrary)
             .padding(.leading)
         }
     }

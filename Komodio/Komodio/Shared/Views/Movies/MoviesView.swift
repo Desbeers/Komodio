@@ -44,7 +44,7 @@ struct MoviesView: View {
         }
         .animation(.default, value: selectedItem)
         .task(id: kodi.library.movies) {
-            if kodi.state != .loadedLibrary {
+            if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
                 state = .empty
@@ -138,36 +138,55 @@ struct MoviesView: View {
         switch filter {
         case .unwatched:
             /// Movies are sorted by newest first
-            items = kodi.library.movies.filter({$0.playcount == 0}).sorted(by: {$0.dateAdded > $1.dateAdded})
+            items = kodi.library.movies
+                .filter({$0.playcount == 0})
+                .sorted(using: KeyPathComparator(\.dateAdded, order: .reverse))
+        case .playlist(let file):
+            Task { @MainActor in
+                var playlist: [Video.Details.Movie] = []
+                let items = await Files.getDirectory(directory: file.file, media: .video)
+                for item in items {
+                    if let movie = kodi.library.movies.first(where: {$0.file == item.file}) {
+                        playlist.append(movie)
+                    }
+                }
+                /// Movies that are part of a set will be removed and replaced with the set
+                let movieSetIDs = Set(playlist.map(\.setID))
+                let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
+                self.items = (playlist.filter({$0.setID == 0}) + movieSets).sorted(using: KeyPathComparator(\.sortByTitle))
+            }
         default:
             /// Movies that are part of a set will be removed and replaced with the set
-            items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(by: {$0.sortByTitle < $1.sortByTitle})
+            items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(using: KeyPathComparator(\.sortByTitle))
         }
     }
 
     /// Set the details of a selected item
     private func setItemDetails() {
-        if let item = selectedItem {
-            switch item.media {
+        if let selectedItem {
+            switch selectedItem.media {
             case .movie:
-                if let movie = kodi.library.movies.first(where: {$0.id == item.id}) {
+                if let movie = kodi.library.movies.first(where: {$0.id == selectedItem.id}) {
                     scene.details = .movie(movie: movie)
                     /// Not a movie set
                     selectedMovieSet.setID = 0
                 }
             case .movieSet:
-                if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(item.id)}) {
+                if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(selectedItem.id)}) {
                     selectedMovieSet = movieSet
                 }
             default:
                 break
             }
         } else {
-            /// Set the default Navigation Subtitle for Movies
-            if filter == .unwatched {
+            switch filter {
+            case .unwatched:
                 scene.navigationSubtitle = "Unwatched Movies"
                 scene.details = .unwatchedMovies
-            } else {
+            case .playlist(let file):
+                scene.navigationSubtitle = file.title
+                scene.details = .moviesPlaylist(file: file)
+            default:
                 scene.navigationSubtitle = Router.movies.label.title
                 scene.details = .movies
             }
