@@ -44,6 +44,7 @@ extension StartView {
                 .animation(.default, value: kodi.status)
             }
             .buttonStyle(.plain)
+            .setSafeAreas()
             .sheet(item: $selectedHost) { host in
                 HStack {
                     HostItemView.KodiSettings()

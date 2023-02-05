@@ -69,6 +69,7 @@ struct MusicVideosView: View {
                 .focusSection()
         }
         .buttonStyle(.card)
+        .setSafeAreas()
     }
 #endif
 

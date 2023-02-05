@@ -33,7 +33,7 @@ class RotatingIconModel: ObservableObject {
     @MainActor func startRotating() async {
         do {
             /// Sleep for a moment before we start to avoid hickups
-            try await Task.sleep(nanoseconds: 2_000_000_000)
+            try await Task.sleep(until: .now + .seconds(1), clock: .continuous)
             /// Start the rotation
             rotating = true
             rotate = true
@@ -57,9 +57,9 @@ extension RotatingIconModel {
         /// A flip/flop when a rotation is completed
         @Binding var status: Bool
         /// The percentage of the animation
-        var percent: CGFloat
+        var percent: Double
         /// The animation data
-        var animatableData: CGFloat {
+        var animatableData: Double {
             get { percent }
             set { percent = newValue }
         }

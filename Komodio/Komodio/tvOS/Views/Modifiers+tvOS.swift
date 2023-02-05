@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Modifiers {
 
-    /// A `ViewModifier` to fill the leading the `Safe Areas` with the ``SidebarView``
+    /// A `ViewModifier` to reserve the leading of the `Safe Areas` for the ``SidebarView``
     struct SafeAreas: ViewModifier {
         /// The SceneState model
         @EnvironmentObject var scene: SceneState
@@ -33,8 +33,8 @@ extension Modifiers {
 
 extension View {
 
-    /// Shortcut to the ``Modifiers/SafeAreas``
-    @MainActor func setSafeAreas() -> some View {
+    //// A `ViewModifier` to reserve the leading of the `Safe Areas` for the ``SidebarView``
+    func setSafeAreas() -> some View {
         modifier(Modifiers.SafeAreas())
     }
 }

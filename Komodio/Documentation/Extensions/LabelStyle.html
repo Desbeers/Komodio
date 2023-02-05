@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SeasonView Structure Reference</title>
+    <title>LabelStyle Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/SeasonView" class="dashAnchor"></a>
-    <a title="SeasonView Structure Reference"></a>
+    <a name="//apple_ref/swift/Extension/LabelStyle" class="dashAnchor"></a>
+    <a title="LabelStyle Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Komodio</a> (100% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Komodio Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        SeasonView Structure Reference
+        LabelStyle Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -295,6 +295,12 @@
             <a href="../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Extensions/ButtonStyle.html">ButtonStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LabelStyle.html">LabelStyle</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/View.html">View</a>
               </li>
             </ul>
@@ -304,26 +310,35 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>SeasonView</h1>
+            <h1>LabelStyle</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">SeasonView</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LabelStyle</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">PlayLabel</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LabelStyle</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="../Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">DetailLabel</span></code></pre>
 
                 </div>
               </div>
-            <p>SwiftUI View for one Season of a TV show (shared)</p>
-
+            
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60%20%3D%3D%20%60Styles.PlayLabel%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self` == `Styles.PlayLabel`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60%20%3D%3D%20%60Styles.PlayLabel%60"></a>
+                  <h3 class="section-name"><span>Available where <code>Self</code> == <code><a href="../Enums/Styles/PlayLabel.html">Styles.PlayLabel</a></code></span>
+</h3>
+                </div>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio10SeasonViewV6tvshow14SwiftlyKodiAPI5VideoO7DetailsO6TVShowVvp"></a>
-                    <a name="//apple_ref/swift/Property/tvshow" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10SeasonViewV6tvshow14SwiftlyKodiAPI5VideoO7DetailsO6TVShowVvp">tvshow</a>
+                    <a name="/s:7SwiftUI10LabelStyleP7KomodioAD6StylesO04PlayC0VRszrlE04playC0AHvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/playLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI10LabelStyleP7KomodioAD6StylesO04PlayC0VRszrlE04playC0AHvpZ">playLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -331,41 +346,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The TV show</p>
+                        <p>Label style for a &lsquo;play&rsquo; button</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">tvshow</span><span class="p">:</span> <span class="kt">Video</span><span class="o">.</span><span class="kt">Details</span><span class="o">.</span><span class="kt">TVShow</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7Komodio10SeasonViewV8episodesSay14SwiftlyKodiAPI5VideoO7DetailsO7EpisodeVGvp"></a>
-                    <a name="//apple_ref/swift/Property/episodes" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10SeasonViewV8episodesSay14SwiftlyKodiAPI5VideoO7DetailsO7EpisodeVGvp">episodes</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The Episodes to show</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">episodes</span><span class="p">:</span> <span class="p">[</span><span class="kt">Video</span><span class="o">.</span><span class="kt">Details</span><span class="o">.</span><span class="kt">Episode</span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">playLabel</span><span class="p">:</span> <span class="kt"><a href="../Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">PlayLabel</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -376,11 +364,11 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Body%20of%20the%20View"></a>
-                <a name="//apple_ref/swift/Section/Body of the View" class="dashAnchor"></a>
+                <a name="/Available%20where%20%60Self%60%20%3D%3D%20%60Styles.DetailLabel%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self` == `Styles.DetailLabel`" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Body%20of%20the%20View"></a>
-                  <h3 class="section-name"><span>Body of the View</span>
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60%20%3D%3D%20%60Styles.DetailLabel%60"></a>
+                  <h3 class="section-name"><span>Available where <code>Self</code> == <code><a href="../Enums/Styles/DetailLabel.html">Styles.DetailLabel</a></code></span>
 </h3>
                 </div>
               </div>
@@ -388,9 +376,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio10SeasonViewV4bodyQrvp"></a>
-                    <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10SeasonViewV4bodyQrvp">body</a>
+                    <a name="/s:7SwiftUI10LabelStyleP7KomodioAD6StylesO06DetailC0VRszrlE06detailC0AHvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/detailLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI10LabelStyleP7KomodioAD6StylesO06DetailC0VRszrlE06detailC0AHvpZ">detailLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -398,55 +386,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The body of this View</p>
+                        <p>Label style for media item details</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Season%20item"></a>
-                <a name="//apple_ref/swift/Section/Season item" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Season%20item"></a>
-                  <h3 class="section-name"><span>Season item</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7Komodio10SeasonViewV4ItemV"></a>
-                    <a name="//apple_ref/swift/Struct/Item" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10SeasonViewV4ItemV">Item</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>SwiftUI View for a season item</p>
-
-                        <a href="../Structs/SeasonView/Item.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Item</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">detailLabel</span><span class="p">:</span> <span class="kt"><a href="../Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">DetailLabel</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -458,7 +405,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-01-31)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

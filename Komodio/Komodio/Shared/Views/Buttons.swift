@@ -45,8 +45,8 @@ extension Buttons {
                 }
             }
             .focused($isFocused)
-            .labelStyle(Styles.PlayLabel())
-            .buttonStyle(Styles.PlayButton())
+            .labelStyle(.playLabel)
+            .buttonStyle(.playButton)
             .animation(.default, value: isFocused)
         }
     }
@@ -73,28 +73,4 @@ extension Buttons {
             })
         }
     }
-
-//    /// A Button to toggle the watched state of a movie set
-//    /// - Note: Don't add a buttonstyle, else it will not work as context menu
-//    struct MovieSetToggle: View {
-//        /// The set we want to toggle
-//        let set: Video.Details.MovieSet
-//        /// The body of this View
-//        var body: some View {
-//            VStack {
-//                Button(action: {
-//                    Task {
-//                        await set.togglePlayedState()
-//                    }
-//                }, label: {
-//                    Label(title: {
-//                        Text(set.playcount == 0 ? "Mark all movies as watched" : "Mark all movies as new")
-//                    }, icon: {
-//                        Image(systemName: set.playcount == 0 ? "eye.fill" : "eye")
-//                    })
-//                })
-//                .labelStyle(Styles.PlayLabel())
-//            }
-//        }
-//    }
 }

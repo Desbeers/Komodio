@@ -26,18 +26,15 @@ struct MainView: View {
             /// Set the destinations for sub-views in the stack
                 .navigationDestination(for: Video.Details.Movie.self, destination: { movie in
                     MovieView.Details(movie: movie)
-                        .setSafeAreas()
                 })
                 .navigationDestination(for: Video.Details.MovieSet.self, destination: { movieSet in
                     MovieSetView(movieSet: movieSet)
-                        .setSafeAreas()
                 })
                 .navigationDestination(for: Video.Details.TVShow.self, destination: { tvshow in
                     SeasonsView(tvshow: tvshow)
                 })
                 .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
                     MusicVideosView(artist: artist)
-                        .setSafeAreas()
                 })
         }
         /// Put the ``SidebarView`` into the `safe area`.

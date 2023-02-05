@@ -96,8 +96,8 @@ extension TVShowView {
                             .padding(.bottom)
                         Buttons.PlayedState(item: tvshow)
                             .padding(.bottom)
-                            .labelStyle(Styles.PlayLabel())
-                            .buttonStyle(Styles.PlayButton())
+                            .labelStyle(.playLabel)
+                            .buttonStyle(.playButton)
                         VStack(alignment: .leading) {
                             Text(tvshow.plot)
                             tvshowDetails
@@ -127,7 +127,7 @@ extension TVShowView {
                         HStack {
                             tvshowDetails
                             Buttons.PlayedState(item: tvshow)
-                                .labelStyle(Styles.PlayLabel())
+                                .labelStyle(.playLabel)
                                 .buttonStyle(.card)
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                         }
@@ -153,7 +153,7 @@ extension TVShowView {
                 Label("\(tvshow.season) \(tvshow.season == 1 ? " season" : "seasons"), \(tvshow.episode) episodes", systemImage: "display")
                 Label(watchedLabel, systemImage: "eye")
             }
-            .labelStyle(Styles.DetailLabel())
+            .labelStyle(.detailLabel)
             .padding(.vertical)
         }
 

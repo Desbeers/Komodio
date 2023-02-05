@@ -212,7 +212,6 @@ extension MovieView {
                     Text(movie.plot)
                         .padding(.bottom)
                     movieDetails
-                    .labelStyle(Styles.DetailLabel())
                     Spacer()
                     Buttons.Player(item: movie)
                 }
@@ -236,7 +235,7 @@ extension MovieView {
                     Label(cast, systemImage: "person.fill")
                 }
             }
-            .labelStyle(Styles.DetailLabel())
+            .labelStyle(.detailLabel)
             .padding(.vertical)
         }
     }

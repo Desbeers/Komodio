@@ -58,17 +58,15 @@ struct SearchView: View {
                             }
                         }
                     }
-                    .frame(maxWidth: .infinity)
                 }
             }
         }
-        .frame(maxWidth: .infinity)
-        .buttonStyle(.card)
         .setSafeAreas()
+        .buttonStyle(.card)
         .searchable(text: $scene.query)
         .task(id: scene.query) {
             do {
-                try await Task.sleep(nanoseconds: 300_000_000)
+                try await Task.sleep(until: .now + .seconds(0.3), clock: .continuous)
 
                 if scene.query.isEmpty {
                     movies = []

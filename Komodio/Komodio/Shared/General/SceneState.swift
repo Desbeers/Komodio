@@ -93,7 +93,7 @@ extension SceneState {
     /// - Parameter query: The query in the UI
     @MainActor func updateSearch(query: String) async {
         do {
-            try await Task.sleep(nanoseconds: 1_000_000_000)
+            try await Task.sleep(until: .now + .seconds(1), clock: .continuous)
             self.query = query
             if !query.isEmpty {
                 sidebarSelection = .search

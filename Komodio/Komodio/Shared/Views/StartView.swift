@@ -29,7 +29,7 @@ struct StartView: View {
                 } else {
                     /// Give Komodio some time to connect to a host
                     Task {
-                        try await Task.sleep(nanoseconds: 1_000_000_000)
+                        try await Task.sleep(until: .now + .seconds(1), clock: .continuous)
                         opacity = 1
                     }
                 }

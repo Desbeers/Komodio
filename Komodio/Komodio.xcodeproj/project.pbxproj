@@ -94,6 +94,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D704EA17298FDA9700EB3E38 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D71170B02934E72D0059FCD3 /* TVShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowView.swift; sourceTree = "<group>"; };
 		D71170B22934E8570059FCD3 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		D71170B6293502E90059FCD3 /* MusicVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideosView.swift; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
+				D704EA17298FDA9700EB3E38 /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 				D785A198294B63D900530F62 /* Frameworks */,

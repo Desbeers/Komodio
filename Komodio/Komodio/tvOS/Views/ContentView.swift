@@ -22,7 +22,6 @@ struct ContentView: View {
         switch scene.contentSelection {
         case .start:
             StartView()
-            .setSafeAreas()
         case .movies:
             MoviesView()
         case .unwatchedMovies:
@@ -35,12 +34,10 @@ struct ContentView: View {
             ArtistsView()
         case .search:
             SearchView()
-                .padding(.horizontal, KomodioApp.sidebarCollapsedWidth)
-                .setSafeAreas()
         case .kodiSettings:
             KodiSettingsView()
-                .setSafeAreas()
         default:
+            /// This should not happen
             Text("Not implemented")
         }
     }

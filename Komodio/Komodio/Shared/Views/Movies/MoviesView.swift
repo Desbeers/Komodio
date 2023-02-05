@@ -151,13 +151,11 @@ struct MoviesView: View {
                     }
                 }
                 /// Movies that are part of a set will be removed and replaced with the set
-                let movieSetIDs = Set(playlist.map(\.setID))
-                let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
-                self.items = (playlist.filter({$0.setID == 0}) + movieSets).sorted(using: KeyPathComparator(\.sortByTitle))
+                self.items = swapMoviesForSet(movies: playlist)
             }
         default:
             /// Movies that are part of a set will be removed and replaced with the set
-            items = (kodi.library.movies.filter({$0.setID == 0}) + kodi.library.movieSets).sorted(using: KeyPathComparator(\.sortByTitle))
+            items = swapMoviesForSet(movies: kodi.library.movies)
         }
     }
 
@@ -191,5 +189,14 @@ struct MoviesView: View {
                 scene.details = .movies
             }
         }
+    }
+
+    /// Swap movies for a set item
+    ///
+    /// Movies that are part of a set will be removed and replaced with the set
+    private func swapMoviesForSet(movies: [Video.Details.Movie]) -> [any KodiItem] {
+        let movieSetIDs = Set(movies.map(\.setID))
+        let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
+        return (movies.filter({$0.setID == 0}) + movieSets).sorted(using: KeyPathComparator(\.sortByTitle))
     }
 }

@@ -40,6 +40,11 @@ extension Styles {
     }
 }
 
+extension ButtonStyle where Self == Styles.PlayButton {
+    /// Button style for a 'play' button
+    static var playButton: Styles.PlayButton { .init() }
+}
+
 // MARK: Label styles
 
 extension Styles {
@@ -106,4 +111,14 @@ extension Styles {
 
         }
     }
+}
+
+extension LabelStyle where Self == Styles.PlayLabel {
+    /// Label style for a 'play' button
+    static var playLabel: Styles.PlayLabel { .init() }
+}
+
+extension LabelStyle where Self == Styles.DetailLabel {
+    /// Label style for media item details
+    static var detailLabel: Styles.DetailLabel { .init() }
 }

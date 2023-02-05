@@ -77,6 +77,7 @@ struct MovieSetView: View {
             .focusSection()
         }
         .buttonStyle(.card)
+        .setSafeAreas()
 #endif
 
     }
@@ -178,8 +179,8 @@ extension MovieSetView {
                             .padding(.bottom)
                         Buttons.PlayedState(item: movieSet)
                             .padding(.bottom)
-                            .labelStyle(Styles.PlayLabel())
-                            .buttonStyle(Styles.PlayButton())
+                            .labelStyle(.playLabel)
+                            .buttonStyle(.playButton)
                         Text(movieSet.plot)
                     }
                     .detailsFontStyle()
@@ -201,7 +202,7 @@ extension MovieSetView {
                             .minimumScaleFactor(0.5)
                             .padding(.bottom)
                         Buttons.PlayedState(item: movieSet)
-                            .labelStyle(Styles.PlayLabel())
+                            .labelStyle(.playLabel)
                             .padding(.bottom)
                             .buttonStyle(.card)
                         Text(movieSet.plot)
