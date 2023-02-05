@@ -47,7 +47,7 @@ extension AppState {
                 logger("Error saving MyHost")
             }
             Task { @MainActor in
-                KodiConnector.shared.state = .none
+                KodiConnector.shared.status = .none
                 AppState.shared.host = host
             }
         }

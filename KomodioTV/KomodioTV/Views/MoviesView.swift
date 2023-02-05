@@ -44,7 +44,7 @@ struct MoviesView: View {
         .animation(.default, value: hideWatched)
         .animation(.default, value: sortOrder)
         .task(id: kodi.library.movies) {
-            if kodi.state != .loadedLibrary {
+            if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
                 state = .empty

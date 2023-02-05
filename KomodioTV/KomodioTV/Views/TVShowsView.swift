@@ -36,7 +36,7 @@ struct TVShowsView: View {
         }
         .animation(.default, value: hideWatched)
         .task(id: kodi.library.tvshows) {
-            if kodi.state != .loadedLibrary {
+            if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.tvshows.isEmpty {
                 state = .empty

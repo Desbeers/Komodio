@@ -96,7 +96,7 @@ extension DetailsView {
                             Text(item.title)
                                 .font(.title2)
                                 .lineLimit(1)
-                            Text("\(Parts.secondsToTime(seconds: item.runtime))")
+                            Text("\(Parts.secondsToTime(seconds: item.duration))")
                                 .font(.caption)
                                 .opacity(0.6)
                         }

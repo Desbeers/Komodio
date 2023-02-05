@@ -49,7 +49,7 @@ extension Modifiers {
                         .background(.thinMaterial)
                         .shadow(radius: 20)
                     case .runtime:
-                        Text(Parts.secondsToTime(seconds: item.runtime))
+                        Text(Parts.secondsToTime(seconds: item.duration))
                             .font(.caption)
                             .frame(maxWidth: .infinity)
                             .padding(2)

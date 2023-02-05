@@ -28,7 +28,7 @@ struct SettingsView: View {
                     }, label: {
                         Text("Reload library")
                     })
-                    .disabled(kodi.state != .loadedLibrary)
+                    .disabled(kodi.status != .loadedLibrary)
                 }
             }
             Divider()

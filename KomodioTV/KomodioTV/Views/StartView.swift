@@ -17,7 +17,7 @@ struct StartView: View {
     /// The body of this View
     var body: some View {
         VStack {
-            switch kodi.state {
+            switch kodi.status {
             case .offline:
                 Label(title: {
                     VStack(alignment: .leading) {

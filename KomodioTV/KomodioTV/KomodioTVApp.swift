@@ -22,14 +22,14 @@ import SwiftlyKodiAPI
                 .environmentObject(appState)
             .task(id: appState.host) {
                 if let host = appState.host {
-                    if kodi.state == .none {
+                    if kodi.status == .none {
                         print("Load new host")
                         kodi.connect(host: host)
                     }
                 }
             }
-            .task(id: kodi.state) {
-                switch kodi.state {
+            .task(id: kodi.status) {
+                switch kodi.status {
                 case .offline, .loadedLibrary:
                     appState.selectedTab = .home
                 default:
