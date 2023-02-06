@@ -41,7 +41,6 @@
 		D7254F4F295A06D200DC704B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72DE7B42955F22500DD0FFB /* SidebarView.swift */; };
 		D7325D522906852000D15D79 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
-		D75C3F63294DCF09002BC065 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */; };
 		D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D75C3F65294DCFE6002BC065 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */; };
 		D75C3F68294DDD3B002BC065 /* TVShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55D290583F600037DC9 /* TVShowsView.swift */; };
@@ -57,6 +56,8 @@
 		D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BE293503C70059FCD3 /* MusicVideoView.swift */; };
 		D76750DB2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
 		D76750DC2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
+		D76BFFD22990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */; };
+		D76BFFD32990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */; };
 		D779BEB029882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D779BEB129882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D77B1361296DECBF00ECE2F9 /* KomodioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */; };
@@ -94,7 +95,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D704EA17298FDA9700EB3E38 /* SwiftlyKodiAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftlyKodiAPI; path = ../../SwiftlyKodiAPI; sourceTree = "<group>"; };
 		D71170B02934E72D0059FCD3 /* TVShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowView.swift; sourceTree = "<group>"; };
 		D71170B22934E8570059FCD3 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		D71170B6293502E90059FCD3 /* MusicVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideosView.swift; sourceTree = "<group>"; };
@@ -128,8 +128,8 @@
 		D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconModel.swift; sourceTree = "<group>"; };
 		D72DE7B42955F22500DD0FFB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
-		D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../KomodioTV/KomodioTV/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D779BEAF29882A67009FD90A /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1363296ECD2E00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
@@ -210,7 +210,6 @@
 		D71BD52829056A5C00037DC9 = {
 			isa = PBXGroup;
 			children = (
-				D704EA17298FDA9700EB3E38 /* SwiftlyKodiAPI */,
 				D71BD53329056A5C00037DC9 /* Komodio */,
 				D71BD53229056A5C00037DC9 /* Products */,
 				D785A198294B63D900530F62 /* Frameworks */,
@@ -356,8 +355,8 @@
 				D72DE7B62955F27300DD0FFB /* General */,
 				D72DE7B32955F21200DD0FFB /* Views */,
 				D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */,
-				D75C3F62294DCF09002BC065 /* LaunchScreen.storyboard */,
 				D7F03A8029685E2D0026D815 /* Komodio.plist */,
+				D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -452,6 +451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D76BFFD22990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */,
 				D7254F4F295A06D200DC704B /* Assets.xcassets in Resources */,
 				D71BD53C29056A5E00037DC9 /* Preview Assets.xcassets in Resources */,
 			);
@@ -461,9 +461,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D76BFFD32990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */,
 				D75C3F65294DCFE6002BC065 /* Preview Assets.xcassets in Resources */,
 				D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */,
-				D75C3F63294DCF09002BC065 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
