@@ -22,7 +22,7 @@ extension StartView {
         /// The body of the View
         var body: some View {
             VStack {
-                PartsView.DetailMessage(title: kodi.host.bonjour?.name ?? "")
+                PartsView.DetailHeader(title: kodi.host.bonjour?.name ?? "")
                     .padding(.top, 40)
                 VStack {
                     switch kodi.status {

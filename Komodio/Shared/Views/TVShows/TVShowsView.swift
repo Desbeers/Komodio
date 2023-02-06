@@ -70,7 +70,6 @@ struct TVShowsView: View {
             }
             .scaleEffect(selectedTVShow.media == .tvshow ? 0.6 : 1)
             .offset(x: selectedTVShow.media == .tvshow ? -ContentView.columnWidth : 0, y: 0)
-            .listStyle(.inset(alternatesRowBackgrounds: true))
             SeasonsView(tvshow: selectedTVShow)
                 .transition(.move(edge: .leading))
                 .offset(x: selectedTVShow.media == .tvshow ? 0 : ContentView.columnWidth, y: 0)

@@ -69,7 +69,6 @@ struct ArtistsView: View {
             }
             .scaleEffect(selectedArtist != nil ? 0.6 : 1)
             .offset(x: selectedArtist != nil ? -ContentView.columnWidth : 0, y: 0)
-            .listStyle(.inset(alternatesRowBackgrounds: true))
             MusicVideosView(artist: artist)
                 .transition(.move(edge: .leading))
                 .offset(x: selectedArtist != nil ? 0 : ContentView.columnWidth, y: 0)

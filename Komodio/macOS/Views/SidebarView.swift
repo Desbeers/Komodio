@@ -33,6 +33,8 @@ struct SidebarView: View {
                 scene.contentSelection = selection
             }
         }
+        /// Override de default list style that it set in ``MainView``
+        .listStyle(.sidebar)
         .animation(.default, value: searchField)
         .animation(.default, value: kodi.status)
         .buttonStyle(.plain)

@@ -71,7 +71,6 @@ struct SearchView: View {
                     }
             }
         }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
         .buttonStyle(.plain)
         .task(id: scene.query) {
             scene.details = .search
@@ -119,7 +118,7 @@ extension SearchView {
         /// The SceneState model
         @EnvironmentObject var scene: SceneState
         var body: some View {
-            PartsView.DetailMessage(title: Router.search.label.title, message: "Search results for '**\(scene.query)**'")
+            PartsView.DetailHeader(title: Router.search.label.title, subtitle: "Search results for '**\(scene.query)**'")
         }
     }
 }

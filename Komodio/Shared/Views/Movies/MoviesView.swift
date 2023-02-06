@@ -82,7 +82,6 @@ struct MoviesView: View {
             }
             .scaleEffect(selectedItem?.media == .movieSet ? 0.6 : 1)
             .offset(x: selectedItem?.media == .movieSet ? -ContentView.columnWidth : 0, y: 0)
-            .listStyle(.inset(alternatesRowBackgrounds: true))
             MovieSetView(movieSet: selectedMovieSet)
                 .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
                 .opacity(selectedItem?.media == .movieSet ? 1 : 0)

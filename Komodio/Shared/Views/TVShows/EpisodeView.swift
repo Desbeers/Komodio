@@ -33,11 +33,8 @@ extension EpisodeView {
                 Divider()
                 HStack(alignment: .top, spacing: 0) {
                     KodiArt.Fanart(item: episode)
-                        .watchStatus(of: episode)
+                        .fanartStyle(item: episode)
                         .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
-                        .padding(4)
-                        .background(.thickMaterial)
-                        .cornerRadius(KomodioApp.thumbSize.width / 35)
                         .padding(.trailing)
                     VStack(alignment: .leading) {
                         PartsView.TextMore(item: episode)
@@ -59,11 +56,8 @@ extension EpisodeView {
                 Rectangle().fill(.secondary).frame(height: 1)
                 HStack(alignment: .top, spacing: 0) {
                     KodiArt.Fanart(item: episode)
-                        .watchStatus(of: episode)
+                        .fanartStyle(item: episode)
                         .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
-                        .padding()
-                        .background(.thickMaterial)
-                        .cornerRadius(KomodioApp.thumbSize.width / 35)
                         .padding(.trailing)
                     PartsView.TextMore(item: episode)
                         .frame(height: KomodioApp.thumbSize.height)

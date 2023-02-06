@@ -53,6 +53,9 @@ struct MainView: View {
                 scene.sidebarSelection = .start
             }
         }
+        /// The list style is the same in every View so set it here
+        /// - Note: Not for the ``SidebarView`` but it will override it
+        .listStyle(.inset(alternatesRowBackgrounds: true))
         .navigationSubtitle(scene.navigationSubtitle)
         .animation(.default, value: scene.sidebarSelection)
         .animation(.default, value: scene.contentSelection)

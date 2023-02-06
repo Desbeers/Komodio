@@ -15,12 +15,12 @@ enum PartsView {
 
 extension PartsView {
 
-    /// The message to show in ``DetailView``
-    struct DetailMessage: View {
+    /// The header for details
+    struct DetailHeader: View {
         /// The title of the message
         let title: String
-        /// The optional message
-        var message: String?
+        /// The optional subtitle
+        var subtitle: String?
 
         // MARK: Body of the View
 
@@ -28,17 +28,19 @@ extension PartsView {
         var body: some View {
             VStack {
                 Text(title)
-                    .font(.system(size: KomodioApp.platform == .macOS ? 50 : 80))
+                    .font(.system(size: KomodioApp.platform == .macOS ? 40 : 60))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                    .padding(.bottom)
-                if let message {
-                    Text(.init(message))
+                /// Keep the height of the View, also when the text is scaled
+                    .frame(height: KomodioApp.platform == .macOS ? 60 : 80)
+                if let subtitle {
+                    /// Init the text, because then we can use Mardown formatting
+                    Text(.init(subtitle))
                         .font(.system(size: KomodioApp.platform == .macOS ? 20 : 40))
                         .opacity(0.6)
-                        .padding(.bottom)
                 }
             }
+            .padding(.bottom)
         }
     }
 }

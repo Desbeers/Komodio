@@ -63,7 +63,7 @@ struct DetailView: View {
     /// The fallback View
     private var fallback: some View {
         VStack {
-            PartsView.DetailMessage(title: scene.sidebarSelection.label.title, message: scene.sidebarSelection.label.description)
+            PartsView.DetailHeader(title: scene.sidebarSelection.label.title, subtitle: scene.sidebarSelection.label.description)
             Image(systemName: scene.sidebarSelection.label.icon)
                 .resizable()
                 .scaledToFit()

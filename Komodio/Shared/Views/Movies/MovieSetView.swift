@@ -56,7 +56,6 @@ struct MovieSetView: View {
                         .tag(movie)
                 }
             }
-            .listStyle(.inset(alternatesRowBackgrounds: true))
         }
 #endif
 
@@ -165,36 +164,27 @@ extension MovieSetView {
             Group {
 
 #if os(macOS)
-                ScrollView {
-                    VStack {
-                        Text(movieSet.title)
-                            .font(.system(size: 40))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                        KodiArt.Fanart(item: movieSet)
-                            .aspectRatio(contentMode: .fit)
-                            .watchStatus(of: movieSet)
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                            .padding(.bottom)
-                        Buttons.PlayedState(item: movieSet)
-                            .padding(.bottom)
-                            .labelStyle(.playLabel)
-                            .buttonStyle(.playButton)
-                        Text(movieSet.plot)
-                    }
-                    .detailsFontStyle()
-                    .padding(40)
+                VStack {
+                    Text(movieSet.title)
+                        .font(.system(size: 40))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    KodiArt.Fanart(item: movieSet)
+                        .fanartStyle(item: movieSet)
+                    Buttons.PlayedState(item: movieSet)
+                        .padding()
+                        .labelStyle(.playLabel)
+                        .buttonStyle(.playButton)
+                    Text(movieSet.plot)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .detailsFontStyle()
+                .detailsWrapper()
 #endif
 
 #if os(tvOS)
                 HStack {
                     KodiArt.Fanart(item: movieSet)
-                        .aspectRatio(contentMode: .fit)
-                        .watchStatus(of: movieSet)
-                        .cornerRadius(10)
+                        .fanartStyle(item: movieSet)
                     VStack {
                         Text(movieSet.title)
                             .font(.title)

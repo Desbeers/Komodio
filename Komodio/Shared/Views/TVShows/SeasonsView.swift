@@ -58,7 +58,6 @@ struct SeasonsView: View {
                         .tag(season.season)
                 }
             }
-            .listStyle(.inset(alternatesRowBackgrounds: true))
         }
 #endif
 

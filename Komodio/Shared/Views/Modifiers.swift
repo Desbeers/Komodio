@@ -90,25 +90,121 @@ extension View {
     }
 }
 
-// MARK: Item details font modifier
+// MARK: Details wrapper
 
 extension Modifiers {
 
-    /// A `ViewModifier` to set de font style for details of a `MediaItem`
-    struct DetailsFontStyle: ViewModifier {
+    /// A `ViewModifier` to wrap the ``DetailView`` for the specific platfom
+    struct DetailsWrapper: ViewModifier {
         /// The modifier
         func body(content: Content) -> some View {
+
+#if os(macOS)
+            /// Wrap the content in a `ScrollView` and give it inside padding
+            ScrollView {
+                content
+                    .padding(40)
+            }
+#endif
+
+#if os(tvOS)
+            /// Just show the content; tvOS does not scroll
             content
-                .font(.system(size: 14))
-                .lineSpacing(6)
+#endif
+
         }
     }
 }
 
 extension View {
 
-    /// Shortcut to the ``Modifiers/DetailsFontStyle``
+    /// A `ViewModifier` to wrap the ``DetailView`` for the specific platfom
+    func detailsWrapper() -> some View {
+        modifier(Modifiers.DetailsWrapper())
+    }
+}
+
+// MARK: KodiItem details font modifier
+
+extension Modifiers {
+
+    /// A `ViewModifier` to set de font style for details of a `KodiItem`
+    struct DetailsFontStyle: ViewModifier {
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+#if os(macOS)
+                .font(.system(size: 14))
+                .lineSpacing(6)
+#endif
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to set de font style for details of a `KodiItem`
     func detailsFontStyle() -> some View {
         modifier(Modifiers.DetailsFontStyle())
+    }
+}
+
+// MARK: Fanart modifier
+
+extension Modifiers {
+
+    /// A `ViewModifier` to style the fanart of a `MediaItem`
+    struct FanartStyle: ViewModifier {
+        /// The `KodiItem`
+        let item: any KodiItem
+        /// The optional overlay
+        var overlay: String?
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+
+#if os(macOS)
+                .aspectRatio(contentMode: .fit)
+                .watchStatus(of: item)
+                .overlay(alignment: .bottom) {
+                    if let overlay {
+                        Text(overlay)
+                            .font(.headline)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .padding(8)
+                            .frame(maxWidth: .infinity)
+                            .background(.regularMaterial)
+                    }
+                }
+                .cornerRadius(10)
+                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
+#endif
+
+#if os(tvOS)
+                .aspectRatio(contentMode: .fit)
+                .watchStatus(of: item)
+                .overlay(alignment: .bottom) {
+                    if let overlay {
+                        Text(overlay)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(.regularMaterial)
+                    }
+                }
+                .cornerRadius(10)
+#endif
+
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to style the fanart of a `MediaItem`
+    func fanartStyle(item: any KodiItem, overlay: String? = nil) -> some View {
+        modifier(Modifiers.FanartStyle(item: item, overlay: overlay))
     }
 }

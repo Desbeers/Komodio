@@ -66,6 +66,9 @@ extension KomodioApp {
     /// The default size of thumb art
     static let thumbSize = CGSize(width: 426, height: 240)
 
+    /// The default size of fanart
+    static let fanartSize = CGSize(width: 960, height: 540)
+
     /// The width of the sidebar
     static let sidebarWidth: Double = 450
 

@@ -26,7 +26,6 @@ struct SeasonView: View {
                 EpisodeView.Item(episode: episode)
             }
         }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
 
 #if os(tvOS)

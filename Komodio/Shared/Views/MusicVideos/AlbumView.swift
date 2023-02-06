@@ -21,9 +21,6 @@ struct AlbumView: View {
                 Item(musicVideo: musicVideo)
             }
         }
-        #if os(macOS)
-        .listStyle(.inset(alternatesRowBackgrounds: true))
-        #endif
     }
 }
 
@@ -62,11 +59,8 @@ extension AlbumView {
 #if os(tvOS)
             HStack(spacing: 0) {
                 KodiArt.Fanart(item: musicVideo)
-                    .watchStatus(of: musicVideo)
+                    .fanartStyle(item: musicVideo)
                     .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
-                    .padding()
-                    .background(.thickMaterial)
-                    .cornerRadius(KomodioApp.thumbSize.width / 35)
                     .padding(.trailing)
                 VStack(alignment: .leading) {
                     Text(musicVideo.title)

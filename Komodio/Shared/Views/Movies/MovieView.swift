@@ -106,43 +106,20 @@ extension MovieView {
         @ViewBuilder var content: some View {
 
 #if os(macOS)
-            ScrollView {
-                VStack {
-                    Text(movie.title)
-                        .font(.system(size: 40))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                    HStack {
-                        KodiArt.Fanart(item: movie)
-                            .aspectRatio(contentMode: .fit)
-                            .watchStatus(of: movie)
-                            .overlay(alignment: .bottom) {
-                                if !movie.tagline.isEmpty {
-                                    Text(movie.tagline)
-                                        .font(.headline)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.1)
-                                        .padding(8)
-                                        .frame(maxWidth: .infinity)
-                                        .background(.regularMaterial)
-                                }
-                            }
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
-                    }
-                    Buttons.Player(item: movie)
-                        .padding()
-                    VStack(alignment: .leading) {
-                        Text(movie.plot)
-                            .padding(.bottom)
-                        movieDetails
-                        Spacer()
-                    }
+            VStack {
+                PartsView.DetailHeader(title: movie.title)
+                KodiArt.Fanart(item: movie)
+                    .fanartStyle(item: movie, overlay: movie.tagline.isEmpty ? nil : movie.tagline)
+                Buttons.Player(item: movie)
+                    .padding()
+                VStack(alignment: .leading) {
+                    Text(movie.plot)
+                        .padding(.bottom)
+                    movieDetails
                 }
-                .detailsFontStyle()
-                .padding(40)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .detailsFontStyle()
+            .detailsWrapper()
 #endif
 
 #if os(tvOS)

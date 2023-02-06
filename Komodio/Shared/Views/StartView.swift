@@ -54,7 +54,7 @@ extension StartView {
         var body: some View {
             VStack {
                 if kodi.status != .loadedLibrary {
-                    PartsView.DetailMessage(title: kodi.status.message)
+                    PartsView.DetailHeader(title: kodi.status.message)
                         .padding(.top, 40)
                 }
                 PartsView.RotatingIcon(rotate: $rotate)

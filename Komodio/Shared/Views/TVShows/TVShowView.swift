@@ -82,20 +82,12 @@ extension TVShowView {
             Group {
 
 #if os(macOS)
-                ScrollView {
                     VStack {
-                        Text(tvshow.title)
-                            .font(.system(size: 40))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
+                        PartsView.DetailHeader(title: tvshow.title)
                         KodiArt.Fanart(item: tvshow)
-                            .aspectRatio(contentMode: .fit)
-                            .watchStatus(of: tvshow)
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                            .padding(.bottom)
+                            .fanartStyle(item: tvshow)
                         Buttons.PlayedState(item: tvshow)
-                            .padding(.bottom)
+                            .padding()
                             .labelStyle(.playLabel)
                             .buttonStyle(.playButton)
                         VStack(alignment: .leading) {
@@ -104,9 +96,7 @@ extension TVShowView {
                         }
                     }
                     .detailsFontStyle()
-                    .padding(40)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                }
+                    .detailsWrapper()
 #endif
 
 #if os(tvOS)
@@ -115,13 +105,9 @@ extension TVShowView {
                         .watchStatus(of: tvshow)
                         .cornerRadius(10)
                     VStack {
-                        Text(tvshow.title)
-                            .font(.title)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                            .padding(.bottom)
+                        PartsView.DetailHeader(title: tvshow.title)
                         KodiArt.Fanart(item: tvshow)
-                            .cornerRadius(10)
+                            .fanartStyle(item: tvshow)
                         PartsView.TextMore(item: tvshow)
                             .focusSection()
                         HStack {

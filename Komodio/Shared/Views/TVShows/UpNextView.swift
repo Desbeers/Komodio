@@ -79,7 +79,6 @@ struct UpNextView: View {
                     .tag(episode)
             }
         }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
 
 #if os(tvOS)
@@ -156,60 +155,23 @@ extension UpNextView {
         /// The body of the View
         var body: some View {
 
-#if os(macOS)
-            ScrollView {
-                VStack {
-                    Text(episode.showTitle)
-                        .font(.system(size: 40))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                    KodiArt.Fanart(item: episode)
-                        .watchStatus(of: episode)
-                        .overlay(alignment: .bottom) {
-                            Text(episode.title)
-                                    .font(.title2)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .padding(8)
-                                    .frame(maxWidth: .infinity)
-                                    .background(.regularMaterial)
-                        }
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                    Buttons.Player(item: episode)
-                        .padding()
-                    Text(episode.plot)
-                }
-                .detailsFontStyle()
-                .padding(40)
-            }
-            .background(item: episode)
-#endif
-
-#if os(tvOS)
             VStack {
-                Text(episode.showTitle)
-                    .font(.title)
-                Text("Season \(episode.season), episode \(episode.episode)")
-                    .font(.caption)
+                PartsView.DetailHeader(title: episode.showTitle, subtitle: "Season \(episode.season), episode \(episode.episode)")
                 KodiArt.Fanart(item: episode)
-                    .watchStatus(of: episode)
-                    .overlay(alignment: .bottom) {
-                        Text(episode.title)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.1)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(.regularMaterial)
-                    }
-                    .cornerRadius(KomodioApp.thumbSize.width / 35)
-                    .padding()
-                Text(episode.plot)
+                    .fanartStyle(item: episode, overlay: episode.title)
+                #if os(tvOS)
+                    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
+                #endif
                 Buttons.Player(item: episode)
+                /// Make sure tvOS can get the focus
+                    .frame(maxWidth: .infinity)
+                    .focusSection()
+                    .padding()
+                PartsView.TextMore(item: episode)
             }
+            .detailsFontStyle()
+            .detailsWrapper()
             .background(item: episode)
-#endif
-
         }
     }
 }

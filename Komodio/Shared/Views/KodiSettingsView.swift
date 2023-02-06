@@ -63,7 +63,6 @@ struct KodiSettingsView: View {
                 }
             }
             .offset(x: selectedSection != nil ? -ContentView.columnWidth : 0, y: 0)
-            .listStyle(.inset(alternatesRowBackgrounds: true))
             Section(section: section)
                 .transition(.move(edge: .leading))
                 .offset(x: selectedSection != nil ? 0 : ContentView.columnWidth, y: 0)
@@ -159,7 +158,6 @@ extension KodiSettingsView {
                     .tag(category)
                 }
             }
-            .listStyle(.inset(alternatesRowBackgrounds: true))
 #endif
 
 #if os(tvOS)

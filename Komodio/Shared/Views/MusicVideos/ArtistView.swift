@@ -61,42 +61,19 @@ extension ArtistView {
 
         /// The body of the View
         var body: some View {
-
-#if os(macOS)
-            ScrollView {
-                VStack {
-                    Text(artist.artist)
-                        .font(.largeTitle)
-                        .padding(.bottom)
-                    KodiArt.Fanart(item: artist)
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .padding(.bottom, 40)
-                    Text(artist.description)
-                }
-                .detailsFontStyle()
-                .padding(40)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(item: artist)
-#endif
-
-#if os(tvOS)
             VStack {
-                Text(artist.artist)
-                    .font(.largeTitle)
-                    .padding(.bottom)
+                PartsView.DetailHeader(title: artist.artist)
                 KodiArt.Fanart(item: artist)
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                    .padding(.bottom, 40)
-                Text(artist.description)
-            }
-            .padding(40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .background(item: artist)
+                    .fanartStyle(item: artist)
+#if os(tvOS)
+    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
 #endif
-
+                    .padding(.bottom)
+                PartsView.TextMore(item: artist)
+            }
+            .detailsFontStyle()
+            .detailsWrapper()
+            .background(item: artist)
         }
     }
 }

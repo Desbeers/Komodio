@@ -46,7 +46,6 @@ struct MusicVideosView: View {
                     .tag(item)
             }
         }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
     }
 #endif
 
