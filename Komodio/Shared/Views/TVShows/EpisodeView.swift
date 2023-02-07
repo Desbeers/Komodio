@@ -24,30 +24,6 @@ extension EpisodeView {
 
         /// The body of the View
         var body: some View {
-
-#if os(macOS)
-            VStack(alignment: .leading) {
-                Text(episode.title)
-                    .font(.largeTitle)
-                Text("Episode \(episode.episode)")
-                Divider()
-                HStack(alignment: .top, spacing: 0) {
-                    KodiArt.Fanart(item: episode)
-                        .fanartStyle(item: episode)
-                        .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
-                        .padding(.trailing)
-                    VStack(alignment: .leading) {
-                        PartsView.TextMore(item: episode)
-                            .frame(height: KomodioApp.thumbSize.height)
-                        Buttons.Player(item: episode)
-                    }
-                }
-                .detailsFontStyle()
-            }
-            .padding()
-#endif
-
-#if os(tvOS)
             VStack(alignment: .leading) {
                 Text(episode.title)
                     .font(.title3)
@@ -63,12 +39,12 @@ extension EpisodeView {
                         .frame(height: KomodioApp.thumbSize.height)
                 }
                 .focusSection()
-                Buttons.Player(item: episode)
+                Buttons.Player(item: episode, fadeStateButton: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .focusSection()
             }
-#endif
-
+            .detailsFontStyle()
+            .padding()
         }
     }
 }

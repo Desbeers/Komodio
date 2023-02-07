@@ -19,23 +19,11 @@ struct SeasonView: View {
 
     /// The body of this View
     var body: some View {
-
-#if os(macOS)
         List {
             ForEach(episodes) { episode in
                 EpisodeView.Item(episode: episode)
             }
         }
-#endif
-
-#if os(tvOS)
-        List {
-            ForEach(episodes) { episode in
-                EpisodeView.Item(episode: episode)
-            }
-        }
-#endif
-
     }
 }
 

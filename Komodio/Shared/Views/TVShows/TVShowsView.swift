@@ -108,7 +108,6 @@ struct TVShowsView: View {
         }
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .setSafeAreas()
 #endif
 
     }

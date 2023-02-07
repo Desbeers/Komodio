@@ -61,7 +61,6 @@ struct SearchView: View {
                 }
             }
         }
-        .setSafeAreas()
         .buttonStyle(.card)
         .searchable(text: $scene.query)
         .task(id: scene.query) {

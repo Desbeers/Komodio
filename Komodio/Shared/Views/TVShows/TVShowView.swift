@@ -82,21 +82,21 @@ extension TVShowView {
             Group {
 
 #if os(macOS)
-                    VStack {
-                        PartsView.DetailHeader(title: tvshow.title)
-                        KodiArt.Fanart(item: tvshow)
-                            .fanartStyle(item: tvshow)
-                        Buttons.PlayedState(item: tvshow)
-                            .padding()
-                            .labelStyle(.playLabel)
-                            .buttonStyle(.playButton)
-                        VStack(alignment: .leading) {
-                            Text(tvshow.plot)
-                            tvshowDetails
-                        }
+                VStack {
+                    PartsView.DetailHeader(title: tvshow.title)
+                    KodiArt.Fanart(item: tvshow)
+                        .fanartStyle(item: tvshow)
+                    Buttons.PlayedState(item: tvshow)
+                        .padding()
+                        .labelStyle(.playLabel)
+                        .buttonStyle(.playButton)
+                    VStack(alignment: .leading) {
+                        Text(tvshow.plot)
+                        tvshowDetails
                     }
-                    .detailsFontStyle()
-                    .detailsWrapper()
+                }
+                .detailsFontStyle()
+                .detailsWrapper()
 #endif
 
 #if os(tvOS)

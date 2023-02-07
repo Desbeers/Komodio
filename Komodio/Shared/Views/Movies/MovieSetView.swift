@@ -76,7 +76,6 @@ struct MovieSetView: View {
             .focusSection()
         }
         .buttonStyle(.card)
-        .setSafeAreas()
 #endif
 
     }

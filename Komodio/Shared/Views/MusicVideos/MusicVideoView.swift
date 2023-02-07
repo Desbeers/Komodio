@@ -57,38 +57,22 @@ extension MusicVideoView {
 
         /// The body of the View
         var body: some View {
-            Group {
-
-#if os(macOS)
-                VStack {
-                    PartsView.DetailHeader(title: musicVideo.title)
-                    KodiArt.Fanart(item: musicVideo)
-                        .fanartStyle(item: musicVideo)
-                    Buttons.Player(item: musicVideo)
-                        .padding()
-                    Text(musicVideo.plot)
-                }
-                .detailsFontStyle()
-                .padding(40)
-#endif
-
+            VStack {
+                PartsView.DetailHeader(title: musicVideo.title)
+                KodiArt.Fanart(item: musicVideo)
+                    .fanartStyle(item: musicVideo)
 #if os(tvOS)
-                VStack {
-                    PartsView.DetailHeader(title: musicVideo.title)
-                    KodiArt.Fanart(item: musicVideo)
-                        .fanartStyle(item: musicVideo)
-                        .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
-                    Buttons.Player(item: musicVideo)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .focusSection()
-                    PartsView.TextMore(item: musicVideo)
-                }
-                .focusSection()
+                    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
 #endif
-
+                Buttons.Player(item: musicVideo)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .focusSection()
+                PartsView.TextMore(item: musicVideo)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .focusSection()
+            .detailsFontStyle()
+            .detailsWrapper()
             .background(item: musicVideo)
         }
     }

@@ -22,7 +22,9 @@ extension Buttons {
         /// The `KodiItem`
         var item: any KodiItem
         /// Bool to show the `state` button or not
-        var state: Bool = true
+        var showState: Bool = true
+        /// Bool to fade the `state` button on focus or not
+        var fadeStateButton: Bool = false
         /// The focus state of the player buttons
         @FocusState var isFocused: Bool
 
@@ -37,7 +39,7 @@ extension Buttons {
                     if item.resume.position != 0 {
                         Buttons.Resume(item: item)
                     }
-                    if state && (KomodioApp.platform == .macOS ? true : isFocused) {
+                    if showState && (KomodioApp.platform == .macOS ? true : fadeStateButton ? isFocused : true) {
                         Buttons.PlayedState(item: item)
                     }
                 case false:

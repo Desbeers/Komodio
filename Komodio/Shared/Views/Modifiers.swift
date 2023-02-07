@@ -108,8 +108,10 @@ extension Modifiers {
 #endif
 
 #if os(tvOS)
-            /// Just show the content; tvOS does not scroll
+            /// Just show the content at full height; tvOS does not scroll
             content
+                .padding(.vertical, 40)
+                .frame(height: UIScreen.main.bounds.height, alignment: .top)
 #endif
 
         }
@@ -143,7 +145,7 @@ extension Modifiers {
 
 extension View {
 
-    /// A `ViewModifier` to set de font style for details of a `KodiItem`
+    /// A `ViewModifier` to set the font style for details of a `KodiItem`
     func detailsFontStyle() -> some View {
         modifier(Modifiers.DetailsFontStyle())
     }
@@ -162,14 +164,12 @@ extension Modifiers {
         /// The modifier
         func body(content: Content) -> some View {
             content
-
-#if os(macOS)
                 .aspectRatio(contentMode: .fit)
                 .watchStatus(of: item)
                 .overlay(alignment: .bottom) {
                     if let overlay {
                         Text(overlay)
-                            .font(.headline)
+                            .font(KomodioApp.platform == .macOS ? .headline : .subheadline)
                             .lineLimit(1)
                             .minimumScaleFactor(0.1)
                             .padding(8)
@@ -178,25 +178,9 @@ extension Modifiers {
                     }
                 }
                 .cornerRadius(10)
+#if os(macOS)
                 .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
 #endif
-
-#if os(tvOS)
-                .aspectRatio(contentMode: .fit)
-                .watchStatus(of: item)
-                .overlay(alignment: .bottom) {
-                    if let overlay {
-                        Text(overlay)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(.regularMaterial)
-                    }
-                }
-                .cornerRadius(10)
-#endif
-
         }
     }
 }

@@ -105,7 +105,6 @@ struct ArtistsView: View {
         .buttonStyle(.card)
         .padding(.horizontal, 80)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .setSafeAreas()
     }
 #endif
 

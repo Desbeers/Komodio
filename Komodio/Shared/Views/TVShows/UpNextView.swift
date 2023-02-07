@@ -98,7 +98,6 @@ struct UpNextView: View {
                 .frame(maxWidth: .infinity)
                 .focusSection()
         }
-        .setSafeAreas()
 #endif
 
     }
@@ -122,7 +121,7 @@ extension UpNextView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
 
-                #if os(macOS)
+#if os(macOS)
                 VStack(alignment: .leading) {
                     Text(episode.showTitle)
                         .font(.headline)
@@ -136,7 +135,7 @@ extension UpNextView {
                 }
                 .padding(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                #endif
+#endif
 
             }
         }
@@ -154,7 +153,6 @@ extension UpNextView {
 
         /// The body of the View
         var body: some View {
-
             VStack {
                 PartsView.DetailHeader(title: episode.showTitle, subtitle: "Season \(episode.season), episode \(episode.episode)")
                 KodiArt.Fanart(item: episode)

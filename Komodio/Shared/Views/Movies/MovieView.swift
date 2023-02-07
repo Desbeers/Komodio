@@ -154,7 +154,7 @@ extension MovieView {
                 VStack {
                     Spacer()
                     HStack(alignment: .center) {
-                        Buttons.Player(item: movie, state: false)
+                        Buttons.Player(item: movie, showState: false)
                         VStack(alignment: .leading, spacing: 0) {
                             Text(movie.title)
                                 .font(.title2)

@@ -66,7 +66,7 @@ extension ArtistView {
                 KodiArt.Fanart(item: artist)
                     .fanartStyle(item: artist)
 #if os(tvOS)
-    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
+                    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
 #endif
                     .padding(.bottom)
                 PartsView.TextMore(item: artist)
