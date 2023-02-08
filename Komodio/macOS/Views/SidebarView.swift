@@ -81,6 +81,11 @@ struct SidebarView: View {
         Section("Movies") {
             sidebarItem(item: Router.movies)
             sidebarItem(item: Router.unwatchedMovies)
+            if !kodi.library.moviePlaylists.isEmpty {
+                ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
+                    sidebarItem(item: .moviesPlaylist(file: playlist))
+                }
+            }
         }
         Section("TV shows") {
             sidebarItem(item: Router.tvshows)
@@ -88,13 +93,6 @@ struct SidebarView: View {
         }
         Section("Music Videos") {
             sidebarItem(item: Router.musicVideos)
-        }
-        if !kodi.library.videoPlaylists.isEmpty {
-            Section("Playlists") {
-                ForEach(kodi.library.videoPlaylists, id: \.file) { playlist in
-                    sidebarItem(item: .moviesPlaylist(file: playlist))
-                }
-            }
         }
         if !searchField.isEmpty {
             Section("Search") {

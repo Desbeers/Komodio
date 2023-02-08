@@ -27,6 +27,8 @@ struct ContentView: View {
                 MoviesView()
             case .unwatchedMovies:
                 MoviesView(filter: .unwatched)
+            case .playlists:
+                PlaylistsView()
             case .tvshows:
                 TVShowsView()
             case .unwachedEpisodes:

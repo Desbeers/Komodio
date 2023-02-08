@@ -45,6 +45,7 @@ custom_categories:
     - AlbumView
     - MusicVideosView
     - MusicVideoView
+    - PlaylistsView
     - StatisticsView
     - HostItemView
     - KomodioPlayerView

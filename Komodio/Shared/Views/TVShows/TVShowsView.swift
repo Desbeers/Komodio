@@ -97,6 +97,7 @@ struct TVShowsView: View {
 
 #if os(tvOS)
         ScrollView {
+            PartsView.DetailHeader(title: scene.navigationSubtitle)
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(tvshows) { tvshow in
                     NavigationLink(value: tvshow, label: {

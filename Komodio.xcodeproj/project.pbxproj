@@ -57,6 +57,7 @@
 		D76750DB2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
 		D76750DC2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
 		D76BFFD32990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */; };
+		D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */; };
 		D779BEB029882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D779BEB129882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D77B1361296DECBF00ECE2F9 /* KomodioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */; };
@@ -129,6 +130,7 @@
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsView.swift; sourceTree = "<group>"; };
 		D779BEAF29882A67009FD90A /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1363296ECD2E00ECE2F9 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				D72DE7B42955F22500DD0FFB /* SidebarView.swift */,
 				D785A1A1294B665600530F62 /* ContentView.swift */,
 				D7F03A7D2964676A0026D815 /* StartView+tvOS.swift */,
+				D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */,
 				D7254F48295853C900DC704B /* SearchView.swift */,
 				D7254F402957399C00DC704B /* Buttons+tvOS.swift */,
 				D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */,
@@ -578,6 +581,7 @@
 				D785A1A3294B665F00530F62 /* MovieSetView.swift in Sources */,
 				D7254F4E2959FCC800DC704B /* RotatingIconModel.swift in Sources */,
 				D785A19D294B640300530F62 /* SceneState.swift in Sources */,
+				D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */,
 				D785A19B294B63FA00530F62 /* Router.swift in Sources */,
 				D785A1A7294B7F3A00530F62 /* DetailView.swift in Sources */,
 				D75C3F6C294DDD49002BC065 /* EpisodeView.swift in Sources */,

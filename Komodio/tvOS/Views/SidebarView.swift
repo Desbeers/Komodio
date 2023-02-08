@@ -41,16 +41,18 @@ struct SidebarView: View {
             Section("Movies") {
                 sidebarItem(item: scene.sidebarItems[1], selection: scene.mainSelection)
                 sidebarItem(item: scene.sidebarItems[2], selection: scene.mainSelection)
+                sidebarItem(item: scene.sidebarItems[3], selection: scene.mainSelection)
+
             }
             Section("TV shows") {
-                sidebarItem(item: scene.sidebarItems[3], selection: scene.mainSelection)
                 sidebarItem(item: scene.sidebarItems[4], selection: scene.mainSelection)
-            }
-            Section("Music Videos") {
                 sidebarItem(item: scene.sidebarItems[5], selection: scene.mainSelection)
             }
-            Section("Search") {
+            Section("Music Videos") {
                 sidebarItem(item: scene.sidebarItems[6], selection: scene.mainSelection)
+            }
+            Section("Search") {
+                sidebarItem(item: scene.sidebarItems[7], selection: scene.mainSelection)
             }
         }
         .padding(.top)
@@ -91,6 +93,6 @@ struct SidebarView: View {
                     .font(scene.sidebarItems[selection] == item ? .headline : .subheadline)
                     .frame(width: 40, height: 40)
             })
-        .padding()
+        .padding(.bottom)
     }
 }

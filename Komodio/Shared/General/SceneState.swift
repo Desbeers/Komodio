@@ -28,6 +28,7 @@ class SceneState: ObservableObject {
         .start,
         .movies,
         .unwatchedMovies,
+        .playlists,
         .tvshows,
         .unwachedEpisodes,
         .musicVideos,

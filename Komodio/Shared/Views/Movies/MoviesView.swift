@@ -104,6 +104,7 @@ struct MoviesView: View {
 
 #if os(tvOS)
         ScrollView {
+            PartsView.DetailHeader(title: scene.navigationSubtitle)
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach($items, id: \.id) { $video in
                     switch video {
@@ -177,7 +178,7 @@ struct MoviesView: View {
         } else {
             switch filter {
             case .unwatched:
-                scene.navigationSubtitle = "Unwatched Movies"
+                scene.navigationSubtitle = Router.unwatchedMovies.label.title
                 scene.details = .unwatchedMovies
             case .playlist(let file):
                 scene.navigationSubtitle = file.title

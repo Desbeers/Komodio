@@ -21,7 +21,7 @@ enum Router: Hashable {
     case movieSet(movieSet: Video.Details.MovieSet)
     /// All unwatched movies
     case unwatchedMovies
-    /// Playlist
+    /// Movies Playlist
     case moviesPlaylist(file: List.Item.File)
 
     // MARK: TV shows
@@ -54,6 +54,8 @@ enum Router: Hashable {
 
     /// Start View for Komodio
     case start
+    /// Playlists
+    case playlists
     /// The search View
     case search
     /// The Kodi settings View
@@ -93,6 +95,8 @@ extension Router {
             return "Search did not find any results"
         case .movies:
             return "There are no movies in your library"
+        case .playlists:
+            return "There are no playlists in your library"
         case .tvshows:
             return "There are no TV shows in your library"
         case .movieSet:
@@ -177,6 +181,11 @@ extension Router {
             return Item(title: "Kodi Settings",
                         description: "The Settings for your Kodi",
                         icon: "gear"
+            )
+        case .playlists:
+            return Item(title: "Playlists",
+                        description: "Your movie playlists",
+                        icon: "list.triangle"
             )
         default:
             return Item(title: "Details",

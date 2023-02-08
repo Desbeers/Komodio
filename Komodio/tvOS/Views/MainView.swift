@@ -40,6 +40,10 @@ struct MainView: View {
                     MusicVideosView(artist: artist)
                         .setSafeAreas()
                 })
+                .navigationDestination(for: List.Item.File.self, destination: { playlist in
+                    MoviesView(filter: .playlist(file: playlist))
+                        .setSafeAreas()
+                })
         }
         /// Put the ``SidebarView`` into the `safe area`.
         .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {
