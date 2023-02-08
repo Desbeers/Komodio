@@ -69,7 +69,6 @@ struct MainView: View {
             KodiSettingsView.FullScreen()
         }
         .animation(.default, value: isFocused)
-        .animation(.default, value: scene.mainSelection)
         .environmentObject(scene)
     }
 }

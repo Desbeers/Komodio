@@ -35,9 +35,9 @@ struct SidebarView: View {
                     Image(systemName: "sparkles.tv")
                         .foregroundColor(scene.mainSelection == 0 ? Color("AccentColor") : .gray)
                         .font(scene.mainSelection == 0 ? .headline : .subheadline)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 40, height: 40, alignment: .center)
                 })
-            .padding()
+            .padding(.vertical, 20)
             Section("Movies") {
                 sidebarItem(item: scene.sidebarItems[1], selection: scene.mainSelection)
                 sidebarItem(item: scene.sidebarItems[2], selection: scene.mainSelection)
@@ -57,6 +57,7 @@ struct SidebarView: View {
         }
         .padding(.top)
         .frame(maxHeight: .infinity, alignment: .topLeading)
+        .animation(.default, value: scene.mainSelection)
         .focusable()
         .swipeGestures(
             onUp: {
@@ -91,8 +92,8 @@ struct SidebarView: View {
                 Image(systemName: item.label.icon)
                     .foregroundColor(scene.sidebarItems[selection] == item ? Color("AccentColor") : .gray)
                     .font(scene.sidebarItems[selection] == item ? .headline : .subheadline)
-                    .frame(width: 40, height: 40)
+                    .frame(width: 40, height: 40, alignment: .center)
             })
-        .padding(.bottom)
+        .padding(.bottom, 20)
     }
 }

@@ -10,8 +10,6 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for the main content (tvOS)
 struct ContentView: View {
-    /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
 
@@ -19,7 +17,7 @@ struct ContentView: View {
 
     /// The body of the View
     var body: some View {
-        Group {
+        VStack {
             switch scene.contentSelection {
             case .start:
                 StartView()
@@ -44,6 +42,7 @@ struct ContentView: View {
                 Text("Not implemented")
             }
         }
+        .animation(.default, value: scene.contentSelection)
         .setSafeAreas()
     }
 }

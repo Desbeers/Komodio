@@ -11,26 +11,47 @@ import SwiftlyKodiAPI
 struct PlaylistsView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
 
     // MARK: Body of the View
 
     /// The body of the View
     var body: some View {
-        HStack {
-            if kodi.library.moviePlaylists.isEmpty {
-                Text(Router.playlists.empty)
+        VStack {
+            switch state {
+            case .ready:
+                content
+            default:
+                PartsView.StatusMessage(item: .playlists, status: state)
+            }
+        }
+        .task(id: kodi.library.moviePlaylists) {
+            if kodi.status != .loadedLibrary {
+                state = .offline
+            } else if kodi.library.moviePlaylists.isEmpty {
+                state = .empty
             } else {
-                ScrollView {
-                    ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-                        NavigationLink(value: playlist, label: {
-                            Label(title: {
-                                Text(playlist.title)
-                            }, icon: {
-                                Image(systemName: Router.playlists.label.icon)
-                            })
+                state = .ready
+            }
+        }
+    }
+
+    // MARK: Content of the View
+
+    /// The content of the View
+    var content: some View {
+        HStack {
+            ScrollView {
+                ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
+                    NavigationLink(value: playlist, label: {
+                        Label(title: {
+                            Text(playlist.title)
+                        }, icon: {
+                            Image(systemName: Router.playlists.label.icon)
                         })
-                        .padding()
-                    }
+                    })
+                    .padding()
                 }
             }
             DetailView()
