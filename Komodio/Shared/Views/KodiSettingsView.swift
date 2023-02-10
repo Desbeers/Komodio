@@ -235,8 +235,8 @@ extension KodiSettingsView {
 
         var body: some View {
             ScrollView {
-                Text("\(section.label) - \(category.label)")
-                    .font(.largeTitle)
+                PartsView.DetailHeader(title: section.label, subtitle: category.label)
+                    .padding(.top)
                 ForEach(category.groups.flatMap({$0.settings})) { setting in
                     KodiSettingView(setting: setting)
                         .padding(.bottom)

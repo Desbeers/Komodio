@@ -61,6 +61,8 @@ extension Styles {
                     .opacity(0.6)
                 configuration.title
             }
+            /// Make sure two lines will fit
+            .frame(height: 25)
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
             .foregroundColor(.black)

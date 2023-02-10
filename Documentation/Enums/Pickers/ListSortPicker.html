@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>DetailMessage Structure Reference</title>
+    <title>ListSortPicker Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/DetailMessage" class="dashAnchor"></a>
-    <a title="DetailMessage Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/ListSortPicker" class="dashAnchor"></a>
+    <a title="ListSortPicker Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../../index.html">Komodio</a> (100% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Komodio Reference</a>
         <img id="carat" src="../../img/carat.png" alt=""/>
-        DetailMessage Structure Reference
+        ListSortPicker Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -53,6 +53,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/ListSort.html">ListSort</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/ListSort/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/ListSort/SortMethod.html">– SortMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/ListSort/SortOrder.html">– SortOrder</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Parts.html">Parts</a>
@@ -236,7 +248,7 @@
                 <a href="../../Enums/PartsView.html">PartsView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Enums/PartsView/DetailMessage.html">– DetailMessage</a>
+                <a href="../../Enums/PartsView/DetailHeader.html">– DetailHeader</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/PartsView/StatusMessage.html">– StatusMessage</a>
@@ -266,6 +278,15 @@
                 <a href="../../Enums/Buttons/Resume.html">– Resume</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Enums/Pickers.html">Pickers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Pickers/ListSortPicker.html">– ListSortPicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Enums/Modifiers.html">Modifiers</a>
               </li>
               <li class="nav-group-task">
@@ -275,7 +296,13 @@
                 <a href="../../Enums/Modifiers/Background.html">– Background</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Enums/Modifiers/DetailsWrapper.html">– DetailsWrapper</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Enums/Modifiers/DetailsFontStyle.html">– DetailsFontStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Modifiers/FanartStyle.html">– FanartStyle</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Styles.html">Styles</a>
@@ -295,6 +322,9 @@
             <a href="../../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Extensions/ButtonStyle.html">ButtonStyle</a>
               </li>
               <li class="nav-group-task">
@@ -310,15 +340,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>DetailMessage</h1>
+            <h1>ListSortPicker</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">DetailMessage</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">ListSortPicker</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
 
                 </div>
               </div>
-            <p>The message to show in <code><a href="../../Structs/DetailView.html">DetailView</a></code></p>
+            <p>Sort a list: Two pickers to select the method and order</p>
 
           </section>
           <section class="section task-group-section">
@@ -327,9 +357,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio9PartsViewO13DetailMessageV5titleSSvp"></a>
-                    <a name="//apple_ref/swift/Property/title" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio9PartsViewO13DetailMessageV5titleSSvp">title</a>
+                    <a name="/s:7Komodio7PickersO14ListSortPickerV7sortingAA0cD0O4ItemVvp"></a>
+                    <a name="//apple_ref/swift/Property/sorting" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO14ListSortPickerV7sortingAA0cD0O4ItemVvp">sorting</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -337,14 +367,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The title of the message</p>
+                        <p>The current sorting</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@Binding</span>
+<span class="k">var</span> <span class="nv">sorting</span><span class="p">:</span> <span class="kt"><a href="../../Enums/ListSort.html">ListSort</a></span><span class="o">.</span><span class="kt">Item</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -354,9 +385,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio9PartsViewO13DetailMessageV7messageSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/message" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio9PartsViewO13DetailMessageV7messageSSSgvp">message</a>
+                    <a name="/s:7Komodio7PickersO14ListSortPickerV5media14SwiftlyKodiAPI7LibraryO5MediaOvp"></a>
+                    <a name="//apple_ref/swift/Property/media" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO14ListSortPickerV5media14SwiftlyKodiAPI7LibraryO5MediaOvp">media</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -364,14 +395,42 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The optional message</p>
+                        <p>The kind of media</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">media</span><span class="p">:</span> <span class="kt">Library</span><span class="o">.</span><span class="kt">Media</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio7PickersO14ListSortPickerV5scene33_8F6014390161075A6BF3A7F332AADF3DLLAA10SceneStateCvp"></a>
+                    <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO14ListSortPickerV5scene33_8F6014390161075A6BF3A7F332AADF3DLLAA10SceneStateCvp">scene</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The SceneState model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">scene</span><span class="p">:</span> <span class="kt"><a href="../../Classes/SceneState.html">SceneState</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -394,9 +453,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio9PartsViewO13DetailMessageV4bodyQrvp"></a>
+                    <a name="/s:7Komodio7PickersO14ListSortPickerV4bodyQrvp"></a>
                     <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio9PartsViewO13DetailMessageV4bodyQrvp">body</a>
+                    <a class="token" href="#/s:7Komodio7PickersO14ListSortPickerV4bodyQrvp">body</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -423,7 +482,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-05)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

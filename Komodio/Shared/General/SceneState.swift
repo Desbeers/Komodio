@@ -51,7 +51,7 @@ class SceneState: ObservableObject {
     }
     /// Bool to show the Kodi Settings View
     @Published var showSettings: Bool = false
-    /// The Naigation path
+    /// The Navigation path
     @Published var navigationStackPath = NavigationPath()
     /// The optional background image
     @Published var background: (any KodiItem)?
@@ -60,6 +60,8 @@ class SceneState: ObservableObject {
 
     // MARK: Shared stuff
 
+    /// The settings to sort a list
+    @Published var listSortSettings: [ListSort.Item] = []
     /// The current selection in the ``SidebarView``
     @Published var sidebarSelection: Router = .start
     /// The current selection in the ``ContentView``
@@ -84,6 +86,10 @@ class SceneState: ObservableObject {
                 break
             }
         }
+    }
+    /// Init the ``SceneState``
+    init() {
+        listSortSettings = ListSort.load()
     }
 }
 

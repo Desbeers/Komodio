@@ -55,6 +55,18 @@
                 <a href="../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ListSort.html">ListSort</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ListSort/Item.html">– Item</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ListSort/SortMethod.html">– SortMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ListSort/SortOrder.html">– SortOrder</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Parts.html">Parts</a>
               </li>
               <li class="nav-group-task">
@@ -236,7 +248,7 @@
                 <a href="../Enums/PartsView.html">PartsView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Enums/PartsView/DetailMessage.html">– DetailMessage</a>
+                <a href="../Enums/PartsView/DetailHeader.html">– DetailHeader</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/PartsView/StatusMessage.html">– StatusMessage</a>
@@ -266,6 +278,15 @@
                 <a href="../Enums/Buttons/Resume.html">– Resume</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Pickers.html">Pickers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers/ListSortPicker.html">– ListSortPicker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Modifiers.html">Modifiers</a>
               </li>
               <li class="nav-group-task">
@@ -275,7 +296,13 @@
                 <a href="../Enums/Modifiers/Background.html">– Background</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Modifiers/DetailsWrapper.html">– DetailsWrapper</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Modifiers/DetailsFontStyle.html">– DetailsFontStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/FanartStyle.html">– FanartStyle</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/Styles.html">Styles</a>
@@ -294,6 +321,9 @@
           <li class="nav-group-name">
             <a href="../Other%20Extensions.html">Other Extensions</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Extensions/ButtonStyle.html">ButtonStyle</a>
               </li>
@@ -414,11 +444,52 @@ On tvOS, it will be set to the <code><a href="../Classes/SceneState.html#/backgr
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Item%20details%20font%20modifier"></a>
-                <a name="//apple_ref/swift/Section/Item details font modifier" class="dashAnchor"></a>
+                <a name="/Details%20wrapper"></a>
+                <a name="//apple_ref/swift/Section/Details wrapper" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Item%20details%20font%20modifier"></a>
-                  <h3 class="section-name"><span>Item details font modifier</span>
+                  <a class="section-name-link" href="#/Details%20wrapper"></a>
+                  <h3 class="section-name"><span>Details wrapper</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio9ModifiersO14DetailsWrapperV"></a>
+                    <a name="//apple_ref/swift/Struct/DetailsWrapper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio9ModifiersO14DetailsWrapperV">DetailsWrapper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>ViewModifier</code> to wrap the <code><a href="../Structs/DetailView.html">DetailView</a></code> for the specific platfom</p>
+
+                        <a href="../Enums/Modifiers/DetailsWrapper.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">DetailsWrapper</span> <span class="p">:</span> <span class="kt">ViewModifier</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KodiItem%20details%20font%20modifier"></a>
+                <a name="//apple_ref/swift/Section/KodiItem details font modifier" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/KodiItem%20details%20font%20modifier"></a>
+                  <h3 class="section-name"><span>KodiItem details font modifier</span>
 </h3>
                 </div>
               </div>
@@ -436,7 +507,7 @@ On tvOS, it will be set to the <code><a href="../Classes/SceneState.html#/backgr
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A <code>ViewModifier</code> to set de font style for details of a <code><a href="../Structs/MediaItem.html">MediaItem</a></code></p>
+                        <p>A <code>ViewModifier</code> to set de font style for details of a <code>KodiItem</code></p>
 
                         <a href="../Enums/Modifiers/DetailsFontStyle.html" class="slightly-smaller">See more</a>
                       </div>
@@ -453,10 +524,51 @@ On tvOS, it will be set to the <code><a href="../Classes/SceneState.html#/backgr
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Fanart%20modifier"></a>
+                <a name="//apple_ref/swift/Section/Fanart modifier" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Fanart%20modifier"></a>
+                  <h3 class="section-name"><span>Fanart modifier</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio9ModifiersO11FanartStyleV"></a>
+                    <a name="//apple_ref/swift/Struct/FanartStyle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio9ModifiersO11FanartStyleV">FanartStyle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>ViewModifier</code> to style the fanart of a <code><a href="../Structs/MediaItem.html">MediaItem</a></code></p>
+
+                        <a href="../Enums/Modifiers/FanartStyle.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">FanartStyle</span> <span class="p">:</span> <span class="kt">ViewModifier</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-05)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

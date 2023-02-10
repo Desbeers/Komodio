@@ -21,6 +21,8 @@ struct MoviesView: View {
     @State private var items: [any KodiItem] = []
     /// The optional filter
     var filter: Parts.Filter = .none
+    /// The sorting
+    @State var sorting = ListSort.Item()
     /// The optional selected item
     @State private var selectedItem: MediaItem?
     /// The optional selected movie set (macOS)
@@ -43,6 +45,7 @@ struct MoviesView: View {
             }
         }
         .animation(.default, value: selectedItem)
+        .animation(.default, value: items.map(\.id))
         .task(id: kodi.library.movies) {
             if kodi.status != .loadedLibrary {
                 state = .offline
@@ -57,6 +60,9 @@ struct MoviesView: View {
         .task(id: selectedItem) {
             setItemDetails()
         }
+        .task(id: sorting) {
+            getItems()
+        }
     }
 
     // MARK: Content of the View
@@ -67,6 +73,7 @@ struct MoviesView: View {
 #if os(macOS)
         ZStack {
             List(selection: $selectedItem) {
+                Pickers.ListSortPicker(sorting: $sorting, media: .movie)
                 ForEach(items, id: \.id) { video in
                     switch video {
                     case let movie as Video.Details.Movie:
@@ -104,9 +111,17 @@ struct MoviesView: View {
 
 #if os(tvOS)
         ScrollView {
-            PartsView.DetailHeader(title: scene.navigationSubtitle)
+            ZStack {
+                PartsView.DetailHeader(title: scene.navigationSubtitle)
+                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                    .padding(.trailing, 40)
+                    .scaleEffect(0.8)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .frame(maxWidth: .infinity)
+            .focusSection()
             LazyVGrid(columns: grid, spacing: 0) {
-                ForEach($items, id: \.id) { $video in
+                ForEach(items, id: \.id) { video in
                     switch video {
                     case let movie as Video.Details.Movie:
                         NavigationLink(value: movie, label: {
@@ -134,12 +149,18 @@ struct MoviesView: View {
 
     /// Get all items from the library
     private func getItems() {
+        logger("Get Items")
+        /// Set the ID of the sorting
+        self.sorting.id = scene.contentSelection.label.title
+        /// Check if the setting is not the default
+        if let sorting = scene.listSortSettings.first(where: {$0.id == self.sorting.id}) {
+            self.sorting = sorting
+        }
         switch filter {
         case .unwatched:
-            /// Movies are sorted by newest first
             items = kodi.library.movies
                 .filter({$0.playcount == 0})
-                .sorted(using: KeyPathComparator(\.dateAdded, order: .reverse))
+                .sorted(sortItem: sorting)
         case .playlist(let file):
             Task { @MainActor in
                 var playlist: [Video.Details.Movie] = []
@@ -149,12 +170,14 @@ struct MoviesView: View {
                         playlist.append(movie)
                     }
                 }
-                /// Movies that are part of a set will be removed and replaced with the set
-                self.items = swapMoviesForSet(movies: playlist)
+                /// Movies that are part of a set will be removed and replaced with the set when sorted by title
+                self.items = (sorting.method == .title ? swapMoviesForSet(movies: playlist) : playlist)
+                    .sorted(sortItem: sorting)
             }
         default:
-            /// Movies that are part of a set will be removed and replaced with the set
-            items = swapMoviesForSet(movies: kodi.library.movies)
+            /// Movies that are part of a set will be removed and replaced with the set when sorted by title
+            items = (sorting.method == .title ? swapMoviesForSet(movies: kodi.library.movies) : kodi.library.movies)
+                .sorted(sortItem: sorting)
         }
     }
 
@@ -196,6 +219,6 @@ struct MoviesView: View {
     private func swapMoviesForSet(movies: [Video.Details.Movie]) -> [any KodiItem] {
         let movieSetIDs = Set(movies.map(\.setID))
         let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
-        return (movies.filter({$0.setID == 0}) + movieSets).sorted(using: KeyPathComparator(\.sortByTitle))
+        return (movies.filter({$0.setID == 0}) + movieSets)
     }
 }

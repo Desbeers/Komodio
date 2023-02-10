@@ -20,13 +20,15 @@ struct MovieSetView: View {
     @State private var movies: [Video.Details.Movie] = []
     /// The optional selected movie in the set
     @State private var selectedMovie: Video.Details.Movie?
+    /// The sorting
+    @State var sorting = ListSort.Item(id: "movieset", method: .year, order: .forward)
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
-
-        // MARK: Body of the View
-
         content
             .task(id: movieSet) {
                 getMoviesFromSet()
@@ -41,6 +43,7 @@ struct MovieSetView: View {
             .task(id: kodi.library.movieSets) {
                 setMovieSetDetails()
             }
+            .animation(.default, value: sorting)
     }
 
     // MARK: Content of the View
@@ -51,7 +54,8 @@ struct MovieSetView: View {
 #if os(macOS)
         VStack {
             List(selection: $selectedMovie) {
-                ForEach(movies) { movie in
+                Pickers.ListSortPicker(sorting: $sorting, media: .movie)
+                ForEach(movies.sorted(sortItem: sorting)) { movie in
                     MovieView.Item(movie: movie)
                         .tag(movie)
                 }
@@ -62,20 +66,30 @@ struct MovieSetView: View {
 #if os(tvOS)
         VStack {
             DetailView()
+            HStack {
+                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                Buttons.PlayedState(item: movieSet)
+            }
+            .labelStyle(.playLabel)
+            .buttonStyle(.card)
+            .frame(maxWidth: .infinity)
+            .focusSection()
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(movies) { movie in
+                    ForEach(movies.sorted(sortItem: sorting)) { movie in
                         NavigationLink(value: movie, label: {
                             MovieView.Item(movie: movie)
                         })
                     }
                 }
-                .padding(80)
+                .padding(40)
+                .padding(.bottom, 20)
             }
             .frame(maxWidth: .infinity)
             .focusSection()
         }
         .buttonStyle(.card)
+        .ignoresSafeArea(edges: .bottom)
 #endif
 
     }
@@ -84,8 +98,15 @@ struct MovieSetView: View {
 
     /// Get all movies from the selected set
     private func getMoviesFromSet() {
+
         /// The selection might not be a set
         if movieSet.media == .movieSet {
+            /// Set the ID of the sorting
+            self.sorting.id = movieSet.id
+            /// Check if the setting is not the default
+            if let sorting = scene.listSortSettings.first(where: {$0.id == self.sorting.id}) {
+                self.sorting = sorting
+            }
             /// Get all the movies from the set
             movies = kodi.library.movies
                 .filter({$0.setID == movieSet.setID})
@@ -190,17 +211,11 @@ extension MovieSetView {
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .padding(.bottom)
-                        Buttons.PlayedState(item: movieSet)
-                            .labelStyle(.playLabel)
-                            .padding(.bottom)
-                            .buttonStyle(.card)
                         Text(movieSet.plot)
                     }
                 }
                 .padding(40)
                 .frame(maxWidth: .infinity)
-                .focusSection()
-
 #endif
 
             }
