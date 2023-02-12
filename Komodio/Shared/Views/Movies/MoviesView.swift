@@ -22,7 +22,7 @@ struct MoviesView: View {
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = ListSort.Item()
+    @State var sorting = SwiftlyKodiAPI.List.Sort()
     /// The optional selected item
     @State private var selectedItem: MediaItem?
     /// The optional selected movie set (macOS)
@@ -77,7 +77,7 @@ struct MoviesView: View {
                 ForEach(items, id: \.id) { video in
                     switch video {
                     case let movie as Video.Details.Movie:
-                        MovieView.Item(movie: movie)
+                        MovieView.Item(movie: movie, sorting: sorting)
                             .tag(MediaItem(id: movie.id, media: .movie))
                     case let movieSet as Video.Details.MovieSet:
                         MovieSetView.Item(movieSet: movieSet)
@@ -125,7 +125,7 @@ struct MoviesView: View {
                     switch video {
                     case let movie as Video.Details.Movie:
                         NavigationLink(value: movie, label: {
-                            MovieView.Item(movie: movie)
+                            MovieView.Item(movie: movie, sorting: sorting)
                         })
                         .padding(.bottom, 40)
                     case let movieSet as Video.Details.MovieSet:

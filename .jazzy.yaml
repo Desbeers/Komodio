@@ -18,7 +18,6 @@ custom_categories:
     - KomodioApp
     - Router
     - MediaItem
-    - ListSort
     - Parts
   - name: Observable Classes
     children:

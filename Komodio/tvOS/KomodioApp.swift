@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftlyKodiAPI
 
 /// The Komodio App Scene (tvOS)
+
 @main struct KomodioApp: App {
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared

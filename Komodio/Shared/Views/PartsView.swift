@@ -224,3 +224,50 @@ extension PartsView {
         }
     }
 }
+
+extension PartsView {
+
+    /// View a KodiItem rating rating with stars
+    /// - Parameters:
+    ///   - rating: The rating
+    /// - Returns: A view with stars
+    @ViewBuilder static func ratingToStars(rating: Int) -> some View {
+        HStack(spacing: 0) {
+            ForEach(1..<6, id: \.self) { number in
+                Image(systemName: number <= (rating / 2) ? "star.fill" : "star")
+                    .foregroundColor(number <= (rating / 2) ? .yellow : .secondary.opacity(0.4))
+            }
+        }
+    }
+}
+
+extension PartsView {
+    struct SortLabel: View {
+        let item: any KodiItem
+        let sorting: SwiftlyKodiAPI.List.Sort
+        var body: some View {
+            switch sorting.method {
+            case .dateAdded:
+                Label(item.swiftDateFromKodiDate(item.dateAdded)
+                    .formatted(date: KomodioApp.platform == .macOS ? .long : .abbreviated, time: .omitted),
+                      systemImage: "plus.square"
+                )
+            case .rating:
+                PartsView.ratingToStars(rating: Int(item.rating.rounded()))
+            case .userRating:
+                PartsView.ratingToStars(rating: item.userRating)
+            case .duration:
+                Label(Parts.secondsToTime(seconds: item.duration), systemImage: "clock")
+            case .year:
+                Text(item.year.description)
+            default:
+                #if os(macOS)
+                Text(item.year.description)
+                #endif
+                #if os(tvOS)
+                EmptyView()
+                #endif
+            }
+        }
+    }
+}

@@ -21,7 +21,7 @@ struct MovieSetView: View {
     /// The optional selected movie in the set
     @State private var selectedMovie: Video.Details.Movie?
     /// The sorting
-    @State var sorting = ListSort.Item(id: "movieset", method: .year, order: .forward)
+    @State var sorting = SwiftlyKodiAPI.List.Sort(id: "movieset", method: .year, order: .ascending)
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
 
@@ -56,7 +56,7 @@ struct MovieSetView: View {
             List(selection: $selectedMovie) {
                 Pickers.ListSortPicker(sorting: $sorting, media: .movie)
                 ForEach(movies.sorted(sortItem: sorting)) { movie in
-                    MovieView.Item(movie: movie)
+                    MovieView.Item(movie: movie, sorting: sorting)
                         .tag(movie)
                 }
             }
@@ -78,7 +78,7 @@ struct MovieSetView: View {
                 HStack {
                     ForEach(movies.sorted(sortItem: sorting)) { movie in
                         NavigationLink(value: movie, label: {
-                            MovieView.Item(movie: movie)
+                            MovieView.Item(movie: movie, sorting: sorting)
                         })
                     }
                 }

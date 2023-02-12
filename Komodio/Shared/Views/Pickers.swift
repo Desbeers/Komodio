@@ -16,9 +16,11 @@ enum Pickers {
 extension Pickers {
 
     /// Sort a list: Two pickers to select the method and order
+    ///
+    /// For `tvOS` it will be Buttons instead of a picker because it might be too many items
     struct ListSortPicker: View {
         /// The current sorting
-        @Binding var sorting: ListSort.Item
+        @Binding var sorting: SwiftlyKodiAPI.List.Sort
         /// The kind of media
         let media: Library.Media
         /// The SceneState model
@@ -29,15 +31,27 @@ extension Pickers {
         /// The body of the View
         var body: some View {
             VStack {
+#if os(macOS)
                 Picker(selection: $sorting.method, label: Text("Sort method")) {
-                    ForEach(ListSort.SortMethod.allCases, id: \.rawValue) { method in
-                        Text(method.rawValue)
+                    ForEach(SwiftlyKodiAPI.List.Sort.getMethods(media: media), id: \.rawValue) { method in
+                        Text(method.displayLabel)
                             .tag(method)
                     }
                 }
+#endif
+#if os(tvOS)
+                ForEach(SwiftlyKodiAPI.List.Sort.getMethods(media: media), id: \.rawValue) { method in
+                    Button(action: {
+                        sorting.method = method
+                    }, label: {
+                        Text(method.displayLabel)
+                            .frame(width: 600)
+                    })
+                }
+#endif
                 Picker(selection: $sorting.order, label: Text("Sort order")) {
-                    ForEach(ListSort.SortOrder.allCases, id: \.rawValue) { order in
-                        Text(order.label(method: sorting.method))
+                    ForEach(SwiftlyKodiAPI.List.Sort.Order.allCases, id: \.rawValue) { order in
+                        Text(order.displayLabel(method: sorting.method))
                             .tag(order)
                     }
                 }
@@ -49,7 +63,7 @@ extension Pickers {
                 } else {
                     scene.listSortSettings.append(item)
                 }
-                ListSort.save(settings: scene.listSortSettings)
+                SceneState.saveListSortSettings(settings: scene.listSortSettings)
             }
             .labelsHidden()
         }
@@ -59,7 +73,7 @@ extension Pickers {
     /// - Note: Used for tvOS or else the UI will be too cluttered
     struct ListSortSheet: View {
         /// The current sorting
-        @Binding var sorting: ListSort.Item
+        @Binding var sorting: SwiftlyKodiAPI.List.Sort
         /// The kind of media
         let media: Library.Media
         /// Bool to show the sSheet
@@ -74,7 +88,7 @@ extension Pickers {
                 showSheet = true
             }, label: {
                 Label(title: {
-                    Text("\(sorting.method.rawValue)∙\(sorting.order.label(method: sorting.method))")
+                    Text("\(sorting.method.displayLabel) ∙ \(sorting.order.displayLabel(method: sorting.method))")
                         .padding()
                 }, icon: {
                     Image(systemName: "arrow.up.arrow.down")
@@ -82,7 +96,12 @@ extension Pickers {
                 })
             })
             .sheet(isPresented: $showSheet) {
-                ListSortPicker(sorting: $sorting, media: media)
+                VStack {
+                    Text("\(sorting.method.displayLabel) ∙ \(sorting.order.displayLabel(method: sorting.method))")
+                        .padding()
+                        .font(.title)
+                    ListSortPicker(sorting: $sorting, media: media)
+                }
             }
         }
     }

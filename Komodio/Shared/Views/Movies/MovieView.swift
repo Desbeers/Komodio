@@ -35,6 +35,8 @@ extension MovieView {
     struct Item: View {
         /// The movie
         let movie: Video.Details.Movie
+        /// The optional sorting
+        var sorting: SwiftlyKodiAPI.List.Sort?
 
         // MARK: Body of the View
 
@@ -45,6 +47,17 @@ extension MovieView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: movie)
+#if os(tvOS)
+                    .overlay(alignment: .bottom) {
+                        if let sorting {
+                            SortLabel(item: movie, sorting: sorting)
+                                .font(.caption)
+                                .scaleEffect(0.8)
+                                .frame(maxWidth: .infinity)
+                                .background(.thinMaterial)
+                        }
+                    }
+#endif
 
 #if os(macOS)
                 VStack(alignment: .leading) {
@@ -53,8 +66,10 @@ extension MovieView {
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     Text(movie.genre.joined(separator: "∙"))
-                    Text(movie.year.description)
-                        .font(.caption)
+                    if let sorting {
+                        PartsView.SortLabel(item: movie, sorting: sorting)
+                            .font(.caption)
+                    }
                 }
 #endif
 
@@ -190,7 +205,9 @@ extension MovieView {
                         .padding(.bottom)
                     movieDetails
                     Spacer()
-                    Buttons.Player(item: movie)
+                    Buttons.PlayedState(item: movie)
+                        .labelStyle(.playLabel)
+                        .buttonStyle(.playButton)
                 }
                 .padding(40)
             }
@@ -207,6 +224,9 @@ extension MovieView {
                 Label(movie.details, systemImage: "info.circle.fill")
                 if !movie.director.isEmpty {
                     Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
+                }
+                if movie.userRating != 0 {
+                    PartsView.ratingToStars(rating: movie.userRating)
                 }
                 if !cast.isEmpty {
                     Label(cast, systemImage: "person.fill")
