@@ -93,6 +93,7 @@ struct ArtistsView: View {
     /// The content of the view
     var content: some View {
         ScrollView {
+            PartsView.DetailHeader(title: scene.navigationSubtitle)
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(artists) { artist in
                     NavigationLink(value: artist, label: {

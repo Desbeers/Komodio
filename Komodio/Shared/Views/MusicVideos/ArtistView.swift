@@ -40,8 +40,13 @@ extension ArtistView {
                 KodiArt.Poster(item: artist)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: KomodioApp.posterSize.height, height: KomodioApp.posterSize.height)
-                Text(artist.artist)
-                    .font(.caption)
+                    .overlay(alignment: .bottom) {
+                        Text(artist.artist)
+                            .font(.caption)
+                            .scaleEffect(0.8)
+                            .frame(maxWidth: .infinity)
+                            .background(.thinMaterial)
+                    }
             }
 #endif
         }

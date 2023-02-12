@@ -114,7 +114,7 @@ struct MoviesView: View {
             ZStack {
                 PartsView.DetailHeader(title: scene.navigationSubtitle)
                 Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                    .padding(.trailing, 40)
+                    .padding(.bottom, 10)
                     .scaleEffect(0.8)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }

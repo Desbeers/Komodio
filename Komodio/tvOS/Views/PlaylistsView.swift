@@ -47,6 +47,7 @@ struct PlaylistsView: View {
                     NavigationLink(value: playlist, label: {
                         Label(title: {
                             Text(playlist.title)
+                                .frame(width: 400, alignment: .leading)
                         }, icon: {
                             Image(systemName: Router.playlists.label.icon)
                         })

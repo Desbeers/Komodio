@@ -17,7 +17,7 @@ extension Pickers {
 
     /// Sort a list: Two pickers to select the method and order
     ///
-    /// For `tvOS` it will be Buttons instead of a picker because it might be too many items
+    /// For `tvOS` it will be Buttons for the method instead of a picker because it might be too many items
     struct ListSortPicker: View {
         /// The current sorting
         @Binding var sorting: SwiftlyKodiAPI.List.Sort
@@ -46,6 +46,7 @@ extension Pickers {
                     }, label: {
                         Text(method.displayLabel)
                             .frame(width: 600)
+                            .fontWeight(sorting.method == method ? .heavy : .regular)
                     })
                 }
 #endif
@@ -101,6 +102,108 @@ extension Pickers {
                         .padding()
                         .font(.title)
                     ListSortPicker(sorting: $sorting, media: media)
+                }
+                .animation(.default, value: sorting)
+            }
+        }
+    }
+}
+
+extension Pickers {
+
+    /// Picker for User Rating of a `KodiItem`
+    ///
+    /// For `tvOS` it will be Buttons instead of a picker because a Picker applies the selection directly
+    struct RatingWidget: View {
+        let item: any KodiItem
+        @State private var rating: Int = 0
+        @Environment(\.presentationMode) var presentationMode
+        var body: some View {
+            HStack {
+
+#if os(macOS)
+                Picker(selection: $rating, label: Text("Your rating:")) {
+                    Image(systemName: "nosign")
+                        .tag(0)
+                    ForEach(1..<11, id: \.self) { number in
+                        Image(systemName: number <= rating ? "star.fill" : "star")
+                            .foregroundColor(number <= rating ? .yellow : .secondary.opacity(0.4))
+                            .tag(number)
+                    }
+                }
+                .pickerStyle(.segmented)
+#endif
+
+#if os(tvOS)
+                Button(action: {
+                    rating = 0
+                }, label: {
+                    Image(systemName: "nosign")
+                        .foregroundColor(.secondary)
+                })
+                ForEach(1..<11, id: \.self) { number in
+                    Button(action: {
+                        rating = number
+                    }, label: {
+                        Image(systemName: number <= rating ? "star.fill" : "star")
+                            .foregroundColor(number <= rating ? .yellow : .secondary.opacity(0.4))
+                    })
+                }
+                .shadow(radius: 10)
+#endif
+            }
+            .task {
+                rating = item.userRating
+            }
+            .onChange(of: rating) { newRating in
+                if newRating != item.userRating {
+                    Task {
+                        await item.setUserRating(rating: rating)
+                        #if os(tvOS)
+                        /// The rating is shown in a Sheet; close it when the value has changed
+                        presentationMode.wrappedValue.dismiss()
+                        #endif
+                    }
+                }
+            }
+        }
+    }
+
+    /// SwiftUI Button to show the ``Pickers/ListSortPicker`` in a Sheet
+    /// - Note: Used for tvOS or else the UI will be too cluttered
+    struct RatingWidgetSheet: View {
+        /// The KodiItem
+        let item: any KodiItem
+        /// Bool to show the sSheet
+        @State private var showSheet: Bool = false
+
+        // MARK: Body of the View
+
+        /// The body of the View
+
+        var body: some View {
+            Button(action: {
+                showSheet = true
+            }, label: {
+                PartsView.ratingToStars(rating: item.userRating)
+            })
+            .sheet(isPresented: $showSheet) {
+                VStack {
+                    Text(item.title)
+                        .padding()
+                        .font(.title)
+                    Text("Your rating")
+                        .padding()
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                    RatingWidget(item: item)
+                        .scaleEffect(0.8)
+                        .padding()
+                }
+                .background {
+                    KodiArt.Fanart(item: item)
+                        .scaledToFill()
+                        .opacity(0.2)
                 }
             }
         }

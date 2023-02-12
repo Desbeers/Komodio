@@ -231,11 +231,24 @@ extension PartsView {
     /// - Parameters:
     ///   - rating: The rating
     /// - Returns: A view with stars
-    @ViewBuilder static func ratingToStars(rating: Int) -> some View {
-        HStack(spacing: 0) {
+    static func ratingToStars(rating: Int) -> some View {
+        return HStack(spacing: 0) {
             ForEach(1..<6, id: \.self) { number in
-                Image(systemName: number <= (rating / 2) ? "star.fill" : "star")
-                    .foregroundColor(number <= (rating / 2) ? .yellow : .secondary.opacity(0.4))
+                Image(systemName: image(number: number))
+                    .foregroundColor(number * 2 <= rating + 1 ? .yellow : .secondary.opacity(0.4))
+                    .fontWeight(.bold)
+                #if os(tvOS)
+                    .shadow(radius: 10)
+                #endif
+            }
+        }
+        func image(number: Int) -> String {
+            if number * 2 <= rating {
+                return "star.fill"
+            } else if number * 2 == rating + 1 {
+                return "star.leadinghalf.filled"
+            } else {
+                return "star"
             }
         }
     }

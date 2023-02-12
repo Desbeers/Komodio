@@ -50,7 +50,7 @@ extension MovieView {
 #if os(tvOS)
                     .overlay(alignment: .bottom) {
                         if let sorting {
-                            SortLabel(item: movie, sorting: sorting)
+                            PartsView.SortLabel(item: movie, sorting: sorting)
                                 .font(.caption)
                                 .scaleEffect(0.8)
                                 .frame(maxWidth: .infinity)
@@ -132,6 +132,8 @@ extension MovieView {
                         .padding(.bottom)
                     movieDetails
                 }
+                Pickers.RatingWidget(item: movie)
+                    .padding()
             }
             .detailsFontStyle()
             .detailsWrapper()
@@ -205,9 +207,12 @@ extension MovieView {
                         .padding(.bottom)
                     movieDetails
                     Spacer()
-                    Buttons.PlayedState(item: movie)
-                        .labelStyle(.playLabel)
-                        .buttonStyle(.playButton)
+                    HStack {
+                        Buttons.PlayedState(item: movie)
+                            .labelStyle(.playLabel)
+                            .buttonStyle(.playButton)
+                        Pickers.RatingWidgetSheet(item: movie)
+                    }
                 }
                 .padding(40)
             }
@@ -224,9 +229,6 @@ extension MovieView {
                 Label(movie.details, systemImage: "info.circle.fill")
                 if !movie.director.isEmpty {
                     Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
-                }
-                if movie.userRating != 0 {
-                    PartsView.ratingToStars(rating: movie.userRating)
                 }
                 if !cast.isEmpty {
                     Label(cast, systemImage: "person.fill")
