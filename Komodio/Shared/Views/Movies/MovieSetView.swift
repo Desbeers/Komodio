@@ -185,10 +185,7 @@ extension MovieSetView {
 
 #if os(macOS)
                 VStack {
-                    Text(movieSet.title)
-                        .font(.system(size: 40))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
+                    PartsView.DetailHeader(title: movieSet.title)
                     KodiArt.Fanart(item: movieSet)
                         .fanartStyle(item: movieSet)
                     Buttons.PlayedState(item: movieSet)

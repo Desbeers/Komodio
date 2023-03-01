@@ -41,6 +41,7 @@
 		D7254F4F295A06D200DC704B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72DE7B42955F22500DD0FFB /* SidebarView.swift */; };
 		D7325D522906852000D15D79 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
+		D7599CEB29AE80C2004BA9D3 /* Parts+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */; };
 		D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D75C3F65294DCFE6002BC065 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */; };
 		D75C3F68294DDD3B002BC065 /* TVShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55D290583F600037DC9 /* TVShowsView.swift */; };
@@ -130,6 +131,7 @@
 		D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconModel.swift; sourceTree = "<group>"; };
 		D72DE7B42955F22500DD0FFB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
+		D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Parts+tvOS.swift"; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsView.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				D7254F402957399C00DC704B /* Buttons+tvOS.swift */,
 				D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */,
 				D7F03A702960819D0026D815 /* KodiSettingsView+tvOS.swift */,
+				D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				D7254F4E2959FCC800DC704B /* RotatingIconModel.swift in Sources */,
 				D785A19D294B640300530F62 /* SceneState.swift in Sources */,
 				D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */,
+				D7599CEB29AE80C2004BA9D3 /* Parts+tvOS.swift in Sources */,
 				D785A19B294B63FA00530F62 /* Router.swift in Sources */,
 				D785A1A7294B7F3A00530F62 /* DetailView.swift in Sources */,
 				D75C3F6C294DDD49002BC065 /* EpisodeView.swift in Sources */,

@@ -91,7 +91,7 @@ extension Modifiers {
         private let swipeDistance: Float = 0.7
         /// How much pause in milliseconds should be between gestures in order for a gesture to be considered a new gesture
         /// and not a remenat x/y values from the previous gesture
-        private let secondsBetweenInteractions: Double = 0.2
+        private let secondsBetweenInteractions: Double = 0.4
         /// The last 'Y' position
         @State private var lastY: Float = 0
         /// The last 'X' position

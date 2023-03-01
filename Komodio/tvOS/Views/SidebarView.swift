@@ -63,15 +63,15 @@ struct SidebarView: View {
             onUp: {
                 if isFocused {
                     scene.mainSelection = scene.mainSelection == 0 ? 0 : scene.mainSelection - 1
-                    let systemSoundID: SystemSoundID = 1306
-                    AudioServicesPlaySystemSound(systemSoundID)
+                    /// Play the navigation sound
+                    Parts.playNavigationSound()
                 }
             },
             onDown: {
                 if isFocused {
                     scene.mainSelection = scene.sidebarItems.count - 1 == scene.mainSelection ? scene.mainSelection : scene.mainSelection + 1
-                    let systemSoundID: SystemSoundID = 1104
-                    AudioServicesPlaySystemSound(systemSoundID)
+                    /// Play the navigation sound
+                    Parts.playNavigationSound()
                 }
             }
         )
