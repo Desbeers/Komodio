@@ -77,7 +77,7 @@ extension Pickers {
         @Binding var sorting: SwiftlyKodiAPI.List.Sort
         /// The kind of media
         let media: Library.Media
-        /// Bool to show the sSheet
+        /// Bool to show the Sheet
         @State private var showSheet: Bool = false
 
         // MARK: Body of the View
@@ -90,10 +90,8 @@ extension Pickers {
             }, label: {
                 Label(title: {
                     Text("\(sorting.method.displayLabel) ∙ \(sorting.order.displayLabel(method: sorting.method))")
-                        .padding()
                 }, icon: {
                     Image(systemName: "arrow.up.arrow.down")
-                        .padding(.leading)
                 })
             })
             .sheet(isPresented: $showSheet) {

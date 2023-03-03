@@ -16,7 +16,7 @@ import SwiftlyKodiAPI
     @Environment(\.openWindow) private var openWindow
     /// The body of the scene
     var body: some Scene {
-        WindowGroup(id: "Main") {
+        Window("Komodio", id: "Main") {
             MainView()
                 .environmentObject(kodi)
                 .task {
@@ -28,9 +28,7 @@ import SwiftlyKodiAPI
         }
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button("New Window") {
-                    openWindow(id: "Main")
-                }
+                /// Hide the "New Player" window option
             }
         }
         /// Open a Video Window

@@ -13,7 +13,7 @@ struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @StateObject private var scene = SceneState()
+    @StateObject private var scene: SceneState = .shared
     /// The search field in the toolbar
     @State private var searchField: String = ""
     /// Set the column visibility

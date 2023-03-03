@@ -101,6 +101,7 @@ struct MusicVideosView: View {
             } else {
                 scene.details = .artist(artist: artist)
             }
+            scene.navigationSubtitle = artist.artist
         } else {
             /// Make sure we don't have an old selection
             selectedItem = nil

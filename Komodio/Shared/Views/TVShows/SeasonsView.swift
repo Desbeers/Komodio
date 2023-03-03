@@ -115,6 +115,7 @@ struct SeasonsView: View {
                 seasons[index].resume.position = 0
             }
             self.seasons = seasons
+            scene.navigationSubtitle = tvshow.title
         } else {
             selectedSeason = nil
         }

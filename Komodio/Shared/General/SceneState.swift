@@ -23,32 +23,6 @@ class SceneState: ObservableObject {
 #if os(tvOS)
     /// The current search query
     @Published var query: String = ""
-    /// Router items to show in the sidebar
-    let sidebarItems: [Router] = [
-        .start,
-        .movies,
-        .unwatchedMovies,
-        .playlists,
-        .tvshows,
-        .unwachedEpisodes,
-        .musicVideos,
-        .search
-    ]
-    /// The main selection of Komodio
-    var mainSelection: Int = 0 {
-        didSet {
-            /// Set the sidebar selection as a ``Router`` item
-            sidebarSelection = sidebarItems[mainSelection]
-            /// Reset the details
-            details = sidebarItems[mainSelection]
-            /// Set the contentSelection
-            contentSelection = sidebarItems[mainSelection]
-            /// Reset the navigationStackPath
-            navigationStackPath = NavigationPath()
-            /// Reset the background
-            background = nil
-        }
-    }
     /// Bool to show the Kodi Settings View
     @Published var showSettings: Bool = false
     /// The Navigation path
@@ -59,7 +33,8 @@ class SceneState: ObservableObject {
 #endif
 
     // MARK: Shared stuff
-
+    /// The shared instance of this SceneState class
+    static let shared = SceneState()
     /// The settings to sort a list
     var listSortSettings: [SwiftlyKodiAPI.List.Sort] = []
     /// The current selection in the ``SidebarView``
@@ -69,26 +44,9 @@ class SceneState: ObservableObject {
     /// The subtitle for the navigation
     @Published var navigationSubtitle: String = ""
     /// The details for the current selection in the main view
-    @Published var details: Router = .start {
-        didSet {
-            switch details {
-            case .start:
-                navigationSubtitle = ""
-            case .movieSet(let movieSet):
-                navigationSubtitle = movieSet.title
-            case .tvshow(let tvshow):
-                navigationSubtitle = tvshow.title
-            case .artist(let artist):
-                navigationSubtitle = artist.artist
-            case .search:
-                navigationSubtitle = Router.search.label.title
-            default:
-                break
-            }
-        }
-    }
+    @Published var details: Router = .start
     /// Init the ``SceneState``
-    init() {
+    private init() {
         listSortSettings = SceneState.loadListSortSettings()
     }
 }
@@ -134,5 +92,14 @@ extension SceneState {
         } catch {
             logger("Error saving ListSort settings")
         }
+    }
+
+    /// Get the `List Sort` settings for a View
+    /// - Parameter sortID: The ID of the sorting
+    static func getListSortSettings(sortID: String) -> SwiftlyKodiAPI.List.Sort {
+        if let sorting = SceneState.shared.listSortSettings.first(where: {$0.id == sortID}) {
+            return sorting
+        }
+        return SwiftlyKodiAPI.List.Sort(id: sortID)
     }
 }

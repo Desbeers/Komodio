@@ -35,24 +35,20 @@ struct TVShowsView: View {
                 PartsView.StatusMessage(item: .tvshows, status: state)
             }
         }
-            .animation(.default, value: selectedTVShow)
-            .task(id: kodi.library.tvshows) {
-                if kodi.status != .loadedLibrary {
-                    state = .offline
-                } else if kodi.library.tvshows.isEmpty {
-                    state = .empty
-                } else {
-                    tvshows = kodi.library.tvshows.sorted(using: KeyPathComparator(\.sortByTitle))
-                    state = .ready
-                }
+        .animation(.default, value: selectedTVShow)
+        .task(id: kodi.library.tvshows) {
+            if kodi.status != .loadedLibrary {
+                state = .offline
+            } else if kodi.library.tvshows.isEmpty {
+                state = .empty
+            } else {
+                tvshows = kodi.library.tvshows.sorted(using: KeyPathComparator(\.sortByTitle))
+                state = .ready
             }
-            .task(id: selectedTVShow) {
-                if selectedTVShow.media == .tvshow {
-                    scene.details = .tvshow(tvshow: selectedTVShow)
-                } else {
-                    scene.navigationSubtitle = Router.tvshows.label.title
-                }
-            }
+        }
+        .task(id: selectedTVShow) {
+            scene.navigationSubtitle = Router.tvshows.label.title
+        }
     }
 
     // MARK: Content of the View
@@ -97,7 +93,7 @@ struct TVShowsView: View {
 
 #if os(tvOS)
         ScrollView {
-            PartsView.DetailHeader(title: scene.navigationSubtitle)
+            PartsView.DetailHeader(title: Router.tvshows.label.title)
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(tvshows) { tvshow in
                     NavigationLink(value: tvshow, label: {

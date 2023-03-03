@@ -22,7 +22,7 @@ struct MoviesView: View {
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = SwiftlyKodiAPI.List.Sort()
+    @State var sorting = SceneState.getListSortSettings(sortID: SceneState.shared.contentSelection.label.title)
     /// The optional selected item
     @State private var selectedItem: MediaItem?
     /// The optional selected movie set (macOS)
@@ -46,22 +46,19 @@ struct MoviesView: View {
         }
         .animation(.default, value: selectedItem)
         .animation(.default, value: items.map(\.id))
-        .task(id: kodi.library.movies) {
+        .task {
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
                 state = .empty
             } else {
                 getItems()
-                setItemDetails()
                 state = .ready
             }
         }
-        .task(id: selectedItem) {
-            setItemDetails()
-        }
-        .task(id: sorting) {
+        .onChange(of: kodi.library.movies) { _ in
             getItems()
+            setItemDetails()
         }
     }
 
@@ -107,15 +104,26 @@ struct MoviesView: View {
                 }
             }
         }
+        .task(id: selectedItem) {
+            setItemDetails()
+        }
+        .onChange(of: sorting) { [sorting] newValue in
+            if sorting.method == newValue.method {
+                items.sort(sortItem: newValue)
+            } else {
+                getItems()
+            }
+        }
 #endif
 
 #if os(tvOS)
         ScrollView {
             ZStack {
-                PartsView.DetailHeader(title: scene.navigationSubtitle)
+                PartsView.DetailHeader(title: getNavigationSubtitle())
                 Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                    .labelStyle(.sortLabel)
+                    .padding(.trailing, 40)
                     .padding(.bottom, 10)
-                    .scaleEffect(0.8)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .frame(maxWidth: .infinity)
@@ -150,12 +158,6 @@ struct MoviesView: View {
     /// Get all items from the library
     private func getItems() {
         logger("Get Items")
-        /// Set the ID of the sorting
-        self.sorting.id = scene.contentSelection.label.title
-        /// Check if the setting is not the default
-        if let sorting = scene.listSortSettings.first(where: {$0.id == self.sorting.id}) {
-            self.sorting = sorting
-        }
         switch filter {
         case .unwatched:
             items = kodi.library.movies
@@ -201,15 +203,13 @@ struct MoviesView: View {
         } else {
             switch filter {
             case .unwatched:
-                scene.navigationSubtitle = Router.unwatchedMovies.label.title
                 scene.details = .unwatchedMovies
             case .playlist(let file):
-                scene.navigationSubtitle = file.title
                 scene.details = .moviesPlaylist(file: file)
             default:
-                scene.navigationSubtitle = Router.movies.label.title
                 scene.details = .movies
             }
+            scene.navigationSubtitle = getNavigationSubtitle()
         }
     }
 
@@ -220,5 +220,17 @@ struct MoviesView: View {
         let movieSetIDs = Set(movies.map(\.setID))
         let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
         return (movies.filter({$0.setID == 0}) + movieSets)
+    }
+
+    /// Get the navigation subtitle
+    private func getNavigationSubtitle() -> String {
+        switch filter {
+        case .unwatched:
+            return Router.unwatchedMovies.label.title
+        case .playlist(let file):
+            return  file.title
+        default:
+            return Router.movies.label.title
+        }
     }
 }

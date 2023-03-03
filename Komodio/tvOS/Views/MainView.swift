@@ -60,7 +60,6 @@ struct MainView: View {
         }
         .task(id: kodi.status) {
             if kodi.status != .loadedLibrary {
-                scene.mainSelection = 0
                 isFocused = true
             }
         }

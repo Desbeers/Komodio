@@ -113,6 +113,19 @@ extension Styles {
 
         }
     }
+
+    /// SwiftUI Label style for a sort label (tvOS)
+    struct SortLabel: LabelStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            HStack(spacing: 0) {
+                configuration.icon
+                    .padding(.trailing)
+                configuration.title
+            }
+            .font(.system(size: 20))
+            .padding()
+        }
+    }
 }
 
 extension LabelStyle where Self == Styles.PlayLabel {
@@ -123,4 +136,9 @@ extension LabelStyle where Self == Styles.PlayLabel {
 extension LabelStyle where Self == Styles.DetailLabel {
     /// Label style for media item details
     static var detailLabel: Styles.DetailLabel { .init() }
+}
+
+extension LabelStyle where Self == Styles.SortLabel {
+    /// Label style for media item details
+    static var sortLabel: Styles.SortLabel { .init() }
 }

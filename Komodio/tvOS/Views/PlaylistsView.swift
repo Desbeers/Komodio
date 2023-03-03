@@ -11,6 +11,8 @@ import SwiftlyKodiAPI
 struct PlaylistsView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
+    /// The SceneState model
+    @EnvironmentObject private var scene: SceneState
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
 
@@ -34,6 +36,7 @@ struct PlaylistsView: View {
             } else {
                 state = .ready
             }
+            scene.details = .playlists
         }
     }
 

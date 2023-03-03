@@ -24,6 +24,7 @@ struct SeasonView: View {
                 EpisodeView.Item(episode: episode)
             }
         }
+        .id(episodes)
     }
 }
 

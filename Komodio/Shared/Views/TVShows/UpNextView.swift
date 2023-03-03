@@ -82,20 +82,23 @@ struct UpNextView: View {
 #endif
 
 #if os(tvOS)
-        HStack {
-            List {
-                ForEach(episodes) { episode in
-                    Button(action: {
-                        selectedEpisode = episode
-                    }, label: {
-                        Item(episode: episode)
-                    })
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(episodes) { episode in
+                        Button(action: {
+                            selectedEpisode = episode
+                        }, label: {
+                            Item(episode: episode)
+                        })
+                        .padding(.top, 20)
+                        .padding(.bottom, 80)
+                    }
                 }
             }
-            .frame(width: KomodioApp.posterSize.width + 80)
             .buttonStyle(.card)
             DetailView()
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .focusSection()
         }
 #endif
@@ -153,22 +156,42 @@ extension UpNextView {
 
         /// The body of the View
         var body: some View {
-            VStack {
-                PartsView.DetailHeader(title: episode.showTitle, subtitle: "Season \(episode.season), episode \(episode.episode)")
-                KodiArt.Fanart(item: episode)
-                    .fanartStyle(item: episode, overlay: episode.title)
-                #if os(tvOS)
-                    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
-                #endif
-                Buttons.Player(item: episode)
-                /// Make sure tvOS can get the focus
-                    .frame(maxWidth: .infinity)
-                    .focusSection()
-                    .padding()
-                PartsView.TextMore(item: episode)
+            Group {
+#if os(macOS)
+                VStack {
+                    PartsView.DetailHeader(title: episode.showTitle, subtitle: "Season \(episode.season), episode \(episode.episode)")
+                    KodiArt.Fanart(item: episode)
+                        .fanartStyle(item: episode, overlay: episode.title)
+                    Buttons.Player(item: episode)
+                        .padding()
+                    PartsView.TextMore(item: episode)
+                }
+                .detailsFontStyle()
+                .detailsWrapper()
+#endif
+
+#if os(tvOS)
+                VStack {
+                    PartsView.DetailHeader(title: "\(episode.showTitle): \(episode.title)")
+                    HStack {
+                        KodiArt.Fanart(item: episode)
+                            .fanartStyle(item: episode, overlay: "Season \(episode.season), episode \(episode.episode)")
+                            .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
+                        VStack {
+                            PartsView.TextMore(item: episode)
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    Buttons.Player(item: episode)
+                    /// Make sure tvOS can get the focus
+                        .frame(maxWidth: .infinity)
+                        .focusSection()
+                        .padding()
+                }
+                .frame(maxWidth: .infinity)
+#endif
             }
-            .detailsFontStyle()
-            .detailsWrapper()
             .background(item: episode)
         }
     }

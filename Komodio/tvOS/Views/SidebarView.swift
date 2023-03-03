@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 import AVFoundation
 
 /// SwiftUI View for the sidebar (tvOS)
+///
+/// It is a bit of a hack to tame the Siri remote...
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -17,7 +19,31 @@ struct SidebarView: View {
     @EnvironmentObject var scene: SceneState
     /// The focus state of the sidebar
     @FocusState var isFocused: Bool
-
+    /// Router items to show in the sidebar
+    let sidebarItems: [Router] = [
+        .start,
+        .movies,
+        .unwatchedMovies,
+        .playlists,
+        .tvshows,
+        .unwachedEpisodes,
+        .musicVideos,
+        .search
+    ]
+    @State var sidebarSelection: Int = 0 {
+        didSet {
+            /// Set the sidebar selection as a ``Router`` item
+            scene.sidebarSelection = sidebarItems[sidebarSelection]
+            /// Reset the details
+            scene.details = sidebarItems[sidebarSelection]
+            /// Set the contentSelection
+            scene.contentSelection = sidebarItems[sidebarSelection]
+            /// Reset the navigationStackPath
+            scene.navigationStackPath = NavigationPath()
+            /// Reset the background
+            scene.background = nil
+        }
+    }
     // MARK: Body of the View
 
     /// The body of the View
@@ -33,53 +59,58 @@ struct SidebarView: View {
                     }
                 }, icon: {
                     Image(systemName: "sparkles.tv")
-                        .foregroundColor(scene.mainSelection == 0 ? Color("AccentColor") : .gray)
-                        .font(scene.mainSelection == 0 ? .headline : .subheadline)
+                        .foregroundColor(sidebarSelection == 0 ? Color("AccentColor") : .gray)
+                        .font(sidebarSelection == 0 ? .headline : .subheadline)
                         .frame(width: 40, height: 40, alignment: .center)
                 })
             .padding(.vertical, 20)
             Section("Movies") {
-                sidebarItem(item: scene.sidebarItems[1], selection: scene.mainSelection)
-                sidebarItem(item: scene.sidebarItems[2], selection: scene.mainSelection)
-                sidebarItem(item: scene.sidebarItems[3], selection: scene.mainSelection)
+                sidebarItem(item: sidebarItems[1])
+                sidebarItem(item: sidebarItems[2])
+                sidebarItem(item: sidebarItems[3])
 
             }
             Section("TV shows") {
-                sidebarItem(item: scene.sidebarItems[4], selection: scene.mainSelection)
-                sidebarItem(item: scene.sidebarItems[5], selection: scene.mainSelection)
+                sidebarItem(item: sidebarItems[4])
+                sidebarItem(item: sidebarItems[5])
             }
             Section("Music Videos") {
-                sidebarItem(item: scene.sidebarItems[6], selection: scene.mainSelection)
+                sidebarItem(item: sidebarItems[6])
             }
             Section("Search") {
-                sidebarItem(item: scene.sidebarItems[7], selection: scene.mainSelection)
+                sidebarItem(item: sidebarItems[7])
             }
         }
         .padding(.top)
         .frame(maxHeight: .infinity, alignment: .topLeading)
-        .animation(.default, value: scene.mainSelection)
+        .animation(.default, value: sidebarSelection)
         .focusable()
         .swipeGestures(
             onUp: {
                 if isFocused {
-                    scene.mainSelection = scene.mainSelection == 0 ? 0 : scene.mainSelection - 1
+                    sidebarSelection = sidebarSelection == 0 ? 0 : sidebarSelection - 1
                     /// Play the navigation sound
                     Parts.playNavigationSound()
                 }
             },
             onDown: {
                 if isFocused {
-                    scene.mainSelection = scene.sidebarItems.count - 1 == scene.mainSelection ? scene.mainSelection : scene.mainSelection + 1
+                    sidebarSelection = sidebarItems.count - 1 == sidebarSelection ? sidebarSelection : sidebarSelection + 1
                     /// Play the navigation sound
                     Parts.playNavigationSound()
                 }
             }
         )
         .focused($isFocused)
+        .task(id: kodi.status) {
+            if kodi.status != .loadedLibrary {
+                sidebarSelection = 0
+            }
+        }
     }
 
     /// SwiftUI View for an item in the sidebar
-    @ViewBuilder func sidebarItem(item: Router, selection: Int = 0) -> some View {
+    @ViewBuilder func sidebarItem(item: Router) -> some View {
         Label(
             title: {
                 VStack(alignment: .leading) {
@@ -90,8 +121,8 @@ struct SidebarView: View {
                 }
             }, icon: {
                 Image(systemName: item.label.icon)
-                    .foregroundColor(scene.sidebarItems[selection] == item ? Color("AccentColor") : .gray)
-                    .font(scene.sidebarItems[selection] == item ? .headline : .subheadline)
+                    .foregroundColor(sidebarItems[sidebarSelection] == item ? Color("AccentColor") : .gray)
+                    .font(sidebarItems[sidebarSelection] == item ? .headline : .subheadline)
                     .frame(width: 40, height: 40, alignment: .center)
             })
         .padding(.bottom, 20)

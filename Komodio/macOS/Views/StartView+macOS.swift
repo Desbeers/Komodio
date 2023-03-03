@@ -16,6 +16,8 @@ extension StartView {
     struct Content: View {
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
+        /// The SceneState model
+        @EnvironmentObject private var scene: SceneState
 
         // MARK: Body of the View
 
@@ -50,6 +52,9 @@ extension StartView {
                 .padding(.leading)
             }
             .animation(.default, value: kodi.status)
+            .task {
+                scene.navigationSubtitle = ""
+            }
         }
     }
 }

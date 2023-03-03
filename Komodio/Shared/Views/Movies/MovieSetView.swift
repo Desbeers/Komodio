@@ -24,6 +24,8 @@ struct MovieSetView: View {
     @State var sorting = SwiftlyKodiAPI.List.Sort(id: "movieset", method: .year, order: .ascending)
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
+    /// The focussed movie (tvOS)
+    @FocusState var focussedMovie: Video.Details.Movie?
 
     // MARK: Body of the View
 
@@ -37,10 +39,10 @@ struct MovieSetView: View {
             .task(id: selectedMovie) {
                 setMovieDetails()
             }
-            .task(id: kodi.library.movies) {
+            .onChange(of: kodi.library.movies) { _ in
                 getMoviesFromSet()
             }
-            .task(id: kodi.library.movieSets) {
+            .onChange(of: kodi.library.movieSets) { _ in
                 setMovieSetDetails()
             }
             .animation(.default, value: sorting)
@@ -64,32 +66,37 @@ struct MovieSetView: View {
 #endif
 
 #if os(tvOS)
-        VStack {
-            DetailView()
-            HStack {
-                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                Buttons.PlayedState(item: movieSet)
-            }
-            .labelStyle(.playLabel)
-            .buttonStyle(.card)
-            .frame(maxWidth: .infinity)
-            .focusSection()
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(movies.sorted(sortItem: sorting)) { movie in
-                        NavigationLink(value: movie, label: {
-                            MovieView.Item(movie: movie, sorting: sorting)
-                        })
+        ZStack(alignment: .bottom) {
+            VStack {
+                DetailView()
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(movies.sorted(sortItem: sorting)) { movie in
+                            NavigationLink(value: movie, label: {
+                                MovieView.Item(movie: movie, sorting: sorting)
+                            })
+                            .focused($focussedMovie, equals: movie)
+                        }
                     }
+                    .padding(40)
+                    .padding(.bottom, 40)
                 }
-                .padding(40)
-                .padding(.bottom, 20)
+                .frame(maxWidth: .infinity)
+                .focusSection()
+                Spacer()
             }
-            .frame(maxWidth: .infinity)
-            .focusSection()
+            Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                .labelStyle(.sortLabel)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .focusSection()
+            if let focussedMovie {
+                Text(focussedMovie.title)
+                    .transition(.opacity)
+                    .padding(.bottom, 10)
+            }
         }
+        .animation(.default, value: focussedMovie)
         .buttonStyle(.card)
-        .ignoresSafeArea(edges: .bottom)
 #endif
 
     }
@@ -118,6 +125,7 @@ struct MovieSetView: View {
             if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
                 self.selectedMovie = movie
             }
+            scene.navigationSubtitle = movieSet.title
         } else {
             /// Make sure we don't have an old selection
             selectedMovie = nil
@@ -200,19 +208,29 @@ extension MovieSetView {
 
 #if os(tvOS)
                 HStack {
-                    KodiArt.Fanart(item: movieSet)
-                        .fanartStyle(item: movieSet)
+                    VStack {
+                        KodiArt.Fanart(item: movieSet)
+                            .fanartStyle(item: movieSet)
+                            .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
+                        Buttons.PlayedState(item: movieSet)
+                            .labelStyle(.sortLabel)
+                            .buttonStyle(.card)
+                    }
+                    .padding(.bottom, 10)
                     VStack {
                         Text(movieSet.title)
                             .font(.title)
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .padding(.bottom)
-                        Text(movieSet.plot)
+                        PartsView.TextMore(item: movieSet)
+                            .focusSection()
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(40)
                 .frame(maxWidth: .infinity)
+                .focusSection()
 #endif
 
             }
