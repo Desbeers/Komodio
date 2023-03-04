@@ -164,7 +164,11 @@ extension UpNextView {
                         .fanartStyle(item: episode, overlay: episode.title)
                     Buttons.Player(item: episode)
                         .padding()
-                    PartsView.TextMore(item: episode)
+                    if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(1) && episode.playcount == 0 {
+                        Text("Plot is hidden for unwatched episodes...")
+                    } else {
+                        PartsView.TextMore(item: episode)
+                    }
                 }
                 .detailsFontStyle()
                 .detailsWrapper()
@@ -178,7 +182,11 @@ extension UpNextView {
                             .fanartStyle(item: episode, overlay: "Season \(episode.season), episode \(episode.episode)")
                             .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                         VStack {
-                            PartsView.TextMore(item: episode)
+                            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(1) && episode.playcount == 0 {
+                                Text("Plot is hidden for unwatched episodes...")
+                            } else {
+                                PartsView.TextMore(item: episode)
+                            }
                             Spacer()
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -193,6 +201,7 @@ extension UpNextView {
 #endif
             }
             .background(item: episode)
+            .id(episode)
         }
     }
 }

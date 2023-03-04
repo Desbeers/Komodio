@@ -98,6 +98,13 @@ extension MovieView {
             }
             return cast.prefix(10).joined(separator: " ∙ ")
         }
+        /// The plot of the Movie
+        var plot: String {
+            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(0) && movie.playcount == 0 {
+                return "Plot is hidden for unwatched movies..."
+            }
+            return movie.plot
+        }
 
         // MARK: Body of the View
 
@@ -128,7 +135,7 @@ extension MovieView {
                 Buttons.Player(item: movie)
                     .padding()
                 VStack(alignment: .leading) {
-                    Text(movie.plot)
+                    Text(plot)
                         .padding(.bottom)
                     movieDetails
                 }
@@ -203,7 +210,7 @@ extension MovieView {
                     Text(movie.tagline.isEmpty ? movie.title : movie.tagline)
                         .font(.headline)
                         .padding(.bottom)
-                    Text(movie.plot)
+                    Text(plot)
                         .padding(.bottom)
                     movieDetails
                     Spacer()

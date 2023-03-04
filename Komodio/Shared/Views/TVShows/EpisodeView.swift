@@ -35,8 +35,12 @@ extension EpisodeView {
                         .fanartStyle(item: episode)
                         .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                         .padding(.trailing)
-                    PartsView.TextMore(item: episode)
-                        .frame(height: KomodioApp.thumbSize.height)
+                    if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(1) && episode.playcount == 0 {
+                        Text("Plot is hidden for unwatched episodes...")
+                    } else {
+                        PartsView.TextMore(item: episode)
+                            .frame(height: KomodioApp.thumbSize.height)
+                    }
                 }
                 .focusSection()
                 Buttons.Player(item: episode, fadeStateButton: true)

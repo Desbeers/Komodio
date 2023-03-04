@@ -215,11 +215,14 @@ struct MoviesView: View {
 
     /// Swap movies for a set item
     ///
-    /// Movies that are part of a set will be removed and replaced with the set
+    /// Movies that are part of a set will be removed and replaced with the set when enabled in the Kodi host
     private func swapMoviesForSet(movies: [Video.Details.Movie]) -> [any KodiItem] {
-        let movieSetIDs = Set(movies.map(\.setID))
-        let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
-        return (movies.filter({$0.setID == 0}) + movieSets)
+        if KodiConnector.shared.getKodiSetting(id: .videolibraryGroupMovieSets).bool {
+            let movieSetIDs = Set(movies.map(\.setID))
+            let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
+            return (movies.filter({$0.setID == 0}) + movieSets)
+        }
+        return movies
     }
 
     /// Get the navigation subtitle

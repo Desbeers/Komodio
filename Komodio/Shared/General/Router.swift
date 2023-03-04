@@ -60,8 +60,6 @@ enum Router: Hashable {
     case search
     /// The Kodi settings View
     case kodiSettings
-    /// The Kodi settings details View
-    case kodiSettingsDetails(section: Setting.Details.Section, category: Setting.Details.Category)
     /// Kodi Host connection settings
     case hostItemSettings(host: HostItem)
 }
