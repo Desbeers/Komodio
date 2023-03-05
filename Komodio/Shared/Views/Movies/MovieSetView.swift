@@ -46,6 +46,7 @@ struct MovieSetView: View {
                 setMovieSetDetails()
             }
             .animation(.default, value: sorting)
+            .animation(.default, value: movies)
     }
 
     // MARK: Content of the View
@@ -117,10 +118,7 @@ struct MovieSetView: View {
             /// Get all the movies from the set
             movies = kodi.library.movies
                 .filter({$0.setID == movieSet.setID})
-                .sorted(using: [
-                  KeyPathComparator(\.year),
-                  KeyPathComparator(\.sortByTitle)
-                ])
+                .filter({scene.movieItems.contains($0.movieID)})
             /// Update the optional selected movie
             if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
                 self.selectedMovie = movie

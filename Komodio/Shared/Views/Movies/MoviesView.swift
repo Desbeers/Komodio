@@ -158,27 +158,19 @@ struct MoviesView: View {
     /// Get all items from the library
     private func getItems() {
         logger("Get Items")
-        switch filter {
-        case .unwatched:
-            items = kodi.library.movies
-                .filter({$0.playcount == 0})
-                .sorted(sortItem: sorting)
-        case .playlist(let file):
-            Task { @MainActor in
-                var playlist: [Video.Details.Movie] = []
-                let items = await Files.getDirectory(directory: file.file, media: .video)
-                for item in items {
-                    if let movie = kodi.library.movies.first(where: {$0.file == item.file}) {
-                        playlist.append(movie)
-                    }
-                }
-                /// Movies that are part of a set will be removed and replaced with the set when sorted by title
-                self.items = (sorting.method == .title ? swapMoviesForSet(movies: playlist) : playlist)
-                    .sorted(sortItem: sorting)
+        Task { @MainActor in
+            var items: [Video.Details.Movie] = []
+            switch filter {
+            case .unwatched:
+                items = kodi.library.movies
+                    .filter({$0.playcount == 0})
+            case .playlist(let file):
+                let playlist = await Files.getDirectory(directory: file.file, media: .video).compactMap(\.id)
+                items = kodi.library.movies.filter({playlist.contains($0.movieID)})
+            default:
+                items = kodi.library.movies
             }
-        default:
-            /// Movies that are part of a set will be removed and replaced with the set when sorted by title
-            items = (sorting.method == .title ? swapMoviesForSet(movies: kodi.library.movies) : kodi.library.movies)
+            self.items = (sorting.method == .title ? swapMoviesForSet(movies: items) : items)
                 .sorted(sortItem: sorting)
         }
     }
@@ -220,6 +212,7 @@ struct MoviesView: View {
         if KodiConnector.shared.getKodiSetting(id: .videolibraryGroupMovieSets).bool {
             let movieSetIDs = Set(movies.map(\.setID))
             let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
+            scene.movieItems = movies.filter({$0.setID != 0}).map(\.movieID)
             return (movies.filter({$0.setID == 0}) + movieSets)
         }
         return movies

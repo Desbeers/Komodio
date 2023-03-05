@@ -45,6 +45,9 @@ class SceneState: ObservableObject {
     @Published var navigationSubtitle: String = ""
     /// The details for the current selection in the main view
     @Published var details: Router = .start
+    /// Movie ID's passed around Views
+    @Published var movieItems: [Int] = []
+
     /// Init the ``SceneState``
     private init() {
         listSortSettings = SceneState.loadListSortSettings()
