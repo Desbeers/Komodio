@@ -25,7 +25,11 @@ extension Modifiers {
                 }
                 .onExitCommand {
                     scene.background = nil
-                    presentationMode.wrappedValue.dismiss()
+                    if scene.navigationStackPath.isEmpty {
+                        scene.toggleSidebar.toggle()
+                    } else {
+                        scene.navigationStackPath.removeLast()
+                    }
                 }
         }
     }

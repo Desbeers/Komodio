@@ -91,7 +91,7 @@ extension Modifiers {
         private let swipeDistance: Float = 0.7
         /// How much pause in milliseconds should be between gestures in order for a gesture to be considered a new gesture
         /// and not a remenat x/y values from the previous gesture
-        private let secondsBetweenInteractions: Double = 0.4
+        private let secondsBetweenInteractions: Double = 0.2
         /// The last 'Y' position
         @State private var lastY: Float = 0
         /// The last 'X' position
@@ -198,7 +198,6 @@ extension View {
     ) -> some View {
         self
         /// The GameController does not work in the simulator; use the arrow keys instead
-#if targetEnvironment(simulator)
             .onMoveCommand { direction in
                 switch direction {
                 case .up:
@@ -213,13 +212,11 @@ extension View {
                     break
                 }
             }
-#else
             .modifier(Modifiers.SwipeGestureActions(
                 onUp: onUp,
                 onDown: onDown,
                 onRight: onRight,
                 onLeft: onLeft)
             )
-#endif
     }
 }
