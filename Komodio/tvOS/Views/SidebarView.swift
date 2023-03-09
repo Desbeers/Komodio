@@ -22,6 +22,7 @@ struct SidebarView: View {
     /// Router items to show in the sidebar
     let sidebarItems: [Router] = [
         .start,
+        .favourites,
         .movies,
         .unwatchedMovies,
         .playlists,
@@ -64,21 +65,22 @@ struct SidebarView: View {
                         .frame(width: 40, height: 40, alignment: .center)
                 })
             .padding(.vertical, 20)
+            sidebarItem(item: sidebarItems[1])
             Section("Movies") {
-                sidebarItem(item: sidebarItems[1])
                 sidebarItem(item: sidebarItems[2])
                 sidebarItem(item: sidebarItems[3])
+                sidebarItem(item: sidebarItems[4])
 
             }
             Section("TV shows") {
-                sidebarItem(item: sidebarItems[4])
                 sidebarItem(item: sidebarItems[5])
-            }
-            Section("Music Videos") {
                 sidebarItem(item: sidebarItems[6])
             }
-            Section("Search") {
+            Section("Music Videos") {
                 sidebarItem(item: sidebarItems[7])
+            }
+            Section("Search") {
+                sidebarItem(item: sidebarItems[8])
             }
         }
         .padding(.top)
@@ -107,6 +109,14 @@ struct SidebarView: View {
                 sidebarSelection = 0
             }
         }
+//        .task(id: scene.toggleSidebar) {
+//            if kodi.status != .loadedLibrary {
+//                isFocused = true
+//            }
+//        }
+        .onChange(of: scene.toggleSidebar) { _ in
+            isFocused = true
+        }
     }
 
     /// SwiftUI View for an item in the sidebar
@@ -125,6 +135,6 @@ struct SidebarView: View {
                     .font(sidebarItems[sidebarSelection] == item ? .headline : .subheadline)
                     .frame(width: 40, height: 40, alignment: .center)
             })
-        .padding(.bottom, 20)
+        .padding(.bottom, 10)
     }
 }

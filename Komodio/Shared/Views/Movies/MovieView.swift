@@ -216,10 +216,10 @@ extension MovieView {
                     Spacer()
                     HStack {
                         Buttons.PlayedState(item: movie)
-                            .labelStyle(.playLabel)
-                            .buttonStyle(.playButton)
                         Pickers.RatingWidgetSheet(item: movie)
                     }
+                    .labelStyle(.playLabel)
+                    .buttonStyle(.playButton)
                 }
                 .padding(40)
             }

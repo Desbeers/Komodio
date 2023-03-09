@@ -123,6 +123,7 @@ extension UpNextView {
                 KodiArt.Poster(item: episode)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                    .watchStatus(of: episode)
 
 #if os(macOS)
                 VStack(alignment: .leading) {
@@ -201,7 +202,6 @@ extension UpNextView {
 #endif
             }
             .background(item: episode)
-            .id(episode)
         }
     }
 }

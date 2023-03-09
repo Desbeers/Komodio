@@ -33,6 +33,8 @@ struct ContentView: View {
                 UpNextView()
             case .musicVideos:
                 ArtistsView()
+            case .favourites:
+                FavouritesView()
             case .search:
                 SearchView()
             case .kodiSettings:

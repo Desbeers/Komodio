@@ -47,9 +47,10 @@ import SwiftlyKodiAPI
                     }
                         .scaledToFill()
                         .ignoresSafeArea()
-                        .transition(.slide)
+                        .transition(.opacity)
+                        .id(scene.background?.id)
+                        .animation(.default, value: scene.background?.id)
                 )
-                .animation(.default, value: scene.background?.id)
         }
     }
 }

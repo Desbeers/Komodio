@@ -237,9 +237,6 @@ extension PartsView {
                 Image(systemName: image(number: number))
                     .foregroundColor(number * 2 <= rating + 1 ? .yellow : .secondary.opacity(0.4))
                     .fontWeight(.bold)
-                #if os(tvOS)
-                    .shadow(radius: 10)
-                #endif
             }
         }
         func image(number: Int) -> String {

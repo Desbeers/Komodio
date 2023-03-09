@@ -147,7 +147,6 @@ extension Pickers {
                             .foregroundColor(number <= rating ? .yellow : .secondary.opacity(0.4))
                     })
                 }
-                .shadow(radius: 10)
 #endif
             }
             .task {
@@ -183,7 +182,12 @@ extension Pickers {
             Button(action: {
                 showSheet = true
             }, label: {
-                PartsView.ratingToStars(rating: item.userRating)
+                Label(title: {
+                    PartsView.ratingToStars(rating: item.userRating)
+                }, icon: {
+                    Image(systemName: "star.circle.fill")
+                })
+
             })
             .sheet(isPresented: $showSheet) {
                 VStack {

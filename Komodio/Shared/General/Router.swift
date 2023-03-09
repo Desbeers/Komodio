@@ -56,6 +56,8 @@ enum Router: Hashable {
     case start
     /// Playlists
     case playlists
+    /// Favourites
+    case favourites
     /// The search View
     case search
     /// The Kodi settings View
@@ -107,6 +109,8 @@ extension Router {
             return "This artist is not in your library"
         case .album:
             return "There are no albums for this artist"
+        case .favourites:
+            return "You have no favourite items"
         default:
             return "Navigation Error"
         }
@@ -184,6 +188,11 @@ extension Router {
             return Item(title: "Playlists",
                         description: "Your movie playlists",
                         icon: "list.triangle"
+            )
+        case .favourites:
+            return Item(title: "Favourites",
+                        description: "Your favourite items",
+                        icon: "heart.fill"
             )
         default:
             return Item(title: "Details",

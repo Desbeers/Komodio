@@ -38,6 +38,8 @@ struct ContentView: View {
         case .moviesPlaylist(let file):
             MoviesView(filter: .playlist(file: file))
                 .id(file)
+        case .favourites:
+            FavouritesView()
         case .search:
             SearchView()
         case .kodiSettings:

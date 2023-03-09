@@ -36,8 +36,16 @@ struct MainView: View {
                     SeasonsView(tvshow: tvshow)
                         .setSafeAreas()
                 })
+                .navigationDestination(for: Video.Details.Episode.self, destination: { episode in
+                    UpNextView.Details(episode: episode)
+                        .setSafeAreas()
+                })
                 .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
                     MusicVideosView(artist: artist)
+                        .setSafeAreas()
+                })
+                .navigationDestination(for: Video.Details.MusicVideo.self, destination: { musicVideo in
+                    MusicVideoView.Details(musicVideo: musicVideo)
                         .setSafeAreas()
                 })
                 .navigationDestination(for: List.Item.File.self, destination: { playlist in

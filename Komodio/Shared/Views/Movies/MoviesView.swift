@@ -182,8 +182,6 @@ struct MoviesView: View {
             case .movie:
                 if let movie = kodi.library.movies.first(where: {$0.id == selectedItem.id}) {
                     scene.details = .movie(movie: movie)
-                    /// Not a movie set
-                    selectedMovieSet.setID = 0
                 }
             case .movieSet:
                 if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(selectedItem.id)}) {

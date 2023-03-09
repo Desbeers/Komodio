@@ -29,6 +29,8 @@ class SceneState: ObservableObject {
     @Published var navigationStackPath = NavigationPath()
     /// The optional background image
     @Published var background: (any KodiItem)?
+    /// Sidebar focus toggle
+    @Published var toggleSidebar: Bool = false
 
 #endif
 

@@ -46,6 +46,7 @@ struct SidebarView: View {
     @ViewBuilder var content: some View {
         label(title: "Komodio", description: kodi.status.message, icon: "sparkles.tv")
             .tag(Router.start)
+        sidebarItem(item: Router.favourites)
         if !kodi.configuredHosts.isEmpty {
             Section("Your Kodi's") {
                 ForEach(kodi.configuredHosts) { host in
