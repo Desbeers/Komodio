@@ -108,7 +108,6 @@ extension Styles {
             }
             .font(.caption)
             .padding(.bottom)
-            .foregroundColor(.white)
 #endif
 
         }
