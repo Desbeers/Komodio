@@ -117,7 +117,7 @@ extension StartView {
                     VStack {
                         ForEach(kodi.bonjourHosts.filter({$0.new}), id: \.ip) { host in
                             Button(action: {
-                                selectedHost = HostItem(ip: host.ip, media: .video, status: .new)
+                                selectedHost = HostItem(ip: host.ip, media: .video, player: .stream, status: .new)
                             }, label: {
                                 Label(title: {
                                     Text(host.name)

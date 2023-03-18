@@ -75,7 +75,7 @@ struct SidebarView: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(.orange)
                     })
-                    .tag(Router.hostItemSettings(host: HostItem(ip: host.ip, media: .video, status: .new)))
+                    .tag(Router.hostItemSettings(host: HostItem(ip: host.ip, media: .video, player: .stream, status: .new)))
                 }
             }
         }
