@@ -239,6 +239,10 @@ extension PartsView {
                     .fontWeight(.bold)
             }
         }
+
+        /// Convert a number to an SF image String
+        /// - Parameter number: The number
+        /// - Returns: The SF image as String
         func image(number: Int) -> String {
             if number * 2 <= rating {
                 return "star.fill"
@@ -252,9 +256,14 @@ extension PartsView {
 }
 
 extension PartsView {
+
+    /// SwiftUI View for a sorting label
     struct SortLabel: View {
+        /// The KodiItem
         let item: any KodiItem
+        /// The sort method
         let sorting: SwiftlyKodiAPI.List.Sort
+        /// The body of the View
         var body: some View {
             switch sorting.method {
             case .dateAdded:

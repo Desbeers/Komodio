@@ -113,9 +113,13 @@ extension Pickers {
     ///
     /// For `tvOS` it will be Buttons instead of a picker because a Picker applies the selection directly
     struct RatingWidget: View {
+        /// The KodiItem
         let item: any KodiItem
+        /// The rating of the ityem
         @State private var rating: Int = 0
+        /// The presentation mode  (tvOS)
         @Environment(\.presentationMode) var presentationMode
+        /// The body of the View
         var body: some View {
             HStack {
 

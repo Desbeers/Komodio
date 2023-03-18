@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Item Structure Reference</title>
+    <title>RatingWidgetSheet Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Item" class="dashAnchor"></a>
-    <a title="Item Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/RatingWidgetSheet" class="dashAnchor"></a>
+    <a title="RatingWidgetSheet Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../../index.html">Komodio</a> (100% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Komodio Reference</a>
         <img id="carat" src="../../img/carat.png" alt=""/>
-        Item Structure Reference
+        RatingWidgetSheet Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -53,18 +53,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort.html">ListSort</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort/Item.html">– Item</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort/SortMethod.html">– SortMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort/SortOrder.html">– SortOrder</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Parts.html">Parts</a>
@@ -215,6 +203,9 @@
                 <a href="../../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/FavouritesView.html">FavouritesView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/HostItemView.html">HostItemView</a>
               </li>
               <li class="nav-group-task">
@@ -234,9 +225,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/KodiSettingsView.html">KodiSettingsView</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/KodiSettingsView/Section.html">– Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/KodiSettingsView/Details.html">– Details</a>
@@ -263,6 +251,9 @@
                 <a href="../../Enums/PartsView/TextMore.html">– TextMore</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Enums/PartsView/SortLabel.html">– SortLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Enums/Buttons.html">Buttons</a>
               </li>
               <li class="nav-group-task">
@@ -285,6 +276,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Pickers/RatingWidget.html">– RatingWidget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Pickers/RatingWidgetSheet.html">– RatingWidgetSheet</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Modifiers.html">Modifiers</a>
@@ -316,14 +313,14 @@
               <li class="nav-group-task">
                 <a href="../../Enums/Styles/DetailLabel.html">– DetailLabel</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Styles/SortLabel.html">– SortLabel</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../../Other%20Extensions.html">Other Extensions</a>
+            <a href="../../SwiftUI%20Styles.html">SwiftUI Styles</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../../Extensions/Array.html">Array</a>
-              </li>
               <li class="nav-group-task">
                 <a href="../../Extensions/ButtonStyle.html">ButtonStyle</a>
               </li>
@@ -340,15 +337,20 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Item</h1>
+            <h1>RatingWidgetSheet</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Item</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">RatingWidgetSheet</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
 
                 </div>
               </div>
-            <p>Struct for a <code><a href="../../Enums/ListSort.html">ListSort</a></code> item</p>
+            <p>SwiftUI Button to show the <code><a href="../../Enums/Pickers/ListSortPicker.html">ListSortPicker</a></code> in a Sheet</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Used for tvOS or else the UI will be too cluttered
+
+</div>
 
           </section>
           <section class="section task-group-section">
@@ -357,9 +359,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio8ListSortO4ItemV2idSSvp"></a>
-                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio8ListSortO4ItemV2idSSvp">id</a>
+                    <a name="/s:7Komodio7PickersO17RatingWidgetSheetV4item14SwiftlyKodiAPI0H4Item_pvp"></a>
+                    <a name="//apple_ref/swift/Property/item" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO17RatingWidgetSheetV4item14SwiftlyKodiAPI0H4Item_pvp">item</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -367,14 +369,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The ID of the item</p>
+                        <p>The KodiItem</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">item</span><span class="p">:</span> <span class="n">any</span> <span class="kt">KodiItem</span></code></pre>
 
                         </div>
                       </div>
@@ -384,9 +386,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio8ListSortO4ItemV6methodAC0C6MethodOvp"></a>
-                    <a name="//apple_ref/swift/Property/method" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio8ListSortO4ItemV6methodAC0C6MethodOvp">method</a>
+                    <a name="/s:7Komodio7PickersO17RatingWidgetSheetV04showE033_8F6014390161075A6BF3A7F332AADF3DLLSbvp"></a>
+                    <a name="//apple_ref/swift/Property/showSheet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO17RatingWidgetSheetV04showE033_8F6014390161075A6BF3A7F332AADF3DLLSbvp">showSheet</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -394,26 +396,40 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The sort method</p>
+                        <p>Bool to show the sSheet</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="../../Enums/ListSort/SortMethod.html">SortMethod</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@State</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">showSheet</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Body%20of%20the%20View"></a>
+                <a name="//apple_ref/swift/Section/Body of the View" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Body%20of%20the%20View"></a>
+                  <h3 class="section-name"><span>Body of the View</span>
+</h3>
+                </div>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio8ListSortO4ItemV5orderAC0C5OrderOvp"></a>
-                    <a name="//apple_ref/swift/Property/order" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio8ListSortO4ItemV5orderAC0C5OrderOvp">order</a>
+                    <a name="/s:7Komodio7PickersO17RatingWidgetSheetV4bodyQrvp"></a>
+                    <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO17RatingWidgetSheetV4bodyQrvp">body</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -421,14 +437,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The sort order</p>
+                        <p>The body of the View</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">order</span><span class="p">:</span> <span class="kt"><a href="../../Enums/ListSort/SortOrder.html">SortOrder</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -440,7 +456,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-10)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-03-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

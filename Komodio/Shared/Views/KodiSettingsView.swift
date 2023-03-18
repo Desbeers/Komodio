@@ -32,6 +32,8 @@ struct KodiSettingsView: View {
 }
 
 extension KodiSettingsView {
+
+    /// SwiftUI View for Kodi settings details
     struct Details: View {
         var body: some View {
             ScrollView {

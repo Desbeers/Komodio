@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Other Extensions  Reference</title>
+    <title>SwiftUI Styles  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Section/Other Extensions" class="dashAnchor"></a>
-    <a title="Other Extensions  Reference"></a>
+    <a name="//apple_ref/swift/Section/SwiftUI Styles" class="dashAnchor"></a>
+    <a title="SwiftUI Styles  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html">Komodio</a> (100% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="index.html">Komodio Reference</a>
         <img id="carat" src="img/carat.png" alt=""/>
-        Other Extensions  Reference
+        SwiftUI Styles  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -53,18 +53,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/ListSort.html">ListSort</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/ListSort/Item.html">– Item</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/ListSort/SortMethod.html">– SortMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/ListSort/SortOrder.html">– SortOrder</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/Parts.html">Parts</a>
@@ -215,6 +203,9 @@
                 <a href="Structs/StatisticsView/HostInfo.html">– HostInfo</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/FavouritesView.html">FavouritesView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/HostItemView.html">HostItemView</a>
               </li>
               <li class="nav-group-task">
@@ -234,9 +225,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/KodiSettingsView.html">KodiSettingsView</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KodiSettingsView/Section.html">– Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/KodiSettingsView/Details.html">– Details</a>
@@ -263,6 +251,9 @@
                 <a href="Enums/PartsView/TextMore.html">– TextMore</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/PartsView/SortLabel.html">– SortLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/Buttons.html">Buttons</a>
               </li>
               <li class="nav-group-task">
@@ -285,6 +276,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Pickers/RatingWidget.html">– RatingWidget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Pickers/RatingWidgetSheet.html">– RatingWidgetSheet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/Modifiers.html">Modifiers</a>
@@ -316,14 +313,14 @@
               <li class="nav-group-task">
                 <a href="Enums/Styles/DetailLabel.html">– DetailLabel</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Enums/Styles/SortLabel.html">– SortLabel</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Other%20Extensions.html">Other Extensions</a>
+            <a href="SwiftUI%20Styles.html">SwiftUI Styles</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Extensions/Array.html">Array</a>
-              </li>
               <li class="nav-group-task">
                 <a href="Extensions/ButtonStyle.html">ButtonStyle</a>
               </li>
@@ -340,83 +337,10 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Other Extensions</h1>
-            <p>The following extensions are available globally.</p>
-
+            <h1>SwiftUI Styles</h1>
+            
           </section>
           <section class="section task-group-section">
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sa"></a>
-                    <a name="//apple_ref/swift/Extension/Array" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sa">Array</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/Array.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Array</span> <span class="k">where</span> <span class="kt">Element</span> <span class="o">==</span> <span class="n">any</span> <span class="kt">KodiItem</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Array</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">KodiItem</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Watch%20Status%20Modifier"></a>
-                <a name="//apple_ref/swift/Section/Watch Status Modifier" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Watch%20Status%20Modifier"></a>
-                  <h3 class="section-name"><span>Watch Status Modifier</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7SwiftUI4ViewP"></a>
-                    <a name="//apple_ref/swift/Extension/View" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7SwiftUI4ViewP">View</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/View.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">View</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/Button%20styles"></a>
@@ -490,6 +414,47 @@
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LabelStyle</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">PlayLabel</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LabelStyle</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">DetailLabel</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LabelStyle</span> <span class="k">where</span> <span class="k">Self</span> <span class="o">==</span> <span class="kt"><a href="Enums/Styles.html">Styles</a></span><span class="o">.</span><span class="kt">SortLabel</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Watch%20Status%20Modifier"></a>
+                <a name="//apple_ref/swift/Section/Watch Status Modifier" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Watch%20Status%20Modifier"></a>
+                  <h3 class="section-name"><span>Watch Status Modifier</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7SwiftUI4ViewP"></a>
+                    <a name="//apple_ref/swift/Extension/View" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7SwiftUI4ViewP">View</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/View.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">View</span></code></pre>
 
                         </div>
                       </div>
@@ -501,7 +466,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-10)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-03-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

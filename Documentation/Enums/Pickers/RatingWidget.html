@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Section Structure Reference</title>
+    <title>RatingWidget Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Section" class="dashAnchor"></a>
-    <a title="Section Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/RatingWidget" class="dashAnchor"></a>
+    <a title="RatingWidget Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../../index.html">Komodio</a> (100% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Komodio Reference</a>
         <img id="carat" src="../../img/carat.png" alt=""/>
-        Section Structure Reference
+        RatingWidget Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -53,18 +53,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort.html">ListSort</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort/Item.html">– Item</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort/SortMethod.html">– SortMethod</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Enums/ListSort/SortOrder.html">– SortOrder</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Parts.html">Parts</a>
@@ -215,6 +203,9 @@
                 <a href="../../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/FavouritesView.html">FavouritesView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/HostItemView.html">HostItemView</a>
               </li>
               <li class="nav-group-task">
@@ -234,9 +225,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/KodiSettingsView.html">KodiSettingsView</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/KodiSettingsView/Section.html">– Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/KodiSettingsView/Details.html">– Details</a>
@@ -263,6 +251,9 @@
                 <a href="../../Enums/PartsView/TextMore.html">– TextMore</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Enums/PartsView/SortLabel.html">– SortLabel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Enums/Buttons.html">Buttons</a>
               </li>
               <li class="nav-group-task">
@@ -285,6 +276,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Pickers/RatingWidget.html">– RatingWidget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Pickers/RatingWidgetSheet.html">– RatingWidgetSheet</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Modifiers.html">Modifiers</a>
@@ -316,14 +313,14 @@
               <li class="nav-group-task">
                 <a href="../../Enums/Styles/DetailLabel.html">– DetailLabel</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Styles/SortLabel.html">– SortLabel</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../../Other%20Extensions.html">Other Extensions</a>
+            <a href="../../SwiftUI%20Styles.html">SwiftUI Styles</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../../Extensions/Array.html">Array</a>
-              </li>
               <li class="nav-group-task">
                 <a href="../../Extensions/ButtonStyle.html">ButtonStyle</a>
               </li>
@@ -340,15 +337,17 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Section</h1>
+            <h1>RatingWidget</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Section</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">RatingWidget</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
 
                 </div>
               </div>
-            <p>SwiftUI View for a section</p>
+            <p>Picker for User Rating of a <code>KodiItem</code></p>
+
+<p>For <code>tvOS</code> it will be Buttons instead of a picker because a Picker applies the selection directly</p>
 
           </section>
           <section class="section task-group-section">
@@ -357,9 +356,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio16KodiSettingsViewV7SectionV7section07SwiftlyB3API7SettingO7DetailsOADVvp"></a>
-                    <a name="//apple_ref/swift/Property/section" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio16KodiSettingsViewV7SectionV7section07SwiftlyB3API7SettingO7DetailsOADVvp">section</a>
+                    <a name="/s:7Komodio7PickersO12RatingWidgetV4item14SwiftlyKodiAPI0G4Item_pvp"></a>
+                    <a name="//apple_ref/swift/Property/item" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO12RatingWidgetV4item14SwiftlyKodiAPI0G4Item_pvp">item</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -367,14 +366,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current section</p>
+                        <p>The KodiItem</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Setting</span><span class="o">.</span><span class="kt"><a href="../../Structs/KodiSettingsView/Details.html">Details</a></span><span class="o">.</span><span class="kt">Section</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">item</span><span class="p">:</span> <span class="n">any</span> <span class="kt">KodiItem</span></code></pre>
 
                         </div>
                       </div>
@@ -384,9 +383,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio16KodiSettingsViewV7SectionV5scene33_BB97821C68675D30AC3B52CF13EEAC83LLAA10SceneStateCvp"></a>
-                    <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio16KodiSettingsViewV7SectionV5scene33_BB97821C68675D30AC3B52CF13EEAC83LLAA10SceneStateCvp">scene</a>
+                    <a name="/s:7Komodio7PickersO12RatingWidgetV6rating33_8F6014390161075A6BF3A7F332AADF3DLLSivp"></a>
+                    <a name="//apple_ref/swift/Property/rating" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO12RatingWidgetV6rating33_8F6014390161075A6BF3A7F332AADF3DLLSivp">rating</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -394,35 +393,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The SceneState model</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@EnvironmentObject</span>
-<span class="kd">private</span> <span class="k">var</span> <span class="nv">scene</span><span class="p">:</span> <span class="kt"><a href="../../Classes/SceneState.html">SceneState</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7Komodio16KodiSettingsViewV7SectionV10categories33_BB97821C68675D30AC3B52CF13EEAC83LLSay07SwiftlyB3API7SettingO7DetailsO8CategoryVGvp"></a>
-                    <a name="//apple_ref/swift/Property/categories" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio16KodiSettingsViewV7SectionV10categories33_BB97821C68675D30AC3B52CF13EEAC83LLSay07SwiftlyB3API7SettingO7DetailsO8CategoryVGvp">categories</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>All the categories</p>
+                        <p>The rating of the ityem</p>
 
                       </div>
                       <div class="declaration">
@@ -430,7 +401,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@State</span>
-<span class="kd">private</span> <span class="k">var</span> <span class="nv">categories</span><span class="p">:</span> <span class="p">[</span><span class="kt">Setting</span><span class="o">.</span><span class="kt"><a href="../../Structs/KodiSettingsView/Details.html">Details</a></span><span class="o">.</span><span class="kt">Category</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">rating</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -440,9 +411,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio16KodiSettingsViewV7SectionV16selectedCategory33_BB97821C68675D30AC3B52CF13EEAC83LL07SwiftlyB3API7SettingO7DetailsO0G0VSgvp"></a>
-                    <a name="//apple_ref/swift/Property/selectedCategory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio16KodiSettingsViewV7SectionV16selectedCategory33_BB97821C68675D30AC3B52CF13EEAC83LL07SwiftlyB3API7SettingO7DetailsO0G0VSgvp">selectedCategory</a>
+                    <a name="/s:7Komodio7PickersO12RatingWidgetV16presentationMode7SwiftUI7BindingVyAG012PresentationF0VGvp"></a>
+                    <a name="//apple_ref/swift/Property/presentationMode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio7PickersO12RatingWidgetV16presentationMode7SwiftUI7BindingVyAG012PresentationF0VGvp">presentationMode</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -450,15 +421,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The optional selected category</p>
+                        <p>The presentation mode  (tvOS)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@State</span>
-<span class="kd">private</span> <span class="k">var</span> <span class="nv">selectedCategory</span><span class="p">:</span> <span class="kt">Setting</span><span class="o">.</span><span class="kt"><a href="../../Structs/KodiSettingsView/Details.html">Details</a></span><span class="o">.</span><span class="kt">Category</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@Environment</span>
+<span class="k">var</span> <span class="nv">presentationMode</span><span class="p">:</span> <span class="kt">Binding</span><span class="o">&lt;</span><span class="kt">PresentationMode</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -468,60 +439,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
-                    <a name="//apple_ref/swift/Property/isFocused" class="dashAnchor"></a>
-                    <a class="token" href="#/">isFocused</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The focus state of the selection (tvOS)</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/"></a>
-                    <a name="//apple_ref/swift/Property/selection" class="dashAnchor"></a>
-                    <a class="token" href="#/">selection</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The current selection (tvOS)</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Body%20of%20the%20View"></a>
-                <a name="//apple_ref/swift/Section/Body of the View" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Body%20of%20the%20View"></a>
-                  <h3 class="section-name"><span>Body of the View</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7SwiftUI4ViewP4body4BodyQzvp"></a>
+                    <a name="/s:7Komodio7PickersO12RatingWidgetV4bodyQrvp"></a>
                     <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7SwiftUI4ViewP4body4BodyQzvp">body</a>
+                    <a class="token" href="#/s:7Komodio7PickersO12RatingWidgetV4bodyQrvp">body</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -529,7 +449,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>The body of the View</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -544,51 +465,10 @@
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Content%20of%20the%20View"></a>
-                <a name="//apple_ref/swift/Section/Content of the View" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Content%20of%20the%20View"></a>
-                  <h3 class="section-name"><span>Content of the View</span>
-</h3>
-                </div>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7Komodio16KodiSettingsViewV7SectionV7contentQrvp"></a>
-                    <a name="//apple_ref/swift/Property/content" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio16KodiSettingsViewV7SectionV7contentQrvp">content</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The content of the View</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@ViewBuilder</span>
-<span class="k">var</span> <span class="nv">content</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-02-10)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-03-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

@@ -36,6 +36,10 @@ I have no intention to make a **Komodio** release here on GitHub or on the Apple
 
 - [SwiftlyKodiAPI](https://github.com/Desbeers/swiftlykodiapi). The Swift API to talk to Kodio.
 
+## Code documentation
+
+The source code of **Komodio** is well [documented](https://desbeers.github.io/Komodio/).
+
 ## What's in a name?
 
 ***Komodio** has no meaning. I wrote an audio remote application for Kodi named [Kodio](https://github.com/Desbeers/Kodio/), so wanted something similar..

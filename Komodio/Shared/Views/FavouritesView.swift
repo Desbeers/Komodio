@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI View for Favorites (shared)
 struct FavouritesView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -43,7 +44,7 @@ struct FavouritesView: View {
             }
         }
     }
-
+    /// The content of the View
     @ViewBuilder var content: some View {
 #if os(macOS)
         List(selection: $selectedItem) {
