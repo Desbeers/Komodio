@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "komodioMac-16.png",
+      "filename" : "macOS-appIcon@2x-16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "komodioMac-32.png",
+      "filename" : "macOS-appIcon@2x-32.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "komodioMac-32.png",
+      "filename" : "macOS-appIcon@2x-32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "komodioMac-64.png",
+      "filename" : "macOS-appIcon@2x-64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "komodioMac-128.png",
+      "filename" : "macOS-appIcon@2x-128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "komodioMac-256.png",
+      "filename" : "macOS-appIcon@2x-256.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "komodioMac-256.png",
+      "filename" : "macOS-appIcon@2x-256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "komodioMac-512.png",
+      "filename" : "macOS-appIcon@2x-512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "komodioMac-512.png",
+      "filename" : "macOS-appIcon@2x-512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "komodioMac-1024.png",
+      "filename" : "macOS-appIcon@2x-1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
