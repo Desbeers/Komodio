@@ -26,10 +26,13 @@ extension Modifiers {
         func body(content: Content) -> some View {
             content
                 .overlay(alignment: .topTrailing) {
-                    Image(systemName: item.media == .movieSet ? "circle.grid.cross.fill" : item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled")
-                        .font(KomodioApp.platform == .macOS ? .title3 : .body)
-                        .foregroundColor(.yellow)
-                        .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)
+                    Image(
+                        systemName: item.media == .movieSet ?
+                        "circle.grid.cross.fill" : item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled"
+                    )
+                    .font(KomodioApp.platform == .macOS ? .title3 : .body)
+                    .foregroundColor(.yellow)
+                    .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)
                 }
         }
     }
@@ -113,7 +116,6 @@ extension Modifiers {
                 .padding(.vertical, 40)
                 .frame(height: UIScreen.main.bounds.height, alignment: .top)
 #endif
-
         }
     }
 }

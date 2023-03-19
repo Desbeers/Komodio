@@ -97,16 +97,28 @@ struct SearchView: View {
             }
         }
         .task(id: kodi.library.movies) {
-            if let selectedItem, selectedItem.media == .movie, let update = kodi.library.movies.first(where: {$0.id == selectedItem.id}) {
+            // swiftlint:disable opening_brace
+            if
+                let selectedItem,
+                selectedItem.media == .movie,
+                let update = kodi.library.movies.first(where: { $0.id == selectedItem.id })
+            {
                 movies = kodi.library.movies.search(scene.query)
                 self.selectedItem = MediaItem(id: selectedItem.id, media: .movie, item: update)
             }
+            // swiftlint:enable opening_brace
         }
         .task(id: kodi.library.musicVideos) {
-            if let selectedItem, selectedItem.media == .musicVideo, let update = kodi.library.musicVideos.first(where: {$0.id == selectedItem.id}) {
+            // swiftlint:disable opening_brace
+            if
+                let selectedItem,
+                selectedItem.media == .musicVideo,
+                let update = kodi.library.musicVideos.first(where: { $0.id == selectedItem.id })
+            {
                 musicVideos = kodi.library.musicVideos.search(scene.query)
                 self.selectedItem = MediaItem(id: selectedItem.id, media: .musicVideo, item: update)
             }
+            // swiftlint:enable opening_brace
         }
     }
 }
@@ -118,7 +130,10 @@ extension SearchView {
         /// The SceneState model
         @EnvironmentObject var scene: SceneState
         var body: some View {
-            PartsView.DetailHeader(title: Router.search.label.title, subtitle: "Search results for '**\(scene.query)**'")
+            PartsView.DetailHeader(
+                title: Router.search.label.title,
+                subtitle: "Search results for '**\(scene.query)**'"
+            )
         }
     }
 }

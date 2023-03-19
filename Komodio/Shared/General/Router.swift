@@ -120,84 +120,100 @@ extension Router {
     var label: Item {
         switch self {
         case .start:
-            return Item(title: "Komodio",
-                        description: "Loading your library",
-                        icon: "sparkles.tv"
+            return Item(
+                title: "Komodio",
+                description: "Loading your library",
+                icon: "sparkles.tv"
             )
         case .musicVideos:
-            return Item(title: "Music Videos",
-                        description: "All the Music Videos in your library",
-                        icon: "music.note.tv"
+            return Item(
+                title: "Music Videos",
+                description: "All the Music Videos in your library",
+                icon: "music.note.tv"
             )
         case .search:
-            return Item(title: "Search",
-                        description: "Search Results",
-                        icon: "magnifyingglass"
+            return Item(
+                title: "Search",
+                description: "Search Results",
+                icon: "magnifyingglass"
             )
         case .movies:
-            return Item(title: "All Movies",
-                        description: "All the Movies in your Library",
-                        icon: "film"
+            return Item(
+                title: "All Movies",
+                description: "All the Movies in your Library",
+                icon: "film"
             )
         case .unwatchedMovies:
-            return Item(title: "Unwatched Movies",
-                        description: "Movies that you have not seen yet",
-                        icon: "eye"
+            return Item(
+                title: "Unwatched Movies",
+                description: "Movies that you have not seen yet",
+                icon: "eye"
             )
         case .tvshows:
-            return Item(title: "All TV shows",
-                        description: "All the TV shows in your Library",
-                        icon: "tv"
+            return Item(
+                title: "All TV shows",
+                description: "All the TV shows in your Library",
+                icon: "tv"
             )
         case .unwachedEpisodes:
-            return Item(title: "Up Next",
-                        description: "Watch the next Episode of a TV show",
-                        icon: "eye"
+            return Item(
+                title: "Up Next",
+                description: "Watch the next Episode of a TV show",
+                icon: "eye"
             )
         case .movieSet:
-            return Item(title: "Movie Set",
-                        description: "The movies in the set",
-                        icon: "film"
+            return Item(
+                title: "Movie Set",
+                description: "The movies in the set",
+                icon: "film"
             )
         case .seasons:
-            return Item(title: "Seasons",
-                        description: "The seasons in a TV show",
-                        icon: "tv"
+            return Item(
+                title: "Seasons",
+                description: "The seasons in a TV show",
+                icon: "tv"
             )
         case .moviesPlaylist(let file):
-            return Item(title: file.title,
-                        description: "Playlist",
-                        icon: "list.triangle"
+            return Item(
+                title: file.title,
+                description: "Playlist",
+                icon: "list.triangle"
             )
         case .artist:
-            return Item(title: "Artist",
-                        description: "An artist",
-                        icon: "person"
+            return Item(
+                title: "Artist",
+                description: "An artist",
+                icon: "person"
             )
         case .album:
-            return Item(title: "Albums",
-                        description: "The albums of the artist",
-                        icon: "square.stack"
+            return Item(
+                title: "Albums",
+                description: "The albums of the artist",
+                icon: "square.stack"
             )
         case .kodiSettings:
-            return Item(title: "Kodi Settings",
-                        description: "The Settings for your Kodi",
-                        icon: "gear"
+            return Item(
+                title: "Kodi Settings",
+                description: "The Settings for your Kodi",
+                icon: "gear"
             )
         case .playlists:
-            return Item(title: "Playlists",
-                        description: "Your movie playlists",
-                        icon: "list.triangle"
+            return Item(
+                title: "Playlists",
+                description: "Your movie playlists",
+                icon: "list.triangle"
             )
         case .favourites:
-            return Item(title: "Favourites",
-                        description: "Your favourite items",
-                        icon: "heart.fill"
+            return Item(
+                title: "Favourites",
+                description: "Your favourite items",
+                icon: "heart.fill"
             )
         default:
-            return Item(title: "Details",
-                        description: "Details of an item",
-                        icon: "square.dashed"
+            return Item(
+                title: "Details",
+                description: "Details of an item",
+                icon: "square.dashed"
             )
         }
     }

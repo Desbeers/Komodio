@@ -49,7 +49,7 @@ struct UpNextView: View {
                 state = episodes.isEmpty ? .empty : .ready
                 /// Update the optional selected item
                 if let selectedEpisode {
-                    if let selection = episodes.first(where: {$0.tvshowID == selectedEpisode.tvshowID}) {
+                    if let selection = episodes.first(where: { $0.tvshowID == selectedEpisode.tvshowID }) {
                         self.selectedEpisode = selection
                     } else {
                         self.selectedEpisode = nil
@@ -102,7 +102,6 @@ struct UpNextView: View {
                 .focusSection()
         }
 #endif
-
     }
 }
 
@@ -140,7 +139,6 @@ extension UpNextView {
                 .padding(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 #endif
-
             }
         }
     }
@@ -160,12 +158,21 @@ extension UpNextView {
             Group {
 #if os(macOS)
                 VStack {
-                    PartsView.DetailHeader(title: episode.showTitle, subtitle: "Season \(episode.season), episode \(episode.episode)")
+                    PartsView.DetailHeader(
+                        title: episode.showTitle,
+                        subtitle: "Season \(episode.season), episode \(episode.episode)"
+                    )
                     KodiArt.Fanart(item: episode)
                         .fanartStyle(item: episode, overlay: episode.title)
                     Buttons.Player(item: episode)
                         .padding()
-                    if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(1) && episode.playcount == 0 {
+                    if
+                        !KodiConnector
+                            .shared
+                            .getKodiSetting(id: .videolibraryShowuUwatchedPlots)
+                            .list
+                            .contains(1) && episode.playcount == 0
+                    {
                         Text("Plot is hidden for unwatched episodes...")
                     } else {
                         PartsView.TextMore(item: episode)
@@ -183,7 +190,12 @@ extension UpNextView {
                             .fanartStyle(item: episode, overlay: "Season \(episode.season), episode \(episode.episode)")
                             .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
                         VStack {
-                            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(1) && episode.playcount == 0 {
+                            if
+                                !KodiConnector
+                                    .shared
+                                    .getKodiSetting(id: .videolibraryShowuUwatchedPlots)
+                                    .list
+                                    .contains(1) && episode.playcount == 0 {
                                 Text("Plot is hidden for unwatched episodes...")
                             } else {
                                 PartsView.TextMore(item: episode)

@@ -57,5 +57,4 @@ extension KomodioApp {
 
     /// The default size of thumb art
     static let thumbSize = CGSize(width: 213, height: 120)
-
 }

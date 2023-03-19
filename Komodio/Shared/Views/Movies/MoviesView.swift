@@ -150,7 +150,6 @@ struct MoviesView: View {
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
 #endif
-
     }
 
     // MARK: Private functions
@@ -163,10 +162,11 @@ struct MoviesView: View {
             switch filter {
             case .unwatched:
                 items = kodi.library.movies
-                    .filter({$0.playcount == 0})
+                    .filter { $0.playcount == 0 }
             case .playlist(let file):
                 let playlist = await Files.getDirectory(directory: file.file, media: .video).compactMap(\.id)
-                items = kodi.library.movies.filter({playlist.contains($0.movieID)})
+                items = kodi.library.movies
+                    .filter { playlist.contains($0.movieID) }
             default:
                 items = kodi.library.movies
             }
@@ -180,11 +180,11 @@ struct MoviesView: View {
         if let selectedItem {
             switch selectedItem.media {
             case .movie:
-                if let movie = kodi.library.movies.first(where: {$0.id == selectedItem.id}) {
+                if let movie = kodi.library.movies.first(where: { $0.id == selectedItem.id }) {
                     scene.details = .movie(movie: movie)
                 }
             case .movieSet:
-                if let movieSet = kodi.library.movieSets.first(where: {$0.setID == Int(selectedItem.id)}) {
+                if let movieSet = kodi.library.movieSets.first(where: { $0.setID == Int(selectedItem.id) }) {
                     selectedMovieSet = movieSet
                 }
             default:
@@ -209,9 +209,11 @@ struct MoviesView: View {
     private func swapMoviesForSet(movies: [Video.Details.Movie]) -> [any KodiItem] {
         if KodiConnector.shared.getKodiSetting(id: .videolibraryGroupMovieSets).bool {
             let movieSetIDs = Set(movies.map(\.setID))
-            let movieSets = kodi.library.movieSets.filter({movieSetIDs.contains($0.setID)})
-            scene.movieItems = movies.filter({$0.setID != 0}).map(\.movieID)
-            return (movies.filter({$0.setID == 0}) + movieSets)
+            let movieSets = kodi.library.movieSets
+                .filter { movieSetIDs.contains($0.setID) }
+            scene.movieItems = movies
+                .filter { $0.setID != 0 }.map(\.movieID)
+            return (movies.filter { $0.setID == 0 } + movieSets)
         }
         return movies
     }

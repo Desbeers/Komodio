@@ -66,16 +66,25 @@ struct SidebarView: View {
                 }
             }
         }
-        if !kodi.bonjourHosts.filter({$0.new}).isEmpty {
+        if !kodi.bonjourHosts.filter({ $0.new }).isEmpty {
             Section("New Kodi's") {
-                ForEach(kodi.bonjourHosts.filter({$0.new}), id: \.ip) { host in
+                ForEach(kodi.bonjourHosts.filter { $0.new }, id: \.ip) { host in
                     Label(title: {
                         Text(host.name)
                     }, icon: {
                         Image(systemName: "star.fill")
                             .foregroundColor(.orange)
                     })
-                    .tag(Router.hostItemSettings(host: HostItem(ip: host.ip, media: .video, player: .stream, status: .new)))
+                    .tag(
+                        Router.hostItemSettings(
+                            host: HostItem(
+                                ip: host.ip,
+                                media: .video,
+                                player: .stream,
+                                status: .new
+                            )
+                        )
+                    )
                 }
             }
         }
@@ -108,9 +117,10 @@ struct SidebarView: View {
                         await KodiConnector.shared.loadLibrary(cache: false)
                     }
                 }, label: {
-                    label(title: "Reload Library",
-                          description: "Reload '\(kodi.host.name)'",
-                          icon: "arrow.triangle.2.circlepath"
+                    label(
+                        title: "Reload Library",
+                        description: "Reload '\(kodi.host.name)'",
+                        icon: "arrow.triangle.2.circlepath"
                     )
                 })
             }

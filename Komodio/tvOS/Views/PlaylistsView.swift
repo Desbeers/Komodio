@@ -47,14 +47,14 @@ struct PlaylistsView: View {
         HStack {
             ScrollView {
                 ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-                    NavigationLink(value: playlist, label: {
+                    NavigationLink(value: playlist) {
                         Label(title: {
                             Text(playlist.title)
                                 .frame(width: 400, alignment: .leading)
                         }, icon: {
                             Image(systemName: Router.playlists.label.icon)
                         })
-                    })
+                    }
                     .padding()
                 }
             }

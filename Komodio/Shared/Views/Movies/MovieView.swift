@@ -20,7 +20,7 @@ enum MovieView {
     /// - Parameter movie: The movie to update
     /// - Returns: If update is found, the updated Movie, else `nil`
     static private func updateMovie(movie: Video.Details.Movie) -> Video.Details.Movie? {
-        if let update = KodiConnector.shared.library.movies.first(where: {$0.id == movie.id}), update != movie {
+        if let update = KodiConnector.shared.library.movies.first(where: { $0.id == movie.id }), update != movie {
             return update
         }
         return nil
@@ -72,7 +72,6 @@ extension MovieView {
                     }
                 }
 #endif
-
             }
         }
     }
@@ -100,7 +99,9 @@ extension MovieView {
         }
         /// The plot of the Movie
         var plot: String {
-            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots).list.contains(0) && movie.playcount == 0 {
+            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
+                .list
+                .contains(0) && movie.playcount == 0 {
                 return "Plot is hidden for unwatched movies..."
             }
             return movie.plot
@@ -169,11 +170,14 @@ extension MovieView {
         /// SwiftUI View for the top of movie details
         var top: some View {
             ZStack(alignment: .bottom) {
-                LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.5), .black.opacity(0.8)]),
-                               startPoint: .top,
-                               endPoint: .bottom)
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [.clear, .black.opacity(0.5), .black.opacity(0.8)]
+                    ),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
                 .frame(height: 210)
-
                 /// Top row
                 VStack {
                     Spacer()
@@ -232,10 +236,16 @@ extension MovieView {
         /// The details of the movie
         var movieDetails: some View {
             VStack(alignment: .leading) {
-                Label("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.duration))", systemImage: "calendar.badge.clock")
+                Label(
+                    "\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.duration))",
+                    systemImage: "calendar.badge.clock"
+                )
                 Label(movie.details, systemImage: "info.circle.fill")
                 if !movie.director.isEmpty {
-                    Label("Directed by \(movie.director.joined(separator: " ∙ "))", systemImage: "list.bullet.clipboard.fill")
+                    Label(
+                        "Directed by \(movie.director.joined(separator: " ∙ "))",
+                        systemImage: "list.bullet.clipboard.fill"
+                    )
                 }
                 if !cast.isEmpty {
                     Label(cast, systemImage: "person.fill")

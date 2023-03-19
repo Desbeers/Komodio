@@ -96,9 +96,9 @@ struct TVShowsView: View {
             PartsView.DetailHeader(title: Router.tvshows.label.title)
             LazyVGrid(columns: grid, spacing: 0) {
                 ForEach(tvshows) { tvshow in
-                    NavigationLink(value: tvshow, label: {
+                    NavigationLink(value: tvshow) {
                         TVShowView.Item(tvshow: tvshow)
-                    })
+                    }
                     .padding(.bottom, 40)
                 }
             }
@@ -106,6 +106,5 @@ struct TVShowsView: View {
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
 #endif
-
     }
 }

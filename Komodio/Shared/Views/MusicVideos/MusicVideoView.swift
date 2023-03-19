@@ -38,7 +38,6 @@ extension MusicVideoView {
                 Text(item.media == .musicVideo ? item.item.title : item.item.details)
                     .font(.headline)
 #endif
-
             }
         }
     }

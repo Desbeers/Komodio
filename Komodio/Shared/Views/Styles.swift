@@ -35,7 +35,6 @@ extension Styles {
                 .scaleEffect(configuration.isPressed ? 1.2 : 1)
                 .animation(.default, value: configuration.isPressed)
 #endif
-
         }
     }
 }
@@ -81,7 +80,6 @@ extension Styles {
             .opacity(focused ? 1 : 0.6)
             .frame(height: 100)
 #endif
-
         }
     }
 
@@ -109,7 +107,6 @@ extension Styles {
             .font(.caption)
             .padding(.bottom)
 #endif
-
         }
     }
 

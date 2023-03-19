@@ -67,6 +67,9 @@ extension Parts {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute]
         formatter.unitsStyle = style
-        return formatter.string(from: TimeInterval(Double(seconds)))!
+        if let string = formatter.string(from: TimeInterval(Double(seconds))) {
+            return string
+        }
+        return ""
     }
 }

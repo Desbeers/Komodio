@@ -20,7 +20,7 @@ enum TVShowView {
     /// - Parameter tvshow: The TV show to update
     /// - Returns: If update is found, the updated Movie, else `nil`
     static private func updateTVshow(tvshow: Video.Details.TVShow) -> Video.Details.TVShow? {
-        if let update = KodiConnector.shared.library.tvshows.first(where: {$0.id == tvshow.id}), update != tvshow {
+        if let update = KodiConnector.shared.library.tvshows.first(where: { $0.id == tvshow.id }), update != tvshow {
             return update
         }
         return nil
@@ -58,7 +58,6 @@ extension TVShowView {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
 #endif
-
             }
         }
     }
@@ -136,7 +135,10 @@ extension TVShowView {
         var tvshowDetails: some View {
             VStack(alignment: .leading) {
                 Label(info, systemImage: "info.circle.fill")
-                Label("\(tvshow.season) \(tvshow.season == 1 ? " season" : "seasons"), \(tvshow.episode) episodes", systemImage: "display")
+                Label(
+                    "\(tvshow.season) \(tvshow.season == 1 ? " season" : "seasons"), \(tvshow.episode) episodes",
+                    systemImage: "display"
+                )
                 Label(watchedLabel, systemImage: "eye")
             }
             .labelStyle(.detailLabel)

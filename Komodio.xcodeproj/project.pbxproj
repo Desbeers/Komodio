@@ -502,7 +502,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		D72DE7B72955F29600DD0FFB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -520,7 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

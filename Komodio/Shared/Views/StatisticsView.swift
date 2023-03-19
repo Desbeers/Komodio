@@ -19,7 +19,8 @@ struct StatisticsView: View {
             if !kodi.library.movies.isEmpty {
                 Label("\(kodi.library.movies.count) Movies", systemImage: Router.movies.label.icon)
                     .labelStyle(StatisticsLabel())
-                let unwatched = kodi.library.movies.filter({$0.playcount == 0})
+                let unwatched = kodi.library.movies
+                    .filter { $0.playcount == 0 }
                 if !unwatched.isEmpty {
                     Label("\(unwatched.count) Unwatched Movies", systemImage: "eye")
                         .labelStyle(StatisticsLabel(subItem: true))
@@ -28,7 +29,8 @@ struct StatisticsView: View {
             if !kodi.library.tvshows.isEmpty {
                 Label("\(kodi.library.tvshows.count) TV shows", systemImage: Router.tvshows.label.icon)
                     .labelStyle(StatisticsLabel())
-                let unwatched = kodi.library.episodes.filter({$0.playcount == 0})
+                let unwatched = kodi.library.episodes
+                    .filter { $0.playcount == 0 }
                 if !unwatched.isEmpty {
                     Label("\(unwatched.count) Unwatched Episodes", systemImage: "eye")
                         .labelStyle(StatisticsLabel(subItem: true))
@@ -74,7 +76,6 @@ extension StatisticsView {
             .padding(.vertical, subItem ? 10 : 0)
             .padding(.leading, subItem ? 30 : 0)
 #endif
-
         }
     }
 }

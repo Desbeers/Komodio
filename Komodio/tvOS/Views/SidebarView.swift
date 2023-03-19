@@ -70,7 +70,6 @@ struct SidebarView: View {
                 sidebarItem(item: sidebarItems[2])
                 sidebarItem(item: sidebarItems[3])
                 sidebarItem(item: sidebarItems[4])
-
             }
             Section("TV shows") {
                 sidebarItem(item: sidebarItems[5])
@@ -97,7 +96,8 @@ struct SidebarView: View {
             },
             onDown: {
                 if isFocused {
-                    sidebarSelection = sidebarItems.count - 1 == sidebarSelection ? sidebarSelection : sidebarSelection + 1
+                    sidebarSelection = sidebarItems.count - 1 == sidebarSelection ?
+                    sidebarSelection : sidebarSelection + 1
                     /// Play the navigation sound
                     Parts.playNavigationSound()
                 }
@@ -109,11 +109,6 @@ struct SidebarView: View {
                 sidebarSelection = 0
             }
         }
-//        .task(id: scene.toggleSidebar) {
-//            if kodi.status != .loadedLibrary {
-//                isFocused = true
-//            }
-//        }
         .onChange(of: scene.toggleSidebar) { _ in
             isFocused = true
         }

@@ -24,8 +24,12 @@ class SiriRemoteController: ObservableObject {
     }
     /// Deinit the controller
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.GCControllerDidConnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.GCControllerDidDisconnect, object: nil)
+        NotificationCenter
+            .default
+            .removeObserver(self, name: NSNotification.Name.GCControllerDidConnect, object: nil)
+        NotificationCenter
+            .default
+            .removeObserver(self, name: NSNotification.Name.GCControllerDidDisconnect, object: nil)
     }
     /// Get the controllers
     func getControllers() {
@@ -39,20 +43,21 @@ class SiriRemoteController: ObservableObject {
     func attachControllers() {
         registerForGameControllerNotifications()
         /// Basic call to get game controllers
-        GCController.startWirelessControllerDiscovery(completionHandler: {})
-
+        GCController.startWirelessControllerDiscovery()
     }
     /// Setup notification when Controller is found
     func registerForGameControllerNotifications() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleControllerDidConnectNotification(notification: )),
-            name: NSNotification.Name.GCControllerDidConnect, object: nil
+            name: NSNotification.Name.GCControllerDidConnect,
+            object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleControllerDidDisconnectNotification(notification: )),
-            name: NSNotification.Name.GCControllerDidDisconnect, object: nil
+            name: NSNotification.Name.GCControllerDidDisconnect,
+            object: nil
         )
     }
     /// Notification when Controller is connected
@@ -131,8 +136,8 @@ extension Modifiers {
                         let currentHandler = microGamepad.dpad.valueChangedHandler
                         microGamepad.dpad.valueChangedHandler = { pad, x, y in
                             /// if there is already a hendler set - execute it as well
-                            if currentHandler != nil {
-                                currentHandler!(pad, x, y)
+                            if let currentHandler {
+                                currentHandler(pad, x, y)
                             }
                             /// check how much time passed since the last interaction on the siri remote,
                             /// If enough time has passed - reset counters and consider these coming values as a new gesture values
@@ -156,8 +161,10 @@ extension Modifiers {
                             if isNewSwipe {
                                 if totalYSwipeDistance > swipeDistance && totalYSwipeDistance > 0 {
                                     /// Swipe up detected
-                                    isNewSwipe = false // lock so next values will be disregarded until a few milliseconds of 'remote silence' achieved
-                                    onUp() // execute the appropriate closure for this detected swipe
+                                    /// Lock so next values will be disregarded until a few milliseconds of 'remote silence' achieved
+                                    isNewSwipe = false
+                                    /// Execute the appropriate closure for this detected swipe
+                                    onUp()
                                 } else if totalYSwipeDistance < -swipeDistance && totalYSwipeDistance < 0 {
                                     /// Swipe down detected
                                     isNewSwipe = false

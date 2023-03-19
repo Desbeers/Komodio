@@ -77,27 +77,31 @@ struct MusicVideosView: View {
     private func getItems() {
         if artist.media == .artist {
             var result: [MediaItem] = []
-            let allMusicVideosFromArtist = kodi.library.musicVideos.filter({$0.artist.contains(artist.artist)})
+            let allMusicVideosFromArtist = kodi.library.musicVideos
+                .filter { $0.artist.contains(artist.artist) }
             for video in allMusicVideosFromArtist.uniqueAlbum() {
-                let albumMusicVideos = allMusicVideosFromArtist.filter({$0.album == video.album})
+                let albumMusicVideos = allMusicVideosFromArtist
+                    .filter { $0.album == video.album }
                 let count = albumMusicVideos.count
                 var item = video
                 /// Set the watched state for an album
-                if count != 1, !albumMusicVideos.filter({$0.playcount == 0}).isEmpty {
+                if count != 1, !albumMusicVideos.filter({ $0.playcount == 0 }).isEmpty {
                     item.playcount = 0
                     item.resume.position = 0
                 }
-
-                result.append(MediaItem(id: count == 1 ? video.id : video.album,
-                                        media: count == 1 ? .musicVideo : .album,
-                                        item: item
-                                       )
-                )
+                result
+                    .append(
+                        MediaItem(
+                            id: count == 1 ? video.id : video.album,
+                            media: count == 1 ? .musicVideo : .album,
+                            item: item
+                        )
+                    )
             }
             items = result
             /// Update the optional selected item
             if let selectedItem {
-                self.selectedItem = items.first(where: {$0.id == selectedItem.id})
+                self.selectedItem = items.first { $0.id == selectedItem.id }
             } else {
                 scene.details = .artist(artist: artist)
             }
@@ -116,7 +120,8 @@ struct MusicVideosView: View {
                 scene.details = Router.musicVideo(musicVideo: musicVideo)
             case.album:
                 /// Get all Music Videos from the specific artist and album
-                let musicVideos = kodi.library.musicVideos.filter({$0.artist.contains(musicVideo.artist) && $0.album == musicVideo.album})
+                let musicVideos = kodi.library.musicVideos
+                    .filter { $0.artist.contains(musicVideo.artist) && $0.album == musicVideo.album }
                 scene.details = Router.album(musicVideos: musicVideos)
             default:
                 break

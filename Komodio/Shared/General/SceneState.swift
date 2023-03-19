@@ -15,7 +15,7 @@ class SceneState: ObservableObject {
 
 #if os(macOS)
     /// The current search query
-   var query: String = ""
+    var query: String = ""
 #endif
 
     // MARK: tvOS stuff
@@ -102,7 +102,7 @@ extension SceneState {
     /// Get the `List Sort` settings for a View
     /// - Parameter sortID: The ID of the sorting
     static func getListSortSettings(sortID: String) -> SwiftlyKodiAPI.List.Sort {
-        if let sorting = SceneState.shared.listSortSettings.first(where: {$0.id == sortID}) {
+        if let sorting = SceneState.shared.listSortSettings.first(where: { $0.id == sortID }) {
             return sorting
         }
         return SwiftlyKodiAPI.List.Sort(id: sortID)

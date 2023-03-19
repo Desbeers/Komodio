@@ -22,6 +22,7 @@ struct MainView: View {
     /// The body of the View
     var body: some View {
         NavigationStack(path: $scene.navigationStackPath) {
+            // swiftlint:disable:next trailing_closure
             ContentView()
             /// Set the destinations for sub-views in the stack
                 .navigationDestination(for: Video.Details.Movie.self, destination: { movie in
@@ -57,7 +58,10 @@ struct MainView: View {
         .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {
             SidebarView()
                 .fixedSize()
-                .frame(width: isFocused ? KomodioApp.sidebarWidth : KomodioApp.sidebarCollapsedWidth, alignment: .center)
+                .frame(
+                    width: isFocused ? KomodioApp.sidebarWidth : KomodioApp.sidebarCollapsedWidth,
+                    alignment: .center
+                )
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.trailing)
                 .opacity(isFocused ? 1 : 0.2)

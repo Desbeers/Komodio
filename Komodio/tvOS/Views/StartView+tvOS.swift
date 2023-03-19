@@ -81,7 +81,9 @@ extension StartView {
                                         .frame(width: 200, alignment: .leading)
                                     }, icon: {
                                         Image(systemName: "globe")
-                                            .foregroundColor(host.isOnline ? host.isSelected ? .green : Color("AccentColor") : .red)
+                                            .foregroundColor(
+                                                host.isOnline ? host.isSelected ? .green : Color("AccentColor") : .red
+                                            )
                                     })
                                 })
                                 if host.isSelected {
@@ -110,12 +112,12 @@ extension StartView {
                 .padding(20)
                 .background(.thinMaterial)
                 .cornerRadius(20)
-                if !kodi.bonjourHosts.filter({$0.new}).isEmpty {
+                if !kodi.bonjourHosts.filter { $0.new }.isEmpty {
                     Text("New Kodi's")
                         .foregroundColor(.secondary)
                         .font(.headline)
                     VStack {
-                        ForEach(kodi.bonjourHosts.filter({$0.new}), id: \.ip) { host in
+                        ForEach(kodi.bonjourHosts.filter { $0.new }, id: \.ip) { host in
                             Button(action: {
                                 selectedHost = HostItem(ip: host.ip, media: .video, player: .stream, status: .new)
                             }, label: {

@@ -67,7 +67,7 @@ struct SeasonsView: View {
         ///         and there might be more seasons
         if !seasons.isEmpty {
             TabView(selection: $selectedTab) {
-                    TVShowView.Details(tvshow: tvshow)
+                TVShowView.Details(tvshow: tvshow)
                     .focusSection()
                     .tag(-1)
                 /// It looks like `TabView` is ignoring the custom safe areas
@@ -86,8 +86,11 @@ struct SeasonsView: View {
                         }
                         /// It looks like `TabView` is ignoring the custom safe areas
                         .padding(.leading, KomodioApp.sidebarCollapsedWidth / 1.2)
-                        SeasonView(tvshow: tvshow, episodes: episodes.filter({$0.season == season.season }))
-                            .focusSection()
+                        SeasonView(
+                            tvshow: tvshow,
+                            episodes: episodes.filter { $0.season == season.season }
+                        )
+                        .focusSection()
                     }
                     .tag(season.season)
                 }
@@ -95,7 +98,6 @@ struct SeasonsView: View {
             .tabViewStyle(.page)
         }
 #endif
-
     }
 
     // MARK: Private functions
@@ -105,12 +107,14 @@ struct SeasonsView: View {
         if tvshow.media == .tvshow {
             scene.details = .tvshow(tvshow: tvshow)
             episodes = kodi.library.episodes
-                .filter({$0.tvshowID == tvshow.tvshowID})
+                .filter { $0.tvshowID == tvshow.tvshowID }
             /// Filter the episodes to get the seasons
             var seasons = episodes.unique { $0.season }
             /// Find the playcount of the season
             for index in seasons.indices {
-                let unwatched = episodes.filter({$0.season == seasons[index].season && $0.playcount == 0}).count
+                let unwatched = episodes
+                    .filter { $0.season == seasons[index].season && $0.playcount == 0 }
+                    .count
                 seasons[index].playcount = unwatched == 0 ? 1 : 0
                 seasons[index].resume.position = 0
             }
@@ -124,7 +128,8 @@ struct SeasonsView: View {
     /// Set the details of a selected season
     private func setSeasonDetails() {
         if let selectedSeason {
-            let episodes = self.episodes.filter({$0.season == selectedSeason })
+            let episodes = self.episodes
+                .filter { $0.season == selectedSeason }
             scene.details = .season(tvshow: tvshow, episodes: episodes)
         }
     }

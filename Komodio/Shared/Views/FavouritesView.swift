@@ -104,7 +104,6 @@ struct FavouritesView: View {
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
 #endif
-
     }
 
     // MARK: Private functions
@@ -114,15 +113,15 @@ struct FavouritesView: View {
         if let selectedItem {
             switch selectedItem.media {
             case .movie:
-                if let movie = kodi.library.movies.first(where: {$0.id == selectedItem.id}) {
+                if let movie = kodi.library.movies.first(where: { $0.id == selectedItem.id }) {
                     scene.details = .movie(movie: movie)
                 }
             case .episode:
-                if let episode = kodi.library.episodes.first(where: {$0.id == selectedItem.id}) {
+                if let episode = kodi.library.episodes.first(where: { $0.id == selectedItem.id }) {
                     scene.details = .episode(episode: episode)
                 }
             case .musicVideo:
-                if let musicVideo = kodi.library.musicVideos.first(where: {$0.id == selectedItem.id}) {
+                if let musicVideo = kodi.library.musicVideos.first(where: { $0.id == selectedItem.id }) {
                     scene.details = .musicVideo(musicVideo: musicVideo)
                 }
             default:

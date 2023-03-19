@@ -68,7 +68,10 @@ extension Buttons {
                 }
             }, label: {
                 Label(title: {
-                    Text(item.playcount == 0 ? "Mark \(item.media.description) as watched" : "Mark  \(item.media.description) as new")
+                    Text(
+                        item.playcount == 0 ?
+                        "Mark \(item.media.description) as watched" : "Mark  \(item.media.description) as new"
+                    )
                 }, icon: {
                     Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
                 })

@@ -59,7 +59,7 @@ extension Pickers {
                 .pickerStyle(.segmented)
             }
             .onChange(of: sorting) { item in
-                if let index = scene.listSortSettings.firstIndex(where: {$0.id == sorting.id}) {
+                if let index = scene.listSortSettings.firstIndex(where: { $0.id == sorting.id }) {
                     scene.listSortSettings[index] = item
                 } else {
                     scene.listSortSettings.append(item)
@@ -191,7 +191,6 @@ extension Pickers {
                 }, icon: {
                     Image(systemName: "star.circle.fill")
                 })
-
             })
             .sheet(isPresented: $showSheet) {
                 VStack {

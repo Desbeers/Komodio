@@ -73,9 +73,9 @@ struct MovieSetView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(movies.sorted(sortItem: sorting)) { movie in
-                            NavigationLink(value: movie, label: {
+                            NavigationLink(value: movie) {
                                 MovieView.Item(movie: movie, sorting: sorting)
-                            })
+                            }
                             .focused($focussedMovie, equals: movie)
                         }
                     }
@@ -99,7 +99,6 @@ struct MovieSetView: View {
         .animation(.default, value: focussedMovie)
         .buttonStyle(.card)
 #endif
-
     }
 
     // MARK: Private functions
@@ -112,15 +111,15 @@ struct MovieSetView: View {
             /// Set the ID of the sorting
             self.sorting.id = movieSet.id
             /// Check if the setting is not the default
-            if let sorting = scene.listSortSettings.first(where: {$0.id == self.sorting.id}) {
+            if let sorting = scene.listSortSettings.first(where: { $0.id == self.sorting.id }) {
                 self.sorting = sorting
             }
             /// Get all the movies from the set
             movies = kodi.library.movies
-                .filter({$0.setID == movieSet.setID})
-                .filter({scene.movieItems.contains($0.movieID)})
+                .filter { $0.setID == movieSet.setID }
+                .filter { scene.movieItems.contains($0.movieID) }
             /// Update the optional selected movie
-            if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
+            if let selectedMovie, let movie = movies.first(where: { $0.id == selectedMovie.id }) {
                 self.selectedMovie = movie
             }
             scene.navigationSubtitle = movieSet.title
@@ -132,14 +131,20 @@ struct MovieSetView: View {
 
     /// Set the details of a selected movie set
     private func setMovieSetDetails() {
-        if movieSet.media == .movieSet, selectedMovie == nil, let movieSet = kodi.library.movieSets.first(where: {$0.id == movieSet.id}) {
+        // swiftlint:disable opening_brace
+        if
+            movieSet.media == .movieSet,
+            selectedMovie == nil,
+            let movieSet = kodi.library.movieSets.first(where: { $0.id == movieSet.id })
+        {
             scene.details = .movieSet(movieSet: movieSet)
         }
+        // swiftlint:enable opening_brace
     }
 
     /// Set the details of a selected movie
     private func setMovieDetails() {
-        if let selectedMovie, let movie = movies.first(where: ({$0.id == selectedMovie.id})) {
+        if let selectedMovie, let movie = movies.first(where: { $0.id == selectedMovie.id }) {
             scene.details = .movie(movie: movie)
         }
     }
@@ -168,7 +173,6 @@ extension MovieSetView {
                     Text("Movie Set")
                 }
 #endif
-
             }
         }
     }
@@ -230,7 +234,6 @@ extension MovieSetView {
                 .frame(maxWidth: .infinity)
                 .focusSection()
 #endif
-
             }
             .background(item: movieSet)
             .animation(.default, value: movieSet)

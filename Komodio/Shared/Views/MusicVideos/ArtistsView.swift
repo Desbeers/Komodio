@@ -116,7 +116,8 @@ struct ArtistsView: View {
     /// Movies that are part of a set will be removed and replaced with the set
     private func getItems() {
         var artistList: [Audio.Details.Artist] = []
-        let allArtists = kodi.library.musicVideos.unique(by: {$0.artist}).flatMap({$0.artist})
+        let allArtists = kodi.library.musicVideos
+            .unique { $0.artist }.flatMap { $0.artist }
         for artist in allArtists {
             artistList.append(artistItem(artist: artist))
         }
@@ -138,7 +139,7 @@ struct ArtistsView: View {
     /// - Parameter artist: Name of the artist
     /// - Returns: A `KodiItem`
     func artistItem(artist: String) -> Audio.Details.Artist {
-        if let artistDetails = KodiConnector.shared.library.artists.first(where: {$0.artist == artist}) {
+        if let artistDetails = KodiConnector.shared.library.artists.first(where: { $0.artist == artist }) {
             return artistDetails
         }
         /// Return an uknown artist

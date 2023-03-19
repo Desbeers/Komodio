@@ -31,10 +31,10 @@ struct SearchView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(movies) { item in
-                                NavigationLink(value: item, label: {
+                                NavigationLink(value: item) {
                                     KodiArt.Poster(item: item)
                                         .frame(width: 150, height: 225)
-                                })
+                                }
                                 .padding(40)
                             }
                         }
@@ -50,10 +50,10 @@ struct SearchView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(tvshows) { item in
-                                NavigationLink(value: item, label: {
+                                NavigationLink(value: item) {
                                     KodiArt.Poster(item: item)
                                         .frame(width: 150, height: 225)
-                                })
+                                }
                                 .padding(40)
                             }
                         }

@@ -86,6 +86,7 @@ extension PartsView {
         @State var end = UnitPoint(x: 4, y: 0)
         /// Set a timer
         let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+        // swiftlint:disable discouraged_object_literal
         /// The colors for the gradient
         let colors = [
             Color(#colorLiteral(red: 0.337254902, green: 0.1137254902, blue: 0.7490196078, alpha: 1)),
@@ -94,18 +95,24 @@ extension PartsView {
             Color(#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)),
             Color(#colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1))
         ]
+        // swiftlint:enable discouraged_object_literal
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
-            LinearGradient(gradient: Gradient(colors: colors), startPoint: start, endPoint: end)
-                .animation(Animation.easeInOut(duration: 8).repeatForever(autoreverses: true), value: start)
-                .onReceive(timer, perform: { _ in
-                    self.start = UnitPoint(x: 4, y: 0)
-                    self.end = UnitPoint(x: 0, y: 2)
-                })
-                .blendMode(.color)
+            // swiftlint:disable:next trailing_closure
+            LinearGradient(
+                gradient: Gradient(colors: colors),
+                startPoint: start,
+                endPoint: end
+            )
+            .animation(Animation.easeInOut(duration: 8).repeatForever(autoreverses: true), value: start)
+            .onReceive(timer, perform: { _ in
+                self.start = UnitPoint(x: 4, y: 0)
+                self.end = UnitPoint(x: 0, y: 2)
+            })
+            .blendMode(.color)
         }
     }
 }
@@ -143,7 +150,10 @@ extension PartsView {
                     alignment: .center
                 )
             }
-            .animation(rotateModel.rotating ? rotateModel.foreverAnimation : .linear(duration: 0), value: rotateModel.rotating)
+            .animation(
+                rotateModel.rotating ? rotateModel.foreverAnimation : .linear(duration: 0),
+                value: rotateModel.rotating
+            )
             .task(id: rotate) {
                 switch rotate {
                 case true:
@@ -194,7 +204,6 @@ extension PartsView {
 #if os(tvOS)
                     .buttonStyle(.plain)
 #endif
-
                 }
             }
             .sheet(isPresented: $showFullText) {
@@ -219,7 +228,6 @@ extension PartsView {
                     }
                     .frame(width: 600)
 #endif
-
             }
         }
     }
@@ -267,9 +275,10 @@ extension PartsView {
         var body: some View {
             switch sorting.method {
             case .dateAdded:
-                Label(item.swiftDateFromKodiDate(item.dateAdded)
-                    .formatted(date: KomodioApp.platform == .macOS ? .long : .abbreviated, time: .omitted),
-                      systemImage: "plus.square"
+                Label(
+                    item.swiftDateFromKodiDate(item.dateAdded)
+                        .formatted(date: KomodioApp.platform == .macOS ? .long : .abbreviated, time: .omitted),
+                    systemImage: "plus.square"
                 )
             case .rating:
                 PartsView.ratingToStars(rating: Int(item.rating.rounded()))
