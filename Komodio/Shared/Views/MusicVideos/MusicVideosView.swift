@@ -31,14 +31,22 @@ struct MusicVideosView: View {
 
     /// The body of the View
     var body: some View {
-        VStack {
-            switch state {
-            case .ready:
-                content
-            default:
-                PartsView.StatusMessage(item: .playlists, status: state)
-                    .focusable()
+        Group {
+#if os(macOS)
+            content
+#endif
+            
+#if os(tvOS)
+            VStack {
+                switch state {
+                case .ready:
+                    content
+                default:
+                    PartsView.StatusMessage(item: .playlists, status: state)
+                        .focusable()
+                }
             }
+#endif
         }
         .task(id: artist) {
             opacity = 1
@@ -151,6 +159,7 @@ struct MusicVideosView: View {
     /// Set the details of a selected item
     private func setItemDetails() {
         if let selectedItem, let musicVideo = selectedItem.item as? Video.Details.MusicVideo {
+            scene.selectedKodiItem = selectedItem.item
             switch selectedItem.media {
             case .musicVideo:
                 scene.details = Router.musicVideo(musicVideo: musicVideo)
