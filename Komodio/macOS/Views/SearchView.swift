@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Search View
+
 /// SwiftUI View for search results (macOS)
 struct SearchView: View {
     /// The KodiConnector model
@@ -26,6 +28,8 @@ struct SearchView: View {
     var results: Bool {
         return !movies.isEmpty || !musicVideos.isEmpty || !tvshows.isEmpty
     }
+    /// The opacity of the View
+    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -63,16 +67,17 @@ struct SearchView: View {
                     .font(.title)
                     .padding()
                     ForEach(tvshows) { tvshow in
-                        Button(action: {
-                            scene.contentSelection = Router.seasons(tvhow: tvshow)
-                        }, label: {
+                        NavigationLink(value: tvshow) {
                             TVShowView.Item(tvshow: tvshow)
-                        })
+                        }
+                        .buttonStyle(.listButton(selected: false))
                     }
             }
         }
+        .navigationStackAnimation(opacity: $opacity)
         .buttonStyle(.plain)
         .task(id: scene.query) {
+            opacity = 1
             scene.details = .search
             if scene.query.isEmpty {
                 movies = []

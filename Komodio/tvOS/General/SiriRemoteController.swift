@@ -10,6 +10,8 @@
 import SwiftUI
 import GameController
 
+// MARK: Siri Remote Controller
+
 /// Class to observe the Siri remote (tvOS)
 class SiriRemoteController: ObservableObject {
     /// The shared instance of the class

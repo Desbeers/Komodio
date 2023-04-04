@@ -8,48 +8,56 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Season View
+
 /// SwiftUI View for one Season of a TV show (shared)
 struct SeasonView: View {
     /// The TV show
     let tvshow: Video.Details.TVShow
     /// The Episodes to show
     let episodes: [Video.Details.Episode]
+    /// The opacity of the View
+    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
     /// The body of this View
     var body: some View {
+#if os(macOS)
+        ScrollView {
+            ScrollViewReader { proxy in
+                PartsView.DetailHeader(
+                    title: episodes.first?.season == 0 ? "Specials" : "Season \(episodes.first?.season ?? 1)"
+                )
+                .id(0)
+                LazyVStack {
+                    ForEach(episodes) { episode in
+                        EpisodeView.Item(episode: episode)
+                            .padding(.horizontal, 20)
+                    }
+                }
+                .opacity(opacity)
+                .task(id: episodes) {
+                    withAnimation(.linear(duration: 1)) {
+                        proxy.scrollTo(0, anchor: .top)
+                    }
+                    do {
+                        opacity = 0
+                        try await Task.sleep(until: .now + .seconds(0.5), clock: .continuous)
+                        opacity = 1
+                    } catch {}
+                }
+            }
+        }
+        .animation(.default, value: opacity)
+#endif
+
+#if os(tvOS)
         List {
             ForEach(episodes) { episode in
                 EpisodeView.Item(episode: episode)
             }
         }
-        .id(episodes)
-    }
-}
-
-extension SeasonView {
-
-    // MARK: Season item
-
-    /// SwiftUI View for a season item
-    struct Item: View {
-        /// The Season
-        let season: Video.Details.Episode
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            HStack(spacing: 0) {
-                KodiArt.Poster(item: season)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 100)
-                    .padding(.trailing)
-                Text(season.season == 0 ? "Specials" : "Season \(season.season)")
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .watchStatus(of: season)
-        }
+#endif
     }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Main View
+
 /// SwiftUI View for the main navigation (macOS)
 struct MainView: View {
     /// The KodiConnector model
@@ -17,48 +19,53 @@ struct MainView: View {
     /// The search field in the toolbar
     @State private var searchField: String = ""
     /// Set the column visibility
-    @State private var columnVisibility = NavigationSplitViewVisibility.automatic
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
 
     // MARK: Body of the View
 
     /// The body of the View
     var body: some View {
-        NavigationSplitView(
-            columnVisibility: $columnVisibility,
-            sidebar: {
-                SidebarView(searchField: $searchField)
-            },
-            content: {
-                ContentView()
-                    .navigationSplitViewColumnWidth(ContentView.columnWidth)
-                    .frame(maxHeight: .infinity, alignment: .top)
-            },
-            detail: {
-                DetailView()
-            })
+        HStack {
+            NavigationSplitView(
+                columnVisibility: $columnVisibility,
+                sidebar: {
+                    SidebarView(searchField: $searchField)
+                        .navigationSplitViewColumnWidth(200)
+                },
+                detail: {
+                    ContentView()
+                        .navigationSplitViewColumnWidth(ContentView.columnWidth)
+                })
+            .background(Color.primary.opacity(0.1))
+            DetailView()
+        }
         .background(
             ZStack {
-                Color(nsColor: .controlBackgroundColor)
-                Image("Background")
-                    .resizable()
-                    .scaledToFill()
-                    .opacity(0.3)
-                    .overlay {
-                        PartsView.GradientOverlay()
-                    }
+                Color("BlendColor")
+                if let item = scene.selectedKodiItem, !item.fanart.isEmpty {
+                    KodiArt.Fanart(item: item)
+                        .grayscale(1)
+                        .opacity(0.1)
+                        .scaledToFill()
+                        .transition(.opacity)
+                } else {
+                    Image("Background")
+                        .resizable()
+                        .opacity(0.1)
+                        .scaledToFill()
+                        .transition(.opacity)
+                }
             }
+                .animation(.default, value: scene.selectedKodiItem?.id)
         )
         .task(id: kodi.status) {
             if kodi.status != .loadedLibrary {
                 scene.sidebarSelection = .start
             }
         }
-        /// The list style is the same in every View so set it here
-        /// - Note: Not for the ``SidebarView`` but it will override it
-        .listStyle(.inset(alternatesRowBackgrounds: true))
+        .scrollContentBackground(.hidden)
         .navigationSubtitle(scene.navigationSubtitle)
         .animation(.default, value: scene.sidebarSelection)
-        .animation(.default, value: scene.contentSelection)
         .searchable(text: $searchField, prompt: "Search library")
         .task(id: searchField) {
             await scene.updateSearch(query: searchField)

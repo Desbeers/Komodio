@@ -8,10 +8,9 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Host Item View
+
 /// SwiftUI View for settings to connect to a Kodi host (shared)
-///
-/// - On macOS, in the ``ContentView``; selected from the ``SidebarView``
-/// - On tvOS, on a 'full screen' View, selected from the ``StartView``
 struct HostItemView: View {
     /// The `HostItem` to edit
     let host: HostItem
@@ -31,16 +30,29 @@ struct HostItemView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.ultraThinMaterial)
 
 #if os(macOS)
         /// Goto 'start' when a host is updated
         .onChange(of: kodi.configuredHosts) { _ in
             scene.sidebarSelection = .start
         }
+        .task {
+            scene.navigationSubtitle = host.name
+        }
+        .toolbar {
+            /// Show a 'back' button
+            ToolbarItem(placement: .navigation) {
+                Button(action: {
+                    scene.sidebarSelection = .start
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                })
+            }
+        }
 #endif
 
 #if os(tvOS)
+        .background(.ultraThinMaterial)
         /// Close the view when the host is updated
         .onChange(of: kodi.host) { _ in
             presentationMode.wrappedValue.dismiss()
@@ -57,7 +69,7 @@ struct HostItemView: View {
 
 extension HostItemView {
 
-    // MARK: Kodi settings to connect to Komodio
+    // MARK: Host Item Kodi Settings
 
     /// SwiftUI View for Kodi settings to connect to Komodio
     struct KodiSettings: View {

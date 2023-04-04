@@ -5,7 +5,7 @@
 //  © 2023 Nick Berendsen
 //
 
-import Foundation
+import SwiftUI
 import SwiftlyKodiAPI
 
 /// Router for Komodio navigation (shared)
@@ -22,7 +22,7 @@ enum Router: Hashable {
     /// All unwatched movies
     case unwatchedMovies
     /// Movies Playlist
-    case moviesPlaylist(file: List.Item.File)
+    case moviesPlaylist(file: SwiftlyKodiAPI.List.Item.File)
 
     // MARK: TV shows
 
@@ -134,7 +134,7 @@ extension Router {
         case .search:
             return Item(
                 title: "Search",
-                description: "Search Results",
+                description: "Search your library",
                 icon: "magnifyingglass"
             )
         case .movies:
@@ -215,6 +215,24 @@ extension Router {
                 description: "Details of an item",
                 icon: "square.dashed"
             )
+        }
+    }
+
+    /// The color of the ``Router item``
+    var color: Color {
+        switch self {
+        case .favourites:
+            return Color("DarkRed")
+        case .movies, .unwatchedMovies:
+            return .teal
+        case .tvshows, .unwachedEpisodes:
+            return .indigo
+        case .playlists, .moviesPlaylist:
+            return .purple
+        case .musicVideos:
+            return .cyan
+        default:
+            return KomodioApp.platform == .macOS ? .accentColor : .orange
         }
     }
 

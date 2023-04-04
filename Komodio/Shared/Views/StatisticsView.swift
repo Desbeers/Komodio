@@ -8,12 +8,18 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Statistics View
+
 /// SwiftUI View for library statistics (shared)
 struct StatisticsView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
+
+    // MARK: Body of the View
+
+    /// The body of the View
     var body: some View {
         VStack(alignment: .leading) {
             if !kodi.library.movies.isEmpty {
@@ -46,6 +52,8 @@ struct StatisticsView: View {
 
 extension StatisticsView {
 
+    // MARK: Statistics Label
+
     /// Label style for statistics
     private struct StatisticsLabel: LabelStyle {
         /// Bool if the label is a 'subitem'
@@ -55,19 +63,20 @@ extension StatisticsView {
 #if os(macOS)
             HStack {
                 configuration.icon
-                    .foregroundColor(subItem ? .gray : .accentColor)
-                    .frame(width: 40)
+                    .foregroundColor(subItem ? .secondary : .primary)
+                    .frame(width: 30)
                 configuration.title
             }
-            .font(.system(size: subItem ? 15 : 20))
-            .padding(.vertical, subItem ? 10 : 20)
+            .font(.system(size: subItem ? 12 : 16))
+            .padding(.top, subItem ? 0 : 10)
             .padding(.leading, subItem ? 20 : 0)
+            .padding(.bottom)
 #endif
 
 #if os(tvOS)
             HStack(spacing: 0) {
                 configuration.icon
-                    .foregroundColor(subItem ? .secondary : Color("AccentColor"))
+                    .foregroundColor(subItem ? .secondary : .primary)
                     .padding(.trailing, 10)
                 configuration.title
                     .foregroundColor(.primary)
@@ -82,6 +91,8 @@ extension StatisticsView {
 
 extension StatisticsView {
 
+    // MARK: Statistics Host Info
+
     /// SwiftUI View with host info
     struct HostInfo: View {
         /// The KodiConnector model
@@ -92,7 +103,10 @@ extension StatisticsView {
         /// The body of the View
         var body: some View {
             VStack {
+                Text(kodi.host.name)
+                    .font(.title)
                 Text("Kodi \(kodi.properties.version.major).\(kodi.properties.version.minor)")
+                    .font(.caption)
             }
         }
     }

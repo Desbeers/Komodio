@@ -8,12 +8,16 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Pickers
+
 /// Collection of SwiftUI Pickers (shared)
 enum Pickers {
     // Just a namespace here
 }
 
 extension Pickers {
+
+    // MARK: List Sort Picker
 
     /// Sort a list: Two pickers to select the method and order
     ///
@@ -70,9 +74,13 @@ extension Pickers {
         }
     }
 
+    // MARK: List Sort Sheet
+
     /// SwiftUI Button to show the ``Pickers/ListSortPicker`` in a Sheet
     /// - Note: Used for tvOS or else the UI will be too cluttered
     struct ListSortSheet: View {
+        /// The color scheme
+        @Environment(\.colorScheme) var colorScheme
         /// The current sorting
         @Binding var sorting: SwiftlyKodiAPI.List.Sort
         /// The kind of media
@@ -83,7 +91,6 @@ extension Pickers {
         // MARK: Body of the View
 
         /// The body of the View
-
         var body: some View {
             Button(action: {
                 showSheet = true
@@ -94,6 +101,7 @@ extension Pickers {
                     Image(systemName: "arrow.up.arrow.down")
                 })
             })
+            .padding(.trailing)
             .sheet(isPresented: $showSheet) {
                 VStack {
                     Text("\(sorting.method.displayLabel) ∙ \(sorting.order.displayLabel(method: sorting.method))")
@@ -109,6 +117,8 @@ extension Pickers {
 
 extension Pickers {
 
+    // MARK: Rating Widget
+
     /// Picker for User Rating of a `KodiItem`
     ///
     /// For `tvOS` it will be Buttons instead of a picker because a Picker applies the selection directly
@@ -119,10 +129,12 @@ extension Pickers {
         @State private var rating: Int = 0
         /// The presentation mode  (tvOS)
         @Environment(\.presentationMode) var presentationMode
+
+        // MARK: Body of the View
+
         /// The body of the View
         var body: some View {
             HStack {
-
 #if os(macOS)
                 Picker(selection: $rating, label: Text("Your rating:")) {
                     Image(systemName: "nosign")
@@ -169,6 +181,8 @@ extension Pickers {
             }
         }
     }
+
+    // MARK: Rating Widget Sheet
 
     /// SwiftUI Button to show the ``Pickers/ListSortPicker`` in a Sheet
     /// - Note: Used for tvOS or else the UI will be too cluttered

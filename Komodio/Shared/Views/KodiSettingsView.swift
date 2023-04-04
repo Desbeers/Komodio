@@ -8,10 +8,16 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Kodi Settings View
+
 /// SwiftUI View for Kodi settings (shared)
 struct KodiSettingsView: View {
     /// The SceneState model
     @EnvironmentObject var scene: SceneState
+
+    // MARK: Body of the View
+
+    /// The body of the View
     var body: some View {
         VStack {
             Text("Kodi Settings")
@@ -28,13 +34,31 @@ struct KodiSettingsView: View {
         .task {
             scene.navigationSubtitle = Router.kodiSettings.label.title
         }
+#if os(macOS)
+        .toolbar {
+            /// Show a 'back' button
+            ToolbarItem(placement: .navigation) {
+                Button(action: {
+                    scene.sidebarSelection = .start
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                })
+            }
+        }
+#endif
     }
 }
 
 extension KodiSettingsView {
 
+    // MARK: Kodi Settings Details
+
     /// SwiftUI View for Kodi settings details
     struct Details: View {
+
+        // MARK: Body of the View
+
+        /// The body of the View
         var body: some View {
             ScrollView {
                 KodiSettingView.setting(for: .servicesDevicename)
@@ -51,6 +75,8 @@ extension KodiSettingsView {
 }
 
 extension KodiSettingsView {
+
+    // MARK: Kodi Settings Warning
 
     /// SwiftUI View for warning of Kodi settings
     struct Warning: View {

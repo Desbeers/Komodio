@@ -25,10 +25,10 @@ class SceneState: ObservableObject {
     @Published var query: String = ""
     /// Bool to show the Kodi Settings View
     @Published var showSettings: Bool = false
-    /// The Navigation path
-    @Published var navigationStackPath = NavigationPath()
-    /// The optional background image
-    @Published var background: (any KodiItem)?
+//    /// The Navigation path
+//    @Published var navigationStackPath = NavigationPath()
+//    /// The optional background image
+//    @Published var background: (any KodiItem)?
     /// Sidebar focus toggle
     @Published var toggleSidebar: Bool = false
 
@@ -37,18 +37,22 @@ class SceneState: ObservableObject {
     // MARK: Shared stuff
     /// The shared instance of this SceneState class
     static let shared = SceneState()
+    /// The Navigation path
+    @Published var navigationStackPath = NavigationPath()
+    /// The optional background image
+    @Published var background: (any KodiItem)?
     /// The settings to sort a list
     var listSortSettings: [SwiftlyKodiAPI.List.Sort] = []
     /// The current selection in the ``SidebarView``
     @Published var sidebarSelection: Router = .start
-    /// The current selection in the ``ContentView``
-    @Published var contentSelection: Router = .start
     /// The subtitle for the navigation
     @Published var navigationSubtitle: String = ""
     /// The details for the current selection in the main view
     @Published var details: Router = .start
     /// Movie ID's passed around Views
     @Published var movieItems: [Int] = []
+    /// The optional current selected KodiItem
+    var selectedKodiItem: (any KodiItem)?
 
     /// Init the ``SceneState``
     private init() {

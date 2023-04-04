@@ -2,8 +2,43 @@
   "colors" : [
     {
       "color" : {
-        "platform" : "tvos",
-        "reference" : "systemBlueColor"
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0x8D",
+          "green" : "0x95",
+          "red" : "0x90"
+        }
+      },
+      "idiom" : "mac"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0x8D",
+          "green" : "0x95",
+          "red" : "0x90"
+        }
+      },
+      "idiom" : "mac"
+    },
+    {
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0x8D",
+          "green" : "0x95",
+          "red" : "0x90"
+        }
       },
       "idiom" : "tv"
     },
@@ -15,8 +50,13 @@
         }
       ],
       "color" : {
-        "platform" : "tvos",
-        "reference" : "systemCyanColor"
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0x8D",
+          "green" : "0x95",
+          "red" : "0x90"
+        }
       },
       "idiom" : "tv"
     }

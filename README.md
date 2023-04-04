@@ -4,7 +4,7 @@
 
 **Komodio** is a video player for tvOS 16 and macOS Ventura that can stream videos from your local Kodi host.
 
-![Komodio](https://github.com/Desbeers/Komodio/raw/main/screenshot.png)
+![Komodio](https://github.com/Desbeers/Komodio/raw/main/screenshot.jpg)
 
 It is a simple player and does not have all the 'bells and whistles' that the *real* Kodi has. Kodi will never be available for tvOS, however, Komodio will let you play your media on it. Good enough for me.
 

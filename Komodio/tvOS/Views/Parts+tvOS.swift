@@ -10,6 +10,8 @@ import AVFoundation
 
 extension Parts {
 
+    // MARK: PlayNavigation Sound
+
     /// Play the navigation sound when navigating the main menu
     static func playNavigationSound() {
         /// I can't find the proper ID of this sound so I use the URL instead...

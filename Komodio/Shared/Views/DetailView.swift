@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Detail View
+
 /// SwiftUI View for details of the selection (shared)
 struct DetailView: View {
     /// The SceneState model
@@ -44,6 +46,7 @@ struct DetailView: View {
             case .musicVideo(let musicVideo):
                 MusicVideoView
                     .Details(musicVideo: musicVideo)
+                    .id(musicVideo.id)
             case .album(let musicVideos):
                 AlbumView(musicVideos: musicVideos)
             case .kodiSettings:
@@ -62,19 +65,25 @@ struct DetailView: View {
     // MARK: Fallback of the View
 
     /// The fallback View
-    private var fallback: some View {
-        VStack {
-            PartsView.DetailHeader(
-                title: scene.sidebarSelection.label.title,
-                subtitle: scene.sidebarSelection.label.description
-            )
+    @ViewBuilder private var fallback: some View {
+#if os(macOS)
+        DetailWrapper(title: scene.sidebarSelection.label.title, subtitle: scene.sidebarSelection.label.description) {
             Image(systemName: scene.sidebarSelection.label.icon)
                 .resizable()
                 .scaledToFit()
-                .padding(40)
+                .padding(80)
                 .foregroundColor(.secondary)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
-        .padding(40)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+#endif
+
+#if os(tvOS)
+        Image(systemName: scene.sidebarSelection.label.icon)
+            .resizable()
+            .scaledToFit()
+            .padding(80)
+            .foregroundColor(.secondary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+#endif
     }
 }

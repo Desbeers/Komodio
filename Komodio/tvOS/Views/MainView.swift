@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Main View
+
 /// SwiftUI View for the main navigation (tvOS)
 struct MainView: View {
     /// The KodiConnector model
@@ -16,6 +18,8 @@ struct MainView: View {
     @EnvironmentObject private var scene: SceneState
     /// Bool if the sidebar has focus
     @FocusState var isFocused: Bool
+    /// The color scheme
+    @Environment(\.colorScheme) var colorScheme
 
     // MARK: Body of the View
 
@@ -27,31 +31,31 @@ struct MainView: View {
             /// Set the destinations for sub-views in the stack
                 .navigationDestination(for: Video.Details.Movie.self, destination: { movie in
                     MovieView.Details(movie: movie)
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
                 .navigationDestination(for: Video.Details.MovieSet.self, destination: { movieSet in
                     MovieSetView(movieSet: movieSet)
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
                 .navigationDestination(for: Video.Details.TVShow.self, destination: { tvshow in
                     SeasonsView(tvshow: tvshow)
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
                 .navigationDestination(for: Video.Details.Episode.self, destination: { episode in
                     UpNextView.Details(episode: episode)
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
                 .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
                     MusicVideosView(artist: artist)
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
                 .navigationDestination(for: Video.Details.MusicVideo.self, destination: { musicVideo in
                     MusicVideoView.Details(musicVideo: musicVideo)
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
                 .navigationDestination(for: List.Item.File.self, destination: { playlist in
                     MoviesView(filter: .playlist(file: playlist))
-                        .setSafeAreas()
+                        .setSiriExit()
                 })
         }
         /// Put the ``SidebarView`` into the `safe area`.
@@ -75,7 +79,6 @@ struct MainView: View {
                 isFocused = true
             }
         }
-        .opacity(scene.showSettings ? 0 : 1)
         .fullScreenCover(isPresented: $scene.showSettings) {
             KodiSettingsView.FullScreen()
         }

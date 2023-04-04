@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Modifiers
+
 /// Collection of SwiftUI View Modifiers (shared)
 enum Modifiers {
     // Just a namespace here...
@@ -46,88 +48,6 @@ extension View {
     }
 }
 
-// MARK: Background Modifier
-
-extension Modifiers {
-
-    /// A `ViewModifier` to set a backgound
-    ///
-    /// On macOS, it will be set as `background` for the `View`
-    /// On tvOS, it will be set to the `SceneState/background`
-    struct Background: ViewModifier {
-        /// The `KodiItem`
-        let item: any KodiItem
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
-        /// The modifier
-        func body(content: Content) -> some View {
-            content
-#if os(macOS)
-                .background(
-                    ZStack {
-                        Color(nsColor: .controlBackgroundColor)
-                        KodiArt.Fanart(item: item)
-                            .scaledToFill()
-                            .opacity(0.2)
-                            .overlay {
-                                PartsView.GradientOverlay()
-                                    .opacity(0.3)
-                            }
-                    }
-                )
-#endif
-#if os(tvOS)
-                .task {
-                    scene.background = item
-                }
-#endif
-        }
-    }
-}
-
-extension View {
-
-    /// Shortcut to the ``Modifiers/Background``
-    func background(item: any KodiItem) -> some View {
-        modifier(Modifiers.Background(item: item))
-    }
-}
-
-// MARK: Details wrapper
-
-extension Modifiers {
-
-    /// A `ViewModifier` to wrap the ``DetailView`` for the specific platfom
-    struct DetailsWrapper: ViewModifier {
-        /// The modifier
-        func body(content: Content) -> some View {
-
-#if os(macOS)
-            /// Wrap the content in a `ScrollView` and give it inside padding
-            ScrollView {
-                content
-                    .padding(40)
-            }
-#endif
-
-#if os(tvOS)
-            /// Just show the content at full height; tvOS does not scroll
-            content
-                .padding(.vertical, 40)
-                .frame(height: UIScreen.main.bounds.height, alignment: .top)
-#endif
-        }
-    }
-}
-
-extension View {
-
-    /// A `ViewModifier` to wrap the ``DetailView`` for the specific platfom
-    func detailsWrapper() -> some View {
-        modifier(Modifiers.DetailsWrapper())
-    }
-}
-
 // MARK: KodiItem details font modifier
 
 extension Modifiers {
@@ -157,7 +77,7 @@ extension View {
 
 extension Modifiers {
 
-    /// A `ViewModifier` to style the fanart of a `MediaItem`
+    /// A `ViewModifier` to style the fanart of a `KodiItem`
     struct FanartStyle: ViewModifier {
         /// The `KodiItem`
         let item: any KodiItem
@@ -179,10 +99,7 @@ extension Modifiers {
                             .background(.regularMaterial)
                     }
                 }
-                .cornerRadius(10)
-#if os(macOS)
-                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
-#endif
+                .cornerRadius(KomodioApp.cornerRadius)
         }
     }
 }

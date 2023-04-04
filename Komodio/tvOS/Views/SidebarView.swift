@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftlyKodiAPI
 import AVFoundation
 
+// MARK: Sidebar View
+
 /// SwiftUI View for the sidebar (tvOS)
 ///
 /// It is a bit of a hack to tame the Siri remote...
@@ -31,18 +33,17 @@ struct SidebarView: View {
         .musicVideos,
         .search
     ]
+    /// The sidebar selection
     @State var sidebarSelection: Int = 0 {
         didSet {
             /// Set the sidebar selection as a ``Router`` item
             scene.sidebarSelection = sidebarItems[sidebarSelection]
             /// Reset the details
             scene.details = sidebarItems[sidebarSelection]
-            /// Set the contentSelection
-            scene.contentSelection = sidebarItems[sidebarSelection]
             /// Reset the navigationStackPath
             scene.navigationStackPath = NavigationPath()
             /// Reset the background
-            scene.background = nil
+            scene.selectedKodiItem = nil
         }
     }
     // MARK: Body of the View
@@ -60,7 +61,7 @@ struct SidebarView: View {
                     }
                 }, icon: {
                     Image(systemName: "sparkles.tv")
-                        .foregroundColor(sidebarSelection == 0 ? Color("AccentColor") : .gray)
+                        .foregroundColor(sidebarSelection == 0 ? .orange : Color("AccentColor"))
                         .font(sidebarSelection == 0 ? .headline : .subheadline)
                         .frame(width: 40, height: 40, alignment: .center)
                 })
@@ -126,7 +127,7 @@ struct SidebarView: View {
                 }
             }, icon: {
                 Image(systemName: item.label.icon)
-                    .foregroundColor(sidebarItems[sidebarSelection] == item ? Color("AccentColor") : .gray)
+                    .foregroundColor(sidebarItems[sidebarSelection] == item ? item.color : Color("AccentColor"))
                     .font(sidebarItems[sidebarSelection] == item ? .headline : .subheadline)
                     .frame(width: 40, height: 40, alignment: .center)
             })

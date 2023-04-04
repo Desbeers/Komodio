@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Favorites View
+
 /// SwiftUI View for Favorites (shared)
 struct FavouritesView: View {
     /// The KodiConnector model
@@ -23,6 +25,9 @@ struct FavouritesView: View {
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
 
+    // MARK: Body of the View
+
+    /// The body of the View
     var body: some View {
         VStack {
             switch state {
@@ -73,9 +78,14 @@ struct FavouritesView: View {
 #endif
 
 #if os(tvOS)
-        ScrollView {
-            VStack {
-                PartsView.DetailHeader(title: Router.favourites.label.title)
+        ContentWrapper(
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.favourites.label.title,
+                    subtitle: Router.favourites.label.description
+                )
+            },
+            content: {
                 LazyVGrid(columns: grid, spacing: 0) {
                     ForEach(kodi.favourites, id: \.id) { video in
                         switch video {
@@ -100,9 +110,8 @@ struct FavouritesView: View {
                     }
                 }
             }
-        }
+        )
         .buttonStyle(.card)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
 #endif
     }
 

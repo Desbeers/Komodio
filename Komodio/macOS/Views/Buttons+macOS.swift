@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 
 extension Buttons {
 
+    // MARK: Play Button
+
     /// The 'play' button
     struct Play: View {
         /// The `KodiItem` to play
@@ -39,6 +41,8 @@ extension Buttons {
             })
         }
     }
+
+    // MARK: Resume Button
 
     /// The 'resume' button
     struct Resume: View {

@@ -26,6 +26,8 @@ struct ArtistsView: View {
     @State private var state: Parts.Status = .loading
     /// Define the grid layout (tvOS)
     private let grid = [GridItem(.adaptive(minimum: 350))]
+    /// The opacity of the View
+    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -38,6 +40,9 @@ struct ArtistsView: View {
             default:
                 PartsView.StatusMessage(item: .musicVideos, status: state)
             }
+        }
+        .task {
+            opacity = 1
         }
         .animation(.default, value: selectedArtist)
         .task(id: kodi.library.musicVideos) {
@@ -60,60 +65,49 @@ struct ArtistsView: View {
 #if os(macOS)
     /// The content of the view
     var content: some View {
-        ZStack {
-            List(selection: $selectedArtist) {
-                ForEach(artists, id: \.id) { artist in
-                    ArtistView.Item(artist: artist)
-                        .tag(artist)
-                }
-            }
-            .scaleEffect(selectedArtist != nil ? 0.6 : 1)
-            .offset(x: selectedArtist != nil ? -ContentView.columnWidth : 0, y: 0)
-            MusicVideosView(artist: artist)
-                .transition(.move(edge: .leading))
-                .offset(x: selectedArtist != nil ? 0 : ContentView.columnWidth, y: 0)
-        }
-        .toolbar {
-            if selectedArtist != nil {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        selectedArtist = nil
-                        artist = Audio.Details.Artist(media: .none)
-                        scene.details = Router.musicVideos
-                    }, label: {
-                        Image(systemName: "chevron.backward")
+        ScrollView {
+            LazyVStack {
+                ForEach(artists) { artist in
+                    NavigationLink(value: artist, label: {
+                        ArtistView.Item(artist: artist)
                     })
+                    .buttonStyle(.listButton(selected: false))
+                    Divider()
                 }
             }
+            .padding()
         }
+        .navigationStackAnimation(opacity: $opacity)
     }
 #endif
 
 #if os(tvOS)
     /// The content of the view
     var content: some View {
-        ScrollView {
-            PartsView.DetailHeader(title: Router.musicVideos.label.title)
-            LazyVGrid(columns: grid, spacing: 0) {
-                ForEach(artists) { artist in
-                    NavigationLink(value: artist, label: {
-                        ArtistView.Item(artist: artist)
-                    })
+        ContentWrapper(
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.musicVideos.label.title,
+                    subtitle: Router.musicVideos.label.description
+                )
+            },
+            content: {
+                LazyVGrid(columns: grid, spacing: 0) {
+                    ForEach(artists) { artist in
+                        NavigationLink(value: artist, label: {
+                            ArtistView.Item(artist: artist)
+                        })
+                    }
+                    .padding(.bottom, 40)
                 }
-                .padding(.bottom, 40)
-            }
-        }
+            })
         .buttonStyle(.card)
-        .padding(.horizontal, 80)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
     }
 #endif
 
     // MARK: Private functions
 
-    /// Get all items from the library
-    ///
-    /// Movies that are part of a set will be removed and replaced with the set
+    /// Get all artists from the library
     private func getItems() {
         var artistList: [Audio.Details.Artist] = []
         let allArtists = kodi.library.musicVideos
@@ -129,8 +123,9 @@ struct ArtistsView: View {
         if let selectedArtist {
             artist = selectedArtist
             scene.details = .artist(artist: selectedArtist)
+            scene.background = artist
         } else {
-            scene.navigationSubtitle = Router.musicVideos.label.title
+            scene.navigationSubtitle = Router.musicVideos.label.description
             artist = Audio.Details.Artist(media: .none)
         }
     }
@@ -138,7 +133,7 @@ struct ArtistsView: View {
     /// Convert an 'artist' string to a `KodiItem`
     /// - Parameter artist: Name of the artist
     /// - Returns: A `KodiItem`
-    func artistItem(artist: String) -> Audio.Details.Artist {
+    private func artistItem(artist: String) -> Audio.Details.Artist {
         if let artistDetails = KodiConnector.shared.library.artists.first(where: { $0.artist == artist }) {
             return artistDetails
         }

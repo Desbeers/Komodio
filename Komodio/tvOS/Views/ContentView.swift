@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Content View
+
 /// SwiftUI View for the main content (tvOS)
 struct ContentView: View {
     /// The SceneState model
@@ -18,7 +20,7 @@ struct ContentView: View {
     /// The body of the View
     var body: some View {
         VStack {
-            switch scene.contentSelection {
+            switch scene.sidebarSelection {
             case .start:
                 StartView()
             case .movies:
@@ -44,7 +46,7 @@ struct ContentView: View {
                 Text("Not implemented")
             }
         }
-        .animation(.default, value: scene.contentSelection)
-        .setSafeAreas()
+        .animation(.default, value: scene.sidebarSelection)
+        .setSiriExit()
     }
 }

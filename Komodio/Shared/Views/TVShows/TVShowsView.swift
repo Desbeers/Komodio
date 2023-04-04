@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: TV shows View
+
 /// SwiftUI View for all TV shows (shared)
 struct TVShowsView: View {
     /// The KodiConnector model
@@ -22,6 +24,8 @@ struct TVShowsView: View {
     @State private var state: Parts.Status = .loading
     /// Define the grid layout (for tvOS)
     private let grid = [GridItem(.adaptive(minimum: 260))]
+    /// The opacity of the View
+    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -36,6 +40,10 @@ struct TVShowsView: View {
             }
         }
         .animation(.default, value: selectedTVShow)
+        .task {
+            scene.navigationSubtitle = scene.sidebarSelection.label.description
+            opacity = 1
+        }
         .task(id: kodi.library.tvshows) {
             if kodi.status != .loadedLibrary {
                 state = .offline
@@ -46,9 +54,6 @@ struct TVShowsView: View {
                 state = .ready
             }
         }
-        .task(id: selectedTVShow) {
-            scene.navigationSubtitle = Router.tvshows.label.title
-        }
     }
 
     // MARK: Content of the View
@@ -57,52 +62,40 @@ struct TVShowsView: View {
     @ViewBuilder var content: some View {
 
 #if os(macOS)
-        ZStack {
-            List(selection: $selectedTVShow) {
-                ForEach(tvshows) { tvshow in
-                    TVShowView.Item(tvshow: tvshow)
-                        .tag(tvshow)
-                }
-            }
-            .scaleEffect(selectedTVShow.media == .tvshow ? 0.6 : 1)
-            .offset(x: selectedTVShow.media == .tvshow ? -ContentView.columnWidth : 0, y: 0)
-            SeasonsView(tvshow: selectedTVShow)
-                .transition(.move(edge: .leading))
-                .offset(x: selectedTVShow.media == .tvshow ? 0 : ContentView.columnWidth, y: 0)
-        }
-        .toolbar {
-            if selectedTVShow.media == .tvshow {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        /// Deselect the TV show
-                        selectedTVShow.media = .none
-                        /// We might came from the search page
-                        if scene.sidebarSelection == .search {
-                            scene.contentSelection = .search
-                            scene.details = .tvshows
-                        } else {
-                            scene.details = .tvshows
-                        }
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                    })
-                }
-            }
-        }
-#endif
-
-#if os(tvOS)
         ScrollView {
-            PartsView.DetailHeader(title: Router.tvshows.label.title)
-            LazyVGrid(columns: grid, spacing: 0) {
+            LazyVStack {
                 ForEach(tvshows) { tvshow in
                     NavigationLink(value: tvshow) {
                         TVShowView.Item(tvshow: tvshow)
                     }
-                    .padding(.bottom, 40)
+                    .buttonStyle(.listButton(selected: false))
+                    .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == tvshow.id))
+                    Divider()
                 }
             }
+            .padding()
         }
+        .navigationStackAnimation(opacity: $opacity)
+#endif
+
+#if os(tvOS)
+        ContentWrapper(
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.tvshows.label.title,
+                    subtitle: Router.tvshows.label.description
+                )
+            },
+            content: {
+                LazyVGrid(columns: grid, spacing: 0) {
+                    ForEach(tvshows) { tvshow in
+                        NavigationLink(value: tvshow) {
+                            TVShowView.Item(tvshow: tvshow)
+                        }
+                        .padding(.bottom, 40)
+                    }
+                }
+            })
         .buttonStyle(.card)
         .frame(maxWidth: .infinity, alignment: .topLeading)
 #endif

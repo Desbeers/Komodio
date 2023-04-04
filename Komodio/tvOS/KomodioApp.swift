@@ -8,14 +8,18 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// The Komodio App Scene (tvOS)
+// MARK: Komodio App
 
+/// The Komodio App Scene (tvOS)
 @main struct KomodioApp: App {
     /// The KodiConnector model
     @StateObject var kodi: KodiConnector = .shared
     /// The SceneState model
     @StateObject var scene: SceneState = .shared
-    /// The body of the scene
+
+    // MARK: Body of the Scene
+
+    /// The body of the Scene
     var body: some Scene {
         WindowGroup {
             MainView()
@@ -29,28 +33,24 @@ import SwiftlyKodiAPI
                 }
                 .background(
                     ZStack {
-                        if let background = scene.background {
+                        Color("BlendColor")
+                        if let background = scene.selectedKodiItem, !background.fanart.isEmpty {
                             KodiArt.Fanart(item: background)
-                                .opacity(background.media == .movie ? 1 : 0.2)
-                                .overlay {
-                                    PartsView.GradientOverlay()
-                                        .opacity(0.3)
-                                }
+                                .grayscale(1)
+                                .opacity(0.2)
+                                .scaledToFill()
+                                .transition(.opacity)
                         } else {
                             Image("Background")
                                 .resizable()
-                                .opacity(0.3)
-                                .overlay {
-                                    PartsView.GradientOverlay()
-                                }
+                                .opacity(0.2)
+                                .scaledToFill()
+                                .transition(.opacity)
                         }
                     }
-                        .scaledToFill()
                         .ignoresSafeArea()
-                        .transition(.opacity)
-                        .id(scene.background?.id)
-                        .animation(.default, value: scene.background?.id)
                 )
+                .animation(.default, value: scene.navigationStackPath)
         }
     }
 }
@@ -78,4 +78,10 @@ extension KomodioApp {
     static var sidebarCollapsedWidth: Double {
         KomodioApp.sidebarWidth / 3
     }
+
+    /// The default corner radius
+    static let cornerRadius: Double = 10
+
+    /// Define the grid layout
+    static let grid = [GridItem(.adaptive(minimum: 260))]
 }

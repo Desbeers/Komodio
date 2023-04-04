@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import SwiftlyKodiAPI
+
+// MARK: Styles
 
 /// SwiftUI styles for `buttons` and `labels` (shared)
 enum Styles {
@@ -16,15 +19,59 @@ enum Styles {
 
 extension Styles {
 
+    // MARK: List Button
+
+    /// SwiftUI Button style for a list Button
+    struct ListButton: ButtonStyle {
+        /// Bool if the item is selected
+        let selected: Bool
+        /// The focus state
+        @Environment(\.isFocused) var focused: Bool
+
+        func makeBody(configuration: Configuration) -> some View {
+#if os(macOS)
+            configuration.label
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .foregroundColor(selected ? Color.white : Color.primary)
+                .background(selected ? Color.accentColor : Color.clear)
+                .cornerRadius(6)
+#endif
+
+#if os(tvOS)
+            configuration.label
+                .padding()
+                .foregroundColor(selected ? .white : .primary)
+                .background(selected ? Color.black : Color("AccentColor"))
+                .cornerRadius(16)
+                .shadow(radius: 3, x: 0, y: 2)
+                .scaleEffect(focused ? 1.2 : 1)
+                .animation(.easeOut(duration: 0.2), value: focused)
+#endif
+        }
+    }
+}
+
+extension ButtonStyle where Self == Styles.ListButton {
+    /// Button style for a 'play' button
+    static func listButton(selected: Bool) -> Styles.ListButton { .init(selected: selected) }
+}
+
+extension Styles {
+
+    // MARK: Play Button
+
     /// SwiftUI Button style for a Play Button
     struct PlayButton: ButtonStyle {
-        func makeBody(configuration: Configuration) -> some View {
+        /// Enabled or not
+        @Environment(\.isEnabled) var isEnabled
 
+        func makeBody(configuration: Configuration) -> some View {
 #if os(macOS)
             configuration.label
                 .cornerRadius(6)
                 .shadow(radius: 1)
-                .opacity(configuration.isPressed ? 0.8 : 1)
+                .opacity(configuration.isPressed ? 0.8 : isEnabled ? 1 : 0.3)
                 .animation(.default, value: configuration.isPressed)
 #endif
 
@@ -48,24 +95,26 @@ extension ButtonStyle where Self == Styles.PlayButton {
 
 extension Styles {
 
+    // MARK: Play Label
+
     /// SwiftUI Label style for a Play Button
     struct PlayLabel: LabelStyle {
+        /// Current color scheme
+        @Environment(\.colorScheme) var colorScheme
         /// Bool if the label is focussed
         @Environment(\.isFocused) private var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
-
 #if os(macOS)
             HStack {
                 configuration.icon
-                    .opacity(0.6)
                 configuration.title
             }
             /// Make sure two lines will fit
             .frame(height: 25)
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
-            .foregroundColor(.black)
-            .background(.white.gradient)
+            .foregroundColor(.primary)
+            .background(colorScheme == .light ? Color.white.gradient.opacity(1) : Color.gray.gradient.opacity(0.6))
 #endif
 
 #if os(tvOS)
@@ -83,12 +132,13 @@ extension Styles {
         }
     }
 
+    // MARK: Detail Label
+
     /// SwiftUI Label style for a media item detail label
     struct DetailLabel: LabelStyle {
         /// Bool if the label is focussed
         @Environment(\.isFocused) var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
-
 #if os(macOS)
             HStack(alignment: .top) {
                 configuration.icon
@@ -110,8 +160,10 @@ extension Styles {
         }
     }
 
-    /// SwiftUI Label style for a sort label (tvOS)
-    struct SortLabel: LabelStyle {
+    // MARK: Header Label
+
+    /// SwiftUI Label style for a HeaderView Button (tvOS)
+    struct HeaderLabel: LabelStyle {
         func makeBody(configuration: Configuration) -> some View {
             HStack(spacing: 0) {
                 configuration.icon
@@ -125,16 +177,16 @@ extension Styles {
 }
 
 extension LabelStyle where Self == Styles.PlayLabel {
-    /// Label style for a 'play' button
+    /// SwiftUI Label style for a Play Button
     static var playLabel: Styles.PlayLabel { .init() }
 }
 
 extension LabelStyle where Self == Styles.DetailLabel {
-    /// Label style for media item details
+    /// SwiftUI Label style for a DetailView Label
     static var detailLabel: Styles.DetailLabel { .init() }
 }
 
-extension LabelStyle where Self == Styles.SortLabel {
-    /// Label style for media item details
-    static var sortLabel: Styles.SortLabel { .init() }
+extension LabelStyle where Self == Styles.HeaderLabel {
+    /// SwiftUI Label style for a HeaderView Button (tvOS)
+    static var headerLabel: Styles.HeaderLabel { .init() }
 }

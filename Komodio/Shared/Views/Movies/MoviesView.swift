@@ -8,10 +8,9 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Movies View
+
 /// SwiftUI View for all Movies in the library (shared)
-///
-/// - Movies that are part of a set will be removed and replaced with the set when showing all movies and sorted by title
-/// - When the library is filtered by 'unwatched', it will be sorted by 'date added'
 struct MoviesView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -22,15 +21,11 @@ struct MoviesView: View {
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = SceneState.getListSortSettings(sortID: SceneState.shared.contentSelection.label.title)
-    /// The optional selected item
-    @State private var selectedItem: MediaItem?
-    /// The optional selected movie set (macOS)
-    @State private var selectedMovieSet = Video.Details.MovieSet(media: .none)
+    @State var sorting = SceneState.getListSortSettings(sortID: SceneState.shared.sidebarSelection.label.title)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
-    /// Define the grid layout (tvOS)
-    private let grid = [GridItem(.adaptive(minimum: 260))]
+    /// The opacity of the View
+    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -42,11 +37,12 @@ struct MoviesView: View {
                 content
             default:
                 PartsView.StatusMessage(item: .movies, status: state)
+                    .focusable()
             }
         }
-        .animation(.default, value: selectedItem)
-        .animation(.default, value: items.map(\.id))
-        .task {
+        .task(id: filter) {
+            scene.navigationSubtitle = getNavigationSubtitle()
+            opacity = 1
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
@@ -58,7 +54,6 @@ struct MoviesView: View {
         }
         .onChange(of: kodi.library.movies) { _ in
             getItems()
-            setItemDetails()
         }
     }
 
@@ -68,45 +63,38 @@ struct MoviesView: View {
     @ViewBuilder var content: some View {
 
 #if os(macOS)
-        ZStack {
-            List(selection: $selectedItem) {
-                Pickers.ListSortPicker(sorting: $sorting, media: .movie)
+        ScrollView {
+            Pickers.ListSortPicker(sorting: $sorting, media: .movie)
+                .padding()
+            LazyVStack {
                 ForEach(items, id: \.id) { video in
                     switch video {
                     case let movie as Video.Details.Movie:
-                        MovieView.Item(movie: movie, sorting: sorting)
-                            .tag(MediaItem(id: movie.id, media: .movie))
+                        Button(
+                            action: {
+                                scene.selectedKodiItem = movie
+                                scene.details = .movie(movie: movie)
+                            },
+                            label: {
+                                MovieView.Item(movie: movie, sorting: sorting)
+                            }
+                        )
+                        .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == movie.id))
                     case let movieSet as Video.Details.MovieSet:
-                        MovieSetView.Item(movieSet: movieSet)
-                            .tag(MediaItem(id: String(movieSet.setID), media: .movieSet))
+                        NavigationLink(value: movieSet, label: {
+                            MovieSetView.Item(movieSet: movieSet)
+                        })
+                        .buttonStyle(.listButton(selected: false))
                     default:
                         EmptyView()
                     }
+                    Divider()
                 }
             }
-            .scaleEffect(selectedItem?.media == .movieSet ? 0.6 : 1)
-            .offset(x: selectedItem?.media == .movieSet ? -ContentView.columnWidth : 0, y: 0)
-            MovieSetView(movieSet: selectedMovieSet)
-                .offset(x: selectedItem?.media == .movieSet ? 0 : ContentView.columnWidth, y: 0)
-                .opacity(selectedItem?.media == .movieSet ? 1 : 0)
+            .padding()
         }
-        .toolbar {
-            /// The selection might not be a set
-            if selectedItem?.media == .movieSet {
-                /// Show a 'back' button
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        selectedMovieSet.media = .none
-                        selectedItem = nil
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                    })
-                }
-            }
-        }
-        .task(id: selectedItem) {
-            setItemDetails()
-        }
+        .navigationStackAnimation(opacity: $opacity)
+        .animation(.default, value: sorting)
         .onChange(of: sorting) { [sorting] newValue in
             if sorting.method == newValue.method {
                 items.sort(sortItem: newValue)
@@ -117,38 +105,40 @@ struct MoviesView: View {
 #endif
 
 #if os(tvOS)
-        ScrollView {
-            ZStack {
-                PartsView.DetailHeader(title: getNavigationSubtitle())
-                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                    .labelStyle(.sortLabel)
-                    .padding(.trailing, 40)
-                    .padding(.bottom, 10)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .frame(maxWidth: .infinity)
-            .focusSection()
-            LazyVGrid(columns: grid, spacing: 0) {
-                ForEach(items, id: \.id) { video in
-                    switch video {
-                    case let movie as Video.Details.Movie:
-                        NavigationLink(value: movie, label: {
-                            MovieView.Item(movie: movie, sorting: sorting)
-                        })
-                        .padding(.bottom, 40)
-                    case let movieSet as Video.Details.MovieSet:
-                        NavigationLink(value: movieSet, label: {
-                            MovieSetView.Item(movieSet: movieSet)
-                        })
-                        .padding(.bottom, 40)
-                    default:
-                        EmptyView()
+        ContentWrapper(
+            header: {
+                ZStack {
+                    PartsView.DetailHeader(title: getNavigationTitle(), subtitle: getNavigationSubtitle())
+                    Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                        .labelStyle(.headerLabel)
+                        .padding(.leading, 50)
+                        .padding(.bottom, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            },
+            content: {
+                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
+                    ForEach(items, id: \.id) { video in
+                        switch video {
+                        case let movie as Video.Details.Movie:
+                            NavigationLink(value: movie, label: {
+                                MovieView.Item(movie: movie, sorting: sorting)
+                            })
+                            .padding(.bottom, 40)
+                        case let movieSet as Video.Details.MovieSet:
+                            NavigationLink(value: movieSet, label: {
+                                MovieSetView.Item(movieSet: movieSet)
+                            })
+                            .padding(.bottom, 40)
+                        default:
+                            EmptyView()
+                        }
                     }
                 }
             }
-        }
+        )
         .buttonStyle(.card)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .animation(.default, value: items.map { $0.id })
 #endif
     }
 
@@ -175,34 +165,6 @@ struct MoviesView: View {
         }
     }
 
-    /// Set the details of a selected item
-    private func setItemDetails() {
-        if let selectedItem {
-            switch selectedItem.media {
-            case .movie:
-                if let movie = kodi.library.movies.first(where: { $0.id == selectedItem.id }) {
-                    scene.details = .movie(movie: movie)
-                }
-            case .movieSet:
-                if let movieSet = kodi.library.movieSets.first(where: { $0.setID == Int(selectedItem.id) }) {
-                    selectedMovieSet = movieSet
-                }
-            default:
-                break
-            }
-        } else {
-            switch filter {
-            case .unwatched:
-                scene.details = .unwatchedMovies
-            case .playlist(let file):
-                scene.details = .moviesPlaylist(file: file)
-            default:
-                scene.details = .movies
-            }
-            scene.navigationSubtitle = getNavigationSubtitle()
-        }
-    }
-
     /// Swap movies for a set item
     ///
     /// Movies that are part of a set will be removed and replaced with the set when enabled in the Kodi host
@@ -218,8 +180,8 @@ struct MoviesView: View {
         return movies
     }
 
-    /// Get the navigation subtitle
-    private func getNavigationSubtitle() -> String {
+    /// Get the navigation title
+    private func getNavigationTitle() -> String {
         switch filter {
         case .unwatched:
             return Router.unwatchedMovies.label.title
@@ -227,6 +189,18 @@ struct MoviesView: View {
             return  file.title
         default:
             return Router.movies.label.title
+        }
+    }
+
+    /// Get the navigation subtitle
+    private func getNavigationSubtitle() -> String {
+        switch filter {
+        case .unwatched:
+            return Router.unwatchedMovies.label.description
+        case .playlist:
+            return "Playlist"
+        default:
+            return Router.movies.label.description
         }
     }
 }

@@ -8,6 +8,9 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Playlists View
+
+/// SwiftUI View for playlists (tvOS)
 struct PlaylistsView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -26,6 +29,7 @@ struct PlaylistsView: View {
                 content
             default:
                 PartsView.StatusMessage(item: .playlists, status: state)
+                    .focusable()
             }
         }
         .task(id: kodi.library.moviePlaylists) {
@@ -44,22 +48,31 @@ struct PlaylistsView: View {
 
     /// The content of the View
     var content: some View {
-        HStack {
-            ScrollView {
-                ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-                    NavigationLink(value: playlist) {
-                        Label(title: {
-                            Text(playlist.title)
-                                .frame(width: 400, alignment: .leading)
-                        }, icon: {
-                            Image(systemName: Router.playlists.label.icon)
-                        })
+        ContentWrapper(
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.playlists.label.title,
+                    subtitle: Router.playlists.label.description
+                )
+            },
+            content: {
+                HStack {
+                    ScrollView {
+                        ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
+                            NavigationLink(value: playlist) {
+                                Label(title: {
+                                    Text(playlist.title)
+                                        .frame(width: 400, alignment: .leading)
+                                }, icon: {
+                                    Image(systemName: Router.playlists.label.icon)
+                                })
+                            }
+                            .padding()
+                        }
                     }
-                    .padding()
+                    DetailView()
+                        .frame(width: 800)
                 }
-            }
-            DetailView()
-                .frame(width: 800)
-        }
+            })
     }
 }

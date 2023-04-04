@@ -8,14 +8,19 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+
+// MARK: Buttons
+
 /// Collection of SwiftUI Buttons (shared)
 ///
-/// - The ``Play`` and ``Resume`` buttons between macOS and tvOS are very different and in its on file
+/// - The ``Play`` and ``Resume`` buttons between macOS and tvOS are very different and in its own file
 enum Buttons {
     // Just a namespace here
 }
 
 extension Buttons {
+
+    // MARK: Player
 
     /// The 'play',  'resume' and optional 'played state' buttons
     struct Player: View {
@@ -52,6 +57,8 @@ extension Buttons {
             .animation(.default, value: isFocused)
         }
     }
+
+    // MARK: Played State
 
     /// The 'played state' button
     struct PlayedState: View {

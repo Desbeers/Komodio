@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Sidebar View
+
 /// SwiftUI View for the sidebar (macOS)
 struct SidebarView: View {
     /// The KodiConnector model
@@ -29,8 +31,8 @@ struct SidebarView: View {
             .onChange(of: scene.sidebarSelection) { selection in
                 /// Reset the details
                 scene.details = selection
-                /// Set the contentSelection
-                scene.contentSelection = selection
+                /// Reset the optional selected kodi item
+                scene.selectedKodiItem = nil
             }
         }
         /// Override de default list style that it set in ``MainView``
@@ -44,87 +46,43 @@ struct SidebarView: View {
 
     /// The content of the View
     @ViewBuilder var content: some View {
-        label(title: "Komodio", description: kodi.status.message, icon: "sparkles.tv")
-            .tag(Router.start)
-        sidebarItem(item: Router.favourites)
-        if !kodi.configuredHosts.isEmpty {
-            Section("Your Kodi's") {
-                ForEach(kodi.configuredHosts) { host in
-                    Label(title: {
-                        VStack(alignment: .leading) {
-                            Text(host.name)
-                            Text(host.isOnline ? "Online" : "Offline")
-                                .font(.caption)
-                                .opacity(0.6)
-                                .padding(.bottom, 2)
-                        }
-                    }, icon: {
-                        Image(systemName: "globe")
-                            .foregroundColor(host.isOnline ? host.isSelected ? .green : .accentColor : .red)
-                    })
-                    .tag(Router.hostItemSettings(host: host))
+        NavigationLink(value: Router.start) {
+            Label(title: {
+                VStack(alignment: .leading) {
+                    Text(kodi.host.bonjour?.name ?? "Kodio")
+                    Text(kodi.status.message)
+                        .font(.caption)
+                        .opacity(0.5)
                 }
-            }
+            }, icon: {
+                Image(systemName: "globe")
+            })
         }
-        if !kodi.bonjourHosts.filter({ $0.new }).isEmpty {
-            Section("New Kodi's") {
-                ForEach(kodi.bonjourHosts.filter { $0.new }, id: \.ip) { host in
-                    Label(title: {
-                        Text(host.name)
-                    }, icon: {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.orange)
-                    })
-                    .tag(
-                        Router.hostItemSettings(
-                            host: HostItem(
-                                ip: host.ip,
-                                media: .video,
-                                player: .stream,
-                                status: .new
-                            )
-                        )
-                    )
-                }
-            }
-        }
-        Section("Movies") {
-            sidebarItem(item: Router.movies)
-            sidebarItem(item: Router.unwatchedMovies)
-            if !kodi.library.moviePlaylists.isEmpty {
-                ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-                    sidebarItem(item: .moviesPlaylist(file: playlist))
-                }
-            }
-        }
-        Section("TV shows") {
-            sidebarItem(item: Router.tvshows)
-            sidebarItem(item: Router.unwachedEpisodes)
-        }
-        Section("Music Videos") {
-            sidebarItem(item: Router.musicVideos)
-        }
-        if !searchField.isEmpty {
-            Section("Search") {
-                sidebarItem(item: Router.search)
-            }
-        }
-        if kodi.status == .loadedLibrary || kodi.status == .outdatedLibrary {
-            Section("Maintanance") {
-                sidebarItem(item: Router.kodiSettings)
-                Button(action: {
-                    Task {
-                        await KodiConnector.shared.loadLibrary(cache: false)
+        .listItemTint(kodi.host.isOnline ? .green : .red)
+        if kodi.status == .loadedLibrary {
+            sidebarItem(item: Router.favourites)
+                .listItemTint(.red)
+            Section("Movies") {
+                sidebarItem(item: Router.movies)
+                sidebarItem(item: Router.unwatchedMovies)
+                if !kodi.library.moviePlaylists.isEmpty {
+                    ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
+                        sidebarItem(item: .moviesPlaylist(file: playlist))
                     }
-                }, label: {
-                    label(
-                        title: "Reload Library",
-                        description: "Reload '\(kodi.host.name)'",
-                        icon: "arrow.triangle.2.circlepath"
-                    )
-                })
+                }
             }
-            .tint(.orange)
+            Section("TV shows") {
+                sidebarItem(item: Router.tvshows)
+                sidebarItem(item: Router.unwachedEpisodes)
+            }
+            Section("Music Videos") {
+                sidebarItem(item: Router.musicVideos)
+            }
+            if !searchField.isEmpty {
+                Section("Search") {
+                    sidebarItem(item: Router.search)
+                }
+            }
         }
     }
 
@@ -132,8 +90,10 @@ struct SidebarView: View {
     /// - Parameter item: The ``Router`` item
     /// - Returns: A SwiftUI View with the sidebar item
     private func sidebarItem(item: Router) -> some View {
-        label(title: item.label.title, description: item.label.description, icon: item.label.icon)
-        .tag(item)
+        NavigationLink(value: item) {
+            label(title: item.label.title, description: item.label.description, icon: item.label.icon)
+        }
+        .listItemTint(item.color)
     }
 
     /// SwiftUI View for a `Label` of a `Button` in the sidebar
@@ -145,14 +105,9 @@ struct SidebarView: View {
     private func label(title: String, description: String, icon: String) -> some View {
         Label(
             title: {
-                VStack(alignment: .leading) {
-                    Text(title)
-                    Text(description)
-                        .font(.caption)
-                        .opacity(0.6)
-                        .padding(.bottom, 2)
-                }
-            }, icon: {
+                Text(title)
+            },
+            icon: {
                 Image(systemName: icon)
             })
     }

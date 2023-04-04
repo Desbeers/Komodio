@@ -19,6 +19,7 @@ custom_categories:
     - Router
     - MediaItem
     - Parts
+    - Hosts
   - name: Observable Classes
     children:
     - SceneState
@@ -29,7 +30,9 @@ custom_categories:
     - MainView
     - SidebarView
     - ContentView
+    - ContentWrapper
     - DetailView
+    - DetailWrapper
     - StartView
     - MoviesView
     - MovieView

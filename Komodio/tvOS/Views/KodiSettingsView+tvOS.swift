@@ -10,6 +10,8 @@ import SwiftlyKodiAPI
 
 extension KodiSettingsView {
 
+    // MARK: Full Screen
+
     /// Full screen View for Kodi settings (tvOS)
     struct FullScreen: View {
 

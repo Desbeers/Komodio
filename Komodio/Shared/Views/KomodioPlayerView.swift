@@ -8,6 +8,9 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+
+// MARK: Komodio Player View
+
 /// SwiftUI View for a video player (shared)
 ///
 /// Currently, Komodio is using the `AVPlayer` from the SwiftlyKodiAPI package
@@ -53,6 +56,8 @@ struct KomodioPlayerView: View {
 // MARK: Extensions
 
 extension KomodioPlayerView {
+
+    // MARK: Komodio Player Cant Play
 
     /// SwiftUI View for message that we can't play a video
     struct CantPlay: View {

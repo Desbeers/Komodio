@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
+// MARK: Parts View
+
 /// Collection of loose SwiftUI Views (shared)
 enum PartsView {
     /// Just a namespace here...
@@ -15,12 +17,28 @@ enum PartsView {
 
 extension PartsView {
 
+    // MARK: Parts Detail Header
+
     /// The header for details
     struct DetailHeader: View {
+        /// The color scheme
+        @Environment(\.colorScheme) var colorScheme
         /// The title of the message
         let title: String
         /// The optional subtitle
         var subtitle: String?
+        /// The colors
+        private var colors: [Color] {
+            switch colorScheme {
+                /// tvOS does not always respect the accentColor setting
+            case .light:
+                return [Color("AccentColor"), .black]
+            case .dark:
+                return [.white, Color("AccentColor")]
+            @unknown default:
+                return [Color("AccentColor"), .black]
+            }
+        }
 
         // MARK: Body of the View
 
@@ -28,24 +46,40 @@ extension PartsView {
         var body: some View {
             VStack {
                 Text(title)
-                    .font(.system(size: KomodioApp.platform == .macOS ? 40 : 60))
+                    .font(.system(size: KomodioApp.platform == .macOS ? 30 : 60))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                /// Keep the height of the View, also when the text is scaled
-                    .frame(height: KomodioApp.platform == .macOS ? 60 : 80)
                 if let subtitle {
                     /// Init the text, because then we can use Mardown formatting
                     Text(.init(subtitle))
-                        .font(.system(size: KomodioApp.platform == .macOS ? 20 : 40))
+                        .font(.system(size: KomodioApp.platform == .macOS ? 15 : 30))
                         .opacity(0.6)
                 }
             }
-            .padding(.bottom)
+            .frame(height: KomodioApp.platform == .macOS ? 45 : 90)
+            .foregroundColor(colorScheme == .light ? .white : .black)
+            .padding(.all, KomodioApp.platform == .macOS ? 10 : 20)
+            .frame(maxWidth: .infinity)
+            .background(
+                RadialGradient(
+                    gradient: Gradient(
+                        colors: colors
+                    ),
+                    center: .center,
+                    startRadius: 0,
+                    endRadius: KomodioApp.platform == .macOS ? 280 : 500
+                )
+                .saturation(0.4)
+            )
+            .cornerRadius(KomodioApp.cornerRadius)
+            .padding()
         }
     }
 }
 
 extension PartsView {
+
+    // MARK: Parts Status Message
 
     /// The message to show when a router item is empty, loading or Kodi is offline
     struct StatusMessage: View {
@@ -62,8 +96,6 @@ extension PartsView {
                 switch status {
                 case .offline:
                     Text(status.offlineMessage)
-                case .loading:
-                    Text(item.loading)
                 case .empty:
                     Text(item.empty)
                 default:
@@ -78,46 +110,7 @@ extension PartsView {
 
 extension PartsView {
 
-    /// Overlay a View with a animated gradient
-    struct GradientOverlay: View {
-        /// The start of the animation
-        @State var start = UnitPoint(x: 0, y: -2)
-        /// The end of the animation
-        @State var end = UnitPoint(x: 4, y: 0)
-        /// Set a timer
-        let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
-        // swiftlint:disable discouraged_object_literal
-        /// The colors for the gradient
-        let colors = [
-            Color(#colorLiteral(red: 0.337254902, green: 0.1137254902, blue: 0.7490196078, alpha: 1)),
-            Color(#colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)),
-            Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)),
-            Color(#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)),
-            Color(#colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1))
-        ]
-        // swiftlint:enable discouraged_object_literal
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            // swiftlint:disable:next trailing_closure
-            LinearGradient(
-                gradient: Gradient(colors: colors),
-                startPoint: start,
-                endPoint: end
-            )
-            .animation(Animation.easeInOut(duration: 8).repeatForever(autoreverses: true), value: start)
-            .onReceive(timer, perform: { _ in
-                self.start = UnitPoint(x: 4, y: 0)
-                self.end = UnitPoint(x: 0, y: 2)
-            })
-            .blendMode(.color)
-        }
-    }
-}
-
-extension PartsView {
+    // MARK: Parts Rotating Icon
 
     /// View a  icon image that can rotate
     struct RotatingIcon: View {
@@ -179,6 +172,8 @@ extension PartsView {
 
 extension PartsView {
 
+    // MARK: Parts Text More
+
     /// Show text with optional 'more' button
     struct TextMore: View {
         /// The media item to show
@@ -196,7 +191,6 @@ extension PartsView {
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .focusSection()
-
 #if os(macOS)
                     .font(.body)
 #endif
@@ -235,6 +229,8 @@ extension PartsView {
 
 extension PartsView {
 
+    // MARK: Parts Rating to Stars
+
     /// View a KodiItem rating rating with stars
     /// - Parameters:
     ///   - rating: The rating
@@ -265,12 +261,17 @@ extension PartsView {
 
 extension PartsView {
 
+    // MARK: Parts Sort Label
+
     /// SwiftUI View for a sorting label
     struct SortLabel: View {
         /// The KodiItem
         let item: any KodiItem
         /// The sort method
         let sorting: SwiftlyKodiAPI.List.Sort
+
+        // MARK: Body of the View
+
         /// The body of the View
         var body: some View {
             switch sorting.method {
