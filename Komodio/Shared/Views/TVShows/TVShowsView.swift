@@ -22,8 +22,6 @@ struct TVShowsView: View {
     @State var selectedTVShow = Video.Details.TVShow(media: .none)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
-    /// Define the grid layout (for tvOS)
-    private let grid = [GridItem(.adaptive(minimum: 260))]
     /// The opacity of the View
     @State private var opacity: Double = 0
 
@@ -87,7 +85,7 @@ struct TVShowsView: View {
                 )
             },
             content: {
-                LazyVGrid(columns: grid, spacing: 0) {
+                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(tvshows) { tvshow in
                         NavigationLink(value: tvshow) {
                             TVShowView.Item(tvshow: tvshow)

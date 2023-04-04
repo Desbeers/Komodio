@@ -91,24 +91,15 @@ struct SidebarView: View {
     /// - Returns: A SwiftUI View with the sidebar item
     private func sidebarItem(item: Router) -> some View {
         NavigationLink(value: item) {
-            label(title: item.label.title, description: item.label.description, icon: item.label.icon)
+            Label(
+                title: {
+                    Text(item.label.title)
+                },
+                icon: {
+                    Image(systemName: item.label.icon)
+                }
+            )
         }
         .listItemTint(item.color)
-    }
-
-    /// SwiftUI View for a `Label` of a `Button` in the sidebar
-    /// - Parameters:
-    ///   - title: The title of the label
-    ///   - description: The description of the label
-    ///   - icon: The SF icon
-    /// - Returns: A SwiftUI `Label` View
-    private func label(title: String, description: String, icon: String) -> some View {
-        Label(
-            title: {
-                Text(title)
-            },
-            icon: {
-                Image(systemName: icon)
-            })
     }
 }

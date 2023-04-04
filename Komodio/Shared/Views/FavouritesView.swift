@@ -22,8 +22,6 @@ struct FavouritesView: View {
     @State private var state: Parts.Status = .loading
     /// The optional selected item
     @State private var selectedItem: MediaItem?
-    /// Define the grid layout (tvOS)
-    private let grid = [GridItem(.adaptive(minimum: 260))]
 
     // MARK: Body of the View
 
@@ -86,7 +84,7 @@ struct FavouritesView: View {
                 )
             },
             content: {
-                LazyVGrid(columns: grid, spacing: 0) {
+                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(kodi.favourites, id: \.id) { video in
                         switch video {
                         case let movie as Video.Details.Movie:

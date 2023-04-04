@@ -244,7 +244,5 @@ extension Router {
         let description: String
         /// The SF symbol
         let icon: String
-        /// The ``Router``
-        let route: Router = .start
     }
 }

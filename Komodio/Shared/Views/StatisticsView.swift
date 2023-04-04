@@ -12,8 +12,6 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for library statistics (shared)
 struct StatisticsView: View {
-    /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
 

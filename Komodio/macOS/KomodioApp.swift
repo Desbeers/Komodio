@@ -14,8 +14,6 @@ import SwiftlyKodiAPI
 @main struct KomodioApp: App {
     /// The KodiConnector model
     @StateObject private var kodi: KodiConnector = .shared
-    /// Open new windows
-    @Environment(\.openWindow) private var openWindow
 
     // MARK: Body of the Scene
 
@@ -31,7 +29,6 @@ import SwiftlyKodiAPI
                     }
                 }
         }
-
         .commands {
             CommandGroup(replacing: .newItem) {
                 /// Hide the "New Player" window option

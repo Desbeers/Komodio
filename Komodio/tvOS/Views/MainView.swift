@@ -18,8 +18,6 @@ struct MainView: View {
     @EnvironmentObject private var scene: SceneState
     /// Bool if the sidebar has focus
     @FocusState var isFocused: Bool
-    /// The color scheme
-    @Environment(\.colorScheme) var colorScheme
 
     // MARK: Body of the View
 

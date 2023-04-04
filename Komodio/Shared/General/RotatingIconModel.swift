@@ -53,7 +53,7 @@ extension RotatingIconModel {
     /// - Note: A 'GeometryEffect' instead of a simple animation so we can observe it
     struct Rotate: GeometryEffect, @unchecked Sendable {
         /// Do we want to rotate or not?
-        var rotate: Bool
+        let rotate: Bool
         /// A flip/flop when a rotation is completed
         @Binding var status: Bool
         /// The percentage of the animation

@@ -24,8 +24,6 @@ struct ArtistsView: View {
     @State private var artist = Audio.Details.Artist(media: .none)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
-    /// Define the grid layout (tvOS)
-    private let grid = [GridItem(.adaptive(minimum: 350))]
     /// The opacity of the View
     @State private var opacity: Double = 0
 
@@ -92,7 +90,7 @@ struct ArtistsView: View {
                 )
             },
             content: {
-                LazyVGrid(columns: grid, spacing: 0) {
+                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(artists) { artist in
                         NavigationLink(value: artist, label: {
                             ArtistView.Item(artist: artist)
@@ -123,7 +121,6 @@ struct ArtistsView: View {
         if let selectedArtist {
             artist = selectedArtist
             scene.details = .artist(artist: selectedArtist)
-            scene.background = artist
         } else {
             scene.navigationSubtitle = Router.musicVideos.label.description
             artist = Audio.Details.Artist(media: .none)

@@ -127,18 +127,3 @@ struct SearchView: View {
         }
     }
 }
-
-extension SearchView {
-
-    /// SwiftUI View with search details
-    struct Details: View {
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
-        var body: some View {
-            PartsView.DetailHeader(
-                title: Router.search.label.title,
-                subtitle: "Search results for '**\(scene.query)**'"
-            )
-        }
-    }
-}
