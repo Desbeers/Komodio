@@ -24,21 +24,35 @@ struct MusicVideosView: View {
     @State private var selectedItem: MediaItem?
     /// The opacity of the View
     @State private var opacity: Double = 0
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
+
+    // MARK: Body of the View
+
     /// The body of the View
     var body: some View {
-        content
-            .task(id: artist) {
-                opacity = 1
-                scene.selectedKodiItem = artist
-                scene.navigationSubtitle = artist.artist
+        VStack {
+            switch state {
+            case .ready:
+                content
+            default:
+                PartsView.StatusMessage(item: .playlists, status: state)
+                    .focusable()
             }
-            .task(id: kodi.library.musicVideos) {
-                getItems()
-                setItemDetails()
-            }
-            .task(id: selectedItem) {
-                setItemDetails()
-            }
+        }
+        .task(id: artist) {
+            opacity = 1
+            scene.selectedKodiItem = artist
+            scene.navigationSubtitle = artist.artist
+        }
+        .task(id: kodi.library.musicVideos) {
+            getItems()
+            setItemDetails()
+            state = .ready
+        }
+        .task(id: selectedItem) {
+            setItemDetails()
+        }
     }
 
     // MARK: Content of the MusicVideosView
@@ -71,7 +85,6 @@ struct MusicVideosView: View {
 #if os(tvOS)
     /// The content of the view
     var content: some View {
-
         ContentWrapper(
             scroll: false,
             header: {
