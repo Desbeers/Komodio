@@ -127,14 +127,14 @@ struct ArtistsView: View {
         }
     }
 
-    /// Convert an 'artist' string to a `KodiItem`
+    /// Convert an 'artist' string to a `Audio.Details.Artist`
     /// - Parameter artist: Name of the artist
-    /// - Returns: A `KodiItem`
+    /// - Returns: An `Audio.Details.Artist`
     private func artistItem(artist: String) -> Audio.Details.Artist {
         if let artistDetails = KodiConnector.shared.library.artists.first(where: { $0.artist == artist }) {
             return artistDetails
         }
         /// Return an uknown artist
-        return Audio.Details.Artist(media: .artist, artist: artist, artistID: Int.random(in: 1...1000))
+        return Audio.Details.Artist(media: .artist, artist: artist, artistID: UUID().hashValue)
     }
 }
