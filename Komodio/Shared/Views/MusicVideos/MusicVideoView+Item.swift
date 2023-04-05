@@ -30,7 +30,7 @@ extension MusicVideoView {
                     .watchStatus(of: item.item)
 
 #if os(macOS)
-                Text(item.media == .musicVideo ? item.item.title : item.item.details)
+                Text(item.id)
                     .font(.headline)
 #endif
             }
