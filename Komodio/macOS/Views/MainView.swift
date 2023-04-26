@@ -38,6 +38,7 @@ struct MainView: View {
                 })
             .background(Color.primary.opacity(0.1))
             DetailView()
+                .frame(maxWidth: .infinity)
         }
         .background(
             ZStack {
