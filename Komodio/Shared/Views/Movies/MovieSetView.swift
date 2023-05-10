@@ -50,7 +50,7 @@ struct MovieSetView: View {
     @ViewBuilder var content: some View {
 #if os(macOS)
         ScrollView {
-            Pickers.ListSortPicker(sorting: $sorting, media: .movie)
+            KodiListSort.PickerView(sorting: $sorting, media: .movie)
                 .padding()
             LazyVStack {
                 ForEach(movies) { movie in

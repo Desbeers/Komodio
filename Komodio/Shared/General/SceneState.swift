@@ -47,10 +47,10 @@ class SceneState: ObservableObject {
     /// The optional current selected KodiItem
     var selectedKodiItem: (any KodiItem)?
 
-    /// Init the ``SceneState``
-    private init() {
-        listSortSettings = SceneState.loadListSortSettings()
-    }
+//    /// Init the ``SceneState``
+//    private init() {
+//        listSortSettings = SceneState.loadListSortSettings()
+//    }
 }
 
 extension SceneState {
@@ -71,37 +71,4 @@ extension SceneState {
         } catch { }
     }
 #endif
-}
-
-extension SceneState {
-
-    /// Load the `List Sort` settings
-    /// - Returns: The stored List Sort settings settings
-    static func loadListSortSettings() -> [SwiftlyKodiAPI.List.Sort] {
-        logger("Get ListSort settings")
-        if let settings = Cache.get(key: "ListSort", as: [SwiftlyKodiAPI.List.Sort].self, root: true) {
-            return settings
-        }
-        /// No settings found
-        return []
-    }
-
-    /// Save the `List Sort` settings to the cache
-    /// - Parameter settings: All the current List Sort settings
-    static func saveListSortSettings(settings: [SwiftlyKodiAPI.List.Sort]) {
-        do {
-            try Cache.set(key: "ListSort", object: settings, root: true)
-        } catch {
-            logger("Error saving ListSort settings")
-        }
-    }
-
-    /// Get the `List Sort` settings for a View
-    /// - Parameter sortID: The ID of the sorting
-    static func getListSortSettings(sortID: String) -> SwiftlyKodiAPI.List.Sort {
-        if let sorting = SceneState.shared.listSortSettings.first(where: { $0.id == sortID }) {
-            return sorting
-        }
-        return SwiftlyKodiAPI.List.Sort(id: sortID)
-    }
 }

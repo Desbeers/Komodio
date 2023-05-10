@@ -21,7 +21,7 @@ struct MoviesView: View {
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = SceneState.getListSortSettings(sortID: SceneState.shared.sidebarSelection.label.title)
+    @State var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.sidebarSelection.label.title)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
     /// The opacity of the View
@@ -64,7 +64,7 @@ struct MoviesView: View {
 
 #if os(macOS)
         ScrollView {
-            Pickers.ListSortPicker(sorting: $sorting, media: .movie)
+            KodiListSort.PickerView(sorting: $sorting, media: .movie)
                 .padding()
             LazyVStack {
                 ForEach(items, id: \.id) { video in
