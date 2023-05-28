@@ -135,6 +135,6 @@ struct ArtistsView: View {
             return artistDetails
         }
         /// Return an uknown artist
-        return Audio.Details.Artist(media: .artist, artist: artist, artistID: UUID().hashValue)
+        return Audio.Details.Artist(media: .artist, title: artist, artist: artist, artistID: UUID().hashValue)
     }
 }
