@@ -107,13 +107,7 @@ struct ArtistsView: View {
 
     /// Get all artists from the library
     private func getItems() {
-        var artistList: [Audio.Details.Artist] = []
-        let allArtists = kodi.library.musicVideos
-            .unique { $0.artist }.flatMap { $0.artist }
-        for artist in allArtists {
-            artistList.append(artistItem(artist: artist))
-        }
-        artists = artistList
+        artists = VideoLibrary.getMusicVideoArtists()
     }
 
     /// Set the details of a selected item
@@ -125,16 +119,5 @@ struct ArtistsView: View {
             scene.navigationSubtitle = Router.musicVideos.label.description
             artist = Audio.Details.Artist(media: .none)
         }
-    }
-
-    /// Convert an 'artist' string to a `Audio.Details.Artist`
-    /// - Parameter artist: Name of the artist
-    /// - Returns: An `Audio.Details.Artist`
-    private func artistItem(artist: String) -> Audio.Details.Artist {
-        if let artistDetails = KodiConnector.shared.library.artists.first(where: { $0.artist == artist }) {
-            return artistDetails
-        }
-        /// Return an uknown artist
-        return Audio.Details.Artist(media: .artist, title: artist, artist: artist, artistID: UUID().hashValue)
     }
 }
