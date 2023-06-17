@@ -120,7 +120,7 @@ extension MovieView {
                             Text(movie.title)
                                 .font(.title2)
                                 .lineLimit(1)
-                            Text("\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.duration))")
+                            Text("\(movie.year.description) ∙ \(Utils.secondsToTimeString(seconds: movie.duration))")
                                 .font(.caption)
                                 .opacity(0.6)
                         }
@@ -170,7 +170,7 @@ extension MovieView {
         var movieDetails: some View {
             VStack(alignment: .leading) {
                 Label(
-                    "\(movie.year.description) ∙ \(Parts.secondsToTime(seconds: movie.duration))",
+                    "\(movie.year.description) ∙ \(Utils.secondsToTimeString(seconds: movie.duration))",
                     systemImage: "calendar.badge.clock"
                 )
                 Label(movie.details, systemImage: "info.circle.fill")

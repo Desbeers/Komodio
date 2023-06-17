@@ -160,24 +160,11 @@ struct MoviesView: View {
             default:
                 items = kodi.library.movies
             }
-            self.items = (sorting.method == .title ? swapMoviesForSet(movies: items) : items)
-                .sorted(sortItem: sorting)
-        }
-    }
-
-    /// Swap movies for a set item
-    ///
-    /// Movies that are part of a set will be removed and replaced with the set when enabled in the Kodi host
-    private func swapMoviesForSet(movies: [Video.Details.Movie]) -> [any KodiItem] {
-        if KodiConnector.shared.getKodiSetting(id: .videolibraryGroupMovieSets).bool {
-            let movieSetIDs = Set(movies.map(\.setID))
-            let movieSets = kodi.library.movieSets
-                .filter { movieSetIDs.contains($0.setID) }
-            scene.movieItems = movies
+            scene.movieItems = items
                 .filter { $0.setID != 0 }.map(\.movieID)
-            return (movies.filter { $0.setID == 0 } + movieSets)
+            self.items = sorting.method == .title ? items.swapMoviesForSet() : items
+            self.items.sort(sortItem: sorting)
         }
-        return movies
     }
 
     /// Get the navigation title

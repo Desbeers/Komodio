@@ -54,6 +54,10 @@ extension Buttons {
         var item: any KodiItem
         /// Bool if the player will be presented
         @State private var isPresented = false
+        /// Calculate the resume time
+        private var resume: Int {
+            Int(item.resume.total - item.resume.position)
+        }
 
         // MARK: Body of the View
 
@@ -67,7 +71,7 @@ extension Buttons {
                 Label(title: {
                     VStack(alignment: .leading) {
                         Text("Resume")
-                        Text("\(Parts.secondsToTime(seconds: Int(item.resume.total - item.resume.position))) to go")
+                        Text("\(Utils.secondsToTimeString(seconds: resume)) to go")
                             .font(.system(size: 20))
                     }
                 }, icon: {

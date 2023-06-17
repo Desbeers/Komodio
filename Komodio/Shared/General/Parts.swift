@@ -55,21 +55,3 @@ extension Parts {
         case tvOS
     }
 }
-
-extension Parts {
-
-    /// Convert 'seconds' to a formatted string
-    /// - Parameters:
-    ///   - seconds: The seconds
-    ///   - style: The time format
-    /// - Returns: A formatted String
-    static func secondsToTime(seconds: Int, style: DateComponentsFormatter.UnitsStyle = .brief) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = style
-        if let string = formatter.string(from: TimeInterval(Double(seconds))) {
-            return string
-        }
-        return ""
-    }
-}

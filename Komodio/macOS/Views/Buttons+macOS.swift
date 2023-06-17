@@ -50,6 +50,10 @@ extension Buttons {
         var item: any KodiItem
         /// Open Window environment
         @Environment(\.openWindow) var openWindow
+        /// Calculate the resume time
+        private var resume: Int {
+            Int(item.resume.total - item.resume.position)
+        }
 
         // MARK: Body of the View
 
@@ -62,7 +66,7 @@ extension Buttons {
                 Label(title: {
                     VStack(alignment: .leading) {
                         Text("Resume")
-                        Text("\(Parts.secondsToTime(seconds: Int(item.resume.total - item.resume.position))) to go")
+                        Text("\(Utils.secondsToTimeString(seconds: resume)) to go")
                             .font(.caption)
                     }
                 }, icon: {

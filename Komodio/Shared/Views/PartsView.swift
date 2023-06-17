@@ -277,7 +277,7 @@ extension PartsView {
             switch sorting.method {
             case .dateAdded:
                 Label(
-                    item.swiftDateFromKodiDate(item.dateAdded)
+                    Utils.swiftDateFromKodiDate(item.dateAdded)
                         .formatted(date: KomodioApp.platform == .macOS ? .long : .abbreviated, time: .omitted),
                     systemImage: "plus.square"
                 )
@@ -286,7 +286,7 @@ extension PartsView {
             case .userRating:
                 PartsView.ratingToStars(rating: item.userRating)
             case .duration:
-                Label(Parts.secondsToTime(seconds: item.duration), systemImage: "clock")
+                Label(Utils.secondsToTimeString(seconds: item.duration), systemImage: "clock")
             case .year:
                 Text(item.year.description)
             default:
