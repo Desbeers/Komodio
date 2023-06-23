@@ -35,48 +35,70 @@ struct SearchView: View {
 
     /// The body of the View
     var body: some View {
-
-        List(selection: $selectedItem) {
-
-            if !results {
-                Label("No results found", systemImage: "magnifyingglass")
-                    .font(.title)
-                    .padding()
-            }
-
-            if !movies.isEmpty {
-                Label("Movies", systemImage: "magnifyingglass")
-                    .font(.title)
-                    .padding()
+        ScrollView {
+            LazyVStack {
+                if !results {
+                    Label("No results found", systemImage: "magnifyingglass")
+                        .font(.title)
+                        .padding()
+                }
+                if !movies.isEmpty {
+                    Label("Movies", systemImage: "magnifyingglass")
+                        .font(.title)
+                        .padding()
                     ForEach(movies) { movie in
-                        MovieView.Item(movie: movie)
-                            .tag(MediaItem(id: movie.id, media: .movie, item: movie))
+                        Button(
+                            action: {
+                                scene.selectedKodiItem = movie
+                                scene.details = .movie(movie: movie)
+                            },
+                            label: {
+                                MovieView.Item(movie: movie)
+                            }
+                        )
+                        .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == movie.id))
+                        Divider()
                     }
-            }
-            if !musicVideos.isEmpty {
-                Label("Music Videos", systemImage: "magnifyingglass")
-                    .font(.title)
-                    .padding()
+                }
+                if !musicVideos.isEmpty {
+                    Label("Music Videos", systemImage: "magnifyingglass")
+                        .font(.title)
+                        .padding()
                     ForEach(musicVideos) { musicVideo in
-                        MusicVideoView.Item(item: MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
-                            .tag(MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo))
+                        Button(
+                            action: {
+                                scene.selectedKodiItem = musicVideo
+                                scene.details = .musicVideo(musicVideo: musicVideo)
+                            },
+                            label: {
+                                MusicVideoView.Item(
+                                    item: MediaItem(id: musicVideo.title, media: .musicVideo, item: musicVideo)
+                                )
+                            }
+                        )
+                        .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == musicVideo.id))
+                        Divider()
                     }
-            }
-            if !tvshows.isEmpty {
-                Label("TV shows", systemImage: "magnifyingglass")
-                    .font(.title)
-                    .padding()
+                }
+                if !tvshows.isEmpty {
+                    Label("TV shows", systemImage: "magnifyingglass")
+                        .font(.title)
+                        .padding()
                     ForEach(tvshows) { tvshow in
                         NavigationLink(value: tvshow) {
                             TVShowView.Item(tvshow: tvshow)
                         }
                         .buttonStyle(.listButton(selected: false))
+                        Divider()
                     }
+                }
             }
+            .padding()
         }
         .navigationStackAnimation(opacity: $opacity)
         .buttonStyle(.plain)
         .task(id: scene.query) {
+            scene.navigationSubtitle = Router.search.label.description
             opacity = 1
             scene.details = .search
             if scene.query.isEmpty {
