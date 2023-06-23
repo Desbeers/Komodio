@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftlykodiapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Desbeers/SwiftlyKodiAPI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "47894239d836baa2af58bd97f49e0a05348d2d81"
+      }
+    }
+  ],
+  "version" : 2
+}
