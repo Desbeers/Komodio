@@ -47,17 +47,16 @@ struct SearchView: View {
                         .font(.title)
                         .padding()
                     ForEach(movies) { movie in
+                        Divider()
                         Button(
                             action: {
-                                scene.selectedKodiItem = movie
-                                scene.details = .movie(movie: movie)
+                                selectedItem = MediaItem(id: movie.id, media: .movie, item: movie)
                             },
                             label: {
                                 MovieView.Item(movie: movie)
                             }
                         )
-                        .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == movie.id))
-                        Divider()
+                        .buttonStyle(.listButton(selected: selectedItem?.id == movie.id))
                     }
                 }
                 if !musicVideos.isEmpty {
@@ -65,10 +64,10 @@ struct SearchView: View {
                         .font(.title)
                         .padding()
                     ForEach(musicVideos) { musicVideo in
+                        Divider()
                         Button(
                             action: {
-                                scene.selectedKodiItem = musicVideo
-                                scene.details = .musicVideo(musicVideo: musicVideo)
+                                selectedItem = MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo)
                             },
                             label: {
                                 MusicVideoView.Item(
@@ -76,8 +75,7 @@ struct SearchView: View {
                                 )
                             }
                         )
-                        .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == musicVideo.id))
-                        Divider()
+                        .buttonStyle(.listButton(selected: selectedItem?.id == musicVideo.id))
                     }
                 }
                 if !tvshows.isEmpty {
