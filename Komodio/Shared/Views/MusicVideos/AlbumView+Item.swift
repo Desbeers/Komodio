@@ -36,7 +36,7 @@ extension AlbumView {
                 }
             }
             .padding()
-            .focusSection()
+            .backport.focusSection()
         }
     }
 }

@@ -22,8 +22,6 @@ struct TVShowsView: View {
     @State var selectedTVShow = Video.Details.TVShow(media: .none)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
-    /// The opacity of the View
-    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -40,7 +38,6 @@ struct TVShowsView: View {
         .animation(.default, value: selectedTVShow)
         .task {
             scene.navigationSubtitle = scene.sidebarSelection.label.description
-            opacity = 1
         }
         .task(id: kodi.library.tvshows) {
             if kodi.status != .loadedLibrary {
@@ -73,10 +70,9 @@ struct TVShowsView: View {
             }
             .padding()
         }
-        .navigationStackAnimation(opacity: $opacity)
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         ContentWrapper(
             header: {
                 PartsView.DetailHeader(
@@ -94,7 +90,7 @@ struct TVShowsView: View {
                     }
                 }
             })
-        .buttonStyle(.card)
+        .backport.cardButton()
         .frame(maxWidth: .infinity, alignment: .topLeading)
 #endif
     }

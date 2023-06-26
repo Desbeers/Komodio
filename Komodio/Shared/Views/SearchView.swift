@@ -1,6 +1,6 @@
 //
 //  SearchView.swift
-//  Komodio (macOS)
+//  Komodio (macOS +iOS)
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,7 +10,8 @@ import SwiftlyKodiAPI
 
 // MARK: Search View
 
-/// SwiftUI View for search results (macOS)
+/// SwiftUI View for search results (macOS + iOS)
+/// - Note: tvOS has its own `View`
 struct SearchView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -28,13 +29,27 @@ struct SearchView: View {
     var results: Bool {
         return !movies.isEmpty || !musicVideos.isEmpty || !tvshows.isEmpty
     }
-    /// The opacity of the View
-    @State private var opacity: Double = 0
-
-    // MARK: Body of the View
-
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
+#if os(macOS)
+        content
+#else
+        VStack {
+            Divider()
+                .opacity(0)
+            HStack {
+                content
+                    .frame(width: KomodioApp.posterSize.width * 2)
+                DetailView()
+            }
+        }
+#endif
+    }
+
+    // MARK: Content of the View
+
+    /// The content of the View
+    var content: some View {
         ScrollView {
             LazyVStack {
                 if !results {
@@ -93,11 +108,9 @@ struct SearchView: View {
             }
             .padding()
         }
-        .navigationStackAnimation(opacity: $opacity)
         .buttonStyle(.plain)
         .task(id: scene.query) {
             scene.navigationSubtitle = Router.search.label.description
-            opacity = 1
             scene.details = .search
             if scene.query.isEmpty {
                 movies = []

@@ -24,38 +24,11 @@ struct MainView: View {
     /// The body of the View
     var body: some View {
         NavigationStack(path: $scene.navigationStackPath) {
-            // swiftlint:disable:next trailing_closure
             ContentView()
-            /// Set the destinations for sub-views in the stack
-                .navigationDestination(for: Video.Details.Movie.self, destination: { movie in
-                    MovieView.Details(movie: movie)
-                        .setSiriExit()
-                })
-                .navigationDestination(for: Video.Details.MovieSet.self, destination: { movieSet in
-                    MovieSetView(movieSet: movieSet)
-                        .setSiriExit()
-                })
-                .navigationDestination(for: Video.Details.TVShow.self, destination: { tvshow in
-                    SeasonsView(tvshow: tvshow)
-                        .setSiriExit()
-                })
-                .navigationDestination(for: Video.Details.Episode.self, destination: { episode in
-                    UpNextView.Details(episode: episode)
-                        .setSiriExit()
-                })
-                .navigationDestination(for: Audio.Details.Artist.self, destination: { artist in
-                    MusicVideosView(artist: artist)
-                        .setSiriExit()
-                })
-                .navigationDestination(for: Video.Details.MusicVideo.self, destination: { musicVideo in
-                    MusicVideoView.Details(musicVideo: musicVideo)
-                        .setSiriExit()
-                })
-                .navigationDestination(for: List.Item.File.self, destination: { playlist in
-                    MoviesView(filter: .playlist(file: playlist))
-                        .setSiriExit()
-                })
         }
+        .setBackground()
+        .animation(.default, value: scene.sidebarSelection)
+        .setSiriExit()
         /// Put the ``SidebarView`` into the `safe area`.
         .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {
             SidebarView()
@@ -77,10 +50,6 @@ struct MainView: View {
                 isFocused = true
             }
         }
-        .fullScreenCover(isPresented: $scene.showSettings) {
-            KodiSettingsView.FullScreen()
-        }
         .animation(.default, value: isFocused)
-        .environmentObject(scene)
     }
 }

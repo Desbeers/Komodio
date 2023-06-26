@@ -1,6 +1,6 @@
 //
 //  SidebarView.swift
-//  Komodio (macOS)
+//  Komodio (macOS +iOS)
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,7 +10,8 @@ import SwiftlyKodiAPI
 
 // MARK: Sidebar View
 
-/// SwiftUI View for the sidebar (macOS)
+/// SwiftUI View for the sidebar (macOS + iOS)
+/// - Note: tvOS has its own `View`
 struct SidebarView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -20,24 +21,41 @@ struct SidebarView: View {
     /// - Note: This is here to show or hide the 'search' menu item
     @Binding var searchField: String
 
+    /// The current selection in the ``SidebarView``
+    @State var sidebarSelection: Router? = .start
+
     // MARK: Body of the View
 
     /// The body of the View
     var body: some View {
         VStack {
-            List(selection: $scene.sidebarSelection) {
+            List(selection: $sidebarSelection) {
                 content
             }
+            .onChange(of: sidebarSelection) { selection in
+                if let selection {
+                    Task { @MainActor in
+                        scene.sidebarSelection = selection
+                        /// Reset the details
+                        scene.details = selection
+                        /// Reset the optional selected kodi item
+                        scene.selectedKodiItem = nil
+                        /// Set the navigation title
+                        scene.navigationTitle = selection.label.description
+                    }
+                }
+            }
             .onChange(of: scene.sidebarSelection) { selection in
-                /// Reset the details
-                scene.details = selection
-                /// Reset the optional selected kodi item
-                scene.selectedKodiItem = nil
+                if selection != sidebarSelection {
+                    Task { @MainActor in
+                        sidebarSelection = selection
+                    }
+                }
             }
         }
         /// Override de default list style that it set in ``MainView``
         .listStyle(.sidebar)
-        .animation(.default, value: searchField)
+        // .animation(.default, value: searchField)
         .animation(.default, value: kodi.status)
         .buttonStyle(.plain)
     }

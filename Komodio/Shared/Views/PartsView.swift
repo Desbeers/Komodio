@@ -27,6 +27,17 @@ extension PartsView {
         let title: String
         /// The optional subtitle
         var subtitle: String?
+        /// The font size
+        private var font: Double {
+            switch KomodioApp.platform {
+            case .macOS:
+                return 30
+            case .tvOS:
+                return 60
+            case .iPadOS:
+                return 35
+            }
+        }
         /// The colors
         private var colors: [Color] {
             switch colorScheme {
@@ -46,19 +57,19 @@ extension PartsView {
         var body: some View {
             VStack {
                 Text(title)
-                    .font(.system(size: KomodioApp.platform == .macOS ? 30 : 60))
+                    .font(.system(size: font))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                if let subtitle {
+                if let subtitle, KomodioApp.platform != .iPadOS {
                     /// Init the text, because then we can use Mardown formatting
                     Text(.init(subtitle))
-                        .font(.system(size: KomodioApp.platform == .macOS ? 15 : 30))
+                        .font(.system(size: font / 2))
                         .opacity(0.6)
                 }
             }
-            .frame(height: KomodioApp.platform == .macOS ? 45 : 90)
+            .frame(height: font * 1.5)
             .foregroundColor(colorScheme == .light ? .white : .black)
-            .padding(.all, KomodioApp.platform == .macOS ? 10 : 20)
+            .padding(.all, font / 3)
             .frame(maxWidth: .infinity)
             .background(
                 RadialGradient(
@@ -190,7 +201,7 @@ extension PartsView {
                         showFullText = true
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .focusSection()
+                    .backport.focusSection()
 #if os(macOS)
                     .font(.body)
 #endif

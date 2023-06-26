@@ -107,6 +107,19 @@ extension Pickers {
                     })
                 }
 #endif
+
+#if os(iOS)
+                Picker(selection: $rating, label: Text("Your rating:")) {
+                    Image(systemName: "nosign")
+                        .tag(0)
+                    ForEach(1..<11, id: \.self) { number in
+                        Image(systemName: number <= rating ? "star.fill" : "star")
+                            .foregroundColor(number <= rating ? .yellow : .secondary.opacity(0.4))
+                            .tag(number)
+                    }
+                }
+                .pickerStyle(.segmented)
+#endif
             }
             .task {
                 rating = item.userRating

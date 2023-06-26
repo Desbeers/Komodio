@@ -40,10 +40,10 @@ extension EpisodeView {
                             .frame(height: KomodioApp.thumbSize.height)
                     }
                 }
-                .focusSection()
+                .backport.focusSection()
                 Buttons.Player(item: episode, fadeStateButton: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .focusSection()
+                    .backport.focusSection()
             }
             .detailsFontStyle()
         }

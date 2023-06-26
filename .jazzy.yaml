@@ -20,6 +20,7 @@ custom_categories:
     - MediaItem
     - Parts
     - Hosts
+    - Backport
   - name: Observable Classes
     children:
     - SceneState

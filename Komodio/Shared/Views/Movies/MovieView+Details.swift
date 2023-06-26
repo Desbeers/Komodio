@@ -18,6 +18,8 @@ extension MovieView {
         @State var movie: Video.Details.Movie
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
+        /// The SceneState model
+        @EnvironmentObject var scene: SceneState
         /// The focus state of the Movie View (for tvOS)
         @FocusState var isFocused: Bool
         /// The cast of the Movie
@@ -47,6 +49,7 @@ extension MovieView {
                     if let update = MovieView.updateMovie(movie: movie) {
                         movie = update
                     }
+                    scene.selectedKodiItem = movie
                 }
                 .focused($isFocused)
                 .animation(.default, value: movie)
@@ -57,7 +60,7 @@ extension MovieView {
 
         /// The content of the View
         @ViewBuilder var content: some View {
-#if os(macOS)
+#if os(macOS) || os(iOS)
             DetailWrapper(title: movie.title) {
                 VStack {
                     KodiArt.Fanart(item: movie)

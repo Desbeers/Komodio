@@ -28,10 +28,10 @@ extension MusicVideoView {
                     Buttons.Player(item: musicVideo)
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .focusSection()
+                        .backport.focusSection()
                     PartsView.TextMore(item: musicVideo)
                 }
-                .focusSection()
+                .backport.focusSection()
                 .detailsFontStyle()
             }
         }

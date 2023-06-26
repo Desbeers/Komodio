@@ -45,7 +45,8 @@ struct StatisticsView: View {
                     .labelStyle(StatisticsLabel())
             }
         }
-        .buttonStyle(.plain)    }
+        .padding(.vertical)
+    }
 }
 
 extension StatisticsView {
@@ -56,33 +57,29 @@ extension StatisticsView {
     private struct StatisticsLabel: LabelStyle {
         /// Bool if the label is a 'subitem'
         var subItem: Bool = false
+        /// Calculate the font size
+        var font: Double {
+            switch KomodioApp.platform {
+
+            case .macOS:
+                return 20
+            case .tvOS:
+                return 35
+            case .iPadOS:
+                return 24
+            }
+        }
         func makeBody(configuration: Configuration) -> some View {
 
-#if os(macOS)
             HStack {
                 configuration.icon
-                    .foregroundColor(subItem ? .secondary : .primary)
-                    .frame(width: 30)
+                    .frame(width: font * 2)
                 configuration.title
+                    .padding(.leading, subItem ? font / 2 : 0)
             }
-            .font(.system(size: subItem ? 12 : 16))
-            .padding(.top, subItem ? 0 : 10)
-            .padding(.leading, subItem ? 20 : 0)
-            .padding(.bottom)
-#endif
-
-#if os(tvOS)
-            HStack(spacing: 0) {
-                configuration.icon
-                    .foregroundColor(subItem ? .secondary : .primary)
-                    .padding(.trailing, 10)
-                configuration.title
-                    .foregroundColor(.primary)
-            }
-            .font(.system(size: subItem ? 20 : 35))
-            .padding(.vertical, subItem ? 10 : 0)
-            .padding(.leading, subItem ? 30 : 0)
-#endif
+            .font(.system(size: subItem ? font * 0.75 : font))
+            .padding(.top, subItem ? 0 : font / 2)
+            .padding(.bottom, font / 3)
         }
     }
 }

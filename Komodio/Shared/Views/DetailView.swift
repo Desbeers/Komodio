@@ -77,7 +77,7 @@ struct DetailView: View {
         }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         Image(systemName: scene.sidebarSelection.label.icon)
             .resizable()
             .scaledToFit()

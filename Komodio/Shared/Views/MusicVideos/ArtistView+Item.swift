@@ -36,14 +36,15 @@ extension ArtistView {
             }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
             VStack {
                 KodiArt.Poster(item: artist)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.width)
                     .overlay(alignment: .bottom) {
                         Text(artist.artist)
-                            .font(.caption)
+                            .font(KomodioApp.platform == .tvOS ? .caption : .title)
+                            .foregroundColor(.primary)
                             .scaleEffect(0.8)
                             .frame(maxWidth: .infinity)
                             .background(.thinMaterial)

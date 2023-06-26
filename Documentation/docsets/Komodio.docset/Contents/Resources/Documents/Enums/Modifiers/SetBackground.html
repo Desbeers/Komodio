@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Details Structure Reference</title>
+    <title>SetBackground Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Details" class="dashAnchor"></a>
-    <a title="Details Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/SetBackground" class="dashAnchor"></a>
+    <a title="SetBackground Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../../index.html">Komodio</a> (100% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Komodio Reference</a>
         <img id="carat" src="../../img/carat.png" alt=""/>
-        Details Structure Reference
+        SetBackground Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -68,6 +68,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Hosts.html">Hosts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Backport.html">Backport</a>
               </li>
             </ul>
           </li>
@@ -107,10 +110,10 @@
                 <a href="../../Structs/StartView.html">StartView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/StartView/Details.html">– Details</a>
+                <a href="../../Structs/StartView/Content.html">– Content</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/StartView/Content.html">– Content</a>
+                <a href="../../Structs/StartView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/MoviesView.html">MoviesView</a>
@@ -227,9 +230,6 @@
                 <a href="../../Structs/SearchView.html">SearchView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/SearchView/Details.html">– Details</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Structs/KodiSettingsView.html">KodiSettingsView</a>
               </li>
               <li class="nav-group-task">
@@ -275,9 +275,6 @@
                 <a href="../../Enums/Pickers.html">Pickers</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Enums/Pickers/ListSortPicker.html">– ListSortPicker</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
               </li>
               <li class="nav-group-task">
@@ -290,10 +287,19 @@
                 <a href="../../Enums/Modifiers.html">Modifiers</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Enums/Modifiers/NavigationDestinations.html">– NavigationDestinations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Modifiers/AppendStuff.html">– AppendStuff</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Enums/Modifiers/WatchStatus.html">– WatchStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Modifiers/DetailsFontStyle.html">– DetailsFontStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Modifiers/SetBackground.html">– SetBackground</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Modifiers/FanartStyle.html">– FanartStyle</a>
@@ -303,6 +309,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Styles.html">Styles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Styles/CardBackport.html">– CardBackport</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Enums/Styles/ListButton.html">– ListButton</a>
@@ -340,15 +349,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Details</h1>
+            <h1>SetBackground</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Details</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">SetBackground</span> <span class="p">:</span> <span class="kt">ViewModifier</span></code></pre>
 
                 </div>
               </div>
-            <p>SwiftUI View with search details</p>
+            <p>A <code>ViewModifier</code> to set the fanart background</p>
 
           </section>
           <section class="section task-group-section">
@@ -357,9 +366,36 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio10SearchViewV7DetailsV5sceneAA10SceneStateCvp"></a>
+                    <a name="/s:7Komodio9ModifiersO13SetBackgroundVAEycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio9ModifiersO13SetBackgroundVAEycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Avoid error in the <code>View extension</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">nonisolated</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio9ModifiersO13SetBackgroundV5sceneAA10SceneStateCvp"></a>
                     <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10SearchViewV7DetailsV5sceneAA10SceneStateCvp">scene</a>
+                    <a class="token" href="#/s:7Komodio9ModifiersO13SetBackgroundV5sceneAA10SceneStateCvp">scene</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -385,9 +421,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7SwiftUI4ViewP4body4BodyQzvp"></a>
-                    <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7SwiftUI4ViewP4body4BodyQzvp">body</a>
+                    <a name="/s:7Komodio9ModifiersO13SetBackgroundV4body7contentQr7SwiftUI21_ViewModifier_ContentVyAEG_tF"></a>
+                    <a name="//apple_ref/swift/Method/body(content:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio9ModifiersO13SetBackgroundV4body7contentQr7SwiftUI21_ViewModifier_ContentVyAEG_tF">body(content:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -395,13 +431,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>The modifier</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">body</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kd">some</span> <span class="kt">View</span></code></pre>
 
                         </div>
                       </div>
@@ -413,7 +450,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-04-04)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-06-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

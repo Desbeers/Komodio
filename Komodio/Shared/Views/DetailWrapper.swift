@@ -42,5 +42,13 @@ struct DetailWrapper<Content: View>: View {
         }
         .padding(40)
 #endif
+
+#if os(iOS)
+        ScrollView {
+            PartsView.DetailHeader(title: title, subtitle: subtitle)
+            content()
+                .padding(.horizontal, 30)
+        }
+#endif
     }
 }

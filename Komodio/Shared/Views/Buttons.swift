@@ -83,6 +83,148 @@ extension Buttons {
                     Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
                 })
             })
+            .buttonStyle(.playButton)
         }
+    }
+}
+
+
+extension Buttons {
+
+    // MARK: Play Button
+
+    /// The 'play' button
+    struct Play: View {
+        /// The `KodiItem` to play
+        var item: any KodiItem
+        /// Bool if the player will be presented
+        @State private var isPresented = false
+#if os(macOS)
+        /// Open Window environment
+        @Environment(\.openWindow) var openWindow
+        /// The button action
+        private var action: () {
+            let video = MediaItem(id: item.id, resume: true, item: item)
+            openWindow(value: video)
+        }
+#else
+        /// The button action
+        private var action: () {
+            isPresented.toggle()
+        }
+#endif
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            Button(
+                action: {
+                    action
+                },
+                label: {
+                    formatButtonLabel(
+                        title: "Play",
+                        subtitle: item.resume.position == 0 ? nil : "From beginning",
+                        icon: "play.fill")
+                })
+#if !os(macOS)
+            .fullScreenCover(isPresented: $isPresented) {
+                KomodioPlayerView(video: item)
+            }
+#endif
+        }
+    }
+
+    // MARK: Resume Button
+
+    /// The 'resume' button
+    struct Resume: View {
+        /// The `KodiItem` to resume
+        var item: any KodiItem
+        /// Bool if the player will be presented
+        @State private var isPresented = false
+        /// Calculate the resume time
+        private var resume: Int {
+            Int(item.resume.total - item.resume.position)
+        }
+#if os(macOS)
+        /// Open Window environment
+        @Environment(\.openWindow) var openWindow
+        /// The button action
+        private var action: () {
+            let video = MediaItem(id: item.id, resume: true, item: item)
+            openWindow(value: video)
+        }
+#else
+        /// The button action
+        private var action: () {
+            isPresented.toggle()
+        }
+#endif
+
+        // MARK: Body of the View
+
+        /// The body of the View
+        var body: some View {
+            Button(
+                action: {
+                    action
+                },
+                label: {
+                    formatButtonLabel(
+                        title: "Resume",
+                        subtitle: "\(Utils.secondsToTimeString(seconds: resume)) to go",
+                        icon: "play.fill"
+                    )
+                })
+#if !os(macOS)
+            .fullScreenCover(isPresented: $isPresented) {
+                KomodioPlayerView(video: item, resume: true)
+            }
+#endif
+        }
+    }
+}
+
+extension Buttons {
+
+    /// Format a label for a button
+    /// - Parameters:
+    ///   - title: The title
+    ///   - subtitle: The optional subtile
+    ///   - icon: Name of the SF symbol
+    ///   - color: The color for the icon
+    /// - Returns: A SwiftUI `Label`
+    static func formatButtonLabel(
+        title: String,
+        subtitle: String?,
+        icon: String,
+        color: Color = Color.primary
+    ) -> some View {
+        /// Calculate the font size for the subtitle
+        var subtitleFontSize: Double {
+            switch KomodioApp.platform {
+            case .macOS:
+                return 10
+            case .tvOS:
+                return 20
+            case .iPadOS:
+                return 14
+            }
+        }
+        return Label(title: {
+            VStack(alignment: .leading) {
+                Text(title)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.system(size: subtitleFontSize))
+                        .opacity(0.8)
+                }
+            }
+        }, icon: {
+            Image(systemName: icon)
+                .foregroundColor(color)
+        })
     }
 }

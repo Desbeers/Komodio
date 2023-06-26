@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 /// Collection of loose parts (shared)
 enum Parts {
-    /// Just a namespace here...
+    // Just a namespace here
 }
 
 extension Parts {
@@ -53,5 +53,7 @@ extension Parts {
         case macOS
         /// tvOS
         case tvOS
+        /// iPadOS
+        case iPadOS
     }
 }

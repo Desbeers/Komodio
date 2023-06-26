@@ -22,8 +22,6 @@ struct MovieSetView: View {
     @State private var movies: [Video.Details.Movie] = []
     /// The sorting
     @State var sorting = SwiftlyKodiAPI.List.Sort(id: "movieset", method: .year, order: .ascending)
-    /// The opacity of the View
-    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -33,7 +31,6 @@ struct MovieSetView: View {
             .task(id: movieSet) {
                 scene.selectedKodiItem = movieSet
                 scene.details = .movieSet(movieSet: movieSet)
-                opacity = 1
                 getMoviesFromSet()
             }
             .onChange(of: kodi.library.movies) { _ in
@@ -70,30 +67,30 @@ struct MovieSetView: View {
             .padding()
         }
         .animation(.default, value: sorting)
-        .offset(x: opacity == 0 ? ContentView.columnWidth : 0, y: 0)
-        .opacity(opacity)
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         ContentWrapper(
             header: {
                 ZStack {
                     PartsView.DetailHeader(title: movieSet.title)
-                    Buttons.PlayedState(item: movieSet)
-                        .padding(.trailing, 50)
-                        .padding(.bottom, 10)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                        .padding(.leading, 50)
-                        .padding(.bottom, 10)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    if KomodioApp.platform == .tvOS {
+                        Buttons.PlayedState(item: movieSet)
+                            .padding(.trailing, 50)
+                            .padding(.bottom, 10)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                            .padding(.leading, 50)
+                            .padding(.bottom, 10)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
                 .labelStyle(.headerLabel)
             }, content: {
                 VStack {
                     if !movieSet.description.isEmpty {
                         PartsView.TextMore(item: movieSet)
-                            .focusSection()
+                            .backport.focusSection()
                             .padding(.bottom, 20)
                     }
                     LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
@@ -105,12 +102,20 @@ struct MovieSetView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
-                    .focusSection()
+                    .backport.focusSection()
                 }
             }
         )
-        .buttonStyle(.card)
+        .backport.cardButton()
         .animation(.default, value: movies.map { $0.id })
+        .toolbar {
+            if KomodioApp.platform == .iPadOS {
+                Buttons.PlayedState(item: movieSet)
+                    .labelStyle(.titleAndIcon)
+                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                    .labelStyle(.titleAndIcon)
+            }
+        }
 #endif
     }
 

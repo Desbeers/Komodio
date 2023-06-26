@@ -75,7 +75,7 @@ struct FavouritesView: View {
         }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         ContentWrapper(
             header: {
                 PartsView.DetailHeader(
@@ -109,7 +109,7 @@ struct FavouritesView: View {
                 }
             }
         )
-        .buttonStyle(.card)
+        .backport.cardButton()
 #endif
     }
 
@@ -135,7 +135,7 @@ struct FavouritesView: View {
                 break
             }
         } else {
-            scene.navigationSubtitle = Router.favourites.label.title
+            scene.navigationSubtitle = Router.favourites.label.description
             scene.details = .favourites
         }
     }

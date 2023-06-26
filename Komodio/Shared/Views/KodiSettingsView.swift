@@ -19,33 +19,29 @@ struct KodiSettingsView: View {
 
     /// The body of the View
     var body: some View {
-        VStack {
-            Text("Kodi Settings")
-                .font(.largeTitle)
-            Warning()
-                .padding()
-                .background(.thickMaterial)
-                .cornerRadius(10)
-            Spacer()
+        HStack {
+            VStack {
+                Text("Kodi Settings")
+                    .font(.largeTitle)
+                Warning()
+                    .padding()
+                    .background(.thickMaterial)
+                    .cornerRadius(10)
+                Spacer()
+#if os(iOS)
+                Details()
+#endif
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+#if os(tvOS)
+                Details()
+#endif
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(.ultraThinMaterial.opacity(0.8))
         .task {
             scene.navigationSubtitle = Router.kodiSettings.label.title
+            scene.details = .kodiSettings
         }
-#if os(macOS)
-        .toolbar {
-            /// Show a 'back' button
-            ToolbarItem(placement: .navigation) {
-                Button(action: {
-                    scene.sidebarSelection = .start
-                }, label: {
-                    Image(systemName: "chevron.backward")
-                })
-            }
-        }
-#endif
     }
 }
 

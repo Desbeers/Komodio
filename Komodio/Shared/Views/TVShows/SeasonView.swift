@@ -52,7 +52,7 @@ struct SeasonView: View {
         .animation(.default, value: opacity)
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         List {
             ForEach(episodes) { episode in
                 EpisodeView.Item(episode: episode)

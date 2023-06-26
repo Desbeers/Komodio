@@ -17,12 +17,13 @@
 		D71170BB293503710059FCD3 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BA293503710059FCD3 /* ArtistView.swift */; };
 		D71170BD293503A40059FCD3 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BC293503A40059FCD3 /* AlbumView.swift */; };
 		D71170BF293503C70059FCD3 /* MusicVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BE293503C70059FCD3 /* MusicVideoView.swift */; };
+		D713E0C12A47A13D000F0BC9 /* ContentWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC952A45D6A80086C8FB /* ContentWrapper.swift */; };
+		D714969B2A45C15E0029042C /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D714969A2A45C15E0029042C /* SwiftlyKodiAPI */; };
 		D71BD53529056A5C00037DC9 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53429056A5C00037DC9 /* KomodioApp.swift */; };
 		D71BD53729056A5C00037DC9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53629056A5C00037DC9 /* MainView.swift */; };
 		D71BD53C29056A5E00037DC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */; };
 		D71BD54529056AD800037DC9 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */; };
 		D71BD54C29056F1100037DC9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
-		D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54D29056F3700037DC9 /* SidebarView.swift */; };
 		D71BD55229056FB500037DC9 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D71BD5542905726A00037DC9 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
 		D71BD55629057E6600037DC9 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55529057E6600037DC9 /* DetailView.swift */; };
@@ -32,19 +33,24 @@
 		D71BD5602905849A00037DC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55F2905849A00037DC9 /* ContentView.swift */; };
 		D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD561290595FF00037DC9 /* Modifiers.swift */; };
 		D71BD56829059C6D00037DC9 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56729059C6D00037DC9 /* SeasonsView.swift */; };
-		D7254F43295739CA00DC704B /* Buttons+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F42295739CA00DC704B /* Buttons+macOS.swift */; };
-		D7254F4429573BD900DC704B /* Buttons+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F402957399C00DC704B /* Buttons+tvOS.swift */; };
+		D71C89C52A4845750077DB0F /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C89C42A4845750077DB0F /* LabelStyles.swift */; };
+		D71C89C62A4845750077DB0F /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C89C42A4845750077DB0F /* LabelStyles.swift */; };
+		D71C89C72A4845750077DB0F /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C89C42A4845750077DB0F /* LabelStyles.swift */; };
 		D7254F4629573FAB00DC704B /* Modifiers+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */; };
 		D7254F49295853C900DC704B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F48295853C900DC704B /* SearchView.swift */; };
 		D7254F4A295853F800DC704B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45B293A525800CE9B8D /* SearchView.swift */; };
 		D7254F4D2959FCC800DC704B /* RotatingIconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */; };
 		D7254F4E2959FCC800DC704B /* RotatingIconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */; };
 		D7254F4F295A06D200DC704B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
+		D7269CC72A475A2100CFBFE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55F2905849A00037DC9 /* ContentView.swift */; };
+		D7269CC82A475AB900CFBFE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55F2905849A00037DC9 /* ContentView.swift */; };
 		D72BF72729D7058600CFA373 /* ContentWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72629D7058600CFA373 /* ContentWrapper.swift */; };
 		D72BF72929D715EE00CFA373 /* Hosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72829D715EE00CFA373 /* Hosts.swift */; };
 		D72BF72A29D715EE00CFA373 /* Hosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72829D715EE00CFA373 /* Hosts.swift */; };
 		D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72DE7B42955F22500DD0FFB /* SidebarView.swift */; };
 		D7325D522906852000D15D79 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
+		D73970682A49A13A002C02E2 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45B293A525800CE9B8D /* SearchView.swift */; };
+		D73970692A49A7CA002C02E2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC612A45D0E30086C8FB /* SidebarView.swift */; };
 		D750D00229B50A8900088E0F /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750D00129B50A8900088E0F /* FavouritesView.swift */; };
 		D750D00329B50A8900088E0F /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750D00129B50A8900088E0F /* FavouritesView.swift */; };
 		D7599CEB29AE80C2004BA9D3 /* Parts+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */; };
@@ -61,9 +67,12 @@
 		D75C3F70294DED96002BC065 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BA293503710059FCD3 /* ArtistView.swift */; };
 		D75C3F71294DED9A002BC065 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BC293503A40059FCD3 /* AlbumView.swift */; };
 		D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BE293503C70059FCD3 /* MusicVideoView.swift */; };
+		D766F5DF2A46EB10002DDB1C /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766F5DE2A46EB10002DDB1C /* Navigation.swift */; };
+		D766F5E02A46EB10002DDB1C /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766F5DE2A46EB10002DDB1C /* Navigation.swift */; };
+		D766F5E12A46EB10002DDB1C /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766F5DE2A46EB10002DDB1C /* Navigation.swift */; };
 		D76750DB2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
 		D76750DC2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
-		D76BFFD32990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */; };
+		D76BFFD32990F7E7000E8E54 /* LaunchScreenTV.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreenTV.storyboard */; };
 		D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */; };
 		D76BFFD8299521B0000E8E54 /* Pickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD7299521B0000E8E54 /* Pickers.swift */; };
 		D76BFFD9299521B0000E8E54 /* Pickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD7299521B0000E8E54 /* Pickers.swift */; };
@@ -77,6 +86,9 @@
 		D770A27B29DC02ED005076F5 /* MusicVideoView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27929DC02ED005076F5 /* MusicVideoView+Item.swift */; };
 		D770A27D29DC05AA005076F5 /* MusicVideoView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27C29DC05AA005076F5 /* MusicVideoView+Details.swift */; };
 		D770A27E29DC05AA005076F5 /* MusicVideoView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27C29DC05AA005076F5 /* MusicVideoView+Details.swift */; };
+		D7721D942A483DE2004D8531 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7721D932A483DE2004D8531 /* ButtonStyles.swift */; };
+		D7721D952A483DE2004D8531 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7721D932A483DE2004D8531 /* ButtonStyles.swift */; };
+		D7721D962A483DE2004D8531 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7721D932A483DE2004D8531 /* ButtonStyles.swift */; };
 		D7773D7D29D9C65D007798A0 /* Modifiers+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7773D7C29D9C65D007798A0 /* Modifiers+macOS.swift */; };
 		D779BEB029882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D779BEB129882A67009FD90A /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
@@ -90,13 +102,67 @@
 		D785A19E294B640800530F62 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
 		D785A19F294B652100530F62 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
 		D785A1A0294B653C00530F62 /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* PartsView.swift */; };
-		D785A1A2294B665600530F62 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D785A1A1294B665600530F62 /* ContentView.swift */; };
 		D785A1A3294B665F00530F62 /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
 		D785A1A4294B668C00530F62 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD561290595FF00037DC9 /* Modifiers.swift */; };
 		D785A1A7294B7F3A00530F62 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55529057E6600037DC9 /* DetailView.swift */; };
 		D785A1A8294B7F8E00530F62 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B22934E8570059FCD3 /* MovieView.swift */; };
 		D785A1A9294B7FA000530F62 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55729057F1A00037DC9 /* Buttons.swift */; };
 		D785A1AB294CBC6100530F62 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
+		D786DC562A45C7370086C8FB /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC502A45C7370086C8FB /* KomodioApp.swift */; };
+		D786DC5B2A45C9570086C8FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
+		D786DC602A45CE180086C8FB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC5F2A45CE180086C8FB /* MainView.swift */; };
+		D786DC622A45D0E30086C8FB /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC612A45D0E30086C8FB /* SidebarView.swift */; };
+		D786DC632A45D13E0086C8FB /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
+		D786DC642A45D1420086C8FB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
+		D786DC652A45D1480086C8FB /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
+		D786DC662A45D1B50086C8FB /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
+		D786DC672A45D5040086C8FB /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
+		D786DC682A45D50C0086C8FB /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B22934E8570059FCD3 /* MovieView.swift */; };
+		D786DC692A45D5120086C8FB /* MovieView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263029DB71B100CEC57E /* MovieView+Item.swift */; };
+		D786DC6A2A45D5160086C8FB /* MovieView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263329DB722200CEC57E /* MovieView+Details.swift */; };
+		D786DC6B2A45D51A0086C8FB /* MovieSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7325D512906852000D15D79 /* MovieSetView.swift */; };
+		D786DC6C2A45D51D0086C8FB /* MovieSetView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7262A29DB612F00CEC57E /* MovieSetView+Item.swift */; };
+		D786DC6D2A45D5210086C8FB /* MovieSetView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7262D29DB705100CEC57E /* MovieSetView+Details.swift */; };
+		D786DC6E2A45D5440086C8FB /* PartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45D293A59AC00CE9B8D /* PartsView.swift */; };
+		D786DC6F2A45D5640086C8FB /* RotatingIconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */; };
+		D786DC702A45D56E0086C8FB /* Hosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72829D715EE00CFA373 /* Hosts.swift */; };
+		D786DC712A45D59A0086C8FB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55529057E6600037DC9 /* DetailView.swift */; };
+		D786DC722A45D5CD0086C8FB /* TVShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55D290583F600037DC9 /* TVShowsView.swift */; };
+		D786DC732A45D5DE0086C8FB /* SeasonView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263C29DB765F00CEC57E /* SeasonView+Item.swift */; };
+		D786DC742A45D5DE0086C8FB /* TVShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B02934E72D0059FCD3 /* TVShowView.swift */; };
+		D786DC752A45D5DE0086C8FB /* UpNextView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7264529DB78A600CEC57E /* UpNextView+Details.swift */; };
+		D786DC762A45D5DE0086C8FB /* TVShowView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263629DB747C00CEC57E /* TVShowView+Item.swift */; };
+		D786DC772A45D5DE0086C8FB /* TVShowView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263929DB751500CEC57E /* TVShowView+Details.swift */; };
+		D786DC782A45D5DE0086C8FB /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56529059B6000037DC9 /* EpisodeView.swift */; };
+		D786DC792A45D5DE0086C8FB /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56329059B1400037DC9 /* SeasonView.swift */; };
+		D786DC7A2A45D5DE0086C8FB /* UpNextView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7264229DB77C000CEC57E /* UpNextView+Item.swift */; };
+		D786DC7B2A45D5DE0086C8FB /* EpisodeView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263F29DB76FD00CEC57E /* EpisodeView+Item.swift */; };
+		D786DC7C2A45D5DE0086C8FB /* UpNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE462293B6B9100CE9B8D /* UpNextView.swift */; };
+		D786DC7D2A45D5DE0086C8FB /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD56729059C6D00037DC9 /* SeasonsView.swift */; };
+		D786DC7E2A45D5E60086C8FB /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BA293503710059FCD3 /* ArtistView.swift */; };
+		D786DC7F2A45D5E60086C8FB /* ArtistView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27029DC0096005076F5 /* ArtistView+Item.swift */; };
+		D786DC802A45D5E60086C8FB /* ArtistView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27229DC00D3005076F5 /* ArtistView+Details.swift */; };
+		D786DC812A45D5E60086C8FB /* MusicVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B6293502E90059FCD3 /* MusicVideosView.swift */; };
+		D786DC822A45D5E60086C8FB /* AlbumView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27629DC015A005076F5 /* AlbumView+Item.swift */; };
+		D786DC832A45D5E60086C8FB /* MusicVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BE293503C70059FCD3 /* MusicVideoView.swift */; };
+		D786DC842A45D5E60086C8FB /* MusicVideoView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27C29DC05AA005076F5 /* MusicVideoView+Details.swift */; };
+		D786DC852A45D5E60086C8FB /* MusicVideoView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27929DC02ED005076F5 /* MusicVideoView+Item.swift */; };
+		D786DC862A45D5E60086C8FB /* ArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B8293503520059FCD3 /* ArtistsView.swift */; };
+		D786DC872A45D5E60086C8FB /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BC293503A40059FCD3 /* AlbumView.swift */; };
+		D786DC882A45D5F00086C8FB /* KomodioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */; };
+		D786DC892A45D5F00086C8FB /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A782964635B0026D815 /* StatisticsView.swift */; };
+		D786DC8A2A45D5F00086C8FB /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD561290595FF00037DC9 /* Modifiers.swift */; };
+		D786DC8B2A45D5F00086C8FB /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750D00129B50A8900088E0F /* FavouritesView.swift */; };
+		D786DC8C2A45D5F00086C8FB /* HostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* HostItemView.swift */; };
+		D786DC8D2A45D5F00086C8FB /* KodiSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */; };
+		D786DC8E2A45D5F00086C8FB /* Pickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD7299521B0000E8E54 /* Pickers.swift */; };
+		D786DC8F2A45D5F00086C8FB /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55729057F1A00037DC9 /* Buttons.swift */; };
+		D786DC902A45D5F00086C8FB /* DetailWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D000F929D1FED3007973C0 /* DetailWrapper.swift */; };
+		D786DC912A45D5F00086C8FB /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
+		D786DC922A45D5F00086C8FB /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
+		D786DC9A2A45D7230086C8FB /* Backport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC992A45D7230086C8FB /* Backport.swift */; };
+		D786DC9B2A45D7230086C8FB /* Backport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC992A45D7230086C8FB /* Backport.swift */; };
+		D786DC9C2A45D7230086C8FB /* Backport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC992A45D7230086C8FB /* Backport.swift */; };
 		D7B49BE22953262A00BBCB80 /* SiriRemoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */; };
 		D7D000FA29D1FED3007973C0 /* DetailWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D000F929D1FED3007973C0 /* DetailWrapper.swift */; };
 		D7D000FB29D1FED3007973C0 /* DetailWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D000F929D1FED3007973C0 /* DetailWrapper.swift */; };
@@ -127,11 +193,8 @@
 		D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE462293B6B9100CE9B8D /* UpNextView.swift */; };
 		D7F03A6D295F141C0026D815 /* KodiSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */; };
 		D7F03A6F296071F40026D815 /* KodiSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */; };
-		D7F03A712960819D0026D815 /* KodiSettingsView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A702960819D0026D815 /* KodiSettingsView+tvOS.swift */; };
 		D7F03A792964635B0026D815 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A782964635B0026D815 /* StatisticsView.swift */; };
 		D7F03A7A2964635B0026D815 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A782964635B0026D815 /* StatisticsView.swift */; };
-		D7F03A7C296466C40026D815 /* StartView+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A7B296466C40026D815 /* StartView+macOS.swift */; };
-		D7F03A7E2964676A0026D815 /* StartView+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A7D2964676A0026D815 /* StartView+tvOS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +206,7 @@
 		D71170BA293503710059FCD3 /* ArtistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		D71170BC293503A40059FCD3 /* AlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		D71170BE293503C70059FCD3 /* MusicVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideoView.swift; sourceTree = "<group>"; };
+		D714968C2A45C0AC0029042C /* KomodioPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KomodioPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D71BD53129056A5C00037DC9 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D71BD53429056A5C00037DC9 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D71BD53629056A5C00037DC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -150,7 +214,6 @@
 		D71BD53B29056A5E00037DC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D71BD53D29056A5E00037DC9 /* Komodio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Komodio.entitlements; sourceTree = "<group>"; };
 		D71BD54B29056F1100037DC9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		D71BD54D29056F3700037DC9 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D71BD55129056FB500037DC9 /* SceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneState.swift; sourceTree = "<group>"; };
 		D71BD5532905726A00037DC9 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		D71BD55529057E6600037DC9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -162,19 +225,20 @@
 		D71BD56329059B1400037DC9 /* SeasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonView.swift; sourceTree = "<group>"; };
 		D71BD56529059B6000037DC9 /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
 		D71BD56729059C6D00037DC9 /* SeasonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
-		D7254F402957399C00DC704B /* Buttons+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buttons+tvOS.swift"; sourceTree = "<group>"; };
-		D7254F42295739CA00DC704B /* Buttons+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buttons+macOS.swift"; sourceTree = "<group>"; };
+		D71C89C42A4845750077DB0F /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modifiers+tvOS.swift"; sourceTree = "<group>"; };
 		D7254F48295853C900DC704B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconModel.swift; sourceTree = "<group>"; };
+		D7269CC92A475AD900CFBFE9 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D72BF72629D7058600CFA373 /* ContentWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWrapper.swift; sourceTree = "<group>"; };
 		D72BF72829D715EE00CFA373 /* Hosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hosts.swift; sourceTree = "<group>"; };
 		D72DE7B42955F22500DD0FFB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
 		D750D00129B50A8900088E0F /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Parts+tvOS.swift"; sourceTree = "<group>"; };
+		D766F5DE2A46EB10002DDB1C /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D76BFFD12990F7E7000E8E54 /* LaunchScreenTV.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreenTV.storyboard; sourceTree = "<group>"; };
 		D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsView.swift; sourceTree = "<group>"; };
 		D76BFFD7299521B0000E8E54 /* Pickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickers.swift; sourceTree = "<group>"; };
 		D770A27029DC0096005076F5 /* ArtistView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtistView+Item.swift"; sourceTree = "<group>"; };
@@ -182,11 +246,17 @@
 		D770A27629DC015A005076F5 /* AlbumView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlbumView+Item.swift"; sourceTree = "<group>"; };
 		D770A27929DC02ED005076F5 /* MusicVideoView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicVideoView+Item.swift"; sourceTree = "<group>"; };
 		D770A27C29DC05AA005076F5 /* MusicVideoView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicVideoView+Details.swift"; sourceTree = "<group>"; };
+		D7721D932A483DE2004D8531 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		D7773D7C29D9C65D007798A0 /* Modifiers+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modifiers+macOS.swift"; sourceTree = "<group>"; };
 		D779BEAF29882A67009FD90A /* Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parts.swift; sourceTree = "<group>"; };
 		D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioPlayerView.swift; sourceTree = "<group>"; };
 		D77B1371297561AA00ECE2F9 /* HostItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostItemView.swift; sourceTree = "<group>"; };
-		D785A1A1294B665600530F62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D786DC502A45C7370086C8FB /* KomodioApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
+		D786DC552A45C7370086C8FB /* Komodio.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Komodio.plist; sourceTree = "<group>"; };
+		D786DC5F2A45CE180086C8FB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D786DC612A45D0E30086C8FB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		D786DC952A45D6A80086C8FB /* ContentWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWrapper.swift; sourceTree = "<group>"; };
+		D786DC992A45D7230086C8FB /* Backport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backport.swift; sourceTree = "<group>"; };
 		D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiriRemoteController.swift; sourceTree = "<group>"; };
 		D7D000F929D1FED3007973C0 /* DetailWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWrapper.swift; sourceTree = "<group>"; };
 		D7E7262A29DB612F00CEC57E /* MovieSetView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieSetView+Item.swift"; sourceTree = "<group>"; };
@@ -207,14 +277,19 @@
 		D7EFE45F293B2C3300CE9B8D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D7EFE462293B6B9100CE9B8D /* UpNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextView.swift; sourceTree = "<group>"; };
 		D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiSettingsView.swift; sourceTree = "<group>"; };
-		D7F03A702960819D0026D815 /* KodiSettingsView+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KodiSettingsView+tvOS.swift"; sourceTree = "<group>"; };
 		D7F03A782964635B0026D815 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
-		D7F03A7B296466C40026D815 /* StartView+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartView+macOS.swift"; sourceTree = "<group>"; };
-		D7F03A7D2964676A0026D815 /* StartView+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartView+tvOS.swift"; sourceTree = "<group>"; };
 		D7F03A8029685E2D0026D815 /* Komodio.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Komodio.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D71496892A45C0AC0029042C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D714969B2A45C15E0029042C /* SwiftlyKodiAPI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D71BD52E29056A5C00037DC9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -299,6 +374,7 @@
 			children = (
 				D71BD53129056A5C00037DC9 /* Komodio.app */,
 				D7EFE44D293A4E7900CE9B8D /* KomodioTV.app */,
+				D714968C2A45C0AC0029042C /* KomodioPad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -308,7 +384,9 @@
 			children = (
 				D75C3F60294DCCB2002BC065 /* Shared */,
 				D75C3F5F294DCCAA002BC065 /* macOS */,
+				D786DC9E2A45FF320086C8FB /* iOS (shared) */,
 				D7EFE44E293A4E7900CE9B8D /* tvOS */,
+				D786DC4F2A45C7370086C8FB /* iPadOS */,
 			);
 			path = Komodio;
 			sourceTree = "<group>";
@@ -325,11 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				D71BD53629056A5C00037DC9 /* MainView.swift */,
-				D71BD54D29056F3700037DC9 /* SidebarView.swift */,
-				D71BD55F2905849A00037DC9 /* ContentView.swift */,
-				D7F03A7B296466C40026D815 /* StartView+macOS.swift */,
-				D7EFE45B293A525800CE9B8D /* SearchView.swift */,
-				D7254F42295739CA00DC704B /* Buttons+macOS.swift */,
 				D7773D7C29D9C65D007798A0 /* Modifiers+macOS.swift */,
 			);
 			path = Views;
@@ -340,15 +413,10 @@
 			children = (
 				D7EFE451293A4E7900CE9B8D /* MainView.swift */,
 				D72DE7B42955F22500DD0FFB /* SidebarView.swift */,
-				D785A1A1294B665600530F62 /* ContentView.swift */,
 				D72BF72629D7058600CFA373 /* ContentWrapper.swift */,
-				D7F03A7D2964676A0026D815 /* StartView+tvOS.swift */,
 				D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */,
 				D7254F48295853C900DC704B /* SearchView.swift */,
-				D7254F402957399C00DC704B /* Buttons+tvOS.swift */,
 				D7254F4529573FAB00DC704B /* Modifiers+tvOS.swift */,
-				D7F03A702960819D0026D815 /* KodiSettingsView+tvOS.swift */,
-				D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +425,8 @@
 			isa = PBXGroup;
 			children = (
 				D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */,
+				D7599CE929AE7FAE004BA9D3 /* Parts+tvOS.swift */,
+				D76BFFD12990F7E7000E8E54 /* LaunchScreenTV.storyboard */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -376,6 +446,7 @@
 			children = (
 				D75C3F61294DCCC8002BC065 /* General */,
 				D75C3F66294DD454002BC065 /* Views */,
+				D7721D922A483D88004D8531 /* Styles */,
 				D71BD53A29056A5E00037DC9 /* Preview Content */,
 			);
 			path = Shared;
@@ -391,6 +462,8 @@
 				D779BEAF29882A67009FD90A /* Parts.swift */,
 				D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */,
 				D71BD53829056A5E00037DC9 /* Assets.xcassets */,
+				D786DC992A45D7230086C8FB /* Backport.swift */,
+				D766F5DE2A46EB10002DDB1C /* Navigation.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -402,20 +475,42 @@
 				D71170AF2934E6CB0059FCD3 /* TVShows */,
 				D71170B5293502D00059FCD3 /* MusicVideos */,
 				D7EFE45F293B2C3300CE9B8D /* StartView.swift */,
+				D786DC612A45D0E30086C8FB /* SidebarView.swift */,
+				D71BD55F2905849A00037DC9 /* ContentView.swift */,
 				D71BD55529057E6600037DC9 /* DetailView.swift */,
 				D7D000F929D1FED3007973C0 /* DetailWrapper.swift */,
 				D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */,
 				D77B1371297561AA00ECE2F9 /* HostItemView.swift */,
 				D7F03A782964635B0026D815 /* StatisticsView.swift */,
 				D750D00129B50A8900088E0F /* FavouritesView.swift */,
+				D7EFE45B293A525800CE9B8D /* SearchView.swift */,
 				D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */,
 				D7EFE45D293A59AC00CE9B8D /* PartsView.swift */,
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
 				D76BFFD7299521B0000E8E54 /* Pickers.swift */,
 				D71BD561290595FF00037DC9 /* Modifiers.swift */,
-				D76750DA2969838800A95D52 /* Styles.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D7721D902A4837CD004D8531 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D786DC5F2A45CE180086C8FB /* MainView.swift */,
+				D7269CC92A475AD900CFBFE9 /* SearchView.swift */,
+				D786DC952A45D6A80086C8FB /* ContentWrapper.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D7721D922A483D88004D8531 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				D76750DA2969838800A95D52 /* Styles.swift */,
+				D7721D932A483DE2004D8531 /* ButtonStyles.swift */,
+				D71C89C42A4845750077DB0F /* LabelStyles.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		D785A198294B63D900530F62 /* Frameworks */ = {
@@ -426,6 +521,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D786DC4F2A45C7370086C8FB /* iPadOS */ = {
+			isa = PBXGroup;
+			children = (
+				D7721D902A4837CD004D8531 /* Views */,
+				D786DC502A45C7370086C8FB /* KomodioApp.swift */,
+				D786DC552A45C7370086C8FB /* Komodio.plist */,
+			);
+			path = iPadOS;
+			sourceTree = "<group>";
+		};
+		D786DC9E2A45FF320086C8FB /* iOS (shared) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "iOS (shared)";
+			sourceTree = "<group>";
+		};
 		D7EFE44E293A4E7900CE9B8D /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,7 +545,6 @@
 				D72DE7B32955F21200DD0FFB /* Views */,
 				D7EFE44F293A4E7900CE9B8D /* KomodioApp.swift */,
 				D7F03A8029685E2D0026D815 /* Komodio.plist */,
-				D76BFFD12990F7E7000E8E54 /* LaunchScreen.storyboard */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -441,6 +552,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D714968B2A45C0AC0029042C /* KomodioPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D71496992A45C0AD0029042C /* Build configuration list for PBXNativeTarget "KomodioPad" */;
+			buildPhases = (
+				D71496882A45C0AC0029042C /* Sources */,
+				D71496892A45C0AC0029042C /* Frameworks */,
+				D714968A2A45C0AC0029042C /* Resources */,
+				D71C89C82A48644B0077DB0F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KomodioPad;
+			packageProductDependencies = (
+				D714969A2A45C15E0029042C /* SwiftlyKodiAPI */,
+			);
+			productName = KomodioPad;
+			productReference = D714968C2A45C0AC0029042C /* KomodioPad.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D71BD53029056A5C00037DC9 /* Komodio */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D71BD54029056A5E00037DC9 /* Build configuration list for PBXNativeTarget "Komodio" */;
@@ -490,9 +622,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					D714968B2A45C0AC0029042C = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					D71BD53029056A5C00037DC9 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -519,11 +654,20 @@
 			targets = (
 				D71BD53029056A5C00037DC9 /* Komodio */,
 				D7EFE44C293A4E7900CE9B8D /* KomodioTV */,
+				D714968B2A45C0AC0029042C /* KomodioPad */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D714968A2A45C0AC0029042C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D786DC5B2A45C9570086C8FB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D71BD52F29056A5C00037DC9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -537,7 +681,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D76BFFD32990F7E7000E8E54 /* LaunchScreen.storyboard in Resources */,
+				D76BFFD32990F7E7000E8E54 /* LaunchScreenTV.storyboard in Resources */,
 				D75C3F65294DCFE6002BC065 /* Preview Assets.xcassets in Resources */,
 				D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */,
 			);
@@ -562,7 +706,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		D71C89C82A48644B0077DB0F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		D72DE7B72955F29600DD0FFB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -580,11 +742,76 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  # swiftlint --enable-all-rules\n  # swiftlint autocorrect\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which /opt/homebrew/bin/swiftlint >/dev/null; then\n  /opt/homebrew/bin/swiftlint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D71496882A45C0AC0029042C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D786DC6D2A45D5210086C8FB /* MovieSetView+Details.swift in Sources */,
+				D786DC832A45D5E60086C8FB /* MusicVideoView.swift in Sources */,
+				D786DC882A45D5F00086C8FB /* KomodioPlayerView.swift in Sources */,
+				D71C89C72A4845750077DB0F /* LabelStyles.swift in Sources */,
+				D786DC772A45D5DE0086C8FB /* TVShowView+Details.swift in Sources */,
+				D786DC662A45D1B50086C8FB /* Parts.swift in Sources */,
+				D786DC652A45D1480086C8FB /* MediaItem.swift in Sources */,
+				D786DC902A45D5F00086C8FB /* DetailWrapper.swift in Sources */,
+				D786DC892A45D5F00086C8FB /* StatisticsView.swift in Sources */,
+				D786DC7D2A45D5DE0086C8FB /* SeasonsView.swift in Sources */,
+				D786DC702A45D56E0086C8FB /* Hosts.swift in Sources */,
+				D786DC8E2A45D5F00086C8FB /* Pickers.swift in Sources */,
+				D786DC912A45D5F00086C8FB /* Styles.swift in Sources */,
+				D7721D962A483DE2004D8531 /* ButtonStyles.swift in Sources */,
+				D786DC632A45D13E0086C8FB /* SceneState.swift in Sources */,
+				D786DC9C2A45D7230086C8FB /* Backport.swift in Sources */,
+				D786DC812A45D5E60086C8FB /* MusicVideosView.swift in Sources */,
+				D786DC8A2A45D5F00086C8FB /* Modifiers.swift in Sources */,
+				D786DC7B2A45D5DE0086C8FB /* EpisodeView+Item.swift in Sources */,
+				D786DC8D2A45D5F00086C8FB /* KodiSettingsView.swift in Sources */,
+				D786DC7C2A45D5DE0086C8FB /* UpNextView.swift in Sources */,
+				D786DC622A45D0E30086C8FB /* SidebarView.swift in Sources */,
+				D786DC692A45D5120086C8FB /* MovieView+Item.swift in Sources */,
+				D786DC762A45D5DE0086C8FB /* TVShowView+Item.swift in Sources */,
+				D786DC682A45D50C0086C8FB /* MovieView.swift in Sources */,
+				D786DC722A45D5CD0086C8FB /* TVShowsView.swift in Sources */,
+				D786DC862A45D5E60086C8FB /* ArtistsView.swift in Sources */,
+				D7269CC82A475AB900CFBFE9 /* ContentView.swift in Sources */,
+				D786DC732A45D5DE0086C8FB /* SeasonView+Item.swift in Sources */,
+				D786DC752A45D5DE0086C8FB /* UpNextView+Details.swift in Sources */,
+				D786DC8C2A45D5F00086C8FB /* HostItemView.swift in Sources */,
+				D786DC602A45CE180086C8FB /* MainView.swift in Sources */,
+				D786DC872A45D5E60086C8FB /* AlbumView.swift in Sources */,
+				D786DC8F2A45D5F00086C8FB /* Buttons.swift in Sources */,
+				D786DC922A45D5F00086C8FB /* StartView.swift in Sources */,
+				D73970682A49A13A002C02E2 /* SearchView.swift in Sources */,
+				D786DC642A45D1420086C8FB /* Router.swift in Sources */,
+				D786DC782A45D5DE0086C8FB /* EpisodeView.swift in Sources */,
+				D786DC802A45D5E60086C8FB /* ArtistView+Details.swift in Sources */,
+				D786DC8B2A45D5F00086C8FB /* FavouritesView.swift in Sources */,
+				D786DC842A45D5E60086C8FB /* MusicVideoView+Details.swift in Sources */,
+				D786DC672A45D5040086C8FB /* MoviesView.swift in Sources */,
+				D786DC792A45D5DE0086C8FB /* SeasonView.swift in Sources */,
+				D786DC6F2A45D5640086C8FB /* RotatingIconModel.swift in Sources */,
+				D786DC822A45D5E60086C8FB /* AlbumView+Item.swift in Sources */,
+				D713E0C12A47A13D000F0BC9 /* ContentWrapper.swift in Sources */,
+				D786DC6A2A45D5160086C8FB /* MovieView+Details.swift in Sources */,
+				D786DC7A2A45D5DE0086C8FB /* UpNextView+Item.swift in Sources */,
+				D786DC6C2A45D51D0086C8FB /* MovieSetView+Item.swift in Sources */,
+				D786DC562A45C7370086C8FB /* KomodioApp.swift in Sources */,
+				D786DC712A45D59A0086C8FB /* DetailView.swift in Sources */,
+				D786DC6B2A45D51A0086C8FB /* MovieSetView.swift in Sources */,
+				D786DC7F2A45D5E60086C8FB /* ArtistView+Item.swift in Sources */,
+				D786DC852A45D5E60086C8FB /* MusicVideoView+Item.swift in Sources */,
+				D786DC7E2A45D5E60086C8FB /* ArtistView.swift in Sources */,
+				D786DC6E2A45D5440086C8FB /* PartsView.swift in Sources */,
+				D786DC742A45D5DE0086C8FB /* TVShowView.swift in Sources */,
+				D766F5E12A46EB10002DDB1C /* Navigation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D71BD52D29056A5C00037DC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -592,6 +819,7 @@
 				D71170B12934E72D0059FCD3 /* TVShowView.swift in Sources */,
 				D76750DB2969838800A95D52 /* Styles.swift in Sources */,
 				D7E7262E29DB705100CEC57E /* MovieSetView+Details.swift in Sources */,
+				D71C89C52A4845750077DB0F /* LabelStyles.swift in Sources */,
 				D7EFE45E293A59AC00CE9B8D /* PartsView.swift in Sources */,
 				D71BD55A29057FE400037DC9 /* MediaItem.swift in Sources */,
 				D71170BD293503A40059FCD3 /* AlbumView.swift in Sources */,
@@ -599,7 +827,6 @@
 				D77B1372297561AA00ECE2F9 /* HostItemView.swift in Sources */,
 				D71BD562290595FF00037DC9 /* Modifiers.swift in Sources */,
 				D770A27A29DC02ED005076F5 /* MusicVideoView+Item.swift in Sources */,
-				D7F03A7C296466C40026D815 /* StartView+macOS.swift in Sources */,
 				D7E7263A29DB751500CEC57E /* TVShowView+Details.swift in Sources */,
 				D779BEB029882A67009FD90A /* Parts.swift in Sources */,
 				D71BD55829057F1A00037DC9 /* Buttons.swift in Sources */,
@@ -614,13 +841,14 @@
 				D71BD54C29056F1100037DC9 /* Router.swift in Sources */,
 				D71170AC2934E36E0059FCD3 /* SeasonView.swift in Sources */,
 				D7E7263429DB722200CEC57E /* MovieView+Details.swift in Sources */,
+				D73970692A49A7CA002C02E2 /* SidebarView.swift in Sources */,
 				D7EFE463293B6B9100CE9B8D /* UpNextView.swift in Sources */,
 				D7E7263129DB71B100CEC57E /* MovieView+Item.swift in Sources */,
 				D7254F4A295853F800DC704B /* SearchView.swift in Sources */,
 				D770A27729DC015A005076F5 /* AlbumView+Item.swift in Sources */,
+				D786DC9A2A45D7230086C8FB /* Backport.swift in Sources */,
 				D7E7264629DB78A600CEC57E /* UpNextView+Details.swift in Sources */,
 				D7E7262B29DB612F00CEC57E /* MovieSetView+Item.swift in Sources */,
-				D71BD54E29056F3700037DC9 /* SidebarView.swift in Sources */,
 				D7F03A792964635B0026D815 /* StatisticsView.swift in Sources */,
 				D7E7263729DB747C00CEC57E /* TVShowView+Item.swift in Sources */,
 				D71170AD2934E37A0059FCD3 /* EpisodeView.swift in Sources */,
@@ -634,9 +862,9 @@
 				D770A27129DC0096005076F5 /* ArtistView+Item.swift in Sources */,
 				D7E7264329DB77C000CEC57E /* UpNextView+Item.swift in Sources */,
 				D71BD55E290583F600037DC9 /* TVShowsView.swift in Sources */,
+				D7721D942A483DE2004D8531 /* ButtonStyles.swift in Sources */,
 				D71170BF293503C70059FCD3 /* MusicVideoView.swift in Sources */,
 				D71BD5602905849A00037DC9 /* ContentView.swift in Sources */,
-				D7254F43295739CA00DC704B /* Buttons+macOS.swift in Sources */,
 				D72BF72929D715EE00CFA373 /* Hosts.swift in Sources */,
 				D7773D7D29D9C65D007798A0 /* Modifiers+macOS.swift in Sources */,
 				D71BD53729056A5C00037DC9 /* MainView.swift in Sources */,
@@ -645,6 +873,7 @@
 				D71BD53529056A5C00037DC9 /* KomodioApp.swift in Sources */,
 				D7EFE460293B2C3300CE9B8D /* StartView.swift in Sources */,
 				D7E7264029DB76FD00CEC57E /* EpisodeView+Item.swift in Sources */,
+				D766F5DF2A46EB10002DDB1C /* Navigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,15 +882,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D779BEB129882A67009FD90A /* Parts.swift in Sources */,
+				D71C89C62A4845750077DB0F /* LabelStyles.swift in Sources */,
 				D75C3F6D294DDD4D002BC065 /* UpNextView.swift in Sources */,
 				D75C3F69294DDD3F002BC065 /* TVShowView.swift in Sources */,
 				D7E7262C29DB612F00CEC57E /* MovieSetView+Item.swift in Sources */,
+				D7721D952A483DE2004D8531 /* ButtonStyles.swift in Sources */,
 				D7E7264729DB78A600CEC57E /* UpNextView+Details.swift in Sources */,
 				D785A1AB294CBC6100530F62 /* StartView.swift in Sources */,
 				D785A1A9294B7FA000530F62 /* Buttons.swift in Sources */,
 				D7B49BE22953262A00BBCB80 /* SiriRemoteController.swift in Sources */,
 				D7E7263829DB747C00CEC57E /* TVShowView+Item.swift in Sources */,
-				D7F03A7E2964676A0026D815 /* StartView+tvOS.swift in Sources */,
 				D75C3F68294DDD3B002BC065 /* TVShowsView.swift in Sources */,
 				D76BFFD9299521B0000E8E54 /* Pickers.swift in Sources */,
 				D770A27E29DC05AA005076F5 /* MusicVideoView+Details.swift in Sources */,
@@ -673,6 +903,7 @@
 				D7254F4629573FAB00DC704B /* Modifiers+tvOS.swift in Sources */,
 				D75C3F6B294DDD46002BC065 /* SeasonView.swift in Sources */,
 				D7254F49295853C900DC704B /* SearchView.swift in Sources */,
+				D786DC9B2A45D7230086C8FB /* Backport.swift in Sources */,
 				D7E7264129DB76FD00CEC57E /* EpisodeView+Item.swift in Sources */,
 				D75C3F6F294DED93002BC065 /* MusicVideosView.swift in Sources */,
 				D7D000FB29D1FED3007973C0 /* DetailWrapper.swift in Sources */,
@@ -681,10 +912,10 @@
 				D785A1A4294B668C00530F62 /* Modifiers.swift in Sources */,
 				D75C3F6E294DED8F002BC065 /* ArtistsView.swift in Sources */,
 				D7EFE452293A4E7900CE9B8D /* MainView.swift in Sources */,
-				D7F03A712960819D0026D815 /* KodiSettingsView+tvOS.swift in Sources */,
 				D785A1A3294B665F00530F62 /* MovieSetView.swift in Sources */,
 				D7E7263229DB71B100CEC57E /* MovieView+Item.swift in Sources */,
 				D7254F4E2959FCC800DC704B /* RotatingIconModel.swift in Sources */,
+				D7269CC72A475A2100CFBFE9 /* ContentView.swift in Sources */,
 				D785A19D294B640300530F62 /* SceneState.swift in Sources */,
 				D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */,
 				D7599CEB29AE80C2004BA9D3 /* Parts+tvOS.swift in Sources */,
@@ -697,7 +928,6 @@
 				D770A27B29DC02ED005076F5 /* MusicVideoView+Item.swift in Sources */,
 				D7F03A6F296071F40026D815 /* KodiSettingsView.swift in Sources */,
 				D7E7262F29DB705100CEC57E /* MovieSetView+Details.swift in Sources */,
-				D785A1A2294B665600530F62 /* ContentView.swift in Sources */,
 				D770A27429DC00D3005076F5 /* ArtistView+Details.swift in Sources */,
 				D77B1362296DECBF00ECE2F9 /* KomodioPlayerView.swift in Sources */,
 				D770A27529DC00E4005076F5 /* ArtistView+Item.swift in Sources */,
@@ -707,8 +937,8 @@
 				D785A19F294B652100530F62 /* MoviesView.swift in Sources */,
 				D750D00329B50A8900088E0F /* FavouritesView.swift in Sources */,
 				D7E7264429DB77C000CEC57E /* UpNextView+Item.swift in Sources */,
-				D7254F4429573BD900DC704B /* Buttons+tvOS.swift in Sources */,
 				D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */,
+				D766F5E02A46EB10002DDB1C /* Navigation.swift in Sources */,
 				D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */,
 				D785A19E294B640800530F62 /* MediaItem.swift in Sources */,
 				D7E7263B29DB751500CEC57E /* TVShowView+Details.swift in Sources */,
@@ -719,6 +949,81 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D71496972A45C0AD0029042C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Komodio/Shared/Preview Content\"";
+				DEVELOPMENT_TEAM = FHPCJ7396C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Komodio/iPadOS/Komodio.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Komodio;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Access Kodi on your network";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenPad.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.KomodioPad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		D71496982A45C0AD0029042C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Komodio/Shared/Preview Content\"";
+				DEVELOPMENT_TEAM = FHPCJ7396C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Komodio/iPadOS/Komodio.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Komodio;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Access Kodi on your network";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenPad.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.KomodioPad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		D71BD53E29056A5E00037DC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -770,14 +1075,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 16.1;
+				TVOS_DEPLOYMENT_TARGET = 16.4;
 			};
 			name = Debug;
 		};
@@ -826,13 +1132,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 16.1;
+				TVOS_DEPLOYMENT_TARGET = 16.4;
 			};
 			name = Release;
 		};
@@ -911,7 +1218,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Komodio/tvOS/Komodio.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenTV.storyboard;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -942,7 +1249,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Komodio/tvOS/Komodio.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenTV.storyboard;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -964,6 +1271,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D71496992A45C0AD0029042C /* Build configuration list for PBXNativeTarget "KomodioPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D71496972A45C0AD0029042C /* Debug */,
+				D71496982A45C0AD0029042C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D71BD52C29056A5C00037DC9 /* Build configuration list for PBXProject "Komodio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1005,6 +1321,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D714969A2A45C15E0029042C /* SwiftlyKodiAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */;
+			productName = SwiftlyKodiAPI;
+		};
 		D71BD54429056AD800037DC9 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */;

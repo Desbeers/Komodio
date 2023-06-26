@@ -16,10 +16,15 @@ struct MainView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @StateObject private var scene: SceneState = .shared
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
+    /// The opacity of the View
+    @State private var opacity: Double = 0
     /// The search field in the toolbar
     @State private var searchField: String = ""
     /// Set the column visibility
     @State private var columnVisibility = NavigationSplitViewVisibility.all
+
 
     // MARK: Body of the View
 
@@ -33,36 +38,19 @@ struct MainView: View {
                         .navigationSplitViewColumnWidth(200)
                 },
                 detail: {
-                    ContentView()
-                        .navigationSplitViewColumnWidth(ContentView.columnWidth)
+                    details
                 })
             .background(Color.primary.opacity(0.1))
             DetailView()
                 .frame(maxWidth: .infinity)
         }
-        .background(
-            ZStack {
-                Color("BlendColor")
-                if let item = scene.selectedKodiItem, !item.fanart.isEmpty {
-                    KodiArt.Fanart(item: item)
-                        .grayscale(1)
-                        .opacity(0.1)
-                        .scaledToFill()
-                        .transition(.opacity)
-                } else {
-                    Image("Background")
-                        .resizable()
-                        .opacity(0.1)
-                        .scaledToFill()
-                        .transition(.opacity)
-                }
-            }
-                .animation(.default, value: scene.selectedKodiItem?.id)
-        )
+        .setBackground()
         .task(id: kodi.status) {
             if kodi.status != .loadedLibrary {
                 scene.sidebarSelection = .start
             }
+            opacity = 1
+            state = .ready
         }
         .scrollContentBackground(.hidden)
         .navigationSubtitle(scene.navigationSubtitle)
@@ -72,5 +60,23 @@ struct MainView: View {
             await scene.updateSearch(query: searchField)
         }
         .environmentObject(scene)
+    }
+
+    // MARK: Content of the Details
+
+    /// The body of the View
+    var details: some View {
+        VStack {
+            switch state {
+            case .ready:
+                NavigationStack(path: $scene.navigationStackPath) {
+                    ContentView()
+                }
+            default:
+                PartsView.StatusMessage(item: scene.sidebarSelection, status: state)
+            }
+        }
+        .navigationSplitViewColumnWidth(KomodioApp.detailWidth)
+        .navigationStackAnimation(opacity: $opacity)
     }
 }

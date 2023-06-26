@@ -31,25 +31,6 @@ import SwiftlyKodiAPI
                         kodi.getSelectedHost()
                     }
                 }
-                .background(
-                    ZStack {
-                        Color("BlendColor")
-                        if let background = scene.selectedKodiItem, !background.fanart.isEmpty {
-                            KodiArt.Fanart(item: background)
-                                .grayscale(1)
-                                .opacity(0.2)
-                                .scaledToFill()
-                                .transition(.opacity)
-                        } else {
-                            Image("Background")
-                                .resizable()
-                                .opacity(0.2)
-                                .scaledToFill()
-                                .transition(.opacity)
-                        }
-                    }
-                        .ignoresSafeArea()
-                )
                 .animation(.default, value: scene.navigationStackPath)
         }
     }

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Komodio (tvOS)
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,16 +10,16 @@ import SwiftlyKodiAPI
 
 // MARK: Content View
 
-/// SwiftUI View for the main content (tvOS)
+/// SwiftUI View for the main content (shared)
 struct ContentView: View {
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
 
     // MARK: Body of the View
 
     /// The body of the View
     var body: some View {
-        VStack {
+        Group {
             switch scene.sidebarSelection {
             case .start:
                 StartView()
@@ -27,26 +27,29 @@ struct ContentView: View {
                 MoviesView()
             case .unwatchedMovies:
                 MoviesView(filter: .unwatched)
-            case .playlists:
-                PlaylistsView()
             case .tvshows:
                 TVShowsView()
+            case .seasons(let tvshow):
+                TVShowsView(selectedTVShow: tvshow)
             case .unwachedEpisodes:
                 UpNextView()
             case .musicVideos:
                 ArtistsView()
+            case .moviesPlaylist(let file):
+                MoviesView(filter: .playlist(file: file))
             case .favourites:
                 FavouritesView()
             case .search:
                 SearchView()
             case .kodiSettings:
                 KodiSettingsView()
+            case .hostItemSettings(let host):
+                HostItemView(host: host)
             default:
-                /// This should not happen
                 Text("Not implemented")
             }
         }
-        .animation(.default, value: scene.sidebarSelection)
-        .setSiriExit()
+        .navigationDestinations()
+        .animation(.default, value: scene.navigationStackPath)
     }
 }

@@ -70,7 +70,7 @@ struct UpNextView: View {
         .animation(.default, value: opacity)
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         ContentWrapper(
             scroll: false,
             header: {
@@ -91,11 +91,11 @@ struct UpNextView: View {
                         }
                     }
                     .frame(width: KomodioApp.posterSize.width + 120)
-                    .buttonStyle(.card)
+                    .backport.cardButton()
                     if let selectedEpisode {
                         Details(episode: selectedEpisode)
                             .padding(.trailing, 80)
-                            .focusSection()
+                            .backport.focusSection()
                     } else {
                         DetailView()
                     }

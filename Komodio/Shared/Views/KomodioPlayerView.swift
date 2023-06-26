@@ -44,7 +44,7 @@ struct KomodioPlayerView: View {
             CantPlay(video: video)
                 .font(.title)
                 .padding()
-                .focusable()
+                .backport.focusable()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .padding(.horizontal, 80)

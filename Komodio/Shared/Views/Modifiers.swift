@@ -73,7 +73,53 @@ extension View {
     }
 }
 
-// MARK: Fanart modifier
+// MARK: Fanart modifiers
+
+extension Modifiers {
+
+    /// A `ViewModifier` to set the fanart background
+    struct SetBackground: ViewModifier {
+        /// Avoid error in the `View extension`
+        nonisolated init() {}
+        /// The SceneState model
+        @EnvironmentObject var scene: SceneState
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+                .background(
+                    ZStack {
+                        Color("BlendColor")
+                        if let background = scene.selectedKodiItem, !background.fanart.isEmpty {
+                            KodiArt.Fanart(item: background)
+                                .grayscale(1)
+                                .opacity(0.2)
+                                .scaledToFill()
+                        } else {
+                            Image("Background")
+                                .resizable()
+                                .opacity(0.2)
+                                .scaledToFill()
+                        }
+                    }
+                    #if os(iOS)
+                        .ignoresSafeArea(.all, edges: .bottom)
+                    #else
+                        .ignoresSafeArea()
+                    #endif
+                        .transition(.opacity)
+                        .animation(.default, value: scene.selectedKodiItem?.id)
+                )
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to set the fanart background
+    func setBackground() -> some View {
+        modifier(Modifiers.SetBackground())
+    }
+}
 
 extension Modifiers {
 

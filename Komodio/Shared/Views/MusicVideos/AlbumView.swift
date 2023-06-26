@@ -25,7 +25,7 @@ struct AlbumView: View {
         }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         List {
             ForEach(musicVideos) { musicVideo in
                 Item(musicVideo: musicVideo)

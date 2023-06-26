@@ -21,7 +21,7 @@ extension ArtistView {
 
         /// The body of the View
         var body: some View {
-#if os(macOS)
+#if os(macOS) || os(iOS)
             DetailWrapper(title: artist.artist) {
                 VStack {
                     KodiArt.Fanart(item: artist)

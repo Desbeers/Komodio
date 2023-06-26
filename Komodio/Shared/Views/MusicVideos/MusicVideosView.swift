@@ -22,8 +22,6 @@ struct MusicVideosView: View {
     @State private var items: [MediaItem] = []
     /// The optional selected item
     @State private var selectedItem: MediaItem?
-    /// The opacity of the View
-    @State private var opacity: Double = 0
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
 
@@ -36,20 +34,19 @@ struct MusicVideosView: View {
             content
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
             VStack {
                 switch state {
                 case .ready:
                     content
                 default:
                     PartsView.StatusMessage(item: .playlists, status: state)
-                        .focusable()
+                        .backport.focusable()
                 }
             }
 #endif
         }
         .task(id: artist) {
-            opacity = 1
             scene.selectedKodiItem = artist
             scene.navigationSubtitle = artist.artist
         }
@@ -85,12 +82,10 @@ struct MusicVideosView: View {
             }
             .padding()
         }
-        .offset(x: opacity == 0 ? ContentView.columnWidth : 0, y: 0)
-        .opacity(opacity)
     }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
     /// The content of the view
     var content: some View {
         ContentWrapper(
@@ -111,9 +106,9 @@ struct MusicVideosView: View {
                         }
                     }
                     .frame(width: KomodioApp.posterSize.width + 120)
-                    .buttonStyle(.card)
+                    .backport.cardButton()
                     DetailView()
-                        .focusSection()
+                        .backport.focusSection()
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 80)

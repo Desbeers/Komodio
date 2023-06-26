@@ -24,8 +24,6 @@ struct MoviesView: View {
     @State var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.sidebarSelection.label.title)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
-    /// The opacity of the View
-    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -37,12 +35,11 @@ struct MoviesView: View {
                 content
             default:
                 PartsView.StatusMessage(item: .movies, status: state)
-                    .focusable()
+                    .backport.focusable()
             }
         }
         .task(id: filter) {
             scene.navigationSubtitle = getNavigationSubtitle()
-            opacity = 1
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
@@ -93,7 +90,6 @@ struct MoviesView: View {
             }
             .padding()
         }
-        .navigationStackAnimation(opacity: $opacity)
         .animation(.default, value: sorting)
         .onChange(of: sorting) { [sorting] newValue in
             if sorting.method == newValue.method {
@@ -104,16 +100,18 @@ struct MoviesView: View {
         }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         ContentWrapper(
             header: {
                 ZStack {
                     PartsView.DetailHeader(title: getNavigationTitle(), subtitle: getNavigationSubtitle())
-                    Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                        .labelStyle(.headerLabel)
-                        .padding(.leading, 50)
-                        .padding(.bottom, 10)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    if KomodioApp.platform == .tvOS {
+                        Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                            .labelStyle(.headerLabel)
+                            .padding(.leading, 50)
+                            .padding(.bottom, 10)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
             },
             content: {
@@ -137,8 +135,21 @@ struct MoviesView: View {
                 }
             }
         )
-        .buttonStyle(.card)
+        .backport.cardButton()
         .animation(.default, value: items.map { $0.id })
+        .toolbar {
+            if KomodioApp.platform == .iPadOS {
+                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                    .labelStyle(.titleAndIcon)
+            }
+        }
+        .onChange(of: sorting) { [sorting] newValue in
+            if sorting.method == newValue.method {
+                items.sort(sortItem: newValue)
+            } else {
+                getItems()
+            }
+        }
 #endif
     }
 

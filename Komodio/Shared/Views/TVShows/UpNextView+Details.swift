@@ -47,7 +47,7 @@ extension UpNextView {
             }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
             VStack {
                 Text("\(episode.showTitle): \(episode.title)")
                     .font(.title2)
@@ -74,7 +74,7 @@ extension UpNextView {
                 Buttons.Player(item: episode)
                 /// Make sure tvOS can get the focus
                     .frame(maxWidth: .infinity)
-                    .focusSection()
+                    .backport.focusSection()
                     .padding()
             }
             .frame(maxWidth: .infinity)

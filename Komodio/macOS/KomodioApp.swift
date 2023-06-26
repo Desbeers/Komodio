@@ -56,6 +56,10 @@ extension KomodioApp {
     /// The plaform
     static let platform: Parts.Platform = .macOS
 
+    /// The `NavigationSplitView` detail width
+    /// - Note: Used for the width as well the animation
+    static let detailWidth: Double = 400
+
     /// The default size of poster art
     static let posterSize = CGSize(width: 80, height: 120)
 

@@ -14,11 +14,9 @@ import SwiftlyKodiAPI
 struct HostItemView: View {
     /// The `HostItem` to edit
     let host: HostItem
-    /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The Presentation mode (tvOS)
+    /// The Presentation mode
     @Environment(\.presentationMode) private var presentationMode
 
     // MARK: Body of the View
@@ -26,44 +24,15 @@ struct HostItemView: View {
     /// The body of the View
     var body: some View {
         VStack {
-            KodiHostItemView(host: host)
+            KodiHostItemView(host: host) {
+                presentationMode.wrappedValue.dismiss()
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-#if os(macOS)
-        /// Goto 'start' when a host is updated
-        .onChange(of: kodi.configuredHosts) { _ in
-            scene.sidebarSelection = .start
-        }
         .task {
             scene.navigationSubtitle = host.name
         }
-        .toolbar {
-            /// Show a 'back' button
-            ToolbarItem(placement: .navigation) {
-                Button(action: {
-                    scene.sidebarSelection = .start
-                }, label: {
-                    Image(systemName: "chevron.backward")
-                })
-            }
-        }
-#endif
-
-#if os(tvOS)
-        .background(.ultraThinMaterial)
-        /// Close the view when the host is updated
-        .onChange(of: kodi.host) { _ in
-            presentationMode.wrappedValue.dismiss()
-        }
-        .onChange(of: kodi.configuredHosts) { _ in
-            presentationMode.wrappedValue.dismiss()
-        }
-        .onChange(of: kodi.status) { _ in
-            presentationMode.wrappedValue.dismiss()
-        }
-#endif
     }
 }
 

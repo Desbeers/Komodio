@@ -24,8 +24,6 @@ struct ArtistsView: View {
     @State private var artist = Audio.Details.Artist(media: .none)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
-    /// The opacity of the View
-    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -38,9 +36,6 @@ struct ArtistsView: View {
             default:
                 PartsView.StatusMessage(item: .musicVideos, status: state)
             }
-        }
-        .task {
-            opacity = 1
         }
         .animation(.default, value: selectedArtist)
         .task(id: kodi.library.musicVideos) {
@@ -75,11 +70,10 @@ struct ArtistsView: View {
             }
             .padding()
         }
-        .navigationStackAnimation(opacity: $opacity)
     }
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
     /// The content of the view
     var content: some View {
         ContentWrapper(
@@ -99,7 +93,7 @@ struct ArtistsView: View {
                     .padding(.bottom, 40)
                 }
             })
-        .buttonStyle(.card)
+        .backport.cardButton()
     }
 #endif
 

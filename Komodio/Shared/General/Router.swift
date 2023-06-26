@@ -88,7 +88,7 @@ extension Router {
     var empty: String {
         switch self {
         case .start:
-            return "Loading your library"
+            return "Komodio"
         case .musicVideos:
             return "There are no music videos in your library"
         case .search:
@@ -122,7 +122,7 @@ extension Router {
         case .start:
             return Item(
                 title: "Komodio",
-                description: "Loading your library",
+                description: "Komodio",
                 icon: "sparkles.tv"
             )
         case .musicVideos:

@@ -69,6 +69,9 @@
               <li class="nav-group-task">
                 <a href="../Enums/Hosts.html">Hosts</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Backport.html">Backport</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -107,10 +110,10 @@
                 <a href="../Structs/StartView.html">StartView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/StartView/Details.html">– Details</a>
+                <a href="../Structs/StartView/Content.html">– Content</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/StartView/Content.html">– Content</a>
+                <a href="../Structs/StartView/Details.html">– Details</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MoviesView.html">MoviesView</a>
@@ -227,9 +230,6 @@
                 <a href="../Structs/SearchView.html">SearchView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SearchView/Details.html">– Details</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/KodiSettingsView.html">KodiSettingsView</a>
               </li>
               <li class="nav-group-task">
@@ -275,9 +275,6 @@
                 <a href="../Enums/Pickers.html">Pickers</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Enums/Pickers/ListSortPicker.html">– ListSortPicker</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Enums/Pickers/ListSortSheet.html">– ListSortSheet</a>
               </li>
               <li class="nav-group-task">
@@ -290,10 +287,19 @@
                 <a href="../Enums/Modifiers.html">Modifiers</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Modifiers/NavigationDestinations.html">– NavigationDestinations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/AppendStuff.html">– AppendStuff</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Modifiers/WatchStatus.html">– WatchStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/Modifiers/DetailsFontStyle.html">– DetailsFontStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/SetBackground.html">– SetBackground</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/Modifiers/FanartStyle.html">– FanartStyle</a>
@@ -303,6 +309,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/Styles.html">Styles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/CardBackport.html">– CardBackport</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/Styles/ListButton.html">– ListButton</a>
@@ -521,34 +530,6 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7Komodio10MoviesViewV7opacity33_570C28E24AD727D7A7927DA94672A575LLSdvp"></a>
-                    <a name="//apple_ref/swift/Property/opacity" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10MoviesViewV7opacity33_570C28E24AD727D7A7927DA94672A575LLSdvp">opacity</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The opacity of the View</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@State</span>
-<span class="kd">private</span> <span class="k">var</span> <span class="nv">opacity</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -673,35 +654,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Komodio10MoviesViewV04swapB6ForSet33_570C28E24AD727D7A7927DA94672A575LL6moviesSay14SwiftlyKodiAPI0P4Item_pGSayAG5VideoO7DetailsO5MovieVG_tF"></a>
-                    <a name="//apple_ref/swift/Method/swapMoviesForSet(movies:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Komodio10MoviesViewV04swapB6ForSet33_570C28E24AD727D7A7927DA94672A575LL6moviesSay14SwiftlyKodiAPI0P4Item_pGSayAG5VideoO7DetailsO5MovieVG_tF">swapMoviesForSet(movies:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Swap movies for a set item</p>
-
-<p>Movies that are part of a set will be removed and replaced with the set when enabled in the Kodi host</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">swapMoviesForSet</span><span class="p">(</span><span class="nv">movies</span><span class="p">:</span> <span class="p">[</span><span class="kt">Video</span><span class="o">.</span><span class="kt">Details</span><span class="o">.</span><span class="kt">Movie</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">any</span> <span class="kt">KodiItem</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:7Komodio10MoviesViewV18getNavigationTitle33_570C28E24AD727D7A7927DA94672A575LLSSyF"></a>
                     <a name="//apple_ref/swift/Method/getNavigationTitle()" class="dashAnchor"></a>
                     <a class="token" href="#/s:7Komodio10MoviesViewV18getNavigationTitle33_570C28E24AD727D7A7927DA94672A575LLSSyF">getNavigationTitle()</a>
@@ -758,7 +710,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-04-04)</p>
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-06-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

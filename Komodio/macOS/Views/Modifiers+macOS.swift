@@ -20,9 +20,7 @@ extension Modifiers {
         /// The modifier
         func body(content: Content) -> some View {
             content
-                .offset(x: opacity == 0 ? -ContentView.columnWidth : 0, y: 0)
-                .opacity(opacity)
-                .animation(.default, value: opacity)
+                .offset(x: opacity == 0 ? -KomodioApp.detailWidth : 0, y: 0)
                 .onChange(of: scene.navigationStackPath) { value in
                     switch value.count {
                     case 0:

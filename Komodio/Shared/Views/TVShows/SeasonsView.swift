@@ -37,8 +37,6 @@ struct SeasonsView: View {
             return "Season \(selectedTab)"
         }
     }
-    /// The opacity of the View
-    @State private var opacity: Double = 0
 
     // MARK: Body of the View
 
@@ -50,7 +48,6 @@ struct SeasonsView: View {
                 scene.selectedKodiItem = tvshow
                 scene.details = .tvshow(tvshow: tvshow)
                 scene.navigationSubtitle = tvshow.title
-                opacity = 1
             }
             .task(id: kodi.library.episodes) {
                 getTVShowSeasons()
@@ -86,11 +83,9 @@ struct SeasonsView: View {
             }
             .padding()
         }
-        .offset(x: opacity == 0 ? ContentView.columnWidth : 0, y: 0)
-        .opacity(opacity)
 #endif
 
-#if os(tvOS)
+#if os(tvOS) || os(iOS)
         /// Show seasons on page tabs
         ContentWrapper(
             scroll: false,
@@ -134,11 +129,11 @@ struct SeasonsView: View {
                     }
                     .padding(.bottom)
                     .frame(maxWidth: .infinity)
-                    .focusSection()
+                    .backport.focusSection()
                     switch selectedTab {
                     case -1:
                         TVShowView.Details(tvshow: tvshow)
-                            .focusSection()
+                            .backport.focusSection()
                     default:
                         HStack {
                             /// Display the season cover
@@ -156,7 +151,7 @@ struct SeasonsView: View {
                                 episodes: episodes.filter { $0.season == selectedTab }
                             )
                         }
-                        .focusSection()
+                        .backport.focusSection()
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
