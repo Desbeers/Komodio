@@ -70,7 +70,7 @@ struct MovieSetView: View {
 #endif
 
 #if os(tvOS) || os(iOS)
-        ContentWrapper(
+        ContentView.Wrapper(
             header: {
                 ZStack {
                     PartsView.DetailHeader(title: movieSet.title)

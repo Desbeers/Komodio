@@ -76,7 +76,7 @@ struct ArtistsView: View {
 #if os(tvOS) || os(iOS)
     /// The content of the view
     var content: some View {
-        ContentWrapper(
+        ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
                     title: Router.musicVideos.label.title,

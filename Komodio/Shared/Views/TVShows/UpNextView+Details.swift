@@ -22,7 +22,7 @@ extension UpNextView {
         /// The body of the View
         var body: some View {
 #if os(macOS)
-            DetailWrapper(
+            DetailView.Wrapper(
                 title: episode.showTitle,
                 subtitle: "Season \(episode.season), episode \(episode.episode)"
             ) {

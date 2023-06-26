@@ -88,7 +88,7 @@ struct MusicVideosView: View {
 #if os(tvOS) || os(iOS)
     /// The content of the view
     var content: some View {
-        ContentWrapper(
+        ContentView.Wrapper(
             scroll: false,
             header: {
                 PartsView.DetailHeader(

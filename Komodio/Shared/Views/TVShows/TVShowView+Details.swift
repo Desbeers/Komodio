@@ -26,7 +26,7 @@ extension TVShowView {
             Group {
 
 #if os(macOS)
-                DetailWrapper(title: tvshow.title) {
+                DetailView.Wrapper(title: tvshow.title) {
                     VStack {
                         KodiArt.Fanart(item: tvshow)
                             .fanartStyle(item: tvshow)

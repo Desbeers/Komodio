@@ -87,7 +87,7 @@ struct SeasonsView: View {
 
 #if os(tvOS) || os(iOS)
         /// Show seasons on page tabs
-        ContentWrapper(
+        ContentView.Wrapper(
             scroll: false,
             header: {
                 PartsView.DetailHeader(title: tvshow.title, subtitle: subtitle)

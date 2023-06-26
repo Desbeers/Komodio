@@ -48,7 +48,7 @@ struct PlaylistsView: View {
 
     /// The content of the View
     var content: some View {
-        ContentWrapper(
+        ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
                     title: Router.playlists.label.title,

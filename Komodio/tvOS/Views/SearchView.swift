@@ -24,7 +24,7 @@ struct SearchView: View {
     let grid = [GridItem(.adaptive(minimum: 300))]
     /// The body of this View
     var body: some View {
-        ContentWrapper(
+        ContentView.Wrapper(
             scroll: false,
             header: {
                 PartsView.DetailHeader(

@@ -67,7 +67,10 @@ struct DetailView: View {
     /// The fallback View
     @ViewBuilder private var fallback: some View {
 #if os(macOS)
-        DetailWrapper(title: scene.sidebarSelection.label.title, subtitle: scene.sidebarSelection.label.description) {
+        DetailView.Wrapper(
+            title: scene.sidebarSelection.label.title,
+            subtitle: scene.sidebarSelection.label.description
+        ) {
             Image(systemName: scene.sidebarSelection.label.icon)
                 .resizable()
                 .scaledToFit()

@@ -61,7 +61,7 @@ extension MovieView {
         /// The content of the View
         @ViewBuilder var content: some View {
 #if os(macOS) || os(iOS)
-            DetailWrapper(title: movie.title) {
+            DetailView.Wrapper(title: movie.title) {
                 VStack {
                     KodiArt.Fanart(item: movie)
                         .fanartStyle(item: movie, overlay: movie.tagline.isEmpty ? nil : movie.tagline)

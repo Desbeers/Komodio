@@ -27,6 +27,10 @@ struct ContentView: View {
                 MoviesView()
             case .unwatchedMovies:
                 MoviesView(filter: .unwatched)
+#if os(tvOS)
+            case .playlists:
+                PlaylistsView()
+#endif
             case .tvshows:
                 TVShowsView()
             case .seasons(let tvshow):

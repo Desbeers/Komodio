@@ -71,7 +71,7 @@ struct UpNextView: View {
 #endif
 
 #if os(tvOS) || os(iOS)
-        ContentWrapper(
+        ContentView.Wrapper(
             scroll: false,
             header: {
                 PartsView.DetailHeader(

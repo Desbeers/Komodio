@@ -73,7 +73,7 @@ struct TVShowsView: View {
 #endif
 
 #if os(tvOS) || os(iOS)
-        ContentWrapper(
+        ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
                     title: Router.tvshows.label.title,

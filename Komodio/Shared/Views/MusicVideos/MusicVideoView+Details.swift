@@ -21,7 +21,7 @@ extension MusicVideoView {
 
         /// The body of the View
         var body: some View {
-            DetailWrapper(title: musicVideo.title) {
+            DetailView.Wrapper(title: musicVideo.title) {
                 VStack {
                     KodiArt.Fanart(item: musicVideo)
                         .fanartStyle(item: musicVideo)

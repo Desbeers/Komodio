@@ -57,7 +57,7 @@ extension Modifiers {
                         KodiSettingsView()
                             .appendStuff()
                     default:
-                        Text("Not implemented")
+                        Text("Not implemented...")
                             .appendStuff()
                     }
                 }

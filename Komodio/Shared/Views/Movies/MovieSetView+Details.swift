@@ -22,7 +22,7 @@ extension MovieSetView {
 
         /// The body of the View
         var body: some View {
-            DetailWrapper(title: movieSet.title) {
+            DetailView.Wrapper(title: movieSet.title) {
                 VStack {
                     KodiArt.Fanart(item: movieSet)
                         .fanartStyle(item: movieSet)

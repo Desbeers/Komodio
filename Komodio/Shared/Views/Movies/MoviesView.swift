@@ -101,7 +101,7 @@ struct MoviesView: View {
 #endif
 
 #if os(tvOS) || os(iOS)
-        ContentWrapper(
+        ContentView.Wrapper(
             header: {
                 ZStack {
                     PartsView.DetailHeader(title: getNavigationTitle(), subtitle: getNavigationSubtitle())
