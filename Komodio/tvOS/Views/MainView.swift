@@ -15,7 +15,7 @@ struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @StateObject var scene: SceneState = .shared
     /// Bool if the sidebar has focus
     @FocusState var isFocused: Bool
 
@@ -50,6 +50,7 @@ struct MainView: View {
                 isFocused = true
             }
         }
+        .environmentObject(scene)
         .animation(.default, value: isFocused)
     }
 }

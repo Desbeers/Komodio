@@ -13,7 +13,7 @@ struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @StateObject var scene: SceneState = .shared
     /// The search field in the toolbar
     @State private var searchField: String = ""
 
@@ -41,6 +41,7 @@ struct MainView: View {
         .task(id: searchField) {
             await scene.updateSearch(query: searchField)
         }
+        .environmentObject(scene)
         .animation(.default, value: scene.navigationStackPath)
     }
 }

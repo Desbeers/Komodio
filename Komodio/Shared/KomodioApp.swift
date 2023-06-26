@@ -1,6 +1,6 @@
 //
 //  KomodioApp.swift
-//  Komodio (macOS)
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Komodio App
 
-/// The Komodio App Scene (macOS)
+/// The Komodio App Scene (shared)
 @main struct KomodioApp: App {
     /// The KodiConnector model
     @StateObject private var kodi: KodiConnector = .shared
@@ -19,6 +19,11 @@ import SwiftlyKodiAPI
 
     /// The body of the Scene
     var body: some Scene {
+
+#if os(macOS)
+
+        // MARK: macOS
+
         Window("Komodio", id: "Main") {
             MainView()
                 .environmentObject(kodi)
@@ -46,26 +51,21 @@ import SwiftlyKodiAPI
         .defaultSize(width: 1280, height: 720)
         .defaultPosition(.center)
         .windowStyle(.hiddenTitleBar)
+
+#else
+
+        // MARK: tvOS and iPadOS
+
+        WindowGroup {
+            MainView()
+                .environmentObject(kodi)
+                .task {
+                    if kodi.status == .none {
+                        /// Get the selected host (if any)
+                        kodi.getSelectedHost()
+                    }
+                }
+        }
+#endif
     }
-}
-
-extension KomodioApp {
-
-    // MARK: Static settings
-
-    /// The plaform
-    static let platform: Parts.Platform = .macOS
-
-    /// The `NavigationSplitView` detail width
-    /// - Note: Used for the width as well the animation
-    static let detailWidth: Double = 400
-
-    /// The default size of poster art
-    static let posterSize = CGSize(width: 80, height: 120)
-
-    /// The default size of thumb art
-    static let thumbSize = CGSize(width: 213, height: 120)
-
-    /// The default corner radius
-    static let cornerRadius: Double = 6
 }
