@@ -384,8 +384,6 @@
 			isa = PBXGroup;
 			children = (
 				D75C3F60294DCCB2002BC065 /* Shared */,
-				D71BD53429056A5C00037DC9 /* KomodioApp.swift */,
-				D715FC232A49D08C00CC9699 /* KomodioApp+StaticSettings.swift */,
 				D75C3F5F294DCCAA002BC065 /* macOS */,
 				D7EFE44E293A4E7900CE9B8D /* tvOS */,
 				D786DC4F2A45C7370086C8FB /* iPadOS */,
@@ -439,6 +437,8 @@
 				D75C3F61294DCCC8002BC065 /* General */,
 				D75C3F66294DD454002BC065 /* Views */,
 				D7721D922A483D88004D8531 /* Styles */,
+				D71BD53429056A5C00037DC9 /* KomodioApp.swift */,
+				D715FC232A49D08C00CC9699 /* KomodioApp+StaticSettings.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
