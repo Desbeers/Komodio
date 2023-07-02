@@ -30,9 +30,6 @@ struct HostItemView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .task {
-            scene.navigationSubtitle = host.name
-        }
     }
 }
 

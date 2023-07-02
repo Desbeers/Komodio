@@ -83,7 +83,6 @@ extension Buttons {
                     Image(systemName: item.playcount == 0 ? "eye.fill" : "eye")
                 })
             })
-            .buttonStyle(.playButton)
         }
     }
 }

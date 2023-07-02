@@ -35,17 +35,13 @@ struct SidebarView: View {
             .onChange(of: sidebarSelection) { selection in
                 if let selection {
                     Task { @MainActor in
-                        scene.sidebarSelection = selection
+                        scene.mainSelection = selection
                         /// Reset the details
                         scene.details = selection
-                        /// Reset the optional selected kodi item
-                        scene.selectedKodiItem = nil
-                        /// Set the navigation title
-                        scene.navigationTitle = selection.label.description
                     }
                 }
             }
-            .onChange(of: scene.sidebarSelection) { selection in
+            .onChange(of: scene.mainSelection) { selection in
                 if selection != sidebarSelection {
                     Task { @MainActor in
                         sidebarSelection = selection
@@ -78,46 +74,46 @@ struct SidebarView: View {
         }
         .listItemTint(kodi.host.isOnline ? .green : .red)
         if kodi.status == .loadedLibrary {
-            sidebarItem(item: Router.favourites)
+            sidebarItem(router: Router.favourites)
                 .listItemTint(.red)
             Section("Movies") {
-                sidebarItem(item: Router.movies)
-                sidebarItem(item: Router.unwatchedMovies)
+                sidebarItem(router: Router.movies)
+                sidebarItem(router: Router.unwatchedMovies)
                 if !kodi.library.moviePlaylists.isEmpty {
                     ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-                        sidebarItem(item: .moviesPlaylist(file: playlist))
+                        sidebarItem(router: .moviePlaylist(file: playlist))
                     }
                 }
             }
             Section("TV shows") {
-                sidebarItem(item: Router.tvshows)
-                sidebarItem(item: Router.unwachedEpisodes)
+                sidebarItem(router: Router.tvshows)
+                sidebarItem(router: Router.unwachedEpisodes)
             }
             Section("Music Videos") {
-                sidebarItem(item: Router.musicVideos)
+                sidebarItem(router: Router.musicVideos)
             }
             if !searchField.isEmpty {
                 Section("Search") {
-                    sidebarItem(item: Router.search)
+                    sidebarItem(router: Router.search)
                 }
             }
         }
     }
 
     /// SwiftUI View for an item in the sidebar
-    /// - Parameter item: The ``Router`` item
+    /// - Parameter router: The ``Router`` item
     /// - Returns: A SwiftUI View with the sidebar item
-    private func sidebarItem(item: Router) -> some View {
-        NavigationLink(value: item) {
+    private func sidebarItem(router: Router) -> some View {
+        NavigationLink(value: router) {
             Label(
                 title: {
-                    Text(item.label.title)
+                    Text(router.item.title)
                 },
                 icon: {
-                    Image(systemName: item.label.icon)
+                    Image(systemName: router.item.icon)
                 }
             )
         }
-        .listItemTint(item.color)
+        .listItemTint(router.item.color)
     }
 }

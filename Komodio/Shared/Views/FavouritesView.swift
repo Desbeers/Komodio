@@ -13,7 +13,7 @@ import SwiftlyKodiAPI
 /// SwiftUI View for Favorites (shared)
 struct FavouritesView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The items in this view
@@ -32,7 +32,7 @@ struct FavouritesView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(item: .favourites, status: state)
+                PartsView.StatusMessage(router: .favourites, status: state)
             }
         }
         .animation(.default, value: selectedItem)
@@ -79,8 +79,8 @@ struct FavouritesView: View {
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
-                    title: Router.favourites.label.title,
-                    subtitle: Router.favourites.label.description
+                    title: Router.favourites.item.title,
+                    subtitle: Router.favourites.item.description
                 )
             },
             content: {
@@ -88,20 +88,20 @@ struct FavouritesView: View {
                     ForEach(kodi.favourites, id: \.id) { video in
                         switch video {
                         case let movie as Video.Details.Movie:
-                            NavigationLink(value: movie, label: {
+                            NavigationLink(value: Router.movie(movie: movie), label: {
                                 MovieView.Item(movie: movie)
                             })
-                            .padding(.bottom, 40)
+                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         case let episode as Video.Details.Episode:
-                            NavigationLink(value: episode, label: {
+                            NavigationLink(value: Router.episode(episode: episode), label: {
                                 UpNextView.Item(episode: episode)
                             })
-                            .padding(.bottom, 40)
+                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         case let musicVideo as Video.Details.MusicVideo:
-                            NavigationLink(value: musicVideo, label: {
+                            NavigationLink(value: Router.musicVideo(musicVideo: musicVideo), label: {
                                 MusicVideoView.Item(item: MediaItem(id: musicVideo.id, media: .musicVideo, item: video))
                             })
-                            .padding(.bottom, 40)
+                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         default:
                             EmptyView()
                         }
@@ -135,7 +135,6 @@ struct FavouritesView: View {
                 break
             }
         } else {
-            scene.navigationSubtitle = Router.favourites.label.description
             scene.details = .favourites
         }
     }

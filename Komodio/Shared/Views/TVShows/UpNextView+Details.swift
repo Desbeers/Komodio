@@ -21,7 +21,7 @@ extension UpNextView {
 
         /// The body of the View
         var body: some View {
-#if os(macOS)
+#if os(macOS) || os(iOS)
             DetailView.Wrapper(
                 title: episode.showTitle,
                 subtitle: "Season \(episode.season), episode \(episode.episode)"
@@ -47,7 +47,7 @@ extension UpNextView {
             }
 #endif
 
-#if os(tvOS) || os(iOS)
+#if os(tvOS)
             VStack {
                 Text("\(episode.showTitle): \(episode.title)")
                     .font(.title2)
@@ -77,7 +77,7 @@ extension UpNextView {
                     .backport.focusSection()
                     .padding()
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 #endif
         }
     }

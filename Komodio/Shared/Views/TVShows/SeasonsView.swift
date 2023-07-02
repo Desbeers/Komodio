@@ -45,9 +45,6 @@ struct SeasonsView: View {
         content
             .task(id: tvshow) {
                 getTVShowSeasons()
-                scene.selectedKodiItem = tvshow
-                scene.details = .tvshow(tvshow: tvshow)
-                scene.navigationSubtitle = tvshow.title
             }
             .task(id: kodi.library.episodes) {
                 getTVShowSeasons()
@@ -140,7 +137,7 @@ struct SeasonsView: View {
                             if let season = seasons.first(where: { $0.season == selectedTab }) {
                                 VStack {
                                     KodiArt.Poster(item: season)
-                                        .frame(width: 400, height: 600)
+                                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                                         .cornerRadius(10)
                                         .watchStatus(of: season)
                                 }

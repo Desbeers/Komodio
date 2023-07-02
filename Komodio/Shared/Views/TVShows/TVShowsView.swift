@@ -32,13 +32,10 @@ struct TVShowsView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(item: .tvshows, status: state)
+                PartsView.StatusMessage(router: .tvshows, status: state)
             }
         }
         .animation(.default, value: selectedTVShow)
-        .task {
-            scene.navigationSubtitle = scene.sidebarSelection.label.description
-        }
         .task(id: kodi.library.tvshows) {
             if kodi.status != .loadedLibrary {
                 state = .offline
@@ -60,11 +57,11 @@ struct TVShowsView: View {
         ScrollView {
             LazyVStack {
                 ForEach(tvshows) { tvshow in
-                    NavigationLink(value: tvshow) {
+                    NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
                         TVShowView.Item(tvshow: tvshow)
                     }
                     .buttonStyle(.listButton(selected: false))
-                    .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == tvshow.id))
+                    .buttonStyle(.listButton(selected: scene.details.item.kodiItem?.id == tvshow.id))
                     Divider()
                 }
             }
@@ -76,17 +73,17 @@ struct TVShowsView: View {
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
-                    title: Router.tvshows.label.title,
-                    subtitle: Router.tvshows.label.description
+                    title: Router.tvshows.item.title,
+                    subtitle: Router.tvshows.item.description
                 )
             },
             content: {
                 LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(tvshows) { tvshow in
-                        NavigationLink(value: tvshow) {
+                        NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
                             TVShowView.Item(tvshow: tvshow)
                         }
-                        .padding(.bottom, 40)
+                        .padding(.bottom, KomodioApp.posterSize.height / 9)
                     }
                 }
             })

@@ -49,7 +49,6 @@ extension MovieView {
                     if let update = MovieView.updateMovie(movie: movie) {
                         movie = update
                     }
-                    scene.selectedKodiItem = movie
                 }
                 .focused($isFocused)
                 .animation(.default, value: movie)

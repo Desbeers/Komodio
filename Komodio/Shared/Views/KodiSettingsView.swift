@@ -13,7 +13,7 @@ import SwiftlyKodiAPI
 /// SwiftUI View for Kodi settings (shared)
 struct KodiSettingsView: View {
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
 
     // MARK: Body of the View
 
@@ -37,10 +37,6 @@ struct KodiSettingsView: View {
 #if os(tvOS)
                 Details()
 #endif
-        }
-        .task {
-            scene.navigationSubtitle = Router.kodiSettings.label.title
-            scene.details = .kodiSettings
         }
     }
 }

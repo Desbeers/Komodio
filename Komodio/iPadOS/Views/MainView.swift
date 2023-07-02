@@ -30,13 +30,14 @@ struct MainView: View {
             detail: {
                 NavigationStack(path: $scene.navigationStackPath) {
                     ContentView()
-                        .navigationTitle(scene.navigationTitle)
+                        .navigationTitle(scene.mainSelection.item.description)
                         .navigationBarTitleDisplayMode(.inline)
-                        .animation(.default, value: scene.sidebarSelection)
+                        .animation(.default, value: scene.mainSelection)
                         .setBackground()
                 }
             }
         )
+        .scrollContentBackground(.hidden)
         .searchable(text: $searchField, prompt: "Search library")
         .task(id: searchField) {
             await scene.updateSearch(query: searchField)

@@ -19,41 +19,8 @@ struct ContentView: View {
 
     /// The body of the View
     var body: some View {
-        Group {
-            switch scene.sidebarSelection {
-            case .start:
-                StartView()
-            case .movies:
-                MoviesView()
-            case .unwatchedMovies:
-                MoviesView(filter: .unwatched)
-#if os(tvOS)
-            case .playlists:
-                PlaylistsView()
-#endif
-            case .tvshows:
-                TVShowsView()
-            case .seasons(let tvshow):
-                TVShowsView(selectedTVShow: tvshow)
-            case .unwachedEpisodes:
-                UpNextView()
-            case .musicVideos:
-                ArtistsView()
-            case .moviesPlaylist(let file):
-                MoviesView(filter: .playlist(file: file))
-            case .favourites:
-                FavouritesView()
-            case .search:
-                SearchView()
-            case .kodiSettings:
-                KodiSettingsView()
-            case .hostItemSettings(let host):
-                HostItemView(host: host)
-            default:
-                Text("Not implemented")
-            }
-        }
-        .navigationDestinations()
-        .animation(.default, value: scene.navigationStackPath)
+        Router.DestinationView(router: scene.mainSelection)
+            .navigationDestinations()
+            .animation(.default, value: scene.navigationStackPath)
     }
 }

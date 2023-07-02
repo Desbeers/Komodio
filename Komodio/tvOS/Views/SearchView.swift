@@ -13,9 +13,9 @@ import SwiftlyKodiAPI
 /// SwiftUI View for search results (tvOS)
 struct SearchView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
     /// The movies to show
     @State private var movies: [Video.Details.Movie] = []
     /// The TV shows to show
@@ -28,8 +28,8 @@ struct SearchView: View {
             scroll: false,
             header: {
                 PartsView.DetailHeader(
-                    title: Router.search.label.title,
-                    subtitle: Router.search.label.description
+                    title: Router.search.item.title,
+                    subtitle: Router.search.item.description
                 )
             }, content: {
                 Grid {
@@ -40,9 +40,9 @@ struct SearchView: View {
                                 .frame(width: 200)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-                                    ForEach(movies) { item in
-                                        NavigationLink(value: item) {
-                                            KodiArt.Poster(item: item)
+                                    ForEach(movies) { movie in
+                                        NavigationLink(value: Router.movie(movie: movie)) {
+                                            KodiArt.Poster(item: movie)
                                                 .frame(width: 150, height: 225)
                                         }
                                         .padding(40)
@@ -59,9 +59,9 @@ struct SearchView: View {
                                 .frame(width: 200)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-                                    ForEach(tvshows) { item in
-                                        NavigationLink(value: item) {
-                                            KodiArt.Poster(item: item)
+                                    ForEach(tvshows) { tvshow in
+                                        NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
+                                            KodiArt.Poster(item: tvshow)
                                                 .frame(width: 150, height: 225)
                                         }
                                         .padding(40)

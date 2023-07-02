@@ -95,7 +95,7 @@ extension PartsView {
     /// The message to show when a router item is empty, loading or Kodi is offline
     struct StatusMessage: View {
         /// The Router item
-        let item: Router
+        let router: Router
         /// The status
         let status: Parts.Status
 
@@ -108,7 +108,7 @@ extension PartsView {
                 case .offline:
                     Text(status.offlineMessage)
                 case .empty:
-                    Text(item.empty)
+                    Text(router.item.empty)
                 default:
                     EmptyView()
                 }

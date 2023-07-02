@@ -27,7 +27,7 @@ struct MainView: View {
             ContentView()
         }
         .setBackground()
-        .animation(.default, value: scene.sidebarSelection)
+        .animation(.default, value: scene.mainSelection)
         .setSiriExit()
         /// Put the ``SidebarView`` into the `safe area`.
         .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {

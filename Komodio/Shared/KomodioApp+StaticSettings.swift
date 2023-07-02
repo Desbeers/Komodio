@@ -68,7 +68,7 @@ extension KomodioApp {
     static let posterSize = CGSize(width: 180, height: 270)
 
     /// The default size of thumb art
-    static let thumbSize = CGSize(width: 426, height: 240)
+    static let thumbSize = CGSize(width: 213, height: 120)
 
     /// The default size of fanart
     static let fanartSize = CGSize(width: 960, height: 540)

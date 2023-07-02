@@ -22,12 +22,12 @@ struct SidebarView: View {
     /// The focus state of the sidebar
     @FocusState var isFocused: Bool
     /// Router items to show in the sidebar
-    let sidebarItems: [Router] = [
+    let routerItems: [Router] = [
         .start,
         .favourites,
         .movies,
         .unwatchedMovies,
-        .playlists,
+        .moviePlaylists,
         .tvshows,
         .unwachedEpisodes,
         .musicVideos,
@@ -37,13 +37,11 @@ struct SidebarView: View {
     @State var sidebarSelection: Int = 0 {
         didSet {
             /// Set the sidebar selection as a ``Router`` item
-            scene.sidebarSelection = sidebarItems[sidebarSelection]
+            scene.mainSelection = routerItems[sidebarSelection]
             /// Reset the details
-            scene.details = sidebarItems[sidebarSelection]
+            scene.details = routerItems[sidebarSelection]
             /// Reset the navigationStackPath
             scene.navigationStackPath = NavigationPath()
-            /// Reset the background
-            scene.selectedKodiItem = nil
         }
     }
     // MARK: Body of the View
@@ -66,21 +64,21 @@ struct SidebarView: View {
                         .frame(width: 40, height: 40, alignment: .center)
                 })
             .padding(.vertical, 20)
-            sidebarItem(item: sidebarItems[1])
+            sidebarItem(router: routerItems[1])
             Section("Movies") {
-                sidebarItem(item: sidebarItems[2])
-                sidebarItem(item: sidebarItems[3])
-                sidebarItem(item: sidebarItems[4])
+                sidebarItem(router: routerItems[2])
+                sidebarItem(router: routerItems[3])
+                sidebarItem(router: routerItems[4])
             }
             Section("TV shows") {
-                sidebarItem(item: sidebarItems[5])
-                sidebarItem(item: sidebarItems[6])
+                sidebarItem(router: routerItems[5])
+                sidebarItem(router: routerItems[6])
             }
             Section("Music Videos") {
-                sidebarItem(item: sidebarItems[7])
+                sidebarItem(router: routerItems[7])
             }
             Section("Search") {
-                sidebarItem(item: sidebarItems[8])
+                sidebarItem(router: routerItems[8])
             }
         }
         .padding(.top)
@@ -97,7 +95,7 @@ struct SidebarView: View {
             },
             onDown: {
                 if isFocused {
-                    sidebarSelection = sidebarItems.count - 1 == sidebarSelection ?
+                    sidebarSelection = routerItems.count - 1 == sidebarSelection ?
                     sidebarSelection : sidebarSelection + 1
                     /// Play the navigation sound
                     Parts.playNavigationSound()
@@ -116,19 +114,19 @@ struct SidebarView: View {
     }
 
     /// SwiftUI View for an item in the sidebar
-    @ViewBuilder func sidebarItem(item: Router) -> some View {
+    @ViewBuilder func sidebarItem(router: Router) -> some View {
         Label(
             title: {
                 VStack(alignment: .leading) {
-                    Text(item.label.title)
-                    Text(item.label.description)
+                    Text(router.item.title)
+                    Text(router.item.description)
                         .font(.system(size: 16))
                         .foregroundColor(.gray)
                 }
             }, icon: {
-                Image(systemName: item.label.icon)
-                    .foregroundColor(sidebarItems[sidebarSelection] == item ? item.color : Color("AccentColor"))
-                    .font(sidebarItems[sidebarSelection] == item ? .headline : .subheadline)
+                Image(systemName: router.item.icon)
+                    .foregroundColor(routerItems[sidebarSelection] == router ? router.item.color : Color("AccentColor"))
+                    .font(routerItems[sidebarSelection] == router ? .headline : .subheadline)
                     .frame(width: 40, height: 40, alignment: .center)
             })
         .padding(.bottom, 10)

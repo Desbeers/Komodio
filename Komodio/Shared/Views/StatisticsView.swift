@@ -21,7 +21,7 @@ struct StatisticsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if !kodi.library.movies.isEmpty {
-                Label("\(kodi.library.movies.count) Movies", systemImage: Router.movies.label.icon)
+                Label("\(kodi.library.movies.count) Movies", systemImage: Router.movies.item.icon)
                     .labelStyle(StatisticsLabel())
                 let unwatched = kodi.library.movies
                     .filter { $0.playcount == 0 }
@@ -31,7 +31,7 @@ struct StatisticsView: View {
                 }
             }
             if !kodi.library.tvshows.isEmpty {
-                Label("\(kodi.library.tvshows.count) TV shows", systemImage: Router.tvshows.label.icon)
+                Label("\(kodi.library.tvshows.count) TV shows", systemImage: Router.tvshows.item.icon)
                     .labelStyle(StatisticsLabel())
                 let unwatched = kodi.library.episodes
                     .filter { $0.playcount == 0 }
@@ -41,7 +41,7 @@ struct StatisticsView: View {
                 }
             }
             if !kodi.library.musicVideos.isEmpty {
-                Label("\(kodi.library.musicVideos.count) Music Videos", systemImage: Router.musicVideos.label.icon)
+                Label("\(kodi.library.musicVideos.count) Music Videos", systemImage: Router.musicVideos.item.icon)
                     .labelStyle(StatisticsLabel())
             }
         }

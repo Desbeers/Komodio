@@ -25,9 +25,6 @@ extension Modifiers {
                     switch value.count {
                     case 0:
                         opacity = 1
-                        scene.details = scene.sidebarSelection
-                        scene.selectedKodiItem = nil
-                        scene.navigationSubtitle = scene.sidebarSelection.label.description
                     default:
                         opacity = 0
                     }

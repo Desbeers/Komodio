@@ -34,7 +34,7 @@ struct ArtistsView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(item: .musicVideos, status: state)
+                PartsView.StatusMessage(router: .musicVideos, status: state)
             }
         }
         .animation(.default, value: selectedArtist)
@@ -61,7 +61,7 @@ struct ArtistsView: View {
         ScrollView {
             LazyVStack {
                 ForEach(artists) { artist in
-                    NavigationLink(value: artist, label: {
+                    NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
                         ArtistView.Item(artist: artist)
                     })
                     .buttonStyle(.listButton(selected: false))
@@ -79,18 +79,18 @@ struct ArtistsView: View {
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
-                    title: Router.musicVideos.label.title,
-                    subtitle: Router.musicVideos.label.description
+                    title: Router.musicVideos.item.title,
+                    subtitle: Router.musicVideos.item.description
                 )
             },
             content: {
                 LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(artists) { artist in
-                        NavigationLink(value: artist, label: {
+                        NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
                             ArtistView.Item(artist: artist)
                         })
                     }
-                    .padding(.bottom, 40)
+                    .padding(.bottom, KomodioApp.posterSize.height / 9)
                 }
             })
         .backport.cardButton()
@@ -108,9 +108,8 @@ struct ArtistsView: View {
     private func setItemDetails() {
         if let selectedArtist {
             artist = selectedArtist
-            scene.details = .artist(artist: selectedArtist)
+            scene.details = .musicVideoArtist(artist: selectedArtist)
         } else {
-            scene.navigationSubtitle = Router.musicVideos.label.description
             artist = Audio.Details.Artist(media: .none)
         }
     }

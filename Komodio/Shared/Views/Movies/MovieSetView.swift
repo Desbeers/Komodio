@@ -29,8 +29,6 @@ struct MovieSetView: View {
     var body: some View {
         content
             .task(id: movieSet) {
-                scene.selectedKodiItem = movieSet
-                scene.details = .movieSet(movieSet: movieSet)
                 getMoviesFromSet()
             }
             .onChange(of: kodi.library.movies) { _ in
@@ -53,14 +51,13 @@ struct MovieSetView: View {
                 ForEach(movies) { movie in
                     Button(
                         action: {
-                            scene.selectedKodiItem = movie
                             scene.details = .movie(movie: movie)
                         },
                         label: {
                             MovieView.Item(movie: movie, sorting: sorting)
                         }
                     )
-                    .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == movie.id))
+                    .buttonStyle(.listButton(selected: scene.details.item.kodiItem?.id == movie.id))
                     Divider()
                 }
             }
@@ -95,10 +92,10 @@ struct MovieSetView: View {
                     }
                     LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                         ForEach(movies) { movie in
-                            NavigationLink(value: movie) {
+                            NavigationLink(value: Router.movie(movie: movie)) {
                                 MovieView.Item(movie: movie, sorting: sorting)
                             }
-                            .padding(.bottom, 40)
+                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -137,7 +134,6 @@ struct MovieSetView: View {
                 .filter { $0.setID == movieSet.setID }
                 .filter { scene.movieItems.contains($0.movieID) }
                 .sorted(sortItem: sorting)
-            scene.navigationSubtitle = movieSet.title
         }
     }
 }

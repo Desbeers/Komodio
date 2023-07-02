@@ -21,7 +21,7 @@ struct MoviesView: View {
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.sidebarSelection.label.title)
+    @State var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.mainSelection.item.title)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
 
@@ -34,12 +34,11 @@ struct MoviesView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(item: .movies, status: state)
+                PartsView.StatusMessage(router: .movies, status: state)
                     .backport.focusable()
             }
         }
         .task(id: filter) {
-            scene.navigationSubtitle = getNavigationSubtitle()
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
@@ -69,16 +68,15 @@ struct MoviesView: View {
                     case let movie as Video.Details.Movie:
                         Button(
                             action: {
-                                scene.selectedKodiItem = movie
                                 scene.details = .movie(movie: movie)
                             },
                             label: {
                                 MovieView.Item(movie: movie, sorting: sorting)
                             }
                         )
-                        .buttonStyle(.listButton(selected: scene.selectedKodiItem?.id == movie.id))
+                        .buttonStyle(.listButton(selected: scene.details.item.kodiItem?.id == movie.id))
                     case let movieSet as Video.Details.MovieSet:
-                        NavigationLink(value: movieSet, label: {
+                        NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
                             MovieSetView.Item(movieSet: movieSet)
                         })
                         .buttonStyle(.listButton(selected: false))
@@ -119,15 +117,15 @@ struct MoviesView: View {
                     ForEach(items, id: \.id) { video in
                         switch video {
                         case let movie as Video.Details.Movie:
-                            NavigationLink(value: movie, label: {
+                            NavigationLink(value: Router.movie(movie: movie), label: {
                                 MovieView.Item(movie: movie, sorting: sorting)
                             })
-                            .padding(.bottom, 40)
+                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         case let movieSet as Video.Details.MovieSet:
-                            NavigationLink(value: movieSet, label: {
+                            NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
                                 MovieSetView.Item(movieSet: movieSet)
                             })
-                            .padding(.bottom, 40)
+                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         default:
                             EmptyView()
                         }
@@ -182,11 +180,11 @@ struct MoviesView: View {
     private func getNavigationTitle() -> String {
         switch filter {
         case .unwatched:
-            return Router.unwatchedMovies.label.title
+            return Router.unwatchedMovies.item.title
         case .playlist(let file):
             return  file.title
         default:
-            return Router.movies.label.title
+            return Router.movies.item.title
         }
     }
 
@@ -194,11 +192,11 @@ struct MoviesView: View {
     private func getNavigationSubtitle() -> String {
         switch filter {
         case .unwatched:
-            return Router.unwatchedMovies.label.description
+            return Router.unwatchedMovies.item.description
         case .playlist:
             return "Playlist"
         default:
-            return Router.movies.label.description
+            return Router.movies.item.description
         }
     }
 }

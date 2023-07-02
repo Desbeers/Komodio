@@ -20,7 +20,6 @@ extension Modifiers {
             content
                 .animation(.default, value: scene.navigationStackPath)
                 .onExitCommand {
-                    scene.selectedKodiItem = nil
                     if scene.navigationStackPath.isEmpty {
                         scene.toggleSidebar.toggle()
                     } else {

@@ -89,7 +89,7 @@ extension Modifiers {
                 .background(
                     ZStack {
                         Color("BlendColor")
-                        if let background = scene.selectedKodiItem, !background.fanart.isEmpty {
+                        if let background = scene.details.item.kodiItem, !background.fanart.isEmpty {
                             KodiArt.Fanart(item: background)
                                 .grayscale(1)
                                 .opacity(0.2)
@@ -107,7 +107,7 @@ extension Modifiers {
                         .ignoresSafeArea()
                     #endif
                         .transition(.opacity)
-                        .animation(.default, value: scene.selectedKodiItem?.id)
+                        .animation(.default, value: scene.details.item.kodiItem?.id)
                 )
         }
     }
@@ -152,7 +152,7 @@ extension Modifiers {
 
 extension View {
 
-    /// A `ViewModifier` to style the fanart of a `MediaItem`
+    /// A `ViewModifier` to style the fanart of a `KodiItem`
     func fanartStyle(item: any KodiItem, overlay: String? = nil) -> some View {
         modifier(Modifiers.FanartStyle(item: item, overlay: overlay))
     }

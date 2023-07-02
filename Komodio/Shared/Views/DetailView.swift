@@ -40,14 +40,14 @@ struct DetailView: View {
                     .id(episode.id)
             case let .season(tvshow, episodes):
                 SeasonView(tvshow: tvshow, episodes: episodes)
-            case .artist(let artist):
+            case .musicVideoArtist(let artist):
                 ArtistView
                     .Details(artist: artist)
             case .musicVideo(let musicVideo):
                 MusicVideoView
                     .Details(musicVideo: musicVideo)
                     .id(musicVideo.id)
-            case .album(let musicVideos):
+            case .musicVideoAlbum(let musicVideos):
                 AlbumView(musicVideos: musicVideos)
             case .kodiSettings:
                 KodiSettingsView
@@ -68,10 +68,10 @@ struct DetailView: View {
     @ViewBuilder private var fallback: some View {
 #if os(macOS)
         DetailView.Wrapper(
-            title: scene.sidebarSelection.label.title,
-            subtitle: scene.sidebarSelection.label.description
+            title: scene.mainSelection.item.title,
+            subtitle: scene.mainSelection.item.description
         ) {
-            Image(systemName: scene.sidebarSelection.label.icon)
+            Image(systemName: scene.mainSelection.item.icon)
                 .resizable()
                 .scaledToFit()
                 .padding(80)
@@ -81,7 +81,7 @@ struct DetailView: View {
 #endif
 
 #if os(tvOS) || os(iOS)
-        Image(systemName: scene.sidebarSelection.label.icon)
+        Image(systemName: scene.mainSelection.item.icon)
             .resizable()
             .scaledToFit()
             .padding(80)

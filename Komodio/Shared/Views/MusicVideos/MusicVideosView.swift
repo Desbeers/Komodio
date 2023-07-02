@@ -40,15 +40,11 @@ struct MusicVideosView: View {
                 case .ready:
                     content
                 default:
-                    PartsView.StatusMessage(item: .playlists, status: state)
+                    PartsView.StatusMessage(router: .musicVideos, status: state)
                         .backport.focusable()
                 }
             }
 #endif
-        }
-        .task(id: artist) {
-            scene.selectedKodiItem = artist
-            scene.navigationSubtitle = artist.artist
         }
         .task(id: kodi.library.musicVideos) {
             getItems()
@@ -62,9 +58,10 @@ struct MusicVideosView: View {
 
     // MARK: Content of the MusicVideosView
 
-#if os(macOS)
     /// The content of the view
-    var content: some View {
+    @ViewBuilder var content: some View {
+
+#if os(macOS)
         ScrollView {
             LazyVStack {
                 ForEach(items) { item in
@@ -82,12 +79,9 @@ struct MusicVideosView: View {
             }
             .padding()
         }
-    }
 #endif
 
 #if os(tvOS) || os(iOS)
-    /// The content of the view
-    var content: some View {
         ContentView.Wrapper(
             scroll: false,
             header: {
@@ -105,16 +99,17 @@ struct MusicVideosView: View {
                             })
                         }
                     }
-                    .frame(width: KomodioApp.posterSize.width + 120)
+                    .frame(width: KomodioApp.posterSize.width * 1.5)
                     .backport.cardButton()
                     DetailView()
                         .backport.focusSection()
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 80)
-            })
-    }
+                .padding(.leading, KomodioApp.posterSize.width * 0.3)
+            }
+        )
 #endif
+    }
 
     // MARK: Private functions
 
@@ -149,22 +144,21 @@ struct MusicVideosView: View {
         if let selectedItem {
             self.selectedItem = items.first { $0.id == selectedItem.id }
         } else {
-            scene.details = .artist(artist: artist)
+            scene.details = .musicVideoArtist(artist: artist)
         }
     }
 
     /// Set the details of a selected item
     private func setItemDetails() {
         if let selectedItem, let musicVideo = selectedItem.item as? Video.Details.MusicVideo {
-            scene.selectedKodiItem = selectedItem.item
             switch selectedItem.media {
             case .musicVideo:
-                scene.details = Router.musicVideo(musicVideo: musicVideo)
+                scene.details = .musicVideo(musicVideo: musicVideo)
             case.album:
                 /// Get all Music Videos from the specific artist and album
                 let musicVideos = kodi.library.musicVideos
                     .filter { $0.artist.contains(musicVideo.artist) && $0.album == musicVideo.album }
-                scene.details = Router.album(musicVideos: musicVideos)
+                scene.details = Router.musicVideoAlbum(musicVideos: musicVideos)
             default:
                 break
             }

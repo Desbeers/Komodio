@@ -34,7 +34,7 @@ struct UpNextView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(item: .unwachedEpisodes, status: state)
+                PartsView.StatusMessage(router: .unwachedEpisodes, status: state)
             }
         }
         .task(id: kodi.library.episodes) {
@@ -70,13 +70,13 @@ struct UpNextView: View {
         .animation(.default, value: opacity)
 #endif
 
-#if os(tvOS) || os(iOS)
+#if os(tvOS)
         ContentView.Wrapper(
             scroll: false,
             header: {
                 PartsView.DetailHeader(
-                    title: Router.unwachedEpisodes.label.title,
-                    subtitle: Router.unwachedEpisodes.label.description
+                    title: Router.unwachedEpisodes.item.title,
+                    subtitle: Router.unwachedEpisodes.item.description
                 )
             },
             content: {
@@ -90,21 +90,44 @@ struct UpNextView: View {
                             })
                         }
                     }
-                    .frame(width: KomodioApp.posterSize.width + 120)
+                    .frame(width: KomodioApp.posterSize.width * 1.5, alignment: .center)
                     .backport.cardButton()
                     if let selectedEpisode {
                         Details(episode: selectedEpisode)
-                            .padding(.trailing, 80)
+                            .padding(.trailing, KomodioApp.posterSize.width * 0.3)
                             .backport.focusSection()
                     } else {
                         DetailView()
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 80)
+                .padding(.leading, KomodioApp.posterSize.width * 0.3)
             }
         )
         .animation(.default, value: selectedEpisode)
+#endif
+
+#if os(iOS)
+        ContentView.Wrapper(
+            scroll: true,
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.unwachedEpisodes.item.title,
+                    subtitle: Router.unwachedEpisodes.item.description
+                )
+            },
+            content: {
+                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
+                    ForEach(episodes) { episode in
+                        NavigationLink(value: Router.episode(episode: episode)) {
+                            Item(episode: episode)
+                                .padding(.bottom, KomodioApp.posterSize.height / 9)
+                        }
+                    }
+                }
+                .backport.cardButton()
+            }
+        )
 #endif
     }
 
@@ -112,7 +135,6 @@ struct UpNextView: View {
 
     /// Get all movies from the selected set
     private func getUnwatchedEpisodes() {
-        scene.navigationSubtitle = Router.unwachedEpisodes.label.title
         opacity = 1
         if kodi.status != .loadedLibrary {
             state = .offline

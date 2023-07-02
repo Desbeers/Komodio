@@ -28,7 +28,7 @@ struct PlaylistsView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(item: .playlists, status: state)
+                PartsView.StatusMessage(router: .moviePlaylists, status: state)
                     .focusable()
             }
         }
@@ -40,7 +40,7 @@ struct PlaylistsView: View {
             } else {
                 state = .ready
             }
-            scene.details = .playlists
+            scene.details = .moviePlaylists
         }
     }
 
@@ -51,20 +51,20 @@ struct PlaylistsView: View {
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
-                    title: Router.playlists.label.title,
-                    subtitle: Router.playlists.label.description
+                    title: Router.moviePlaylists.item.title,
+                    subtitle: Router.moviePlaylists.item.description
                 )
             },
             content: {
                 HStack {
                     ScrollView {
                         ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-                            NavigationLink(value: playlist) {
+                            NavigationLink(value: Router.moviePlaylist(file: playlist)) {
                                 Label(title: {
                                     Text(playlist.title)
                                         .frame(width: 400, alignment: .leading)
                                 }, icon: {
-                                    Image(systemName: Router.playlists.label.icon)
+                                    Image(systemName: Router.moviePlaylists.item.icon)
                                 })
                             }
                             .padding()

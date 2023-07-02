@@ -47,14 +47,13 @@ struct MainView: View {
         .setBackground()
         .task(id: kodi.status) {
             if kodi.status != .loadedLibrary {
-                scene.sidebarSelection = .start
+                scene.mainSelection = .start
             }
             opacity = 1
             state = .ready
         }
         .scrollContentBackground(.hidden)
-        .navigationSubtitle(scene.navigationSubtitle)
-        .animation(.default, value: scene.sidebarSelection)
+        .animation(.default, value: scene.mainSelection)
         .searchable(text: $searchField, prompt: "Search library")
         .task(id: searchField) {
             await scene.updateSearch(query: searchField)
@@ -71,9 +70,10 @@ struct MainView: View {
             case .ready:
                 NavigationStack(path: $scene.navigationStackPath) {
                     ContentView()
+                        .navigationSubtitle(scene.mainSelection.item.description)
                 }
             default:
-                PartsView.StatusMessage(item: scene.sidebarSelection, status: state)
+                PartsView.StatusMessage(router: scene.mainSelection, status: state)
             }
         }
         .navigationSplitViewColumnWidth(KomodioApp.detailWidth)

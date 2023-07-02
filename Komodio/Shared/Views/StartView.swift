@@ -56,9 +56,6 @@ struct StartView: View {
                 .labelStyle(.playLabel)
                 .padding()
                 .animation(.default, value: kodi.status)
-                .task {
-                    scene.navigationSubtitle = ""
-                }
             }
 #if os(tvOS) || os(iOS)
             StartView.Details()
@@ -76,7 +73,7 @@ struct StartView: View {
             Divider()
             ForEach(hosts) { host in
 
-                NavigationLink(value: host) {
+                NavigationLink(value: Router.hostItemSettings(host: host)) {
                     Buttons.formatButtonLabel(
                         title: host.name,
                         subtitle: host.isOnline ? "Online" : "Offline",
@@ -108,7 +105,7 @@ struct StartView: View {
             Text("New Kodi's")
                 .font(.title)
             ForEach(newHosts) { host in
-                NavigationLink(value: host) {
+                NavigationLink(value: Router.hostItemSettings(host: host)) {
                     Label(title: {
                         Text(host.name)
                     }, icon: {

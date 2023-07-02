@@ -14,9 +14,9 @@ import SwiftlyKodiAPI
 /// - Note: tvOS has its own `View`
 struct SearchView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
     /// The movies to show
     @State private var movies: [Video.Details.Movie] = []
     /// The Music Videos to show
@@ -98,7 +98,7 @@ struct SearchView: View {
                         .font(.title)
                         .padding()
                     ForEach(tvshows) { tvshow in
-                        NavigationLink(value: tvshow) {
+                        NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
                             TVShowView.Item(tvshow: tvshow)
                         }
                         .buttonStyle(.listButton(selected: false))
@@ -110,7 +110,6 @@ struct SearchView: View {
         }
         .buttonStyle(.plain)
         .task(id: scene.query) {
-            scene.navigationSubtitle = Router.search.label.description
             scene.details = .search
             if scene.query.isEmpty {
                 movies = []

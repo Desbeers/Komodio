@@ -15,7 +15,7 @@ class SceneState: ObservableObject {
 
 #if os(macOS) || os(iOS)
     /// The current search query
-    var query: String = ""
+    @Published var query: String = ""
 #endif
 
     // MARK: tvOS stuff
@@ -32,32 +32,32 @@ class SceneState: ObservableObject {
     // MARK: Shared stuff
     /// The shared instance of this SceneState class
     static let shared = SceneState()
-    /// The Navigation path
+
+    /// # Router
+
+    /// The main selection of the router
+    @Published var mainSelection: Router = .start {
+        didSet {
+            details = mainSelection
+        }
+    }
+    /// The Navigation stack path of the router
     @Published var navigationStackPath = NavigationPath() {
         didSet {
-            /// Nothing
-        }
-        willSet (newValue) {
-            if newValue.isEmpty {
-                selectedKodiItem = nil
+            if navigationStackPath.isEmpty {
+                details = mainSelection
             }
         }
     }
-    /// The settings to sort a list
-    var listSortSettings: [SwiftlyKodiAPI.List.Sort] = []
-    /// The current optional selection in the ``SidebarView``
-    /// The current selection in the ``SidebarView``
-    @Published var sidebarSelection: Router = .start
-    /// The title for the navigation (iPadOS)
-    @Published var navigationTitle: String = "Welcome to Komodio"
-    /// The subtitle for the navigation (macOS)
-    @Published var navigationSubtitle: String = "Komdio"
     /// The details for the current selection in the main view
     @Published var details: Router = .start
+
+    /// # Other stuff
+
+    /// The settings to sort a list
+    var listSortSettings: [SwiftlyKodiAPI.List.Sort] = []
     /// Movie ID's passed around Views
     @Published var movieItems: [Int] = []
-    /// The optional current selected KodiItem
-    @Published var selectedKodiItem: (any KodiItem)?
 }
 
 extension SceneState {
@@ -70,10 +70,10 @@ extension SceneState {
             try await Task.sleep(until: .now + .seconds(1), clock: .continuous)
             self.query = query
             if !query.isEmpty {
-                sidebarSelection = .search
-            } else if sidebarSelection == .search {
+                mainSelection = .search
+            } else if mainSelection == .search {
                 /// Go to the main browser view; the search is canceled
-                sidebarSelection = .start
+                mainSelection = .start
             }
         } catch { }
     }
