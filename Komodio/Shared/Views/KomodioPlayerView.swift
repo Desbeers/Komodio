@@ -65,7 +65,7 @@ extension KomodioPlayerView {
         let video: any KodiItem
         /// Details of the message
         var details: String {
-            "'\(URL(filePath: video.file).pathExtension)' files are not supported..."
+            "'\(URL(filePath: video.file).pathExtension)' files are not supported…"
         }
 
         // MARK: Body of the View
@@ -75,16 +75,10 @@ extension KomodioPlayerView {
             Button(action: {
                 // No action
             }, label: {
-                Label(title: {
-                    VStack(alignment: .leading) {
-                        Text("**Komodio** cannot play this video")
-                        Text(details)
-                            .scaleEffect(0.8)
-                            .opacity(0.8)
-                    }
-                }, icon: {
-                    Image(systemName: "lock.square.fill")
-                })
+                Buttons.formatButtonLabel(
+                    title: "**Komodio** can't play this video",
+                    subtitle: details,
+                    icon: "lock.square.fill")
             })
         }
     }

@@ -60,8 +60,7 @@ struct TVShowsView: View {
                     NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
                         TVShowView.Item(tvshow: tvshow)
                     }
-                    .buttonStyle(.listButton(selected: false))
-                    .buttonStyle(.listButton(selected: scene.details.item.kodiItem?.id == tvshow.id))
+                    .buttonStyle(.kodiItemButton(kodiItem: tvshow))
                     Divider()
                 }
             }

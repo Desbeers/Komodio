@@ -44,7 +44,7 @@ extension Buttons {
                     if item.resume.position != 0 {
                         Buttons.Resume(item: item)
                     }
-                    if showState && (KomodioApp.platform == .macOS ? true : fadeStateButton ? isFocused : true) {
+                    if showState && (KomodioApp.platform != .tvOS ? true : fadeStateButton ? isFocused : true) {
                         Buttons.PlayedState(item: item)
                     }
                 case false:
@@ -214,7 +214,7 @@ extension Buttons {
         }
         return Label(title: {
             VStack(alignment: .leading) {
-                Text(title)
+                Text(.init(title))
                 if let subtitle {
                     Text(subtitle)
                         .font(.system(size: subtitleFontSize))

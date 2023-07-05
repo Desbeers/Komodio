@@ -38,8 +38,8 @@ struct DetailView: View {
                 UpNextView
                     .Details(episode: episode)
                     .id(episode.id)
-            case let .season(tvshow, episodes):
-                SeasonView(tvshow: tvshow, episodes: episodes)
+            case .season(let season):
+                SeasonView(season: season)
             case .musicVideoArtist(let artist):
                 ArtistView
                     .Details(artist: artist)

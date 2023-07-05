@@ -12,52 +12,62 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for one Season of a TV show (shared)
 struct SeasonView: View {
-    /// The TV show
-    let tvshow: Video.Details.TVShow
-    /// The Episodes to show
-    let episodes: [Video.Details.Episode]
-    /// The opacity of the View
-    @State private var opacity: Double = 0
+    /// The TV show season
+    let season: Video.Details.Season
 
     // MARK: Body of the View
 
-    /// The body of this View
     var body: some View {
+        content
+    }
+
+    /// The body of this View
+    @ViewBuilder var content: some View {
 #if os(macOS)
         ScrollView {
-            ScrollViewReader { proxy in
-                PartsView.DetailHeader(
-                    title: episodes.first?.season == 0 ? "Specials" : "Season \(episodes.first?.season ?? 1)"
-                )
-                .id(0)
-                LazyVStack {
-                    ForEach(episodes) { episode in
-                        EpisodeView.Item(episode: episode)
-                            .padding(.horizontal, 20)
-                    }
-                }
-                .opacity(opacity)
-                .task(id: episodes) {
-                    withAnimation(.linear(duration: 1)) {
-                        proxy.scrollTo(0, anchor: .top)
-                    }
-                    do {
-                        opacity = 0
-                        try await Task.sleep(until: .now + .seconds(0.5), clock: .continuous)
-                        opacity = 1
-                    } catch {}
+            PartsView.DetailHeader(
+                title: season.title
+            )
+            LazyVStack {
+                ForEach(season.episodes) { episode in
+                    EpisodeView.Item(episode: episode)
+                        .padding(.horizontal, 20)
                 }
             }
         }
-        .animation(.default, value: opacity)
+        .id(season.season)
 #endif
 
-#if os(tvOS) || os(iOS)
-        List {
-            ForEach(episodes) { episode in
-                EpisodeView.Item(episode: episode)
+#if os(tvOS)
+        HStack {
+            /// Display the season cover
+            KodiArt.Poster(item: season)
+                .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                .cornerRadius(KomodioApp.cornerRadius)
+                .watchStatus(of: season)
+            List {
+                ForEach(season.episodes) { episode in
+                    EpisodeView.Item(episode: episode)
+                }
             }
         }
+        .focusSection()
+#endif
+
+#if os(iOS)
+        HStack(alignment: .top) {
+            /// Display the season cover
+            KodiArt.Poster(item: season)
+                .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                .cornerRadius(KomodioApp.cornerRadius)
+                .watchStatus(of: season)
+            LazyVStack {
+                ForEach(season.episodes) { episode in
+                    EpisodeView.Item(episode: episode)
+                }
+            }
+        }
+        .padding(.horizontal)
 #endif
     }
 }

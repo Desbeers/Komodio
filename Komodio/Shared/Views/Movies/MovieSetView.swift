@@ -57,7 +57,7 @@ struct MovieSetView: View {
                             MovieView.Item(movie: movie, sorting: sorting)
                         }
                     )
-                    .buttonStyle(.listButton(selected: scene.details.item.kodiItem?.id == movie.id))
+                    .buttonStyle(.kodiItemButton(kodiItem: movie))
                     Divider()
                 }
             }

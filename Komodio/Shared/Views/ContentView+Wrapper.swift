@@ -17,6 +17,17 @@ extension ContentView {
         @ViewBuilder var header: () -> Header
         /// The content of the View
         @ViewBuilder var content: () -> Content
+        /// The inside padding
+        private var insidePadding: Double {
+            switch KomodioApp.platform {
+            case .macOS:
+                return 40
+            case .tvOS:
+                return 40
+            case .iPadOS:
+                return 0
+            }
+        }
 
         // MARK: Body of the View
 
@@ -31,8 +42,9 @@ extension ContentView {
                     inside
                 }
             }
-            .padding(.leading)
 #if os(tvOS)
+            .padding(.leading)
+            /// Extra padding for the sidebar
             .padding(.leading, KomodioApp.sidebarCollapsedWidth)
             .ignoresSafeArea()
 #endif
@@ -43,7 +55,7 @@ extension ContentView {
                 .frame(maxWidth: .infinity)
                 .backport.focusSection()
             content()
-                .padding(40)
+                .padding(insidePadding)
         }
     }
 }

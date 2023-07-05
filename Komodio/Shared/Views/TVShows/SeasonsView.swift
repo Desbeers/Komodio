@@ -18,24 +18,17 @@ struct SeasonsView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The episode items to show in this view
-    @State private var episodes: [Video.Details.Episode] = []
+    /// The selected scene
+    @State private var selectedSeason: Video.Details.Season
     /// The seasons to show in this view
-    @State private var seasons: [Video.Details.Episode] = []
-    /// The optional selected season (macOS)
-    @State private var selectedSeason: Int?
-    /// The selected season tab (tvOS)
-    @State private var selectedTab: Int = -1
-    /// The subtitle (tvOS)
-    private var subtitle: String {
-        switch selectedTab {
-        case -1:
-            return "TV Show info"
-        case 0:
-            return "Specials"
-        default:
-            return "Season \(selectedTab)"
-        }
+    @State private var seasons: [Video.Details.Season] = []
+    /// The TV show info 'season'
+    private let tvShowInfo: Video.Details.Season
+    /// Init the `View`
+    public init(tvshow: Video.Details.TVShow) {
+        self.tvshow = tvshow
+        self.tvShowInfo = Video.Details.Season(tvshow: tvshow, season: -1, playcount: 1)
+        self.selectedSeason = self.tvShowInfo
     }
 
     // MARK: Body of the View
@@ -46,12 +39,8 @@ struct SeasonsView: View {
             .task(id: tvshow) {
                 getTVShowSeasons()
             }
-            .task(id: kodi.library.episodes) {
+            .onChange(of: kodi.library.episodes) { _ in
                 getTVShowSeasons()
-                setSeasonDetails()
-            }
-            .task(id: selectedSeason) {
-                setSeasonDetails()
             }
     }
 
@@ -62,19 +51,27 @@ struct SeasonsView: View {
 #if os(macOS)
         ScrollView {
             LazyVStack {
-                KodiArt.Fanart(item: tvshow)
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
+                Button(
+                    action: {
+                        setSeasonDetails(tvShowInfo)
+                    },
+                    label: {
+                        KodiArt.Fanart(item: tvshow)
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(10)
+                    }
+                )
+                .buttonStyle(.plain)
                 ForEach(seasons) { season in
                     Button(
                         action: {
-                            selectedSeason = season.season
+                            setSeasonDetails(season)
                         },
                         label: {
                             SeasonView.Item(season: season)
                         }
                     )
-                    .buttonStyle(.listButton(selected: selectedSeason == season.season))
+                    .buttonStyle(.kodiItemButton(kodiItem: season))
                     Divider()
                 }
             }
@@ -85,41 +82,31 @@ struct SeasonsView: View {
 #if os(tvOS) || os(iOS)
         /// Show seasons on page tabs
         ContentView.Wrapper(
-            scroll: false,
+            scroll: KomodioApp.platform == .tvOS ? false : true,
             header: {
-                PartsView.DetailHeader(title: tvshow.title, subtitle: subtitle)
+                PartsView.DetailHeader(title: tvshow.title, subtitle: scene.details.item.description)
             },
             content: {
                 VStack {
                     ScrollView(.horizontal) {
                         HStack(spacing: 0) {
-                            Button(
-                                action: {
-                                    selectedTab = -1
-                                },
-                                label: {
-                                    Text("Info")
-                                        .font(.caption)
-                                })
-                            .buttonStyle(.listButton(selected: selectedTab == -1))
-                            .padding()
                             ForEach(seasons) { season in
                                 Button(
                                     action: {
-                                        selectedTab = season.season
+                                        setSeasonDetails(season)
                                     },
                                     label: {
-                                        Text(season.season == 0 ? "Specials" : "Season \(season.season)")
-                                            .font(.caption)
-                                    })
-                                .buttonStyle(.listButton(selected: selectedTab == season.season))
-                                .overlay(alignment: .topTrailing) {
-                                    Image(systemName: "star.fill")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.yellow)
-                                        .padding(4)
-                                        .opacity(season.playcount == 0 ? 1 : 0)
-                                }
+                                        Text(season.title)
+                                            .padding(KomodioApp.platform == .tvOS ? 30 : 15)
+                                            .overlay(alignment: .topTrailing) {
+                                                Image(systemName: "star.fill")
+                                                    .font(.caption)
+                                                    .foregroundColor(.yellow)
+                                                    .opacity(season.playcount == 0 ? 1 : 0)
+                                            }
+                                    }
+                                )
+                                .buttonStyle(.tabButton(selected: season.season == selectedSeason.season))
                                 .padding()
                             }
                         }
@@ -127,32 +114,11 @@ struct SeasonsView: View {
                     .padding(.bottom)
                     .frame(maxWidth: .infinity)
                     .backport.focusSection()
-                    switch selectedTab {
-                    case -1:
-                        TVShowView.Details(tvshow: tvshow)
-                            .backport.focusSection()
-                    default:
-                        HStack {
-                            /// Display the season cover
-                            if let season = seasons.first(where: { $0.season == selectedTab }) {
-                                VStack {
-                                    KodiArt.Poster(item: season)
-                                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                                        .cornerRadius(10)
-                                        .watchStatus(of: season)
-                                }
-                                .frame(maxHeight: .infinity)
-                            }
-                            SeasonView(
-                                tvshow: tvshow,
-                                episodes: episodes.filter { $0.season == selectedTab }
-                            )
-                        }
+                    DetailView()
                         .backport.focusSection()
-                    }
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
-                .animation(.default, value: selectedTab)
+                .animation(.default, value: scene.details)
             }
         )
 #endif
@@ -162,27 +128,45 @@ struct SeasonsView: View {
 
     /// Get all seasons of a TV show
     private func getTVShowSeasons() {
-        episodes = kodi.library.episodes
+        var seasons: [Video.Details.Season] = []
+        let allEpisodes = kodi.library.episodes
             .filter { $0.tvshowID == tvshow.tvshowID }
+#if !os(macOS)
+        /// Start with the TV show info season for tvOS and iOS
+        seasons.append(tvShowInfo)
+#endif
         /// Filter the episodes to get the seasons
-        var seasons = episodes.unique { $0.season }
+        let allSeasons = allEpisodes.unique { $0.season }
         /// Find the playcount of the season
-        for index in seasons.indices {
-            let unwatched = episodes
-                .filter { $0.season == seasons[index].season && $0.playcount == 0 }
+        for season in allSeasons {
+            let unwatched = allEpisodes
+                .filter { $0.season == season.season && $0.playcount == 0 }
                 .count
-            seasons[index].playcount = unwatched == 0 ? 1 : 0
-            seasons[index].resume.position = 0
+            seasons.append(
+                .init(
+                    tvshow: tvshow,
+                    season: season.season,
+                    episodes: allEpisodes.filter { $0.season == season.season },
+                    playcount: unwatched == 0 ? 1 : 0,
+                    art: season.art
+                )
+            )
         }
         self.seasons = seasons
+        /// Update the season details of the optional selected season
+        if let update = seasons.first(where: { $0.season == selectedSeason.season }) {
+            setSeasonDetails(update)
+        }
     }
 
     /// Set the details of a selected season
-    private func setSeasonDetails() {
-        if let selectedSeason {
-            let episodes = self.episodes
-                .filter { $0.season == selectedSeason }
-            scene.details = .season(tvshow: tvshow, episodes: episodes)
+    private func setSeasonDetails(_ season: Video.Details.Season) {
+        selectedSeason = season
+        switch season.season {
+        case -1:
+            scene.details = .tvshow(tvshow: tvshow)
+        default:
+            scene.details = .season(season: season)
         }
     }
 }

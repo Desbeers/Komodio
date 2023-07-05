@@ -71,7 +71,7 @@ struct SearchView: View {
                                 MovieView.Item(movie: movie)
                             }
                         )
-                        .buttonStyle(.listButton(selected: selectedItem?.id == movie.id))
+                        .buttonStyle(.kodiItemButton(kodiItem: movie))
                     }
                 }
                 if !musicVideos.isEmpty {
@@ -90,7 +90,7 @@ struct SearchView: View {
                                 )
                             }
                         )
-                        .buttonStyle(.listButton(selected: selectedItem?.id == musicVideo.id))
+                        .buttonStyle(.kodiItemButton(kodiItem: musicVideo))
                     }
                 }
                 if !tvshows.isEmpty {
@@ -101,7 +101,7 @@ struct SearchView: View {
                         NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
                             TVShowView.Item(tvshow: tvshow)
                         }
-                        .buttonStyle(.listButton(selected: false))
+                        .buttonStyle(.kodiItemButton(kodiItem: tvshow))
                         Divider()
                     }
                 }

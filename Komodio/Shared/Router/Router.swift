@@ -50,7 +50,7 @@ enum Router: Hashable {
     /// All seasons of a specific TV show
     case seasons(tvshow: Video.Details.TVShow)
     /// A season of a specific TV show
-    case season(tvshow: Video.Details.TVShow, episodes: [Video.Details.Episode])
+    case season(season: Video.Details.Season)
     /// A specific episode
     case episode(episode: Video.Details.Episode)
     /// First unwatched episode of unfinnished TV shows

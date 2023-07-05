@@ -191,19 +191,15 @@ extension Router {
                 color: .indigo,
                 kodiItem: tvshow
             )
-        case let .season(tvshow, episodes):
-            guard let episode = episodes.first else {
-                /// This should not happen
-                return Item(title: "Error: `\(tvshow.title)`")
-            }
+        case .season(let season):
             return Item(
-                title: "Season \(episode.season)",
-                description: "All the Episodes from Season \(episode.season)",
+                title: "\(season.title)",
+                description: "All the Episodes from Season \(season.season)",
                 loading: "Loading your Episodes",
-                empty: "There are no Episodes in Season \(episode.season)",
+                empty: "There are no Episodes in Season \(season.season)",
                 icon: "tv",
                 color: .indigo,
-                kodiItem: tvshow
+                kodiItem: season
             )
         case .episode(let episode):
             return Item(
@@ -212,7 +208,8 @@ extension Router {
                 loading: "Loading `\(episode.title)`",
                 empty: "`\(episode.title)` was not found",
                 icon: "tv",
-                color: .indigo
+                color: .indigo,
+                kodiItem: episode
             )
         case .unwachedEpisodes:
             return Item(
@@ -266,7 +263,8 @@ extension Router {
                 loading: "Loading `\(album.album)`",
                 empty: "`\(album.album)` was not found",
                 icon: "music.note.tv",
-                color: .cyan
+                color: .cyan,
+                kodiItem: album
             )
 
             // MARK: Fallback

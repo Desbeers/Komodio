@@ -55,8 +55,8 @@ extension Router {
                 SeasonsView(tvshow: tvshow)
             case .seasons(let tvshow):
                 TVShowsView(selectedTVShow: tvshow)
-            case let .season(tvshow, episodes):
-                SeasonView(tvshow: tvshow, episodes: episodes)
+            case .season(let season):
+                SeasonView(season: season)
             case .episode(let episode):
                 UpNextView.Details(episode: episode)
             case .unwachedEpisodes:

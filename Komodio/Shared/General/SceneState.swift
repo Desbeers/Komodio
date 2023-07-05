@@ -33,6 +33,8 @@ class SceneState: ObservableObject {
     /// The shared instance of this SceneState class
     static let shared = SceneState()
 
+    private init() {}
+
     /// # Router
 
     /// The main selection of the router

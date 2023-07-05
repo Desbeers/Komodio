@@ -74,12 +74,12 @@ struct MoviesView: View {
                                 MovieView.Item(movie: movie, sorting: sorting)
                             }
                         )
-                        .buttonStyle(.listButton(selected: scene.details.item.kodiItem?.id == movie.id))
+                        .buttonStyle(.kodiItemButton(kodiItem: movie))
                     case let movieSet as Video.Details.MovieSet:
                         NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
                             MovieSetView.Item(movieSet: movieSet)
                         })
-                        .buttonStyle(.listButton(selected: false))
+                        .buttonStyle(.kodiItemButton(kodiItem: movieSet))
                     default:
                         EmptyView()
                     }

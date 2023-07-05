@@ -73,7 +73,7 @@ struct MusicVideosView: View {
                             MusicVideoView.Item(item: item)
                         }
                     )
-                    .buttonStyle(.listButton(selected: selectedItem?.id == item.id))
+                    .buttonStyle(.kodiItemButton(kodiItem: item.item))
                     Divider()
                 }
             }

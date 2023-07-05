@@ -60,7 +60,7 @@ struct UpNextView: View {
                             Item(episode: episode)
                         }
                     )
-                    .buttonStyle(.listButton(selected: selectedEpisode?.id == episode.id))
+                    .buttonStyle(.kodiItemButton(kodiItem: episode))
                     Divider()
                 }
             }

@@ -79,7 +79,7 @@ extension Modifiers {
 
     /// A `ViewModifier` to set the fanart background
     struct SetBackground: ViewModifier {
-        /// Avoid error in the `View extension`
+        /// Avoid error in the `View extension` when Strict Concurrency Checking is set to 'complete'
         nonisolated init() {}
         /// The SceneState model
         @EnvironmentObject var scene: SceneState

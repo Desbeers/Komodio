@@ -32,6 +32,7 @@ extension TVShowView {
                             .fanartStyle(item: tvshow)
                         Buttons.PlayedState(item: tvshow)
                             .padding()
+                            .buttonStyle(.playButton)
                         VStack(alignment: .leading) {
                             Text(tvshow.plot)
                             tvshowDetails
@@ -41,7 +42,7 @@ extension TVShowView {
                 }
 #endif
 
-#if os(tvOS) || os(iOS)
+#if os(tvOS)
                 HStack {
                     KodiArt.Poster(item: tvshow)
                         .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
@@ -58,6 +59,30 @@ extension TVShowView {
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     }
+                }
+#endif
+
+#if os(iOS)
+                HStack(alignment: .top) {
+                    KodiArt.Poster(item: tvshow)
+                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
+                        .cornerRadius(10)
+                        .watchStatus(of: tvshow)
+                    VStack {
+                        KodiArt.Fanart(item: tvshow)
+                            .fanartStyle(item: tvshow)
+                        VStack(alignment: .leading) {
+                            Text(tvshow.plot)
+                            tvshowDetails
+                        }
+                    }
+                    .padding(.trailing)
+                    .detailsFontStyle()
+                }
+                .padding(.horizontal)
+                .toolbar {
+                    Buttons.PlayedState(item: tvshow)
+                        .labelStyle(.titleAndIcon)
                 }
 #endif
             }

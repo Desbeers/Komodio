@@ -15,7 +15,7 @@ extension SeasonView {
     /// SwiftUI View for a season item
     struct Item: View {
         /// The Season
-        let season: Video.Details.Episode
+        let season: Video.Details.Season
 
         // MARK: Body of the View
 
@@ -27,7 +27,7 @@ extension SeasonView {
                     .frame(height: 100)
                     .watchStatus(of: season)
                     .padding(.trailing)
-                Text(season.season == 0 ? "Specials" : "Season \(season.season)")
+                Text(season.title)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }

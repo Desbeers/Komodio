@@ -64,7 +64,7 @@ struct ArtistsView: View {
                     NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
                         ArtistView.Item(artist: artist)
                     })
-                    .buttonStyle(.listButton(selected: false))
+                    .buttonStyle(.kodiItemButton(kodiItem: artist))
                     Divider()
                 }
             }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftlyKodiAPI
 
 extension Styles {
 
@@ -33,16 +34,62 @@ extension ButtonStyle where Self == Styles.CardBackport {
 
 extension Styles {
 
-    // MARK: List Button
+    // MARK: Tab Button
 
-    /// SwiftUI Button style for a list Button
-    struct ListButton: ButtonStyle {
+    /// SwiftUI Button style for a tab Button
+    struct TabButton: ButtonStyle {
         /// Bool if the item is selected
         let selected: Bool
         /// The focus state
         @Environment(\.isFocused) var focused: Bool
 
         func makeBody(configuration: Configuration) -> some View {
+#if os(macOS)
+            configuration.label
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .foregroundColor(selected ? Color.white : Color.primary)
+                .background(selected ? Color.accentColor : Color.clear)
+                .cornerRadius(6)
+#endif
+
+#if os(tvOS) || os(iOS)
+            configuration.label
+                .foregroundColor(selected ? .white : .primary)
+                .background(selected ? Color.black : Color("AccentColor"))
+                .cornerRadius(KomodioApp.cornerRadius)
+                .shadow(radius: 3, x: 0, y: 2)
+                .scaleEffect(focused ? 1.2 : 1)
+                .animation(.easeOut(duration: 0.2), value: focused)
+#endif
+        }
+    }
+}
+
+extension ButtonStyle where Self == Styles.TabButton {
+    /// Button style for a 'tab' button
+    static func tabButton(selected: Bool) -> Styles.TabButton { .init(selected: selected) }
+}
+
+extension Styles {
+
+    // MARK: KodiItem Button
+
+    /// SwiftUI Button style for a KodiItem Button
+    struct KodiItemButton: ButtonStyle {
+        /// The `KodiItem`
+        let kodiItem: any KodiItem
+        /// The SceneState model
+        @EnvironmentObject var scene: SceneState
+        /// The focus state
+        @Environment(\.isFocused) var focused: Bool
+        /// Avoid error in the `View extension` when Strict Concurrency Checking is set to 'complete'
+        nonisolated init(kodiItem: any KodiItem) {
+            self.kodiItem = kodiItem
+        }
+
+        func makeBody(configuration: Configuration) -> some View {
+            let selected = kodiItem.id == scene.details.item.kodiItem?.id
 #if os(macOS)
             configuration.label
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -66,9 +113,9 @@ extension Styles {
     }
 }
 
-extension ButtonStyle where Self == Styles.ListButton {
-    /// Button style for a 'play' button
-    static func listButton(selected: Bool) -> Styles.ListButton { .init(selected: selected) }
+extension ButtonStyle where Self == Styles.KodiItemButton {
+    /// Button style for a 'KodiItem' button
+    static func kodiItemButton(kodiItem: any KodiItem) -> Styles.KodiItemButton { .init(kodiItem: kodiItem) }
 }
 
 extension Styles {

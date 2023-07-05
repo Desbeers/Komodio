@@ -19,7 +19,7 @@ extension Pickers {
 
     // MARK: List Sort Sheet
 
-    /// SwiftUI Button to show the ``Pickers/ListSortPicker`` in a Sheet
+    /// SwiftUI Button to show the `PickerView` in a Sheet
     /// - Note: Used for tvOS or else the UI will be too cluttered
     struct ListSortSheet: View {
         /// The color scheme
@@ -140,7 +140,7 @@ extension Pickers {
 
     // MARK: Rating Widget Sheet
 
-    /// SwiftUI Button to show the ``Pickers/ListSortPicker`` in a Sheet
+    /// SwiftUI Button to show the ``RatingWidget`` in a Sheet
     /// - Note: Used for tvOS or else the UI will be too cluttered
     struct RatingWidgetSheet: View {
         /// The KodiItem
