@@ -30,7 +30,7 @@ struct MainView: View {
 
     /// The body of the View
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             NavigationSplitView(
                 columnVisibility: $columnVisibility,
                 sidebar: {
