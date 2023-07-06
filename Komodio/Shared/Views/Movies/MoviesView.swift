@@ -34,7 +34,7 @@ struct MoviesView: View {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: .movies, status: state)
+                PartsView.StatusMessage(router: scene.mainSelection, status: state)
                     .backport.focusable()
             }
         }
@@ -45,7 +45,6 @@ struct MoviesView: View {
                 state = .empty
             } else {
                 getItems()
-                state = .ready
             }
         }
         .onChange(of: kodi.library.movies) { _ in
@@ -102,7 +101,7 @@ struct MoviesView: View {
         ContentView.Wrapper(
             header: {
                 ZStack {
-                    PartsView.DetailHeader(title: getNavigationTitle(), subtitle: getNavigationSubtitle())
+                    PartsView.DetailHeader(title: scene.details.item.title, subtitle: scene.details.item.description)
                     if KomodioApp.platform == .tvOS {
                         Pickers.ListSortSheet(sorting: $sorting, media: .movie)
                             .labelStyle(.headerLabel)
@@ -155,7 +154,6 @@ struct MoviesView: View {
 
     /// Get all items from the library
     private func getItems() {
-        logger("Get Items")
         Task { @MainActor in
             var items: [Video.Details.Movie] = []
             switch filter {
@@ -173,30 +171,20 @@ struct MoviesView: View {
                 .filter { $0.setID != 0 }.map(\.movieID)
             self.items = sorting.method == .title ? items.swapMoviesForSet() : items
             self.items.sort(sortItem: sorting)
-        }
-    }
-
-    /// Get the navigation title
-    private func getNavigationTitle() -> String {
-        switch filter {
-        case .unwatched:
-            return Router.unwatchedMovies.item.title
-        case .playlist(let file):
-            return  file.title
-        default:
-            return Router.movies.item.title
-        }
-    }
-
-    /// Get the navigation subtitle
-    private func getNavigationSubtitle() -> String {
-        switch filter {
-        case .unwatched:
-            return Router.unwatchedMovies.item.description
-        case .playlist:
-            return "Playlist"
-        default:
-            return Router.movies.item.description
+            /// Set the loading state
+            state = self.items.isEmpty ? .empty : .ready
+            /// Update the details
+            if let selectedMovie = scene.details.item.kodiItem {
+                /// Check if there is an update
+                let update = items.first { $0.kodiID == selectedMovie.kodiID }
+                if let update {
+                    /// Found an update
+                    scene.details = .movie(movie: update)
+                } else {
+                    /// The item is removed from the list
+                    scene.details = scene.mainSelection
+                }
+            }
         }
     }
 }

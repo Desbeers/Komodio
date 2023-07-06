@@ -34,8 +34,8 @@ extension Router {
 
             case .movies:
                 MoviesView()
-            case .movie(let movie):
-                MovieView.Details(movie: movie)
+            case .movie:
+                DetailView()
             case .movieSet(let movieSet):
                 MovieSetView(movieSet: movieSet)
             case .unwatchedMovies:
@@ -53,8 +53,8 @@ extension Router {
                 TVShowsView()
             case .tvshow(let tvshow):
                 SeasonsView(tvshow: tvshow)
-            case .seasons(let tvshow):
-                TVShowsView(selectedTVShow: tvshow)
+            case .seasons:
+                DetailView()
             case .season(let season):
                 SeasonView(season: season)
             case .episode(let episode):

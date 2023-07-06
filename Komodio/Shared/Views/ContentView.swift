@@ -21,6 +21,6 @@ struct ContentView: View {
     var body: some View {
         Router.DestinationView(router: scene.mainSelection)
             .navigationDestinations()
-            .animation(.default, value: scene.navigationStackPath)
+            .animation(.default, value: scene.details)
     }
 }

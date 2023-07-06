@@ -26,7 +26,6 @@ struct DetailView: View {
             case .movie(let movie):
                 MovieView
                     .Details(movie: movie)
-                    .id(movie.id)
             case .movieSet(let movieSet):
                 MovieSetView
                     .Details(movieSet: movieSet)

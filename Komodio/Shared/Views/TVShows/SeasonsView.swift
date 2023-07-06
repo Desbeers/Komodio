@@ -18,8 +18,6 @@ struct SeasonsView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The selected scene
-    @State private var selectedSeason: Video.Details.Season
     /// The seasons to show in this view
     @State private var seasons: [Video.Details.Season] = []
     /// The TV show info 'season'
@@ -28,17 +26,18 @@ struct SeasonsView: View {
     public init(tvshow: Video.Details.TVShow) {
         self.tvshow = tvshow
         self.tvShowInfo = Video.Details.Season(tvshow: tvshow, season: -1, playcount: 1)
-        self.selectedSeason = self.tvShowInfo
     }
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         content
+        /// Initial action when showing the `View`
             .task(id: tvshow) {
                 getTVShowSeasons()
             }
+        /// Action when the episodes of the Kodi library are updated
             .onChange(of: kodi.library.episodes) { _ in
                 getTVShowSeasons()
             }
@@ -46,9 +45,11 @@ struct SeasonsView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     @ViewBuilder var content: some View {
+
 #if os(macOS)
+        /// `View` for macOS
         ScrollView {
             LazyVStack {
                 Button(
@@ -79,8 +80,9 @@ struct SeasonsView: View {
         }
 #endif
 
-#if os(tvOS) || os(iOS)
-        /// Show seasons on page tabs
+#if canImport(UIKit)
+        /// `View` for tvOS and iOS
+        /// - Note: Show seasons on page tabs
         ContentView.Wrapper(
             scroll: KomodioApp.platform == .tvOS ? false : true,
             header: {
@@ -106,7 +108,7 @@ struct SeasonsView: View {
                                             }
                                     }
                                 )
-                                .buttonStyle(.tabButton(selected: season.season == selectedSeason.season))
+                                .buttonStyle(.tabButton(selected: season.id == scene.details.item.kodiItem?.id))
                                 .padding()
                             }
                         }
@@ -154,14 +156,14 @@ struct SeasonsView: View {
         }
         self.seasons = seasons
         /// Update the season details of the optional selected season
-        if let update = seasons.first(where: { $0.season == selectedSeason.season }) {
+        if let selectedSeason = scene.details.item.kodiItem,
+            let update = seasons.first(where: { $0.id == selectedSeason.id }) {
             setSeasonDetails(update)
         }
     }
 
     /// Set the details of a selected season
     private func setSeasonDetails(_ season: Video.Details.Season) {
-        selectedSeason = season
         switch season.season {
         case -1:
             scene.details = .tvshow(tvshow: tvshow)

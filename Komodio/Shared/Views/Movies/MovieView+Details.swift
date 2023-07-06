@@ -15,43 +15,16 @@ extension MovieView {
     /// SwiftUI View for Movie details
     struct Details: View {
         /// The Movie
-        @State var movie: Video.Details.Movie
-        /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        let movie: Video.Details.Movie
         /// The focus state of the Movie View (for tvOS)
         @FocusState var isFocused: Bool
-        /// The cast of the Movie
-        var cast: String {
-            var cast: [String] = []
-            for person in movie.cast {
-                cast.append(person.name)
-            }
-            return cast.prefix(10).joined(separator: " ∙ ")
-        }
-        /// The plot of the Movie
-        var plot: String {
-            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
-                .list
-                .contains(0) && movie.playcount == 0 {
-                return "Plot is hidden for unwatched movies..."
-            }
-            return movie.plot
-        }
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
             content
-                .task(id: kodi.library.movies) {
-                    if let update = MovieView.updateMovie(movie: movie) {
-                        movie = update
-                    }
-                }
                 .focused($isFocused)
-                .animation(.default, value: movie)
                 .animation(.default, value: isFocused)
         }
 
@@ -167,6 +140,26 @@ extension MovieView {
             .padding(.leading, KomodioApp.sidebarCollapsedWidth)
         }
 #endif
+
+        // MARK: Caculated stuff
+
+        /// The cast of the Movie
+        var cast: String {
+            var cast: [String] = []
+            for person in movie.cast {
+                cast.append(person.name)
+            }
+            return cast.prefix(10).joined(separator: " ∙ ")
+        }
+        /// The plot of the Movie
+        var plot: String {
+            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
+                .list
+                .contains(0) && movie.playcount == 0 {
+                return "Plot is hidden for unwatched movies..."
+            }
+            return movie.plot
+        }
 
         /// The details of the movie
         var movieDetails: some View {

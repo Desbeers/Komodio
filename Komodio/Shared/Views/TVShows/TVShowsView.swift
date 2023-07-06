@@ -18,8 +18,6 @@ struct TVShowsView: View {
     @EnvironmentObject var scene: SceneState
     /// The TV shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
-    /// The optional selected TV show (for macOS)
-    @State var selectedTVShow = Video.Details.TVShow(media: .none)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
 
@@ -35,7 +33,6 @@ struct TVShowsView: View {
                 PartsView.StatusMessage(router: .tvshows, status: state)
             }
         }
-        .animation(.default, value: selectedTVShow)
         .task(id: kodi.library.tvshows) {
             if kodi.status != .loadedLibrary {
                 state = .offline
