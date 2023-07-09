@@ -137,11 +137,11 @@ extension PartsView {
                 ZStack {
                     Image("RotatingIconBackground")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .shadow(radius: minSize(size: geometry) / 50)
                     Image("RotatingIconForeground")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .foregroundColor(.white)
                     /// The custom rotator
                         .modifier(RotatingIconModel.Rotate(rotate: rotateModel.rotating, status: $rotateModel.status))
@@ -150,7 +150,7 @@ extension PartsView {
                 .frame(
                     width: geometry.size.width,
                     height: geometry.size.height,
-                    alignment: .top
+                    alignment: .center
                 )
             }
             .animation(

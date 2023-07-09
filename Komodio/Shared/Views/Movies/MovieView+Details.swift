@@ -18,6 +18,8 @@ extension MovieView {
         let movie: Video.Details.Movie
         /// The SceneState model
         @EnvironmentObject private var scene: SceneState
+        /// The loading state of the View (tvOS)
+        @State private var state: Parts.Status = .loading
 
         // MARK: Body of the View
 
@@ -53,23 +55,42 @@ extension MovieView {
 #endif
 
 #if os(tvOS)
-            ZStack {
-                KodiArt.Fanart(item: movie)
-                    .scaledToFill()
-                ScrollView {
-                    VStack(spacing: 0) {
-                        top
-                            .frame(height: UIScreen.main.bounds.height)
-                            .focusSection()
-                        details
-                            .frame(height: UIScreen.main.bounds.height)
-                            .background(.black.opacity(0.8))
+            Group {
+                switch state {
+                case .loading:
+                    VStack {
+                        Text(movie.title)
+                            .font(.title)
+                        ProgressView()
                     }
-                    .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .focusable()
+                default:
+                    ZStack {
+                        KodiArt.Fanart(item: movie)
+                            .scaledToFill()
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                top
+                                    .frame(height: UIScreen.main.bounds.height)
+                                    .focusSection()
+                                details
+                                    .frame(height: UIScreen.main.bounds.height)
+                                    .background(.black.opacity(0.8))
+                            }
+                            .foregroundColor(.white)
+                        }
+                    }
                 }
             }
             .ignoresSafeArea()
             .animation(.default, value: scene.sidebarFocus)
+            .animation(.default, value: state)
+            .transition(.slide)
+            .task {
+                try? await Task.sleep(until: .now + .seconds(2), clock: .continuous)
+                state = .ready
+            }
 #endif
         }
 

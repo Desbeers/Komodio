@@ -30,6 +30,7 @@ extension DetailView {
         /// The body of the `View`
         var body: some View {
             wrapper
+                .frame(maxWidth: .infinity)
         }
 
         // MARK: Wrapper of the View

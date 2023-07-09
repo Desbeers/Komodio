@@ -58,7 +58,7 @@ extension Modifiers {
         func body(content: Content) -> some View {
             content
 #if os(macOS)
-                .font(.system(size: 14))
+                .font(.system(size: 16))
                 .lineSpacing(6)
 #endif
         }
@@ -89,25 +89,17 @@ extension Modifiers {
                 .background(
                     ZStack {
                         Color("BlendColor")
-                        if let background = scene.details.item.kodiItem, !background.fanart.isEmpty {
-                            KodiArt.Fanart(item: background)
-                                .grayscale(1)
-                                .opacity(0.2)
-                                .scaledToFill()
-                        } else {
-                            Image("Background")
-                                .resizable()
-                                .opacity(0.2)
-                                .scaledToFill()
-                        }
+                        KodiArt.Fanart(item: scene.details.item.kodiItem, fallback: Image("Background"))
+                            .grayscale(1)
+                            .opacity(0.2)
+                            .scaledToFill()
                     }
                     #if os(iOS)
                         .ignoresSafeArea(.all, edges: .bottom)
                     #else
                         .ignoresSafeArea()
                     #endif
-                        .transition(.opacity)
-                        .animation(.default, value: scene.details.item.kodiItem?.id)
+                        .animation(.easeInOut(duration: 1), value: scene.details.item.kodiItem?.id)
                 )
         }
     }
