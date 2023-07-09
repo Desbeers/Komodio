@@ -42,6 +42,7 @@ extension MovieSetView {
                     .buttonStyle(.playButton)
                 Text(movieSet.plot)
             }
+            .padding(.bottom)
         }
     }
 }

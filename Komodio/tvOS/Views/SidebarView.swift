@@ -16,11 +16,13 @@ import AVFoundation
 /// It is a bit of a hack to tame the Siri remote...
 struct SidebarView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
     /// The focus state of the sidebar
-    @FocusState var isFocused: Bool
+    @FocusState private var isFocused: Bool
+    /// Bool for the confirmation dialog
+    @State private var isPresentingConfirmExit: Bool = false
     /// Router items to show in the sidebar
     let routerItems: [Router] = [
         .start,
@@ -113,6 +115,19 @@ struct SidebarView: View {
         }
         .onChange(of: isFocused) { value in
             scene.sidebarFocus = value
+        }
+        .onExitCommand {
+            isPresentingConfirmExit = true
+        }
+        .confirmationDialog(
+            "Are you sure?",
+            isPresented: $isPresentingConfirmExit
+        ) {
+            Button("Exit Komodio") {
+                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+            }
+        } message: {
+            Text("Are you sure you want to exit?")
         }
     }
 

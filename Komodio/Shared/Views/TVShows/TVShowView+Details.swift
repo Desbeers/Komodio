@@ -47,6 +47,7 @@ extension TVShowView {
                     tvshowDetails
                 }
             }
+            .padding(.bottom)
 #if os(iOS)
             .toolbar {
                 Buttons.PlayedState(item: tvshow)
