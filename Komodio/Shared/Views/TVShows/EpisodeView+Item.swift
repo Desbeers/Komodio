@@ -45,7 +45,6 @@ extension EpisodeView {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .backport.focusSection()
             }
-            .detailsFontStyle()
         }
     }
 }

@@ -13,9 +13,9 @@ extension ContentView {
     struct Wrapper<Header: View, Content: View>: View {
         /// Wrap the view in a `ScollView` or not
         var scroll: Bool = true
-        /// The header of the View
+        /// The header of the `View`
         @ViewBuilder var header: () -> Header
-        /// The content of the View
+        /// The content of the `View`
         @ViewBuilder var content: () -> Content
         /// The inside padding
         private var insidePadding: Double {
@@ -25,7 +25,7 @@ extension ContentView {
             case .tvOS:
                 return 40
             case .iPadOS:
-                return 0
+                return 20
             }
         }
 
@@ -42,6 +42,7 @@ extension ContentView {
                     inside
                 }
             }
+            .padding([.top, .horizontal])
 #if os(tvOS)
             .padding(.leading)
             /// Extra padding for the sidebar
@@ -55,7 +56,9 @@ extension ContentView {
                 .frame(maxWidth: .infinity)
                 .backport.focusSection()
             content()
-                .padding(insidePadding)
+                .padding(.horizontal, insidePadding)
+            /// No scrollbar means no vertical padding; the inside content might be a list that wants to scroll from top to bottom
+                .padding(.vertical, scroll ? insidePadding : 0)
         }
     }
 }

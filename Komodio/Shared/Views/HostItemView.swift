@@ -32,25 +32,3 @@ struct HostItemView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
-
-extension HostItemView {
-
-    // MARK: Host Item Kodi Settings
-
-    /// SwiftUI View for Kodi settings to connect to Komodio
-    struct KodiSettings: View {
-
-        // MARK: Body of the View
-
-        /// The body of the View
-        var body: some View {
-            VStack {
-                KodiHostItemView.KodiSettings()
-                .font(KomodioApp.platform == .macOS ? .title2 : .body)
-            }
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(10)
-        }
-    }
-}

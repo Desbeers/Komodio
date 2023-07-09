@@ -12,28 +12,29 @@ extension MovieView {
 
     // MARK: Movie Details
 
-    /// SwiftUI View for Movie details
+    /// SwiftUI `View` for details of a `Movie`
     struct Details: View {
-        /// The Movie
+        /// The `Movie` to show
         let movie: Video.Details.Movie
-        /// The focus state of the Movie View (for tvOS)
-        @FocusState var isFocused: Bool
+        /// The SceneState model
+        @EnvironmentObject private var scene: SceneState
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             content
-                .focused($isFocused)
-                .animation(.default, value: isFocused)
         }
 
         // MARK: Content of the View
 
-        /// The content of the View
+        /// The content of the `View`
         @ViewBuilder var content: some View {
 #if os(macOS) || os(iOS)
-            DetailView.Wrapper(title: movie.title) {
+            DetailView.Wrapper(
+                scroll: KomodioApp.platform == .tvOS ? false : true,
+                title: movie.title
+            ) {
                 VStack {
                     KodiArt.Fanart(item: movie)
                         .fanartStyle(item: movie, overlay: movie.tagline.isEmpty ? nil : movie.tagline)
@@ -46,9 +47,9 @@ extension MovieView {
                     }
                     Pickers.RatingWidget(item: movie)
                 }
-                .padding(.bottom)
-                .detailsFontStyle()
             }
+            /// Give it an ID so it will always scroll back to the top when selecting another movie
+            .id(movie.id)
 #endif
 
 #if os(tvOS)
@@ -68,6 +69,7 @@ extension MovieView {
                 }
             }
             .ignoresSafeArea()
+            .animation(.default, value: scene.sidebarFocus)
 #endif
         }
 
@@ -102,9 +104,9 @@ extension MovieView {
                         .minimumScaleFactor(0.5)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.leading, isFocused ? KomodioApp.sidebarCollapsedWidth : KomodioApp.sidebarWidth)
+                    .padding(.leading, scene.sidebarFocus ? KomodioApp.sidebarWidth : KomodioApp.sidebarCollapsedWidth)
                 }
-                .padding(40)
+                .padding(KomodioApp.contentPadding)
                 .frame(height: UIScreen.main.bounds.height)
                 .focusSection()
             }
@@ -133,7 +135,7 @@ extension MovieView {
                     .labelStyle(.playLabel)
                     .buttonStyle(.playButton)
                 }
-                .padding(40)
+                .padding(KomodioApp.contentPadding)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .focusSection()
@@ -178,6 +180,7 @@ extension MovieView {
                 if !cast.isEmpty {
                     Label(cast, systemImage: "person.fill")
                 }
+                Label(movie.file, systemImage: "doc")
             }
             .labelStyle(.detailLabel)
         }

@@ -34,45 +34,6 @@ extension ButtonStyle where Self == Styles.CardBackport {
 
 extension Styles {
 
-    // MARK: Tab Button
-
-    /// SwiftUI Button style for a tab Button
-    struct TabButton: ButtonStyle {
-        /// Bool if the item is selected
-        let selected: Bool
-        /// The focus state
-        @Environment(\.isFocused) var focused: Bool
-
-        func makeBody(configuration: Configuration) -> some View {
-#if os(macOS)
-            configuration.label
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .foregroundColor(selected ? Color.white : Color.primary)
-                .background(selected ? Color.accentColor : Color.clear)
-                .cornerRadius(6)
-#endif
-
-#if os(tvOS) || os(iOS)
-            configuration.label
-                .foregroundColor(selected ? .white : .primary)
-                .background(selected ? Color.black : Color("AccentColor"))
-                .cornerRadius(KomodioApp.cornerRadius)
-                .shadow(radius: 3, x: 0, y: 2)
-                .scaleEffect(focused ? 1.2 : 1)
-                .animation(.easeOut(duration: 0.2), value: focused)
-#endif
-        }
-    }
-}
-
-extension ButtonStyle where Self == Styles.TabButton {
-    /// Button style for a 'tab' button
-    static func tabButton(selected: Bool) -> Styles.TabButton { .init(selected: selected) }
-}
-
-extension Styles {
-
     // MARK: KodiItem Button
 
     /// SwiftUI Button style for a KodiItem Button
@@ -101,12 +62,12 @@ extension Styles {
 
 #if os(tvOS) || os(iOS)
             configuration.label
-                .padding()
                 .foregroundColor(selected ? .white : .primary)
                 .background(selected ? Color.black : Color("AccentColor"))
                 .cornerRadius(KomodioApp.cornerRadius)
                 .shadow(radius: 3, x: 0, y: 2)
-                .scaleEffect(focused ? 1.2 : 1)
+                .scaleEffect(focused ? 1.1 : 1)
+                .scaleEffect(selected ? 1.1 : 1)
                 .animation(.easeOut(duration: 0.2), value: focused)
 #endif
         }

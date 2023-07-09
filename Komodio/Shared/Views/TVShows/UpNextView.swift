@@ -70,7 +70,7 @@ struct UpNextView: View {
         .animation(.default, value: opacity)
 #endif
 
-#if os(tvOS)
+#if canImport(UIKit)
         ContentView.Wrapper(
             scroll: false,
             header: {
@@ -80,54 +80,30 @@ struct UpNextView: View {
                 )
             },
             content: {
-                HStack(spacing: 0) {
-                    List {
-                        ForEach(episodes) { episode in
-                            Button(action: {
-                                selectedEpisode = episode
-                            }, label: {
-                                Item(episode: episode)
-                            })
+                HStack(alignment: .top, spacing: 0) {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(episodes) { episode in
+                                Button(action: {
+                                    scene.details = .episode(episode: episode)
+                                    selectedEpisode = episode
+                                }, label: {
+                                    Item(episode: episode)
+                                })
+                                .buttonStyle(.kodiItemButton(kodiItem: episode))
+                            }
                         }
+                        .padding(.vertical, KomodioApp.contentPadding)
                     }
-                    .frame(width: KomodioApp.posterSize.width * 1.5, alignment: .center)
-                    .backport.cardButton()
-                    if let selectedEpisode {
-                        Details(episode: selectedEpisode)
-                            .padding(.trailing, KomodioApp.posterSize.width * 0.3)
-                            .backport.focusSection()
-                    } else {
-                        DetailView()
-                    }
+                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
+                    .backport.focusSection()
+                    DetailView()
+                    /// Give it an ID so it will always scroll back to the top when selecting another season
+                        .id(selectedEpisode?.id)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, KomodioApp.posterSize.width * 0.3)
             }
         )
         .animation(.default, value: selectedEpisode)
-#endif
-
-#if os(iOS)
-        ContentView.Wrapper(
-            scroll: true,
-            header: {
-                PartsView.DetailHeader(
-                    title: Router.unwachedEpisodes.item.title,
-                    subtitle: Router.unwachedEpisodes.item.description
-                )
-            },
-            content: {
-                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
-                    ForEach(episodes) { episode in
-                        NavigationLink(value: Router.episode(episode: episode)) {
-                            Item(episode: episode)
-                                .padding(.bottom, KomodioApp.posterSize.height / 9)
-                        }
-                    }
-                }
-                .backport.cardButton()
-            }
-        )
 #endif
     }
 

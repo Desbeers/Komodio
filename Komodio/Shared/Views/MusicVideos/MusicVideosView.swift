@@ -27,40 +27,23 @@ struct MusicVideosView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
-        Group {
-#if os(macOS)
-            content
-#endif
-
-#if os(tvOS) || os(iOS)
-            VStack {
-                switch state {
-                case .ready:
-                    content
-                default:
-                    PartsView.StatusMessage(router: .musicVideos, status: state)
-                        .backport.focusable()
-                }
+        content
+            .task(id: kodi.library.musicVideos) {
+                getItems()
+                setItemDetails()
+                state = .ready
             }
-#endif
-        }
-        .task(id: kodi.library.musicVideos) {
-            getItems()
-            setItemDetails()
-            state = .ready
-        }
-        .task(id: selectedItem) {
-            setItemDetails()
-        }
+            .task(id: selectedItem) {
+                setItemDetails()
+            }
     }
 
-    // MARK: Content of the MusicVideosView
+    // MARK: Content of the View
 
-    /// The content of the view
+    /// The content of the `view`
     @ViewBuilder var content: some View {
-
 #if os(macOS)
         ScrollView {
             LazyVStack {
@@ -85,29 +68,30 @@ struct MusicVideosView: View {
         ContentView.Wrapper(
             scroll: false,
             header: {
-                PartsView.DetailHeader(
-                    title: artist.title
-                )
-            }, content: {
-                HStack(spacing: 0) {
-                    List {
-                        ForEach(items) { item in
-                            Button(action: {
-                                selectedItem = item
-                            }, label: {
-                                MusicVideoView.Item(item: item)
-                            })
+                PartsView.DetailHeader(title: artist.title)
+            },
+            content: {
+                HStack(alignment: .top, spacing: 0) {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(items) { item in
+                                Button(action: {
+                                    selectedItem = item
+                                }, label: {
+                                    MusicVideoView.Item(item: item)
+                                })
+                            }
                         }
+                        .padding(.vertical, KomodioApp.contentPadding)
                     }
-                    .frame(width: KomodioApp.posterSize.width * 1.5)
-                    .backport.cardButton()
+                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
+                    .backport.focusSection()
                     DetailView()
-                        .backport.focusSection()
+                        .padding(.leading, KomodioApp.contentPadding)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, KomodioApp.posterSize.width * 0.3)
             }
         )
+        .backport.cardButton()
 #endif
     }
 

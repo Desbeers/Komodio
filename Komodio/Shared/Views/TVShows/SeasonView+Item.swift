@@ -25,11 +25,12 @@ extension SeasonView {
                 KodiArt.Poster(item: season)
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 100)
-                    .watchStatus(of: season)
+
                     .padding(.trailing)
                 Text(season.title)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .watchStatus(of: season)
         }
     }
 }

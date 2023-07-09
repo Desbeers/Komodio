@@ -28,12 +28,11 @@ extension MovieView {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
                     .watchStatus(of: movie)
-#if os(tvOS)
+#if canImport(UIKit)
                     .overlay(alignment: .bottom) {
                         if let sorting {
                             PartsView.SortLabel(item: movie, sorting: sorting)
                                 .font(.caption)
-                                .scaleEffect(0.8)
                                 .frame(maxWidth: .infinity)
                                 .background(.thinMaterial)
                         }

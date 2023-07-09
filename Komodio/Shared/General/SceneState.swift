@@ -27,6 +27,8 @@ class SceneState: ObservableObject {
     @Published var showSettings: Bool = false
     /// Sidebar focus toggle
     @Published var toggleSidebar: Bool = false
+    /// Sidebar focus state
+    @Published var sidebarFocus: Bool = false
 #endif
 
     // MARK: Shared stuff
@@ -80,4 +82,34 @@ extension SceneState {
         } catch { }
     }
 #endif
+}
+
+extension SceneState {
+
+    /// Update the optional `KodiItem` in the ``DetailView``
+    func updateDetailView(library: Library.Items) {
+
+        if let selectedKodiItem = details.item.kodiItem {
+            switch selectedKodiItem.media {
+            case .movie:
+                if let update = library.movies.first(where: { $0.id == selectedKodiItem.id }) {
+                    details = .movie(movie: update)
+                    return
+                }
+                /// The selected `KodiItem` is gone...
+                details = mainSelection
+                return
+            case .movieSet:
+                if let update = library.movieSets.first(where: { $0.id == selectedKodiItem.id }) {
+                    details = .movieSet(movieSet: update)
+                }
+            case.tvshow:
+                if let update = library.tvshows.first(where: { $0.id == selectedKodiItem.id }) {
+                    details = .tvshow(tvshow: update)
+                }
+            default:
+                break
+            }
+        }
+    }
 }

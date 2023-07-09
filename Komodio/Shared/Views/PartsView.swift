@@ -23,7 +23,7 @@ extension PartsView {
     struct DetailHeader: View {
         /// The color scheme
         @Environment(\.colorScheme) var colorScheme
-        /// The title of the message
+        /// The title of the header
         let title: String
         /// The optional subtitle
         var subtitle: String?
@@ -60,7 +60,7 @@ extension PartsView {
                     .font(.system(size: font))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                if let subtitle, KomodioApp.platform != .iPadOS {
+                if let subtitle {
                     /// Init the text, because then we can use Mardown formatting
                     Text(.init(subtitle))
                         .font(.system(size: font / 2))
@@ -83,7 +83,6 @@ extension PartsView {
                 .saturation(0.4)
             )
             .cornerRadius(KomodioApp.cornerRadius)
-            .padding()
         }
     }
 }
@@ -138,11 +137,11 @@ extension PartsView {
                 ZStack {
                     Image("RotatingIconBackground")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .shadow(radius: minSize(size: geometry) / 50)
                     Image("RotatingIconForeground")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .foregroundColor(.white)
                     /// The custom rotator
                         .modifier(RotatingIconModel.Rotate(rotate: rotateModel.rotating, status: $rotateModel.status))
@@ -151,7 +150,7 @@ extension PartsView {
                 .frame(
                     width: geometry.size.width,
                     height: geometry.size.height,
-                    alignment: .center
+                    alignment: .top
                 )
             }
             .animation(

@@ -76,7 +76,7 @@ struct MainView: View {
                 PartsView.StatusMessage(router: scene.mainSelection, status: state)
             }
         }
-        .navigationSplitViewColumnWidth(KomodioApp.detailWidth)
+        .navigationSplitViewColumnWidth(KomodioApp.columnWidth)
         .navigationStackAnimation(opacity: $opacity)
     }
 }

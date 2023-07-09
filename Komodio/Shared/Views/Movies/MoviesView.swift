@@ -38,17 +38,25 @@ struct MoviesView: View {
                     .backport.focusable()
             }
         }
+        .animation(.default, value: items.map { $0.id })
         .task(id: filter) {
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.movies.isEmpty {
                 state = .empty
             } else {
-                getItems()
+                getMovies()
+            }
+        }
+        .onChange(of: sorting) { [sorting] newValue in
+            if sorting.method == newValue.method {
+                items.sort(sortItem: newValue)
+            } else {
+                getMovies()
             }
         }
         .onChange(of: kodi.library.movies) { _ in
-            getItems()
+            getMovies()
         }
     }
 
@@ -87,21 +95,17 @@ struct MoviesView: View {
             }
             .padding()
         }
-        .animation(.default, value: sorting)
-        .onChange(of: sorting) { [sorting] newValue in
-            if sorting.method == newValue.method {
-                items.sort(sortItem: newValue)
-            } else {
-                getItems()
-            }
-        }
 #endif
 
 #if os(tvOS) || os(iOS)
         ContentView.Wrapper(
             header: {
                 ZStack {
-                    PartsView.DetailHeader(title: scene.details.item.title, subtitle: scene.details.item.description)
+                    PartsView
+                        .DetailHeader(
+                            title: scene.mainSelection.item.title,
+                            subtitle: scene.mainSelection.item.description
+                        )
                     if KomodioApp.platform == .tvOS {
                         Pickers.ListSortSheet(sorting: $sorting, media: .movie)
                             .labelStyle(.headerLabel)
@@ -133,27 +137,20 @@ struct MoviesView: View {
             }
         )
         .backport.cardButton()
-        .animation(.default, value: items.map { $0.id })
         .toolbar {
             if KomodioApp.platform == .iPadOS {
                 Pickers.ListSortSheet(sorting: $sorting, media: .movie)
                     .labelStyle(.titleAndIcon)
             }
         }
-        .onChange(of: sorting) { [sorting] newValue in
-            if sorting.method == newValue.method {
-                items.sort(sortItem: newValue)
-            } else {
-                getItems()
-            }
-        }
+
 #endif
     }
 
     // MARK: Private functions
 
-    /// Get all items from the library
-    private func getItems() {
+    /// Get all movies from the library
+    private func getMovies() {
         Task { @MainActor in
             var items: [Video.Details.Movie] = []
             switch filter {
@@ -173,18 +170,6 @@ struct MoviesView: View {
             self.items.sort(sortItem: sorting)
             /// Set the loading state
             state = self.items.isEmpty ? .empty : .ready
-            /// Update the details
-            if let selectedMovie = scene.details.item.kodiItem {
-                /// Check if there is an update
-                let update = items.first { $0.kodiID == selectedMovie.kodiID }
-                if let update {
-                    /// Found an update
-                    scene.details = .movie(movie: update)
-                } else {
-                    /// The item is removed from the list
-                    scene.details = scene.mainSelection
-                }
-            }
         }
     }
 }

@@ -45,7 +45,7 @@ struct SearchView: View {
                                             KodiArt.Poster(item: movie)
                                                 .frame(width: 150, height: 225)
                                         }
-                                        .padding(40)
+                                        .padding(KomodioApp.contentPadding)
                                     }
                                 }
                             }
@@ -64,7 +64,7 @@ struct SearchView: View {
                                             KodiArt.Poster(item: tvshow)
                                                 .frame(width: 150, height: 225)
                                         }
-                                        .padding(40)
+                                        .padding(KomodioApp.contentPadding)
                                     }
                                 }
                             }

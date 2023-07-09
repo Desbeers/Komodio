@@ -14,9 +14,12 @@ extension DetailView {
 
     /// SwiftUI View to wrap the ``DetailView``
     struct Wrapper<Content: View>: View {
-
-        /// The title of the message
-        let title: String
+        /// Wrap the view in a `ScrollView` or not
+        let scroll: Bool
+        /// View the details as part of another View
+        var part: Bool = false
+        /// The optional title of the message
+        let title: String?
         /// The optional subtitle
         var subtitle: String?
         /// The content of the View
@@ -24,34 +27,58 @@ extension DetailView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
-#if os(macOS)
-            ScrollView {
-                PartsView.DetailHeader(title: title, subtitle: subtitle)
-                content()
-                    .padding(.horizontal, 30)
-            }
-#endif
+            wrapper
+        }
 
-#if os(tvOS)
-            VStack {
-                Text(title)
-                    .font(.title2)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.2)
-                content()
-            }
-            .padding(40)
-#endif
+        // MARK: Wrapper of the View
 
-#if os(iOS)
-            ScrollView {
-                PartsView.DetailHeader(title: title, subtitle: subtitle)
-                content()
-                    .padding(.horizontal, 30)
+        /// The wrapper of the `View`
+        @ViewBuilder var wrapper: some View {
+            switch scroll {
+            case true:
+                scrollContent
+            case false:
+                fixedContent
             }
-#endif
+        }
+
+        /// The header of the `View`
+        @ViewBuilder var header: some View {
+            if let title {
+                switch part {
+                case true:
+                    VStack {
+                        Text(title)
+                            .font(.title)
+                        if let subtitle {
+                            Text(subtitle)
+                                .font(.subheadline)
+                        }
+                    }
+                    .padding(.top)
+                case false:
+                    PartsView.DetailHeader(title: title, subtitle: subtitle)
+                        .padding([.top, .horizontal])
+                }
+            }
+        }
+
+        /// The content in a `ScrollView`
+        @ViewBuilder var scrollContent: some View {
+            ScrollView {
+                fixedContent
+            }
+        }
+
+        /// The content in a `VStack`
+        @ViewBuilder var fixedContent: some View {
+            VStack(spacing: 0) {
+                header
+                content()
+                    .padding()
+            }
         }
     }
 }

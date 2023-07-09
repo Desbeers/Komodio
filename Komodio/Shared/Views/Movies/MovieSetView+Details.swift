@@ -12,27 +12,35 @@ extension MovieSetView {
 
     // MARK: Movie Set Details
 
-    /// SwiftUI View for the details of a `MovieSet`
-    /// - Note: only used by macOS
+    /// SwiftUI `View` for details of a `MovieSet`
     struct Details: View {
-        /// The movie set
+        /// The `Movie Set` to show
         let movieSet: Video.Details.MovieSet
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
-            DetailView.Wrapper(title: movieSet.title) {
-                VStack {
-                    KodiArt.Fanart(item: movieSet)
-                        .fanartStyle(item: movieSet)
-                    Buttons.PlayedState(item: movieSet)
-                        .padding()
-                        .labelStyle(.playLabel)
-                        .buttonStyle(.playButton)
-                    Text(movieSet.plot)
-                }
-                .detailsFontStyle()
+            DetailView.Wrapper(
+                scroll: KomodioApp.platform == .tvOS ? false : true,
+                title: KomodioApp.platform == .macOS ? movieSet.title : nil
+            ) {
+                content
+            }
+        }
+
+        // MARK: Content of the View
+
+        /// The content of the `View`
+        var content: some View {
+            VStack {
+                KodiArt.Fanart(item: movieSet)
+                    .fanartStyle(item: movieSet)
+                Buttons.PlayedState(item: movieSet)
+                    .padding()
+                    .labelStyle(.playLabel)
+                    .buttonStyle(.playButton)
+                Text(movieSet.plot)
             }
         }
     }

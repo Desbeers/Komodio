@@ -16,9 +16,12 @@ extension KomodioApp {
     /// The plaform
     static let platform: Parts.Platform = .macOS
 
-    /// The `NavigationSplitView` detail width
+    /// The `NavigationSplitView` column width
     /// - Note: Used for the width as well the animation
-    static let detailWidth: Double = 400
+    static let columnWidth: Double = 400
+
+    /// The default padding for content
+    static let contentPadding: Double = 60
 
     /// The default size of poster art
     static let posterSize = CGSize(width: 80, height: 120)
@@ -34,6 +37,12 @@ extension KomodioApp {
 
     /// The plaform
     static let platform: Parts.Platform = .tvOS
+
+    /// The `List` column width
+    static let columnWidth: Double = 400
+
+    /// The default padding for content
+    static let contentPadding: Double = 40
 
     /// The default size of poster art
     static let posterSize = CGSize(width: 240, height: 360)
@@ -63,6 +72,12 @@ extension KomodioApp {
 
     /// The plaform
     static let platform: Parts.Platform = .iPadOS
+
+    /// The `List` column width
+    static let columnWidth: Double = 220
+
+    /// The default padding for content
+    static let contentPadding: Double = 40
 
     /// The default size of poster art
     static let posterSize = CGSize(width: 180, height: 270)

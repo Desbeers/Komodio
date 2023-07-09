@@ -12,7 +12,7 @@ extension ArtistView {
 
     // MARK: Artist Details
 
-    /// SwiftUI View for Artist details
+    /// SwiftUI `View` for details of an `Artist`
     struct Details: View {
         /// The Artist
         let artist: Audio.Details.Artist
@@ -21,28 +21,24 @@ extension ArtistView {
 
         /// The body of the View
         var body: some View {
-#if os(macOS) || os(iOS)
-            DetailView.Wrapper(title: artist.artist) {
-                VStack {
-                    KodiArt.Fanart(item: artist)
-                        .fanartStyle(item: artist)
-                        .padding(.bottom)
-                    PartsView.TextMore(item: artist)
-                }
-                .detailsFontStyle()
+            DetailView.Wrapper(
+                scroll: KomodioApp.platform == .tvOS ? false : true,
+                title: KomodioApp.platform == .macOS ? artist.artist : nil
+            ) {
+                content
             }
-#endif
+        }
 
-#if os(tvOS)
+        // MARK: Content of the View
+
+        /// The content of the `View`
+        var content: some View {
             VStack {
                 KodiArt.Fanart(item: artist)
                     .fanartStyle(item: artist)
-                    .frame(width: KomodioApp.fanartSize.width, height: KomodioApp.fanartSize.height)
                     .padding(.bottom)
                 PartsView.TextMore(item: artist)
             }
-            .detailsFontStyle()
-#endif
         }
     }
 }

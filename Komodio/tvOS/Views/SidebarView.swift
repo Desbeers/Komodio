@@ -111,6 +111,9 @@ struct SidebarView: View {
         .onChange(of: scene.toggleSidebar) { _ in
             isFocused = true
         }
+        .onChange(of: isFocused) { value in
+            scene.sidebarFocus = value
+        }
     }
 
     /// SwiftUI View for an item in the sidebar

@@ -23,23 +23,17 @@ extension StartView {
 
         /// The body of the View
         var body: some View {
-            VStack {
-                PartsView.DetailHeader(title: kodi.host.name, subtitle: kodi.status.message)
+            DetailView.Wrapper(
+                scroll: false,
+                title: kodi.host.name,
+                subtitle: kodi.status.message
+            ) {
                 PartsView.RotatingIcon(rotate: $rotate)
-                    .task(id: kodi.status) {
-                        rotate = kodi.status == .loadedLibrary ? true : false
-                    }
-                if kodi.status != .loadedLibrary {
-                    HStack {
-                        ProgressView()
-                            .padding(.trailing)
-                        Text(kodi.status.message)
-                    }
-                    .font(.headline)
-                    .padding()
-                }
             }
             .animation(.default, value: kodi.status)
+            .task(id: kodi.status) {
+                rotate = kodi.status == .loadedLibrary ? true : false
+            }
         }
     }
 }

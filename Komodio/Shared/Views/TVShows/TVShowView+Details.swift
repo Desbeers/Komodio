@@ -12,85 +12,47 @@ extension TVShowView {
 
     // MARK: TV show Details
 
-    /// SwiftUI View for TV show details
+    /// SwiftUI `View` for details of a `TV show`
     struct Details: View {
-        /// The TV show
-        @State var tvshow: Video.Details.TVShow
-        /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        /// The `TV show` to show
+        let tvshow: Video.Details.TVShow
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
-            Group {
+            DetailView.Wrapper(
+                scroll: KomodioApp.platform == .tvOS ? false : true,
+                title: KomodioApp.platform == .macOS ? tvshow.title : nil
+            ) {
+                content
+            }
+        }
 
-#if os(macOS)
-                DetailView.Wrapper(title: tvshow.title) {
-                    VStack {
-                        KodiArt.Fanart(item: tvshow)
-                            .fanartStyle(item: tvshow)
-                        Buttons.PlayedState(item: tvshow)
-                            .padding()
-                            .buttonStyle(.playButton)
-                        VStack(alignment: .leading) {
-                            Text(tvshow.plot)
-                            tvshowDetails
-                        }
-                    }
-                    .detailsFontStyle()
-                }
+        // MARK: Content of the View
+
+        /// The content of the `View`
+        var content: some View {
+            VStack {
+                KodiArt.Fanart(item: tvshow)
+                    .fanartStyle(item: tvshow)
+#if os(macOS) || os(tvOS)
+                Buttons.PlayedState(item: tvshow)
+                    .padding()
+                    .buttonStyle(.playButton)
 #endif
-
-#if os(tvOS)
-                HStack {
-                    KodiArt.Poster(item: tvshow)
-                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                        .cornerRadius(10)
-                        .watchStatus(of: tvshow)
-                    VStack {
-                        KodiArt.Fanart(item: tvshow)
-                            .fanartStyle(item: tvshow)
-                        PartsView.TextMore(item: tvshow)
-                            .backport.focusSection()
-                        HStack {
-                            tvshowDetails
-                            Buttons.PlayedState(item: tvshow)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                    }
+                VStack(alignment: .leading) {
+                    PartsView.TextMore(item: tvshow)
+                        .backport.focusSection()
+                    tvshowDetails
                 }
-#endif
-
+            }
 #if os(iOS)
-                HStack(alignment: .top) {
-                    KodiArt.Poster(item: tvshow)
-                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                        .cornerRadius(10)
-                        .watchStatus(of: tvshow)
-                    VStack {
-                        KodiArt.Fanart(item: tvshow)
-                            .fanartStyle(item: tvshow)
-                        VStack(alignment: .leading) {
-                            Text(tvshow.plot)
-                            tvshowDetails
-                        }
-                    }
-                    .padding(.trailing)
-                    .detailsFontStyle()
-                }
-                .padding(.horizontal)
-                .toolbar {
-                    Buttons.PlayedState(item: tvshow)
-                        .labelStyle(.titleAndIcon)
-                }
+            .toolbar {
+                Buttons.PlayedState(item: tvshow)
+                    .labelStyle(.titleAndIcon)
+            }
 #endif
-            }
-            .task(id: kodi.library.tvshows) {
-                if let update = TVShowView.updateTVshow(tvshow: tvshow) {
-                    tvshow = update
-                }
-            }
         }
 
         // MARK: TV show details

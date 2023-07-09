@@ -68,47 +68,41 @@ struct MovieSetView: View {
 
 #if os(tvOS) || os(iOS)
         ContentView.Wrapper(
+            scroll: false,
             header: {
                 ZStack {
-                    PartsView.DetailHeader(title: movieSet.title)
+                    PartsView.DetailHeader(title: movieSet.title, subtitle: "\(movies.count) movies")
                     if KomodioApp.platform == .tvOS {
-                        Buttons.PlayedState(item: movieSet)
-                            .padding(.trailing, 50)
-                            .padding(.bottom, 10)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
                         Pickers.ListSortSheet(sorting: $sorting, media: .movie)
+                            .labelStyle(.headerLabel)
                             .padding(.leading, 50)
                             .padding(.bottom, 10)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                .labelStyle(.headerLabel)
-            }, content: {
-                VStack {
-                    if !movieSet.description.isEmpty {
-                        PartsView.TextMore(item: movieSet)
-                            .backport.focusSection()
-                            .padding(.bottom, 20)
-                    }
-                    LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
-                        ForEach(movies) { movie in
-                            NavigationLink(value: Router.movie(movie: movie)) {
-                                MovieView.Item(movie: movie, sorting: sorting)
+            },
+            content: {
+                HStack(alignment: .top, spacing: 0) {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(movies) { movie in
+                                NavigationLink(value: Router.movie(movie: movie)) {
+                                    MovieView.Item(movie: movie, sorting: sorting)
+                                }
+                                .padding(.bottom, KomodioApp.posterSize.height / 20)
                             }
-                            .padding(.bottom, KomodioApp.posterSize.height / 9)
                         }
+                        .padding(.vertical, KomodioApp.contentPadding)
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
                     .backport.focusSection()
+                    DetailView()
                 }
             }
         )
         .backport.cardButton()
-        .animation(.default, value: movies.map { $0.id })
         .toolbar {
             if KomodioApp.platform == .iPadOS {
-                Buttons.PlayedState(item: movieSet)
-                    .labelStyle(.titleAndIcon)
                 Pickers.ListSortSheet(sorting: $sorting, media: .movie)
                     .labelStyle(.titleAndIcon)
             }
@@ -120,20 +114,16 @@ struct MovieSetView: View {
 
     /// Get all movies from the selected set
     private func getMoviesFromSet() {
-
-        /// The selection might not be a set
-        if movieSet.media == .movieSet {
-            /// Set the ID of the sorting
-            self.sorting.id = movieSet.id
-            /// Check if the setting is not the default
-            if let sorting = scene.listSortSettings.first(where: { $0.id == self.sorting.id }) {
-                self.sorting = sorting
-            }
-            /// Get all the movies from the set
-            movies = kodi.library.movies
-                .filter { $0.setID == movieSet.setID }
-                .filter { scene.movieItems.contains($0.movieID) }
-                .sorted(sortItem: sorting)
+        /// Set the ID of the sorting
+        self.sorting.id = movieSet.id
+        /// Check if the setting is not the default
+        if let sorting = scene.listSortSettings.first(where: { $0.id == self.sorting.id }) {
+            self.sorting = sorting
         }
+        /// Get all the movies from the set
+        movies = kodi.library.movies
+            .filter { $0.setID == movieSet.setID }
+            .filter { scene.movieItems.contains($0.movieID) }
+            .sorted(sortItem: sorting)
     }
 }

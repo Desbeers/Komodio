@@ -56,9 +56,9 @@ extension Router {
             case .seasons:
                 DetailView()
             case .season(let season):
-                SeasonView(season: season)
+                SeasonView.Details(season: season)
             case .episode(let episode):
-                UpNextView.Details(episode: episode)
+                EpisodeView.Details(episode: episode)
             case .unwachedEpisodes:
                 UpNextView()
 
@@ -71,7 +71,7 @@ extension Router {
             case .musicVideo(let musicVideo):
                 MusicVideoView.Details(musicVideo: musicVideo)
             case .musicVideoAlbum(let musicVideos):
-                AlbumView(musicVideos: musicVideos)
+                AlbumView.Details(musicVideos: musicVideos)
 
                 // MARK: Fallback
 
