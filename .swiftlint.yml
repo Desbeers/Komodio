@@ -105,3 +105,6 @@ trailing_whitespace:
 
 vertical_whitespace:
   max_empty_lines: 2
+
+cyclomatic_complexity:
+  ignores_case_statements: true

@@ -109,11 +109,11 @@ struct MusicVideosView: View {
         items = allMusicVideosFromArtist
             .swapMusicVideosForAlbums()
             .sorted(sortItem: .init(id: "MusicVideoAlbum", method: .year, order: .ascending))
-        // swiftlint:disable indentation_width
-        /// Update an optional selected Music Video Album
-        if let album = scene.details.item.kodiItem,
-           album.media == .musicVideoAlbum,
-           let update = items.first(where: { $0.id == album.id }) as? Video.Details.MusicVideoAlbum {
+        if
+            let album = scene.details.item.kodiItem,
+            album.media == .musicVideoAlbum,
+            let update = items.first(where: { $0.id == album.id }) as? Video.Details.MusicVideoAlbum {
+            /// Update the selected Music Video Album
             scene.details = .musicVideoAlbum(musicVideoAlbum: update)
         }
     }

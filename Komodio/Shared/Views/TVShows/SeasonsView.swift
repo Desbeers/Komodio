@@ -20,13 +20,6 @@ struct SeasonsView: View {
     @EnvironmentObject private var scene: SceneState
     /// The seasons to show in this view
     @State private var seasons: [Video.Details.Season] = []
-    /// The TV show info 'season'
-    private let tvShowInfo: Video.Details.Season
-    /// Init the `View`
-    public init(tvshow: Video.Details.TVShow) {
-        self.tvshow = tvshow
-        self.tvShowInfo = Video.Details.Season(tvshow: tvshow, season: -1, playcount: 1)
-    }
 
     // MARK: Body of the View
 
@@ -55,7 +48,7 @@ struct SeasonsView: View {
             LazyVStack {
                 Button(
                     action: {
-                        setSeasonDetails(tvShowInfo)
+                        scene.details = .tvshow(tvshow: tvshow)
                     },
                     label: {
                         KodiArt.Fanart(item: tvshow)
@@ -67,7 +60,7 @@ struct SeasonsView: View {
                 ForEach(seasons) { season in
                     Button(
                         action: {
-                            setSeasonDetails(season)
+                            scene.details = .season(season: season)
                         },
                         label: {
                             SeasonView.Item(season: season)
@@ -94,7 +87,7 @@ struct SeasonsView: View {
                         LazyVStack {
                             Button(
                                 action: {
-                                    setSeasonDetails(tvShowInfo)
+                                    scene.details = .tvshow(tvshow: tvshow)
                                 },
                                 label: {
                                     KodiArt.Poster(item: tvshow)
@@ -108,7 +101,7 @@ struct SeasonsView: View {
                             ForEach(seasons) { season in
                                 Button(
                                     action: {
-                                        setSeasonDetails(season)
+                                        scene.details = .season(season: season)
                                     },
                                     label: {
                                         SeasonView.Item(season: season)
@@ -136,41 +129,34 @@ struct SeasonsView: View {
 
     /// Get all seasons of a TV show
     private func getTVShowSeasons() {
-        var seasons: [Video.Details.Season] = []
+        //var seasons: [Video.Details.Season] = []
         let allEpisodes = kodi.library.episodes
             .filter { $0.tvshowID == tvshow.tvshowID }
-        /// Filter the episodes to get the seasons
-        let allSeasons = allEpisodes.unique { $0.season }
-        /// Find the playcount of the season
-        for season in allSeasons {
-            let unwatched = allEpisodes
-                .filter { $0.season == season.season && $0.playcount == 0 }
-                .count
-            seasons.append(
-                .init(
-                    tvshow: tvshow,
-                    season: season.season,
-                    episodes: allEpisodes.filter { $0.season == season.season },
-                    playcount: unwatched == 0 ? 1 : 0,
-                    art: season.art
-                )
-            )
-        }
-        self.seasons = seasons
+//        /// Filter the episodes to get the seasons
+//        let allSeasons = allEpisodes.unique { $0.season }
+//        /// Find the playcount of the season
+//        for season in allSeasons {
+//            let unwatched = allEpisodes
+//                .filter { $0.season == season.season && $0.playcount == 0 }
+//                .count
+//            seasons.append(
+//                .init(
+//                    tvshow: tvshow,
+//                    season: season.season,
+//                    episodes: allEpisodes.filter { $0.season == season.season },
+//                    playcount: unwatched == 0 ? 1 : 0,
+//                    art: season.art
+//                )
+//            )
+//        }
+        seasons = allEpisodes.swapEpisodesForSeasons(tvshow: tvshow)
         /// Update the season details of the optional selected season
-        if let selectedSeason = scene.details.item.kodiItem,
-            let update = seasons.first(where: { $0.id == selectedSeason.id }) {
-            setSeasonDetails(update)
-        }
-    }
-
-    /// Set the details of a selected season
-    private func setSeasonDetails(_ season: Video.Details.Season) {
-        switch season.season {
-        case -1:
-            scene.details = .tvshow(tvshow: tvshow)
-        default:
-            scene.details = .season(season: season)
+        if
+            let season = scene.details.item.kodiItem,
+            season.media == .season,
+            let update = seasons.first(where: { $0.id == season.id }) {
+            /// Update the selected season
+            scene.details = .season(season: update)
         }
     }
 }
