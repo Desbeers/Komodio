@@ -1,5 +1,5 @@
 //
-//  AlbumView+Details.swift
+//  MusicVideoAlbumView+Details.swift
 //  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-extension AlbumView {
+extension MusicVideoAlbumView {
 
     // MARK: Album Details
 

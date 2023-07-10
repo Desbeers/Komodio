@@ -85,12 +85,6 @@ struct FavouritesView: View {
                 .buttonStyle(.kodiItemButton(kodiItem: video))
             }
         }
-        .task(id: selectedItem) {
-            setItemDetails()
-        }
-        .onChange(of: kodi.favourites.map(\.playcount)) { _ in
-            setItemDetails()
-        }
 #endif
 
 #if os(tvOS) || os(iOS)
