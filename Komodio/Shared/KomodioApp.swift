@@ -41,11 +41,11 @@ import SwiftlyKodiAPI
         }
         .defaultSize(width: 1000, height: 800)
         /// Open a Video Window
-        WindowGroup("Player", for: MediaItem.self) { $item in
-            /// Check if `item` isn't `nil`
-            if let item {
-                KomodioPlayerView(video: item.item, resume: item.resume)
-                    .navigationTitle(item.item.title)
+        WindowGroup("Player", for: MediaItem.self) { $media in
+            /// Check if `media` isn't `nil` and that we have a Kodi item
+            if let media, let item = media.item {
+                KomodioPlayerView(video: item, resume: media.resume)
+                    .navigationTitle(item.title)
             }
         }
         .defaultSize(width: 1280, height: 720)

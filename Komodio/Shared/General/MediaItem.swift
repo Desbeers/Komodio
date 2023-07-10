@@ -10,17 +10,14 @@ import SwiftlyKodiAPI
 
 /// Structure for a Komodio 'Media Item' (shared)
 ///
-/// Some lists in Komodio, eg Movies and Music Videos, do contain a mixure of `KodiItems`
-/// To make an item in such list selectable, this `MediaItem` struct is used to wrap the item.
-///
-/// Also, on macOS, this is the struct passed to the `player` because its needs the 'resume' argument added.
+/// On macOS, this is the struct passed to the `player` because its needs the 'resume' argument added.
 struct MediaItem: Hashable, Identifiable, Codable {
 
     // MARK: Protocol conformance
 
     /// Confirm to `Equatable` protocol
     static func == (lhs: MediaItem, rhs: MediaItem) -> Bool {
-        lhs.id == rhs.id && lhs.item.playcount == rhs.item.playcount
+        lhs.id == rhs.id
     }
     /// Confirm to `Hashable` protocol
     func hash(into hasher: inout Hasher) {
@@ -29,14 +26,22 @@ struct MediaItem: Hashable, Identifiable, Codable {
 
     // MARK: Variables
 
-    /// The ID of the item
-    var id: String
-    /// The kind of media
-    var media: Library.Media = .movie
-    /// When playing this item, resume or not
-    var resume: Bool = false
+    /// The ID of the Media
+    let id: String
     /// The KodiItem
-    var item: any KodiItem = Audio.Details.Stream()
+    var item: (any KodiItem)?
+    /// When playing this item, resume or not
+    let resume: Bool
+
+    // MARK: Init
+
+    init(item: any KodiItem, resume: Bool = false) {
+        self.id = item.id
+        self.item = item
+        self.resume = resume
+    }
+
+    // MARK: Coding keys
 
     /// Coding keys
     private enum CodingKeys: CodingKey {

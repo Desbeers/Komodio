@@ -23,8 +23,6 @@ struct SearchView: View {
     @State private var musicVideos: [Video.Details.MusicVideo] = []
     /// The TV shows to show
     @State private var tvshows: [Video.Details.TVShow] = []
-    /// The optional selected item
-    @State private var selectedItem: MediaItem?
     /// Bool if we have results
     var results: Bool {
         return !movies.isEmpty || !musicVideos.isEmpty || !tvshows.isEmpty
@@ -65,7 +63,7 @@ struct SearchView: View {
                         Divider()
                         Button(
                             action: {
-                                selectedItem = MediaItem(id: movie.id, media: .movie, item: movie)
+                                scene.details = .movie(movie: movie)
                             },
                             label: {
                                 MovieView.Item(movie: movie)
@@ -82,7 +80,7 @@ struct SearchView: View {
                         Divider()
                         Button(
                             action: {
-                                selectedItem = MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo)
+                                scene.details = .musicVideo(musicVideo: musicVideo)
                             },
                             label: {
                                 MusicVideoView.Item(item: musicVideo)
@@ -109,51 +107,23 @@ struct SearchView: View {
         .buttonStyle(.plain)
         .task(id: scene.query) {
             scene.details = .search
-            if scene.query.isEmpty {
-                movies = []
-                musicVideos = []
-                tvshows = []
-            } else {
-                movies = kodi.library.movies.search(scene.query)
-                musicVideos = kodi.library.musicVideos.search(scene.query)
-                tvshows = kodi.library.tvshows.search(scene.query)
-            }
+            search()
         }
-        .task(id: selectedItem) {
-            if let selectedItem {
-                switch selectedItem.item {
-                case let movie as Video.Details.Movie:
-                    scene.details = .movie(movie: movie)
-                case let musicVideo as Video.Details.MusicVideo:
-                    scene.details = .musicVideo(musicVideo: musicVideo)
-                default:
-                    break
-                }
-            }
+        .onChange(of: kodi.library) { _ in
+            search()
         }
-        .task(id: kodi.library.movies) {
-            // swiftlint:disable opening_brace
-            if
-                let selectedItem,
-                selectedItem.media == .movie,
-                let update = kodi.library.movies.first(where: { $0.id == selectedItem.id })
-            {
-                movies = kodi.library.movies.search(scene.query)
-                self.selectedItem = MediaItem(id: selectedItem.id, media: .movie, item: update)
-            }
-            // swiftlint:enable opening_brace
-        }
-        .task(id: kodi.library.musicVideos) {
-            // swiftlint:disable opening_brace
-            if
-                let selectedItem,
-                selectedItem.media == .musicVideo,
-                let update = kodi.library.musicVideos.first(where: { $0.id == selectedItem.id })
-            {
-                musicVideos = kodi.library.musicVideos.search(scene.query)
-                self.selectedItem = MediaItem(id: selectedItem.id, media: .musicVideo, item: update)
-            }
-            // swiftlint:enable opening_brace
+    }
+
+    /// Perform the search
+    @MainActor private func search() {
+        if scene.query.isEmpty {
+            movies = []
+            musicVideos = []
+            tvshows = []
+        } else {
+            movies = kodi.library.movies.search(scene.query)
+            musicVideos = kodi.library.musicVideos.search(scene.query)
+            tvshows = kodi.library.tvshows.search(scene.query)
         }
     }
 }

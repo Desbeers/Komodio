@@ -19,7 +19,7 @@ import SwiftlyKodiAPI
 ///
 /// It is my intension to replace this sooner or later, but for now, it is as it is.
 ///
-/// It will give a warning if it ca't play the file
+/// It will give a warning if it can't play the file
 struct KomodioPlayerView: View {
     /// The Video item we want to play
     let video: any KodiItem

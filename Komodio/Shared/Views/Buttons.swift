@@ -103,7 +103,7 @@ extension Buttons {
         @Environment(\.openWindow) var openWindow
         /// The button action
         private var action: () {
-            let video = MediaItem(id: item.id, resume: true, item: item)
+            let video = MediaItem(item: item, resume: true)
             openWindow(value: video)
         }
 #else
@@ -152,7 +152,7 @@ extension Buttons {
         @Environment(\.openWindow) var openWindow
         /// The button action
         private var action: () {
-            let video = MediaItem(id: item.id, resume: true, item: item)
+            let video = MediaItem(item: item, resume: true)
             openWindow(value: video)
         }
 #else
