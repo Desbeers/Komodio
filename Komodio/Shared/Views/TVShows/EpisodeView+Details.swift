@@ -52,7 +52,7 @@ extension EpisodeView {
                     PartsView.TextMore(item: episode)
                 }
             }
-            .padding(.vertical)
+            .padding(.bottom)
         }
     }
 }

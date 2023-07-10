@@ -15,28 +15,22 @@ struct MusicVideosView: View {
     /// The selected artist
     let artist: Audio.Details.Artist
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
-    /// The items to show in this view. Can be music video or album
-    @State private var items: [MediaItem] = []
-    /// The optional selected item
-    @State private var selectedItem: MediaItem?
-    /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @EnvironmentObject private var scene: SceneState
+    /// The items to show in this view. Can be a single Music Video or an album with Music Videos
+    @State private var items: [any KodiItem] = []
 
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
         content
-            .task(id: kodi.library.musicVideos) {
+            .task(id: artist) {
                 getItems()
-                setItemDetails()
-                state = .ready
             }
-            .task(id: selectedItem) {
-                setItemDetails()
+            .onChange(of: kodi.library.musicVideos) { _ in
+                getItems()
             }
     }
 
@@ -47,16 +41,8 @@ struct MusicVideosView: View {
 #if os(macOS)
         ScrollView {
             LazyVStack {
-                ForEach(items) { item in
-                    Button(
-                        action: {
-                            selectedItem = item
-                        },
-                        label: {
-                            MusicVideoView.Item(item: item)
-                        }
-                    )
-                    .buttonStyle(.kodiItemButton(kodiItem: item.item))
+                ForEach(items, id: \.id) { video in
+                    button(video: video)
                     Divider()
                 }
             }
@@ -74,12 +60,9 @@ struct MusicVideosView: View {
                 HStack(alignment: .top, spacing: 0) {
                     ScrollView {
                         LazyVStack {
-                            ForEach(items) { item in
-                                Button(action: {
-                                    selectedItem = item
-                                }, label: {
-                                    MusicVideoView.Item(item: item)
-                                })
+                            ForEach(items, id: \.id) { video in
+                                button(video: video)
+                                    .padding(.bottom, KomodioApp.posterSize.height / 20)
                             }
                         }
                         .padding(.vertical, KomodioApp.contentPadding)
@@ -95,57 +78,43 @@ struct MusicVideosView: View {
 #endif
     }
 
+    // MARK: Navigation Button
+
+    /// The Navigation `Button`
+    func button(video: any KodiItem) -> some View {
+        Button(
+            action: {
+                switch video {
+                case let musicVideo as Video.Details.MusicVideo:
+                    scene.details = .musicVideo(musicVideo: musicVideo)
+                case let musicVideoAlbum as Video.Details.MusicVideoAlbum:
+                    scene.details = .musicVideoAlbum(musicVideoAlbum: musicVideoAlbum)
+                default:
+                    break
+                }
+            },
+            label: {
+                MusicVideoView.Item(item: video)
+            }
+        )
+        .buttonStyle(.kodiItemButton(kodiItem: video))
+    }
+
     // MARK: Private functions
 
     /// Get all items from the library
     private func getItems() {
-        var result: [MediaItem] = []
         let allMusicVideosFromArtist = kodi.library.musicVideos
             .filter { $0.artist.contains(artist.artist) }
-        for video in allMusicVideosFromArtist.uniqueAlbum() {
-            var item = video
-            var count: Int = 1
-            if !video.album.isEmpty {
-                let albumMusicVideos = allMusicVideosFromArtist
-                    .filter { $0.album == video.album }
-                count = albumMusicVideos.count
-                /// Set the watched state for an album
-                if count != 1, !albumMusicVideos.filter({ $0.playcount == 0 }).isEmpty {
-                    item.playcount = 0
-                    item.resume.position = 0
-                }
-            }
-            result.append(
-                MediaItem(
-                    id: count == 1 ? video.title : video.album,
-                    media: count == 1 ? .musicVideo : .album,
-                    item: item
-                )
-            )
-        }
-        items = result
-        /// Update the optional selected item
-        if let selectedItem {
-            self.selectedItem = items.first { $0.id == selectedItem.id }
-        } else {
-            scene.details = .musicVideoArtist(artist: artist)
-        }
-    }
-
-    /// Set the details of a selected item
-    private func setItemDetails() {
-        if let selectedItem, let musicVideo = selectedItem.item as? Video.Details.MusicVideo {
-            switch selectedItem.media {
-            case .musicVideo:
-                scene.details = .musicVideo(musicVideo: musicVideo)
-            case.album:
-                /// Get all Music Videos from the specific artist and album
-                let musicVideos = kodi.library.musicVideos
-                    .filter { $0.artist.contains(musicVideo.artist) && $0.album == musicVideo.album }
-                scene.details = Router.musicVideoAlbum(musicVideos: musicVideos)
-            default:
-                break
-            }
+        items = allMusicVideosFromArtist
+            .swapMusicVideosForAlbums()
+            .sorted(sortItem: .init(id: "MusicVideoAlbum", method: .year, order: .ascending))
+        // swiftlint:disable indentation_width
+        /// Update an optional selected Music Video Album
+        if let album = scene.details.item.kodiItem,
+           album.media == .musicVideoAlbum,
+           let update = items.first(where: { $0.id == album.id }) as? Video.Details.MusicVideoAlbum {
+            scene.details = .musicVideoAlbum(musicVideoAlbum: update)
         }
     }
 }

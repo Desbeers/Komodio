@@ -70,8 +70,8 @@ extension Router {
                 ArtistsView()
             case .musicVideo(let musicVideo):
                 MusicVideoView.Details(musicVideo: musicVideo)
-            case .musicVideoAlbum(let musicVideos):
-                AlbumView.Details(musicVideos: musicVideos)
+            case .musicVideoAlbum(let musicVideoAlbum):
+                AlbumView.Details(musicVideoAlbum: musicVideoAlbum)
 
                 // MARK: Fallback
 

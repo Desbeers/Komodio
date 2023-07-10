@@ -16,22 +16,25 @@ extension MusicVideoView {
     ///
     /// - This can be an album or a music video
     struct Item: View {
-        /// The ``MediaItem``
-        let item: MediaItem
+        /// The `KodiItem`
+        let item: any KodiItem
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
             HStack {
-                KodiArt.Poster(item: item.item)
+                KodiArt.Poster(item: item)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                    .watchStatus(of: item.item)
+                    .watchStatus(of: item)
 
 #if os(macOS)
-                Text(item.id)
-                    .font(.headline)
+                VStack(alignment: .leading) {
+                    Text(item.title)
+                        .font(.headline)
+                    Text("Year: \(item.year.description)")
+                }
 #endif
             }
         }

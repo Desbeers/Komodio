@@ -65,5 +65,5 @@ enum Router: Hashable {
     /// A specific music video
     case musicVideo(musicVideo: Video.Details.MusicVideo)
     /// A music video album
-    case musicVideoAlbum(musicVideos: [Video.Details.MusicVideo])
+    case musicVideoAlbum(musicVideoAlbum: Video.Details.MusicVideoAlbum)
 }

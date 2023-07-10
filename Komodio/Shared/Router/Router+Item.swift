@@ -252,19 +252,15 @@ extension Router {
                 color: .cyan,
                 kodiItem: musicVideo
             )
-        case .musicVideoAlbum(let musicVideos):
-            guard let album = musicVideos.first else {
-                /// This should not happen
-                return Item(title: "Error loading Music Video Album")
-            }
+        case .musicVideoAlbum(let musicVideoAlbum):
             return Item(
-                title: "\(album.album)",
-                description: "All Music Videos from `\(album.album)`",
-                loading: "Loading `\(album.album)`",
-                empty: "`\(album.album)` was not found",
+                title: "\(musicVideoAlbum.album)",
+                description: "All Music Videos from `\(musicVideoAlbum.album)`",
+                loading: "Loading `\(musicVideoAlbum.album)`",
+                empty: "`\(musicVideoAlbum.album)` was not found",
                 icon: "music.note.tv",
                 color: .cyan,
-                kodiItem: album
+                kodiItem: musicVideoAlbum
             )
 
             // MARK: Fallback

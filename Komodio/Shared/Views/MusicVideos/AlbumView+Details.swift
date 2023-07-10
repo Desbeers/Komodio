@@ -14,8 +14,8 @@ extension AlbumView {
 
     /// SwiftUI `View` for details of a `MusicVideoAlbum`
     struct Details: View {
-        /// The `Music Videos` to show
-        let musicVideos: [Video.Details.MusicVideo]
+        /// The `Music Video Album` to show
+        let musicVideoAlbum: Video.Details.MusicVideoAlbum
 
         // MARK: Body of the View
 
@@ -24,7 +24,7 @@ extension AlbumView {
             DetailView.Wrapper(
                 scroll: true,
                 part: KomodioApp.platform == .macOS ? false : true,
-                title: musicVideos.first?.album ?? "Album"
+                title: musicVideoAlbum.title
             ) {
                 content
             }
@@ -35,7 +35,7 @@ extension AlbumView {
         /// The content of the `View`
         var content: some View {
             LazyVStack {
-                ForEach(musicVideos) { musicVideo in
+                ForEach(musicVideoAlbum.musicVideos) { musicVideo in
                     Item(musicVideo: musicVideo)
                 }
             }

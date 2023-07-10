@@ -85,9 +85,7 @@ struct SearchView: View {
                                 selectedItem = MediaItem(id: musicVideo.id, media: .musicVideo, item: musicVideo)
                             },
                             label: {
-                                MusicVideoView.Item(
-                                    item: MediaItem(id: musicVideo.title, media: .musicVideo, item: musicVideo)
-                                )
+                                MusicVideoView.Item(item: musicVideo)
                             }
                         )
                         .buttonStyle(.kodiItemButton(kodiItem: musicVideo))

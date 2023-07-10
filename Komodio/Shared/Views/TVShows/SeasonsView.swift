@@ -119,7 +119,6 @@ struct SeasonsView: View {
                                 .padding(KomodioApp.posterSize.width / 10)
                             }
                         }
-                        .padding(.vertical, KomodioApp.contentPadding)
                     }
                     .frame(width: KomodioApp.columnWidth, alignment: .leading)
                     .backport.focusSection()

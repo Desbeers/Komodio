@@ -47,9 +47,9 @@ struct DetailView: View {
             case .musicVideo(let musicVideo):
                 MusicVideoView
                     .Details(musicVideo: musicVideo)
-            case .musicVideoAlbum(let musicVideos):
+            case .musicVideoAlbum(let musicVideoAlbum):
                 AlbumView
-                    .Details(musicVideos: musicVideos)
+                    .Details(musicVideoAlbum: musicVideoAlbum)
             case .kodiSettings:
                 KodiSettingsView
                     .Details()

@@ -37,6 +37,7 @@ struct UpNextView: View {
                 PartsView.StatusMessage(router: .unwachedEpisodes, status: state)
             }
         }
+        .animation(.default, value: episodes)
         .task(id: kodi.library.episodes) {
             getUnwatchedEpisodes()
         }
@@ -91,9 +92,9 @@ struct UpNextView: View {
                                     Item(episode: episode)
                                 })
                                 .buttonStyle(.kodiItemButton(kodiItem: episode))
+                                .padding(.bottom, KomodioApp.posterSize.height / 20)
                             }
                         }
-                        .padding(.vertical, KomodioApp.contentPadding)
                     }
                     .frame(width: KomodioApp.columnWidth, alignment: .leading)
                     .backport.focusSection()
