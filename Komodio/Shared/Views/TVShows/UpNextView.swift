@@ -39,6 +39,9 @@ struct UpNextView: View {
         }
         .animation(.default, value: episodes)
         .task(id: kodi.library.episodes) {
+            if selectedEpisode != nil {
+                try? await Task.sleep(until: .now + .seconds(2), clock: .continuous)
+            }
             getUnwatchedEpisodes()
         }
     }
@@ -95,12 +98,11 @@ struct UpNextView: View {
                                 .padding(.bottom, KomodioApp.posterSize.height / 20)
                             }
                         }
+                        .padding(.vertical, KomodioApp.contentPadding)
                     }
                     .frame(width: KomodioApp.columnWidth, alignment: .leading)
                     .backport.focusSection()
                     DetailView()
-                    /// Give it an ID so it will always scroll back to the top when selecting another season
-                        .id(selectedEpisode?.id)
                 }
             }
         )

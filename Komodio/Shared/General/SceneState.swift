@@ -107,6 +107,10 @@ extension SceneState {
                 if let update = library.tvshows.first(where: { $0.id == selectedKodiItem.id }) {
                     details = .tvshow(tvshow: update)
                 }
+            case .episode:
+                if let update = library.episodes.first(where: { $0.id == selectedKodiItem.id }) {
+                    details = .episode(episode: update)
+                }
             case .musicVideo:
                 if let update = library.musicVideos.first(where: { $0.id == selectedKodiItem.id }) {
                     details = .musicVideo(musicVideo: update)
