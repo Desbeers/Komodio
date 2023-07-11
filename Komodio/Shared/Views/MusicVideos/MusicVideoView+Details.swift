@@ -15,18 +15,38 @@ extension MusicVideoView {
     /// SwiftUI `View` for details of a `Music Video`
     struct Details: View {
         /// The `Music Video` to show
-        let musicVideo: Video.Details.MusicVideo
+        let selectedMusicVideo: Video.Details.MusicVideo
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
+        /// The state values of the `Music Video`
+        @State private var musicVideo: Video.Details.MusicVideo
+        /// Init the `View`
+        init(musicVideo: Video.Details.MusicVideo) {
+            self.selectedMusicVideo = musicVideo
+            self._musicVideo = State(initialValue: musicVideo)
+        }
 
         // MARK: Body of the View
 
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? false : true,
+                scroll: KomodioApp.platform == .tvOS ? nil : musicVideo.id,
                 part: KomodioApp.platform == .macOS ? false : true,
                 title: musicVideo.title
             ) {
                 content
+                    .animation(.default, value: musicVideo)
+                /// Update the state to the new selection
+                    .task(id: selectedMusicVideo) {
+                        musicVideo = selectedMusicVideo
+                    }
+                /// Update the state from the library
+                    .task(id: kodi.library.musicVideos) {
+                        if let update = MusicVideoView.update(musicVideo: musicVideo) {
+                            musicVideo = update
+                        }
+                    }
             }
         }
 

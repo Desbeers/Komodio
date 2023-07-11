@@ -24,7 +24,7 @@ extension StartView {
         /// The body of the View
         var body: some View {
             DetailView.Wrapper(
-                scroll: false,
+                scroll: nil,
                 title: kodi.host.name,
                 subtitle: kodi.status.message
             ) {

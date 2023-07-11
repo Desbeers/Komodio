@@ -12,5 +12,15 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for a single Episode (shared)
 enum EpisodeView {
-    // Just a Namespace
+
+    /// Update an Episode
+    /// - Parameter episode: The current Episode
+    /// - Returns: The updated Episode
+    static func update(episode: Video.Details.Episode) -> Video.Details.Episode? {
+        let update = KodiConnector.shared.library.episodes.first { $0.id == episode.id }
+        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .episode {
+            SceneState.shared.details = .episode(episode: update)
+        }
+        return update
+    }
 }

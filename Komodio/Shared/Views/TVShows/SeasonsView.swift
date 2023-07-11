@@ -26,7 +26,6 @@ struct SeasonsView: View {
     /// The body of the `View`
     var body: some View {
         content
-            .animation(.default, value: scene.details)
         /// Initial action when showing the `View`
             .task(id: tvshow) {
                 getTVShowSeasons()
@@ -129,26 +128,8 @@ struct SeasonsView: View {
 
     /// Get all seasons of a TV show
     private func getTVShowSeasons() {
-        //var seasons: [Video.Details.Season] = []
         let allEpisodes = kodi.library.episodes
             .filter { $0.tvshowID == tvshow.tvshowID }
-//        /// Filter the episodes to get the seasons
-//        let allSeasons = allEpisodes.unique { $0.season }
-//        /// Find the playcount of the season
-//        for season in allSeasons {
-//            let unwatched = allEpisodes
-//                .filter { $0.season == season.season && $0.playcount == 0 }
-//                .count
-//            seasons.append(
-//                .init(
-//                    tvshow: tvshow,
-//                    season: season.season,
-//                    episodes: allEpisodes.filter { $0.season == season.season },
-//                    playcount: unwatched == 0 ? 1 : 0,
-//                    art: season.art
-//                )
-//            )
-//        }
         seasons = allEpisodes.swapEpisodesForSeasons(tvshow: tvshow)
         /// Update the season details of the optional selected season
         if

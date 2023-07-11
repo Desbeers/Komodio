@@ -15,17 +15,35 @@ extension MovieView {
     /// SwiftUI `View` for details of a `Movie`
     struct Details: View {
         /// The `Movie` to show
-        let movie: Video.Details.Movie
+        private let selectedMovie: Video.Details.Movie
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
         /// The SceneState model
         @EnvironmentObject private var scene: SceneState
-        /// The loading state of the View (tvOS)
-        @State private var state: Parts.Status = .loading
+        /// The state values of the `Movie`
+        @State private var movie: Video.Details.Movie
+        /// Init the `View`
+        init(movie: Video.Details.Movie) {
+            self.selectedMovie = movie
+            self._movie = State(initialValue: movie)
+        }
 
         // MARK: Body of the View
 
         /// The body of the `View`
         var body: some View {
             content
+                .animation(.default, value: movie)
+            /// Update the state to the new selection
+                .task(id: selectedMovie) {
+                    movie = selectedMovie
+                }
+            /// Update the state from the library
+                .task(id: kodi.library.movies) {
+                    if let update = MovieView.update(movie: movie) {
+                        movie = update
+                    }
+                }
         }
 
         // MARK: Content of the View
@@ -34,7 +52,7 @@ extension MovieView {
         @ViewBuilder var content: some View {
 #if os(macOS) || os(iOS)
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? false : true,
+                scroll: KomodioApp.platform == .tvOS ? nil : movie.id,
                 title: movie.title
             ) {
                 VStack {
@@ -50,47 +68,26 @@ extension MovieView {
                     Pickers.RatingWidget(item: movie)
                 }
             }
-            /// Give it an ID so it will always scroll back to the top when selecting another movie
-            .id(movie.id)
 #endif
 
 #if os(tvOS)
-            Group {
-                switch state {
-                case .loading:
-                    VStack {
-                        Text(movie.title)
-                            .font(.title)
-                        ProgressView()
+            ZStack {
+                KodiArt.Fanart(item: movie)
+                    .scaledToFill()
+                ScrollView {
+                    VStack(spacing: 0) {
+                        top
+                            .frame(height: UIScreen.main.bounds.height)
+                            .focusSection()
+                        details
+                            .frame(height: UIScreen.main.bounds.height)
+                            .background(.black.opacity(0.8))
                     }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .focusable()
-                default:
-                    ZStack {
-                        KodiArt.Fanart(item: movie)
-                            .scaledToFill()
-                        ScrollView {
-                            VStack(spacing: 0) {
-                                top
-                                    .frame(height: UIScreen.main.bounds.height)
-                                    .focusSection()
-                                details
-                                    .frame(height: UIScreen.main.bounds.height)
-                                    .background(.black.opacity(0.8))
-                            }
-                            .foregroundColor(.white)
-                        }
-                    }
+                    .foregroundColor(.white)
                 }
             }
             .ignoresSafeArea()
             .animation(.default, value: scene.sidebarFocus)
-            .animation(.default, value: state)
-            .transition(.slide)
-            .task {
-                try? await Task.sleep(until: .now + .seconds(2), clock: .continuous)
-                state = .ready
-            }
 #endif
         }
 

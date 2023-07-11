@@ -61,13 +61,6 @@ struct DetailView: View {
             }
         }
         .animation(.default, value: scene.details)
-        /// Set the font style
-        .detailsFontStyle()
-        /// Make the details focusable
-        .backport.focusSection()
-        .onChange(of: kodi.library) { library in
-            scene.updateDetailView(library: library)
-        }
     }
 
     // MARK: Fallback of the View
@@ -76,7 +69,7 @@ struct DetailView: View {
     @ViewBuilder private var fallback: some View {
 #if os(macOS)
         DetailView.Wrapper(
-            scroll: false,
+            scroll: nil,
             title: scene.mainSelection.item.title,
             subtitle: scene.mainSelection.item.description
         ) {

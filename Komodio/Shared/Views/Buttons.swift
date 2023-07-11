@@ -44,11 +44,11 @@ extension Buttons {
                     if item.resume.position != 0 {
                         Buttons.Resume(item: item)
                     }
-                    if showState && (KomodioApp.platform != .tvOS ? true : fadeStateButton ? isFocused : true) {
-                        Buttons.PlayedState(item: item)
-                    }
                 case false:
                     KomodioPlayerView.CantPlay(video: item)
+                }
+                if showState && (KomodioApp.platform != .tvOS ? true : fadeStateButton ? isFocused : true) {
+                    Buttons.PlayedState(item: item)
                 }
             }
             .focused($isFocused)

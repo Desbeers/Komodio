@@ -12,5 +12,15 @@ import SwiftlyKodiAPI
 
 /// SwiftUI View for a single Movie (shared)
 enum MovieView {
-    // Just a namespace
+
+    /// Update a Movie
+    /// - Parameter movie: The current Movie
+    /// - Returns: The updated Movie
+    static func update(movie: Video.Details.Movie) -> Video.Details.Movie? {
+        let update = KodiConnector.shared.library.movies.first { $0.id == movie.id }
+        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .movie {
+            SceneState.shared.details = .movie(movie: update)
+        }
+        return update
+    }
 }

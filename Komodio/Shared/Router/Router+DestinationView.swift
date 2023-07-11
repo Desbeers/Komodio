@@ -34,8 +34,9 @@ extension Router {
 
             case .movies:
                 MoviesView()
-            case .movie:
-                DetailView()
+            case .movie(let movie):
+                MovieView
+                    .Details(movie: movie)
             case .movieSet(let movieSet):
                 MovieSetView(movieSet: movieSet)
             case .unwatchedMovies:
@@ -53,12 +54,12 @@ extension Router {
                 TVShowsView()
             case .tvshow(let tvshow):
                 SeasonsView(tvshow: tvshow)
-            case .seasons:
-                DetailView()
             case .season(let season):
-                SeasonView.Details(season: season)
-            case .episode:
-                DetailView()
+                SeasonView
+                    .Details(season: season)
+            case .episode(let episode):
+                EpisodeView
+                    .Details(episode: episode)
             case .unwachedEpisodes:
                 UpNextView()
 
@@ -69,9 +70,11 @@ extension Router {
             case .musicVideos:
                 ArtistsView()
             case .musicVideo(let musicVideo):
-                MusicVideoView.Details(musicVideo: musicVideo)
+                MusicVideoView
+                    .Details(musicVideo: musicVideo)
             case .musicVideoAlbum(let musicVideoAlbum):
-                MusicVideoAlbumView.Details(musicVideoAlbum: musicVideoAlbum)
+                MusicVideoAlbumView
+                    .Details(musicVideoAlbum: musicVideoAlbum)
 
                 // MARK: Fallback
 

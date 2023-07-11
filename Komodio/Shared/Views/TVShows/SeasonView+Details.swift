@@ -22,7 +22,7 @@ extension SeasonView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: true,
+                scroll: season.id,
                 title: KomodioApp.platform == .macOS ? season.title : nil
             ) {
                 content
@@ -33,12 +33,10 @@ extension SeasonView {
 
         /// The content of the `View`
         var content: some View {
-            ScrollView {
-                LazyVStack {
-                    ForEach(season.episodes) { episode in
-                        EpisodeView.Item(episode: episode)
-                            .padding(.bottom)
-                    }
+            LazyVStack {
+                ForEach(season.episodes) { episode in
+                    EpisodeView.Item(episode: episode)
+                        .padding(.bottom)
                 }
             }
         }

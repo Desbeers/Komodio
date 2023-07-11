@@ -14,8 +14,8 @@ extension DetailView {
 
     /// SwiftUI View to wrap the ``DetailView``
     struct Wrapper<Content: View>: View {
-        /// Wrap the view in a `ScrollView` or not
-        let scroll: Bool
+        /// Wrap the view in a `ScrollView` when set
+        let scroll: String?
         /// View the details as part of another View
         var part: Bool = false
         /// The optional title of the message
@@ -30,18 +30,22 @@ extension DetailView {
         /// The body of the `View`
         var body: some View {
             wrapper
+            /// Use the full width
                 .frame(maxWidth: .infinity)
+            /// Set the font style
+                .detailsFontStyle()
+            /// Make the details focusable
+                .backport.focusSection()
         }
 
         // MARK: Wrapper of the View
 
         /// The wrapper of the `View`
         @ViewBuilder var wrapper: some View {
-            switch scroll {
-            case true:
-                scrollContent
-            case false:
+            if scroll == nil {
                 fixedContent
+            } else {
+                scrollContent
             }
         }
 
@@ -69,7 +73,14 @@ extension DetailView {
         /// The content in a `ScrollView`
         @ViewBuilder var scrollContent: some View {
             ScrollView {
-                fixedContent
+                ScrollViewReader { proxy in
+                    fixedContent
+                        .onChange(of: scroll) { _ in
+                            withAnimation(.easeOut(duration: 1)) {
+                                proxy.scrollTo(0, anchor: .top)
+                            }
+                        }
+                }
             }
         }
 
@@ -77,6 +88,7 @@ extension DetailView {
         @ViewBuilder var fixedContent: some View {
             VStack(spacing: 0) {
                 header
+                    .id(0)
                 content()
                     .padding()
             }

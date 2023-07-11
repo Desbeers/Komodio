@@ -21,17 +21,14 @@ struct MovieSetView: View {
     /// The set movies to show in this view
     @State private var movies: [Video.Details.Movie] = []
     /// The sorting
-    @State var sorting = SwiftlyKodiAPI.List.Sort(id: "movieset", method: .year, order: .ascending)
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "movieset", method: .year, order: .ascending)
 
     // MARK: Body of the View
 
     /// The body of the View
     var body: some View {
         content
-            .task(id: movieSet) {
-                getMoviesFromSet()
-            }
-            .onChange(of: kodi.library.movies) { _ in
+            .task(id: kodi.library.movies) {
                 getMoviesFromSet()
             }
             .onChange(of: sorting) { sorting in
@@ -96,7 +93,7 @@ struct MovieSetView: View {
                     }
                     .frame(width: KomodioApp.columnWidth, alignment: .leading)
                     .backport.focusSection()
-                    DetailView()
+                    MovieSetView.Details(movieSet: movieSet)
                 }
             }
         )
@@ -125,5 +122,19 @@ struct MovieSetView: View {
             .filter { $0.setID == movieSet.setID }
             .filter { scene.movieItems.contains($0.movieID) }
             .sorted(sortItem: sorting)
+    }
+}
+
+extension MovieSetView {
+
+    /// Update a Movie Set
+    /// - Parameter movieset: The current Movie Set
+    /// - Returns: The updated Movie Set
+    static func update(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
+        let update = KodiConnector.shared.library.movieSets.first { $0.id == movieSet.id }
+        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .movieSet {
+            SceneState.shared.details = .movieSet(movieSet: update)
+        }
+        return update
     }
 }

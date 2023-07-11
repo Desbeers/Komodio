@@ -22,7 +22,7 @@ extension MusicVideoAlbumView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: true,
+                scroll: musicVideoAlbum.id,
                 part: KomodioApp.platform == .macOS ? false : true,
                 title: musicVideoAlbum.title
             ) {

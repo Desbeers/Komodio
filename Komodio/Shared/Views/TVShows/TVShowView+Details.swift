@@ -15,17 +15,37 @@ extension TVShowView {
     /// SwiftUI `View` for details of a `TV show`
     struct Details: View {
         /// The `TV show` to show
-        let tvshow: Video.Details.TVShow
+        private let selectedTVshow: Video.Details.TVShow
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
+        /// The state values of the `TV show`
+        @State private var tvshow: Video.Details.TVShow
+        /// Init the `View`
+        init(tvshow: Video.Details.TVShow) {
+            self.selectedTVshow = tvshow
+            self._tvshow = State(initialValue: tvshow)
+        }
 
         // MARK: Body of the View
 
         /// The body of the View
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? false : true,
+                scroll: KomodioApp.platform == .tvOS ? nil : tvshow.id,
                 title: KomodioApp.platform == .macOS ? tvshow.title : nil
             ) {
                 content
+                    .animation(.default, value: tvshow)
+                /// Update the state to the new selection
+                    .task(id: selectedTVshow) {
+                        tvshow = selectedTVshow
+                    }
+                /// Update the state from the library
+                    .task(id: kodi.library.tvshows) {
+                        if let update = TVShowView.update(tvshow: tvshow) {
+                            tvshow = update
+                        }
+                    }
             }
         }
 

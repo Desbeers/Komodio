@@ -15,17 +15,37 @@ extension MovieSetView {
     /// SwiftUI `View` for details of a `MovieSet`
     struct Details: View {
         /// The `Movie Set` to show
-        let movieSet: Video.Details.MovieSet
+        let selectedMovieSet: Video.Details.MovieSet
+        /// The KodiConnector model
+        @EnvironmentObject private var kodi: KodiConnector
+        /// The state values of the `Movie Set`
+        @State private var movieSet: Video.Details.MovieSet
+        /// Init the `View`
+        init(movieSet: Video.Details.MovieSet) {
+            self.selectedMovieSet = movieSet
+            self._movieSet = State(initialValue: movieSet)
+        }
 
         // MARK: Body of the View
 
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? false : true,
+                scroll: KomodioApp.platform == .tvOS ? nil : movieSet.id,
                 title: KomodioApp.platform == .macOS ? movieSet.title : nil
             ) {
                 content
+                    .animation(.default, value: movieSet)
+                /// Update the state to the new selection
+                    .task(id: selectedMovieSet) {
+                        movieSet = selectedMovieSet
+                    }
+                /// Update the state from the library
+                    .task(id: kodi.library.movieSets) {
+                        if let update = MovieSetView.update(movieSet: movieSet) {
+                            movieSet = update
+                        }
+                    }
             }
         }
 

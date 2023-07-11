@@ -13,9 +13,9 @@ import SwiftlyKodiAPI
 /// SwiftUI View for all TV shows (shared)
 struct TVShowsView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @EnvironmentObject private var scene: SceneState
     /// The TV shows in this view
     @State var tvshows: [Video.Details.TVShow] = []
     /// The loading state of the View
