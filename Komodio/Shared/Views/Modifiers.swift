@@ -15,9 +15,9 @@ enum Modifiers {
     // Just a namespace here...
 }
 
-// MARK: Watch Status Modifier
-
 extension Modifiers {
+
+    // MARK: Watch Status Modifier
 
     /// A `ViewModifier` to show a star for unwatched items
     /// - Note: Movie sets are shown here as well with its own SF symbol
@@ -48,9 +48,9 @@ extension View {
     }
 }
 
-// MARK: KodiItem details font modifier
-
 extension Modifiers {
+
+    // MARK: KodiItem details font modifier
 
     /// A `ViewModifier` to set de font style for details of a `KodiItem`
     struct DetailsFontStyle: ViewModifier {
@@ -73,9 +73,9 @@ extension View {
     }
 }
 
-// MARK: Fanart modifiers
-
 extension Modifiers {
+
+    // MARK: Set Background modifier
 
     /// A `ViewModifier` to set the fanart background
     struct SetBackground: ViewModifier {
@@ -115,6 +115,8 @@ extension View {
 
 extension Modifiers {
 
+    // MARK: Fanart Style modifier
+
     /// A `ViewModifier` to style the fanart of a `KodiItem`
     struct FanartStyle: ViewModifier {
         /// The `KodiItem`
@@ -147,5 +149,39 @@ extension View {
     /// A `ViewModifier` to style the fanart of a `KodiItem`
     func fanartStyle(item: any KodiItem, overlay: String? = nil) -> some View {
         modifier(Modifiers.FanartStyle(item: item, overlay: overlay))
+    }
+}
+
+extension Modifiers {
+
+    // MARK: NavigationStack Animation
+
+    /// A `ViewModifier` to animate the navigation stack
+    struct NavigationStackAnimation: ViewModifier {
+        /// The opacity
+        @Binding var opacity: Double
+        /// The SceneState model
+        @EnvironmentObject var scene: SceneState
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+                .offset(x: opacity == 0 ? -KomodioApp.columnWidth : 0, y: 0)
+                .onChange(of: scene.navigationStackPath) { value in
+                    switch value.count {
+                    case 0:
+                        opacity = 1
+                    default:
+                        opacity = 0
+                    }
+                }
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to animate the navigation stack
+    func navigationStackAnimation(opacity: Binding<Double>) -> some View {
+        modifier(Modifiers.NavigationStackAnimation(opacity: opacity))
     }
 }

@@ -49,11 +49,11 @@ extension Backport where Content: View {
 extension Backport where Content: View {
     /// `navigationSubtitle` backport
     @ViewBuilder func navigationSubtitle(_ text: String) -> some View {
-#if os(iOS) || os(tvOS)
-        content
-#else
+#if os(macOS)
         content
             .navigationSubtitle(text)
+#else
+        content
 #endif
     }
 }
