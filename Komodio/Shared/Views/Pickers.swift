@@ -33,7 +33,7 @@ extension Pickers {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             Button(action: {
                 showSheet = true
@@ -75,7 +75,7 @@ extension Pickers {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             HStack {
 #if os(macOS)
@@ -150,7 +150,7 @@ extension Pickers {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
 
         var body: some View {
             Button(action: {

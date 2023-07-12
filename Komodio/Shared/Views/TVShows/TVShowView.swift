@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: TV show View
 
-/// SwiftUI View for a single TV show (shared)
+/// SwiftUI `View` for a single TV show (shared)
 enum TVShowView {
 
     /// Update a TVshow

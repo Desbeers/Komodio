@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Artists View
 
-/// SwiftUI View for all Artists from Music Videos (shared)
+/// SwiftUI `View` for all Artists from Music Videos (shared)
 struct ArtistsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
@@ -27,7 +27,7 @@ struct ArtistsView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch state {
@@ -56,13 +56,13 @@ struct ArtistsView: View {
     // MARK: Content of the View
 
 #if os(macOS)
-    /// The content of the view
+    /// The content of the `View`
     var content: some View {
         ScrollView {
             LazyVStack {
                 ForEach(artists) { artist in
                     NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
-                        ArtistView.Item(artist: artist)
+                        ArtistsView.ListItem(artist: artist)
                     })
                     .buttonStyle(.kodiItemButton(kodiItem: artist))
                     Divider()
@@ -74,7 +74,7 @@ struct ArtistsView: View {
 #endif
 
 #if os(tvOS) || os(iOS)
-    /// The content of the view
+    /// The content of the `View`
     var content: some View {
         ContentView.Wrapper(
             header: {
@@ -87,7 +87,7 @@ struct ArtistsView: View {
                 LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(artists) { artist in
                         NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
-                            ArtistView.Item(artist: artist)
+                            ArtistsView.ListItem(artist: artist)
                         })
                     }
                     .padding(.bottom, KomodioApp.posterSize.height / 9)

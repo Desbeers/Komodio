@@ -35,6 +35,11 @@ struct MediaItem: Hashable, Identifiable, Codable {
 
     // MARK: Init
 
+
+    /// Init the struct
+    /// - Parameters:
+    ///   - item: The `KodiItem`
+    ///   - resume: When start to pay; resume or not
     init(item: any KodiItem, resume: Bool = false) {
         self.id = item.id
         self.item = item

@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Search View
 
-/// SwiftUI View for search results (tvOS)
+/// SwiftUI `View` for search results (tvOS)
 struct SearchView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector

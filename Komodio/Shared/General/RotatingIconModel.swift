@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-/// Class to observe the ``PartsView/RotatingIcon`` SwiftUI View (shared)
+/// Class to observe the ``PartsView/RotatingIcon`` SwiftUI `View` (shared)
 class RotatingIconModel: ObservableObject {
     /// Do we want to rotate or not?
     private var rotate: Bool = false

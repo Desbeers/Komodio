@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: TV shows View
 
-/// SwiftUI View for all TV shows (shared)
+/// SwiftUI `View` for all TV shows (shared)
 struct TVShowsView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -23,7 +23,7 @@ struct TVShowsView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch state {
@@ -47,7 +47,7 @@ struct TVShowsView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     @ViewBuilder var content: some View {
 
 #if os(macOS)
@@ -55,7 +55,7 @@ struct TVShowsView: View {
             LazyVStack {
                 ForEach(tvshows) { tvshow in
                     NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
-                        TVShowView.Item(tvshow: tvshow)
+                        ListItem(tvshow: tvshow)
                     }
                     .buttonStyle(.kodiItemButton(kodiItem: tvshow))
                     Divider()
@@ -77,7 +77,7 @@ struct TVShowsView: View {
                 LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
                     ForEach(tvshows) { tvshow in
                         NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
-                            TVShowView.Item(tvshow: tvshow)
+                            ListItem(tvshow: tvshow)
                         }
                         .padding(.bottom, KomodioApp.posterSize.height / 9)
                     }

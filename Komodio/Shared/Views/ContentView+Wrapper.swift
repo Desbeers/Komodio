@@ -9,7 +9,7 @@ import SwiftUI
 
 extension ContentView {
 
-    /// SwiftUI View to wrap the ``ContentView``
+    /// SwiftUI `View` to wrap the ``ContentView``
     struct Wrapper<Header: View, Content: View>: View {
         /// Wrap the view in a `ScollView` or not
         var scroll: Bool = true
@@ -31,7 +31,7 @@ extension ContentView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             VStack(spacing: 0) {
                 if scroll {

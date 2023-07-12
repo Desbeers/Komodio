@@ -1,5 +1,5 @@
 //
-//  SeasonView.swift
+//  SeasonView+Details.swift
 //  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
@@ -12,7 +12,7 @@ extension SeasonView {
 
     // MARK: Season Details
 
-    /// SwiftUI View for season details
+    /// SwiftUI `View` with all `Episodes` of a selected `Season`
     struct Details: View {
         /// The TV show season
         let season: Video.Details.Season
@@ -35,7 +35,7 @@ extension SeasonView {
         var content: some View {
             LazyVStack {
                 ForEach(season.episodes) { episode in
-                    EpisodeView.Item(episode: episode)
+                    ListItem(episode: episode)
                         .padding(.bottom)
                 }
             }

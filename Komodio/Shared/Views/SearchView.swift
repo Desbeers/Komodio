@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Search View
 
-/// SwiftUI View for search results (macOS + iOS)
+/// SwiftUI `View` for search results (macOS + iOS)
 /// - Note: tvOS has its own `View`
 struct SearchView: View {
     /// The KodiConnector model
@@ -46,7 +46,7 @@ struct SearchView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     var content: some View {
         ScrollView {
             LazyVStack {
@@ -66,7 +66,7 @@ struct SearchView: View {
                                 scene.details = .movie(movie: movie)
                             },
                             label: {
-                                MovieView.Item(movie: movie)
+                                MoviesView.ListItem(movie: movie)
                             }
                         )
                         .buttonStyle(.kodiItemButton(kodiItem: movie))
@@ -83,7 +83,7 @@ struct SearchView: View {
                                 scene.details = .musicVideo(musicVideo: musicVideo)
                             },
                             label: {
-                                MusicVideoView.Item(item: musicVideo)
+                                MusicVideosView.ListItem(item: musicVideo)
                             }
                         )
                         .buttonStyle(.kodiItemButton(kodiItem: musicVideo))
@@ -95,7 +95,7 @@ struct SearchView: View {
                         .padding()
                     ForEach(tvshows) { tvshow in
                         NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
-                            TVShowView.Item(tvshow: tvshow)
+                            TVShowsView.ListItem(tvshow: tvshow)
                         }
                         .buttonStyle(.kodiItemButton(kodiItem: tvshow))
                         Divider()

@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 extension Router {
 
     /// Structure for a ``Router`` Item
-    struct Item: Identifiable {
+    struct Item {
         /// Title of the item
         var title: String = "Title"
         /// Description of the item
@@ -26,30 +26,12 @@ extension Router {
         var color: Color = Color("AccentColor")
         /// The optional KodiItem
         var kodiItem: (any KodiItem)?
-
-        /// # Calculated stuff
-
-        /// The label for the item
-
-        var id: String {
-            "\(title) \(description)"
-        }
-
-        var label: any View {
-            Label(
-                title: {
-                    Text(title)
-                },
-                icon: {
-                    Image(systemName: icon)
-                }
-            )
-            .foregroundStyle(color)
-        }
     }
 }
 
 extension Router {
+
+    /// Details f the router item
     var item: Item {
         switch self {
 

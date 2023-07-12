@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Movies View
 
-/// SwiftUI View for all Movies in the library (shared)
+/// SwiftUI `View` for all Movies in the library (shared)
 struct MoviesView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -27,7 +27,7 @@ struct MoviesView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch state {
@@ -62,7 +62,7 @@ struct MoviesView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     @ViewBuilder var content: some View {
 
 #if os(macOS)
@@ -78,13 +78,13 @@ struct MoviesView: View {
                                 scene.details = .movie(movie: movie)
                             },
                             label: {
-                                MovieView.Item(movie: movie, sorting: sorting)
+                                MoviesView.ListItem(movie: movie, sorting: sorting)
                             }
                         )
                         .buttonStyle(.kodiItemButton(kodiItem: movie))
                     case let movieSet as Video.Details.MovieSet:
                         NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
-                            MovieSetView.Item(movieSet: movieSet)
+                            MovieSetView.ListItem(movieSet: movieSet)
                         })
                         .buttonStyle(.kodiItemButton(kodiItem: movieSet))
                     default:
@@ -121,12 +121,12 @@ struct MoviesView: View {
                         switch video {
                         case let movie as Video.Details.Movie:
                             NavigationLink(value: Router.movie(movie: movie), label: {
-                                MovieView.Item(movie: movie, sorting: sorting)
+                                MoviesView.ListItem(movie: movie, sorting: sorting)
                             })
                             .padding(.bottom, KomodioApp.posterSize.height / 9)
                         case let movieSet as Video.Details.MovieSet:
                             NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
-                                MovieSetView.Item(movieSet: movieSet)
+                                MovieSetView.ListItem(movieSet: movieSet)
                             })
                             .padding(.bottom, KomodioApp.posterSize.height / 9)
                         default:

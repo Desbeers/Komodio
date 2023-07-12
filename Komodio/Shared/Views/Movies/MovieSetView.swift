@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Movie Set View
 
-/// SwiftUI View for all Movies in a Movie Set (shared)
+/// SwiftUI `View` for all Movies in a Movie Set (shared)
 struct MovieSetView: View {
     /// The movie set
     let movieSet: Video.Details.MovieSet
@@ -25,7 +25,7 @@ struct MovieSetView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         content
             .task(id: kodi.library.movies) {
@@ -38,7 +38,7 @@ struct MovieSetView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     @ViewBuilder var content: some View {
 #if os(macOS)
         ScrollView {
@@ -51,7 +51,7 @@ struct MovieSetView: View {
                             scene.details = .movie(movie: movie)
                         },
                         label: {
-                            MovieView.Item(movie: movie, sorting: sorting)
+                            MoviesView.ListItem(movie: movie, sorting: sorting)
                         }
                     )
                     .buttonStyle(.kodiItemButton(kodiItem: movie))
@@ -84,7 +84,7 @@ struct MovieSetView: View {
                         LazyVStack {
                             ForEach(movies) { movie in
                                 NavigationLink(value: Router.movie(movie: movie)) {
-                                    MovieView.Item(movie: movie, sorting: sorting)
+                                    MoviesView.ListItem(movie: movie, sorting: sorting)
                                 }
                                 .padding(.bottom, KomodioApp.posterSize.height / 20)
                             }

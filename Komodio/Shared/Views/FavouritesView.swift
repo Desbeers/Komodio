@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Favorites View
 
-/// SwiftUI View for Favorites (shared)
+/// SwiftUI `View` for Favorites (shared)
 struct FavouritesView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -23,7 +23,7 @@ struct FavouritesView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch state {
@@ -44,7 +44,7 @@ struct FavouritesView: View {
             }
         }
     }
-    /// The content of the View
+    /// The content of the `View`
     @ViewBuilder var content: some View {
 #if os(macOS)
         List {
@@ -57,7 +57,7 @@ struct FavouritesView: View {
                                 scene.details = .movie(movie: movie)
                             },
                             label: {
-                                MovieView.Item(movie: movie)
+                                MoviesView.ListItem(movie: movie)
                             }
                         )
                     case let episode as Video.Details.Episode:
@@ -66,7 +66,7 @@ struct FavouritesView: View {
                                 scene.details = .episode(episode: episode)
                             },
                             label: {
-                                UpNextView.Item(episode: episode)
+                                EpisodeView.ListItem(episode: episode)
                             }
                         )
                     case let musicVideo as Video.Details.MusicVideo:
@@ -75,7 +75,7 @@ struct FavouritesView: View {
                                 scene.details = .musicVideo(musicVideo: musicVideo)
                             },
                             label: {
-                                MusicVideoView.Item(item: musicVideo)
+                                MusicVideosView.ListItem(item: musicVideo)
                             }
                         )
                     default:
@@ -101,17 +101,17 @@ struct FavouritesView: View {
                         switch video {
                         case let movie as Video.Details.Movie:
                             NavigationLink(value: Router.movie(movie: movie), label: {
-                                MovieView.Item(movie: movie)
+                                MoviesView.ListItem(movie: movie)
                             })
                             .padding(.bottom, KomodioApp.posterSize.height / 9)
                         case let episode as Video.Details.Episode:
                             NavigationLink(value: Router.episode(episode: episode), label: {
-                                UpNextView.Item(episode: episode)
+                                EpisodeView.ListItem(episode: episode)
                             })
                             .padding(.bottom, KomodioApp.posterSize.height / 9)
                         case let musicVideo as Video.Details.MusicVideo:
                             NavigationLink(value: Router.musicVideo(musicVideo: musicVideo), label: {
-                                MusicVideoView.Item(item: musicVideo)
+                                MusicVideosView.ListItem(item: musicVideo)
                             })
                             .padding(.bottom, KomodioApp.posterSize.height / 9)
                         default:

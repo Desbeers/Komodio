@@ -95,7 +95,7 @@ extension MovieView {
 
         // MARK: tvOS Views
 
-        /// SwiftUI View for the top of movie details
+        /// SwiftUI `View` for the top of movie details
         var top: some View {
             ZStack(alignment: .bottom) {
                 LinearGradient(
@@ -130,7 +130,7 @@ extension MovieView {
             }
         }
 
-        /// SwiftUI View for additional movie details
+        /// SwiftUI `View` for additional movie details
         var details: some View {
             HStack {
                 KodiArt.Poster(item: movie)

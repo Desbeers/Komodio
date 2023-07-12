@@ -12,7 +12,7 @@ extension EpisodeView {
 
     // MARK: Up Next Details
 
-    /// SwiftUI View for details of an `Episode`
+    /// SwiftUI `View` for details of an `Episode`
     struct Details: View {
         /// The `Episode` to show
         let selectedEpisode: Video.Details.Episode
@@ -26,11 +26,9 @@ extension EpisodeView {
             self._episode = State(initialValue: episode)
         }
 
-        @Namespace var namespace
-
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
                 scroll: KomodioApp.platform == .tvOS ? nil : episode.id,

@@ -12,7 +12,7 @@ import SwiftlyKodiAPI
 
 extension DetailView {
 
-    /// SwiftUI View to wrap the ``DetailView``
+    /// SwiftUI `View` to wrap the ``DetailView``
     struct Wrapper<Content: View>: View {
         /// Wrap the view in a `ScrollView` when set
         let scroll: String?
@@ -22,7 +22,7 @@ extension DetailView {
         let title: String?
         /// The optional subtitle
         var subtitle: String?
-        /// The content of the View
+        /// The content of the `View`
         @ViewBuilder var content: () -> Content
 
         // MARK: Body of the View

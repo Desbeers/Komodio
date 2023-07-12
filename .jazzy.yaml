@@ -49,6 +49,7 @@ custom_categories:
     - AlbumView
     - MusicVideosView
     - MusicVideoView
+    - MusicVideoAlbumView
     - PlaylistsView
     - StatisticsView
     - FavouritesView
@@ -61,8 +62,9 @@ custom_categories:
     - Pickers
     - Modifiers
     - Styles
-  - name: SwiftUI Styles
+  - name: Extensions
     children:
     - ButtonStyle
     - LabelStyle
     - View
+    - Color

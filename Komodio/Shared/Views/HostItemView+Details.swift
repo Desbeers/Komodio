@@ -17,7 +17,7 @@ extension HostItemView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             VStack {
                 KodiHostItemView.KodiSettings()

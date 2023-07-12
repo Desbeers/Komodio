@@ -19,7 +19,7 @@ extension ArtistView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
                 scroll: KomodioApp.platform == .tvOS ? nil : artist.id,

@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Sidebar View
 
-/// SwiftUI View for the sidebar (macOS + iOS)
+/// SwiftUI `View` for the sidebar (macOS + iOS)
 /// - Note: tvOS has its own `View`
 struct SidebarView: View {
     /// The KodiConnector model
@@ -26,7 +26,7 @@ struct SidebarView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             List(selection: $sidebarSelection) {
@@ -58,7 +58,7 @@ struct SidebarView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     @ViewBuilder var content: some View {
         NavigationLink(value: Router.start) {
             Label(title: {
@@ -100,9 +100,9 @@ struct SidebarView: View {
         }
     }
 
-    /// SwiftUI View for an item in the sidebar
+    /// SwiftUI `View` for an item in the sidebar
     /// - Parameter router: The ``Router`` item
-    /// - Returns: A SwiftUI View with the sidebar item
+    /// - Returns: A SwiftUI `View` with the sidebar item
     private func sidebarItem(router: Router) -> some View {
         NavigationLink(value: router) {
             Label(

@@ -35,7 +35,7 @@ extension Buttons {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             HStack {
                 switch KomodioPlayerView.canPlay(video: item) {
@@ -67,7 +67,7 @@ extension Buttons {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             Button(action: {
                 Task {
@@ -115,7 +115,7 @@ extension Buttons {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             Button(
                 action: {
@@ -164,7 +164,7 @@ extension Buttons {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             Button(
                 action: {

@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Season View
 
-/// SwiftUI View for one Season of a TV show (shared)
+/// SwiftUI `View` for one Season of a TV show (shared)
 enum SeasonView {
     // Just a namespace
 }

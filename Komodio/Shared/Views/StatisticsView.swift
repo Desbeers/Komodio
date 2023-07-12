@@ -10,14 +10,14 @@ import SwiftlyKodiAPI
 
 // MARK: Statistics View
 
-/// SwiftUI View for library statistics (shared)
+/// SwiftUI `View` for library statistics (shared)
 struct StatisticsView: View {
     /// The KodiConnector model
     @EnvironmentObject var kodi: KodiConnector
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack(alignment: .leading) {
             if !kodi.library.movies.isEmpty {
@@ -88,14 +88,14 @@ extension StatisticsView {
 
     // MARK: Statistics Host Info
 
-    /// SwiftUI View with host info
+    /// SwiftUI `View` with host info
     struct HostInfo: View {
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             VStack {
                 Text(kodi.host.name)

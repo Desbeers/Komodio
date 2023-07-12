@@ -35,6 +35,7 @@ class SceneState: ObservableObject {
     /// The shared instance of this SceneState class
     static let shared = SceneState()
 
+    /// Private init of the class
     private init() {}
 
     /// # Router

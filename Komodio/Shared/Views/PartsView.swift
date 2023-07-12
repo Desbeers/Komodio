@@ -53,7 +53,7 @@ extension PartsView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             VStack {
                 Text(title)
@@ -100,7 +100,7 @@ extension PartsView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             VStack {
                 switch status {
@@ -131,7 +131,7 @@ extension PartsView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             GeometryReader { geometry in
                 ZStack {
@@ -190,7 +190,7 @@ extension PartsView {
         let item: any KodiItem
         /// Bool if we show the full text in a sheet
         @State private var showFullText: Bool = false
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             ViewThatFits(in: .vertical) {
                 Text(item.description)
@@ -273,7 +273,7 @@ extension PartsView {
 
     // MARK: Parts Sort Label
 
-    /// SwiftUI View for a sorting label
+    /// SwiftUI `View` for a sorting label
     struct SortLabel: View {
         /// The KodiItem
         let item: any KodiItem
@@ -282,7 +282,7 @@ extension PartsView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             switch sorting.method {
             case .dateAdded:

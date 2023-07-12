@@ -11,7 +11,7 @@ import SwiftlyKodiAPI
 
 // MARK: Komodio Player View
 
-/// SwiftUI View for a video player (shared)
+/// SwiftUI `View` for a video player (shared)
 ///
 /// Currently, Komodio is using the `AVPlayer` from the SwiftlyKodiAPI package
 ///
@@ -28,7 +28,7 @@ struct KomodioPlayerView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         switch KomodioPlayerView.canPlay(video: video) {
         case true:
@@ -59,7 +59,7 @@ extension KomodioPlayerView {
 
     // MARK: Komodio Player Cant Play
 
-    /// SwiftUI View for message that we can't play a video
+    /// SwiftUI `View` for message that we can't play a video
     struct CantPlay: View {
         /// The video that we can't play
         let video: any KodiItem
@@ -70,7 +70,7 @@ extension KomodioPlayerView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             Button(action: {
                 // No action

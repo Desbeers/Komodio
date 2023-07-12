@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Playlists View
 
-/// SwiftUI View for playlists (tvOS)
+/// SwiftUI `View` for playlists (tvOS)
 struct PlaylistsView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -21,7 +21,7 @@ struct PlaylistsView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch state {
@@ -46,7 +46,7 @@ struct PlaylistsView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     var content: some View {
         ContentView.Wrapper(
             header: {

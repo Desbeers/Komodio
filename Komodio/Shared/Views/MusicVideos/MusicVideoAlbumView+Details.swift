@@ -36,7 +36,7 @@ extension MusicVideoAlbumView {
         var content: some View {
             LazyVStack {
                 ForEach(musicVideoAlbum.musicVideos) { musicVideo in
-                    Item(musicVideo: musicVideo)
+                    ListItem(musicVideo: musicVideo)
                 }
             }
         }

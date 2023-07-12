@@ -12,7 +12,7 @@ extension StartView {
 
     // MARK: Start Details
 
-    /// SwiftUI View with details of the StartView
+    /// SwiftUI `View` with details of the StartView
     struct Details: View {
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
@@ -21,7 +21,7 @@ extension StartView {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
                 scroll: nil,

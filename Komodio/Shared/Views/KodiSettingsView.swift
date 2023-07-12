@@ -10,14 +10,14 @@ import SwiftlyKodiAPI
 
 // MARK: Kodi Settings View
 
-/// SwiftUI View for Kodi settings (shared)
+/// SwiftUI `View` for Kodi settings (shared)
 struct KodiSettingsView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         HStack {
             VStack {
@@ -45,12 +45,12 @@ extension KodiSettingsView {
 
     // MARK: Kodi Settings Details
 
-    /// SwiftUI View for Kodi settings details
+    /// SwiftUI `View` for Kodi settings details
     struct Details: View {
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             ScrollView {
                 KodiSettingView.setting(for: .servicesDevicename)
@@ -70,14 +70,14 @@ extension KodiSettingsView {
 
     // MARK: Kodi Settings Warning
 
-    /// SwiftUI View for warning of Kodi settings
+    /// SwiftUI `View` for warning of Kodi settings
     struct Warning: View {
         /// The KodiConnector model
         @EnvironmentObject private var kodi: KodiConnector
 
         // MARK: Body of the View
 
-        /// The body of the View
+        /// The body of the `View`
         var body: some View {
             Label(
                 title: {

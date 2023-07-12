@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Main View
 
-/// SwiftUI View for the main navigation (macOS)
+/// SwiftUI `View` for the main navigation (macOS)
 struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -28,7 +28,7 @@ struct MainView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         HStack(spacing: 0) {
             NavigationSplitView(
@@ -63,7 +63,7 @@ struct MainView: View {
 
     // MARK: Content of the Details
 
-    /// The body of the View
+    /// The body of the `View`
     var details: some View {
         VStack {
             switch state {

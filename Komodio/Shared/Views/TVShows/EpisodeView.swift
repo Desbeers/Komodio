@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Episode View
 
-/// SwiftUI View for a single Episode (shared)
+/// SwiftUI `View` for a single Episode (shared)
 enum EpisodeView {
 
     /// Update an Episode

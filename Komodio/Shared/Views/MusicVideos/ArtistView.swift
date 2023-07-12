@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Artist View
 
-/// SwiftUI View for a single Artist (shared)
+/// SwiftUI `View` for a single Artist (shared)
 enum ArtistView {
     // Just a NameSpace here
 }

@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Modifiers
 
-/// Collection of SwiftUI View Modifiers (shared)
+/// Collection of SwiftUI `View` Modifiers (shared)
 enum Modifiers {
     // Just a namespace here...
 }

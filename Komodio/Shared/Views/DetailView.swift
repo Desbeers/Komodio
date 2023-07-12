@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Detail View
 
-/// SwiftUI View for details of the selection (shared)
+/// SwiftUI `View` for details of the selection (shared)
 struct DetailView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -19,7 +19,7 @@ struct DetailView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch scene.details {

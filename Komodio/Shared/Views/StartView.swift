@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Start View
 
-/// SwiftUI View when starting Komodio (shared)
+/// SwiftUI `View` when starting Komodio (shared)
 struct StartView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -44,7 +44,7 @@ struct StartView: View {
 
     // MARK: Content of the View
 
-    /// The content of the View
+    /// The content of the `View`
     var content: some View {
         HStack {
             ScrollView {

@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Main View
 
-/// SwiftUI View for the main navigation (tvOS)
+/// SwiftUI `View` for the main navigation (tvOS)
 struct MainView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -21,7 +21,7 @@ struct MainView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         NavigationStack(path: $scene.navigationStackPath) {
             ContentView()

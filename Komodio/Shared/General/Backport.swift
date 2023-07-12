@@ -1,8 +1,8 @@
 //
 //  File.swift
-//  KomodioPad
+//  Komodio (shared)
 //
-//  Created by Nick Berendsen on 23/06/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

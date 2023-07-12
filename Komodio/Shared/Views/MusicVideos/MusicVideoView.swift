@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Music Video View
 
-/// SwiftUI View for a single Music Video (shared)
+/// SwiftUI `View` for a single Music Video (shared)
 enum MusicVideoView {
 
     /// Update a Music Video

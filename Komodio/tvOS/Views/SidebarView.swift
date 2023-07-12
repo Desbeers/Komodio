@@ -11,7 +11,7 @@ import AVFoundation
 
 // MARK: Sidebar View
 
-/// SwiftUI View for the sidebar (tvOS)
+/// SwiftUI `View` for the sidebar (tvOS)
 ///
 /// It is a bit of a hack to tame the Siri remote...
 struct SidebarView: View {
@@ -48,7 +48,7 @@ struct SidebarView: View {
     }
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack(alignment: .leading) {
             Label(
@@ -131,7 +131,7 @@ struct SidebarView: View {
         }
     }
 
-    /// SwiftUI View for an item in the sidebar
+    /// SwiftUI `View` for an item in the sidebar
     @ViewBuilder func sidebarItem(router: Router) -> some View {
         Label(
             title: {

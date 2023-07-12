@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Up Next View
 
-/// SwiftUI View for next Episode of TV shows that are not completed (shared)
+/// SwiftUI `View` for next Episode of TV shows that are not completed (shared)
 struct UpNextView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -27,7 +27,7 @@ struct UpNextView: View {
 
     // MARK: Body of the View
 
-    /// The body of the View
+    /// The body of the `View`
     var body: some View {
         VStack {
             switch state {
@@ -48,7 +48,7 @@ struct UpNextView: View {
 
     // MARK: Content of the View
 
-    /// The content of the view
+    /// The content of the `View`
     @ViewBuilder var content: some View {
 
 #if os(macOS)
@@ -61,7 +61,7 @@ struct UpNextView: View {
                             scene.details = .episode(episode: episode)
                         },
                         label: {
-                            Item(episode: episode)
+                            EpisodeView.ListItem(episode: episode)
                         }
                     )
                     .buttonStyle(.kodiItemButton(kodiItem: episode))
@@ -92,7 +92,7 @@ struct UpNextView: View {
                                     scene.details = .episode(episode: episode)
                                     selectedEpisode = episode
                                 }, label: {
-                                    Item(episode: episode)
+                                    EpisodeView.ListItem(episode: episode)
                                 })
                                 .buttonStyle(.kodiItemButton(kodiItem: episode))
                                 .padding(.bottom, KomodioApp.posterSize.height / 20)

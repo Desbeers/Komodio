@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Movie View
 
-/// SwiftUI View for a single Movie (shared)
+/// SwiftUI `View` for a single Movie (shared)
 enum MovieView {
 
     /// Update a Movie

@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Music Videos View
 
-/// SwiftUI View for all Music Videos of an Artist; grouped by optional Album (shared)
+/// SwiftUI `View` for all Music Videos of an Artist; grouped by optional Album (shared)
 struct MusicVideosView: View {
     /// The selected artist
     let artist: Audio.Details.Artist
@@ -94,7 +94,7 @@ struct MusicVideosView: View {
                 }
             },
             label: {
-                MusicVideoView.Item(item: video)
+                MusicVideosView.ListItem(item: video)
             }
         )
         .buttonStyle(.kodiItemButton(kodiItem: video))

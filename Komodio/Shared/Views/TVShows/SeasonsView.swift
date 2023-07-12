@@ -10,7 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Seasons View
 
-/// SwiftUI View for all Seasons of a TV show (shared)
+/// SwiftUI `View` for all Seasons of a TV show (shared)
 struct SeasonsView: View {
     /// The TV show
     let tvshow: Video.Details.TVShow
@@ -62,7 +62,7 @@ struct SeasonsView: View {
                             scene.details = .season(season: season)
                         },
                         label: {
-                            SeasonView.Item(season: season)
+                            ListItem(season: season)
                         }
                     )
                     .buttonStyle(.kodiItemButton(kodiItem: season))
@@ -103,7 +103,7 @@ struct SeasonsView: View {
                                         scene.details = .season(season: season)
                                     },
                                     label: {
-                                        SeasonView.Item(season: season)
+                                        ListItem(season: season)
                                             .frame(width: KomodioApp.posterSize.width)
                                     }
                                 )

@@ -79,7 +79,7 @@ class SiriRemoteController: ObservableObject {
 
 extension Modifiers {
 
-    /// SwiftUI View Modifier for a swipe gesture
+    /// SwiftUI `View` Modifier for a swipe gesture
     struct SwipeGestureActions: ViewModifier {
         /// The closures to execute when up gesture is detected
         var onUp: () -> Void = {}
