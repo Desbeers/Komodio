@@ -60,19 +60,18 @@ struct SidebarView: View {
 
     /// The content of the `View`
     @ViewBuilder var content: some View {
-        NavigationLink(value: Router.start) {
-            Label(title: {
-                VStack(alignment: .leading) {
-                    Text(kodi.host.bonjour?.name ?? "Komodio")
-                    Text(kodi.status.message)
-                        .font(.caption)
-                        .opacity(0.5)
-                }
-            }, icon: {
-                Image(systemName: "globe")
-            })
-        }
+        Label(title: {
+            VStack(alignment: .leading) {
+                Text(kodi.host.bonjour?.name ?? "Komodio")
+                Text(kodi.status.message)
+                    .font(.caption)
+                    .opacity(0.5)
+            }
+        }, icon: {
+            Image(systemName: "globe")
+        })
         .listItemTint(kodi.host.isOnline ? .green : .red)
+        .tag(Router.start)
         if kodi.status == .loadedLibrary {
             sidebarItem(router: Router.favourites)
                 .listItemTint(.red)
@@ -104,16 +103,8 @@ struct SidebarView: View {
     /// - Parameter router: The ``Router`` item
     /// - Returns: A SwiftUI `View` with the sidebar item
     private func sidebarItem(router: Router) -> some View {
-        NavigationLink(value: router) {
-            Label(
-                title: {
-                    Text(router.item.title)
-                },
-                icon: {
-                    Image(systemName: router.item.icon)
-                }
-            )
-        }
-        .listItemTint(router.item.color)
+        Label(router.item.title, systemImage: router.item.icon)
+            .tag(router)
+            .listItemTint(router.item.color)
     }
 }
