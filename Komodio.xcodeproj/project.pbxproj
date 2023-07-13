@@ -28,8 +28,6 @@
 		D747E3842A5F1DF400DF2F54 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = D747E34B2A5EAF4300DF2F54 /* Debug.swift */; };
 		D747E3852A5F1DF400DF2F54 /* RotatingIconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */; };
 		D747E3862A5F1DF400DF2F54 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
-		D747E3872A5F1DF900DF2F54 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
-		D747E3882A5F1DF900DF2F54 /* Router+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA230C2A50730F00624D0D /* Router+Item.swift */; };
 		D747E3892A5F1DF900DF2F54 /* Router+DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA23112A5099D600624D0D /* Router+DestinationView.swift */; };
 		D747E38A2A5F1DF900DF2F54 /* Router+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766F5DE2A46EB10002DDB1C /* Router+Modifiers.swift */; };
 		D747E38B2A5F1E0600DF2F54 /* MoviesView+ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263029DB71B100CEC57E /* MoviesView+ListItem.swift */; };
@@ -119,7 +117,6 @@
 		D78164AA2A58A29600AD1BE9 /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78164A82A58A29600AD1BE9 /* SeasonView.swift */; };
 		D78164AE2A58A41F00AD1BE9 /* HostItemView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78164AC2A58A41F00AD1BE9 /* HostItemView+Details.swift */; };
 		D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D785A199294B63D900530F62 /* SwiftlyKodiAPI */; };
-		D785A19B294B63FA00530F62 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD54B29056F1100037DC9 /* Router.swift */; };
 		D785A19D294B640300530F62 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D785A19E294B640800530F62 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
 		D785A19F294B652100530F62 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD5532905726A00037DC9 /* MoviesView.swift */; };
@@ -132,7 +129,6 @@
 		D785A1AB294CBC6100530F62 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45F293B2C3300CE9B8D /* StartView.swift */; };
 		D786DC9B2A45D7230086C8FB /* Backport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC992A45D7230086C8FB /* Backport.swift */; };
 		D7B49BE22953262A00BBCB80 /* SiriRemoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */; };
-		D7BA230E2A50730F00624D0D /* Router+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA230C2A50730F00624D0D /* Router+Item.swift */; };
 		D7BA23132A5099D600624D0D /* Router+DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA23112A5099D600624D0D /* Router+DestinationView.swift */; };
 		D7C65F882A5AA46E00A0C0CD /* MusicVideoAlbumView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C65F862A5AA46E00A0C0CD /* MusicVideoAlbumView+Details.swift */; };
 		D7D000FB29D1FED3007973C0 /* DetailView+Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D000F929D1FED3007973C0 /* DetailView+Wrapper.swift */; };
@@ -163,7 +159,6 @@
 		D71BD53429056A5C00037DC9 /* KomodioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomodioApp.swift; sourceTree = "<group>"; };
 		D71BD53629056A5C00037DC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D71BD53829056A5E00037DC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D71BD54B29056F1100037DC9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D71BD55129056FB500037DC9 /* SceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneState.swift; sourceTree = "<group>"; };
 		D71BD5532905726A00037DC9 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		D71BD55529057E6600037DC9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -210,7 +205,6 @@
 		D786DC612A45D0E30086C8FB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D786DC992A45D7230086C8FB /* Backport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backport.swift; sourceTree = "<group>"; };
 		D7B49BE12953262A00BBCB80 /* SiriRemoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiriRemoteController.swift; sourceTree = "<group>"; };
-		D7BA230C2A50730F00624D0D /* Router+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Router+Item.swift"; sourceTree = "<group>"; };
 		D7BA23112A5099D600624D0D /* Router+DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Router+DestinationView.swift"; sourceTree = "<group>"; };
 		D7C65F862A5AA46E00A0C0CD /* MusicVideoAlbumView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicVideoAlbumView+Details.swift"; sourceTree = "<group>"; };
 		D7D000F929D1FED3007973C0 /* DetailView+Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailView+Wrapper.swift"; sourceTree = "<group>"; };
@@ -360,8 +354,6 @@
 		D74A75D72A51852700A820F6 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				D71BD54B29056F1100037DC9 /* Router.swift */,
-				D7BA230C2A50730F00624D0D /* Router+Item.swift */,
 				D7BA23112A5099D600624D0D /* Router+DestinationView.swift */,
 				D766F5DE2A46EB10002DDB1C /* Router+Modifiers.swift */,
 			);
@@ -632,9 +624,7 @@
 				D747E3A22A5F1E1700DF2F54 /* Buttons.swift in Sources */,
 				D747E3BA2A5F1E1E00DF2F54 /* ArtistsView.swift in Sources */,
 				D747E3B52A5F1E1E00DF2F54 /* MusicVideosView.swift in Sources */,
-				D747E3872A5F1DF900DF2F54 /* Router.swift in Sources */,
 				D747E37F2A5F1DF400DF2F54 /* MediaItem.swift in Sources */,
-				D747E3882A5F1DF900DF2F54 /* Router+Item.swift in Sources */,
 				D747E3862A5F1DF400DF2F54 /* SceneState.swift in Sources */,
 				D747E3A52A5F1E1700DF2F54 /* StatisticsView.swift in Sources */,
 				D747E3B42A5F1E1E00DF2F54 /* MusicVideoAlbumView+Details.swift in Sources */,
@@ -709,7 +699,6 @@
 				D715FC252A49D1A300CC9699 /* KomodioApp+StaticSettings.swift in Sources */,
 				D76750DC2969838800A95D52 /* Styles.swift in Sources */,
 				D7E7263E29DB765F00CEC57E /* SeasonsView+ListItem.swift in Sources */,
-				D7BA230E2A50730F00624D0D /* Router+Item.swift in Sources */,
 				D785A1A4294B668C00530F62 /* Modifiers.swift in Sources */,
 				D715FC272A49D24900CC9699 /* KomodioApp.swift in Sources */,
 				D75C3F6E294DED8F002BC065 /* ArtistsView.swift in Sources */,
@@ -722,7 +711,6 @@
 				D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */,
 				D7599CEB29AE80C2004BA9D3 /* Parts+tvOS.swift in Sources */,
 				D7E7263529DB722200CEC57E /* MovieView+Details.swift in Sources */,
-				D785A19B294B63FA00530F62 /* Router.swift in Sources */,
 				D785A1A7294B7F3A00530F62 /* DetailView.swift in Sources */,
 				D78164AA2A58A29600AD1BE9 /* SeasonView.swift in Sources */,
 				D75C3F6C294DDD49002BC065 /* EpisodeView.swift in Sources */,

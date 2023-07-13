@@ -51,7 +51,7 @@ struct SidebarView: View {
         }
         /// Override de default list style that it set in ``MainView``
         .listStyle(.sidebar)
-        // .animation(.default, value: searchField)
+        .animation(.default, value: searchField)
         .animation(.default, value: kodi.status)
         .buttonStyle(.plain)
     }
@@ -63,7 +63,7 @@ struct SidebarView: View {
         NavigationLink(value: Router.start) {
             Label(title: {
                 VStack(alignment: .leading) {
-                    Text(kodi.host.bonjour?.name ?? "Kodio")
+                    Text(kodi.host.bonjour?.name ?? "Komodio")
                     Text(kodi.status.message)
                         .font(.caption)
                         .opacity(0.5)
