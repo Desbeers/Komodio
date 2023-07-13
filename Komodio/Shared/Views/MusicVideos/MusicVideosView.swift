@@ -107,7 +107,7 @@ struct MusicVideosView: View {
         let allMusicVideosFromArtist = kodi.library.musicVideos
             .filter { $0.artist.contains(artist.artist) }
         items = allMusicVideosFromArtist
-            .swapMusicVideosForAlbums()
+            .swapMusicVideosForAlbums(artist: artist)
             .sorted(sortItem: .init(id: "MusicVideoAlbum", method: .year, order: .ascending))
         if
             let album = scene.details.item.kodiItem,
