@@ -42,7 +42,6 @@ extension ContentView {
                     inside
                 }
             }
-            .padding([.top, .horizontal])
 #if os(tvOS)
             .padding(.leading)
             /// Extra padding for the sidebar
@@ -55,6 +54,7 @@ extension ContentView {
             header()
                 .frame(maxWidth: .infinity)
                 .backport.focusSection()
+                .padding([.top, .horizontal])
             content()
                 .padding(.horizontal, insidePadding)
             /// No scrollbar means no vertical padding; the inside content might be a list that wants to scroll from top to bottom
