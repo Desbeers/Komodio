@@ -144,6 +144,8 @@
 		D7EFE452293A4E7900CE9B8D /* MainView (tvOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE451293A4E7900CE9B8D /* MainView (tvOS).swift */; };
 		D7F03A6F296071F40026D815 /* KodiSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */; };
 		D7F03A7A2964635B0026D815 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F03A782964635B0026D815 /* StatisticsView.swift */; };
+		D7FB40BF2A61E8C800C61356 /* KodiSettingsView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FB40BE2A61E8C800C61356 /* KodiSettingsView+Details.swift */; };
+		D7FB40C02A61E8C800C61356 /* KodiSettingsView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FB40BE2A61E8C800C61356 /* KodiSettingsView+Details.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +227,7 @@
 		D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiSettingsView.swift; sourceTree = "<group>"; };
 		D7F03A782964635B0026D815 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		D7F03A8029685E2D0026D815 /* Komodio.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Komodio.plist; sourceTree = "<group>"; };
+		D7FB40BE2A61E8C800C61356 /* KodiSettingsView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KodiSettingsView+Details.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +413,7 @@
 				D7EFE45F293B2C3300CE9B8D /* StartView.swift */,
 				D71D2FDB2A4ADCC700E6AE5A /* StartView+Details.swift */,
 				D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */,
+				D7FB40BE2A61E8C800C61356 /* KodiSettingsView+Details.swift */,
 				D77B1371297561AA00ECE2F9 /* HostItemView.swift */,
 				D78164AC2A58A41F00AD1BE9 /* HostItemView+Details.swift */,
 				D7F03A782964635B0026D815 /* StatisticsView.swift */,
@@ -658,6 +662,7 @@
 				D747E3A62A5F1E1700DF2F54 /* KomodioPlayerView.swift in Sources */,
 				D747E3842A5F1DF400DF2F54 /* Debug.swift in Sources */,
 				D747E38E2A5F1E0600DF2F54 /* MovieSetView+Details.swift in Sources */,
+				D7FB40BF2A61E8C800C61356 /* KodiSettingsView+Details.swift in Sources */,
 				D747E3B02A5F1E1700DF2F54 /* HostItemView+Details.swift in Sources */,
 				D747E3932A5F1E0D00DF2F54 /* SeasonsView.swift in Sources */,
 				D747E3972A5F1E0D00DF2F54 /* TVShowView.swift in Sources */,
@@ -731,6 +736,7 @@
 				D785A19F294B652100530F62 /* MoviesView.swift in Sources */,
 				D750D00329B50A8900088E0F /* FavouritesView.swift in Sources */,
 				D747E34D2A5EAF4300DF2F54 /* Debug.swift in Sources */,
+				D7FB40C02A61E8C800C61356 /* KodiSettingsView+Details.swift in Sources */,
 				D7E7264429DB77C000CEC57E /* EpisodeView+ListItem.swift in Sources */,
 				D72DE7B52955F22500DD0FFB /* SidebarView (tvOS).swift in Sources */,
 				D78164AE2A58A41F00AD1BE9 /* HostItemView+Details.swift in Sources */,
