@@ -27,6 +27,7 @@ struct KodiSettingsView: View {
                     .padding()
                     .background(.thickMaterial)
                     .cornerRadius(10)
+                    .padding(.leading, KomodioApp.sidebarCollapsedWidth)
                 Spacer()
 #if os(iOS)
                 Details()

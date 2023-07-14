@@ -47,6 +47,10 @@ struct StartView: View {
     /// The content of the `View`
     var content: some View {
         HStack {
+#if os(tvOS) || os(iOS)
+            StartView.Details()
+                .padding(.leading, KomodioApp.sidebarCollapsedWidth)
+#endif
             ScrollView {
                 VStack {
                     configuredHosts
@@ -57,9 +61,7 @@ struct StartView: View {
                 .padding()
                 .animation(.default, value: kodi.status)
             }
-#if os(tvOS) || os(iOS)
-            StartView.Details()
-#endif
+            .frame(maxWidth: .infinity)
         }
     }
 
@@ -93,7 +95,6 @@ struct StartView: View {
             }
         } else {
             KodiHostItemView.NoHostSelected()
-                .frame(width: 380, alignment: .center)
         }
     }
 

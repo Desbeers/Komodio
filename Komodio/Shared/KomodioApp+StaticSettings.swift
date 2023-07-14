@@ -29,6 +29,14 @@ extension KomodioApp {
     /// The default size of thumb art
     static let thumbSize = CGSize(width: 213, height: 120)
 
+    /// The width of the sidebar (used in tvOS only)
+    static let sidebarWidth: Double = 0
+
+    /// The width of the sidebar when collapsed
+    static var sidebarCollapsedWidth: Double {
+        KomodioApp.sidebarWidth / 3
+    }
+
     /// The default corner radius
     static let cornerRadius: Double = 6
 #endif
@@ -87,6 +95,14 @@ extension KomodioApp {
 
     /// The default size of fanart
     static let fanartSize = CGSize(width: 960, height: 540)
+
+    /// The width of the sidebar (used in tvOS only)
+    static let sidebarWidth: Double = 0
+
+    /// The width of the sidebar when collapsed
+    static var sidebarCollapsedWidth: Double {
+        KomodioApp.sidebarWidth / 3
+    }
 
     /// The default corner radius
     static let cornerRadius: Double = 8
