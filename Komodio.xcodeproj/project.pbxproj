@@ -18,6 +18,7 @@
 		D72BF72A29D715EE00CFA373 /* Hosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72829D715EE00CFA373 /* Hosts.swift */; };
 		D72DE7B52955F22500DD0FFB /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72DE7B42955F22500DD0FFB /* SidebarView.swift */; };
 		D72DEEFE2A5F24E900EC0B8E /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72DEEFD2A5F24E900EC0B8E /* AVKit.framework */; platformFilters = (macos, ); };
+		D73BFC712A61B80E006F9846 /* LaunchScreen (iPadOS).storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D73BFC702A61B80E006F9846 /* LaunchScreen (iPadOS).storyboard */; platformFilter = ios; };
 		D747E34D2A5EAF4300DF2F54 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = D747E34B2A5EAF4300DF2F54 /* Debug.swift */; };
 		D747E37F2A5F1DF400DF2F54 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
 		D747E3802A5F1DF400DF2F54 /* Hosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72829D715EE00CFA373 /* Hosts.swift */; };
@@ -100,7 +101,7 @@
 		D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170BE293503C70059FCD3 /* MusicVideoView.swift */; };
 		D766F5E02A46EB10002DDB1C /* Router+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766F5DE2A46EB10002DDB1C /* Router+Modifiers.swift */; };
 		D76750DC2969838800A95D52 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76750DA2969838800A95D52 /* Styles.swift */; };
-		D76BFFD32990F7E7000E8E54 /* LaunchScreenTV.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreenTV.storyboard */; };
+		D76BFFD32990F7E7000E8E54 /* LaunchScreen (tvOS).storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76BFFD12990F7E7000E8E54 /* LaunchScreen (tvOS).storyboard */; };
 		D76BFFD62993AF08000E8E54 /* PlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */; };
 		D76BFFD9299521B0000E8E54 /* Pickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76BFFD7299521B0000E8E54 /* Pickers.swift */; };
 		D770A27429DC00D3005076F5 /* ArtistView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770A27229DC00D3005076F5 /* ArtistView+Details.swift */; };
@@ -177,6 +178,7 @@
 		D72DE7B42955F22500DD0FFB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D72DEEFD2A5F24E900EC0B8E /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		D7325D512906852000D15D79 /* MovieSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetView.swift; sourceTree = "<group>"; };
+		D73BFC702A61B80E006F9846 /* LaunchScreen (iPadOS).storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LaunchScreen (iPadOS).storyboard"; sourceTree = "<group>"; };
 		D747E34B2A5EAF4300DF2F54 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		D747E3702A5F1D8800DF2F54 /* Komodio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Komodio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D747E3782A5F1D8900DF2F54 /* Komodio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Komodio.entitlements; sourceTree = "<group>"; };
@@ -184,7 +186,7 @@
 		D750D00129B50A8900088E0F /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		D766F5DE2A46EB10002DDB1C /* Router+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Router+Modifiers.swift"; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		D76BFFD12990F7E7000E8E54 /* LaunchScreenTV.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreenTV.storyboard; sourceTree = "<group>"; };
+		D76BFFD12990F7E7000E8E54 /* LaunchScreen (tvOS).storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "LaunchScreen (tvOS).storyboard"; sourceTree = "<group>"; };
 		D76BFFD52993AF08000E8E54 /* PlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsView.swift; sourceTree = "<group>"; };
 		D76BFFD7299521B0000E8E54 /* Pickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pickers.swift; sourceTree = "<group>"; };
 		D770A27029DC0096005076F5 /* ArtistsView+ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtistsView+ListItem.swift"; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			children = (
 				D75C3F60294DCCB2002BC065 /* Shared */,
 				D7EFE44E293A4E7900CE9B8D /* tvOS */,
+				D73BFC6F2A61B7B3006F9846 /* LaunchScreens */,
 			);
 			path = Komodio;
 			sourceTree = "<group>";
@@ -340,9 +343,17 @@
 			isa = PBXGroup;
 			children = (
 				D7B49BE12953262A00BBCB80 /* SiriRemoteController (tvOS).swift */,
-				D76BFFD12990F7E7000E8E54 /* LaunchScreenTV.storyboard */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		D73BFC6F2A61B7B3006F9846 /* LaunchScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D76BFFD12990F7E7000E8E54 /* LaunchScreen (tvOS).storyboard */,
+				D73BFC702A61B80E006F9846 /* LaunchScreen (iPadOS).storyboard */,
+			);
+			path = LaunchScreens;
 			sourceTree = "<group>";
 		};
 		D74A75D72A51852700A820F6 /* Router */ = {
@@ -532,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D747E3832A5F1DF400DF2F54 /* Assets.xcassets in Resources */,
+				D73BFC712A61B80E006F9846 /* LaunchScreen (iPadOS).storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,7 +551,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D76BFFD32990F7E7000E8E54 /* LaunchScreenTV.storyboard in Resources */,
+				D76BFFD32990F7E7000E8E54 /* LaunchScreen (tvOS).storyboard in Resources */,
 				D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -873,6 +885,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "LaunchScreen (iPadOS).storyboard";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
@@ -916,6 +929,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "LaunchScreen (iPadOS).storyboard";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
@@ -951,7 +965,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Komodio/tvOS/Komodio.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenTV.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = "LaunchScreen (tvOS).storyboard";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -982,7 +996,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Komodio/tvOS/Komodio.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenTV.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = "LaunchScreen (tvOS).storyboard";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
