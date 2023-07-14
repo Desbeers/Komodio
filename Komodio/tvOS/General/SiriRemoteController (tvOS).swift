@@ -9,6 +9,7 @@
 
 import SwiftUI
 import GameController
+import AVFoundation
 
 // MARK: Siri Remote Controller
 
@@ -75,9 +76,23 @@ class SiriRemoteController: ObservableObject {
     }
 }
 
-// MARK: SwipeGestureActions Modifier
+extension SiriRemoteController {
+
+    // MARK: PlayNavigation Sound
+
+    /// Play the navigation sound when navigating the main menu
+    static func playNavigationSound() {
+        /// I can't find the proper ID of this sound so I use the URL instead...
+        var systemSoundID: SystemSoundID = 1
+        let url = URL(fileURLWithPath: "/System/Library/Audio/UISounds/focus_change_large.caf")
+        AudioServicesCreateSystemSoundID(url as CFURL, &systemSoundID)
+        AudioServicesPlaySystemSound(systemSoundID)
+    }
+}
 
 extension Modifiers {
+
+    // MARK: SwipeGestureActions Modifier
 
     /// SwiftUI `View` Modifier for a swipe gesture
     struct SwipeGestureActions: ViewModifier {
@@ -114,20 +129,7 @@ extension Modifiers {
 
         // swiftlint:disable identifier_name
 
-        /// Reset the swipe counters
-        /// - Parameters:
-        ///   - x: The current 'X' position
-        ///   - y: The current 'Y' position
-        private func resetCounters(x: Float, y: Float) {
-            isNewSwipe = true
-            /// Start counting from the 'Y' point the finger is touching
-            lastY = y
-            totalYSwipeDistance = 0
-            /// start counting from the 'X' point the finger is touching
-            lastX = x
-            totalXSwipeDistance = 0
-        }
-
+        /// The body of the `ViewModifier`
         func body(content: Content) -> some View {
             content
                 .task(id: controller.gameController) {
@@ -186,6 +188,19 @@ extension Modifiers {
                 }
         }
 
+        /// Reset the swipe counters
+        /// - Parameters:
+        ///   - x: The current 'X' position
+        ///   - y: The current 'Y' position
+        private func resetCounters(x: Float, y: Float) {
+            isNewSwipe = true
+            /// Start counting from the 'Y' point the finger is touching
+            lastY = y
+            totalYSwipeDistance = 0
+            /// start counting from the 'X' point the finger is touching
+            lastX = x
+            totalXSwipeDistance = 0
+        }
         // swiftlint:enable identifier_name
     }
 }
@@ -227,5 +242,36 @@ extension View {
                 onRight: onRight,
                 onLeft: onLeft)
             )
+    }
+}
+
+extension Modifiers {
+
+    // MARK: Siri Exit Modifier
+
+    /// A `ViewModifier` to control the Siri Exit button
+    struct SetSiriExit: ViewModifier {
+        /// The SceneState model
+        @EnvironmentObject var scene: SceneState
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+                .animation(.default, value: scene.navigationStackPath)
+                .onExitCommand {
+                    if scene.navigationStackPath.isEmpty {
+                        scene.toggleSidebar.toggle()
+                    } else {
+                        scene.navigationStackPath.removeLast()
+                    }
+                }
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to control the Siri Exit button
+    func setSiriExit() -> some View {
+        modifier(Modifiers.SetSiriExit())
     }
 }

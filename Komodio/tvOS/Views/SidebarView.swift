@@ -92,7 +92,7 @@ struct SidebarView: View {
                 if isFocused {
                     sidebarSelection = sidebarSelection == 0 ? 0 : sidebarSelection - 1
                     /// Play the navigation sound
-                    Parts.playNavigationSound()
+                    SiriRemoteController.playNavigationSound()
                 }
             },
             onDown: {
@@ -100,7 +100,7 @@ struct SidebarView: View {
                     sidebarSelection = routerItems.count - 1 == sidebarSelection ?
                     sidebarSelection : sidebarSelection + 1
                     /// Play the navigation sound
-                    Parts.playNavigationSound()
+                    SiriRemoteController.playNavigationSound()
                 }
             }
         )
