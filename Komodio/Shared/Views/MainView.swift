@@ -38,28 +38,29 @@ struct MainView: View {
             .environmentObject(scene)
     }
 
-    // MARK: Content of the View
+    // MARK: MARK: Content of the View
 
-    /// The content of the `View`
+    /// The `NavigationSplitView`
     @ViewBuilder var content: some View {
 #if os(macOS)
-        HStack(spacing: 0) {
-            navigationSplitView
-            DetailView()
-                .frame(maxWidth: .infinity)
-        }
+        NavigationSplitView(
+            columnVisibility: $columnVisibility,
+            sidebar: {
+                SidebarView(searchField: $searchField)
+                    .navigationSplitViewColumnWidth(KomodioApp.platform == .macOS ? 200 : 250)
+            },
+            content: {
+                details
+            },
+            detail: {
+                DetailView()
+                    .frame(maxWidth: .infinity)
+            })
+        .background(Color.primary.opacity(0.1))
         .setBackground()
 #endif
 
 #if os(iOS)
-        navigationSplitView
-#endif
-    }
-
-    // MARK: NavigationSplitView of the View
-
-    /// The `NavigationSplitView`
-    var navigationSplitView: some View {
         NavigationSplitView(
             columnVisibility: $columnVisibility,
             sidebar: {
@@ -70,6 +71,7 @@ struct MainView: View {
                 details
             })
         .background(Color.primary.opacity(0.1))
+#endif
     }
 
     // MARK: Details of the NavigationSplitView
