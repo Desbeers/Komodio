@@ -91,7 +91,7 @@ extension Modifiers {
                         Color("BlendColor")
                         KodiArt.Fanart(item: scene.details.item.kodiItem, fallback: Image("Background"))
                             .grayscale(1)
-                            .opacity(0.2)
+                            .opacity(0.1)
                             .scaledToFill()
                     }
                     #if os(iOS)
