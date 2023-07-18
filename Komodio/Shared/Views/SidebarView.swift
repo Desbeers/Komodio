@@ -36,8 +36,6 @@ struct SidebarView: View {
                 if let selection {
                     Task { @MainActor in
                         scene.mainSelection = selection
-                        /// Reset the details
-                        scene.details = selection
                     }
                 }
             }

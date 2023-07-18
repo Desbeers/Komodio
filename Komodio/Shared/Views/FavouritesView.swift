@@ -54,7 +54,7 @@ struct FavouritesView: View {
                     case let movie as Video.Details.Movie:
                         Button(
                             action: {
-                                scene.details = .movie(movie: movie)
+                                scene.detailSelection = .movie(movie: movie)
                             },
                             label: {
                                 MoviesView.ListItem(movie: movie)
@@ -63,7 +63,7 @@ struct FavouritesView: View {
                     case let episode as Video.Details.Episode:
                         Button(
                             action: {
-                                scene.details = .episode(episode: episode)
+                                scene.detailSelection = .episode(episode: episode)
                             },
                             label: {
                                 EpisodeView.ListItem(episode: episode)
@@ -72,7 +72,7 @@ struct FavouritesView: View {
                     case let musicVideo as Video.Details.MusicVideo:
                         Button(
                             action: {
-                                scene.details = .musicVideo(musicVideo: musicVideo)
+                                scene.detailSelection = .musicVideo(musicVideo: musicVideo)
                             },
                             label: {
                                 MusicVideosView.ListItem(item: musicVideo)

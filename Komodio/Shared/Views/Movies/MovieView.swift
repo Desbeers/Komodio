@@ -18,8 +18,8 @@ enum MovieView {
     /// - Returns: The updated Movie
     static func update(movie: Video.Details.Movie) -> Video.Details.Movie? {
         let update = KodiConnector.shared.library.movies.first { $0.id == movie.id }
-        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .movie {
-            SceneState.shared.details = .movie(movie: update)
+        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .movie {
+            SceneState.shared.detailSelection = .movie(movie: update)
         }
         return update
     }

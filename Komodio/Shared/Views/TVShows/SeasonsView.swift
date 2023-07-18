@@ -47,7 +47,7 @@ struct SeasonsView: View {
             LazyVStack {
                 Button(
                     action: {
-                        scene.details = .tvshow(tvshow: tvshow)
+                        scene.detailSelection = .tvshow(tvshow: tvshow)
                     },
                     label: {
                         KodiArt.Fanart(item: tvshow)
@@ -59,7 +59,7 @@ struct SeasonsView: View {
                 ForEach(seasons) { season in
                     Button(
                         action: {
-                            scene.details = .season(season: season)
+                            scene.detailSelection = .season(season: season)
                         },
                         label: {
                             ListItem(season: season)
@@ -78,7 +78,7 @@ struct SeasonsView: View {
         ContentView.Wrapper(
             scroll: false,
             header: {
-                PartsView.DetailHeader(title: tvshow.title, subtitle: scene.details.item.description)
+                PartsView.DetailHeader(title: tvshow.title, subtitle: scene.detailSelection.item.description)
             },
             content: {
                 HStack(alignment: .top, spacing: 0) {
@@ -86,7 +86,7 @@ struct SeasonsView: View {
                         LazyVStack {
                             Button(
                                 action: {
-                                    scene.details = .tvshow(tvshow: tvshow)
+                                    scene.detailSelection = .tvshow(tvshow: tvshow)
                                 },
                                 label: {
                                     KodiArt.Poster(item: tvshow)
@@ -100,7 +100,7 @@ struct SeasonsView: View {
                             ForEach(seasons) { season in
                                 Button(
                                     action: {
-                                        scene.details = .season(season: season)
+                                        scene.detailSelection = .season(season: season)
                                     },
                                     label: {
                                         ListItem(season: season)
@@ -133,11 +133,11 @@ struct SeasonsView: View {
         seasons = allEpisodes.swapEpisodesForSeasons(tvshow: tvshow)
         /// Update the season details of the optional selected season
         if
-            let season = scene.details.item.kodiItem,
+            let season = scene.detailSelection.item.kodiItem,
             season.media == .season,
             let update = seasons.first(where: { $0.id == season.id }) {
             /// Update the selected season
-            scene.details = .season(season: update)
+            scene.detailSelection = .season(season: update)
         }
     }
 }

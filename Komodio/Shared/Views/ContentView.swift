@@ -20,6 +20,16 @@ struct ContentView: View {
     /// The body of the `View`
     var body: some View {
         Router.DestinationView(router: scene.mainSelection)
-            .navigationDestinations()
+            .navigationDestination(for: Router.self) { router in
+                Router.DestinationView(router: router)
+                    .task {
+                        scene.detailSelection = router
+                    }
+                    .appendPlatformStuff(router: router)
+                    .opacity(scene.navigationStack.last == router ? 1 : 0)
+            }
+#if os(macOS)
+            .opacity(scene.navigationStack.isEmpty ? 1 : 0)
+#endif
     }
 }

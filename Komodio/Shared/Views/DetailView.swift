@@ -22,7 +22,7 @@ struct DetailView: View {
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch scene.details {
+            switch scene.detailSelection {
             case .start:
                 StartView
                     .Details()
@@ -60,7 +60,7 @@ struct DetailView: View {
                 fallback
             }
         }
-        .animation(.default, value: scene.details)
+        .animation(.default, value: scene.detailSelection)
     }
 
     // MARK: Fallback of the View

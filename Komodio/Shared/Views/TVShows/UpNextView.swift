@@ -58,7 +58,7 @@ struct UpNextView: View {
                     Button(
                         action: {
                             selectedEpisode = episode
-                            scene.details = .episode(episode: episode)
+                            scene.detailSelection = .episode(episode: episode)
                         },
                         label: {
                             EpisodeView.ListItem(episode: episode)
@@ -89,7 +89,7 @@ struct UpNextView: View {
                         LazyVStack {
                             ForEach(episodes) { episode in
                                 Button(action: {
-                                    scene.details = .episode(episode: episode)
+                                    scene.detailSelection = .episode(episode: episode)
                                     selectedEpisode = episode
                                 }, label: {
                                     EpisodeView.ListItem(episode: episode)
@@ -131,10 +131,10 @@ struct UpNextView: View {
             if let selectedEpisode {
                 if let selection = episodes.first(where: { $0.tvshowID == selectedEpisode.tvshowID }) {
                     self.selectedEpisode = selection
-                    scene.details = .episode(episode: selection)
+                    scene.detailSelection = .episode(episode: selection)
                 } else {
                     self.selectedEpisode = nil
-                    scene.details = .unwachedEpisodes
+                    scene.detailSelection = .unwachedEpisodes
                 }
             }
         }

@@ -18,8 +18,8 @@ enum EpisodeView {
     /// - Returns: The updated Episode
     static func update(episode: Video.Details.Episode) -> Video.Details.Episode? {
         let update = KodiConnector.shared.library.episodes.first { $0.id == episode.id }
-        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .episode {
-            SceneState.shared.details = .episode(episode: update)
+        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .episode {
+            SceneState.shared.detailSelection = .episode(episode: update)
         }
         return update
     }

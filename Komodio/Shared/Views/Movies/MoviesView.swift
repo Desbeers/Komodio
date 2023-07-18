@@ -75,7 +75,7 @@ struct MoviesView: View {
                     case let movie as Video.Details.Movie:
                         Button(
                             action: {
-                                scene.details = .movie(movie: movie)
+                                scene.detailSelection = .movie(movie: movie)
                             },
                             label: {
                                 MoviesView.ListItem(movie: movie, sorting: sorting)

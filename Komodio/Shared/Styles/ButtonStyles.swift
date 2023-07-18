@@ -50,7 +50,7 @@ extension Styles {
         }
 
         func makeBody(configuration: Configuration) -> some View {
-            let selected = kodiItem.id == scene.details.item.kodiItem?.id
+            let selected = kodiItem.id == scene.detailSelection.item.kodiItem?.id
 #if os(macOS)
             configuration.label
                 .frame(maxWidth: .infinity, alignment: .leading)

@@ -41,9 +41,9 @@ struct SidebarView: View {
             /// Set the sidebar selection as a ``Router`` item
             scene.mainSelection = routerItems[sidebarSelection]
             /// Reset the details
-            scene.details = routerItems[sidebarSelection]
-            /// Reset the navigationStackPath
-            scene.navigationStackPath = NavigationPath()
+            scene.detailSelection = routerItems[sidebarSelection]
+            /// Reset the navigationStack
+            scene.navigationStack = []
         }
     }
     // MARK: Body of the View

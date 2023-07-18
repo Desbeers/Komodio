@@ -63,7 +63,7 @@ struct SearchView: View {
                         Divider()
                         Button(
                             action: {
-                                scene.details = .movie(movie: movie)
+                                scene.detailSelection = .movie(movie: movie)
                             },
                             label: {
                                 MoviesView.ListItem(movie: movie)
@@ -80,7 +80,7 @@ struct SearchView: View {
                         Divider()
                         Button(
                             action: {
-                                scene.details = .musicVideo(musicVideo: musicVideo)
+                                scene.detailSelection = .musicVideo(musicVideo: musicVideo)
                             },
                             label: {
                                 MusicVideosView.ListItem(item: musicVideo)
@@ -106,7 +106,7 @@ struct SearchView: View {
         }
         .buttonStyle(.plain)
         .task(id: scene.query) {
-            scene.details = .search
+            scene.detailSelection = .search
             search()
         }
         .onChange(of: kodi.library) { _ in

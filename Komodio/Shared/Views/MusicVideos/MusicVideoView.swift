@@ -18,8 +18,8 @@ enum MusicVideoView {
     /// - Returns: The updated Music Video
     static func update(musicVideo: Video.Details.MusicVideo) -> Video.Details.MusicVideo? {
         let update = KodiConnector.shared.library.musicVideos.first { $0.id == musicVideo.id }
-        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .musicVideo {
-            SceneState.shared.details = .musicVideo(musicVideo: update)
+        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .musicVideo {
+            SceneState.shared.detailSelection = .musicVideo(musicVideo: update)
         }
         return update
     }

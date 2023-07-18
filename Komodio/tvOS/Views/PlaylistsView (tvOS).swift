@@ -40,7 +40,7 @@ struct PlaylistsView: View {
             } else {
                 state = .ready
             }
-            scene.details = .moviePlaylists
+            scene.detailSelection = .moviePlaylists
         }
     }
 

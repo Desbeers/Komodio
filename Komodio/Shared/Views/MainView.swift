@@ -17,8 +17,6 @@ struct MainView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @StateObject private var scene: SceneState = .shared
-    /// The opacity of the View
-    @State private var opacity: Double = 1
     /// The search field in the toolbar
     @State private var searchField: String = ""
     /// Set the column visibility
@@ -30,10 +28,15 @@ struct MainView: View {
     var body: some View {
         content
             .scrollContentBackground(.hidden)
-            .animation(.default, value: scene.mainSelection)
             .searchable(text: $searchField, prompt: "Search library")
             .task(id: searchField) {
                 await scene.updateSearch(query: searchField)
+            }
+            .onChange(of: scene.mainSelection) { selection in
+                scene.detailSelection = selection
+            }
+            .onChange(of: scene.navigationStack) { item in
+                scene.detailSelection = item.isEmpty ? scene.mainSelection : scene.detailSelection
             }
             .environmentObject(scene)
     }
@@ -79,16 +82,15 @@ struct MainView: View {
     /// The details of the `NavigationSplitView`
     @ViewBuilder var details: some View {
 #if os(macOS)
-        NavigationStack(path: $scene.navigationStackPath) {
+        NavigationStack(path: $scene.navigationStack.animation(.easeInOut)) {
             ContentView()
                 .navigationSubtitle(scene.mainSelection.item.description)
         }
         .navigationSplitViewColumnWidth(KomodioApp.columnWidth)
-        .navigationStackAnimation(opacity: $opacity)
 #endif
 
 #if os(iOS)
-        NavigationStack(path: $scene.navigationStackPath) {
+        NavigationStack(path: $scene.navigationStack) {
             ContentView()
                 .navigationTitle(scene.mainSelection.item.description)
                 .navigationBarTitleDisplayMode(.inline)

@@ -10,31 +10,8 @@ import SwiftlyKodiAPI
 
 extension Router {
 
-    /// A `ViewModifier` to add navigation destinations
-    struct NavigationDestinations: ViewModifier {
-        /// The modifier
-        func body(content: Content) -> some View {
-            content
-                .navigationDestination(for: Router.self) { router in
-                    Router.DestinationView(router: router)
-                        .appendStuff(router: router)
-                }
-        }
-    }
-}
-
-extension View {
-
-    /// Shortcut to the ``Modifiers/NavigationDestinations``
-    func navigationDestinations() -> some View {
-        modifier(Router.NavigationDestinations())
-    }
-}
-
-extension Router {
-
-    /// A `ViewModifier` to add random stuff to a View
-    struct AppendStuff: ViewModifier {
+    /// A `ViewModifier` to add platform specific stuff to a View
+    struct AppendPlatformStuff: ViewModifier {
         /// The current Router item
         let router: Router
         /// The SceneState model
@@ -42,9 +19,6 @@ extension Router {
         /// The modifier
         func body(content: Content) -> some View {
             content
-                .task {
-                    scene.details = router
-                }
 #if os(macOS)
                 .navigationSubtitle(router.item.title)
 #elseif os(tvOS)
@@ -58,8 +32,8 @@ extension Router {
 
 extension View {
 
-    /// Shortcut to the ``Modifiers/NavigationDestinations``
-    func appendStuff(router: Router) -> some View {
-        modifier(Router.AppendStuff(router: router))
+    /// Shortcut to the ``Router/AppendPlatformStuff``
+    func appendPlatformStuff(router: Router) -> some View {
+        modifier(Router.AppendPlatformStuff(router: router))
     }
 }

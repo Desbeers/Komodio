@@ -256,12 +256,12 @@ extension Modifiers {
         /// The modifier
         func body(content: Content) -> some View {
             content
-                .animation(.default, value: scene.navigationStackPath)
+                .animation(.default, value: scene.navigationStack)
                 .onExitCommand {
-                    if scene.navigationStackPath.isEmpty {
+                    if scene.navigationStack.isEmpty {
                         scene.toggleSidebar.toggle()
                     } else {
-                        scene.navigationStackPath.removeLast()
+                        scene.navigationStack.removeLast()
                     }
                 }
         }

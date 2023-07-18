@@ -23,7 +23,7 @@ struct MainView: View {
 
     /// The body of the `View`
     var body: some View {
-        NavigationStack(path: $scene.navigationStackPath) {
+        NavigationStack(path: $scene.navigationStack) {
             ContentView()
         }
         .setBackground()

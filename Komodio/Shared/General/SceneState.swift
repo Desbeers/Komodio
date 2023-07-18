@@ -41,21 +41,11 @@ class SceneState: ObservableObject {
     /// # Router
 
     /// The main selection of the router
-    @Published var mainSelection: Router = .start {
-        didSet {
-            details = mainSelection
-        }
-    }
+    @Published var mainSelection: Router = .start
     /// The Navigation stack path of the router
-    @Published var navigationStackPath = NavigationPath() {
-        didSet {
-            if navigationStackPath.isEmpty {
-                details = mainSelection
-            }
-        }
-    }
-    /// The details for the current selection in the main view
-    @Published var details: Router = .start
+    @Published var navigationStack: [Router] = []
+    /// The detail selection of the router
+    @Published var detailSelection: Router = .start
 
     /// # Other stuff
 

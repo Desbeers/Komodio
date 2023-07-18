@@ -89,7 +89,7 @@ extension Modifiers {
                 .background(
                     ZStack {
                         Color("BlendColor")
-                        KodiArt.Fanart(item: scene.details.item.kodiItem, fallback: Image("Background"))
+                        KodiArt.Fanart(item: scene.detailSelection.item.kodiItem, fallback: Image("Background"))
                             .grayscale(1)
                             .opacity(0.1)
                             .scaledToFill()
@@ -99,7 +99,7 @@ extension Modifiers {
                     #else
                         .ignoresSafeArea()
                     #endif
-                        .animation(.easeInOut(duration: 1), value: scene.details.item.kodiItem?.id)
+                        .animation(.easeInOut(duration: 1), value: scene.detailSelection.item.kodiItem?.id)
                 )
         }
     }
@@ -152,36 +152,36 @@ extension View {
     }
 }
 
-extension Modifiers {
-
-    // MARK: NavigationStack Animation
-
-    /// A `ViewModifier` to animate the navigation stack
-    struct NavigationStackAnimation: ViewModifier {
-        /// The opacity
-        @Binding var opacity: Double
-        /// The SceneState model
-        @EnvironmentObject var scene: SceneState
-        /// The modifier
-        func body(content: Content) -> some View {
-            content
-                .offset(x: opacity == 0 ? -KomodioApp.columnWidth : 0, y: 0)
-                .onChange(of: scene.navigationStackPath) { value in
-                    switch value.count {
-                    case 0:
-                        opacity = 1
-                    default:
-                        opacity = 0
-                    }
-                }
-        }
-    }
-}
-
-extension View {
-
-    /// A `ViewModifier` to animate the navigation stack
-    func navigationStackAnimation(opacity: Binding<Double>) -> some View {
-        modifier(Modifiers.NavigationStackAnimation(opacity: opacity))
-    }
-}
+//extension Modifiers {
+//
+//    // MARK: NavigationStack Animation
+//
+//    /// A `ViewModifier` to animate the navigation stack
+//    struct NavigationStackAnimation: ViewModifier {
+//        /// The opacity
+//        @Binding var opacity: Double
+//        /// The SceneState model
+//        @EnvironmentObject var scene: SceneState
+//        /// The modifier
+//        func body(content: Content) -> some View {
+//            content
+//                .offset(x: opacity == 0 ? -KomodioApp.columnWidth : 0, y: 0)
+//                .onChange(of: scene.navigationStackPath) { value in
+//                    switch value.count {
+//                    case 0:
+//                        opacity = 1
+//                    default:
+//                        opacity = 0
+//                    }
+//                }
+//        }
+//    }
+//}
+//
+//extension View {
+//
+//    /// A `ViewModifier` to animate the navigation stack
+//    func navigationStackAnimation(opacity: Binding<Double>) -> some View {
+//        modifier(Modifiers.NavigationStackAnimation(opacity: opacity))
+//    }
+//}

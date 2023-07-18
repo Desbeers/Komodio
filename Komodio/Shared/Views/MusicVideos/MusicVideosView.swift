@@ -86,9 +86,9 @@ struct MusicVideosView: View {
             action: {
                 switch video {
                 case let musicVideo as Video.Details.MusicVideo:
-                    scene.details = .musicVideo(musicVideo: musicVideo)
+                    scene.detailSelection = .musicVideo(musicVideo: musicVideo)
                 case let musicVideoAlbum as Video.Details.MusicVideoAlbum:
-                    scene.details = .musicVideoAlbum(musicVideoAlbum: musicVideoAlbum)
+                    scene.detailSelection = .musicVideoAlbum(musicVideoAlbum: musicVideoAlbum)
                 default:
                     break
                 }
@@ -110,11 +110,11 @@ struct MusicVideosView: View {
             .swapMusicVideosForAlbums(artist: artist)
             .sorted(sortItem: .init(id: "MusicVideoAlbum", method: .year, order: .ascending))
         if
-            let album = scene.details.item.kodiItem,
+            let album = scene.detailSelection.item.kodiItem,
             album.media == .musicVideoAlbum,
             let update = items.first(where: { $0.id == album.id }) as? Video.Details.MusicVideoAlbum {
             /// Update the selected Music Video Album
-            scene.details = .musicVideoAlbum(musicVideoAlbum: update)
+            scene.detailSelection = .musicVideoAlbum(musicVideoAlbum: update)
         }
     }
 }

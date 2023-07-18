@@ -48,7 +48,7 @@ struct MovieSetView: View {
                 ForEach(movies) { movie in
                     Button(
                         action: {
-                            scene.details = .movie(movie: movie)
+                            scene.detailSelection = .movie(movie: movie)
                         },
                         label: {
                             MoviesView.ListItem(movie: movie, sorting: sorting)
@@ -132,8 +132,8 @@ extension MovieSetView {
     /// - Returns: The updated Movie Set
     static func update(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
         let update = KodiConnector.shared.library.movieSets.first { $0.id == movieSet.id }
-        if let update, let details = SceneState.shared.details.item.kodiItem, details.media == .movieSet {
-            SceneState.shared.details = .movieSet(movieSet: update)
+        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .movieSet {
+            SceneState.shared.detailSelection = .movieSet(movieSet: update)
         }
         return update
     }

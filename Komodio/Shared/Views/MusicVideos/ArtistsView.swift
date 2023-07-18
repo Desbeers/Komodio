@@ -108,7 +108,7 @@ struct ArtistsView: View {
     private func setItemDetails() {
         if let selectedArtist {
             artist = selectedArtist
-            scene.details = .musicVideoArtist(artist: selectedArtist)
+            scene.detailSelection = .musicVideoArtist(artist: selectedArtist)
         } else {
             artist = Audio.Details.Artist(media: .none)
         }
