@@ -142,7 +142,7 @@ struct StartView: View {
             ) {
                 Button("Reload the library") {
                     Task {
-                        await KodiConnector.shared.loadLibrary(cache: false)
+                        await kodi.loadLibrary(cache: false)
                     }
                 }
             } message: {

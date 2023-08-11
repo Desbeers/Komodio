@@ -6,7 +6,16 @@
       "location" : "https://github.com/Desbeers/SwiftlyKodiAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "841af6d8d452e90998c53ac5dbcf32647345c967"
+        "revision" : "5c6b3510c0c8710f1199db9aed1d91823fc44a87"
+      }
+    },
+    {
+      "identity" : "swiftlystructcache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Desbeers/SwiftlyStructCache",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e9b371734411f18e98982944ad213756b7f891fb"
       }
     }
   ],

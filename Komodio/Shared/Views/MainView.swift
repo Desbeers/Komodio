@@ -33,10 +33,14 @@ struct MainView: View {
                 await scene.updateSearch(query: searchField)
             }
             .onChange(of: scene.mainSelection) { selection in
-                scene.detailSelection = selection
+                Task { @MainActor in
+                    scene.detailSelection = selection
+                }
             }
             .onChange(of: scene.navigationStack) { item in
-                scene.detailSelection = item.isEmpty ? scene.mainSelection : scene.detailSelection
+                Task { @MainActor in
+                    scene.detailSelection = (item.isEmpty ? scene.mainSelection : item.last) ?? scene.mainSelection
+                }
             }
             .environmentObject(scene)
     }
