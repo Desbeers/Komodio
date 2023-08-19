@@ -31,8 +31,8 @@ extension TVShowView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? nil : tvshow.id,
-                title: KomodioApp.platform == .macOS ? tvshow.title : nil
+                scroll: StaticSetting.platform == .tvOS ? nil : tvshow.id,
+                title: StaticSetting.platform == .macOS ? tvshow.title : nil
             ) {
                 content
                     .animation(.default, value: tvshow)

@@ -24,6 +24,10 @@ struct UpNextView: View {
     @State private var state: Parts.Status = .loading
     /// The opacity of the View
     @State private var opacity: Double = 0
+    /// The collection in this view
+    @State private var collection: [AnyKodiItem] = []
+    /// The sorting
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "upnext", method: .dateAdded, order: .descending)
 
     // MARK: Body of the View
 
@@ -38,10 +42,8 @@ struct UpNextView: View {
             }
         }
         .animation(.default, value: episodes)
+        .animation(.default, value: state)
         .task(id: kodi.library.episodes) {
-            if selectedEpisode != nil {
-                try? await Task.sleep(until: .now + .seconds(2), clock: .continuous)
-            }
             getUnwatchedEpisodes()
         }
     }
@@ -52,31 +54,21 @@ struct UpNextView: View {
     @ViewBuilder var content: some View {
 
 #if os(macOS)
-        ScrollView {
-            LazyVStack {
-                ForEach(episodes) { episode in
-                    Button(
-                        action: {
-                            selectedEpisode = episode
-                            scene.detailSelection = .episode(episode: episode)
-                        },
-                        label: {
-                            EpisodeView.ListItem(episode: episode)
-                        }
-                    )
-                    .buttonStyle(.kodiItemButton(kodiItem: episode))
-                    Divider()
-                }
-            }
-            .padding()
-        }
-        .opacity(opacity)
-        .animation(.default, value: opacity)
+        ContentView.Wrapper(
+            header: {},
+            content: {
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle
+                )
+            },
+            buttons: {}
+        )
 #endif
 
 #if canImport(UIKit)
         ContentView.Wrapper(
-            scroll: false,
             header: {
                 PartsView.DetailHeader(
                     title: Router.unwachedEpisodes.item.title,
@@ -85,28 +77,18 @@ struct UpNextView: View {
             },
             content: {
                 HStack(alignment: .top, spacing: 0) {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(episodes) { episode in
-                                Button(action: {
-                                    scene.detailSelection = .episode(episode: episode)
-                                    selectedEpisode = episode
-                                }, label: {
-                                    EpisodeView.ListItem(episode: episode)
-                                })
-                                .buttonStyle(.kodiItemButton(kodiItem: episode))
-                                .padding(.bottom, KomodioApp.posterSize.height / 20)
-                            }
-                        }
-                        .padding(.vertical, KomodioApp.contentPadding)
-                    }
-                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
+                    CollectionView(
+                        collection: $collection,
+                        sorting: $sorting,
+                        collectionStyle: .asGrid
+                    )
+                    .frame(width: StaticSetting.contentWidth, alignment: .leading)
                     .backport.focusSection()
                     DetailView()
                 }
-            }
+            },
+            buttons: {}
         )
-        .animation(.default, value: selectedEpisode)
 #endif
     }
 
@@ -127,13 +109,18 @@ struct UpNextView: View {
                 .sorted { $0.dateAdded > $1.dateAdded }
             )
             state = episodes.isEmpty ? .empty : .ready
-            /// Update the optional selected item
-            if let selectedEpisode {
-                if let selection = episodes.first(where: { $0.tvshowID == selectedEpisode.tvshowID }) {
-                    self.selectedEpisode = selection
-                    scene.detailSelection = .episode(episode: selection)
+
+            /// Map the items in collections
+            collection = episodes.anykodiItem()
+            /// Update the optional selected TV show
+            Task { @MainActor in
+                if
+                    let episode = scene.detailSelection.item.kodiItem as? Video.Details.Episode,
+                    let update = episodes.first(where: { $0.tvshowID == episode.tvshowID }),
+                    episode.id != update.id {
+                    /// Set the new episode
+                    scene.detailSelection = .episode(episode: update)
                 } else {
-                    self.selectedEpisode = nil
                     scene.detailSelection = .unwachedEpisodes
                 }
             }

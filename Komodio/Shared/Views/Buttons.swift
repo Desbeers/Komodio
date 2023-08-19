@@ -47,7 +47,7 @@ extension Buttons {
                 case false:
                     KomodioPlayerView.CantPlay(video: item)
                 }
-                if showState && (KomodioApp.platform != .tvOS ? true : fadeStateButton ? isFocused : true) {
+                if showState && (StaticSetting.platform != .tvOS ? true : fadeStateButton ? isFocused : true) {
                     Buttons.PlayedState(item: item)
                 }
             }
@@ -100,7 +100,8 @@ extension Buttons {
         @State private var isPresented = false
 #if os(macOS)
         /// Open Window environment
-        @Environment(\.openWindow) var openWindow
+        @Environment(\.openWindow)
+        var openWindow
         /// The button action
         private var action: () {
             let video = MediaItem(item: item, resume: true)
@@ -203,7 +204,7 @@ extension Buttons {
     ) -> some View {
         /// Calculate the font size for the subtitle
         var subtitleFontSize: Double {
-            switch KomodioApp.platform {
+            switch StaticSetting.platform {
             case .macOS:
                 return 10
             case .tvOS:
@@ -225,5 +226,106 @@ extension Buttons {
             Image(systemName: icon)
                 .foregroundColor(color)
         })
+    }
+}
+
+extension Buttons {
+
+    // MARK: CollectionStyle
+
+    /// Button for selecting the collection style
+    struct CollectionStyle: View {
+        /// Bool to hide this button
+        /// - Note: on macOS, this button is in the toolbar and ignored in ``CollectionView``
+        var hide: Bool = true
+        /// The SceneState model
+        @EnvironmentObject private var scene: SceneState
+        /// The body of the `View`
+        var body: some View {
+#if os(macOS)
+            if hide {
+                EmptyView()
+            } else {
+                content
+            }
+#else
+            content
+#endif
+        }
+        ///The content of the `View`
+        var content: some View {
+            Button(
+                action: {
+                    Task { @MainActor in
+                        scene.collectionStyle = scene.collectionStyle == .asGrid ? .asList : .asGrid
+                    }
+                }, label: {
+                    Label(
+                        "List Style",
+                        systemImage: scene.collectionStyle == .asList ? "list.bullet" : "square.grid.2x2"
+                    )
+                }
+            )
+            .labelStyle(.iconOnly)
+        }
+    }
+}
+
+extension Buttons {
+
+    // MARK: CollectionSort
+
+    /// Button, menu or picker to sort a collection
+    struct CollectionSort: View {
+        /// The sorting
+        @Binding var sorting: SwiftlyKodiAPI.List.Sort
+        /// The media
+        let media: Library.Media
+        /// Bool to show the Sheet (tvOS)
+        @State private var showSheet: Bool = false
+        /// The body of the `View`
+        var body: some View {
+#if os(macOS)
+            KodiListSort.SortPickerView(sorting: $sorting, media: media)
+#endif
+#if os(iOS)
+            Menu(
+                content: {
+                    KodiListSort.SortPickerView(sorting: $sorting, media: media)
+                },
+                label: {
+                    Label(
+                        title: {
+                            Text("\(sorting.method.shortLabel)")
+                        },
+                        icon: {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                    )
+                }
+            )
+            .labelStyle(.titleAndIcon)
+#endif
+#if os(tvOS)
+            Button(
+                action: {
+                    showSheet.toggle()
+                },
+                label: {
+                    Label(
+                        title: {
+                            Text("\(sorting.method.shortLabel)")
+                        },
+                        icon: {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                    )
+                }
+            )
+            .sheet(isPresented: $showSheet) {
+                KodiListSort.SortPickerView(sorting: $sorting, media: media)
+            }
+#endif
+        }
     }
 }

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>StaticSetting Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/StaticSetting" class="dashAnchor"></a>
+    <a title="StaticSetting Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Komodio</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Komodio Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        StaticSetting Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../General.html">General</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioApp.html">KomodioApp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/StaticSetting.html">StaticSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Router.html">Router</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Router/DestinationView.html">– DestinationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Router/AppendPlatformStuff.html">– AppendPlatformStuff</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiCell.html">KodiCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts.html">Parts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/Filter.html">– Filter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/Platform.html">– Platform</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Hosts.html">Hosts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Backport.html">Backport</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Observable%20Classes.html">Observable Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SceneState.html">SceneState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RotatingIconModel.html">RotatingIconModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RotatingIconModel/Rotate.html">– Rotate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../SwiftUI%20Views.html">SwiftUI Views</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MainView.html">MainView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SidebarView.html">SidebarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentView.html">ContentView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentView/Wrapper.html">– Wrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DetailView.html">DetailView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DetailView/Wrapper.html">– Wrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionView.html">CollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionView/Cell.html">– Cell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView.html">StartView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MoviesView.html">MoviesView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MovieView.html">MovieView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MovieView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView.html">MovieSetView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TVShowsView.html">TVShowsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TVShowView.html">TVShowView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TVShowView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SeasonView.html">SeasonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SeasonView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EpisodeView.html">EpisodeView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EpisodeView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpNextView.html">UpNextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ArtistsView.html">ArtistsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ArtistView.html">ArtistView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ArtistView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MusicVideosView.html">MusicVideosView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoView.html">MusicVideoView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoAlbumView.html">MusicVideoAlbumView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoAlbumView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatisticsView.html">StatisticsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FavouritesView.html">FavouritesView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView.html">HostItemView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioPlayerView.html">KomodioPlayerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioPlayerView/CantPlay.html">– CantPlay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchView.html">SearchView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiSettingsView.html">KodiSettingsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiSettingsView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiSettingsView/Warning.html">– Warning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView.html">PartsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/DetailHeader.html">– DetailHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/StatusMessage.html">– StatusMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/RotatingIcon.html">– RotatingIcon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/TextMore.html">– TextMore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/SortLabel.html">– SortLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons.html">Buttons</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Player.html">– Player</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/PlayedState.html">– PlayedState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Play.html">– Play</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Resume.html">– Resume</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/CollectionStyle.html">– CollectionStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/CollectionSort.html">– CollectionSort</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers.html">Pickers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers/RatingWidget.html">– RatingWidget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers/RatingWidgetSheet.html">– RatingWidgetSheet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers.html">Modifiers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/WatchStatus.html">– WatchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/DetailsFontStyle.html">– DetailsFontStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/SetBackground.html">– SetBackground</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/FanartStyle.html">– FanartStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/CellButton.html">– CellButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles.html">Styles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/CellButton.html">– CellButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/PlayButton.html">– PlayButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/PlayLabel.html">– PlayLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/DetailLabel.html">– DetailLabel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/ButtonStyle.html">ButtonStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LabelStyle.html">LabelStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/View.html">View</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Color.html">Color</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>StaticSetting</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">StaticSetting</span></code></pre>
+
+                </div>
+              </div>
+            <p>Static settings for Komodio</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO8platformAA5PartsO8PlatformOvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/platform" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO8platformAA5PartsO8PlatformOvpZ">platform</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The plaform</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">platform</span><span class="p">:</span> <span class="kt"><a href="../Enums/Parts.html">Parts</a></span><span class="o">.</span><span class="kt">Platform</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO12sidebarWidthSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/sidebarWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO12sidebarWidthSdvpZ">sidebarWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The width of the sidebar</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">sidebarWidth</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO21sidebarCollapsedWidthSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/sidebarCollapsedWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO21sidebarCollapsedWidthSdvpZ">sidebarCollapsedWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The width of the sidebar when collapsed (tvOS only)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">sidebarCollapsedWidth</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO12contentWidthSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/contentWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO12contentWidthSdvpZ">contentWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code>NavigationSplitView</code> content column width</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">contentWidth</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO13detailPaddingSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/detailPadding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO13detailPaddingSdvpZ">detailPadding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default padding for details</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">detailPadding</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO11cellPaddingSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/cellPadding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO11cellPaddingSdvpZ">cellPadding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default padding for a cell</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">cellPadding</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO10posterSizeSo6CGSizeVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/posterSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO10posterSizeSo6CGSizeVvpZ">posterSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default size of poster art</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">posterSize</span><span class="p">:</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO9thumbSizeSo6CGSizeVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/thumbSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO9thumbSizeSo6CGSizeVvpZ">thumbSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default size of thumb art</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">thumbSize</span><span class="p">:</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO10fanartSizeSo6CGSizeVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/fanartSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO10fanartSizeSo6CGSizeVvpZ">fanartSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default size of fanart</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">fanartSize</span><span class="p">:</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO4gridSay7SwiftUI8GridItemVGvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/grid" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO4gridSay7SwiftUI8GridItemVGvpZ">grid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Define the grid layout</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">grid</span><span class="p">:</span> <span class="p">[</span><span class="kt">GridItem</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio13StaticSettingO12cornerRadiusSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/cornerRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio13StaticSettingO12cornerRadiusSdvpZ">cornerRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default corner radius</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">cornerRadius</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/platform" class="dashAnchor"></a>
+                    <a class="token" href="#/">platform</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The plaform</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/sidebarWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/">sidebarWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The width of the sidebar</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/sidebarCollapsedWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/">sidebarCollapsedWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The width of the sidebar when collapsed (tvOS only)</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/contentWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/">contentWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code>List</code> content column width</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Used when a list and details are in the same <code>View</code>
+
+</div>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/detailPadding" class="dashAnchor"></a>
+                    <a class="token" href="#/">detailPadding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default padding for details</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/cellPadding" class="dashAnchor"></a>
+                    <a class="token" href="#/">cellPadding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default padding for a cell</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/posterSize" class="dashAnchor"></a>
+                    <a class="token" href="#/">posterSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default size of poster art</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/thumbSize" class="dashAnchor"></a>
+                    <a class="token" href="#/">thumbSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default size of thumb art</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/fanartSize" class="dashAnchor"></a>
+                    <a class="token" href="#/">fanartSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default size of fanart</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/grid" class="dashAnchor"></a>
+                    <a class="token" href="#/">grid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Define the grid layout</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Variable/cornerRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/">cornerRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default corner radius</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-08-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

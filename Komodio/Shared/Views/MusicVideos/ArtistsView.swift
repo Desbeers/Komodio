@@ -18,12 +18,12 @@ struct ArtistsView: View {
     @EnvironmentObject var scene: SceneState
     /// The artists in this view
     @State var artists: [Audio.Details.Artist] = []
-    /// The optional selected artist in the list
-    @State private var selectedArtist: Audio.Details.Artist?
-    /// The selected artist
-    @State private var artist = Audio.Details.Artist(media: .none)
+    /// The collection in this view
+    @State private var collection: [AnyKodiItem] = []
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
+    /// The sorting
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "artists", method: .title, order: .ascending)
 
     // MARK: Body of the View
 
@@ -37,7 +37,6 @@ struct ArtistsView: View {
                 PartsView.StatusMessage(router: .musicVideos, status: state)
             }
         }
-        .animation(.default, value: selectedArtist)
         .task(id: kodi.library.musicVideos) {
             if kodi.status != .loadedLibrary {
                 state = .offline
@@ -48,32 +47,10 @@ struct ArtistsView: View {
                 state = .ready
             }
         }
-        .task(id: selectedArtist) {
-            setItemDetails()
-        }
     }
 
     // MARK: Content of the View
 
-#if os(macOS)
-    /// The content of the `View`
-    var content: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(artists) { artist in
-                    NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
-                        ArtistsView.ListItem(artist: artist)
-                    })
-                    .buttonStyle(.kodiItemButton(kodiItem: artist))
-                    Divider()
-                }
-            }
-            .padding()
-        }
-    }
-#endif
-
-#if os(tvOS) || os(iOS)
     /// The content of the `View`
     var content: some View {
         ContentView.Wrapper(
@@ -84,33 +61,22 @@ struct ArtistsView: View {
                 )
             },
             content: {
-                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
-                    ForEach(artists) { artist in
-                        NavigationLink(value: Router.musicVideoArtist(artist: artist), label: {
-                            ArtistsView.ListItem(artist: artist)
-                        })
-                    }
-                    .padding(.bottom, KomodioApp.posterSize.height / 9)
-                }
-            })
-        .backport.cardButton()
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle
+                )
+            },
+            buttons: {
+                Buttons.CollectionStyle()
+            }
+        )
     }
-#endif
 
     // MARK: Private functions
 
     /// Get all artists from the library
     private func getItems() {
-        artists = VideoLibrary.getMusicVideoArtists()
-    }
-
-    /// Set the details of a selected item
-    private func setItemDetails() {
-        if let selectedArtist {
-            artist = selectedArtist
-            scene.detailSelection = .musicVideoArtist(artist: selectedArtist)
-        } else {
-            artist = Audio.Details.Artist(media: .none)
-        }
+        collection = VideoLibrary.getMusicVideoArtists().anykodiItem()
     }
 }

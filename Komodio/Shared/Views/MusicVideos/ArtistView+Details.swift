@@ -22,8 +22,8 @@ extension ArtistView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? nil : artist.id,
-                title: KomodioApp.platform == .macOS ? artist.artist : nil
+                scroll: StaticSetting.platform == .tvOS ? nil : artist.id,
+                title: StaticSetting.platform == .macOS ? artist.artist : nil
             ) {
                 content
             }

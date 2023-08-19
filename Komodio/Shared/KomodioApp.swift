@@ -51,7 +51,6 @@ import SwiftlyKodiAPI
         .defaultSize(width: 1280, height: 720)
         .defaultPosition(.center)
         .windowStyle(.hiddenTitleBar)
-
 #else
 
         // MARK: tvOS and iPadOS

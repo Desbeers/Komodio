@@ -25,6 +25,7 @@ extension StartView {
         var body: some View {
             DetailView.Wrapper(
                 scroll: nil,
+                part: StaticSetting.platform == .macOS ? false : true,
                 title: kodi.host.name,
                 subtitle: kodi.status.message
             ) {

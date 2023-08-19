@@ -18,8 +18,8 @@ struct MovieSetView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The set movies to show in this view
-    @State private var movies: [Video.Details.Movie] = []
+    /// The collection in this view
+    @State private var collection: [AnyKodiItem] = []
     /// The sorting
     @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "movieset", method: .year, order: .ascending)
 
@@ -27,83 +27,60 @@ struct MovieSetView: View {
 
     /// The body of the `View`
     var body: some View {
-        content
-            .task(id: kodi.library.movies) {
-                getMoviesFromSet()
-            }
-            .onChange(of: sorting) { sorting in
-                movies.sort(sortItem: sorting)
-            }
+        VStack {
+            content
+        }
+        .task(id: kodi.library.movies) {
+            getMoviesFromSet()
+        }
     }
 
     // MARK: Content of the View
 
     /// The content of the `View`
     @ViewBuilder var content: some View {
+
 #if os(macOS)
-        ScrollView {
-            KodiListSort.PickerView(sorting: $sorting, media: .movie)
-                .padding()
-            LazyVStack {
-                ForEach(movies) { movie in
-                    Button(
-                        action: {
-                            scene.detailSelection = .movie(movie: movie)
-                        },
-                        label: {
-                            MoviesView.ListItem(movie: movie, sorting: sorting)
-                        }
-                    )
-                    .buttonStyle(.kodiItemButton(kodiItem: movie))
-                    Divider()
-                }
+        ContentView.Wrapper(
+            header: {
+                PartsView.DetailHeader(title: movieSet.title)
+            },
+            content: {
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle,
+                    showIndex: false
+                )
+            },
+            buttons: {
+                Buttons.CollectionSort(sorting: $sorting, media: .movie)
             }
-            .padding()
-        }
-        .animation(.default, value: sorting)
+        )
 #endif
 
 #if os(tvOS) || os(iOS)
         ContentView.Wrapper(
-            scroll: false,
             header: {
-                ZStack {
-                    PartsView.DetailHeader(title: movieSet.title, subtitle: "\(movies.count) movies")
-                    if KomodioApp.platform == .tvOS {
-                        Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                            .labelStyle(.headerLabel)
-                            .padding(.leading, 50)
-                            .padding(.bottom, 10)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
+                PartsView.DetailHeader(title: movieSet.title)
             },
             content: {
                 HStack(alignment: .top, spacing: 0) {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(movies) { movie in
-                                NavigationLink(value: Router.movie(movie: movie)) {
-                                    MoviesView.ListItem(movie: movie, sorting: sorting)
-                                }
-                                .padding(.bottom, KomodioApp.posterSize.height / 20)
-                            }
-                        }
-                        .padding(.vertical, KomodioApp.contentPadding)
-                    }
-                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
+                    CollectionView(
+                        collection: $collection,
+                        sorting: $sorting,
+                        collectionStyle: .asPlain,
+                        showIndex: false
+                    )
+                    .frame(width: StaticSetting.contentWidth, alignment: .leading)
                     .backport.focusSection()
                     MovieSetView.Details(movieSet: movieSet)
                 }
+            },
+            buttons: {
+                Buttons.CollectionSort(sorting: $sorting, media: .movie)
             }
         )
-        .backport.cardButton()
-        .toolbar {
-            if KomodioApp.platform == .iPadOS {
-                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                    .labelStyle(.titleAndIcon)
-            }
-        }
 #endif
     }
 
@@ -118,10 +95,10 @@ struct MovieSetView: View {
             self.sorting = sorting
         }
         /// Get all the movies from the set
-        movies = kodi.library.movies
+        let movies = kodi.library.movies
             .filter { $0.setID == movieSet.setID }
             .filter { scene.movieItems.contains($0.movieID) }
-            .sorted(sortItem: sorting)
+        collection = movies.anykodiItem()
     }
 }
 
@@ -129,12 +106,30 @@ extension MovieSetView {
 
     /// Update a Movie Set
     /// - Parameter movieset: The current Movie Set
-    /// - Returns: The updated Movie Set
+    /// - Returns: The optional updated Movie Set
     static func update(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
-        let update = KodiConnector.shared.library.movieSets.first { $0.id == movieSet.id }
-        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .movieSet {
-            SceneState.shared.detailSelection = .movieSet(movieSet: update)
+        if let update = KodiConnector.shared.library.movieSets.first(where: { $0.id == movieSet.id }), update != movieSet {
+            return update
         }
-        return update
+        return nil
+    }
+}
+
+extension MovieSetView {
+
+    /// Define the cell parameters for a collection
+    /// - Parameters:
+    ///   - movie: The movie set
+    ///   - style: The style of the collection
+    /// - Returns: A ``KodiCell``
+    static func cell(movieSet: Video.Details.MovieSet, style: ScrollCollectionStyle) -> KodiCell {
+        let details: Router = .movieSet(movieSet: movieSet)
+        let stack: Router = .movieSet(movieSet: movieSet)
+        return KodiCell(
+            title: movieSet.title,
+            subtitle: "Movie Set",
+            stack: stack,
+            details: details
+        )
     }
 }

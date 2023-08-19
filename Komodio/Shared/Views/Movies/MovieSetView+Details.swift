@@ -31,8 +31,8 @@ extension MovieSetView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? nil : movieSet.id,
-                title: KomodioApp.platform == .macOS ? movieSet.title : nil
+                scroll: StaticSetting.platform == .tvOS ? nil : movieSet.id,
+                title: StaticSetting.platform == .macOS ? movieSet.title : nil
             ) {
                 content
                     .animation(.default, value: movieSet)
@@ -41,7 +41,7 @@ extension MovieSetView {
                         movieSet = selectedMovieSet
                     }
                 /// Update the state from the library
-                    .task(id: kodi.library.movieSets) {
+                    .onChange(of: kodi.library.movieSets) { _ in
                         if let update = MovieSetView.update(movieSet: movieSet) {
                             movieSet = update
                         }

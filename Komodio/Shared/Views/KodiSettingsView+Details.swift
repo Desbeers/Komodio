@@ -22,7 +22,7 @@ extension KodiSettingsView {
         var body: some View {
             DetailView.Wrapper(
                 scroll: "KodiSettings",
-                part: KomodioApp.platform == .macOS ? false : true,
+                part: StaticSetting.platform == .macOS ? false : true,
                 title: "Settings on '\(KodiConnector.shared.host.name)'"
             ) {
                 ScrollView {
@@ -35,7 +35,7 @@ extension KodiSettingsView {
                 }
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial.opacity(0.8))
-                .cornerRadius(KomodioApp.cornerRadius)
+                .cornerRadius(StaticSetting.cornerRadius)
             }
         }
     }

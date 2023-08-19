@@ -1,11 +1,12 @@
 //
-//  File.swift
+//  Backport.swift
 //  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
 
 import SwiftUI
+import SwiftlyKodiAPI
 
 /// Backport SwiftUI functions for easier multi-targeting
 public struct Backport<Content> {
@@ -23,54 +24,37 @@ extension View {
 }
 
 extension Backport where Content: View {
+
     /// `focusSection` backport
-    @ViewBuilder func focusSection() -> some View {
-#if !os(tvOS)
+    @ViewBuilder
+    func focusSection() -> some View {
         content
-#else
-        content
+#if os(tvOS)
             .focusSection()
 #endif
     }
 }
 
 extension Backport where Content: View {
+
     /// `focusable` backport
-    @ViewBuilder func focusable() -> some View {
-#if os(iOS)
+    @ViewBuilder
+    func focusable() -> some View {
         content
-#else
-        content
+#if !os(iOS)
             .focusable()
 #endif
     }
 }
 
 extension Backport where Content: View {
+
     /// `navigationSubtitle` backport
-    @ViewBuilder func navigationSubtitle(_ text: String) -> some View {
+    @ViewBuilder
+    func navigationSubtitle(_ text: String) -> some View {
+        content
 #if os(macOS)
-        content
             .navigationSubtitle(text)
-#else
-        content
-#endif
-    }
-}
-
-extension Backport where Content: View {
-
-    /// Add ButtonStyle `card` to a View
-    ///
-    /// - Note: Native for tvOS only
-    /// - Returns: A View with the `ButtonStyle` attached
-    @ViewBuilder func cardButton() -> some View {
-#if os(tvOS)
-        content
-            .buttonStyle(.card)
-#else
-        content
-            .buttonStyle(.cardBackport)
 #endif
     }
 }

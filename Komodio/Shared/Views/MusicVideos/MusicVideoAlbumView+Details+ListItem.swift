@@ -24,7 +24,7 @@ extension MusicVideoAlbumView.Details {
             HStack(spacing: 0) {
                 KodiArt.Fanart(item: musicVideo)
                     .fanartStyle(item: musicVideo)
-                    .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
+                    .frame(width: StaticSetting.thumbSize.width, height: StaticSetting.thumbSize.height)
                     .padding(.trailing)
                 VStack(alignment: .leading) {
                     Text(musicVideo.title)

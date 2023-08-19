@@ -16,8 +16,8 @@ struct MoviesView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The items in this view (movies + movie sets)
-    @State private var items: [any KodiItem] = []
+    /// The collection in this view (movies + movie sets)
+    @State private var collection: [AnyKodiItem] = []
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
@@ -38,7 +38,7 @@ struct MoviesView: View {
                     .backport.focusable()
             }
         }
-        .animation(.default, value: items.map { $0.id })
+        .animation(.default, value: state)
         .task(id: filter) {
             if kodi.status != .loadedLibrary {
                 state = .offline
@@ -48,10 +48,8 @@ struct MoviesView: View {
                 getMovies()
             }
         }
-        .onChange(of: sorting) { [sorting] newValue in
-            if sorting.method == newValue.method {
-                items.sort(sortItem: newValue)
-            } else {
+        .onChange(of: sorting) { [sorting] newSorting in
+            if sorting.method == .title || newSorting.method == .title {
                 getMovies()
             }
         }
@@ -64,87 +62,26 @@ struct MoviesView: View {
 
     /// The content of the `View`
     @ViewBuilder var content: some View {
-
-#if os(macOS)
-        ScrollView {
-            KodiListSort.PickerView(sorting: $sorting, media: .movie)
-                .padding()
-            LazyVStack {
-                ForEach(items, id: \.id) { video in
-                    switch video {
-                    case let movie as Video.Details.Movie:
-                        Button(
-                            action: {
-                                scene.detailSelection = .movie(movie: movie)
-                            },
-                            label: {
-                                MoviesView.ListItem(movie: movie, sorting: sorting)
-                            }
-                        )
-                        .buttonStyle(.kodiItemButton(kodiItem: movie))
-                    case let movieSet as Video.Details.MovieSet:
-                        NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
-                            MovieSetView.ListItem(movieSet: movieSet)
-                        })
-                        .buttonStyle(.kodiItemButton(kodiItem: movieSet))
-                    default:
-                        EmptyView()
-                    }
-                    Divider()
-                }
-            }
-            .padding()
-        }
-#endif
-
-#if os(tvOS) || os(iOS)
         ContentView.Wrapper(
             header: {
-                ZStack {
-                    PartsView
-                        .DetailHeader(
-                            title: scene.mainSelection.item.title,
-                            subtitle: scene.mainSelection.item.description
-                        )
-                    if KomodioApp.platform == .tvOS {
-                        Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                            .labelStyle(.headerLabel)
-                            .padding(.leading, 50)
-                            .padding(.bottom, 10)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
+                PartsView
+                    .DetailHeader(
+                        title: scene.detailSelection.item.title,
+                        subtitle: scene.detailSelection.item.description
+                    )
             },
             content: {
-                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
-                    ForEach(items, id: \.id) { video in
-                        switch video {
-                        case let movie as Video.Details.Movie:
-                            NavigationLink(value: Router.movie(movie: movie), label: {
-                                MoviesView.ListItem(movie: movie, sorting: sorting)
-                            })
-                            .padding(.bottom, KomodioApp.posterSize.height / 9)
-                        case let movieSet as Video.Details.MovieSet:
-                            NavigationLink(value: Router.movieSet(movieSet: movieSet), label: {
-                                MovieSetView.ListItem(movieSet: movieSet)
-                            })
-                            .padding(.bottom, KomodioApp.posterSize.height / 9)
-                        default:
-                            EmptyView()
-                        }
-                    }
-                }
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle
+                )
+            },
+            buttons: {
+                Buttons.CollectionStyle()
+                Buttons.CollectionSort(sorting: $sorting, media: .movie)
             }
         )
-        .backport.cardButton()
-        .toolbar {
-            if KomodioApp.platform == .iPadOS {
-                Pickers.ListSortSheet(sorting: $sorting, media: .movie)
-                    .labelStyle(.titleAndIcon)
-            }
-        }
-
-#endif
     }
 
     // MARK: Private functions
@@ -152,24 +89,26 @@ struct MoviesView: View {
     /// Get all movies from the library
     private func getMovies() {
         Task { @MainActor in
-            var items: [Video.Details.Movie] = []
+            var movies: [Video.Details.Movie] = []
             switch filter {
             case .unwatched:
-                items = kodi.library.movies
+                movies = kodi.library.movies
                     .filter { $0.playcount == 0 }
             case .playlist(let file):
                 let playlist = await Files.getDirectory(directory: file.file, media: .video).compactMap(\.id)
-                items = kodi.library.movies
+                movies = kodi.library.movies
                     .filter { playlist.contains($0.movieID) }
             default:
-                items = kodi.library.movies
+                movies = kodi.library.movies
             }
-            scene.movieItems = items
+            scene.movieItems = movies
                 .filter { $0.setID != 0 }.map(\.movieID)
-            self.items = sorting.method == .title ? items.swapMoviesForSet() : items
-            self.items.sort(sortItem: sorting)
+            var items = sorting.method == .title ? movies.swapMoviesForSet() : movies
+            items.sort(sortItem: sorting)
             /// Set the loading state
-            state = self.items.isEmpty ? .empty : .ready
+            state = items.isEmpty ? .empty : .ready
+            /// Map the items in collections
+            collection = items.anykodiItem()
         }
     }
 }

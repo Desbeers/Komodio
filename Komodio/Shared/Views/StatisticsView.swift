@@ -59,19 +59,19 @@ extension StatisticsView {
         var subItem: Bool = false
         /// Calculate the font size
         var font: Double {
-            switch KomodioApp.platform {
+            switch StaticSetting.platform {
 
             case .macOS:
                 return 20
             case .tvOS:
-                return 35
+                return 25
             case .iPadOS:
                 return 24
             }
         }
         func makeBody(configuration: Configuration) -> some View {
 
-            HStack {
+            HStack(spacing: 0) {
                 configuration.icon
                     .frame(width: font * 2)
                 configuration.title

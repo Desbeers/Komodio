@@ -31,8 +31,8 @@ extension MusicVideoView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? nil : musicVideo.id,
-                part: KomodioApp.platform == .macOS ? false : true,
+                scroll: StaticSetting.platform == .tvOS ? nil : musicVideo.id,
+                part: StaticSetting.platform == .macOS ? false : true,
                 title: musicVideo.title
             ) {
                 content

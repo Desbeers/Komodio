@@ -23,7 +23,7 @@ extension SeasonView {
         var body: some View {
             DetailView.Wrapper(
                 scroll: season.id,
-                title: KomodioApp.platform == .macOS ? season.title : nil
+                title: StaticSetting.platform == .macOS ? season.title : nil
             ) {
                 content
             }

@@ -39,7 +39,7 @@ extension MovieView {
                     movie = selectedMovie
                 }
             /// Update the state from the library
-                .task(id: kodi.library.movies) {
+                .onChange(of: kodi.library.movies) { _ in
                     if let update = MovieView.update(movie: movie) {
                         movie = update
                     }
@@ -52,7 +52,7 @@ extension MovieView {
         @ViewBuilder var content: some View {
 #if os(macOS) || os(iOS)
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? nil : movie.id,
+                scroll: StaticSetting.platform == .tvOS ? nil : movie.id,
                 title: movie.title
             ) {
                 VStack {
@@ -122,9 +122,9 @@ extension MovieView {
                         .minimumScaleFactor(0.5)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.leading, scene.sidebarFocus ? KomodioApp.sidebarWidth : KomodioApp.sidebarCollapsedWidth)
+                    .padding(.leading, scene.sidebarFocus ? StaticSetting.sidebarWidth : StaticSetting.sidebarCollapsedWidth)
                 }
-                .padding(KomodioApp.contentPadding)
+                .padding(StaticSetting.detailPadding)
                 .frame(height: UIScreen.main.bounds.height)
                 .focusSection()
             }
@@ -153,11 +153,11 @@ extension MovieView {
                     .labelStyle(.playLabel)
                     .buttonStyle(.playButton)
                 }
-                .padding(KomodioApp.contentPadding)
+                .padding(StaticSetting.detailPadding)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .focusSection()
-            .padding(.leading, KomodioApp.sidebarCollapsedWidth)
+            .padding(.leading, StaticSetting.sidebarCollapsedWidth)
         }
 #endif
 

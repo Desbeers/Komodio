@@ -24,7 +24,7 @@ extension Styles {
                 configuration.title
             }
             /// Make sure two lines will fit
-            .frame(height: KomodioApp.platform == .macOS ? 25 : 40)
+            .frame(height: StaticSetting.platform == .macOS ? 25 : 40)
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
             .foregroundColor(.primary)
@@ -84,27 +84,4 @@ extension Styles {
 extension LabelStyle where Self == Styles.DetailLabel {
     /// SwiftUI Label style for a DetailView Label
     static var detailLabel: Styles.DetailLabel { .init() }
-}
-
-extension Styles {
-
-    // MARK: Header Label
-
-    /// SwiftUI Label style for a button in the header (tvOS)
-    struct HeaderLabel: LabelStyle {
-        func makeBody(configuration: Configuration) -> some View {
-            HStack(spacing: 0) {
-                configuration.icon
-                    .padding(.trailing)
-                configuration.title
-            }
-            .font(.system(size: 20))
-            .padding()
-        }
-    }
-}
-
-extension LabelStyle where Self == Styles.HeaderLabel {
-    /// SwiftUI Label style for a HeaderView Button (tvOS)
-    static var headerLabel: Styles.HeaderLabel { .init() }
 }

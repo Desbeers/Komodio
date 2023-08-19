@@ -12,6 +12,10 @@ import SwiftlyKodiAPI
 
 /// SwiftUI `View` for a single Episode (shared)
 enum EpisodeView {
+    // Just a namespace
+}
+
+extension EpisodeView {
 
     /// Update an Episode
     /// - Parameter episode: The current Episode
@@ -22,5 +26,24 @@ enum EpisodeView {
             SceneState.shared.detailSelection = .episode(episode: update)
         }
         return update
+    }
+}
+
+extension EpisodeView {
+
+    /// Define the cell parameters for a collection
+    /// - Parameters:
+    ///   - movie: The episode
+    ///   - style: The style of the collection
+    /// - Returns: A ``KodiCell``
+    static func cell(episode: Video.Details.Episode, style: ScrollCollectionStyle) -> KodiCell {
+        let details: Router = .episode(episode: episode)
+        let stack: Router? = nil
+        return KodiCell(
+            title: episode.title,
+            subtitle: episode.subtitle,
+            stack: stack,
+            details: details
+        )
     }
 }

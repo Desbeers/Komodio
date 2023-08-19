@@ -34,7 +34,7 @@ struct MainView: View {
             SidebarView()
                 .fixedSize()
                 .frame(
-                    width: isFocused ? KomodioApp.sidebarWidth : KomodioApp.sidebarCollapsedWidth,
+                    width: isFocused ? StaticSetting.sidebarWidth : StaticSetting.sidebarCollapsedWidth,
                     alignment: .center
                 )
                 .frame(maxHeight: .infinity, alignment: .top)

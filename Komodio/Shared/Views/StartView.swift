@@ -46,23 +46,37 @@ struct StartView: View {
 
     /// The content of the `View`
     var content: some View {
-        HStack {
-#if os(tvOS) || os(iOS)
-            StartView.Details()
-                .padding(.leading, KomodioApp.sidebarCollapsedWidth)
+
+        /// `View` for tvOS and iOS
+        ContentView.Wrapper(
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.start.item.title,
+                    subtitle: Router.start.item.description
+                )
+            },
+            content: {
+                HStack(alignment: .top, spacing: 0) {
+#if !os(macOS)
+                    DetailView()
+                        .backport.focusSection()
 #endif
-            ScrollView {
-                VStack {
-                    configuredHosts
-                    newHosts
+                    ScrollView {
+                        VStack {
+                            configuredHosts
+                            newHosts
+                        }
+                        .buttonStyle(.playButton)
+                        .labelStyle(.playLabel)
+                        .padding()
+                        .animation(.default, value: kodi.status)
+                    }
+                    .padding(.leading, StaticSetting.detailPadding)
+                    .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.playButton)
-                .labelStyle(.playLabel)
-                .padding()
-                .animation(.default, value: kodi.status)
-            }
-            .frame(maxWidth: .infinity)
-        }
+            },
+            buttons: {}
+        )
     }
 
     // MARK: Configured hosts
@@ -74,7 +88,6 @@ struct StartView: View {
                 .font(.title)
             Divider()
             ForEach(hosts) { host in
-
                 NavigationLink(value: Router.hostItemSettings(host: host)) {
                     Buttons.formatButtonLabel(
                         title: host.name,

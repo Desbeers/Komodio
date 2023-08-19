@@ -17,49 +17,6 @@ enum Pickers {
 
 extension Pickers {
 
-    // MARK: List Sort Sheet
-
-    /// SwiftUI Button to show the `PickerView` in a Sheet
-    /// - Note: Used for tvOS or else the UI will be too cluttered
-    struct ListSortSheet: View {
-        /// The color scheme
-        @Environment(\.colorScheme) var colorScheme
-        /// The current sorting
-        @Binding var sorting: SwiftlyKodiAPI.List.Sort
-        /// The kind of media
-        let media: Library.Media
-        /// Bool to show the Sheet
-        @State private var showSheet: Bool = false
-
-        // MARK: Body of the View
-
-        /// The body of the `View`
-        var body: some View {
-            Button(action: {
-                showSheet = true
-            }, label: {
-                Label(title: {
-                    Text("\(sorting.method.displayLabel) ∙ \(sorting.order.displayLabel(method: sorting.method))")
-                }, icon: {
-                    Image(systemName: "arrow.up.arrow.down")
-                })
-            })
-            .padding(.trailing)
-            .sheet(isPresented: $showSheet) {
-                VStack {
-                    Text("\(sorting.method.displayLabel) ∙ \(sorting.order.displayLabel(method: sorting.method))")
-                        .padding()
-                        .font(.title)
-                    KodiListSort.PickerView(sorting: $sorting, media: media)
-                }
-                .animation(.default, value: sorting)
-            }
-        }
-    }
-}
-
-extension Pickers {
-
     // MARK: Rating Widget
 
     /// Picker for User Rating of a `KodiItem`
@@ -78,7 +35,7 @@ extension Pickers {
         /// The body of the `View`
         var body: some View {
             HStack {
-#if os(macOS)
+#if os(macOS) || os(iOS)
                 Picker(selection: $rating, label: Text("Your rating:")) {
                     Image(systemName: "nosign")
                         .tag(0)
@@ -106,19 +63,6 @@ extension Pickers {
                             .foregroundColor(number <= rating ? .yellow : .secondary.opacity(0.4))
                     })
                 }
-#endif
-
-#if os(iOS)
-                Picker(selection: $rating, label: Text("Your rating:")) {
-                    Image(systemName: "nosign")
-                        .tag(0)
-                    ForEach(1..<11, id: \.self) { number in
-                        Image(systemName: number <= rating ? "star.fill" : "star")
-                            .foregroundColor(number <= rating ? .yellow : .secondary.opacity(0.4))
-                            .tag(number)
-                    }
-                }
-                .pickerStyle(.segmented)
 #endif
             }
             .task {

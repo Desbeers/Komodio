@@ -56,70 +56,42 @@ struct SeasonsView: View {
                     }
                 )
                 .buttonStyle(.plain)
+                .padding(StaticSetting.cellPadding)
                 ForEach(seasons) { season in
-                    Button(
-                        action: {
-                            scene.detailSelection = .season(season: season)
-                        },
-                        label: {
-                            ListItem(season: season)
-                        }
-                    )
-                    .buttonStyle(.kodiItemButton(kodiItem: season))
-                    Divider()
+                    CollectionView.Cell(item: season, collectionStyle: .asList)
                 }
             }
-            .padding()
         }
 #endif
 
 #if canImport(UIKit)
         /// `View` for tvOS and iOS
         ContentView.Wrapper(
-            scroll: false,
             header: {
-                PartsView.DetailHeader(title: tvshow.title, subtitle: scene.detailSelection.item.description)
+                PartsView.DetailHeader(
+                    title: tvshow.title,
+                    subtitle: scene.detailSelection.item.description
+                )
             },
             content: {
                 HStack(alignment: .top, spacing: 0) {
                     ScrollView {
                         LazyVStack {
-                            Button(
-                                action: {
-                                    scene.detailSelection = .tvshow(tvshow: tvshow)
-                                },
-                                label: {
-                                    KodiArt.Poster(item: tvshow)
-                                        .frame(width: KomodioApp.posterSize.width, height: KomodioApp.posterSize.height)
-                                        .aspectRatio(contentMode: .fit)
-                                        .cornerRadius(10)
-                                }
-                            )
-                            .buttonStyle(.kodiItemButton(kodiItem: tvshow))
-                            .padding(KomodioApp.posterSize.width / 10)
+                            CollectionView.Cell(item: tvshow, collectionStyle: .asGrid)
                             ForEach(seasons) { season in
-                                Button(
-                                    action: {
-                                        scene.detailSelection = .season(season: season)
-                                    },
-                                    label: {
-                                        ListItem(season: season)
-                                            .frame(width: KomodioApp.posterSize.width)
-                                    }
-                                )
-                                .buttonStyle(.kodiItemButton(kodiItem: season))
-                                .padding(KomodioApp.posterSize.width / 10)
+                                CollectionView.Cell(item: season, collectionStyle: .asList)
                             }
                         }
-                        .padding(.vertical, KomodioApp.contentPadding)
+                        .padding(.vertical, StaticSetting.detailPadding)
                     }
-                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
+                    .frame(width: StaticSetting.contentWidth, alignment: .leading)
                     .backport.focusSection()
                     DetailView()
-                        .padding(.leading, KomodioApp.contentPadding)
+                        .padding(.leading, StaticSetting.detailPadding)
                         .frame(maxWidth: .infinity)
                 }
-            }
+            },
+            buttons: {}
         )
 #endif
     }

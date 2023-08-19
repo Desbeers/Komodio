@@ -57,6 +57,8 @@ extension DetailView {
                     VStack {
                         Text(title)
                             .font(.title)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.2)
                         if let subtitle {
                             Text(subtitle)
                                 .font(.subheadline)

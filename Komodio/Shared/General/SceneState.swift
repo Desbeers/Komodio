@@ -53,6 +53,8 @@ class SceneState: ObservableObject {
     var listSortSettings: [SwiftlyKodiAPI.List.Sort] = []
     /// Movie ID's passed around Views
     @Published var movieItems: [Int] = []
+    /// The list style of collections
+    @Published var collectionStyle: ScrollCollectionStyle = .asGrid
 }
 
 extension SceneState {

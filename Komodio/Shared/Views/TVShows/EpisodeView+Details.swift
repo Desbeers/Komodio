@@ -31,8 +31,8 @@ extension EpisodeView {
         /// The body of the `View`
         var body: some View {
             DetailView.Wrapper(
-                scroll: KomodioApp.platform == .tvOS ? nil : episode.id,
-                part: KomodioApp.platform == .macOS ? false : true,
+                scroll: StaticSetting.platform == .tvOS ? nil : episode.id,
+                part: StaticSetting.platform == .macOS ? false : true,
                 title: episode.showTitle,
                 subtitle: "Season \(episode.season), episode \(episode.episode)"
             ) {

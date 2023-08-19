@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftlyKodiAPI
 
-
 // MARK: Komodio Player View
 
 /// SwiftUI `View` for a video player (shared)

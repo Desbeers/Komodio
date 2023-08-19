@@ -32,7 +32,7 @@ extension Modifiers {
                         systemName: item.media == .movieSet ?
                         "circle.grid.cross.fill" : item.resume.position == 0 ? "star.fill" : "circle.lefthalf.filled"
                     )
-                    .font(KomodioApp.platform == .macOS ? .title3 : .body)
+                    .font(StaticSetting.platform == .macOS ? .title3 : .body)
                     .foregroundColor(.yellow)
                     .opacity(item.playcount == 0 || item.resume.position != 0 ? 1 : 0)
                 }
@@ -131,7 +131,7 @@ extension Modifiers {
                 .overlay(alignment: .bottom) {
                     if let overlay {
                         Text(overlay)
-                            .font(KomodioApp.platform == .macOS ? .headline : .subheadline)
+                            .font(StaticSetting.platform == .macOS ? .headline : .subheadline)
                             .lineLimit(1)
                             .minimumScaleFactor(0.1)
                             .padding(8)
@@ -139,7 +139,7 @@ extension Modifiers {
                             .background(.regularMaterial)
                     }
                 }
-                .cornerRadius(KomodioApp.cornerRadius)
+                .cornerRadius(StaticSetting.cornerRadius)
         }
     }
 }
@@ -152,36 +152,48 @@ extension View {
     }
 }
 
-//extension Modifiers {
-//
-//    // MARK: NavigationStack Animation
-//
-//    /// A `ViewModifier` to animate the navigation stack
-//    struct NavigationStackAnimation: ViewModifier {
-//        /// The opacity
-//        @Binding var opacity: Double
-//        /// The SceneState model
-//        @EnvironmentObject var scene: SceneState
-//        /// The modifier
-//        func body(content: Content) -> some View {
-//            content
-//                .offset(x: opacity == 0 ? -KomodioApp.columnWidth : 0, y: 0)
-//                .onChange(of: scene.navigationStackPath) { value in
-//                    switch value.count {
-//                    case 0:
-//                        opacity = 1
-//                    default:
-//                        opacity = 0
-//                    }
-//                }
-//        }
-//    }
-//}
-//
-//extension View {
-//
-//    /// A `ViewModifier` to animate the navigation stack
-//    func navigationStackAnimation(opacity: Binding<Double>) -> some View {
-//        modifier(Modifiers.NavigationStackAnimation(opacity: opacity))
-//    }
-//}
+extension Modifiers {
+
+    // MARK: Cell button modifier
+
+    /// A `ViewModifier` to style the button of a `KodiItem`
+    struct CellButton: ViewModifier {
+        /// The `KodiItem`
+        let item: any KodiItem
+        /// Bool if the item is selected
+        let selected: Bool
+        /// The style of the cell
+        let style: ScrollCollectionStyle
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+
+            #if os(macOS)
+                .buttonStyle(.cellButton(item: item, selected: selected, style: style))
+                .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)
+                .padding(.bottom, StaticSetting.cellPadding)
+            #endif
+
+            #if os(tvOS)
+                .buttonStyle(.card)
+                .foregroundColor(selected ? Color("AccentColor") : .primary)
+                .padding(.top, style == .asPlain ? StaticSetting.cellPadding : 0)
+                .padding(.bottom, StaticSetting.cellPadding)
+                .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)
+            #endif
+
+            #if os(iOS)
+                .buttonStyle(.cellButton(item: item, selected: selected, style: style))
+                .padding(.bottom, StaticSetting.cellPadding)
+            #endif
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to style the button of a `KodiItem`
+    func cellButton(item: any KodiItem, selected: Bool, style: ScrollCollectionStyle) -> some View {
+        modifier(Modifiers.CellButton(item: item, selected: selected, style: style))
+    }
+}

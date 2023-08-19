@@ -18,8 +18,10 @@ struct MusicVideosView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The items to show in this view. Can be a single Music Video or an album with Music Videos
-    @State private var items: [any KodiItem] = []
+    /// The collection to show in this view. Can be a single Music Video or an album with Music Videos
+    @State private var collection: [AnyKodiItem] = []
+    /// The sorting
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "musicVideos", method: .year, order: .ascending)
 
     // MARK: Body of the View
 
@@ -39,65 +41,41 @@ struct MusicVideosView: View {
     /// The content of the `view`
     @ViewBuilder var content: some View {
 #if os(macOS)
-        ScrollView {
-            LazyVStack {
-                ForEach(items, id: \.id) { video in
-                    button(video: video)
-                    Divider()
-                }
-            }
-            .padding()
-        }
+        ContentView.Wrapper(
+            header: {},
+            content: {
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle
+                )
+            },
+            buttons: {}
+        )
 #endif
 
 #if os(tvOS) || os(iOS)
         ContentView.Wrapper(
-            scroll: false,
             header: {
                 PartsView.DetailHeader(title: artist.title)
             },
             content: {
                 HStack(alignment: .top, spacing: 0) {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(items, id: \.id) { video in
-                                button(video: video)
-                                    .padding(.bottom, KomodioApp.posterSize.height / 20)
-                            }
-                        }
-                        .padding(.vertical, KomodioApp.contentPadding)
-                    }
-                    .frame(width: KomodioApp.columnWidth, alignment: .leading)
+                    CollectionView(
+                        collection: $collection,
+                        sorting: $sorting,
+                        collectionStyle: .asPlain,
+                        showIndex: false
+                    )
+                    .frame(width: StaticSetting.contentWidth, alignment: .leading)
                     .backport.focusSection()
                     DetailView()
-                        .padding(.leading, KomodioApp.contentPadding)
-                }
-            }
-        )
-        .backport.cardButton()
-#endif
-    }
-
-    // MARK: Navigation Button
-
-    /// The Navigation `Button`
-    func button(video: any KodiItem) -> some View {
-        Button(
-            action: {
-                switch video {
-                case let musicVideo as Video.Details.MusicVideo:
-                    scene.detailSelection = .musicVideo(musicVideo: musicVideo)
-                case let musicVideoAlbum as Video.Details.MusicVideoAlbum:
-                    scene.detailSelection = .musicVideoAlbum(musicVideoAlbum: musicVideoAlbum)
-                default:
-                    break
+                        .padding(.leading, StaticSetting.detailPadding)
                 }
             },
-            label: {
-                MusicVideosView.ListItem(item: video)
-            }
+            buttons: {}
         )
-        .buttonStyle(.kodiItemButton(kodiItem: video))
+#endif
     }
 
     // MARK: Private functions
@@ -106,9 +84,10 @@ struct MusicVideosView: View {
     private func getItems() {
         let allMusicVideosFromArtist = kodi.library.musicVideos
             .filter { $0.artist.contains(artist.artist) }
-        items = allMusicVideosFromArtist
+        let items = allMusicVideosFromArtist
             .swapMusicVideosForAlbums(artist: artist)
-            .sorted(sortItem: .init(id: "MusicVideoAlbum", method: .year, order: .ascending))
+        /// Map the items in collections
+        collection = items.anykodiItem()
         if
             let album = scene.detailSelection.item.kodiItem,
             album.media == .musicVideoAlbum,

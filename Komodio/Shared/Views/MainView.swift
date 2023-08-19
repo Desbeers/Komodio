@@ -54,7 +54,7 @@ struct MainView: View {
             columnVisibility: $columnVisibility,
             sidebar: {
                 SidebarView(searchField: $searchField)
-                    .navigationSplitViewColumnWidth(KomodioApp.platform == .macOS ? 200 : 250)
+                    .navigationSplitViewColumnWidth(StaticSetting.sidebarWidth)
             },
             content: {
                 details
@@ -65,6 +65,11 @@ struct MainView: View {
             })
         .background(Color.primary.opacity(0.1))
         .setBackground()
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                Buttons.CollectionStyle(hide: false)
+            }
+        }
 #endif
 
 #if os(iOS)
@@ -72,7 +77,7 @@ struct MainView: View {
             columnVisibility: $columnVisibility,
             sidebar: {
                 SidebarView(searchField: $searchField)
-                    .navigationSplitViewColumnWidth(KomodioApp.platform == .macOS ? 200 : 250)
+                    .navigationSplitViewColumnWidth(StaticSetting.sidebarWidth)
             },
             detail: {
                 details
@@ -85,12 +90,17 @@ struct MainView: View {
 
     /// The details of the `NavigationSplitView`
     @ViewBuilder var details: some View {
+
 #if os(macOS)
         NavigationStack(path: $scene.navigationStack.animation(.easeInOut)) {
             ContentView()
                 .navigationSubtitle(scene.mainSelection.item.description)
         }
-        .navigationSplitViewColumnWidth(KomodioApp.columnWidth)
+        .navigationSplitViewColumnWidth(
+            min: StaticSetting.contentWidth,
+            ideal: StaticSetting.contentWidth,
+            max: StaticSetting.contentWidth * 2
+        )
 #endif
 
 #if os(iOS)

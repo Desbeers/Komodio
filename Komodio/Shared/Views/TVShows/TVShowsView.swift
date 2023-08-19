@@ -16,8 +16,10 @@ struct TVShowsView: View {
     @EnvironmentObject private var kodi: KodiConnector
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
-    /// The TV shows in this view
-    @State var tvshows: [Video.Details.TVShow] = []
+    /// The collection in this view
+    @State private var collection: [AnyKodiItem] = []
+    /// The sorting
+    @State private var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.mainSelection.item.title)
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
 
@@ -33,13 +35,14 @@ struct TVShowsView: View {
                 PartsView.StatusMessage(router: .tvshows, status: state)
             }
         }
+        .animation(.default, value: state)
         .task(id: kodi.library.tvshows) {
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.library.tvshows.isEmpty {
                 state = .empty
             } else {
-                tvshows = kodi.library.tvshows.sorted(using: KeyPathComparator(\.sortByTitle))
+                getTVShows()
                 state = .ready
             }
         }
@@ -49,23 +52,6 @@ struct TVShowsView: View {
 
     /// The content of the `View`
     @ViewBuilder var content: some View {
-
-#if os(macOS)
-        ScrollView {
-            LazyVStack {
-                ForEach(tvshows) { tvshow in
-                    NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
-                        ListItem(tvshow: tvshow)
-                    }
-                    .buttonStyle(.kodiItemButton(kodiItem: tvshow))
-                    Divider()
-                }
-            }
-            .padding()
-        }
-#endif
-
-#if os(tvOS) || os(iOS)
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
@@ -74,17 +60,23 @@ struct TVShowsView: View {
                 )
             },
             content: {
-                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
-                    ForEach(tvshows) { tvshow in
-                        NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
-                            ListItem(tvshow: tvshow)
-                        }
-                        .padding(.bottom, KomodioApp.posterSize.height / 9)
-                    }
-                }
-            })
-        .backport.cardButton()
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-#endif
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle
+                )
+            },
+            buttons: {
+                Buttons.CollectionStyle()
+                Buttons.CollectionSort(sorting: $sorting, media: .tvshow)
+            }
+        )
+    }
+
+    // MARK: Private functions
+
+    /// Get all movies from the library
+    private func getTVShows() {
+        collection = kodi.library.tvshows.anykodiItem()
     }
 }

@@ -29,7 +29,7 @@ extension PartsView {
         var subtitle: String?
         /// The font size
         private var font: Double {
-            switch KomodioApp.platform {
+            switch StaticSetting.platform {
             case .macOS:
                 return 30
             case .tvOS:
@@ -78,11 +78,11 @@ extension PartsView {
                     ),
                     center: .center,
                     startRadius: 0,
-                    endRadius: KomodioApp.platform == .macOS ? 280 : 500
+                    endRadius: StaticSetting.platform == .macOS ? 280 : 500
                 )
                 .saturation(0.4)
             )
-            .cornerRadius(KomodioApp.cornerRadius)
+            .cornerRadius(StaticSetting.cornerRadius)
         }
     }
 }
@@ -112,7 +112,7 @@ extension PartsView {
                     EmptyView()
                 }
             }
-            .font(KomodioApp.platform == .macOS ? .title2 : .title3)
+            .font(StaticSetting.platform == .macOS ? .title2 : .title3)
             .frame(maxHeight: .infinity)
         }
     }
@@ -196,18 +196,25 @@ extension PartsView {
                 Text(item.description)
                 VStack {
                     Text(item.description)
-                    Button("More…") {
-                        showFullText = true
-                    }
+                    Button(
+                        action: {
+                            showFullText = true
+                        },
+                        label: {
+                            Label(
+                                title: {
+                                    Text("More")
+                                },
+                                icon: {
+                                    Image(systemName: "info.circle.fill")
+                                }
+                            )
+                        }
+                    )
+                    .labelStyle(.playLabel)
+                    .buttonStyle(.playButton)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .backport.focusSection()
-#if os(macOS)
-                    .font(.body)
-#endif
-
-#if os(tvOS)
-                    .buttonStyle(.plain)
-#endif
                 }
             }
             .sheet(isPresented: $showFullText) {
@@ -221,16 +228,18 @@ extension PartsView {
                 }
 
 #if os(macOS)
-                    .padding(60)
-                    .background(alignment: .bottom) {
-                        Button(action: {
+                .padding(60)
+                .background(alignment: .bottom) {
+                    Button(
+                        action: {
                             showFullText = false
-                        }, label: {
+                        },
+                        label: {
                             Text("Close")
                         })
-                        .padding()
-                    }
-                    .frame(width: 600)
+                    .padding()
+                }
+                .frame(width: 600)
 #endif
             }
         }
@@ -288,7 +297,7 @@ extension PartsView {
             case .dateAdded:
                 Label(
                     Utils.swiftDateFromKodiDate(item.dateAdded)
-                        .formatted(date: KomodioApp.platform == .macOS ? .long : .abbreviated, time: .omitted),
+                        .formatted(date: StaticSetting.platform == .macOS ? .long : .abbreviated, time: .omitted),
                     systemImage: "plus.square"
                 )
             case .rating:

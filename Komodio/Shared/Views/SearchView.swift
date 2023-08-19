@@ -1,6 +1,6 @@
 //
 //  SearchView.swift
-//  Komodio (macOS +iOS)
+//  Komodio (shared)
 //
 //  © 2023 Nick Berendsen
 //
@@ -10,8 +10,7 @@ import SwiftlyKodiAPI
 
 // MARK: Search View
 
-/// SwiftUI `View` for search results (macOS + iOS)
-/// - Note: tvOS has its own `View`
+/// SwiftUI `View` for search results
 struct SearchView: View {
     /// The KodiConnector model
     @EnvironmentObject private var kodi: KodiConnector
@@ -23,88 +22,25 @@ struct SearchView: View {
     @State private var musicVideos: [Video.Details.MusicVideo] = []
     /// The TV shows to show
     @State private var tvshows: [Video.Details.TVShow] = []
+    /// The collection in this view
+    @State private var collection: [AnyKodiItem] = []
+    /// The sorting
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "search", method: .media, order: .ascending)
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
     /// Bool if we have results
     var results: Bool {
         return !movies.isEmpty || !musicVideos.isEmpty || !tvshows.isEmpty
     }
+
+    // MARK: Body of the View
+
     /// The body of the `View`
     var body: some View {
-#if os(macOS)
-        content
-#else
         VStack {
-            Divider()
-                .opacity(0)
-            HStack {
-                content
-                    .frame(width: KomodioApp.posterSize.width * 2)
-                DetailView()
-            }
+            content
         }
-#endif
-    }
-
-    // MARK: Content of the View
-
-    /// The content of the `View`
-    var content: some View {
-        ScrollView {
-            LazyVStack {
-                if !results {
-                    Label("No results found", systemImage: "magnifyingglass")
-                        .font(.title)
-                        .padding()
-                }
-                if !movies.isEmpty {
-                    Label("Movies", systemImage: "magnifyingglass")
-                        .font(.title)
-                        .padding()
-                    ForEach(movies) { movie in
-                        Divider()
-                        Button(
-                            action: {
-                                scene.detailSelection = .movie(movie: movie)
-                            },
-                            label: {
-                                MoviesView.ListItem(movie: movie)
-                            }
-                        )
-                        .buttonStyle(.kodiItemButton(kodiItem: movie))
-                    }
-                }
-                if !musicVideos.isEmpty {
-                    Label("Music Videos", systemImage: "magnifyingglass")
-                        .font(.title)
-                        .padding()
-                    ForEach(musicVideos) { musicVideo in
-                        Divider()
-                        Button(
-                            action: {
-                                scene.detailSelection = .musicVideo(musicVideo: musicVideo)
-                            },
-                            label: {
-                                MusicVideosView.ListItem(item: musicVideo)
-                            }
-                        )
-                        .buttonStyle(.kodiItemButton(kodiItem: musicVideo))
-                    }
-                }
-                if !tvshows.isEmpty {
-                    Label("TV shows", systemImage: "magnifyingglass")
-                        .font(.title)
-                        .padding()
-                    ForEach(tvshows) { tvshow in
-                        NavigationLink(value: Router.tvshow(tvshow: tvshow)) {
-                            TVShowsView.ListItem(tvshow: tvshow)
-                        }
-                        .buttonStyle(.kodiItemButton(kodiItem: tvshow))
-                        Divider()
-                    }
-                }
-            }
-            .padding()
-        }
-        .buttonStyle(.plain)
+        .animation(.default, value: state)
         .task(id: scene.query) {
             scene.detailSelection = .search
             search()
@@ -114,16 +50,59 @@ struct SearchView: View {
         }
     }
 
+    // MARK: Content of the View
+
+    /// The content of the `View`
+    var content: some View {
+        ContentView.Wrapper(
+            header: {
+                PartsView.DetailHeader(
+                    title: Router.search.item.title,
+                    subtitle: Router.search.item.description
+                )
+            },
+            content: {
+                switch state {
+                case .ready:
+                    CollectionView(
+                        collection: $collection,
+                        sorting: $sorting,
+                        collectionStyle: scene.collectionStyle
+                    )
+                default:
+                    PartsView.StatusMessage(router: scene.mainSelection, status: state)
+                        .backport.focusable()
+                }
+            },
+            buttons: {
+                Buttons.CollectionStyle()
+            }
+        )
+#if os(tvOS)
+        .searchable(text: $scene.query)
+#endif
+    }
+
     /// Perform the search
     @MainActor private func search() {
         if scene.query.isEmpty {
-            movies = []
-            musicVideos = []
-            tvshows = []
+            collection = []
         } else {
-            movies = kodi.library.movies.search(scene.query)
-            musicVideos = kodi.library.musicVideos.search(scene.query)
-            tvshows = kodi.library.tvshows.search(scene.query)
+
+            var items: [any KodiItem] = []
+
+            items += kodi.library.movies.search(scene.query)
+            items += kodi.library.musicVideos.search(scene.query)
+            items += kodi.library.tvshows.search(scene.query)
+
+            if items.isEmpty {
+                state = .empty
+            } else {
+
+                /// Map the items in collections
+                collection = items.anykodiItem()
+                state = .ready
+            }
         }
     }
 }

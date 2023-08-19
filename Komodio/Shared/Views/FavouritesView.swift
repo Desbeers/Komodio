@@ -17,9 +17,13 @@ struct FavouritesView: View {
     /// The SceneState model
     @EnvironmentObject private var scene: SceneState
     /// The items in this view
-    @State private var items: [any KodiItem] = []
+    @State private var items: [AnyKodiItem] = []
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
+    /// The collection in this view
+    @State private var collection: [AnyKodiItem] = []
+    /// The sorting
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "favorites", method: .title, order: .ascending)
 
     // MARK: Body of the View
 
@@ -33,61 +37,25 @@ struct FavouritesView: View {
                 PartsView.StatusMessage(router: .favourites, status: state)
             }
         }
-        .animation(.default, value: items.map(\.id))
+        .animation(.default, value: state)
         .task {
             if kodi.status != .loadedLibrary {
                 state = .offline
             } else if kodi.favourites.isEmpty {
                 state = .empty
             } else {
+                getFavorites()
                 state = .ready
             }
         }
-    }
-    /// The content of the `View`
-    @ViewBuilder var content: some View {
-#if os(macOS)
-        List {
-            ForEach(kodi.favourites, id: \.id) { video in
-                Group {
-                    switch video {
-                    case let movie as Video.Details.Movie:
-                        Button(
-                            action: {
-                                scene.detailSelection = .movie(movie: movie)
-                            },
-                            label: {
-                                MoviesView.ListItem(movie: movie)
-                            }
-                        )
-                    case let episode as Video.Details.Episode:
-                        Button(
-                            action: {
-                                scene.detailSelection = .episode(episode: episode)
-                            },
-                            label: {
-                                EpisodeView.ListItem(episode: episode)
-                            }
-                        )
-                    case let musicVideo as Video.Details.MusicVideo:
-                        Button(
-                            action: {
-                                scene.detailSelection = .musicVideo(musicVideo: musicVideo)
-                            },
-                            label: {
-                                MusicVideosView.ListItem(item: musicVideo)
-                            }
-                        )
-                    default:
-                        EmptyView()
-                    }
-                }
-                .buttonStyle(.kodiItemButton(kodiItem: video))
-            }
+        .task(id: kodi.favourites) {
+            getFavorites()
         }
-#endif
+    }
+    // MARK: Content of the View
 
-#if os(tvOS) || os(iOS)
+    /// The content of the `View`
+    var content: some View {
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
@@ -96,32 +64,23 @@ struct FavouritesView: View {
                 )
             },
             content: {
-                LazyVGrid(columns: KomodioApp.grid, spacing: 0) {
-                    ForEach(kodi.favourites, id: \.id) { video in
-                        switch video {
-                        case let movie as Video.Details.Movie:
-                            NavigationLink(value: Router.movie(movie: movie), label: {
-                                MoviesView.ListItem(movie: movie)
-                            })
-                            .padding(.bottom, KomodioApp.posterSize.height / 9)
-                        case let episode as Video.Details.Episode:
-                            NavigationLink(value: Router.episode(episode: episode), label: {
-                                EpisodeView.ListItem(episode: episode)
-                            })
-                            .padding(.bottom, KomodioApp.posterSize.height / 9)
-                        case let musicVideo as Video.Details.MusicVideo:
-                            NavigationLink(value: Router.musicVideo(musicVideo: musicVideo), label: {
-                                MusicVideosView.ListItem(item: musicVideo)
-                            })
-                            .padding(.bottom, KomodioApp.posterSize.height / 9)
-                        default:
-                            EmptyView()
-                        }
-                    }
-                }
+                CollectionView(
+                    collection: $collection,
+                    sorting: $sorting,
+                    collectionStyle: scene.collectionStyle
+                )
+            },
+            buttons: {
+                Buttons.CollectionStyle()
+                Buttons.CollectionSort(sorting: $sorting, media: .favorite)
             }
         )
-        .backport.cardButton()
-#endif
+    }
+
+    // MARK: Private functions
+
+    /// Get all movies from the library
+    private func getFavorites() {
+        collection = kodi.favourites
     }
 }

@@ -30,14 +30,14 @@ extension SeasonView.Details {
                 HStack(alignment: .top, spacing: 0) {
                     KodiArt.Fanart(item: episode)
                         .fanartStyle(item: episode)
-                        .frame(width: KomodioApp.thumbSize.width, height: KomodioApp.thumbSize.height)
+                        .frame(width: StaticSetting.thumbSize.width, height: StaticSetting.thumbSize.height)
                         .padding(.trailing)
                     if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
                         .list.contains(1) && episode.playcount == 0 {
                         Text("Plot is hidden for unwatched episodes...")
                     } else {
                         PartsView.TextMore(item: episode)
-                            .frame(height: KomodioApp.thumbSize.height)
+                            .frame(height: StaticSetting.thumbSize.height)
                     }
                 }
                 .backport.focusSection()

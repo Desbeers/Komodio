@@ -12,15 +12,42 @@ import SwiftlyKodiAPI
 
 /// SwiftUI `View` for a single Movie (shared)
 enum MovieView {
+    // Just a namespace
+}
+
+extension MovieView {
 
     /// Update a Movie
     /// - Parameter movie: The current Movie
-    /// - Returns: The updated Movie
+    /// - Returns: The optional updated Movie
     static func update(movie: Video.Details.Movie) -> Video.Details.Movie? {
-        let update = KodiConnector.shared.library.movies.first { $0.id == movie.id }
-        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .movie {
-            SceneState.shared.detailSelection = .movie(movie: update)
+        if let update = KodiConnector.shared.library.movies.first(where: { $0.id == movie.id }), update != movie {
+            return update
         }
-        return update
+        return nil
+    }
+}
+
+extension MovieView {
+
+    /// Define the cell parameters for a collection
+    /// - Parameters:
+    ///   - movie: The movie
+    ///   - style: The style of the collection
+    /// - Returns: A ``KodiCell``
+    static func cell(movie: Video.Details.Movie, style: ScrollCollectionStyle) -> KodiCell {
+#if os(macOS)
+        let details: Router = .movie(movie: movie)
+        let stack: Router? = nil
+#else
+        let details: Router? = nil
+        let stack: Router = .movie(movie: movie)
+#endif
+        return KodiCell(
+            title: movie.title,
+            subtitle: movie.genre.joined(separator: "∙"),
+            stack: stack,
+            details: details
+        )
     }
 }

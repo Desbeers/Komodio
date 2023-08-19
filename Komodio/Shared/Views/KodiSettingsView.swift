@@ -19,30 +19,7 @@ struct KodiSettingsView: View {
 
     /// The body of the `View`
     var body: some View {
-        content
-    }
-
-    // MARK: Content of the View
-
-    /// The content of the `View`
-    @ViewBuilder var content: some View {
-#if os(macOS)
-        VStack {
-            Text("Kodi Settings")
-                .font(.largeTitle)
-            Warning()
-                .padding()
-                .background(.thickMaterial)
-                .cornerRadius(10)
-                .padding(.leading, KomodioApp.sidebarCollapsedWidth)
-            Spacer()
-        }
-        .padding()
-#endif
-
-#if canImport(UIKit)
         ContentView.Wrapper(
-            scroll: true,
             header: {
                 PartsView
                     .DetailHeader(
@@ -52,10 +29,13 @@ struct KodiSettingsView: View {
             content: {
                 HStack(alignment: .top, spacing: 0) {
                     Warning()
+#if canImport(UIKit)
                     Details()
-                }
-            })
 #endif
+                }
+            },
+            buttons: {}
+        )
     }
 }
 
@@ -79,7 +59,12 @@ extension KodiSettingsView {
                 }, icon: {
                     Image(systemName: "exclamationmark.circle.fill")
                         .foregroundColor(.red)
-                })
+                }
+            )
+            .padding()
+            .background(.thickMaterial)
+            .cornerRadius(10)
+            .padding()
         }
     }
 }
