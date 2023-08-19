@@ -104,7 +104,7 @@ extension Buttons {
         var openWindow
         /// The button action
         private var action: () {
-            let video = MediaItem(item: item, resume: true)
+            let video = MediaItem(item: item, resume: false)
             openWindow(value: video)
         }
 #else
