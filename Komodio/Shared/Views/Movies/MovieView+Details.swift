@@ -122,7 +122,10 @@ extension MovieView {
                         .minimumScaleFactor(0.5)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.leading, scene.sidebarFocus ? StaticSetting.sidebarWidth : StaticSetting.sidebarCollapsedWidth)
+                    .padding(
+                        .leading,
+                        scene.sidebarFocus ? StaticSetting.sidebarWidth : StaticSetting.sidebarCollapsedWidth
+                    )
                 }
                 .padding(StaticSetting.detailPadding)
                 .frame(height: UIScreen.main.bounds.height)

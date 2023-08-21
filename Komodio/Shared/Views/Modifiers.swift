@@ -176,7 +176,7 @@ extension Modifiers {
 
 #if os(tvOS)
                 .buttonStyle(.card)
-                .foregroundColor(selected ? Color("AccentColor") : .primary)
+                .foregroundColor(selected ? .primary.opacity(0.6) : .primary)
                 .padding(.top, style == .asPlain ? StaticSetting.cellPadding : 0)
                 .padding(.bottom, StaticSetting.cellPadding)
                 .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)

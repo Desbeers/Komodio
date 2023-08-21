@@ -71,14 +71,6 @@ struct PlaylistsView: View {
                                     Image(systemName: Router.moviePlaylists.item.icon)
                                 })
                             })
-//                            NavigationLink(value: Router.moviePlaylist(file: playlist)) {
-//                                Label(title: {
-//                                    Text(playlist.title)
-//                                        .frame(width: 400, alignment: .leading)
-//                                }, icon: {
-//                                    Image(systemName: Router.moviePlaylists.item.icon)
-//                                })
-//                            }
                             .padding()
                         }
                     }

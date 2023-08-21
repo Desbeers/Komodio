@@ -200,7 +200,7 @@ extension Buttons {
         title: String,
         subtitle: String?,
         icon: String,
-        color: Color = Color.primary
+        color: Color? = nil
     ) -> some View {
         /// Calculate the font size for the subtitle
         var subtitleFontSize: Double {
@@ -223,8 +223,12 @@ extension Buttons {
                 }
             }
         }, icon: {
-            Image(systemName: icon)
-                .foregroundColor(color)
+            if let color {
+                Image(systemName: icon)
+                    .foregroundColor(color)
+            } else {
+                Image(systemName: icon)
+            }
         })
     }
 }
