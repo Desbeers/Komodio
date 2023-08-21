@@ -1,6 +1,6 @@
 #  Komodio
 
-## An Apple 'tvOS', 'macOS` and 'iPadOS' Video Client for  [Kodi](https://kodi.tv)
+## An Apple 'tvOS', 'macOS`, 'iPadOS' and 'visionOS' Video Client for  [Kodi](https://kodi.tv)
 
 **Komodio** is a video player for tvOS 16, macOS Ventura and iPadOS 16 that can stream videos from your local Kodi host.
 
@@ -45,6 +45,8 @@ The source code of **Komodio** is well [documented](https://desbeers.github.io/K
 ***Komodio** has no meaning. I wrote an audio remote application for Kodi named [Kodio](https://github.com/Desbeers/Kodio/), so wanted something similar..
 
 ## How to compile
+
+Xcode 15 is required.
 
 1. Clone the project
 2. Change the signing certificate to your own

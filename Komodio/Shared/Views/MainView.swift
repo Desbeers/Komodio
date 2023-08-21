@@ -72,7 +72,7 @@ struct MainView: View {
         }
 #endif
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
         NavigationSplitView(
             columnVisibility: $columnVisibility,
             sidebar: {
@@ -103,7 +103,7 @@ struct MainView: View {
         )
 #endif
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
         NavigationStack(path: $scene.navigationStack) {
             ContentView()
                 .navigationTitle(scene.mainSelection.item.description)

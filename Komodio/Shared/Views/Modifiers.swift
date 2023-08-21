@@ -168,24 +168,29 @@ extension Modifiers {
         func body(content: Content) -> some View {
             content
 
-            #if os(macOS)
+#if os(macOS)
                 .buttonStyle(.cellButton(item: item, selected: selected, style: style))
                 .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)
                 .padding(.bottom, StaticSetting.cellPadding)
-            #endif
+#endif
 
-            #if os(tvOS)
+#if os(tvOS)
                 .buttonStyle(.card)
                 .foregroundColor(selected ? Color("AccentColor") : .primary)
                 .padding(.top, style == .asPlain ? StaticSetting.cellPadding : 0)
                 .padding(.bottom, StaticSetting.cellPadding)
                 .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)
-            #endif
+#endif
 
-            #if os(iOS)
+#if os(iOS)
                 .buttonStyle(.cellButton(item: item, selected: selected, style: style))
                 .padding(.bottom, StaticSetting.cellPadding)
-            #endif
+#endif
+
+#if os(visionOS)
+                .buttonStyle(.cellButton(item: item, selected: selected, style: style))
+                .padding(.bottom, StaticSetting.cellPadding)
+#endif
         }
     }
 }

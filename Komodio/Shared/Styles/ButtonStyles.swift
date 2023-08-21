@@ -26,6 +26,7 @@ extension Styles {
                 .foregroundColor(selected ? Color.white : Color.primary)
                 .background(selected ? Color.accentColor : Color.secondary.opacity(0.1))
                 .cornerRadius(StaticSetting.cornerRadius)
+                .backport.hoverEffect()
         }
     }
 }
@@ -55,6 +56,7 @@ extension Styles {
                 .cornerRadius(StaticSetting.cornerRadius)
                 .labelStyle(.playLabel)
                 .animation(.default, value: configuration.isPressed)
+                .backport.hoverEffect()
 #if os(macOS)
                 .shadow(radius: 1)
                 .opacity(configuration.isPressed ? 0.8 : isEnabled ? 1 : 0.3)
@@ -65,7 +67,7 @@ extension Styles {
                 .scaleEffect(configuration.isPressed ? 1.2 : 1)
 #endif
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
                 .shadow(radius: 1)
                 .opacity(configuration.isPressed ? 0.8 : isEnabled ? 1 : 0.3)
 #endif

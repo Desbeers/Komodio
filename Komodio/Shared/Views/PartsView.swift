@@ -227,7 +227,7 @@ extension PartsView {
                     Text(item.description)
                 }
 
-#if os(macOS)
+#if os(macOS) || os(visionOS)
                 .padding(60)
                 .background(alignment: .bottom) {
                     Button(

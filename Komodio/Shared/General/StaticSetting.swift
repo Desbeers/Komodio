@@ -124,4 +124,42 @@ enum StaticSetting {
     static let cornerRadius: Double = 8
 
 #endif
+
+#if os(visionOS)
+
+    /// The plaform
+    static let platform: Parts.Platform = .iPadOS
+
+    /// The width of the sidebar
+    static let sidebarWidth: Double = 250
+
+    /// The width of the sidebar when collapsed (tvOS only)
+    static var sidebarCollapsedWidth: Double = 0
+
+    /// The `List` content column width
+    /// - Note: Used when a list and details are in the same `View`
+    static let contentWidth: Double = 220
+
+    /// The default padding for details
+    static let detailPadding: Double = 40
+
+    /// The default padding for a cell
+    static let cellPadding: Double = 20
+
+    /// The default size of poster art
+    static let posterSize = CGSize(width: 180, height: 270)
+
+    /// The default size of thumb art
+    static let thumbSize = CGSize(width: 213, height: 120)
+
+    /// The default size of fanart
+    static let fanartSize = CGSize(width: 960, height: 540)
+
+    /// Define the grid layout
+    static let grid = [GridItem(.adaptive(minimum: 200))]
+
+    /// The default corner radius
+    static let cornerRadius: Double = 8
+
+#endif
 }
