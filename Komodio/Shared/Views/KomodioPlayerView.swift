@@ -20,35 +20,44 @@ import SwiftlyKodiAPI
 ///
 /// It will give a warning if it can't play the file
 struct KomodioPlayerView: View {
-    /// The Video item we want to play
-    let video: any KodiItem
-    /// Resume the video or not
-    var resume: Bool = false
+    /// The media item
+    let media: MediaItem
+    /// The Video item try want to play
+    @State private var video: (any KodiItem)?
+    /// The loading state of the View
+    @State private var state: Parts.Status = .loading
 
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
-        switch KomodioPlayerView.canPlay(video: video) {
-        case true:
-            KodiPlayerView(video: video, resume: resume)
-        case false:
-            warning
+        VStack {
+            switch state {
+            case .empty:
+                /// This should not happen
+                Text("Error")
+            case .ready:
+                if let video {
+                    KodiPlayerView(video: video, resume: media.resume)
+                }
+            default:
+                ProgressView()
+            }
+        }
+        .task {
+            state = await checkMedia()
         }
     }
-    /// The warning if we can't play a video
-    var warning: some View {
-        ZStack {
-            KodiArt.Fanart(item: video)
-            CantPlay(video: video)
-                .font(.title)
-                .padding()
-                .backport.focusable()
-                .background(.thinMaterial)
-                .cornerRadius(10)
-                .padding(.horizontal, 80)
-                .padding(.top, 80)
+
+    /// Check if we can play the media
+    /// - Returns: The status
+    @MainActor func checkMedia() async -> Parts.Status {
+        let video = await Application.getItem(type: media.media, id: media.id)
+        if let video, KomodioPlayerView.canPlay(video: video) {
+            self.video = video
+            return .ready
         }
+        return .empty
     }
 }
 

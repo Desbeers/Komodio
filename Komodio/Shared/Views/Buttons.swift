@@ -98,13 +98,21 @@ extension Buttons {
         var item: any KodiItem
         /// Bool if the player will be presented
         @State private var isPresented = false
+        /// The media item to pass to the player
+        private var video: MediaItem {
+            MediaItem(
+                id: item.kodiID,
+                title: item.title,
+                media: item.media,
+                resume: false
+            )
+        }
 #if os(macOS)
         /// Open Window environment
         @Environment(\.openWindow)
         var openWindow
         /// The button action
         private var action: () {
-            let video = MediaItem(item: item, resume: false)
             openWindow(value: video)
         }
 #else
@@ -130,7 +138,7 @@ extension Buttons {
                 })
 #if !os(macOS)
             .fullScreenCover(isPresented: $isPresented) {
-                KomodioPlayerView(video: item)
+                KomodioPlayerView(media: video)
             }
 #endif
         }
@@ -148,12 +156,20 @@ extension Buttons {
         private var resume: Int {
             Int(item.resume.total - item.resume.position)
         }
+        /// The media item to pass to the player
+        private var video: MediaItem {
+            MediaItem(
+                id: item.kodiID,
+                title: item.title,
+                media: item.media,
+                resume: true
+            )
+        }
 #if os(macOS)
         /// Open Window environment
         @Environment(\.openWindow) var openWindow
         /// The button action
         private var action: () {
-            let video = MediaItem(item: item, resume: true)
             openWindow(value: video)
         }
 #else
@@ -180,7 +196,7 @@ extension Buttons {
                 })
 #if !os(macOS)
             .fullScreenCover(isPresented: $isPresented) {
-                KomodioPlayerView(video: item, resume: true)
+                KomodioPlayerView(media: video)
             }
 #endif
         }
