@@ -68,6 +68,15 @@ import SwiftlyKodiAPI
         }
         .defaultSize(width: 1920, height: 1080)
 
+        /// Open a Video Window
+        WindowGroup("Player", for: MediaItem.self) { $media in
+            /// Check if `media` isn't `nil` and that we have a Kodi item
+            if let media {
+                KomodioPlayerView(media: media)
+                    .navigationTitle(media.title)
+            }
+        }
+
 #else
 
         // MARK: tvOS and iPadOS

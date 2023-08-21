@@ -58,8 +58,16 @@ extension MovieView {
                 VStack {
                     KodiArt.Fanart(item: movie)
                         .fanartStyle(item: movie, overlay: movie.tagline.isEmpty ? nil : movie.tagline)
+#if os(visionOS)
+                        .overlay(alignment: .topLeading) {
+                            Buttons.Player(item: movie)
+                                .padding()
+                        }
+#endif
+#if !os(visionOS)
                     Buttons.Player(item: movie)
                         .padding()
+#endif
                     VStack(alignment: .leading) {
                         Text(plot)
                             .padding(.bottom)

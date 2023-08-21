@@ -107,7 +107,7 @@ extension Buttons {
                 resume: false
             )
         }
-#if os(macOS)
+#if os(macOS) || os(visionOS)
         /// Open Window environment
         @Environment(\.openWindow)
         var openWindow
@@ -165,7 +165,7 @@ extension Buttons {
                 resume: true
             )
         }
-#if os(macOS)
+#if os(macOS) || os(visionOS)
         /// Open Window environment
         @Environment(\.openWindow) var openWindow
         /// The button action
