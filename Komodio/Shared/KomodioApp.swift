@@ -51,6 +51,23 @@ import SwiftlyKodiAPI
         .defaultSize(width: 1280, height: 720)
         .defaultPosition(.center)
         .windowStyle(.hiddenTitleBar)
+
+#elseif os(visionOS)
+
+        // MARK: visionOS
+
+        WindowGroup {
+            MainView()
+                .environmentObject(kodi)
+                .task {
+                    if kodi.status == .none {
+                        /// Get the selected host (if any)
+                        kodi.getSelectedHost()
+                    }
+                }
+        }
+        .defaultSize(width: 1920, height: 1080)
+
 #else
 
         // MARK: tvOS and iPadOS

@@ -12,6 +12,8 @@ output: Documentation
 clean: true
 theme: apple
 
+exclude: /*/GeneratedAssetSymbols*
+
 custom_categories:
   - name: General
     children:

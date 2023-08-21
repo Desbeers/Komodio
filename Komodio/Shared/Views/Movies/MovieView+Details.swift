@@ -50,7 +50,7 @@ extension MovieView {
 
         /// The content of the `View`
         @ViewBuilder var content: some View {
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
             DetailView.Wrapper(
                 scroll: StaticSetting.platform == .tvOS ? nil : movie.id,
                 title: movie.title

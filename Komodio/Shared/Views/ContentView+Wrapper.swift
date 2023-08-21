@@ -58,7 +58,7 @@ extension ContentView {
             .ignoresSafeArea()
 #endif
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
             VStack(spacing: 0) {
                 header()
                     .frame(maxWidth: .infinity)

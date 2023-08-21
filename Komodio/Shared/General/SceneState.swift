@@ -13,7 +13,7 @@ class SceneState: ObservableObject {
 
     // MARK: macOS stuff
 
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
     /// The current search query
     @Published var query: String = ""
 #endif
@@ -59,7 +59,7 @@ class SceneState: ObservableObject {
 
 extension SceneState {
 
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
     /// Update the search query
     /// - Parameter query: The query in the UI
     @MainActor func updateSearch(query: String) async {
