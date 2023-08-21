@@ -59,7 +59,7 @@ struct MovieSetView: View {
         )
 #endif
 
-#if os(tvOS) || os(iOS)
+#if os(tvOS) || os(iOS) || os(visionOS)
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(title: movieSet.title)

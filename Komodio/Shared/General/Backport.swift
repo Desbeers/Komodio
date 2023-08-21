@@ -49,6 +49,18 @@ extension Backport where Content: View {
 
 extension Backport where Content: View {
 
+    /// `hoverEffect` backport
+    @ViewBuilder
+    func hoverEffect() -> some View {
+        content
+#if os(visionOS)
+            .hoverEffect()
+#endif
+    }
+}
+
+extension Backport where Content: View {
+
     /// `navigationSubtitle` backport
     @ViewBuilder
     func navigationSubtitle(_ text: String) -> some View {

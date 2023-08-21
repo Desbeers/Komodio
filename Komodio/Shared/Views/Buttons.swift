@@ -252,7 +252,7 @@ extension Buttons {
             content
 #endif
         }
-        ///The content of the `View`
+        /// The content of the `View`
         var content: some View {
             Button(
                 action: {
@@ -288,7 +288,7 @@ extension Buttons {
 #if os(macOS)
             KodiListSort.SortPickerView(sorting: $sorting, media: media)
 #endif
-#if os(iOS)
+#if os(iOS) || os(visionOS)
             Menu(
                 content: {
                     KodiListSort.SortPickerView(sorting: $sorting, media: media)

@@ -18,7 +18,7 @@ extension Styles {
         /// Bool if the label is focussed
         @Environment(\.isFocused) private var focused: Bool
         func makeBody(configuration: Configuration) -> some View {
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
             HStack {
                 configuration.icon
                 configuration.title
@@ -59,7 +59,7 @@ extension Styles {
     /// SwiftUI Label style for a media item detail label
     struct DetailLabel: LabelStyle {
         func makeBody(configuration: Configuration) -> some View {
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
             HStack(alignment: .top) {
                 configuration.icon
                     .foregroundColor(.secondary)
