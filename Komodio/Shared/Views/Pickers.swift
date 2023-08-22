@@ -27,8 +27,8 @@ extension Pickers {
         let item: any KodiItem
         /// The rating of the ityem
         @State private var rating: Int = 0
-        /// The presentation mode  (tvOS)
-        @Environment(\.presentationMode) var presentationMode
+        /// The dismiss action (tvOS)
+        @Environment(\.dismiss) private var dismiss
 
         // MARK: Body of the View
 
@@ -72,10 +72,10 @@ extension Pickers {
                 if newRating != item.userRating {
                     Task {
                         await item.setUserRating(rating: rating)
-                        #if os(tvOS)
+#if os(tvOS)
                         /// The rating is shown in a Sheet; close it when the value has changed
-                        presentationMode.wrappedValue.dismiss()
-                        #endif
+                        dismiss()
+#endif
                     }
                 }
             }

@@ -14,10 +14,8 @@ import SwiftlyKodiAPI
 struct HostItemView: View {
     /// The `HostItem` to edit
     let host: HostItem
-    /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
-    /// The Presentation mode
-    @Environment(\.presentationMode) private var presentationMode
+    /// The dismiss action
+    @Environment(\.dismiss) private var dismiss
 
     // MARK: Body of the View
 
@@ -25,7 +23,7 @@ struct HostItemView: View {
     var body: some View {
         VStack {
             KodiHostItemView(host: host) {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         }
         .padding()
