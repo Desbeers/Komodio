@@ -26,6 +26,9 @@ struct KomodioPlayerView: View {
     @State private var video: (any KodiItem)?
     /// The loading state of the View
     @State private var state: Parts.Status = .loading
+#if os(visionOS)
+    @Environment(\.openImmersiveSpace) var openImmersiveSpace
+#endif
 
     // MARK: Body of the View
 
@@ -39,6 +42,11 @@ struct KomodioPlayerView: View {
             case .ready:
                 if let video {
                     KodiPlayerView(video: video, resume: media.resume)
+#if os(visionOS)
+                        .task {
+                            await openImmersiveSpace(id: "Fanart", value: video.fanart)
+                        }
+#endif
                 }
             default:
                 ProgressView()

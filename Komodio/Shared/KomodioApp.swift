@@ -66,7 +66,7 @@ import SwiftlyKodiAPI
                     }
                 }
         }
-        .defaultSize(width: 1920, height: 1080)
+        // .defaultSize(width: 1920, height: 1080)
 
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $media in
@@ -76,6 +76,17 @@ import SwiftlyKodiAPI
                     .navigationTitle(media.title)
             }
         }
+        // .windowStyle(.volumetric)
+
+        ImmersiveSpace(id: "Fanart", for: String.self ) { $fanart in
+            /// Check if `fanart` isn't `nil` and that we have a Kodi item
+            if let fanart {
+                ImmersiveView(fanart: fanart)
+            }
+        }
+        // .immersionStyle(selection: .constant(.mixed), in: .mixed)
+        // .immersionStyle(selection: .constant(.full), in: .full)
+        .immersionStyle(selection: .constant(.progressive), in: .progressive)
 
 #else
 
