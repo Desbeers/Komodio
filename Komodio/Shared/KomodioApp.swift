@@ -78,10 +78,10 @@ import SwiftlyKodiAPI
         }
         // .windowStyle(.volumetric)
 
-        ImmersiveSpace(id: "Fanart", for: String.self ) { $fanart in
-            /// Check if `fanart` isn't `nil` and that we have a Kodi item
-            if let fanart {
-                ImmersiveView(fanart: fanart)
+        ImmersiveSpace(id: "Fanart", for: MediaItem.self ) { $media in
+            /// Check if media isn't `nil` and that we have a Kodi item
+            if let media {
+                ImmersiveView(media: media)
             }
         }
         // .immersionStyle(selection: .constant(.mixed), in: .mixed)

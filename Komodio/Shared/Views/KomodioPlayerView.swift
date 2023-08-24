@@ -28,6 +28,8 @@ struct KomodioPlayerView: View {
     @State private var state: Parts.Status = .loading
 #if os(visionOS)
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
+    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @State private var showImmersive: Bool = false
 #endif
 
     // MARK: Body of the View
@@ -43,8 +45,30 @@ struct KomodioPlayerView: View {
                 if let video {
                     KodiPlayerView(video: video, resume: media.resume)
 #if os(visionOS)
-                        .task {
-                            await openImmersiveSpace(id: "Fanart", value: video.fanart)
+                        .toolbar {
+                            ToolbarItem(
+                                id: "immersive",
+                                placement: .bottomOrnament,
+                                showsByDefault: true
+                            ) {
+                                Button(
+                                    action: {
+                                        showImmersive.toggle()
+                                    }, 
+                                    label: {
+                                        Label("Fanart", systemImage: showImmersive ? "eye.fill" : "eye")
+                                    }
+                                )
+                                .labelStyle(.titleAndIcon)
+                            }
+                        }
+                        .task(id: showImmersive) {
+                            switch showImmersive {
+                            case true:
+                                await openImmersiveSpace(id: "Fanart", value: media)
+                            case false:
+                                await dismissImmersiveSpace()
+                            }
                         }
 #endif
                 }
