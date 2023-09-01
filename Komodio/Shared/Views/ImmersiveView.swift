@@ -30,7 +30,7 @@ struct ImmersiveView: View {
                 /// Get the optional cgImage
                 let cgImage = cachedImage.cgImage,
                 /// Convert it to a texture
-                let texture = try? TextureResource.generate(from: cgImage, options: .init(semantic: .normal))
+                let texture = try? await TextureResource.generate(from: cgImage, options: .init(semantic: .normal))
             else {
                 return
             }
@@ -50,19 +50,21 @@ struct ImmersiveView: View {
                 rootEntity.addChild(titleAttachment)
             }
         } attachments: {
-            VStack {
-                Text(kodiItem?.title ?? "Playing a movie")
-                    .scaleEffect(x: -1, y: 1)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.1)
-                    .padding(.top)
-                KodiArt.Poster(item: kodiItem)
-                    .clipShape(.rect(cornerRadius: 30))
+            Attachment(id: "movietitle") {
+                VStack {
+                    Text(kodiItem?.title ?? "Playing a movie")
+                        .scaleEffect(x: -1, y: 1)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
+                        .padding(.top)
+                    KodiArt.Poster(item: kodiItem)
+                        .clipShape(.rect(cornerRadius: 30))
+                }
+                .frame(width: 200)
+                .padding()
+                .glassBackgroundEffect()
+                //.tag("movietitle")
             }
-            .frame(width: 200)
-            .padding()
-            .glassBackgroundEffect()
-            .tag("movietitle")
         }
     }
 }
