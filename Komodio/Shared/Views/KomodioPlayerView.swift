@@ -54,7 +54,7 @@ struct KomodioPlayerView: View {
                                 Button(
                                     action: {
                                         showImmersive.toggle()
-                                    }, 
+                                    },
                                     label: {
                                         Label("Fanart", systemImage: showImmersive ? "eye.fill" : "eye")
                                     }
@@ -83,7 +83,7 @@ struct KomodioPlayerView: View {
 
     /// Check if we can play the media
     /// - Returns: The status
-    @MainActor func checkMedia() async -> Parts.Status {
+    func checkMedia() async -> Parts.Status {
         let video = await Application.getItem(type: media.media, id: media.id)
         if let video, KomodioPlayerView.canPlay(video: video) {
             self.video = video

@@ -88,8 +88,8 @@ extension Modifiers {
             content
                 .background(
                     ZStack {
-                        Color("BlendColor")
-                        KodiArt.Fanart(item: scene.detailSelection.item.kodiItem, fallback: Image("Background"))
+                        Color.blend
+                        KodiArt.Fanart(item: scene.detailSelection.item.kodiItem, fallback: Image(.background))
                             .grayscale(1)
                             .opacity(0.1)
                             .scaledToFill()

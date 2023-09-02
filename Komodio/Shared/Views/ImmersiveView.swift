@@ -63,7 +63,6 @@ struct ImmersiveView: View {
                 .frame(width: 200)
                 .padding()
                 .glassBackgroundEffect()
-                //.tag("movietitle")
             }
         }
     }
