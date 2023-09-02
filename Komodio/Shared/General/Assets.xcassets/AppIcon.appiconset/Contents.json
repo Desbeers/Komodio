@@ -7,61 +7,61 @@
       "size" : "1024x1024"
     },
     {
-      "filename" : "macOS-appIcon@2x-16.png",
+      "filename" : "Icon-macOS-16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "macOS-appIcon@2x-32.png",
+      "filename" : "Icon-macOS-32.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "macOS-appIcon@2x-32.png",
+      "filename" : "Icon-macOS-32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "macOS-appIcon@2x-64.png",
+      "filename" : "Icon-macOS-64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "macOS-appIcon@2x-128.png",
+      "filename" : "Icon-macOS-128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "macOS-appIcon@2x-256.png",
+      "filename" : "Icon-macOS-256.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "macOS-appIcon@2x-256.png",
+      "filename" : "Icon-macOS-256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "macOS-appIcon@2x-512.png",
+      "filename" : "Icon-macOS-512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "macOS-appIcon@2x-512.png",
+      "filename" : "Icon-macOS-512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "macOS-appIcon@2x-1024.png",
+      "filename" : "Icon-macOS-1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "macOS-appIcon@2x-256.png",
+      "filename" : "Icon-macOS-256.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "macOS-appIcon@2x-512.png",
+      "filename" : "Icon-macOS-512.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "macOS-appIcon@2x-1024.png",
+      "filename" : "Icon-macOS-1024.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
