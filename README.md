@@ -1,10 +1,12 @@
 #  Komodio
 
-## An Apple 'tvOS', 'macOS`, 'iPadOS' and 'visionOS' Video Client for  [Kodi](https://kodi.tv)
+## A macOS, tvOS, iPadOS and visionOS Video Client for [Kodi](https://kodi.tv)
 
-**Komodio** is a video player for tvOS 16, macOS Ventura and iPadOS 16 that can stream videos from your local Kodi host.
+![Icon](https://github.com/Desbeers/Komodio/raw/main/Images/icon.png)
 
-![Komodio](https://github.com/Desbeers/Komodio/raw/main/screenshot.jpg)
+**Komodio** is a video player for tvOS 16, macOS Ventura, iPadOS 16 and visionOS that can stream videos from your local Kodi host.
+
+![Komodio](https://github.com/Desbeers/Komodio/raw/main/Images/screenshot-macOS.jpg)
 
 It is a simple player and does not have all the 'bells and whistles' that the *real* Kodi has. Kodi will never be available for tvOS, however, Komodio will let you play your media on it. Good enough for me.
 
