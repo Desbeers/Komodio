@@ -79,7 +79,7 @@ extension CollectionView {
         /// The poster of the `View`
         @ViewBuilder var poster: some View {
             KodiArt.Poster(item: item)
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
                 .frame(width: cell.poster.width, height: cell.poster.height)
                 .watchStatus(of: item)
                 .overlay(alignment: .bottom) {

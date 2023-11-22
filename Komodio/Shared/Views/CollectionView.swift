@@ -40,7 +40,7 @@ struct CollectionView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.1)
             },
-            cell: { item in
+            cell: { _, item in
                 Cell(item: item.item, sorting: sort, collectionStyle: collectionStyle)
             }
         )
