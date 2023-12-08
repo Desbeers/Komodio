@@ -14,9 +14,9 @@ import SwiftlyKodiAPI
 /// - Note: tvOS has its own `View`
 struct MainView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @StateObject private var scene: SceneState = .shared
+    @State private var scene: SceneState = SceneState()
     /// The search field in the toolbar
     @State private var searchField: String = ""
     /// Set the column visibility
@@ -32,17 +32,15 @@ struct MainView: View {
             .task(id: searchField) {
                 await scene.updateSearch(query: searchField)
             }
-            .onChange(of: scene.mainSelection) { selection in
-                Task { @MainActor in
-                    scene.detailSelection = selection
-                }
+            .onChange(of: scene.mainSelection) {
+                scene.detailSelection = scene.mainSelection
             }
-            .onChange(of: scene.navigationStack) { item in
-                Task { @MainActor in
-                    scene.detailSelection = (item.isEmpty ? scene.mainSelection : item.last) ?? scene.mainSelection
-                }
+            .onChange(of: scene.navigationStack) {
+                scene.detailSelection =
+                (scene.navigationStack.isEmpty ? scene.mainSelection : scene.navigationStack.last)
+                ?? scene.mainSelection
             }
-            .environmentObject(scene)
+            .environment(scene)
     }
 
     // MARK: MARK: Content of the View

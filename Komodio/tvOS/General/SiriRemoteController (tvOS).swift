@@ -14,13 +14,11 @@ import AVFoundation
 // MARK: Siri Remote Controller
 
 /// Class to observe the Siri remote (tvOS)
-class SiriRemoteController: ObservableObject {
-    /// The shared instance of the class
-    static let shared = SiriRemoteController()
+@Observable class SiriRemoteController {
     /// The list of controllers
     var controllerList: [GCController] = []
     /// The controller that is found
-    @Published var gameController: GCController?
+    var gameController: GCController?
     /// Init the controller -- this assume only Siri Remote is connected
     init() {
         getControllers()
@@ -108,7 +106,7 @@ extension Modifiers {
         // MARK: Private stuff
 
         /// The shared controller class
-        @StateObject private var controller: SiriRemoteController = .shared
+        @State var controller: SiriRemoteController = SiriRemoteController()
         /// swipeDistance is how much x/y values needs to be acumelated by a gesture in order to consider a swipe (the distance the finger must travel)
         private let swipeDistance: Float = 0.7
         /// How much pause in milliseconds should be between gestures in order for a gesture to be considered a new gesture
@@ -252,7 +250,7 @@ extension Modifiers {
     /// A `ViewModifier` to control the Siri Exit button
     struct SetSiriExit: ViewModifier {
         /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        @Environment(SceneState.self) private var scene
         /// The modifier
         func body(content: Content) -> some View {
             content

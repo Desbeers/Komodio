@@ -38,13 +38,13 @@ extension ContentView {
                 header()
                     .frame(maxWidth: .infinity)
                     .overlay(alignment: .trailing) {
-                        HStack {
+                        HStack(alignment: .firstTextBaseline) {
                             buttons()
                         }
-                        .buttonStyle(.plain)
+                        .font(.caption)
+                        .menuStyle(.button)
                         .padding(.trailing, 80)
                         .foregroundColor(colorScheme == .light ? .gray : .black)
-                        .font(.caption)
                     }
                     .focusSection()
                 content()

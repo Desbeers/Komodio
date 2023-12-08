@@ -16,8 +16,10 @@ extension MusicVideoView {
     struct Details: View {
         /// The `Music Video` to show
         let selectedMusicVideo: Video.Details.MusicVideo
+        /// The SceneState model
+        @Environment(SceneState.self) private var scene
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
         /// The state values of the `Music Video`
         @State private var musicVideo: Video.Details.MusicVideo
         /// Init the `View`
@@ -43,7 +45,7 @@ extension MusicVideoView {
                     }
                 /// Update the state from the library
                     .task(id: kodi.library.musicVideos) {
-                        if let update = MusicVideoView.update(musicVideo: musicVideo) {
+                        if let update = update(musicVideo: musicVideo) {
                             musicVideo = update
                         }
                     }
@@ -63,6 +65,17 @@ extension MusicVideoView {
                     .backport.focusSection()
                 PartsView.TextMore(item: musicVideo)
             }
+        }
+
+        /// Update a Music Video
+        /// - Parameter musicVideo: The current Music Video
+        /// - Returns: The updated Music Video
+        func update(musicVideo: Video.Details.MusicVideo) -> Video.Details.MusicVideo? {
+            let update = kodi.library.musicVideos.first { $0.id == musicVideo.id }
+            if let update, let details = scene.detailSelection.item.kodiItem, details.media == .musicVideo {
+                scene.detailSelection = .musicVideo(musicVideo: update)
+            }
+            return update
         }
     }
 }

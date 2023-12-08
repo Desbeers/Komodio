@@ -89,37 +89,6 @@ extension PartsView {
 
 extension PartsView {
 
-    // MARK: Parts Status Message
-
-    /// The message to show when a router item is empty, loading or Kodi is offline
-    struct StatusMessage: View {
-        /// The Router item
-        let router: Router
-        /// The status
-        let status: Parts.Status
-
-        // MARK: Body of the View
-
-        /// The body of the `View`
-        var body: some View {
-            VStack {
-                switch status {
-                case .offline:
-                    Text(status.offlineMessage)
-                case .empty:
-                    Text(router.item.empty)
-                default:
-                    EmptyView()
-                }
-            }
-            .font(StaticSetting.platform == .macOS ? .title2 : .title3)
-            .frame(maxHeight: .infinity)
-        }
-    }
-}
-
-extension PartsView {
-
     // MARK: Parts Rotating Icon
 
     /// View a  icon image that can rotate

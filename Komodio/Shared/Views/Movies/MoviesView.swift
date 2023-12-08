@@ -13,47 +13,48 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for all Movies in the library (shared)
 struct MoviesView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The collection in this view (movies + movie sets)
     @State private var collection: [AnyKodiItem] = []
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.mainSelection.item.title)
-    /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State var sorting = SwiftlyKodiAPI.List.Sort()
+    /// The loading status of the View
+    @State private var status: ViewStatus = .loading
 
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: scene.mainSelection, status: state)
+                status.message(router: scene.mainSelection)
                     .backport.focusable()
             }
         }
-        .animation(.default, value: state)
+        .animation(.default, value: status)
         .task(id: filter) {
             if kodi.status != .loadedLibrary {
-                state = .offline
+                status = .offline
             } else if kodi.library.movies.isEmpty {
-                state = .empty
+                status = .empty
             } else {
+                sorting = KodiListSort.getSortSetting(sortID: scene.mainSelection.item.title)
                 getMovies()
             }
         }
-        .onChange(of: sorting) { [sorting] newSorting in
-            if sorting.method == .title || newSorting.method == .title {
+        .onChange(of: sorting) { oldSorting, newSorting in
+            if oldSorting.method == .title || newSorting.method == .title {
                 getMovies()
             }
         }
-        .onChange(of: kodi.library.movies) { _ in
+        .onChange(of: kodi.library.movies) {
             getMovies()
         }
     }
@@ -64,11 +65,20 @@ struct MoviesView: View {
     @ViewBuilder var content: some View {
         ContentView.Wrapper(
             header: {
-                PartsView
-                    .DetailHeader(
-                        title: scene.detailSelection.item.title,
-                        subtitle: scene.detailSelection.item.description
-                    )
+                switch filter {
+                case .playlist(let file):
+                    PartsView
+                        .DetailHeader(
+                            title: file.title,
+                            subtitle: "Movie playlist"
+                        )
+                default:
+                    PartsView
+                        .DetailHeader(
+                            title: scene.mainSelection.item.title,
+                            subtitle: scene.mainSelection.item.description
+                        )
+                }
             },
             content: {
                 CollectionView(
@@ -106,7 +116,7 @@ struct MoviesView: View {
             var items = sorting.method == .title ? movies.swapMoviesForSet() : movies
             items.sort(sortItem: sorting)
             /// Set the loading state
-            state = items.isEmpty ? .empty : .ready
+            status = items.isEmpty ? .empty : .ready
             /// Map the items in collections
             collection = items.anykodiItem()
         }

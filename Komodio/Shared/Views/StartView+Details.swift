@@ -15,7 +15,7 @@ extension StartView {
     /// SwiftUI `View` with details of the StartView
     struct Details: View {
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
         /// Rotate the record
         @State private var rotate: Bool = false
 

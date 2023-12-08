@@ -15,9 +15,9 @@ struct MusicVideosView: View {
     /// The selected artist
     let artist: Audio.Details.Artist
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The collection to show in this view. Can be a single Music Video or an album with Music Videos
     @State private var collection: [AnyKodiItem] = []
     /// The sorting
@@ -31,7 +31,7 @@ struct MusicVideosView: View {
             .task(id: artist) {
                 getItems()
             }
-            .onChange(of: kodi.library.musicVideos) { _ in
+            .onChange(of: kodi.library.musicVideos) {
                 getItems()
             }
     }

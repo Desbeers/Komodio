@@ -13,7 +13,7 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for library statistics (shared)
 struct StatisticsView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
 
     // MARK: Body of the View
 
@@ -91,7 +91,7 @@ extension StatisticsView {
     /// SwiftUI `View` with host info
     struct HostInfo: View {
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
 
         // MARK: Body of the View
 

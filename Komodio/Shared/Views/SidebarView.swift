@@ -14,9 +14,9 @@ import SwiftlyKodiAPI
 /// - Note: tvOS has its own `View`
 struct SidebarView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The search query
     /// - Note: This is here to show or hide the 'search' menu item
     @Binding var searchField: String
@@ -32,14 +32,14 @@ struct SidebarView: View {
             List(selection: $sidebarSelection) {
                 content
             }
-            .onChange(of: sidebarSelection) { selection in
+            .onChange(of: sidebarSelection) { _, selection in
                 if let selection {
                     Task { @MainActor in
                         scene.mainSelection = selection
                     }
                 }
             }
-            .onChange(of: scene.mainSelection) { selection in
+            .onChange(of: scene.mainSelection) { _, selection in
                 if selection != sidebarSelection {
                     Task { @MainActor in
                         sidebarSelection = selection

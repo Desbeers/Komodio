@@ -16,9 +16,9 @@ import AVFoundation
 /// It is a bit of a hack to tame the Siri remote...
 struct SidebarView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The focus state of the sidebar
     @FocusState private var isFocused: Bool
     /// Bool for the confirmation dialog
@@ -36,16 +36,8 @@ struct SidebarView: View {
         .search
     ]
     /// The sidebar selection
-    @State var sidebarSelection: Int = 0 {
-        didSet {
-            /// Set the sidebar selection as a ``Router`` item
-            scene.mainSelection = routerItems[sidebarSelection]
-            /// Reset the details
-            scene.detailSelection = routerItems[sidebarSelection]
-            /// Reset the navigationStack
-            scene.navigationStack = []
-        }
-    }
+    @State var sidebarSelection: Int = 0
+
     // MARK: Body of the View
 
     /// The body of the `View`
@@ -91,16 +83,12 @@ struct SidebarView: View {
             onUp: {
                 if isFocused {
                     sidebarSelection = sidebarSelection == 0 ? 0 : sidebarSelection - 1
-                    /// Play the navigation sound
-                    SiriRemoteController.playNavigationSound()
                 }
             },
             onDown: {
                 if isFocused {
                     sidebarSelection = routerItems.count - 1 == sidebarSelection ?
                     sidebarSelection : sidebarSelection + 1
-                    /// Play the navigation sound
-                    SiriRemoteController.playNavigationSound()
                 }
             }
         )
@@ -110,11 +98,21 @@ struct SidebarView: View {
                 sidebarSelection = 0
             }
         }
-        .onChange(of: scene.toggleSidebar) { _ in
+        .task(id: sidebarSelection) {
+            /// Set the sidebar selection as a ``Router`` item
+            scene.mainSelection = routerItems[sidebarSelection]
+            /// Reset the details
+            scene.detailSelection = routerItems[sidebarSelection]
+            /// Reset the navigationStack
+            scene.navigationStack = []
+            /// Play the navigation sound
+            SiriRemoteController.playNavigationSound()
+        }
+        .onChange(of: scene.toggleSidebar) {
             isFocused = true
         }
-        .onChange(of: isFocused) { value in
-            scene.sidebarFocus = value
+        .onChange(of: isFocused) {
+            scene.sidebarFocus = isFocused
         }
         .onExitCommand {
             isPresentingConfirmExit = true

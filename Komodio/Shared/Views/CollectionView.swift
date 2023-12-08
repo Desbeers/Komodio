@@ -20,8 +20,6 @@ struct CollectionView: View {
     var showIndex: Bool = true
     /// The items for the collection
     @State private var items = ScrollCollection<AnyKodiItem>()
-    /// The sorting
-    @State private var sort: SwiftlyKodiAPI.List.Sort = .init()
     /// The body of the `View`
     var body: some View {
         ScrollCollectionView(
@@ -41,22 +39,26 @@ struct CollectionView: View {
                     .minimumScaleFactor(0.1)
             },
             cell: { _, item in
-                Cell(item: item.item, sorting: sort, collectionStyle: collectionStyle)
+                Cell(item: item.item, sorting: sorting, collectionStyle: collectionStyle)
+                    .scrollTransition(.animated) { content, phase in
+                        content
+                            .opacity(phase != .identity ? 0.3 : 1)
+                    }
             }
         )
         .task(id: collection) {
-            sort = sorting
             let items = collection.map(\.item).sorted(sortItem: sorting)
             self.items = Utils.groupKodiItems(items: items, sorting: sorting)
         }
+#if os(tvOS)
+        .contentMargins(.horizontal, StaticSetting.cellPadding, for: .scrollContent)
+#endif
         .backport.focusSection()
-        .animation(.default, value: collection)
         .animation(.default, value: items.map(\.0))
         .animation(.default, value: collectionStyle)
-        .onChange(of: sorting) { newSort in
+        .onChange(of: sorting) {
             let items = collection.map(\.item).sorted(sortItem: sorting)
-            self.items = Utils.groupKodiItems(items: items, sorting: newSort)
-            self.sort = newSort
+            self.items = Utils.groupKodiItems(items: items, sorting: sorting)
         }
     }
 }

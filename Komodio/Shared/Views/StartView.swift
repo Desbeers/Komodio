@@ -13,9 +13,9 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` when starting Komodio (shared)
 struct StartView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// Bool for the confirmation dialog
     @State private var isPresentingConfirmReloadLibrary: Bool = false
     /// The opacity of the View

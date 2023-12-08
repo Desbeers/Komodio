@@ -13,13 +13,13 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for Favorites (shared)
 struct FavouritesView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The items in this view
     @State private var items: [AnyKodiItem] = []
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
     /// The collection in this view
     @State private var collection: [AnyKodiItem] = []
     /// The sorting
@@ -30,22 +30,22 @@ struct FavouritesView: View {
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: .favourites, status: state)
+                status.message(router: .favourites)
             }
         }
-        .animation(.default, value: state)
+        .animation(.default, value: status)
         .task {
             if kodi.status != .loadedLibrary {
-                state = .offline
+                status = .offline
             } else if kodi.favourites.isEmpty {
-                state = .empty
+                status = .empty
             } else {
                 getFavorites()
-                state = .ready
+                status = .ready
             }
         }
         .task(id: kodi.favourites) {

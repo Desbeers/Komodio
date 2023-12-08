@@ -13,7 +13,7 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for the main content (shared)
 struct ContentView: View {
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
 
     // MARK: Body of the View
 

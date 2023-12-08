@@ -17,19 +17,6 @@ enum MovieView {
 
 extension MovieView {
 
-    /// Update a Movie
-    /// - Parameter movie: The current Movie
-    /// - Returns: The optional updated Movie
-    static func update(movie: Video.Details.Movie) -> Video.Details.Movie? {
-        if let update = KodiConnector.shared.library.movies.first(where: { $0.id == movie.id }), update != movie {
-            return update
-        }
-        return nil
-    }
-}
-
-extension MovieView {
-
     /// Define the cell parameters for a collection
     /// - Parameters:
     ///   - movie: The movie

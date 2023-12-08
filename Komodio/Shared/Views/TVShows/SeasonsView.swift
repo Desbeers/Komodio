@@ -15,9 +15,9 @@ struct SeasonsView: View {
     /// The TV show
     let tvshow: Video.Details.TVShow
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The seasons to show in this view
     @State private var seasons: [Video.Details.Season] = []
 
@@ -31,7 +31,7 @@ struct SeasonsView: View {
                 getTVShowSeasons()
             }
         /// Action when the episodes of the Kodi library are updated
-            .onChange(of: kodi.library.episodes) { _ in
+            .onChange(of: kodi.library.episodes) {
                 getTVShowSeasons()
             }
     }

@@ -13,15 +13,15 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for next Episode of TV shows that are not completed (shared)
 struct UpNextView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The Episodes in this view
     @State private var episodes: [Video.Details.Episode] = []
     /// The optional selected Episode
     @State private var selectedEpisode: Video.Details.Episode?
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
     /// The opacity of the View
     @State private var opacity: Double = 0
     /// The collection in this view
@@ -34,15 +34,15 @@ struct UpNextView: View {
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: .unwachedEpisodes, status: state)
+                status.message(router: .unwachedEpisodes)
             }
         }
         .animation(.default, value: episodes)
-        .animation(.default, value: state)
+        .animation(.default, value: status)
         .task(id: kodi.library.episodes) {
             getUnwatchedEpisodes()
         }
@@ -80,7 +80,7 @@ struct UpNextView: View {
                     CollectionView(
                         collection: $collection,
                         sorting: $sorting,
-                        collectionStyle: .asGrid
+                        collectionStyle: .asPlain
                     )
                     .frame(width: StaticSetting.contentWidth, alignment: .leading)
                     .backport.focusSection()
@@ -98,9 +98,9 @@ struct UpNextView: View {
     private func getUnwatchedEpisodes() {
         opacity = 1
         if kodi.status != .loadedLibrary {
-            state = .offline
+            status = .offline
         } else if kodi.library.tvshows.isEmpty {
-            state = .empty
+            status = .empty
         } else {
             episodes = Array(kodi.library.episodes
                 .filter { $0.playcount == 0 && $0.season != 0 }
@@ -108,7 +108,7 @@ struct UpNextView: View {
                 .unique { $0.tvshowID }
                 .sorted { $0.dateAdded > $1.dateAdded }
             )
-            state = episodes.isEmpty ? .empty : .ready
+            status = episodes.isEmpty ? .empty : .ready
 
             /// Map the items in collections
             collection = episodes.anykodiItem()

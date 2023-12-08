@@ -82,7 +82,7 @@ extension Modifiers {
         /// Avoid error in the `View extension` when Strict Concurrency Checking is set to 'complete'
         nonisolated init() {}
         /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        @Environment(SceneState.self) private var scene
         /// The modifier
         func body(content: Content) -> some View {
             content
@@ -175,8 +175,7 @@ extension Modifiers {
 #endif
 
 #if os(tvOS)
-                .buttonStyle(.card)
-                .foregroundColor(selected ? .primary.opacity(0.6) : .primary)
+                .tvOSButton(style: style)
                 .padding(.top, style == .asPlain ? StaticSetting.cellPadding : 0)
                 .padding(.bottom, StaticSetting.cellPadding)
                 .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)
@@ -202,3 +201,18 @@ extension View {
         modifier(Modifiers.CellButton(item: item, selected: selected, style: style))
     }
 }
+
+#if os(tvOS)
+
+extension View {
+
+    @ViewBuilder func tvOSButton(style: ScrollCollectionStyle) -> some View {
+        if style == .asList {
+            self.buttonStyle(.card)
+        } else {
+            self.buttonStyle(.borderless)
+        }
+    }
+}
+
+#endif

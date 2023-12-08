@@ -17,9 +17,9 @@ extension MovieView {
         /// The `Movie` to show
         private let selectedMovie: Video.Details.Movie
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
         /// The SceneState model
-        @EnvironmentObject private var scene: SceneState
+        @Environment(SceneState.self) private var scene
         /// The state values of the `Movie`
         @State private var movie: Video.Details.Movie
         /// Init the `View`
@@ -39,11 +39,21 @@ extension MovieView {
                     movie = selectedMovie
                 }
             /// Update the state from the library
-                .onChange(of: kodi.library.movies) { _ in
-                    if let update = MovieView.update(movie: movie) {
+                .onChange(of: kodi.library.movies) {
+                    if let update = update(movie: movie) {
                         movie = update
                     }
                 }
+        }
+
+        /// Update a Movie
+        /// - Parameter movie: The current Movie
+        /// - Returns: The optional updated Movie
+        func update(movie: Video.Details.Movie) -> Video.Details.Movie? {
+            if let update = kodi.library.movies.first(where: { $0.id == movie.id }), update != movie {
+                return update
+            }
+            return nil
         }
 
         // MARK: Content of the View
@@ -159,7 +169,7 @@ extension MovieView {
                     Spacer()
                     HStack {
                         Buttons.PlayedState(item: movie)
-                        Pickers.RatingWidgetSheet(item: movie)
+                        Pickers.RatingWidgetMenu(item: movie)
                     }
                     .labelStyle(.playLabel)
                     .buttonStyle(.playButton)

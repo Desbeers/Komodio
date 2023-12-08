@@ -17,7 +17,7 @@ extension MovieSetView {
         /// The `Movie Set` to show
         let selectedMovieSet: Video.Details.MovieSet
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
         /// The state values of the `Movie Set`
         @State private var movieSet: Video.Details.MovieSet
         /// Init the `View`
@@ -41,7 +41,7 @@ extension MovieSetView {
                         movieSet = selectedMovieSet
                     }
                 /// Update the state from the library
-                    .onChange(of: kodi.library.movieSets) { _ in
+                    .onChange(of: kodi.library.movieSets) {
                         if let update = MovieSetView.update(movieSet: movieSet) {
                             movieSet = update
                         }

@@ -77,7 +77,7 @@ extension DetailView {
             ScrollView {
                 ScrollViewReader { proxy in
                     fixedContent
-                        .onChange(of: scroll) { _ in
+                        .onChange(of: scroll) {
                             withAnimation(.easeOut(duration: 1)) {
                                 proxy.scrollTo(0, anchor: .top)
                             }

@@ -25,7 +25,7 @@ struct KomodioPlayerView: View {
     /// The Video item try want to play
     @State private var video: (any KodiItem)?
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
 #if os(visionOS)
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -37,7 +37,7 @@ struct KomodioPlayerView: View {
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .empty:
                 /// This should not happen
                 Text("Error")
@@ -77,13 +77,13 @@ struct KomodioPlayerView: View {
             }
         }
         .task {
-            state = await checkMedia()
+            status = await checkMedia()
         }
     }
 
     /// Check if we can play the media
     /// - Returns: The status
-    func checkMedia() async -> Parts.Status {
+    func checkMedia() async -> ViewStatus {
         let video = await Application.getItem(type: media.media, id: media.id)
         if let video, KomodioPlayerView.canPlay(video: video) {
             self.video = video

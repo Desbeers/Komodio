@@ -4,7 +4,7 @@
 
 ![Icon](https://github.com/Desbeers/Komodio/raw/main/Images/icon.png)
 
-**Komodio** is a video player for tvOS 16, macOS Ventura, iPadOS 16 and visionOS that can stream videos from your local Kodi host.
+**Komodio** is a video player for tvOS 17, macOS Sonoma, iPadOS 17 and visionOS that can stream videos from your local Kodi host.
 
 ![Komodio](https://github.com/Desbeers/Komodio/raw/main/Images/screenshot-macOS.jpg)
 

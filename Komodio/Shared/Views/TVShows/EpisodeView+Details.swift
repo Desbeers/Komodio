@@ -16,8 +16,10 @@ extension EpisodeView {
     struct Details: View {
         /// The `Episode` to show
         let selectedEpisode: Video.Details.Episode
+        /// The SceneState model
+        @Environment(SceneState.self) private var scene
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
         /// The state values of the `Episode`
         @State private var episode: Video.Details.Episode
         /// Init the `View`
@@ -44,7 +46,7 @@ extension EpisodeView {
                     }
                 /// Update the state from the library
                     .task(id: kodi.library.episodes) {
-                        if let update = EpisodeView.update(episode: episode) {
+                        if let update = update(episode: episode) {
                             episode = update
                         }
                     }
@@ -73,6 +75,17 @@ extension EpisodeView {
                 }
             }
             .padding(.bottom)
+        }
+
+        /// Update an Episode
+        /// - Parameter episode: The current Episode
+        /// - Returns: The updated Episode
+        func update(episode: Video.Details.Episode) -> Video.Details.Episode? {
+            let update = kodi.library.episodes.first { $0.id == episode.id }
+            if let update, let details = scene.detailSelection.item.kodiItem, details.media == .episode {
+                scene.detailSelection = .episode(episode: update)
+            }
+            return update
         }
     }
 }

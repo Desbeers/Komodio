@@ -13,7 +13,7 @@ import SwiftlyKodiAPI
 /// The Komodio App Scene (shared)
 @main struct KomodioApp: App {
     /// The KodiConnector model
-    @StateObject private var kodi: KodiConnector = .shared
+    @State private var kodi: KodiConnector = .shared
 
     // MARK: Body of the Scene
 
@@ -26,7 +26,7 @@ import SwiftlyKodiAPI
 
         Window("Komodio", id: "Main") {
             MainView()
-                .environmentObject(kodi)
+                .environment(kodi)
                 .task {
                     if kodi.status == .none {
                         /// Get the selected host (if any)
@@ -58,7 +58,7 @@ import SwiftlyKodiAPI
 
         WindowGroup {
             MainView()
-                .environmentObject(kodi)
+                .environment(kodi)
                 .task {
                     if kodi.status == .none {
                         /// Get the selected host (if any)
@@ -94,7 +94,7 @@ import SwiftlyKodiAPI
 
         WindowGroup {
             MainView()
-                .environmentObject(kodi)
+                .environment(kodi)
                 .task {
                     if kodi.status == .none {
                         /// Get the selected host (if any)

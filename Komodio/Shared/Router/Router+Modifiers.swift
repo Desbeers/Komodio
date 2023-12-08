@@ -15,7 +15,7 @@ extension Router {
         /// The current Router item
         let router: Router
         /// The SceneState model
-        @EnvironmentObject var scene: SceneState
+        @Environment(SceneState.self) private var scene
         /// The modifier
         func body(content: Content) -> some View {
             content

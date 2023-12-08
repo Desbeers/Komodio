@@ -13,9 +13,9 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for details of the selection (shared)
 struct DetailView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
 
     // MARK: Body of the View
 

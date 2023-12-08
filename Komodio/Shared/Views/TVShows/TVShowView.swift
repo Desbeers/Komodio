@@ -12,16 +12,7 @@ import SwiftlyKodiAPI
 
 /// SwiftUI `View` for a single TV show (shared)
 enum TVShowView {
-
-    /// Update a TVshow
-    /// - Parameter tvshow: The current TV show
-    /// - Returns: The updated TV show
-    static func update(tvshow: Video.Details.TVShow) -> Video.Details.TVShow? {
-        if let update = KodiConnector.shared.library.tvshows.first(where: { $0.id == tvshow.id }), update != tvshow {
-            return update
-        }
-        return nil
-    }
+    // Just a namespace
 }
 
 extension TVShowView {

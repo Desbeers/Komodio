@@ -13,32 +13,33 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for playlists (tvOS)
 struct PlaylistsView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
 
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: .moviePlaylists, status: state)
+                status.message(router: .moviePlaylists)
                     .focusable()
             }
         }
+        .animation(.default, value: status)
         .task(id: kodi.library.moviePlaylists) {
             if kodi.status != .loadedLibrary {
-                state = .offline
+                status = .offline
             } else if kodi.library.moviePlaylists.isEmpty {
-                state = .empty
+                status = .empty
             } else {
-                state = .ready
+                status = .ready
             }
             scene.detailSelection = .moviePlaylists
         }
@@ -59,7 +60,6 @@ struct PlaylistsView: View {
                 HStack {
                     ScrollView {
                         ForEach(kodi.library.moviePlaylists, id: \.file) { playlist in
-
                             Button(action: {
                                 scene.navigationStack.append(.moviePlaylist(file: playlist))
                                 scene.detailSelection = .moviePlaylist(file: playlist)
@@ -74,6 +74,7 @@ struct PlaylistsView: View {
                             .padding()
                         }
                     }
+                    .padding(.top, StaticSetting.detailPadding)
                     DetailView()
                         .frame(width: 800)
                 }

@@ -13,9 +13,9 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for search results
 struct SearchView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The movies to show
     @State private var movies: [Video.Details.Movie] = []
     /// The Music Videos to show
@@ -27,7 +27,7 @@ struct SearchView: View {
     /// The sorting
     @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "search", method: .media, order: .ascending)
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
     /// Bool if we have results
     var results: Bool {
         return !movies.isEmpty || !musicVideos.isEmpty || !tvshows.isEmpty
@@ -40,12 +40,12 @@ struct SearchView: View {
         VStack {
             content
         }
-        .animation(.default, value: state)
+        .animation(.default, value: status)
         .task(id: scene.query) {
             scene.detailSelection = .search
             search()
         }
-        .onChange(of: kodi.library) { _ in
+        .onChange(of: kodi.library) {
             search()
         }
     }
@@ -53,7 +53,8 @@ struct SearchView: View {
     // MARK: Content of the View
 
     /// The content of the `View`
-    var content: some View {
+    @ViewBuilder var content: some View {
+        @Bindable var scene = scene
         ContentView.Wrapper(
             header: {
                 PartsView.DetailHeader(
@@ -62,25 +63,27 @@ struct SearchView: View {
                 )
             },
             content: {
-                switch state {
-                case .ready:
-                    CollectionView(
-                        collection: $collection,
-                        sorting: $sorting,
-                        collectionStyle: scene.collectionStyle
-                    )
-                default:
-                    PartsView.StatusMessage(router: scene.mainSelection, status: state)
-                        .backport.focusable()
+                VStack {
+                    switch status {
+                    case .ready:
+                        CollectionView(
+                            collection: $collection,
+                            sorting: $sorting,
+                            collectionStyle: scene.collectionStyle
+                        )
+                    default:
+                        status.message(router: scene.mainSelection)
+                            .backport.focusable()
+                    }
                 }
+#if os(tvOS)
+                .searchable(text: $scene.query, placement: .automatic)
+#endif
             },
             buttons: {
                 Buttons.CollectionStyle()
             }
         )
-#if os(tvOS)
-        .searchable(text: $scene.query)
-#endif
     }
 
     /// Perform the search
@@ -96,12 +99,12 @@ struct SearchView: View {
             items += kodi.library.tvshows.search(scene.query)
 
             if items.isEmpty {
-                state = .empty
+                status = .empty
             } else {
 
                 /// Map the items in collections
                 collection = items.anykodiItem()
-                state = .ready
+                status = .ready
             }
         }
     }

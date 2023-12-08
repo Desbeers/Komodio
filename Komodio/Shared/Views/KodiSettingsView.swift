@@ -13,7 +13,7 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for Kodi settings (shared)
 struct KodiSettingsView: View {
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
 
     // MARK: Body of the View
 
@@ -46,7 +46,7 @@ extension KodiSettingsView {
     /// SwiftUI `View` for warning of Kodi settings
     struct Warning: View {
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
 
         // MARK: Body of the View
 

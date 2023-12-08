@@ -17,31 +17,17 @@ enum MusicVideoView {
 
 extension MusicVideoView {
 
-    /// Update a Music Video
-    /// - Parameter musicVideo: The current Music Video
-    /// - Returns: The updated Music Video
-    static func update(musicVideo: Video.Details.MusicVideo) -> Video.Details.MusicVideo? {
-        let update = KodiConnector.shared.library.musicVideos.first { $0.id == musicVideo.id }
-        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .musicVideo {
-            SceneState.shared.detailSelection = .musicVideo(musicVideo: update)
-        }
-        return update
-    }
-}
-
-extension MusicVideoView {
-
     /// Define the cell parameters for a collection
     /// - Parameters:
     ///   - movie: The music video
     ///   - style: The style of the collection
     /// - Returns: A ``KodiCell``
-    static func cell(musicVideo: Video.Details.MusicVideo, style: ScrollCollectionStyle) -> KodiCell {
+    static func cell(musicVideo: Video.Details.MusicVideo, router: Router) -> KodiCell {
+        @Environment(SceneState.self) var scene
         var stack: Router?
         var details: Router? = .musicVideo(musicVideo: musicVideo)
 #if canImport(UIKit)
-        let scene = SceneState.shared
-        if scene.mainSelection == .search {
+        if router == .search {
             stack = .musicVideo(musicVideo: musicVideo)
             details = nil
         }

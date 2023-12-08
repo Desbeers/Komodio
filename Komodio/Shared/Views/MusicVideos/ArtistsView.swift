@@ -13,15 +13,15 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for all Artists from Music Videos (shared)
 struct ArtistsView: View {
     /// The KodiConnector model
-    @EnvironmentObject var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The artists in this view
     @State var artists: [Audio.Details.Artist] = []
     /// The collection in this view
     @State private var collection: [AnyKodiItem] = []
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
     /// The sorting
     @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "artists", method: .title, order: .ascending)
 
@@ -30,21 +30,22 @@ struct ArtistsView: View {
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: .musicVideos, status: state)
+                status.message(router: .musicVideos)
             }
         }
+        .animation(.default, value: status)
         .task(id: kodi.library.musicVideos) {
             if kodi.status != .loadedLibrary {
-                state = .offline
+                status = .offline
             } else if kodi.library.musicVideos.isEmpty {
-                state = .empty
+                status = .empty
             } else {
                 getItems()
-                state = .ready
+                status = .ready
             }
         }
     }

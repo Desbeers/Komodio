@@ -259,7 +259,7 @@ extension Buttons {
         /// - Note: on macOS, this button is in the toolbar and ignored in ``CollectionView``
         var hide: Bool = true
         /// The SceneState model
-        @EnvironmentObject private var scene: SceneState
+        @Environment(SceneState.self) private var scene
         /// The body of the `View`
         var body: some View {
 #if os(macOS)
@@ -301,8 +301,6 @@ extension Buttons {
         @Binding var sorting: SwiftlyKodiAPI.List.Sort
         /// The media
         let media: Library.Media
-        /// Bool to show the Sheet (tvOS)
-        @State private var showSheet: Bool = false
         /// The body of the `View`
         var body: some View {
 #if os(macOS)
@@ -327,24 +325,18 @@ extension Buttons {
             .labelStyle(.titleAndIcon)
 #endif
 #if os(tvOS)
-            Button(
-                action: {
-                    showSheet.toggle()
-                },
-                label: {
-                    Label(
-                        title: {
-                            Text("\(sorting.method.shortLabel)")
-                        },
-                        icon: {
-                            Image(systemName: "arrow.up.arrow.down")
-                        }
-                    )
-                }
-            )
-            .sheet(isPresented: $showSheet) {
+            Menu(content: {
                 KodiListSort.SortPickerView(sorting: $sorting, media: media)
-            }
+            }, label: {
+                Label(
+                    title: {
+                        Text("\(sorting.method.shortLabel)")
+                    },
+                    icon: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                )
+            })
 #endif
         }
     }

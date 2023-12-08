@@ -15,25 +15,6 @@ enum Parts {
 
 extension Parts {
 
-    /// The state of  loading a View
-    enum Status {
-        /// The Task is loading the items
-        case loading
-        /// No items where found by the `Task`
-        case empty
-        /// The `Task` is done and items where found
-        case ready
-        /// The host is offline
-        case offline
-        /// The message when offline
-        var offlineMessage: String {
-            "Komodio is not connected to a host"
-        }
-    }
-}
-
-extension Parts {
-
     /// Filter for media lists
     enum Filter: Equatable {
         /// Do not filter

@@ -13,37 +13,38 @@ import SwiftlyKodiAPI
 /// SwiftUI `View` for all TV shows (shared)
 struct TVShowsView: View {
     /// The KodiConnector model
-    @EnvironmentObject private var kodi: KodiConnector
+    @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @EnvironmentObject private var scene: SceneState
+    @Environment(SceneState.self) private var scene
     /// The collection in this view
     @State private var collection: [AnyKodiItem] = []
     /// The sorting
-    @State private var sorting = KodiListSort.getSortSetting(sortID: SceneState.shared.mainSelection.item.title)
+    @State var sorting = SwiftlyKodiAPI.List.Sort()
     /// The loading state of the View
-    @State private var state: Parts.Status = .loading
+    @State private var status: ViewStatus = .loading
 
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch state {
+            switch status {
             case .ready:
                 content
             default:
-                PartsView.StatusMessage(router: .tvshows, status: state)
+                status.message(router: .tvshows)
             }
         }
-        .animation(.default, value: state)
+        .animation(.default, value: status)
         .task(id: kodi.library.tvshows) {
             if kodi.status != .loadedLibrary {
-                state = .offline
+                status = .offline
             } else if kodi.library.tvshows.isEmpty {
-                state = .empty
+                status = .empty
             } else {
+                sorting = KodiListSort.getSortSetting(sortID: scene.mainSelection.item.title)
                 getTVShows()
-                state = .ready
+                status = .ready
             }
         }
     }

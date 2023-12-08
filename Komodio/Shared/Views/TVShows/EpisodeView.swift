@@ -17,20 +17,6 @@ enum EpisodeView {
 
 extension EpisodeView {
 
-    /// Update an Episode
-    /// - Parameter episode: The current Episode
-    /// - Returns: The updated Episode
-    static func update(episode: Video.Details.Episode) -> Video.Details.Episode? {
-        let update = KodiConnector.shared.library.episodes.first { $0.id == episode.id }
-        if let update, let details = SceneState.shared.detailSelection.item.kodiItem, details.media == .episode {
-            SceneState.shared.detailSelection = .episode(episode: update)
-        }
-        return update
-    }
-}
-
-extension EpisodeView {
-
     /// Define the cell parameters for a collection
     /// - Parameters:
     ///   - movie: The episode

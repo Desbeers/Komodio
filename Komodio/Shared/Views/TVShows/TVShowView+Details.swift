@@ -17,7 +17,7 @@ extension TVShowView {
         /// The `TV show` to show
         private let selectedTVshow: Video.Details.TVShow
         /// The KodiConnector model
-        @EnvironmentObject private var kodi: KodiConnector
+        @Environment(KodiConnector.self) private var kodi
         /// The state values of the `TV show`
         @State private var tvshow: Video.Details.TVShow
         /// Init the `View`
@@ -42,11 +42,21 @@ extension TVShowView {
                     }
                 /// Update the state from the library
                     .task(id: kodi.library.tvshows) {
-                        if let update = TVShowView.update(tvshow: tvshow) {
+                        if let update = update(tvshow: tvshow) {
                             tvshow = update
                         }
                     }
             }
+        }
+
+        /// Update a TVshow
+        /// - Parameter tvshow: The current TV show
+        /// - Returns: The updated TV show
+        func update(tvshow: Video.Details.TVShow) -> Video.Details.TVShow? {
+            if let update = kodi.library.tvshows.first(where: { $0.id == tvshow.id }), update != tvshow {
+                return update
+            }
+            return nil
         }
 
         // MARK: Content of the View
