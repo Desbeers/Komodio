@@ -17,12 +17,15 @@ struct DetailView: View {
     /// The SceneState model
     @Environment(SceneState.self) private var scene
 
+    @State private var selection: Router = .start
+
+
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
         VStack {
-            switch scene.detailSelection {
+            switch selection {
             case .start:
                 StartView
                     .Details()
@@ -60,7 +63,10 @@ struct DetailView: View {
                 fallback
             }
         }
-        .animation(.default, value: scene.detailSelection)
+        .animation(.default, value: selection)
+        .task(id: scene.detailSelection) {
+            selection = scene.detailSelection
+        }
     }
 
     // MARK: Fallback of the View
@@ -70,8 +76,8 @@ struct DetailView: View {
 #if os(macOS)
         DetailView.Wrapper(
             scroll: nil,
-            title: scene.mainSelection.item.title,
-            subtitle: scene.mainSelection.item.description
+            title: selection.item.title,
+            subtitle: selection.item.description
         ) {
             fallbackIcon
         }
@@ -84,11 +90,13 @@ struct DetailView: View {
 
     /// The fallback icon
     @ViewBuilder private var fallbackIcon: some View {
-        Image(systemName: scene.mainSelection.item.icon)
+        Image(systemName: selection.item.icon)
             .resizable()
             .scaledToFit()
             .padding(80)
             .foregroundColor(.secondary)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .transition(.move(edge: .trailing))
+            .id(selection.item.icon)
     }
 }
