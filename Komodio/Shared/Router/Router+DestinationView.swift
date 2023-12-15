@@ -48,6 +48,7 @@ extension Router {
 #endif
             case .moviePlaylist(let file):
                 MoviesView(filter: .playlist(file: file))
+                    .id(file)
 
                 // MARK: TV shows
 

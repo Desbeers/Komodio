@@ -16,7 +16,6 @@
 		D71820792A8BA85A00C5AED6 /* StaticSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71820772A8BA85A00C5AED6 /* StaticSetting.swift */; };
 		D71C89C62A4845750077DB0F /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71C89C42A4845750077DB0F /* LabelStyles.swift */; };
 		D71D2FDD2A4ADCC700E6AE5A /* StartView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D2FDB2A4ADCC700E6AE5A /* StartView+Details.swift */; };
-		D7254F4E2959FCC800DC704B /* RotatingIconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */; };
 		D7269CC72A475A2100CFBFE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55F2905849A00037DC9 /* ContentView.swift */; };
 		D72BF72729D7058600CFA373 /* ContentView+Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72629D7058600CFA373 /* ContentView+Wrapper.swift */; };
 		D72BF72A29D715EE00CFA373 /* Hosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72BF72829D715EE00CFA373 /* Hosts.swift */; };
@@ -30,7 +29,6 @@
 		D747E3822A5F1DF400DF2F54 /* Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D779BEAF29882A67009FD90A /* Parts.swift */; };
 		D747E3832A5F1DF400DF2F54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
 		D747E3842A5F1DF400DF2F54 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = D747E34B2A5EAF4300DF2F54 /* Debug.swift */; };
-		D747E3852A5F1DF400DF2F54 /* RotatingIconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */; };
 		D747E3862A5F1DF400DF2F54 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D747E3892A5F1DF900DF2F54 /* Router+DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA23112A5099D600624D0D /* Router+DestinationView.swift */; };
 		D747E38A2A5F1DF900DF2F54 /* Router+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D766F5DE2A46EB10002DDB1C /* Router+Modifiers.swift */; };
@@ -109,6 +107,8 @@
 		D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* HostItemView.swift */; };
 		D78164AA2A58A29600AD1BE9 /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78164A82A58A29600AD1BE9 /* SeasonView.swift */; };
 		D78164AE2A58A41F00AD1BE9 /* HostItemView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78164AC2A58A41F00AD1BE9 /* HostItemView+Details.swift */; };
+		D78486932B2C890300517EFC /* SwiftlyRotatingView in Frameworks */ = {isa = PBXBuildFile; productRef = D78486922B2C890300517EFC /* SwiftlyRotatingView */; };
+		D78486952B2C891100517EFC /* SwiftlyRotatingView in Frameworks */ = {isa = PBXBuildFile; productRef = D78486942B2C891100517EFC /* SwiftlyRotatingView */; };
 		D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D785A199294B63D900530F62 /* SwiftlyKodiAPI */; };
 		D785A19D294B640300530F62 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D785A19E294B640800530F62 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
@@ -168,7 +168,6 @@
 		D71BD56729059C6D00037DC9 /* SeasonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
 		D71C89C42A4845750077DB0F /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		D71D2FDB2A4ADCC700E6AE5A /* StartView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartView+Details.swift"; sourceTree = "<group>"; };
-		D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconModel.swift; sourceTree = "<group>"; };
 		D72BF72629D7058600CFA373 /* ContentView+Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+Wrapper.swift"; sourceTree = "<group>"; };
 		D72BF72829D715EE00CFA373 /* Hosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hosts.swift; sourceTree = "<group>"; };
 		D72DE7B42955F22500DD0FFB /* SidebarView (tvOS).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView (tvOS).swift"; sourceTree = "<group>"; };
@@ -224,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D78486932B2C890300517EFC /* SwiftlyRotatingView in Frameworks */,
 				D72DEEFE2A5F24E900EC0B8E /* AVKit.framework in Frameworks */,
 				D747E3C32A5F1EA100DF2F54 /* SwiftlyKodiAPI in Frameworks */,
 			);
@@ -233,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D78486952B2C891100517EFC /* SwiftlyRotatingView in Frameworks */,
 				D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +371,6 @@
 				D71BD55929057FE400037DC9 /* MediaItem.swift */,
 				D72BF72829D715EE00CFA373 /* Hosts.swift */,
 				D779BEAF29882A67009FD90A /* Parts.swift */,
-				D7254F4C2959FCC800DC704B /* RotatingIconModel.swift */,
 				D786DC992A45D7230086C8FB /* Backport.swift */,
 				D747E34B2A5EAF4300DF2F54 /* Debug.swift */,
 				D71820772A8BA85A00C5AED6 /* StaticSetting.swift */,
@@ -461,6 +461,7 @@
 			name = Komodio;
 			packageProductDependencies = (
 				D747E3C22A5F1EA100DF2F54 /* SwiftlyKodiAPI */,
+				D78486922B2C890300517EFC /* SwiftlyRotatingView */,
 			);
 			productName = KomodioMulti;
 			productReference = D747E3702A5F1D8800DF2F54 /* Komodio.app */;
@@ -483,6 +484,7 @@
 			name = KomodioTV;
 			packageProductDependencies = (
 				D785A199294B63D900530F62 /* SwiftlyKodiAPI */,
+				D78486942B2C891100517EFC /* SwiftlyRotatingView */,
 			);
 			productName = KomodioTV;
 			productReference = D7EFE44D293A4E7900CE9B8D /* KomodioTV.app */;
@@ -517,6 +519,7 @@
 			mainGroup = D71BD52829056A5C00037DC9;
 			packageReferences = (
 				D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */,
+				D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */,
 			);
 			productRefGroup = D71BD53229056A5C00037DC9 /* Products */;
 			projectDirPath = "";
@@ -673,7 +676,6 @@
 				D747E3BD2A5F1E2600DF2F54 /* Styles.swift in Sources */,
 				D747E3A92A5F1E1700DF2F54 /* SidebarView.swift in Sources */,
 				D747E3B22A5F1E1E00DF2F54 /* ArtistView+Details.swift in Sources */,
-				D747E3852A5F1DF400DF2F54 /* RotatingIconModel.swift in Sources */,
 				D747E3A02A5F1E1700DF2F54 /* ContentView+Wrapper.swift in Sources */,
 				D747E3822A5F1DF400DF2F54 /* Parts.swift in Sources */,
 				D747E3A72A5F1E1700DF2F54 /* DetailView+Wrapper.swift in Sources */,
@@ -736,7 +738,6 @@
 				D7EFE452293A4E7900CE9B8D /* MainView (tvOS).swift in Sources */,
 				D785A1A3294B665F00530F62 /* MovieSetView.swift in Sources */,
 				D71820792A8BA85A00C5AED6 /* StaticSetting.swift in Sources */,
-				D7254F4E2959FCC800DC704B /* RotatingIconModel.swift in Sources */,
 				D7269CC72A475A2100CFBFE9 /* ContentView.swift in Sources */,
 				D785A19D294B640300530F62 /* SceneState.swift in Sources */,
 				D76BFFD62993AF08000E8E54 /* PlaylistsView (tvOS).swift in Sources */,
@@ -1094,6 +1095,14 @@
 				kind = branch;
 			};
 		};
+		D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Desbeers/SwiftlyRotatingView";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1101,6 +1110,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */;
 			productName = SwiftlyKodiAPI;
+		};
+		D78486922B2C890300517EFC /* SwiftlyRotatingView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */;
+			productName = SwiftlyRotatingView;
+		};
+		D78486942B2C891100517EFC /* SwiftlyRotatingView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */;
+			productName = SwiftlyRotatingView;
 		};
 		D785A199294B63D900530F62 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;

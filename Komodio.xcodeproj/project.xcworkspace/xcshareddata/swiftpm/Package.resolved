@@ -6,7 +6,16 @@
       "location" : "https://github.com/Desbeers/SwiftlyKodiAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "8c499ebd05336256a7aa6ceb86597332d60f09a0"
+        "revision" : "5be6c1e5c3483d2609c543ce559e83186b8f0599"
+      }
+    },
+    {
+      "identity" : "swiftlyrotatingview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Desbeers/SwiftlyRotatingView",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2471b8bc2f715591bb1dc87d420145c73376c273"
       }
     },
     {

@@ -29,7 +29,7 @@ extension StartView {
                 title: kodi.host.name,
                 subtitle: kodi.status.message
             ) {
-                PartsView.RotatingIcon(rotate: $rotate)
+                PartsView.RotatingIcon(rotate: rotate)
             }
             .animation(.default, value: kodi.status)
             .task(id: kodi.status) {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
+import SwiftlyRotatingView
 
 // MARK: Parts View
 
@@ -93,10 +94,8 @@ extension PartsView {
 
     /// View a  icon image that can rotate
     struct RotatingIcon: View {
-        /// The RotatingAnimationModel
-        @StateObject var rotateModel = RotatingIconModel()
         /// Do we want to rotate or not
-        @Binding var rotate: Bool
+        let rotate: Bool
 
         // MARK: Body of the View
 
@@ -108,12 +107,12 @@ extension PartsView {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .shadow(radius: minSize(size: geometry) / 50)
-                    Image("RotatingIconForeground")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.white)
-                    /// The custom rotator
-                        .modifier(RotatingIconModel.Rotate(rotate: rotateModel.rotating, status: $rotateModel.status))
+                    RotatingView(speed: 5, rotate: rotate) {
+                        Image("RotatingIconForeground")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.white)
+                    }
                 }
                 /// Below is needed or else the View will not center
                 .frame(
@@ -121,22 +120,6 @@ extension PartsView {
                     height: geometry.size.height,
                     alignment: .center
                 )
-            }
-            .animation(
-                rotateModel.rotating ? rotateModel.foreverAnimation : .linear(duration: 0),
-                value: rotateModel.rotating
-            )
-            .task(id: rotate) {
-                switch rotate {
-                case true:
-                    /// Start the rotation
-                    /// - Note: It will start with some delay to make it more smoother
-                    await rotateModel.startRotating()
-                case false:
-                    /// Tell the model we like to stop
-                    /// - Note: It will be stopped when the animation is completed
-                    rotateModel.stopRotating()
-                }
             }
         }
 
