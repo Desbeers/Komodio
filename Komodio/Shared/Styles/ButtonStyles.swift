@@ -27,6 +27,9 @@ extension Styles {
                 .background(selected ? Color.accentColor : Color.secondary.opacity(0.1))
                 .cornerRadius(StaticSetting.cornerRadius)
                 .backport.hoverEffect()
+#if os(macOS)
+                .scaleEffect(selected && style == .asGrid ? 1.1 : 1)
+#endif
         }
     }
 }

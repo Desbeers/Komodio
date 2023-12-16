@@ -27,9 +27,10 @@ extension ContentView {
 #if os(macOS)
             HStack {
                 buttons()
-                    .padding([.top, .horizontal])
                     .pickerStyle(.segmented)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding([.top, .horizontal])
             content()
 #endif
 

@@ -63,11 +63,6 @@ struct MainView: View {
             })
         .background(Color.primary.opacity(0.1))
         .setBackground()
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                Buttons.CollectionStyle(hide: false)
-            }
-        }
 #endif
 
 #if os(iOS) || os(visionOS)

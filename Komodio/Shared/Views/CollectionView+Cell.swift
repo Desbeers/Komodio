@@ -77,14 +77,6 @@ extension CollectionView {
                 .aspectRatio(contentMode: .fill)
                 .watchStatus(of: item)
                 .frame(width: cell.poster.width, height: cell.poster.height)
-                .overlay(alignment: .bottom) {
-                    if let sorting, sorting.method != .title, collectionStyle == .asGrid {
-                        PartsView.SortLabel(item: item, sorting: sorting)
-                            .font(.caption)
-                            .frame(maxWidth: .infinity)
-                            .background(.thinMaterial)
-                    }
-                }
         }
         /// The fanart of the `View`
         @ViewBuilder var fanart: some View {
@@ -124,10 +116,6 @@ extension CollectionView {
                     .lineLimit(2)
                     .minimumScaleFactor(0.5)
                 Text(cell.subtitle)
-                if let sorting, sorting.method != .title {
-                    PartsView.SortLabel(item: item, sorting: sorting)
-                        .font(.caption)
-                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

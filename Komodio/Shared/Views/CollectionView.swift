@@ -31,7 +31,7 @@ struct CollectionView: View {
             header: { header in
                 Text(header.sectionLabel)
                     .font(.headline)
-                    .padding()
+                    .padding(StaticSetting.cellPadding)
                     .frame(maxWidth: .infinity)
                     .background(.thinMaterial)
                     .padding(.bottom, StaticSetting.cellPadding)

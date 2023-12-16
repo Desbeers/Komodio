@@ -58,7 +58,7 @@ struct StartView: View {
             content: {
                 HStack(alignment: .top, spacing: 0) {
 #if !os(macOS)
-                    DetailView()
+                    Details()
                         .backport.focusSection()
 #endif
                     ScrollView {
@@ -74,6 +74,13 @@ struct StartView: View {
                     .padding(.leading, StaticSetting.detailPadding)
                     .frame(maxWidth: .infinity)
                 }
+#if os(tvOS)
+                .padding(
+                    .leading,
+                    scene.sidebarFocus ? StaticSetting.sidebarWidth * 0.6 : 0
+                )
+                .animation(.default, value: scene.sidebarFocus)
+#endif
             },
             buttons: {}
         )

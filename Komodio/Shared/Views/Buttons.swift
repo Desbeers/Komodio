@@ -255,25 +255,10 @@ extension Buttons {
 
     /// Button for selecting the collection style
     struct CollectionStyle: View {
-        /// Bool to hide this button
-        /// - Note: on macOS, this button is in the toolbar and ignored in ``CollectionView``
-        var hide: Bool = true
         /// The SceneState model
         @Environment(SceneState.self) private var scene
         /// The body of the `View`
         var body: some View {
-#if os(macOS)
-            if hide {
-                EmptyView()
-            } else {
-                content
-            }
-#else
-            content
-#endif
-        }
-        /// The content of the `View`
-        var content: some View {
             Button(
                 action: {
                     Task { @MainActor in
