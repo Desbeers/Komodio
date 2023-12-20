@@ -14,6 +14,14 @@ extension DetailView {
 
     /// SwiftUI `View` to wrap the ``DetailView``
     struct Wrapper<Content: View>: View {
+        /// Init the `View`
+        init(scroll: String? = nil, part: Bool = false, title: String? = nil, subtitle: String? = nil, @ViewBuilder content: () -> Content) {
+            self.scroll = scroll
+            self.part = part
+            self.title = title
+            self.subtitle = subtitle
+            self.content = content()
+        }
         /// Wrap the view in a `ScrollView` when set
         let scroll: String?
         /// View the details as part of another View
@@ -23,7 +31,7 @@ extension DetailView {
         /// The optional subtitle
         var subtitle: String?
         /// The content of the `View`
-        @ViewBuilder var content: () -> Content
+        let content: Content
 
         // MARK: Body of the View
 
@@ -90,8 +98,9 @@ extension DetailView {
         @ViewBuilder var fixedContent: some View {
             VStack(spacing: 0) {
                 header
+                /// - Note: Give it an ID so we can scroll to the top when the content changed
                     .id(0)
-                content()
+                content
                     .padding()
             }
         }

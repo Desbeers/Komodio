@@ -17,7 +17,7 @@ struct DetailView: View {
     /// The SceneState model
     @Environment(SceneState.self) private var scene
 
-    @State private var selection: Router = .start
+    @State private var selection: Router = .fallback
 
 
     // MARK: Body of the View
@@ -59,6 +59,8 @@ struct DetailView: View {
             case .hostItemSettings:
                 HostItemView
                     .Details()
+            case .fallback:
+                Color.clear
             default:
                 fallback
             }
@@ -97,6 +99,7 @@ struct DetailView: View {
             .foregroundColor(.secondary)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .transition(.move(edge: .trailing))
+        /// - Note: Give it an ID to trigger the transition
             .id(selection.item.icon)
     }
 }

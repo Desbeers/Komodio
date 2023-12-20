@@ -21,7 +21,7 @@ struct MoviesView: View {
     /// The optional filter
     var filter: Parts.Filter = .none
     /// The sorting
-    @State var sorting = SwiftlyKodiAPI.List.Sort()
+    @State private var sorting = SwiftlyKodiAPI.List.Sort()
     /// The loading status of the View
     @State private var status: ViewStatus = .loading
 

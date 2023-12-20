@@ -19,7 +19,7 @@ struct TVShowsView: View {
     /// The collection in this view
     @State private var collection: [AnyKodiItem] = []
     /// The sorting
-    @State var sorting = SwiftlyKodiAPI.List.Sort()
+    @State private var sorting = SwiftlyKodiAPI.List.Sort()
     /// The loading state of the View
     @State private var status: ViewStatus = .loading
 

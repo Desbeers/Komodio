@@ -17,7 +17,7 @@ struct ArtistsView: View {
     /// The SceneState model
     @Environment(SceneState.self) private var scene
     /// The artists in this view
-    @State var artists: [Audio.Details.Artist] = []
+    @State private var artists: [Audio.Details.Artist] = []
     /// The collection in this view
     @State private var collection: [AnyKodiItem] = []
     /// The loading state of the View

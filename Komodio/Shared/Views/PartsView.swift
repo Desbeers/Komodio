@@ -113,6 +113,20 @@ extension PartsView {
                             .aspectRatio(contentMode: .fit)
                             .foregroundColor(.white)
                     }
+                    Circle()
+                        .fill(.black)
+                        .mask(alignment: .top) {
+                            LinearGradient(
+                                stops: [
+                                    Gradient.Stop(color: .clear, location: .zero),
+                                    Gradient.Stop(color: .accent.opacity(0.2), location: 0.4),
+                                    Gradient.Stop(color: .accent.opacity(0.5), location: 1.0)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        }
+                        .padding(minSize(size: geometry) * 0.08)
                 }
                 /// Below is needed or else the View will not center
                 .frame(

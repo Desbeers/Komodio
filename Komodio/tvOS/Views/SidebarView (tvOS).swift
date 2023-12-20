@@ -36,7 +36,7 @@ struct SidebarView: View {
         .search
     ]
     /// The sidebar selection
-    @State var sidebarSelection: Int = 0
+    @State private var sidebarSelection: Int = 0
 
     // MARK: Body of the View
 

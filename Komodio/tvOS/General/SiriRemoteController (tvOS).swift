@@ -106,7 +106,7 @@ extension Modifiers {
         // MARK: Private stuff
 
         /// The shared controller class
-        @State var controller: SiriRemoteController = SiriRemoteController()
+        @State private var controller: SiriRemoteController = SiriRemoteController()
         /// swipeDistance is how much x/y values needs to be acumelated by a gesture in order to consider a swipe (the distance the finger must travel)
         private let swipeDistance: Float = 0.7
         /// How much pause in milliseconds should be between gestures in order for a gesture to be considered a new gesture

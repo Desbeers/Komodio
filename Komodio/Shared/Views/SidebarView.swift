@@ -20,9 +20,8 @@ struct SidebarView: View {
     /// The search query
     /// - Note: This is here to show or hide the 'search' menu item
     @Binding var searchField: String
-
     /// The current selection in the ``SidebarView``
-    @State var sidebarSelection: Router? = .start
+    @State private var sidebarSelection: Router? = .start
 
     // MARK: Body of the View
 

@@ -11,12 +11,18 @@ extension ContentView {
 
     /// SwiftUI `View` to wrap the ``ContentView``
     struct Wrapper<Header: View, Content: View, Buttons: View>: View {
+        /// Init the `View`
+        init(@ViewBuilder header: () -> Header, @ViewBuilder content: () -> Content, @ViewBuilder buttons: () -> Buttons) {
+            self.header = header()
+            self.content = content()
+            self.buttons = buttons()
+        }
         /// The header of the `View`
-        @ViewBuilder var header: () -> Header
+        let header: Header
         /// The content of the `View`
-        @ViewBuilder var content: () -> Content
+        let content: Content
         /// The buttons of the `View`
-        @ViewBuilder var buttons: () -> Buttons
+        let buttons: Buttons
         /// Current color scheme
         @Environment(\.colorScheme) var colorScheme
 
@@ -26,21 +32,21 @@ extension ContentView {
         var body: some View {
 #if os(macOS)
             HStack {
-                buttons()
+                buttons
                     .pickerStyle(.segmented)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.top, .horizontal])
-            content()
+            content
 #endif
 
 #if os(tvOS)
             VStack(spacing: 0) {
-                header()
+                header
                     .frame(maxWidth: .infinity)
                     .overlay(alignment: .trailing) {
                         HStack(alignment: .firstTextBaseline) {
-                            buttons()
+                            buttons
                         }
                         .font(.caption)
                         .menuStyle(.button)
@@ -48,7 +54,7 @@ extension ContentView {
                         .foregroundColor(colorScheme == .light ? .gray : .black)
                     }
                     .focusSection()
-                content()
+                content
                     .padding(.horizontal, StaticSetting.cornerRadius)
                     .focusSection()
             }
@@ -61,7 +67,7 @@ extension ContentView {
 
 #if os(iOS) || os(visionOS)
             VStack(spacing: 0) {
-                header()
+                header
                     .frame(maxWidth: .infinity)
                 content()
                     .padding(.horizontal, StaticSetting.cornerRadius)
@@ -69,7 +75,7 @@ extension ContentView {
             .padding([.top, .horizontal])
             .frame(maxWidth: .infinity)
             .toolbar {
-                buttons()
+                buttons
             }
 #endif
         }

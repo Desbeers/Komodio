@@ -19,7 +19,7 @@ extension CollectionView {
         /// Collection style
         let collectionStyle: ScrollCollectionStyle
         /// The cell details
-        @State var cell: KodiCell = .init(title: "", subtitle: "")
+        @State private var cell: KodiCell = .init(title: "", subtitle: "")
         /// The SceneState model
         @Environment(SceneState.self) private var scene
         /// The body of the `View`
