@@ -219,6 +219,7 @@ extension Modifiers {
     /// A `ViewModifier` to set the safe area in full screen (macOS)
     struct FullScreenSafeArea: ViewModifier {
 #if os(macOS)
+        /// The AppDelegate model
         @Environment(AppDelegate.self) private var appDelegate
 #endif
         /// The modifier

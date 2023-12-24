@@ -82,7 +82,7 @@
 		D74AA1F12B34B68000741B0D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AA1F02B34B68000741B0D /* StartView.swift */; };
 		D74AA1F22B34B68000741B0D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AA1F02B34B68000741B0D /* StartView.swift */; };
 		D750D00329B50A8900088E0F /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750D00129B50A8900088E0F /* FavouritesView.swift */; };
-		D7592F182B35CE3E00AB6125 /* AppDelegate (macOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F172B35CE3E00AB6125 /* AppDelegate (macOS).swift */; };
+		D7592F182B35CE3E00AB6125 /* AppDelegate (macOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F172B35CE3E00AB6125 /* AppDelegate (macOS).swift */; platformFilters = (macos, ); };
 		D7592F1A2B35F71900AB6125 /* ShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F192B35F71900AB6125 /* ShelfView.swift */; };
 		D7592F1B2B35F71900AB6125 /* ShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F192B35F71900AB6125 /* ShelfView.swift */; };
 		D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
@@ -124,7 +124,7 @@
 		D785A1A8294B7F8E00530F62 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71170B22934E8570059FCD3 /* MovieView.swift */; };
 		D785A1A9294B7FA000530F62 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55729057F1A00037DC9 /* Buttons.swift */; };
 		D786DC9B2A45D7230086C8FB /* Backport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DC992A45D7230086C8FB /* Backport.swift */; };
-		D7A9B7C82A94B591007FD0A3 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A9B7C72A94B591007FD0A3 /* ImmersiveView.swift */; };
+		D7A9B7C82A94B591007FD0A3 /* ImmersiveView (visionOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A9B7C72A94B591007FD0A3 /* ImmersiveView (visionOS).swift */; platformFilters = (xros, ); };
 		D7B49BE22953262A00BBCB80 /* SiriRemoteController (tvOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B49BE12953262A00BBCB80 /* SiriRemoteController (tvOS).swift */; };
 		D7BA23132A5099D600624D0D /* Router+DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA23112A5099D600624D0D /* Router+DestinationView.swift */; };
 		D7BE6B982B37086D0051CEFD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BE6B972B37086D0051CEFD /* SettingsView.swift */; };
@@ -203,7 +203,7 @@
 		D78164AC2A58A41F00AD1BE9 /* HostItemView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HostItemView+Details.swift"; sourceTree = "<group>"; };
 		D786DC612A45D0E30086C8FB /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		D786DC992A45D7230086C8FB /* Backport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backport.swift; sourceTree = "<group>"; };
-		D7A9B7C72A94B591007FD0A3 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		D7A9B7C72A94B591007FD0A3 /* ImmersiveView (visionOS).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImmersiveView (visionOS).swift"; sourceTree = "<group>"; };
 		D7B49BE12953262A00BBCB80 /* SiriRemoteController (tvOS).swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SiriRemoteController (tvOS).swift"; sourceTree = "<group>"; };
 		D7BA23112A5099D600624D0D /* Router+DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Router+DestinationView.swift"; sourceTree = "<group>"; };
 		D7BE6B972B37086D0051CEFD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -413,6 +413,7 @@
 				D71BD55529057E6600037DC9 /* DetailView.swift */,
 				D7D000F929D1FED3007973C0 /* DetailView+Wrapper.swift */,
 				D74AA1F02B34B68000741B0D /* StartView.swift */,
+				D7592F192B35F71900AB6125 /* ShelfView.swift */,
 				D7BE6B972B37086D0051CEFD /* SettingsView.swift */,
 				D71D2FDB2A4ADCC700E6AE5A /* StartView+Details.swift */,
 				D7EFE467293CDDE600CE9B8D /* KodiSettingsView.swift */,
@@ -427,7 +428,6 @@
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
 				D76BFFD7299521B0000E8E54 /* Pickers.swift */,
 				D71BD561290595FF00037DC9 /* Modifiers.swift */,
-				D7592F192B35F71900AB6125 /* ShelfView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -453,7 +453,7 @@
 		D7B2F7E52B386E2900A6211B /* visionOS */ = {
 			isa = PBXGroup;
 			children = (
-				D7A9B7C72A94B591007FD0A3 /* ImmersiveView.swift */,
+				D7A9B7C72A94B591007FD0A3 /* ImmersiveView (visionOS).swift */,
 			);
 			path = visionOS;
 			sourceTree = "<group>";
@@ -679,7 +679,7 @@
 				D747E3912A5F1E0600DF2F54 /* MovieView.swift in Sources */,
 				D747E3AF2A5F1E1700DF2F54 /* HostItemView.swift in Sources */,
 				D747E3902A5F1E0600DF2F54 /* MoviesView.swift in Sources */,
-				D7A9B7C82A94B591007FD0A3 /* ImmersiveView.swift in Sources */,
+				D7A9B7C82A94B591007FD0A3 /* ImmersiveView (visionOS).swift in Sources */,
 				D747E3AC2A5F1E1700DF2F54 /* KodiSettingsView.swift in Sources */,
 				D747E39C2A5F1E0D00DF2F54 /* TVShowsView.swift in Sources */,
 				D747E38D2A5F1E0600DF2F54 /* MovieSetView.swift in Sources */,

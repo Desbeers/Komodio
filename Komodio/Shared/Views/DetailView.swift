@@ -16,9 +16,8 @@ struct DetailView: View {
     @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
     @Environment(SceneState.self) private var scene
-
+    /// The current detail selection
     @State private var selection: Router = .fallback
-
 
     // MARK: Body of the View
 

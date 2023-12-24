@@ -2,7 +2,7 @@
 //  KodiCell.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 16/08/2023.
+//  © 2023 Nick Berendsen
 //
 
 import Foundation

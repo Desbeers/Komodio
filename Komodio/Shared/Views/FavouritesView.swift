@@ -2,7 +2,7 @@
 //  FavouritesView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 05/03/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

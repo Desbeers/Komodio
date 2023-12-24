@@ -2,7 +2,7 @@
 //  CollectionView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 14/08/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

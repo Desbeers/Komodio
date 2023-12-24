@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-#if os(macOS)
-
+/// The AppDelegate class (macOS)
 @Observable class AppDelegate: NSObject, NSApplicationDelegate {
     /// Bool if the main window is in fulll screen
     var fullScreen: Bool = false
@@ -38,14 +37,8 @@ import SwiftUI
             }
         }
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        /// Insert code here to tear down your application
-    }
-
+    /// Don't quit the application when we close the window
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        /// Don't quit the application when we close the window
         false
     }
 }
-#endif

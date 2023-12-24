@@ -2,7 +2,7 @@
 //  Router+Modifiers.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 24/06/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
@@ -38,7 +38,7 @@ extension Router {
 
 extension View {
 
-    /// Shortcut to the ``Router/AppendPlatformStuff``
+    /// Shortcut to the `AppendPlatformStuff`
     func appendPlatformStuff(router: Router) -> some View {
         modifier(Router.AppendPlatformStuff(router: router))
     }

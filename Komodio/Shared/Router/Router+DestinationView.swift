@@ -2,7 +2,7 @@
 //  Router+DestinationView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 01/07/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

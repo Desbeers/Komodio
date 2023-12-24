@@ -5,7 +5,6 @@
 //  © 2023 Nick Berendsen
 //
 
-#if os(visionOS)
 
 import SwiftUI
 import SwiftlyKodiAPI
@@ -67,4 +66,3 @@ struct ImmersiveView: View {
         }
     }
 }
-#endif

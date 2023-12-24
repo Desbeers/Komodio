@@ -28,8 +28,7 @@ custom_categories:
   - name: Observable Classes
     children:
     - SceneState
-    - RotatingIconModel
-    - SiriRemoteController
+    - AppDelegate
   - name: SwiftUI Views
     children:
     - MainView
@@ -38,6 +37,7 @@ custom_categories:
     - DetailView
     - CollectionView
     - StartView
+    - ShelfView
     - MoviesView
     - MovieView
     - MovieSetView
@@ -56,6 +56,7 @@ custom_categories:
     - StatisticsView
     - FavouritesView
     - HostItemView
+    - SettingsView
     - KomodioPlayerView
     - SearchView
     - KodiSettingsView

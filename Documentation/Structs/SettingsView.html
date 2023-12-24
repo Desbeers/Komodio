@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SettingsView Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/SettingsView" class="dashAnchor"></a>
+    <a title="SettingsView Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Komodio</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/desbeers/komodio/"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Komodio Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        SettingsView Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../General.html">General</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioApp.html">KomodioApp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/StaticSetting.html">StaticSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Router.html">Router</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Router/DestinationView.html">– DestinationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Router/AppendPlatformStuff.html">– AppendPlatformStuff</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiCell.html">KodiCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts.html">Parts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/Filter.html">– Filter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Parts/Platform.html">– Platform</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Hosts.html">Hosts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Backport.html">Backport</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Observable%20Classes.html">Observable Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SceneState.html">SceneState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../SwiftUI%20Views.html">SwiftUI Views</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MainView.html">MainView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SidebarView.html">SidebarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentView.html">ContentView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentView/Wrapper.html">– Wrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DetailView.html">DetailView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DetailView/Wrapper.html">– Wrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionView.html">CollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionView/Cell.html">– Cell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView.html">StartView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StartView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ShelfView.html">ShelfView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ShelfView/Media.html">– Media</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MoviesView.html">MoviesView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MovieView.html">MovieView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MovieView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView.html">MovieSetView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MovieSetView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TVShowsView.html">TVShowsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TVShowView.html">TVShowView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TVShowView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SeasonsView.html">SeasonsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SeasonView.html">SeasonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SeasonView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EpisodeView.html">EpisodeView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EpisodeView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpNextView.html">UpNextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ArtistsView.html">ArtistsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ArtistView.html">ArtistView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ArtistView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MusicVideosView.html">MusicVideosView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoView.html">MusicVideoView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoAlbumView.html">MusicVideoAlbumView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MusicVideoAlbumView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatisticsView.html">StatisticsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/StatisticsLabel.html">– StatisticsLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatisticsView/HostInfo.html">– HostInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FavouritesView.html">FavouritesView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView.html">HostItemView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HostItemView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SettingsView.html">SettingsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioPlayerView.html">KomodioPlayerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KomodioPlayerView/CantPlay.html">– CantPlay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchView.html">SearchView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiSettingsView.html">KodiSettingsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KodiSettingsView/Details.html">– Details</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView.html">PartsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/DetailHeader.html">– DetailHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/RotatingIcon.html">– RotatingIcon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PartsView/TextMore.html">– TextMore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons.html">Buttons</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Player.html">– Player</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/PlayedState.html">– PlayedState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Play.html">– Play</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/Resume.html">– Resume</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/CollectionStyle.html">– CollectionStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/BackButton.html">– BackButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Buttons/CollectionSort.html">– CollectionSort</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers.html">Pickers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers/RatingWidget.html">– RatingWidget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Pickers/RatingWidgetMenu.html">– RatingWidgetMenu</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers.html">Modifiers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/WatchStatus.html">– WatchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/DetailsFontStyle.html">– DetailsFontStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/SetBackground.html">– SetBackground</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/FanartStyle.html">– FanartStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/CellButton.html">– CellButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Modifiers/FullScreenSafeArea.html">– FullScreenSafeArea</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Modifiers.html">Modifiers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Modifiers/RoundedCorner.html">– RoundedCorner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles.html">Styles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/CellButton.html">– CellButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/PlayButton.html">– PlayButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/PlayLabel.html">– PlayLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Styles/DetailLabel.html">– DetailLabel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/ButtonStyle.html">ButtonStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LabelStyle.html">LabelStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/View.html">View</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/View.html">View</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Color.html">Color</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SettingsView</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">SettingsView</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                </div>
+              </div>
+            <p>SwiftUI <code>View</code> for the main navigation (shared)</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV32isPresentingConfirmReloadLibrary33_D36D042345940EB12AABB26AB1313B41LLSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isPresentingConfirmReloadLibrary" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV32isPresentingConfirmReloadLibrary33_D36D042345940EB12AABB26AB1313B41LLSbvp">isPresentingConfirmReloadLibrary</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bool for the confirmation dialog</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@State</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">isPresentingConfirmReloadLibrary</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">nonmutating</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV5scene33_D36D042345940EB12AABB26AB1313B41LLAA10SceneStateCvp"></a>
+                    <a name="//apple_ref/swift/Property/scene" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV5scene33_D36D042345940EB12AABB26AB1313B41LLAA10SceneStateCvp">scene</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The SceneState model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Environment</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">scene</span><span class="p">:</span> <span class="kt"><a href="../Classes/SceneState.html">SceneState</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV4kodi33_D36D042345940EB12AABB26AB1313B41LL14SwiftlyKodiAPI0L9ConnectorCvp"></a>
+                    <a name="//apple_ref/swift/Property/kodi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV4kodi33_D36D042345940EB12AABB26AB1313B41LL14SwiftlyKodiAPI0L9ConnectorCvp">kodi</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The KodiConnector model</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@Environment</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">kodi</span><span class="p">:</span> <span class="kt">KodiConnector</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Body%20of%20the%20View"></a>
+                <a name="//apple_ref/swift/Section/Body of the View" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Body%20of%20the%20View"></a>
+                  <h3 class="section-name"><span>Body of the View</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV4bodyQrvp"></a>
+                    <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV4bodyQrvp">body</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The body of the <code>View</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Content%20of%20the%20View"></a>
+                <a name="//apple_ref/swift/Section/Content of the View" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Content%20of%20the%20View"></a>
+                  <h3 class="section-name"><span>Content of the View</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV7contentQrvp"></a>
+                    <a name="//apple_ref/swift/Property/content" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV7contentQrvp">content</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The content of the <code>View</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">content</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Configured%20hosts"></a>
+                <a name="//apple_ref/swift/Section/Configured hosts" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Configured%20hosts"></a>
+                  <h3 class="section-name"><span>Configured hosts</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV15configuredHostsQrvp"></a>
+                    <a name="//apple_ref/swift/Property/configuredHosts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV15configuredHostsQrvp">configuredHosts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The configured hosts</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@ViewBuilder</span>
+<span class="k">var</span> <span class="nv">configuredHosts</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Actions%20for%20the%20selected%20hosts"></a>
+                <a name="//apple_ref/swift/Section/Actions for the selected hosts" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Actions%20for%20the%20selected%20hosts"></a>
+                  <h3 class="section-name"><span>Actions for the selected hosts</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV7buttonsQrvp"></a>
+                    <a name="//apple_ref/swift/Property/buttons" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV7buttonsQrvp">buttons</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Actions for the selected Kodi</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">buttons</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/New%20hosts"></a>
+                <a name="//apple_ref/swift/Section/New hosts" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/New%20hosts"></a>
+                  <h3 class="section-name"><span>New hosts</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7Komodio12SettingsViewV8newHostsQrvp"></a>
+                    <a name="//apple_ref/swift/Property/newHosts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7Komodio12SettingsViewV8newHostsQrvp">newHosts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The new hosts</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@ViewBuilder</span>
+<span class="k">var</span> <span class="nv">newHosts</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2023 <a class="link" href="https://desbeers.nl" target="_blank" rel="external noopener">Nick Berendsen</a>. All rights reserved. (Last updated: 2023-12-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

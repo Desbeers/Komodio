@@ -2,7 +2,7 @@
 //  ButtonStyles.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 25/06/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

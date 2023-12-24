@@ -2,7 +2,7 @@
 //  StaticSetting.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 15/08/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI

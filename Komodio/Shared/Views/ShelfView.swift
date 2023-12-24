@@ -2,7 +2,7 @@
 //  ShelfView.swift
 //  Komodio
 //
-//  Created by Nick Berendsen on 22/12/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
@@ -97,11 +97,15 @@ struct ShelfView: View {
 
 extension ShelfView {
 
+    /// The media we cab show in the shelf
     enum Media: String, CaseIterable {
+        /// Random movies
         case randomMovies = "Random Movies"
+        /// Unwatched movies
         case unwatchedMovies = "Unwatched Movies"
+        /// Unwatched episodes
         case unwatchedEpisodes = "Unwatched Episodes"
-
+        /// The corresponding `Router` item for the media
         var router: Router {
             switch self {
             case .randomMovies:
@@ -117,6 +121,7 @@ extension ShelfView {
 
 extension ShelfView {
 
+    /// Get the selected media from the library
     private var getMedia: [any KodiItem] {
         switch media {
         case.unwatchedMovies:
@@ -131,6 +136,7 @@ extension ShelfView {
 
 extension ShelfView {
 
+    /// SwiftUI `Picker` for the ``Media``
     var mediaPicker: some View {
         Picker(selection: $media) {
             ForEach(Media.allCases, id: \.self) { media in

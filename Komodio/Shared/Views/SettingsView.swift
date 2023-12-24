@@ -1,15 +1,15 @@
 //
 //  SettingsView.swift
-//  Komodio
+//  Komodio (shared)
 //
-//  Created by Nick Berendsen on 23/12/2023.
+//  © 2023 Nick Berendsen
 //
 
 import SwiftUI
 import SwiftlyKodiAPI
 
+/// SwiftUI `View` for the main navigation (shared)
 struct SettingsView: View {
-
     /// Bool for the confirmation dialog
     @State private var isPresentingConfirmReloadLibrary: Bool = false
     /// The SceneState model
