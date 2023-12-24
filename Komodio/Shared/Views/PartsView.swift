@@ -84,6 +84,9 @@ extension PartsView {
                 .saturation(0.4)
             )
             .cornerRadius(StaticSetting.cornerRadius)
+#if os(visionOS)
+            .roundedCorner(30, corners: [.topRight])
+#endif
         }
     }
 }

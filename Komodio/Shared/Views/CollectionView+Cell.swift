@@ -27,10 +27,14 @@ extension CollectionView {
             Button(
                 action: {
                     if let details = cell.details {
-                        scene.detailSelection = details
+                        withAnimation {
+                            scene.detailSelection = details
+                        }
                     }
                     if let stack = cell.stack, scene.navigationStack.last != stack {
-                        scene.navigationStack.append(stack)
+                        withAnimation {
+                            scene.navigationStack.append(stack)
+                        }
                     }
                 },
                 label: {
@@ -44,7 +48,7 @@ extension CollectionView {
                     }
                 }
             )
-            .cellButton(item: item, selected: scene.detailSelection == cell.details, style: collectionStyle)
+            .cellButton(item: item, cell: cell, style: collectionStyle)
             .task {
                 switch item {
                 case let movie as Video.Details.Movie:
@@ -56,7 +60,7 @@ extension CollectionView {
                 case let season as Video.Details.Season:
                     cell = SeasonView.cell(season: season, style: collectionStyle)
                 case let episode as Video.Details.Episode:
-                    cell = EpisodeView.cell(episode: episode, style: collectionStyle)
+                    cell = EpisodeView.cell(episode: episode, router: scene.mainSelection)
                 case let musicVideo as Video.Details.MusicVideo:
                     cell = MusicVideoView.cell(musicVideo: musicVideo, router: scene.mainSelection)
                 case let musicVideoAlbum as Video.Details.MusicVideoAlbum:
@@ -76,7 +80,14 @@ extension CollectionView {
             KodiArt.Poster(item: item)
                 .aspectRatio(contentMode: .fill)
                 .watchStatus(of: item)
+            #if os(macOS)
+                .frame(
+                    width: cell.poster.width * (collectionStyle == .asList ? 1 : 2),
+                    height: cell.poster.height * (collectionStyle == .asList ? 1 : 2)
+                )
+            #else
                 .frame(width: cell.poster.width, height: cell.poster.height)
+            #endif
         }
         /// The fanart of the `View`
         @ViewBuilder var fanart: some View {

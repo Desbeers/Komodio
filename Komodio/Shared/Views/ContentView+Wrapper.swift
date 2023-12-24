@@ -31,13 +31,10 @@ extension ContentView {
         /// The body of the `View`
         var body: some View {
 #if os(macOS)
-            HStack {
-                buttons
-                    .pickerStyle(.segmented)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.top, .horizontal])
             content
+                .toolbar {
+                    buttons
+                }
 #endif
 
 #if os(tvOS)
@@ -69,7 +66,18 @@ extension ContentView {
             VStack(spacing: 0) {
                 header
                     .frame(maxWidth: .infinity)
-                content()
+                    .overlay(alignment: .leading) {
+                        Komodio.Buttons.BackButton().padding()
+                    }
+                    .overlay(alignment: .trailing) {
+                        HStack(alignment: .firstTextBaseline) {
+                            buttons
+                        }
+                        .menuStyle(.button)
+                        .padding(.trailing)
+                        .foregroundColor(colorScheme == .light ? .gray : .black)
+                    }
+                content
                     .padding(.horizontal, StaticSetting.cornerRadius)
             }
             .padding([.top, .horizontal])

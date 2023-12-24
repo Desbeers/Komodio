@@ -12,8 +12,15 @@ import SwiftlyKodiAPI
 
 /// The Komodio App Scene (shared)
 @main struct KomodioApp: App {
+    /// The SceneState model
+    @State private var scene: SceneState = SceneState()
     /// The KodiConnector model
     @State private var kodi: KodiConnector = .shared
+
+#if os(macOS)
+    /// AppKit app delegate
+    @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
+#endif
 
     // MARK: Body of the Scene
 
@@ -26,6 +33,7 @@ import SwiftlyKodiAPI
 
         Window("Komodio", id: "Main") {
             MainView()
+                .environment(scene)
                 .environment(kodi)
                 .task {
                     if kodi.status == .none {
@@ -38,7 +46,13 @@ import SwiftlyKodiAPI
             CommandGroup(replacing: .newItem) {
                 /// Hide the "New Player" window option
             }
+            CommandGroup(replacing: .appSettings) {
+                Button("Settings…") {
+                    scene.navigationStack.append(.appSettings)
+                }
+            }
         }
+        .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1000, height: 800)
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $media in
@@ -58,6 +72,7 @@ import SwiftlyKodiAPI
 
         WindowGroup {
             MainView()
+                .environment(scene)
                 .environment(kodi)
                 .task {
                     if kodi.status == .none {
@@ -66,7 +81,7 @@ import SwiftlyKodiAPI
                     }
                 }
         }
-        // .defaultSize(width: 1920, height: 1080)
+        .defaultSize(width: 1920, height: 1080)
 
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $media in
@@ -94,6 +109,7 @@ import SwiftlyKodiAPI
 
         WindowGroup {
             MainView()
+                .environment(scene)
                 .environment(kodi)
                 .task {
                     if kodi.status == .none {
@@ -101,6 +117,9 @@ import SwiftlyKodiAPI
                         kodi.getSelectedHost()
                     }
                 }
+            #if os(iOS)
+                .statusBar(hidden: true)
+            #endif
         }
 #endif
     }

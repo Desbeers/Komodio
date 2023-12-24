@@ -22,30 +22,33 @@ struct CollectionView: View {
     @State private var items = ScrollCollection<AnyKodiItem>()
     /// The body of the `View`
     var body: some View {
-        ScrollCollectionView(
-            collection: items,
-            style: collectionStyle,
-            anchor: .top,
-            grid: StaticSetting.grid,
-            showIndex: showIndex,
-            header: { header in
-                Text(header.sectionLabel)
-                    .font(.headline)
-                    .padding(StaticSetting.cellPadding)
-                    .frame(maxWidth: .infinity)
-                    .background(.thinMaterial)
-                    .padding(.bottom, StaticSetting.cellPadding)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.1)
-            },
-            cell: { _, item in
-                Cell(item: item.item, sorting: sorting, collectionStyle: collectionStyle)
-                    .scrollTransition(.animated) { content, phase in
-                        content
-                            .opacity(phase != .identity ? 0.3 : 1)
-                    }
-            }
-        )
+        VStack(spacing: 0) {
+            Divider()
+            ScrollCollectionView(
+                collection: items,
+                style: collectionStyle,
+                anchor: .top,
+                grid: StaticSetting.grid,
+                showIndex: showIndex,
+                header: { header in
+                    Text(header.sectionLabel)
+                        .font(.headline)
+                        .padding(StaticSetting.cellPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(.thinMaterial)
+                        .padding(.bottom, StaticSetting.cellPadding)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
+                },
+                cell: { _, item in
+                    Cell(item: item.item, sorting: sorting, collectionStyle: collectionStyle)
+                        .scrollTransition(.animated) { content, phase in
+                            content
+                                .opacity(phase != .identity ? 0.3 : 1)
+                        }
+                }
+            )
+        }
         .task(id: collection) {
             let items = collection.map(\.item).sorted(sortItem: sorting)
             self.items = Utils.groupKodiItems(items: items, sorting: sorting)

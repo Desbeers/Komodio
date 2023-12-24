@@ -40,7 +40,7 @@ enum StaticSetting {
     static let fanartSize = CGSize(width: 960, height: 540)
 
     /// Define the grid layout
-    static let grid = [GridItem(.adaptive(minimum: 90))]
+    static let grid = [GridItem(.adaptive(minimum: 180))]
 
     /// The default corner radius
     static let cornerRadius: Double = 6

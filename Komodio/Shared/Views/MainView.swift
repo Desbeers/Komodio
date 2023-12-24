@@ -16,7 +16,7 @@ struct MainView: View {
     /// The KodiConnector model
     @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
-    @State private var scene: SceneState = SceneState()
+    @Environment(SceneState.self) private var scene
     /// The search field in the toolbar
     @State private var searchField: String = ""
     /// Set the column visibility
@@ -28,7 +28,6 @@ struct MainView: View {
     var body: some View {
         content
             .scrollContentBackground(.hidden)
-            .searchable(text: $searchField, prompt: "Search library")
             .task(id: searchField) {
                 await scene.updateSearch(query: searchField)
             }
@@ -40,6 +39,8 @@ struct MainView: View {
                 (scene.navigationStack.isEmpty ? scene.mainSelection : scene.navigationStack.last)
                 ?? scene.mainSelection
             }
+            .searchable(text: $searchField, placement: .sidebar, prompt: "Search library")
+            .setBackground()
             .environment(scene)
     }
 
@@ -47,22 +48,37 @@ struct MainView: View {
 
     /// The `NavigationSplitView`
     @ViewBuilder var content: some View {
+        @Bindable var scene2 = scene
 #if os(macOS)
         NavigationSplitView(
             columnVisibility: $columnVisibility,
             sidebar: {
                 SidebarView(searchField: $searchField)
-                    .navigationSplitViewColumnWidth(StaticSetting.sidebarWidth)
-            },
-            content: {
-                details
+                    .background(.blend.gradient.opacity(0.6))
             },
             detail: {
-                DetailView()
-                    .frame(maxWidth: .infinity)
-            })
-        .background(Color.primary.opacity(0.1))
-        .setBackground()
+                details
+                    .navigationBarBackButtonHidden(true)
+            }
+        )
+        .inspector(isPresented: $scene2.showInspector) {
+            DetailView()
+                .inspectorColumnWidth(min: 500, ideal: 800, max: 1200)
+                .background(.blend.gradient)
+                .fullScreenSafeArea()
+        }
+        .frame(maxWidth: .infinity)
+        .toolbar {
+            Buttons.BackButton()
+        }
+        .task(id: scene.detailSelection) {
+            switch scene.detailSelection {
+            case .start:
+                scene.showInspector = false
+            default:
+                scene.showInspector = true
+            }
+        }
 #endif
 
 #if os(iOS) || os(visionOS)
@@ -70,12 +86,15 @@ struct MainView: View {
             columnVisibility: $columnVisibility,
             sidebar: {
                 SidebarView(searchField: $searchField)
+                    .background(.blend.gradient)
                     .navigationSplitViewColumnWidth(StaticSetting.sidebarWidth)
             },
             detail: {
                 details
-            })
-        .background(Color.primary.opacity(0.1))
+                    .toolbar(.hidden)
+                    .ignoresSafeArea()
+            }
+        )
 #endif
     }
 
@@ -83,17 +102,13 @@ struct MainView: View {
 
     /// The details of the `NavigationSplitView`
     @ViewBuilder var details: some View {
+        @Bindable var scene = scene
 
 #if os(macOS)
-        NavigationStack(path: $scene.navigationStack.animation(.easeInOut)) {
+        NavigationStack(path: $scene.navigationStack) {
             ContentView()
                 .navigationSubtitle(scene.mainSelection.item.description)
         }
-        .navigationSplitViewColumnWidth(
-            min: StaticSetting.contentWidth,
-            ideal: StaticSetting.contentWidth,
-            max: StaticSetting.contentWidth * 2
-        )
 #endif
 
 #if os(iOS) || os(visionOS)

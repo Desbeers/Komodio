@@ -238,6 +238,7 @@ extension Buttons {
                         .opacity(0.8)
                 }
             }
+            .fixedSize(horizontal: true, vertical: false)
         }, icon: {
             if let color {
                 Image(systemName: icon)
@@ -261,9 +262,7 @@ extension Buttons {
         var body: some View {
             Button(
                 action: {
-                    Task { @MainActor in
-                        scene.collectionStyle = scene.collectionStyle == .asGrid ? .asList : .asGrid
-                    }
+                    scene.collectionStyle = scene.collectionStyle == .asGrid ? .asList : .asGrid
                 }, label: {
                     Label(
                         "List Style",
@@ -272,6 +271,31 @@ extension Buttons {
                 }
             )
             .labelStyle(.iconOnly)
+        }
+    }
+}
+
+extension Buttons {
+
+    // MARK: BackButton
+
+    /// Button to go back in the navigation stack
+    struct BackButton: View {
+        /// The SceneState model
+        @Environment(SceneState.self) private var scene
+        /// The body of the `View`
+        var body: some View {
+            if !scene.navigationStack.isEmpty {
+                Button(action: {
+                    withAnimation {
+                        _ = scene.navigationStack.removeLast()
+                    }
+                }, label: {
+                    Label(scene.mainSelection.item.title, systemImage: "chevron.backward")
+                })
+                .font(.headline)
+                .labelStyle(.titleAndIcon)
+            }
         }
     }
 }

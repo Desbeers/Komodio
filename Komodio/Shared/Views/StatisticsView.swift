@@ -79,7 +79,7 @@ extension StatisticsView {
             }
             .font(.system(size: subItem ? font * 0.75 : font))
             .padding(.top, subItem ? 0 : font / 2)
-            .padding(.bottom, font / 3)
+            .padding(.bottom, font / 4)
         }
     }
 }

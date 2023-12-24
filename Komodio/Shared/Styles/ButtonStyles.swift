@@ -28,7 +28,7 @@ extension Styles {
                 .cornerRadius(StaticSetting.cornerRadius)
                 .backport.hoverEffect()
 #if os(macOS)
-                .scaleEffect(selected && style == .asGrid ? 1.1 : 1)
+                .scaleEffect(selected && style == .asGrid ? 1.05 : 1)
 #endif
         }
     }

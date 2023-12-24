@@ -22,7 +22,7 @@ struct MoviesView: View {
     var filter: Parts.Filter = .none
     /// The sorting
     @State private var sorting = SwiftlyKodiAPI.List.Sort()
-    /// The loading status of the View
+    /// The loading status of the `View`
     @State private var status: ViewStatus = .loading
 
     // MARK: Body of the View
@@ -98,7 +98,7 @@ struct MoviesView: View {
 
     /// Get all movies from the library
     private func getMovies() {
-        Task { @MainActor in
+        Task {
             var movies: [Video.Details.Movie] = []
             switch filter {
             case .unwatched:

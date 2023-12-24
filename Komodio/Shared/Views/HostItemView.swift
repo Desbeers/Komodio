@@ -16,17 +16,30 @@ struct HostItemView: View {
     let host: HostItem
     /// The dismiss action
     @Environment(\.dismiss) private var dismiss
+    /// The SceneState model
+    @Environment(SceneState.self) private var scene
 
     // MARK: Body of the View
 
     /// The body of the `View`
     var body: some View {
-        VStack {
-            KodiHostItemView(host: host) {
-                dismiss()
+        DetailView.Wrapper(
+            scroll: nil,
+            part: false,
+            title: host.name,
+            subtitle: nil
+        ) {
+            VStack {
+                KodiHostItemView(host: host) {
+                    _ = scene.navigationStack.popLast()
+                    #if !os(macOS)
+                    /// - Note: The stack is one step deeper
+                    _ = scene.navigationStack.popLast()
+                    #endif
+                }
             }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

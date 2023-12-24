@@ -1,8 +1,8 @@
 //
 //  ImmersiveView.swift
-//  Komodio
+//  Komodio (visionOS)
 //
-//  Created by Nick Berendsen on 22/08/2023.
+//  © 2023 Nick Berendsen
 //
 
 #if os(visionOS)

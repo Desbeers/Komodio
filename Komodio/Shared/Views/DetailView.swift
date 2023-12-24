@@ -27,8 +27,7 @@ struct DetailView: View {
         VStack {
             switch selection {
             case .start:
-                StartView
-                    .Details()
+                Color.clear
             case .movie(let movie):
                 MovieView
                     .Details(movie: movie)
@@ -53,12 +52,14 @@ struct DetailView: View {
             case .musicVideoAlbum(let musicVideoAlbum):
                 MusicVideoAlbumView
                     .Details(musicVideoAlbum: musicVideoAlbum)
+            case .appSettings:
+                HostItemView
+                    .Details()
             case .kodiSettings:
                 KodiSettingsView
                     .Details()
-            case .hostItemSettings:
-                HostItemView
-                    .Details()
+            case .hostItemSettings(let host):
+                HostItemView(host: host)
             case .fallback:
                 Color.clear
             default:

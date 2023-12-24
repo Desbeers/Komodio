@@ -23,48 +23,28 @@ struct KodiSettingsView: View {
             header: {
                 PartsView
                     .DetailHeader(
-                        title: "Kodi Settings"
+                        title: "Settings on '\(KodiConnector.shared.host.name)'"
                     )
             },
             content: {
-                HStack(alignment: .top, spacing: 0) {
-                    Warning()
-#if canImport(UIKit)
-                    Details()
-#endif
+                Grid(
+                    alignment: .top,
+                    horizontalSpacing: 20,
+                    verticalSpacing: 20
+                ) {
+                    GridRow {
+                        KodiSettingView.Warning()
+                        KodiSettingView.setting(for: .servicesDevicename)
+                    }
+                    GridRow {
+                        KodiSettingView.setting(for: .videolibraryShowuUwatchedPlots)
+                        KodiSettingView.setting(for: .videolibraryGroupMovieSets)
+                    }
                 }
+                .backport.focusSection()
+                .frame(maxHeight: .infinity)
             },
             buttons: {}
         )
-    }
-}
-
-extension KodiSettingsView {
-
-    // MARK: Kodi Settings Warning
-
-    /// SwiftUI `View` for warning of Kodi settings
-    struct Warning: View {
-        /// The KodiConnector model
-        @Environment(KodiConnector.self) private var kodi
-
-        // MARK: Body of the View
-
-        /// The body of the `View`
-        var body: some View {
-            Label(
-                title: {
-                    // swiftlint:disable:next line_length
-                    Text("These are the **Kodi** settings on '\(kodi.host.name)', not **Komodio** settings.\n\n**Komodio** will use these settings, however, it will affect all clients, not just **Komodio**.")
-                }, icon: {
-                    Image(systemName: "exclamationmark.circle.fill")
-                        .foregroundColor(.red)
-                }
-            )
-            .padding()
-            .background(.thickMaterial)
-            .cornerRadius(10)
-            .padding()
-        }
     }
 }

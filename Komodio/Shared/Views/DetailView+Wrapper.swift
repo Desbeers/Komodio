@@ -38,6 +38,12 @@ extension DetailView {
         /// The body of the `View`
         var body: some View {
             wrapper
+#if os(tvOS)
+                .padding(.leading)
+            /// Extra padding for the sidebar
+                .padding(.leading, part ? 0 : StaticSetting.sidebarCollapsedWidth)
+                .ignoresSafeArea()
+#endif
             /// Use the full width
                 .frame(maxWidth: .infinity)
             /// Set the font style
@@ -64,7 +70,7 @@ extension DetailView {
                 case true:
                     VStack {
                         Text(title)
-                            .font(.title)
+                            .font(.title2)
                             .lineLimit(1)
                             .minimumScaleFactor(0.2)
                         if let subtitle {
@@ -75,7 +81,13 @@ extension DetailView {
                     .padding(.top)
                 case false:
                     PartsView.DetailHeader(title: title, subtitle: subtitle)
+#if os(iOS) || os(visionOS)
+                        .overlay(alignment: .leading) {
+                            Komodio.Buttons.BackButton().padding()
+                        }
+#endif
                         .padding([.top, .horizontal])
+                        .fullScreenSafeArea()
                 }
             }
         }

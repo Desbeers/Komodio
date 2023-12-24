@@ -25,6 +25,12 @@ extension Router {
                 .setSiriExit()
 #elseif os(iOS)
                 .setBackground()
+                .toolbar(.hidden)
+                .ignoresSafeArea()
+#elseif os(visionOS)
+                .setBackground()
+                .toolbar(.hidden)
+                .ignoresSafeArea()
 #endif
         }
     }

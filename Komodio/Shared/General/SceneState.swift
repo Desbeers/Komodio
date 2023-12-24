@@ -45,6 +45,8 @@ import SwiftlyKodiAPI
     var movieItems: [Int] = []
     /// The list style of collections
     var collectionStyle: ScrollCollectionStyle = .asGrid
+    /// Show the inspector (macOS)
+    var showInspector: Bool = false
 }
 
 extension SceneState {

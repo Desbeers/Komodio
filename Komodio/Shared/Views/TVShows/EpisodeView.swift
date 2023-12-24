@@ -22,9 +22,15 @@ extension EpisodeView {
     ///   - movie: The episode
     ///   - style: The style of the collection
     /// - Returns: A ``KodiCell``
-    static func cell(episode: Video.Details.Episode, style: ScrollCollectionStyle) -> KodiCell {
-        let details: Router = .episode(episode: episode)
-        let stack: Router? = nil
+    static func cell(episode: Video.Details.Episode, router: Router) -> KodiCell {
+        var stack: Router?
+        var details: Router? = .episode(episode: episode)
+#if canImport(UIKit)
+        if router == .start || router == .favourites {
+            stack = .episode(episode: episode)
+            details = nil
+        }
+#endif
         return KodiCell(
             title: episode.title,
             subtitle: episode.subtitle,

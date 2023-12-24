@@ -16,168 +16,102 @@ struct StartView: View {
     @Environment(KodiConnector.self) private var kodi
     /// The SceneState model
     @Environment(SceneState.self) private var scene
-    /// Bool for the confirmation dialog
-    @State private var isPresentingConfirmReloadLibrary: Bool = false
-    /// The opacity of the View
-    /// - The View will have a delay to give Komodio some time to load a library
-    @State private var opacity: Double = 0
+    /// The loading status of the `View`
+    @State private var status: ViewStatus = .loading
 
     // MARK: Body of the View
 
     /// The body of the `View`
+
     var body: some View {
-        content
-            .opacity(opacity)
-            .animation(.default, value: opacity)
-            .task {
-                if kodi.status == .loadedLibrary {
-                    opacity = 1
-                } else {
-                    /// Give Komodio some time to connect to a host
-                    Task {
-                        try await Task.sleep(until: .now + .seconds(1), clock: .continuous)
-                        opacity = 1
+        VStack {
+#if os(macOS)
+            DetailView.Wrapper(
+                scroll: nil,
+                part: false,
+                title: kodi.host.name,
+                subtitle: kodi.status.message
+            ) {
+                content
+            }
+            .overlay(alignment: .topTrailing) {
+                Button {
+                    scene.navigationStack.append(.appSettings)
+                } label: {
+                    Image(systemName: "gear")
+                        .font(.headline)
+                        .padding(5)
+                }
+                .padding(35)
+                .buttonStyle(.borderedProminent)
+            }
+#else
+            ContentView.Wrapper(
+                header: {
+                    PartsView.DetailHeader(
+                        title: kodi.host.name,
+                        subtitle: kodi.status.message
+                    )
+                },
+                content: {
+                    content
+                },
+                buttons: {
+                    Button {
+                        scene.navigationStack.append(.appSettings)
+                    } label: {
+                        Image(systemName: "gear")
                     }
                 }
+            )
+#endif
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .fullScreenSafeArea()
+        .animation(.easeInOut(duration: 1), value: status)
+        .task(id: kodi.status) {
+
+            switch kodi.status {
+            case .loadedLibrary:
+                try? await Task.sleep(until: .now + .seconds(1), clock: .continuous)
+                status = .ready
+            case .offline:
+                status = .offline
+            case .outdatedLibrary:
+                status = .empty
+            default:
+                status = .loading
             }
+        }
     }
 
     // MARK: Content of the View
 
     /// The content of the `View`
     var content: some View {
-
-        /// `View` for tvOS and iOS
-        ContentView.Wrapper(
-            header: {
-                PartsView.DetailHeader(
-                    title: Router.start.item.title,
-                    subtitle: Router.start.item.description
-                )
-            },
-            content: {
-                HStack(alignment: .top, spacing: 0) {
-#if !os(macOS)
-                    Details()
-                        .backport.focusSection()
-#endif
-                    ScrollView {
-                        VStack {
-                            configuredHosts
-                            newHosts
-                        }
-                        .buttonStyle(.playButton)
-                        .labelStyle(.playLabel)
-                        .padding()
-                        .animation(.default, value: kodi.status)
-                    }
-                    .padding(.leading, StaticSetting.detailPadding)
-                    .frame(maxWidth: .infinity)
-                }
-#if os(tvOS)
-                .padding(
-                    .leading,
-                    scene.sidebarFocus ? StaticSetting.sidebarWidth * 0.6 : 0
-                )
-                .animation(.default, value: scene.sidebarFocus)
-#endif
-            },
-            buttons: {}
-        )
-    }
-
-    // MARK: Configured hosts
-
-    /// The configured hosts
-    @ViewBuilder var configuredHosts: some View {
-        if let hosts = Hosts.getConfiguredHosts() {
-            Text("Your Kodi's")
-                .font(.title)
-            Divider()
-            ForEach(hosts) { host in
-                NavigationLink(value: Router.hostItemSettings(host: host)) {
-                    Buttons.formatButtonLabel(
-                        title: host.name,
-                        subtitle: host.isOnline ? "Online" : "Offline",
-                        icon: "globe",
-                        color: host.isOnline ? host.isSelected ? .green : Color("AccentColor") : .red
+        VStack {
+            switch status {
+            case.ready:
+                ShelfView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            default:
+                status.message(router: scene.mainSelection)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            PartsView.RotatingIcon(rotate: true)
+                .visualEffect { initial, geometry in
+                    initial.scaleEffect(
+                        CGSize(
+                            width: status == .ready ? 0.8 : 1,
+                            height: status == .ready ? 0.8 : 1
+                        )
+                    )
+                    .offset(
+                        x: status == .ready ? geometry.frame(in: .global).width / 2 : 0,
+                        y: status == .ready ? geometry.frame(in: .global).height / 2 : 0
                     )
                 }
-                if host.isSelected {
-                    if kodi.status == .offline {
-                        KodiHostItemView.HostIsOffline()
-                    } else {
-                        buttons
-                            .opacity(0.8)
-                    }
-                }
-                Divider()
-            }
-        } else {
-            KodiHostItemView.NoHostSelected()
         }
-    }
-
-    // MARK: New hosts
-
-    /// The new hosts
-    @ViewBuilder var newHosts: some View {
-        if let newHosts = Hosts.getNewHosts() {
-            Text("New Kodi's")
-                .font(.title)
-            ForEach(newHosts) { host in
-                NavigationLink(value: Router.hostItemSettings(host: host)) {
-                    Label(title: {
-                        Text(host.name)
-                    }, icon: {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.orange)
-                    })
-                }
-            }
-        }
-    }
-
-    // MARK: Actions for the selected hosts
-
-    /// Actions for the selected Kodi
-    var buttons: some View {
-        VStack {
-            if kodi.status == .loadedLibrary {
-                StatisticsView()
-                    .frame(maxHeight: .infinity)
-            }
-            Button(action: {
-                isPresentingConfirmReloadLibrary = true
-            }, label: {
-                Buttons.formatButtonLabel(
-                    title: "Reload Library",
-                    subtitle: "Reload '\(kodi.host.name)'",
-                    icon: "arrow.triangle.2.circlepath"
-                )
-            })
-            .confirmationDialog(
-                "Are you sure?",
-                isPresented: $isPresentingConfirmReloadLibrary
-            ) {
-                Button("Reload the library") {
-                    Task {
-                        await kodi.loadLibrary(cache: false)
-                    }
-                }
-            } message: {
-                Text("Reloading the library takes some time")
-            }
-            NavigationLink(value: Router.kodiSettings) {
-                Buttons.formatButtonLabel(
-                    title: "Kodi Settings",
-                    subtitle: "Settings on '\(kodi.host.name)'",
-                    icon: "gear"
-                )
-            }
-        }
-        .padding(.bottom)
-        .disabled(kodi.status != .loadedLibrary && kodi.status != .outdatedLibrary)
-        .buttonStyle(.playButton)
     }
 }

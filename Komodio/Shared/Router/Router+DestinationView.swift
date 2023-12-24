@@ -26,6 +26,8 @@ extension Router {
                 FavouritesView()
             case .search:
                 SearchView()
+            case .appSettings:
+                SettingsView()
             case .kodiSettings:
                 KodiSettingsView()
             case .hostItemSettings(let host):

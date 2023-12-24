@@ -79,27 +79,20 @@ extension Modifiers {
 
     /// A `ViewModifier` to set the fanart background
     struct SetBackground: ViewModifier {
-        /// Avoid error in the `View extension` when Strict Concurrency Checking is set to 'complete'
-        nonisolated init() {}
-        /// The SceneState model
-        @Environment(SceneState.self) private var scene
         /// The modifier
         func body(content: Content) -> some View {
             content
                 .background(
                     ZStack {
                         Color.blend
-                        KodiArt.Fanart(item: scene.detailSelection.item.kodiItem, fallback: Image(.background))
-                            .grayscale(1)
+                        Image(.background)
+                            .resizable()
+                            .aspectRatio(1.778, contentMode: .fill)
                             .opacity(0.1)
-                            .scaledToFill()
+                            .blendMode(.luminosity)
                     }
-                    #if os(iOS)
-                        .ignoresSafeArea(.all, edges: .bottom)
-                    #else
                         .ignoresSafeArea()
-                    #endif
-                        .animation(.easeInOut(duration: 1), value: scene.detailSelection.item.kodiItem?.id)
+                        .scaledToFill()
                 )
         }
     }
@@ -158,10 +151,12 @@ extension Modifiers {
 
     /// A `ViewModifier` to style the button of a `KodiItem`
     struct CellButton: ViewModifier {
+        /// The SceneState model
+        @Environment(SceneState.self) private var scene
         /// The `KodiItem`
         let item: any KodiItem
-        /// Bool if the item is selected
-        let selected: Bool
+        /// The `KodiCell`
+        let cell: KodiCell
         /// The style of the cell
         let style: ScrollCollectionStyle
         /// The modifier
@@ -169,7 +164,7 @@ extension Modifiers {
             content
 
 #if os(macOS)
-                .buttonStyle(.cellButton(item: item, selected: selected, style: style))
+                .buttonStyle(.cellButton(item: item, selected: scene.detailSelection == cell.details, style: style))
                 .padding(.horizontal, style == .asList ? StaticSetting.cellPadding : 0)
                 .padding(.bottom, StaticSetting.cellPadding)
 #endif
@@ -182,12 +177,12 @@ extension Modifiers {
 #endif
 
 #if os(iOS)
-                .buttonStyle(.cellButton(item: item, selected: selected, style: style))
+                .buttonStyle(.cellButton(item: item, selected: scene.detailSelection == cell.details, style: style))
                 .padding(.bottom, StaticSetting.cellPadding)
 #endif
 
 #if os(visionOS)
-                .buttonStyle(.cellButton(item: item, selected: selected, style: style))
+                .buttonStyle(.cellButton(item: item, selected: scene.detailSelection == cell.details, style: style))
                 .padding(.bottom, StaticSetting.cellPadding)
 #endif
         }
@@ -197,8 +192,8 @@ extension Modifiers {
 extension View {
 
     /// A `ViewModifier` to style the button of a `KodiItem`
-    func cellButton(item: any KodiItem, selected: Bool, style: ScrollCollectionStyle) -> some View {
-        modifier(Modifiers.CellButton(item: item, selected: selected, style: style))
+    func cellButton(item: any KodiItem, cell: KodiCell, style: ScrollCollectionStyle) -> some View {
+        modifier(Modifiers.CellButton(item: item, cell: cell, style: style))
     }
 }
 
@@ -212,6 +207,64 @@ extension View {
         } else {
             self.buttonStyle(.borderless)
         }
+    }
+}
+
+#endif
+
+extension Modifiers {
+
+    // MARK: Full Screen modifier
+
+    /// A `ViewModifier` to set the safe area in full screen (macOS)
+    struct FullScreenSafeArea: ViewModifier {
+#if os(macOS)
+        @Environment(AppDelegate.self) private var appDelegate
+#endif
+        /// The modifier
+        func body(content: Content) -> some View {
+            content
+#if os(macOS)
+                .ignoresSafeArea(.all, edges: appDelegate.fullScreen ? .bottom : .all)
+#else
+                .ignoresSafeArea()
+#endif
+        }
+    }
+}
+
+extension View {
+
+    /// A `ViewModifier` to set the safe area in full screen (macOS)
+    func fullScreenSafeArea() -> some View {
+        modifier(Modifiers.FullScreenSafeArea())
+    }
+}
+
+#if canImport(UIKit)
+
+extension Modifiers {
+
+    // MARK: Rounded Corners
+
+    struct RoundedCorner: Shape {
+        var radius: CGFloat = .infinity
+        var corners: UIRectCorner = .allCorners
+
+        func path(in rect: CGRect) -> Path {
+            let path = UIBezierPath(
+                roundedRect: rect,
+                byRoundingCorners: corners,
+                cornerRadii: CGSize(width: radius, height: radius)
+            )
+            return Path(path.cgPath)
+        }
+    }
+}
+
+extension View {
+    func roundedCorner(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(Modifiers.RoundedCorner(radius: radius, corners: corners) )
     }
 }
 

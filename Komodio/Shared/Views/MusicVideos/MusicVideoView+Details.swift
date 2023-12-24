@@ -34,7 +34,7 @@ extension MusicVideoView {
         var body: some View {
             DetailView.Wrapper(
                 scroll: StaticSetting.platform == .tvOS ? nil : musicVideo.id,
-                part: StaticSetting.platform == .macOS ? false : true,
+                part: StaticSetting.platform == .macOS || scene.mainSelection != .musicVideos ? false : true,
                 title: musicVideo.title
             ) {
                 content

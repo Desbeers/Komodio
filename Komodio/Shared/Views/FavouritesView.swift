@@ -23,7 +23,7 @@ struct FavouritesView: View {
     /// The collection in this view
     @State private var collection: [AnyKodiItem] = []
     /// The sorting
-    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "favorites", method: .title, order: .ascending)
+    @State private var sorting = SwiftlyKodiAPI.List.Sort(id: "favorites", method: .media, order: .ascending)
 
     // MARK: Body of the View
 
@@ -44,6 +44,7 @@ struct FavouritesView: View {
             } else if kodi.favourites.isEmpty {
                 status = .empty
             } else {
+                sorting = KodiListSort.getSortSetting(sortID: "favorites")
                 getFavorites()
                 status = .ready
             }

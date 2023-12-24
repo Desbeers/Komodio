@@ -33,16 +33,13 @@ struct SidebarView: View {
             }
             .onChange(of: sidebarSelection) { _, selection in
                 if let selection {
-                    Task { @MainActor in
-                        scene.mainSelection = selection
-                    }
+                    scene.navigationStack = []
+                    scene.mainSelection = selection
                 }
             }
             .onChange(of: scene.mainSelection) { _, selection in
                 if selection != sidebarSelection {
-                    Task { @MainActor in
-                        sidebarSelection = selection
-                    }
+                    sidebarSelection = selection
                 }
             }
         }
@@ -100,8 +97,18 @@ struct SidebarView: View {
     /// - Parameter router: The ``Router`` item
     /// - Returns: A SwiftUI `View` with the sidebar item
     private func sidebarItem(router: Router) -> some View {
-        Label(router.item.title, systemImage: router.item.icon)
-            .tag(router)
-            .listItemTint(router.item.color)
+
+        Label(title: {
+            VStack(alignment: .leading) {
+                Text(router.item.title)
+                Text(router.item.description)
+                    .font(.caption)
+                    .opacity(0.5)
+            }
+        }, icon: {
+            Image(systemName: router.item.icon)
+        })
+        .tag(router)
+        .listItemTint(router.item.color)
     }
 }

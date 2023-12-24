@@ -50,7 +50,9 @@ struct MusicVideosView: View {
                     collectionStyle: scene.collectionStyle
                 )
             },
-            buttons: {}
+            buttons: {
+                Buttons.CollectionStyle()
+            }
         )
 #endif
 

@@ -26,6 +26,8 @@ extension KodiSettingsView {
                 title: "Settings on '\(KodiConnector.shared.host.name)'"
             ) {
                 ScrollView {
+                    KodiSettingView.Warning()
+                        .padding([.top, .horizontal])
                     KodiSettingView.setting(for: .servicesDevicename)
                         .padding([.top, .horizontal])
                     KodiSettingView.setting(for: .videolibraryShowuUwatchedPlots)
@@ -33,9 +35,6 @@ extension KodiSettingsView {
                     KodiSettingView.setting(for: .videolibraryGroupMovieSets)
                         .padding([.top, .horizontal])
                 }
-                .frame(maxWidth: .infinity)
-                .background(.ultraThinMaterial.opacity(0.8))
-                .cornerRadius(StaticSetting.cornerRadius)
             }
         }
     }

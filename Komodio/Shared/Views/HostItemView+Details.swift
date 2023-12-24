@@ -19,13 +19,16 @@ extension HostItemView {
 
         /// The body of the `View`
         var body: some View {
-            VStack {
+            DetailView.Wrapper(
+                scroll: nil,
+                part: StaticSetting.platform == .macOS ? false : true,
+                title: "Get remote access",
+                subtitle: nil
+            ) {
                 KodiHostItemView.KodiSettings()
                     .font(StaticSetting.platform == .macOS ? .title2 : .body)
+                    .frame(maxHeight: .infinity)
             }
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(10)
         }
     }
 }

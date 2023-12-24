@@ -29,7 +29,6 @@ struct MainView: View {
         NavigationStack(path: $scene.navigationStack) {
             ContentView()
         }
-        .setBackground()
         .setSiriExit()
         /// Put the ``SidebarView`` into the `safe area`.
         .safeAreaInset(edge: .leading, alignment: .top, spacing: 0) {
@@ -47,6 +46,7 @@ struct MainView: View {
                 .clipped()
                 .ignoresSafeArea()
         }
+        .setBackground()
         .task(id: kodi.status) {
             if kodi.status != .loadedLibrary {
                 isFocused = true

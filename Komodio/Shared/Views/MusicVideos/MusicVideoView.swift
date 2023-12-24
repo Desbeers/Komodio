@@ -23,11 +23,10 @@ extension MusicVideoView {
     ///   - style: The style of the collection
     /// - Returns: A ``KodiCell``
     static func cell(musicVideo: Video.Details.MusicVideo, router: Router) -> KodiCell {
-        @Environment(SceneState.self) var scene
         var stack: Router?
         var details: Router? = .musicVideo(musicVideo: musicVideo)
 #if canImport(UIKit)
-        if router == .search {
+        if router == .search || router == .favourites {
             stack = .musicVideo(musicVideo: musicVideo)
             details = nil
         }

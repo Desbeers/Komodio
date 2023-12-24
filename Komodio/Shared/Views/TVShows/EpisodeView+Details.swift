@@ -34,7 +34,7 @@ extension EpisodeView {
         var body: some View {
             DetailView.Wrapper(
                 scroll: StaticSetting.platform == .tvOS ? nil : episode.id,
-                part: StaticSetting.platform == .macOS ? false : true,
+                part: StaticSetting.platform == .macOS || scene.mainSelection != .unwachedEpisodes ? false : true,
                 title: episode.showTitle,
                 subtitle: "Season \(episode.season), episode \(episode.episode)"
             ) {
@@ -75,6 +75,10 @@ extension EpisodeView {
                 }
             }
             .padding(.bottom)
+#if os(tvOS)
+            /// - Note: Set the max with so it will never overlap the sidebar
+            .frame(maxWidth: 1400)
+#endif
         }
 
         /// Update an Episode
