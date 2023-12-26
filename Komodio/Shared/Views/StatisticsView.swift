@@ -67,6 +67,8 @@ extension StatisticsView {
                 return 25
             case .iPadOS:
                 return 24
+            case .visionOS:
+                return 18
             }
         }
         func makeBody(configuration: Configuration) -> some View {

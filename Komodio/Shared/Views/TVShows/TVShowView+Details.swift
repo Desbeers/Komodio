@@ -78,7 +78,7 @@ extension TVShowView {
                 }
             }
             .padding(.bottom)
-#if os(iOS)
+#if os(iOS) || os(visionOS)
             .toolbar {
                 Buttons.PlayedState(item: tvshow)
                     .labelStyle(.titleAndIcon)

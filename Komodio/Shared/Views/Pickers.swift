@@ -44,7 +44,7 @@ extension Pickers {
 #endif
                 }
             }
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(visionOS)
             .pickerStyle(.segmented)
             .labelsHidden()
 #endif

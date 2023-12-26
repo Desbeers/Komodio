@@ -227,6 +227,8 @@ extension Buttons {
                 return 20
             case .iPadOS:
                 return 14
+            case .visionOS:
+                return 14
             }
         }
         return Label(title: {

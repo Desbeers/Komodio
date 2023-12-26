@@ -128,7 +128,7 @@ enum StaticSetting {
 #if os(visionOS)
 
     /// The plaform
-    static let platform: Parts.Platform = .iPadOS
+    static let platform: Parts.Platform = .visionOS
 
     /// The width of the sidebar
     static let sidebarWidth: Double = 250

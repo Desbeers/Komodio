@@ -37,6 +37,8 @@ extension PartsView {
                 return 60
             case .iPadOS:
                 return 35
+            case .visionOS:
+                return 35
             }
         }
         /// The colors

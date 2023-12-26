@@ -51,9 +51,18 @@ import SwiftlyKodiAPI
                     scene.navigationStack.append(.appSettings)
                 }
             }
+            AboutPanelCommand(
+                title: "About Komodio",
+                credits: "A video client for Kodi"
+            )
+            GithubHelpCommand(
+                url: "https://github.com/Desbeers/Komodio",
+                replace: true
+            )
         }
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1000, height: 800)
+        
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $media in
             /// Check if `media` isn't `nil` and that we have a Kodi item
@@ -81,7 +90,6 @@ import SwiftlyKodiAPI
                     }
                 }
         }
-        .defaultSize(width: 1920, height: 1080)
 
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $media in
@@ -91,16 +99,14 @@ import SwiftlyKodiAPI
                     .navigationTitle(media.title)
             }
         }
-        // .windowStyle(.volumetric)
 
+        /// Immersive View
         ImmersiveSpace(id: "Fanart", for: MediaItem.self ) { $media in
             /// Check if media isn't `nil` and that we have a Kodi item
             if let media {
                 ImmersiveView(media: media)
             }
         }
-        // .immersionStyle(selection: .constant(.mixed), in: .mixed)
-        // .immersionStyle(selection: .constant(.full), in: .full)
         .immersionStyle(selection: .constant(.progressive), in: .progressive)
 
 #else

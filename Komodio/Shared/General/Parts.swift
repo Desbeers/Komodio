@@ -36,5 +36,7 @@ extension Parts {
         case tvOS
         /// iPadOS
         case iPadOS
+        /// visionOS
+        case visionOS
     }
 }

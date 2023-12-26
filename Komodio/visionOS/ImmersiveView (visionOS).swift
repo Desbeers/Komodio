@@ -52,7 +52,6 @@ struct ImmersiveView: View {
             Attachment(id: "movietitle") {
                 VStack {
                     Text(kodiItem?.title ?? "Playing a movie")
-                        .scaleEffect(x: -1, y: 1)
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
                         .padding(.top)
@@ -60,6 +59,7 @@ struct ImmersiveView: View {
                         .clipShape(.rect(cornerRadius: 30))
                 }
                 .frame(width: 200)
+                .scaleEffect(x: -1, y: 1)
                 .padding()
                 .glassBackgroundEffect()
             }

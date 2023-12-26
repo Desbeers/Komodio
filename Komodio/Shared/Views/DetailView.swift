@@ -85,7 +85,7 @@ struct DetailView: View {
         }
 #endif
 
-#if os(tvOS) || os(iOS)
+#if os(tvOS) || os(iOS) || os(visionOS)
         fallbackIcon
 #endif
     }
