@@ -2,7 +2,7 @@
 //  SiriRemoteController.swift
 //  Komodio (tvOS)
 //
-//  © 2023 Nick Berendsen
+//  © 2024 Nick Berendsen
 //
 // https://developer.apple.com/forums/thread/25440
 // https://stackoverflow.com/questions/59250277/detect-siri-remote-swipe-in-swiftui

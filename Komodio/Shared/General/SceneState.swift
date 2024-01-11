@@ -2,7 +2,7 @@
 //  SceneState.swift
 //  Komodio (shared)
 //
-//  © 2023 Nick Berendsen
+//  © 2024 Nick Berendsen
 //
 
 import SwiftUI
@@ -10,6 +10,13 @@ import SwiftlyKodiAPI
 
 /// Class to observe the current Komodio Scene state (shared)
 @Observable class SceneState {
+
+    // MARK: macOS stuff
+
+#if os(macOS)
+    /// Bool if the main window is in fulll screen
+    var fullScreen: Bool = false
+#endif
 
     // MARK: tvOS stuff
 

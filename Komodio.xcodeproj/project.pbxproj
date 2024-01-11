@@ -83,7 +83,6 @@
 		D74AA1F12B34B68000741B0D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AA1F02B34B68000741B0D /* StartView.swift */; };
 		D74AA1F22B34B68000741B0D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AA1F02B34B68000741B0D /* StartView.swift */; };
 		D750D00329B50A8900088E0F /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750D00129B50A8900088E0F /* FavouritesView.swift */; };
-		D7592F182B35CE3E00AB6125 /* AppDelegate (macOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F172B35CE3E00AB6125 /* AppDelegate (macOS).swift */; platformFilters = (macos, ); };
 		D7592F1A2B35F71900AB6125 /* ShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F192B35F71900AB6125 /* ShelfView.swift */; };
 		D7592F1B2B35F71900AB6125 /* ShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7592F192B35F71900AB6125 /* ShelfView.swift */; };
 		D75C3F64294DCFE2002BC065 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D71BD53829056A5E00037DC9 /* Assets.xcassets */; };
@@ -187,7 +186,6 @@
 		D747E3C42A5F1FEA00DF2F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D74AA1F02B34B68000741B0D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D750D00129B50A8900088E0F /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
-		D7592F172B35CE3E00AB6125 /* AppDelegate (macOS).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate (macOS).swift"; sourceTree = "<group>"; };
 		D7592F192B35F71900AB6125 /* ShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfView.swift; sourceTree = "<group>"; };
 		D766F5DE2A46EB10002DDB1C /* Router+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Router+Modifiers.swift"; sourceTree = "<group>"; };
 		D76750DA2969838800A95D52 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
@@ -365,7 +363,6 @@
 		D7592F162B35CE1500AB6125 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				D7592F172B35CE3E00AB6125 /* AppDelegate (macOS).swift */,
 				D73FBC702B39D78300259195 /* MacCommands (macOS).swift */,
 			);
 			path = macOS;
@@ -719,7 +716,6 @@
 				D747E3842A5F1DF400DF2F54 /* Debug.swift in Sources */,
 				D747E38E2A5F1E0600DF2F54 /* MovieSetView+Details.swift in Sources */,
 				D7FB40BF2A61E8C800C61356 /* KodiSettingsView+Details.swift in Sources */,
-				D7592F182B35CE3E00AB6125 /* AppDelegate (macOS).swift in Sources */,
 				D747E3B02A5F1E1700DF2F54 /* HostItemView+Details.swift in Sources */,
 				D747E3932A5F1E0D00DF2F54 /* SeasonsView.swift in Sources */,
 				D7592F1A2B35F71900AB6125 /* ShelfView.swift in Sources */,

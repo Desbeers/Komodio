@@ -2,7 +2,7 @@
 //  MusicVideoAlbumView+Details+ListItem.swift
 //  Komodio (shared)
 //
-//  © 2023 Nick Berendsen
+//  © 2024 Nick Berendsen
 //
 
 import SwiftUI

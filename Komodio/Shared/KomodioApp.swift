@@ -2,7 +2,7 @@
 //  KomodioApp.swift
 //  Komodio (shared)
 //
-//  © 2023 Nick Berendsen
+//  © 2024 Nick Berendsen
 //
 
 import SwiftUI
@@ -16,11 +16,6 @@ import SwiftlyKodiAPI
     @State private var scene: SceneState = SceneState()
     /// The KodiConnector model
     @State private var kodi: KodiConnector = .shared
-
-#if os(macOS)
-    /// AppKit app delegate
-    @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
-#endif
 
     // MARK: Body of the Scene
 
@@ -40,6 +35,18 @@ import SwiftlyKodiAPI
                         /// Get the selected host (if any)
                         kodi.getSelectedHost()
                     }
+                }
+                .onReceive(NotificationCenter.default.publisher(
+                    for: NSWindow.didEnterFullScreenNotification,
+                    object: nil)
+                ) { _ in
+                    scene.fullScreen = true
+                }
+                .onReceive(NotificationCenter.default.publisher(
+                    for: NSWindow.willExitFullScreenNotification,
+                    object: nil)
+                ) { _ in
+                    scene.fullScreen = false
                 }
         }
         .commands {
@@ -62,7 +69,7 @@ import SwiftlyKodiAPI
         }
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1000, height: 800)
-        
+
         /// Open a Video Window
         WindowGroup("Player", for: MediaItem.self) { $media in
             /// Check if `media` isn't `nil` and that we have a Kodi item

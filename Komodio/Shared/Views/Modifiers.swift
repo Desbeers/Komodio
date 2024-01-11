@@ -2,7 +2,7 @@
 //  Modifiers.swift
 //  Komodio (shared)
 //
-//  © 2023 Nick Berendsen
+//  © 2024 Nick Berendsen
 //
 
 import SwiftUI
@@ -219,8 +219,8 @@ extension Modifiers {
     /// A `ViewModifier` to set the safe area in full screen (macOS)
     struct FullScreenSafeArea: ViewModifier {
 #if os(macOS)
-        /// The AppDelegate model
-        @Environment(AppDelegate.self) private var appDelegate
+        /// The SceneState model
+        @Environment(SceneState.self) private var appDelegate
 #endif
         /// The modifier
         func body(content: Content) -> some View {
