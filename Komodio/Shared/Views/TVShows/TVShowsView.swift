@@ -42,7 +42,7 @@ struct TVShowsView: View {
             } else if kodi.library.tvshows.isEmpty {
                 status = .empty
             } else {
-                sorting = KodiListSort.getSortSetting(sortID: scene.mainSelection.item.title)
+                sorting = kodi.listSortSettings.getSortSetting(sortID: scene.mainSelection.item.title)
                 getTVShows()
                 status = .ready
             }

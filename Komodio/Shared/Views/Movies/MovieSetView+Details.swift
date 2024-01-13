@@ -42,11 +42,21 @@ extension MovieSetView {
                     }
                 /// Update the state from the library
                     .onChange(of: kodi.library.movieSets) {
-                        if let update = MovieSetView.update(movieSet: movieSet) {
+                        if let update = update(movieSet: movieSet) {
                             movieSet = update
                         }
                     }
             }
+        }
+
+        /// Update a Movie Set
+        /// - Parameter movieset: The current Movie Set
+        /// - Returns: The optional updated Movie Set
+        private func update(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
+            if let update = kodi.library.movieSets.first(where: { $0.id == movieSet.id }), update != movieSet {
+                return update
+            }
+            return nil
         }
 
         // MARK: Content of the View

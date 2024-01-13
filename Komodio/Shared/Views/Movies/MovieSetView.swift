@@ -104,19 +104,6 @@ struct MovieSetView: View {
 
 extension MovieSetView {
 
-    /// Update a Movie Set
-    /// - Parameter movieset: The current Movie Set
-    /// - Returns: The optional updated Movie Set
-    static func update(movieSet: Video.Details.MovieSet) -> Video.Details.MovieSet? {
-        if let update = KodiConnector.shared.library.movieSets.first(where: { $0.id == movieSet.id }), update != movieSet {
-            return update
-        }
-        return nil
-    }
-}
-
-extension MovieSetView {
-
     /// Define the cell parameters for a collection
     /// - Parameters:
     ///   - movie: The movie set

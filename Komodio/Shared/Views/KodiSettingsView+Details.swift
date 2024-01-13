@@ -15,6 +15,8 @@ extension KodiSettingsView {
 
     /// SwiftUI `View` for Kodi settings details
     struct Details: View {
+        /// The KodiConnector model
+        @Environment(KodiConnector.self) private var kodi
 
         // MARK: Body of the View
 
@@ -23,16 +25,16 @@ extension KodiSettingsView {
             DetailView.Wrapper(
                 scroll: "KodiSettings",
                 part: StaticSetting.platform == .macOS ? false : true,
-                title: "Settings on '\(KodiConnector.shared.host.name)'"
+                title: "Settings on '\(kodi.host.name)'"
             ) {
                 ScrollView {
                     KodiSettingView.Warning()
                         .padding([.top, .horizontal])
-                    KodiSettingView.setting(for: .servicesDevicename)
+                    KodiSettingView.SingleSetting(setting: .servicesDevicename)
                         .padding([.top, .horizontal])
-                    KodiSettingView.setting(for: .videolibraryShowuUwatchedPlots)
+                    KodiSettingView.SingleSetting(setting: .videolibraryShowuUwatchedPlots)
                         .padding([.top, .horizontal])
-                    KodiSettingView.setting(for: .videolibraryGroupMovieSets)
+                    KodiSettingView.SingleSetting(setting: .videolibraryGroupMovieSets)
                         .padding([.top, .horizontal])
                 }
             }

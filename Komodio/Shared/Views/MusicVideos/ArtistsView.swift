@@ -78,6 +78,6 @@ struct ArtistsView: View {
 
     /// Get all artists from the library
     private func getItems() {
-        collection = VideoLibrary.getMusicVideoArtists().anykodiItem()
+        collection = VideoLibrary.getMusicVideoArtists(library: kodi.library).anykodiItem()
     }
 }

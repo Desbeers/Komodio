@@ -45,7 +45,7 @@ struct MoviesView: View {
             } else if kodi.library.movies.isEmpty {
                 status = .empty
             } else {
-                sorting = KodiListSort.getSortSetting(sortID: scene.mainSelection.item.title)
+                sorting = kodi.listSortSettings.getSortSetting(sortID: scene.mainSelection.item.title)
                 getMovies()
             }
         }
@@ -105,7 +105,12 @@ struct MoviesView: View {
                 movies = kodi.library.movies
                     .filter { $0.playcount == 0 }
             case .playlist(let file):
-                let playlist = await Files.getDirectory(directory: file.file, media: .video).compactMap(\.id)
+                let playlist = await Files.getDirectory(
+                    host: kodi.host,
+                    directory: file.file,
+                    media: .video
+                )
+                    .compactMap(\.id)
                 movies = kodi.library.movies
                     .filter { playlist.contains($0.movieID) }
             default:
@@ -113,7 +118,7 @@ struct MoviesView: View {
             }
             scene.movieItems = movies
                 .filter { $0.setID != 0 }.map(\.movieID)
-            var items = sorting.method == .title ? movies.swapMoviesForSet() : movies
+            var items = await sorting.method == .title ? movies.swapMoviesForSet(host: kodi.host) : movies
             items.sort(sortItem: sorting)
             /// Set the loading state
             status = items.isEmpty ? .empty : .ready

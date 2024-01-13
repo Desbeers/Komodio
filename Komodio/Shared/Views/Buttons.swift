@@ -64,6 +64,8 @@ extension Buttons {
     struct PlayedState: View {
         /// The `KodiItem` to set
         let item: any KodiItem
+        /// The KodiConnector model
+        @Environment(KodiConnector.self) private var kodi
 
         // MARK: Body of the View
 
@@ -71,7 +73,7 @@ extension Buttons {
         var body: some View {
             Button(action: {
                 Task {
-                    await item.togglePlayedState()
+                    await item.togglePlayedState(host: kodi.host)
                 }
             }, label: {
                 Label(title: {

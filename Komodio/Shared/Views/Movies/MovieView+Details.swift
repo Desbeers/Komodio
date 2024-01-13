@@ -194,7 +194,7 @@ extension MovieView {
         }
         /// The plot of the Movie
         var plot: String {
-            if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
+            if !kodi.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
                 .list
                 .contains(0) && movie.playcount == 0 {
                 return "Plot is hidden for unwatched movies..."

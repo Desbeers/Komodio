@@ -14,6 +14,8 @@ import SwiftlyKodiAPI
 struct KodiSettingsView: View {
     /// The SceneState model
     @Environment(SceneState.self) private var scene
+    /// The KodiConnector model
+    @Environment(KodiConnector.self) private var kodi
 
     // MARK: Body of the View
 
@@ -23,7 +25,7 @@ struct KodiSettingsView: View {
             header: {
                 PartsView
                     .DetailHeader(
-                        title: "Settings on '\(KodiConnector.shared.host.name)'"
+                        title: "Settings on '\(kodi.host.name)'"
                     )
             },
             content: {
@@ -34,11 +36,11 @@ struct KodiSettingsView: View {
                 ) {
                     GridRow {
                         KodiSettingView.Warning()
-                        KodiSettingView.setting(for: .servicesDevicename)
+                        KodiSettingView.SingleSetting(setting: .servicesDevicename)
                     }
                     GridRow {
-                        KodiSettingView.setting(for: .videolibraryShowuUwatchedPlots)
-                        KodiSettingView.setting(for: .videolibraryGroupMovieSets)
+                        KodiSettingView.SingleSetting(setting: .videolibraryShowuUwatchedPlots)
+                        KodiSettingView.SingleSetting(setting: .videolibraryGroupMovieSets)
                     }
                 }
                 .backport.focusSection()

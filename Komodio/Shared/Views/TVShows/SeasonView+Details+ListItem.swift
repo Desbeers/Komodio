@@ -14,6 +14,8 @@ extension SeasonView.Details {
 
     /// SwiftUI `View` for a `Episode` list item
     struct ListItem: View {
+        /// The KodiConnector model
+        @Environment(KodiConnector.self) private var kodi
         /// The Episode
         let episode: Video.Details.Episode
 
@@ -32,7 +34,7 @@ extension SeasonView.Details {
                         .fanartStyle(item: episode)
                         .frame(width: StaticSetting.thumbSize.width, height: StaticSetting.thumbSize.height)
                         .padding(.trailing)
-                    if !KodiConnector.shared.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
+                    if !kodi.getKodiSetting(id: .videolibraryShowuUwatchedPlots)
                         .list.contains(1) && episode.playcount == 0 {
                         Text("Plot is hidden for unwatched episodes...")
                     } else {

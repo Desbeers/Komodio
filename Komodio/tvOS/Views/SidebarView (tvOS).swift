@@ -47,7 +47,7 @@ struct SidebarView: View {
                 title: {
                     VStack(alignment: .leading) {
                         Text("Komodio")
-                        Text(kodi.host.bonjour?.name ?? kodi.status.message)
+                        Text(kodi.host.name)
                             .font(.system(size: 16))
                             .foregroundColor(.gray)
                     }

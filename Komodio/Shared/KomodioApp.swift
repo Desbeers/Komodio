@@ -81,6 +81,7 @@ import SwiftlyKodiAPI
         .defaultSize(width: 1280, height: 720)
         .defaultPosition(.center)
         .windowStyle(.hiddenTitleBar)
+        .environment(kodi)
 
 #elseif os(visionOS)
 
@@ -104,6 +105,7 @@ import SwiftlyKodiAPI
             if let media {
                 KomodioPlayerView(media: media)
                     .navigationTitle(media.title)
+                    .environment(kodi)
             }
         }
 
@@ -112,6 +114,7 @@ import SwiftlyKodiAPI
             /// Check if media isn't `nil` and that we have a Kodi item
             if let media {
                 ImmersiveView(media: media)
+                    .environment(kodi)
             }
         }
         .immersionStyle(selection: .constant(.progressive), in: .progressive)

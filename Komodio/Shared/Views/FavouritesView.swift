@@ -44,7 +44,7 @@ struct FavouritesView: View {
             } else if kodi.favourites.isEmpty {
                 status = .empty
             } else {
-                sorting = KodiListSort.getSortSetting(sortID: "favorites")
+                sorting = kodi.listSortSettings.getSortSetting(sortID: "favorites")
                 getFavorites()
                 status = .ready
             }

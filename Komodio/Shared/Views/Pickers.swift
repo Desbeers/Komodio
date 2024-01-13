@@ -25,6 +25,8 @@ extension Pickers {
         let item: any KodiItem
         /// The rating of the ityem
         @State private var rating: Int = 0
+        /// The KodiConnector model
+        @Environment(KodiConnector.self) private var kodi
 
         // MARK: Body of the View
 
@@ -54,7 +56,7 @@ extension Pickers {
             .onChange(of: rating) {
                 if rating != item.userRating {
                     Task {
-                        await item.setUserRating(rating: rating)
+                        await item.setUserRating(host: kodi.host, rating: rating)
                     }
                 }
             }

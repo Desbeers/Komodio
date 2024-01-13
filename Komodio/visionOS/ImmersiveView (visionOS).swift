@@ -11,6 +11,8 @@ import SwiftlyKodiAPI
 import RealityKit
 
 struct ImmersiveView: View {
+    /// The KodiConnector model
+    @Environment(KodiConnector.self) private var kodi
     /// The media item
     let media: MediaItem
     /// The Kodi item
@@ -21,9 +23,9 @@ struct ImmersiveView: View {
             let rootEntity = Entity()
             guard
                 /// Get the video
-                let video = await Application.getItem(type: media.media, id: media.id),
+                let video = await Application.getItem(host: kodi.host, type: media.media, id: media.id),
                 /// Convert the string to a full Kodi URL
-                let url = URL(string: Files.getFullPath(file: video.fanart, type: .art)),
+                let url = URL(string: Files.getFullPath(host: kodi.host, file: video.fanart, type: .art)),
                 /// Try to find it in the art cache, it will be an UIImage
                 let cachedImage = KodiArt.cache.object(forKey: url.absoluteString as NSString),
                 /// Get the optional cgImage
@@ -55,8 +57,10 @@ struct ImmersiveView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
                         .padding(.top)
-                    KodiArt.Poster(item: kodiItem)
-                        .clipShape(.rect(cornerRadius: 30))
+                    if let kodiItem {
+                        KodiArt.Poster(item: kodiItem)
+                            .clipShape(.rect(cornerRadius: 30))
+                    }
                 }
                 .frame(width: 200)
                 .scaleEffect(x: -1, y: 1)

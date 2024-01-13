@@ -82,7 +82,7 @@ struct SettingsView: View {
 
     /// The configured hosts
     @ViewBuilder var configuredHosts: some View {
-        if let hosts = Hosts.getConfiguredHosts() {
+        if let hosts = kodi.getConfiguredHosts() {
             VStack(alignment: .leading) {
                 ForEach(hosts) { host in
                     Button(
@@ -95,13 +95,13 @@ struct SettingsView: View {
                         }, label: {
                             Buttons.formatButtonLabel(
                                 title: host.name,
-                                subtitle: host.isOnline ? "Online" : "Offline",
+                                subtitle: kodi.hostIsOnline(host) ? "Online" : "Offline",
                                 icon: "globe",
-                                color: host.isOnline ? host.isSelected ? .green : Color("AccentColor") : .red
+                                color: kodi.hostIsOnline(host) ? kodi.hostIsSelected(host) ? .green : .accent : .red
                             )
                         }
                     )
-                    if host.isSelected {
+                    if kodi.hostIsSelected(host) {
                         if kodi.status == .offline {
                             KodiHostItemView.HostIsOffline()
                         } else {
@@ -167,7 +167,7 @@ struct SettingsView: View {
 
     /// The new hosts
     @ViewBuilder var newHosts: some View {
-        if let newHosts = Hosts.getNewHosts() {
+        if let newHosts = kodi.getNewHosts() {
             GridRow {
                 Text("New Kodi's")
                     .font(StaticSetting.platform == .macOS ? .title : .title2)

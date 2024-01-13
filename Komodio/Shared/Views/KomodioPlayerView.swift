@@ -26,6 +26,8 @@ struct KomodioPlayerView: View {
     @State private var video: (any KodiItem)?
     /// The loading state of the View
     @State private var status: ViewStatus = .loading
+    /// The KodiConnector model
+    @Environment(KodiConnector.self) private var kodi
 #if os(visionOS)
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -43,7 +45,7 @@ struct KomodioPlayerView: View {
                 Text("Error")
             case .ready:
                 if let video {
-                    KodiPlayerView(video: video, resume: media.resume)
+                    KodiPlayerView(host: kodi.host, video: video, resume: media.resume)
 #if os(visionOS)
                         .toolbar {
                             ToolbarItem(
@@ -84,7 +86,7 @@ struct KomodioPlayerView: View {
     /// Check if we can play the media
     /// - Returns: The status
     func checkMedia() async -> ViewStatus {
-        let video = await Application.getItem(type: media.media, id: media.id)
+        let video = await Application.getItem(host: kodi.host, type: media.media, id: media.id)
         if let video, KomodioPlayerView.canPlay(video: video) {
             self.video = video
             return .ready
