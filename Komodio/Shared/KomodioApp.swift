@@ -15,7 +15,7 @@ import SwiftlyKodiAPI
     /// The SceneState model
     @State private var scene: SceneState = SceneState()
     /// The KodiConnector model
-    @State private var kodi: KodiConnector = .shared
+    @State private var kodi = KodiConnector()
 
     // MARK: Body of the Scene
 

@@ -63,8 +63,7 @@ extension EpisodeView {
                 Buttons.Player(item: episode)
                     .padding()
                 if
-                    !KodiConnector
-                        .shared
+                    !kodi
                         .getKodiSetting(id: .videolibraryShowuUwatchedPlots)
                         .list
                         .contains(1) && episode.playcount == 0
