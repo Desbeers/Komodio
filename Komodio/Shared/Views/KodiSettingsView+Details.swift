@@ -32,7 +32,7 @@ extension KodiSettingsView {
                         .padding([.top, .horizontal])
                     KodiSettingView.SingleSetting(setting: .servicesDevicename)
                         .padding([.top, .horizontal])
-                    KodiSettingView.SingleSetting(setting: .videolibraryShowuUwatchedPlots)
+                    KodiSettingView.SingleSetting(setting: .videolibraryShowUwatchedPlots)
                         .padding([.top, .horizontal])
                     KodiSettingView.SingleSetting(setting: .videolibraryGroupMovieSets)
                         .padding([.top, .horizontal])

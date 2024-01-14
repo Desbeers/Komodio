@@ -63,10 +63,7 @@ extension EpisodeView {
                 Buttons.Player(item: episode)
                     .padding()
                 if
-                    !kodi
-                        .getKodiSetting(id: .videolibraryShowuUwatchedPlots)
-                        .list
-                        .contains(1) && episode.playcount == 0
+                    !kodi.getKodiSetting(id: .videolibraryShowUwatchedPlots).list.value.contains(1) && episode.playcount == 0
                 {
                     Text("Plot is hidden for unwatched episodes...")
                 } else {

@@ -89,6 +89,7 @@ indentation_width:
   include_compiler_directives: false
 
 line_length:
+  warning: 140
   ignores_urls: true
   ignores_function_declarations: true
   ignores_comments: true

@@ -39,7 +39,7 @@ struct KodiSettingsView: View {
                         KodiSettingView.SingleSetting(setting: .servicesDevicename)
                     }
                     GridRow {
-                        KodiSettingView.SingleSetting(setting: .videolibraryShowuUwatchedPlots)
+                        KodiSettingView.SingleSetting(setting: .videolibraryShowUwatchedPlots)
                         KodiSettingView.SingleSetting(setting: .videolibraryGroupMovieSets)
                     }
                 }
