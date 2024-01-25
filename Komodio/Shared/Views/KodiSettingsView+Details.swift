@@ -24,18 +24,23 @@ extension KodiSettingsView {
         var body: some View {
             DetailView.Wrapper(
                 scroll: "KodiSettings",
-                part: StaticSetting.platform == .macOS ? false : true,
+                part: false,
                 title: "Settings on '\(kodi.host.name)'"
             ) {
                 ScrollView {
                     KodiSettingView.Warning()
                         .padding([.top, .horizontal])
+                        .backport.focusable()
                     KodiSettingView.SingleSetting(setting: .servicesDevicename)
                         .padding([.top, .horizontal])
                     KodiSettingView.SingleSetting(setting: .videolibraryShowUwatchedPlots)
                         .padding([.top, .horizontal])
-                    KodiSettingView.SingleSetting(setting: .videolibraryGroupMovieSets)
-                        .padding([.top, .horizontal])
+                    Section("Movie Sets") {
+                        KodiSettingView.SingleSetting(setting: .videolibraryGroupMovieSets)
+                            .padding([.top, .horizontal])
+                        KodiSettingView.SingleSetting(setting: .videolibraryGroupSingleItemSets)
+                            .padding([.top, .horizontal])
+                    }
                 }
             }
         }

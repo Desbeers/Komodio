@@ -29,7 +29,8 @@ extension Router {
             case .appSettings:
                 SettingsView()
             case .kodiSettings:
-                KodiSettingsView()
+                KodiSettingsView
+                    .Details()
             case .hostItemSettings(let host):
                 HostItemView(host: host)
 
