@@ -1,4 +1,5 @@
 {
+  "originHash" : "7db27271d0559d966bcadbfbdc93486bb14a9e4a35194b73c073dd86da67707f",
   "pins" : [
     {
       "identity" : "swiftlykodiapi",
@@ -6,7 +7,7 @@
       "location" : "https://github.com/Desbeers/SwiftlyKodiAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "2c16b21f025edb4fb430804ab50e6d22029045d0"
+        "revision" : "33ee2770e94ad68d9f6dd8c746f677654c3bf118"
       }
     },
     {
@@ -28,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
