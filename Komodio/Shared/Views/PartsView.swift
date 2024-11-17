@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftlyKodiAPI
-import SwiftlyRotatingView
 
 // MARK: Parts View
 

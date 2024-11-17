@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70870122CEA157700D0F193 /* RotatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D69A3F2CEA13EC006136E4 /* RotatingView.swift */; };
 		D715FC272A49D24900CC9699 /* KomodioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD53429056A5C00037DC9 /* KomodioApp.swift */; };
 		D718206C2A8A5B6D00C5AED6 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D718206B2A8A5B6D00C5AED6 /* CollectionView.swift */; };
 		D718206D2A8A5B6D00C5AED6 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D718206B2A8A5B6D00C5AED6 /* CollectionView.swift */; };
@@ -109,8 +110,6 @@
 		D77B1373297561AA00ECE2F9 /* HostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77B1371297561AA00ECE2F9 /* HostItemView.swift */; };
 		D78164AA2A58A29600AD1BE9 /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78164A82A58A29600AD1BE9 /* SeasonView.swift */; };
 		D78164AE2A58A41F00AD1BE9 /* HostItemView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78164AC2A58A41F00AD1BE9 /* HostItemView+Details.swift */; };
-		D78486932B2C890300517EFC /* SwiftlyRotatingView in Frameworks */ = {isa = PBXBuildFile; productRef = D78486922B2C890300517EFC /* SwiftlyRotatingView */; };
-		D78486952B2C891100517EFC /* SwiftlyRotatingView in Frameworks */ = {isa = PBXBuildFile; productRef = D78486942B2C891100517EFC /* SwiftlyRotatingView */; };
 		D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */ = {isa = PBXBuildFile; productRef = D785A199294B63D900530F62 /* SwiftlyKodiAPI */; };
 		D785A19D294B640300530F62 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55129056FB500037DC9 /* SceneState.swift */; };
 		D785A19E294B640800530F62 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71BD55929057FE400037DC9 /* MediaItem.swift */; };
@@ -132,6 +131,7 @@
 		D7BE78712A8D39FB00F16E21 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EFE45B293A525800CE9B8D /* SearchView.swift */; };
 		D7C65F882A5AA46E00A0C0CD /* MusicVideoAlbumView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C65F862A5AA46E00A0C0CD /* MusicVideoAlbumView+Details.swift */; };
 		D7D000FB29D1FED3007973C0 /* DetailView+Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D000F929D1FED3007973C0 /* DetailView+Wrapper.swift */; };
+		D7D69A402CEA13EC006136E4 /* RotatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D69A3F2CEA13EC006136E4 /* RotatingView.swift */; };
 		D7E7262F29DB705100CEC57E /* MovieSetView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7262D29DB705100CEC57E /* MovieSetView+Details.swift */; };
 		D7E7263529DB722200CEC57E /* MovieView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263329DB722200CEC57E /* MovieView+Details.swift */; };
 		D7E7263B29DB751500CEC57E /* TVShowView+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E7263929DB751500CEC57E /* TVShowView+Details.swift */; };
@@ -207,6 +207,7 @@
 		D7BE786E2A8CC54800F16E21 /* KodiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodiCell.swift; sourceTree = "<group>"; };
 		D7C65F862A5AA46E00A0C0CD /* MusicVideoAlbumView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicVideoAlbumView+Details.swift"; sourceTree = "<group>"; };
 		D7D000F929D1FED3007973C0 /* DetailView+Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailView+Wrapper.swift"; sourceTree = "<group>"; };
+		D7D69A3F2CEA13EC006136E4 /* RotatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatingView.swift; sourceTree = "<group>"; };
 		D7E7262D29DB705100CEC57E /* MovieSetView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieSetView+Details.swift"; sourceTree = "<group>"; };
 		D7E7263329DB722200CEC57E /* MovieView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieView+Details.swift"; sourceTree = "<group>"; };
 		D7E7263929DB751500CEC57E /* TVShowView+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TVShowView+Details.swift"; sourceTree = "<group>"; };
@@ -228,7 +229,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D78486932B2C890300517EFC /* SwiftlyRotatingView in Frameworks */,
 				D72DEEFE2A5F24E900EC0B8E /* AVKit.framework in Frameworks */,
 				D747E3C32A5F1EA100DF2F54 /* SwiftlyKodiAPI in Frameworks */,
 			);
@@ -238,7 +238,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D78486952B2C891100517EFC /* SwiftlyRotatingView in Frameworks */,
 				D785A19A294B63D900530F62 /* SwiftlyKodiAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +420,7 @@
 				D7EFE45B293A525800CE9B8D /* SearchView.swift */,
 				D77B1360296DECBF00ECE2F9 /* KomodioPlayerView.swift */,
 				D7EFE45D293A59AC00CE9B8D /* PartsView.swift */,
+				D7D69A3F2CEA13EC006136E4 /* RotatingView.swift */,
 				D71BD55729057F1A00037DC9 /* Buttons.swift */,
 				D76BFFD7299521B0000E8E54 /* Pickers.swift */,
 				D71BD561290595FF00037DC9 /* Modifiers.swift */,
@@ -484,7 +484,6 @@
 			name = Komodio;
 			packageProductDependencies = (
 				D747E3C22A5F1EA100DF2F54 /* SwiftlyKodiAPI */,
-				D78486922B2C890300517EFC /* SwiftlyRotatingView */,
 			);
 			productName = KomodioMulti;
 			productReference = D747E3702A5F1D8800DF2F54 /* Komodio.app */;
@@ -507,7 +506,6 @@
 			name = KomodioTV;
 			packageProductDependencies = (
 				D785A199294B63D900530F62 /* SwiftlyKodiAPI */,
-				D78486942B2C891100517EFC /* SwiftlyRotatingView */,
 			);
 			productName = KomodioTV;
 			productReference = D7EFE44D293A4E7900CE9B8D /* KomodioTV.app */;
@@ -521,7 +519,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					D747E36F2A5F1D8800DF2F54 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -542,7 +540,6 @@
 			mainGroup = D71BD52829056A5C00037DC9;
 			packageReferences = (
 				D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */,
-				D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */,
 			);
 			productRefGroup = D71BD53229056A5C00037DC9 /* Products */;
 			projectDirPath = "";
@@ -675,6 +672,7 @@
 				D747E3B92A5F1E1E00DF2F54 /* MusicVideoAlbumView+Details+ListItem.swift in Sources */,
 				D747E3912A5F1E0600DF2F54 /* MovieView.swift in Sources */,
 				D747E3AF2A5F1E1700DF2F54 /* HostItemView.swift in Sources */,
+				D7D69A402CEA13EC006136E4 /* RotatingView.swift in Sources */,
 				D747E3902A5F1E0600DF2F54 /* MoviesView.swift in Sources */,
 				D7A9B7C82A94B591007FD0A3 /* ImmersiveView (visionOS).swift in Sources */,
 				D747E3AC2A5F1E1700DF2F54 /* KodiSettingsView.swift in Sources */,
@@ -745,6 +743,7 @@
 				D770A27E29DC05AA005076F5 /* MusicVideoView+Details.swift in Sources */,
 				D718206D2A8A5B6D00C5AED6 /* CollectionView.swift in Sources */,
 				D770A27829DC015A005076F5 /* MusicVideoAlbumView+Details+ListItem.swift in Sources */,
+				D70870122CEA157700D0F193 /* RotatingView.swift in Sources */,
 				D75C3F72294DED9D002BC065 /* MusicVideoView.swift in Sources */,
 				D72BF72729D7058600CFA373 /* ContentView+Wrapper.swift in Sources */,
 				D785A1A0294B653C00530F62 /* PartsView.swift in Sources */,
@@ -926,6 +925,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Komodio/Shared/Komodio.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "SwiftUI 5";
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -956,6 +956,7 @@
 				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.Komodio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -974,6 +975,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Komodio/Shared/Komodio.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "SwiftUI 5";
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -1004,6 +1006,7 @@
 				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.desbeers.Komodio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1123,14 +1126,6 @@
 				kind = branch;
 			};
 		};
-		D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Desbeers/SwiftlyRotatingView";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1138,16 +1133,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D71BD54329056AD800037DC9 /* XCRemoteSwiftPackageReference "SwiftlyKodiAPI" */;
 			productName = SwiftlyKodiAPI;
-		};
-		D78486922B2C890300517EFC /* SwiftlyRotatingView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */;
-			productName = SwiftlyRotatingView;
-		};
-		D78486942B2C891100517EFC /* SwiftlyRotatingView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D78486912B2C890300517EFC /* XCRemoteSwiftPackageReference "SwiftlyRotatingView" */;
-			productName = SwiftlyRotatingView;
 		};
 		D785A199294B63D900530F62 /* SwiftlyKodiAPI */ = {
 			isa = XCSwiftPackageProductDependency;

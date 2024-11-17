@@ -1,5 +1,5 @@
 {
-  "originHash" : "7db27271d0559d966bcadbfbdc93486bb14a9e4a35194b73c073dd86da67707f",
+  "originHash" : "25899f963549b08c3b372121c96b36b15b634476ec5eece559b844f7e13ffbb0",
   "pins" : [
     {
       "identity" : "swiftlykodiapi",
@@ -7,25 +7,7 @@
       "location" : "https://github.com/Desbeers/SwiftlyKodiAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "33ee2770e94ad68d9f6dd8c746f677654c3bf118"
-      }
-    },
-    {
-      "identity" : "swiftlyrotatingview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Desbeers/SwiftlyRotatingView",
-      "state" : {
-        "branch" : "main",
-        "revision" : "92a384bc91133e861dcff31ede3afd34af65a638"
-      }
-    },
-    {
-      "identity" : "swiftlystructcache",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Desbeers/SwiftlyStructCache",
-      "state" : {
-        "branch" : "main",
-        "revision" : "e9b371734411f18e98982944ad213756b7f891fb"
+        "revision" : "95623e9546fb201e35b3d00addd7f4ed5a5979a4"
       }
     }
   ],
